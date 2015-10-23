@@ -16,18 +16,21 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-%   New in this version
-%   macros: \lwp \lwpp \rwp \rwpp \lhp \rhp \lhpp \rhpp
+%   Main changes of T.115 (Search the string "T115" for details.)
+%   New user macros:
+%     \mxvernumber, \mxversuffix
+%     \setmaxinstruments, \setmaxcxxviiibeams, \setmaxcclvibeams,
+%     \setmaxgroups, \setmaxslurs, \setmaxtrills, \setmaxoctlines
+%     \smalltrebleoct, \smalltreblelowoct, \smallbassoct, \smallbasslowoct
+%     
+%   Changes functionally/syntax compatible:
+%     \mxversion
+%     \resetlayout, \resetclefsymbols
+%     
+%   Changes which may be incompatible:
+%     \maxinstruments
+%     \setname
 %
-%   Correction of signature spacing at change of the music size (l.1428-35)rev2
-%
-%   Correction of a bug in the definition of choir bracket (l.1690-1700)
-%
-%   Correction of a bug in the macro \rul@sep (l. 2259)(l.2273)
-%
-%   \cclp, \zccup, \zcclp from musixpoi.tex (l.3254)rev3 typo correction
-%
-%   Correction of a historical bug of stem length (l.4460)
 %
 \ifx\undefined\startpiece \else \endinput \fi
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
@@ -36,8 +39,10 @@
 \ifx\makeatother\undefined\def\makeatother{\catcode`\@=12\relax}\fi
 
 \def\mufl@x{0.83}%
-\def\mxversion{T.114}
-\def\mxdate{1 Feb 2009} % T.114-rev.4
+\def\mxvernumber{115}% make it possible to compare with \ifnum
+\def\mxversuffix{-beta4}% optional; Should be empty on fixed version.
+\edef\mxversion{T.\mxvernumber\mxversuffix}
+\def\mxdate{1 Jan 2011}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
@@ -56,6 +61,10 @@
 %          to volta-processing and centerbar processing the changes are
 %          marked with +simick for added single lines, -simick for
 %++simick  replaced lines and ++simick...++simick for added blocks
+
+% Hiroaki, May2010, T.115: change register allocation codes into new ones 
+% which enables >12 elements.  Search the string "T115" for details.
+%
 
 % TeXperts may want to change the next
 
@@ -156,9 +165,9 @@
 %...\let\@wloG=\wlog
 %...\def\wlog#1{}
 
-%%% account registers
+%%% account registers 
 
-\let\maxinstruments\si@
+% \let\maxinstruments\si@ % [T115] here disabled to avoid conflict
 
 % temporary registers
 
@@ -183,132 +192,323 @@
 \newdimen\y@iv
 \newdimen\y@v
 
+% [T115] moved out to the new register allocation code -- start from here --
 % altitude
-
-\newskip\k@ii
-\newskip\k@iii
-\newskip\k@iiii
-\newskip\k@iiv
-\newskip\k@iv
-\newskip\k@ivi
-
+%  \newskip\k@ii
 % InterNote
-
-\newdimen\i@ni
-\newdimen\i@nii
-\newdimen\i@niii
-\newdimen\i@niv
-\newdimen\i@nv
-\newdimen\i@nvi
-
+%  \newdimen\i@ni
 \def\i@n{\z@} % safety in case of....
-
 % positions x et z de debut des poutres
-
-\newdimen\b@xi  \newdimen\b@zi
-\newdimen\b@xii \newdimen\b@zii
-\newdimen\b@xiii\newdimen\b@ziii
-\newdimen\b@xiv \newdimen\b@ziv
-\newdimen\b@xv  \newdimen\b@zv
-\newdimen\b@xvi \newdimen\b@zvi
-
-\newdimen\c@xi  \newskip\c@zi
-\newdimen\c@xii \newskip\c@zii
-\newdimen\c@xiii\newskip\c@ziii
-\newdimen\c@xiv \newskip\c@ziv
-\newdimen\c@xv  \newskip\c@zv
-\newdimen\c@xvi \newskip\c@zvi
-
-\newdimen\d@xi  \newskip\d@zi
-\newdimen\d@xii \newskip\d@zii
-\newdimen\d@xiii\newskip\d@ziii
-\newdimen\d@xiv \newskip\d@ziv
-\newdimen\d@xv  \newskip\d@zv
-\newdimen\d@xvi \newskip\d@zvi
-
-\newdimen\e@xi  \newskip\e@zi
-\newdimen\e@xii \newskip\e@zii
-\newdimen\e@xiii\newskip\e@ziii
-\newdimen\e@xiv \newskip\e@ziv
-\newdimen\e@xv  \newskip\e@zv
-\newdimen\e@xvi \newskip\e@zvi
-
-\newdimen\f@xi  \newskip\f@zi
-\newdimen\f@xii \newskip\f@zii
-\newdimen\f@xiii\newskip\f@ziii
-\newdimen\f@xiv \newskip\f@ziv
-\newdimen\f@xv  \newskip\f@zv
-\newdimen\f@xvi \newskip\f@zvi
-
+%  \newdimen\b@xi  \newdimen\b@zi
+%  \newdimen\c@xi  \newskip\c@zi
+%  \newdimen\d@xi  \newskip\d@zi
+%  \newdimen\e@xi  \newskip\e@zi
+%  \newdimen\f@xi  \newskip\f@zi
 % pentes des poutres ( entier de -9 a +9 )
 % multiplicite des poutres ( de -5 a +5 . 0= inactive )
-
-\newcount\b@pi  \newcount\b@ni
-\newcount\b@pii \newcount\b@nii
-\newcount\b@piii\newcount\b@niii
-\newcount\b@piv \newcount\b@niv
-\newcount\b@pv  \newcount\b@nv
-\newcount\b@pvi \newcount\b@nvi
-
+%  \newcount\b@pi  \newcount\b@ni
 % Number of Portees
-
-\newcount\n@pi  \n@pi\@ne
-\newcount\n@pii \n@pii\@ne
-\newcount\n@piii\n@piii\@ne
-\newcount\n@piv \n@piv\@ne
-\newcount\n@pv  \n@pv\@ne
-\newcount\n@pvi \n@pvi\@ne
-
+%  \newcount\n@pi  \n@pi\@ne
 % Actual Signs   Old Signs
-
-\newcount\a@si  \newcount\o@si
-\newcount\a@sii \newcount\o@sii
-\newcount\a@siii\newcount\o@siii
-\newcount\a@siv \newcount\o@siv
-\newcount\a@sv  \newcount\o@sv
-\newcount\a@svi \newcount\o@svi
-
+%  \newcount\a@si  \newcount\o@si
 % ActualCleftoks
-
-\newtoks\a@ci  \a@ci={{\z@}{\z@}{\z@}{\z@}}
-\newtoks\a@cii \a@cii={{\z@}{\z@}{\z@}{\z@}}
-\newtoks\a@ciii\a@ciii={{\z@}{\z@}{\z@}{\z@}}
-\newtoks\a@civ \a@civ={{\z@}{\z@}{\z@}{\z@}}
-\newtoks\a@cv  \a@cv={{\z@}{\z@}{\z@}{\z@}}
-\newtoks\a@cvi \a@cvi={{\z@}{\z@}{\z@}{\z@}}
-
+%  \newtoks\a@ci  \a@ci={{\z@}{\z@}{\z@}{\z@}}
 % OldCleftoks
-
-\newtoks\o@ci
-\newtoks\o@cii
-\newtoks\o@ciii
-\newtoks\o@civ
-\newtoks\o@cv
-\newtoks\o@cvi
-
+%  \newtoks\o@ci
 % MeterToks
-
-\newtoks\m@ti
-\newtoks\m@tii
-\newtoks\m@tiii
-\newtoks\m@tiv
-\newtoks\m@tv
-\newtoks\m@tvi
-
+%  \newtoks\m@ti
 % Altitude of choir groups
-
-\newskip\g@bi
-\newskip\g@bii
-\newskip\g@biii
-
+%  \newskip\g@bi
 % Height of choir groups
+%  \newskip\g@hi
 
-\newskip\g@hi
-\newskip\g@hii
-\newskip\g@hiii
-
-\let\maxgroups\thr@@ % maximum three groups of instruments or choirs
+% [T115] moved out to the new register allocation code -- until here --
+% \let\maxgroups\thr@@ % maximum three groups of instruments or choirs [T115] moved to later, using \setmaxgroups
 \newcount\group@no
+
+%%% [T115] new register allocation code -- start from here --
+%
+% register allocation for use inside \loop...\if...\repeat
+% (only for plain, but no harm even in case of LaTeX)
+\edef\noexpand@newcount{\noexpand\newcount}%
+\edef\noexpand@newdimen{\noexpand\newdimen}%
+\edef\noexpand@newskip{\noexpand\newskip}%
+%\edef\noexpand@newmuskip{\noexpand\newmuskip}% not used
+%\edef\noexpand@newbox{\noexpand\newbox}% not used
+\edef\noexpand@newtoks{\noexpand\newtoks}%
+%\edef\noexpand@newmarks{\noexpand\newmarks}% not used
+%
+% a shortcut for register allocation routines
+\def\roman@c@{\romannumeral\count@}%
+%
+% some registers (i@n, b@x, b@z, c@x, d@x, e@x, s@x, s@Y) 
+% should be allocated by \newdimen (for id 0...5) and \newskip (for id 6...11)
+% because T.114 and earlier did so and for the compatibility to Stanislav 
+% Kneifl's musixps.tex 0.92a.
+% And again \newdimen (for id>11), because both \dimen and \skip are 
+% applicable but \dimen uses less memory in case of >255 on e-TeX.
+\def\noexpand@newdimsk{%
+  \ifnum\count@<7 \let\@@newdimsk=\noexpand@newdimen
+  \else\ifnum\count@<13  \let\@@newdimsk=\noexpand@newskip
+  \else\let\@@newdimsk=\noexpand@newdimen
+  \fi\fi \@@newdimsk}%
+%
+% and some other registers (c@z, d@z, e@z, f@z, g@z) 
+% should be allocated by \newskip (for id 0...11) and \newdimen (for id>11)
+% for the same reason of above.
+\def\noexpand@newskdim{%
+  \ifnum\count@<13 \let\@@newskdim=\noexpand@newskip
+  \else \let\@@newskdim=\noexpand@newdimen
+  \fi \@@newskdim}%
+%
+% registers for instrument
+\newdimen\interinstrument % moved from "distance between instruments" to here
+\def\setmaxinstruments#1{%
+  \ifnum#1>\@oldmaxinstruments
+    \chardef\maxinstruments=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements is limited to \the\@c}
+      \chardef\maxinstruments=\@c
+    \fi
+    \count@\@oldmaxinstruments\loop
+      \advance\count@ by\@ne
+      %
+      \expandafter \let \csname interinstrument\roman@c@\endcsname \interinstrument
+      %
+      % altitude
+      \expandafter \noexpand@newskip  \csname k@i\roman@c@\endcsname
+      %
+      % InterNote
+      \expandafter \noexpand@newdimsk \csname i@n\roman@c@\endcsname
+      %
+      % beam horizontal positions: x=start, z=end, 8th-64th beams
+      \expandafter \noexpand@newdimsk \csname b@x\roman@c@\endcsname
+      \expandafter \noexpand@newdimsk \csname b@z\roman@c@\endcsname
+      \expandafter \noexpand@newdimsk \csname c@x\roman@c@\endcsname
+      \expandafter \noexpand@newskdim \csname c@z\roman@c@\endcsname
+      \expandafter \noexpand@newdimsk \csname d@x\roman@c@\endcsname
+      \expandafter \noexpand@newskdim \csname d@z\roman@c@\endcsname
+      \expandafter \noexpand@newdimsk \csname e@x\roman@c@\endcsname
+      \expandafter \noexpand@newskdim \csname e@z\roman@c@\endcsname
+      %
+      % pentes des poutres ( entier de -9 a +9 ) (slopes of the beams)
+      % multiplicite des poutres ( de -5 a +5 . 0= inactive ) (multiplicity of the beams)
+      \expandafter \noexpand@newcount \csname b@p\roman@c@\endcsname
+      \expandafter \noexpand@newcount \csname b@n\roman@c@\endcsname
+      %
+      % Number of Portees
+      \expandafter \noexpand@newcount \csname n@p\roman@c@\endcsname
+      \csname n@p\roman@c@\endcsname\@ne
+      %
+      % Actual Signs
+      \expandafter \noexpand@newcount \csname a@s\roman@c@\endcsname
+      %
+      % Old Signs
+      \expandafter \noexpand@newcount \csname o@s\roman@c@\endcsname
+      %
+      % ActualCleftoks
+      \expandafter \noexpand@newtoks  \csname a@c\roman@c@\endcsname
+      \csname a@c\roman@c@\endcsname={{\z@}{\z@}{\z@}{\z@}}%
+      %
+      % OldCleftoks
+      \expandafter \noexpand@newtoks  \csname o@c\roman@c@\endcsname
+      %
+      % MeterToks
+      \expandafter \noexpand@newtoks  \csname m@t\roman@c@\endcsname
+      %
+      % staffsize
+      \expandafter \let \csname staffspacing\roman@c@\endcsname \@ne
+      %
+      % text, lyrics, free positioning of chars
+      \expandafter \let \csname T@R\roman@c@\endcsname \z@
+      %
+      % preset clef symbols
+      \expandafter \let \csname treblec@s\roman@c@\endcsname \z@
+      \expandafter \let \csname altoc@s\roman@c@\endcsname \z@
+      \expandafter \let \csname bassc@s\roman@c@\endcsname \z@
+      %
+      % preset default staff lines as 5
+      \expandafter \let \csname n@l\roman@c@\endcsname \fiv@
+      %
+    \ifnum\count@<\maxinstruments\repeat
+    \expandafter\message\expandafter{maxinstruments=\the\maxinstruments}%
+    \chardef\@oldmaxinstruments=\maxinstruments\relax%
+    \normalnotesize\resetlayout
+  \fi
+}%
+%
+% registers for 128th beam
+\def\setmaxcxxviiibeams#1{%
+  \ifnum#1>\maxinstruments
+    \errmessage{The number of 128th beam must not exceed maxinstruments}%
+  \else
+    \ifnum#1>\@oldmaxcxxviiibeams
+      \chardef\maxcxxviiibeams=#1\relax
+      \ifnum#1>\@c
+        \errmessage{The maximum reference number of elements is limited to \the\@c}
+        \chardef\maxcxxviiibeams=\@c
+      \fi
+      \count@\@oldmaxcxxviiibeams \loop
+        \advance\count@ by\@ne
+        \expandafter \noexpand@newdimen \csname f@x\roman@c@\endcsname
+        \expandafter \noexpand@newskdim \csname f@z\roman@c@\endcsname
+      \ifnum\count@<\maxcxxviiibeams\repeat
+      \expandafter\message\expandafter{max128beams=\the\maxcxxviiibeams}%
+      \chardef\@oldmaxcxxviiibeams=\maxcxxviiibeams\relax%
+    \fi
+  \fi
+}%
+%
+% registers for 256th beam
+\def\setmaxcclvibeams#1{%
+  \ifnum#1>\maxcxxviiibeams
+    \errmessage{The number of 256th beam must not exceed the number of 128th beam}%
+  \else
+    \ifnum#1>\@oldmaxcclvibeams
+      \chardef\maxcclvibeams=#1\relax
+      \ifnum#1>\@c
+        \errmessage{The maximum reference number of elements is limited to \the\@c}
+        \chardef\maxcclvibeams=\@c
+      \fi
+      \count@\@oldmaxcclvibeams \loop
+        \advance\count@ by\@ne
+        \expandafter \noexpand@newdimen \csname g@x\roman@c@\endcsname
+        \expandafter \noexpand@newskdim \csname g@z\roman@c@\endcsname
+      \ifnum\count@<\maxcclvibeams\repeat
+      \expandafter\message\expandafter{max256beams=\the\maxcclvibeams}%
+      \chardef\@oldmaxcclvibeams=\maxcclvibeams\relax%
+    \fi
+  \fi
+}%
+%
+% registers for choir group
+\def\setmaxgroups#1{%
+  \ifnum#1>\@oldmaxgroups
+    \chardef\maxgroups=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements is limited to \the\@c}
+      \chardef\maxgroups=\@c
+    \fi
+    \count@\@oldmaxgroups \loop
+      \advance\count@ by\@ne
+      % Altitude
+      \expandafter \noexpand@newskip  \csname g@b\roman@c@\endcsname
+      % Height
+      \expandafter \noexpand@newskip  \csname g@h\roman@c@\endcsname
+      %
+      \expandafter \let \csname lowersonginstrum\roman@c@\endcsname \maxdimen
+      \expandafter \let \csname uppersonginstrum\roman@c@\endcsname \z@
+    \ifnum\count@<\maxgroups\repeat
+    \expandafter\message\expandafter{maxgroups=\the\maxgroups}%
+    \chardef\@oldmaxgroups=\maxgroups\relax%
+  \fi
+}%
+%
+% registers for slur
+\def\setmaxslurs#1{%
+  \ifnum#1>\@oldmaxslurs
+    \chardef\maxslurs=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements is limited to \the\@c}
+      \chardef\maxslurs=\@c
+    \fi
+    \count@\@oldmaxslurs \loop
+      \advance\count@ by\@ne
+      %
+      % horizontal start position of slur
+      \expandafter \noexpand@newdimsk \csname s@x\roman@c@\endcsname
+      %
+      % sense u,d and x (flag) for pending slurs
+      \expandafter \noexpand@newtoks  \csname s@s\roman@c@\endcsname
+      \csname s@s\roman@c@\endcsname={x}%
+      %
+      % vertical offset of slur
+      \expandafter \noexpand@newdimsk \csname s@Y\roman@c@\endcsname
+      %
+      % altportee of slur
+      \expandafter \noexpand@newskip  \csname s@a\roman@c@\endcsname
+      %
+      % vertical start position of slur [steps of internote]
+      \expandafter \noexpand@newcount \csname s@y\roman@c@\endcsname
+      %
+      % instrument number of that slur (to retrieve internote)
+      \expandafter \noexpand@newcount \csname s@N\roman@c@\endcsname
+      %
+      % vertical end position of slur [steps of internote], used from 
+      % \breakslur.  the value \maxdimen is used to decide, if 
+      % \breakslur is used or not (flag)
+      \expandafter \noexpand@newcount \csname s@z\roman@c@\endcsname
+      \csname s@z\roman@c@\endcsname\maxdimen
+      %
+      %++ickd: dotted indicator for pending slurs
+      \expandafter \noexpand@newtoks  \csname s@d\roman@c@\endcsname
+      %
+    \ifnum\count@<\maxslurs\repeat
+    \expandafter\message\expandafter{maxslurs=\the\maxslurs}%
+    \chardef\@oldmaxslurs=\maxslurs\relax%
+  \fi
+}%
+%
+% registers for trill (MusiXTeX-type trill only.  Legacy \trillC and 
+% \TrillC are out of the scope.)
+\def\setmaxtrills#1{%
+  \ifnum#1>\@oldmaxtrills
+    \chardef\maxtrills=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements is limited to \the\@c}
+      \chardef\maxtrills=\@c
+    \fi
+    \count@\@oldmaxtrills \loop
+      \advance\count@ by\@ne
+      % starting horizontal pos
+      \expandafter \noexpand@newskip  \csname tr@x\roman@c@\endcsname
+      \csname tr@x\roman@c@\endcsname\maxdimen\relax 
+      % heading of trill
+      \expandafter \noexpand@newtoks  \csname tr@sw\roman@c@\endcsname
+      % height of trill
+      \expandafter \noexpand@newskip  \csname tr@y\roman@c@\endcsname
+    \ifnum\count@<\maxtrills\repeat
+    \expandafter\message\expandafter{maxtrills=\the\maxtrills}%
+    \chardef\@oldmaxtrills=\maxtrills\relax%
+  \fi
+}%
+%
+% registers for octave line
+\def\setmaxoctlines#1{%
+  \ifnum#1>\@oldmaxoctlines
+    \chardef\maxoctlines=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements is limited to \the\@c}
+      \chardef\maxoctlines=\@c
+    \fi
+    \count@\@oldmaxoctlines \loop
+      \advance\count@ by\@ne
+      % starting horizontal pos
+      \expandafter \noexpand@newskip  \csname o@x\roman@c@\endcsname
+      \csname o@x\roman@c@\endcsname\maxdimen\relax 
+      % height of octline
+      \expandafter \noexpand@newskip  \csname o@y\roman@c@\endcsname
+      % sense of octline
+      \expandafter \noexpand@newtoks  \csname o@sw\roman@c@\endcsname
+    \ifnum\count@<\maxoctlines\repeat
+    \expandafter\message\expandafter{maxoctlines=\the\maxoctlines}%
+    \chardef\@oldmaxoctlines=\maxoctlines\relax%
+  \fi
+}%
+%
+\chardef\@oldmaxinstruments=\z@
+\chardef\@oldmaxcxxviiibeams=\z@
+\chardef\@oldmaxcclvibeams=\z@
+\chardef\@oldmaxgroups=\z@
+\chardef\@oldmaxslurs=\z@
+\chardef\@oldmaxtrills=\z@
+\chardef\@oldmaxoctlines=\z@
+%
+% actual setup (=register allocation) of the maximum element numbers 
+% should be done after fonts definition.
+%
+%%% [T115] new register allocation code -- until here --
+
 
 %%% fonts
 
@@ -673,86 +873,42 @@
 
 \newcount\N@s
 
+% [T115] moved out to the new register allocation code (except for \s@Y)
 % horizontal start position of slur
-
-\newdimen\s@xi
-\newdimen\s@xii
-\newdimen\s@xiii
-\newdimen\s@xiv
-\newdimen\s@xv
-\newdimen\s@xvi
-
+%  \newdimen\s@xi
 % sense u,d and x (flag) for pending slurs
-
-\newtoks\s@si  \s@si={x}
-\newtoks\s@sii \s@sii={x}
-\newtoks\s@siii\s@siii={x}
-\newtoks\s@siv \s@siv={x}
-\newtoks\s@sv  \s@sv={x}
-\newtoks\s@svi \s@svi={x}
-
+%  \newtoks\s@si  \s@si={x}
 % vertical offset of slur
-
-\newdimen\s@Y
-\newdimen\s@Yi
-\newdimen\s@Yii
-\newdimen\s@Yiii
-\newdimen\s@Yiv
-\newdimen\s@Yv
-\newdimen\s@Yvi
-
+\newdimen\s@Y % this register is for common use
+%  \newdimen\s@Yi
 % altportee of slur
-
-\newskip\s@ai
-\newskip\s@aii
-\newskip\s@aiii
-\newskip\s@aiv
-\newskip\s@av
-\newskip\s@avi
-
+%  \newskip\s@ai
 % vertical start position of slur [steps of internote]
-
-\newcount\s@yi
-\newcount\s@yii
-\newcount\s@yiii
-\newcount\s@yiv
-\newcount\s@yv
-\newcount\s@yvi
-
-
+%  \newcount\s@yi
 % instrument number of that slur (to retrieve internote)
-
-\newcount\s@Ni
-\newcount\s@Nii
-\newcount\s@Niii
-\newcount\s@Niv
-\newcount\s@Nv
-\newcount\s@Nvi
-
+%  \newcount\s@Ni
 % vertical end position of slur [steps of internote], used from \breakslur
 % the value \maxdimen is used to decide, if \breakslur is used or not (flag)
-
-\newcount\s@zi  \s@zi\maxdimen
-\newcount\s@zii \s@zii\maxdimen
-\newcount\s@ziii\s@ziii\maxdimen
-\newcount\s@ziv \s@ziv\maxdimen
-\newcount\s@zv  \s@zv\maxdimen
-\newcount\s@zvi \s@zvi\maxdimen
-
+%  \newcount\s@zi  \s@zi\maxdimen
 %++ickd: dotted indicator for pending slurs
-
-\newtoks\s@di
-\newtoks\s@dii
-\newtoks\s@diii
-\newtoks\s@div
-\newtoks\s@dv
-\newtoks\s@dvi
+%  \newtoks\s@di % moved out to the new register allocation code
 %++ickd
 
 \def\roman@n@i{\romannumeral\n@i\endcsname}
 
+%
+% [T115] make slurs independent from \maxinstruments
+\def\test@slurnum{%
+  \ifnum\n@i<\z@ \n@i\@c \fi
+  \ifnum\n@i<\maxslurs \else
+    \count@\maxslurs \advance\count@\m@ne
+    \errmessage{Wrong slur reference number \the\n@i! (valid: 0 to \the\count@)}% [T115]
+    \n@i\z@% [T115]
+  \fi
+  \advance\n@i\@ne}%
+%
 \def\s@l@ctslur#1\relax{%
-  \n@i#1\relax\test@num
+  \n@i#1\relax\test@slurnum% [T115] make it independent from beams
   \edef\s@a{\csname s@a\roman@n@i}%  dimen (altportee)
   \edef\s@x{\csname s@x\roman@n@i}%  dimen (hor start pos)
   \edef\s@y{\csname s@y\roman@n@i}%  count (startnote [internote])
@@ -1548,12 +1704,8 @@
 \def\setsize#1#2{\n@v#1\relax % select instrument
   \expandafter\edef\csname staffspacing\romannumeral\n@v\endcsname{#2}}
 
-\let\staffspacingi\@ne
-\let\staffspacingii\@ne
-\let\staffspacingiii\@ne
-\let\staffspacingiv\@ne
-\let\staffspacingv\@ne
-\let\staffspacingvi\@ne
+% [T115] moved out to the new register allocation code
+%  \let\staffspacingi\@ne
 
 % number of staffs
 
@@ -1572,6 +1724,9 @@
 \def\interstaff#1{\def\interfacteur{#1}}
 
 \def\s@l@ctinstr{%
+  \ifnum\noinstrum@nt>\maxinstruments % [T115] -- from here --
+    \errmessage{Wrong instrument reference number \the\noinstrum@nt, maxinstruments=\the\maxinstruments}
+  \fi % [T115] -- until here --
   \edef\altitude{\csname k@i\romannumeral\noinstrum@nt\endcsname}%
   \edef\st@ffs{\csname n@p\romannumeral\noinstrum@nt\endcsname}%
   \edef\nblines{\csname n@l\romannumeral\noinstrum@nt\endcsname}%
@@ -1612,12 +1767,9 @@
 \def\songbottom{\groupbottom1}
 \def\songtop{\grouptop1}
 
-\let\lowersonginstrumi\maxdimen
-\let\lowersonginstrumii\maxdimen
-\let\lowersonginstrumiii\maxdimen
-\let\uppersonginstrumi\z@
-\let\uppersonginstrumii\z@
-\let\uppersonginstrumiii\z@
+% [T115] moved out to the new register allocation code
+%  \let\lowersonginstrumi\maxdimen
+%  \let\uppersonginstrumi\z@
 
 \def\g@loop{\group@no\z@ \loop\ifnum\group@no<\maxgroups
   \s@l@ctgroup}
@@ -1631,7 +1783,10 @@
 \def\test@grnum{%
   \ifnum\group@no<\z@ \group@no\@c \fi
   \ifnum\group@no<\maxgroups \else
-    \errmessage{Wrong group number=\the\group@no! max=\the\maxgroups}\group@no\z@ \fi
+    \count@\maxgroups \advance\count@\m@ne
+    \errmessage{Wrong group reference number \the\group@no! (valid: 0 to \the\count@)}% [T115]
+    \group@no\z@% [T115]
+  \fi
   \advance\group@no\@ne}
 
 % \nobarmessages prevents bar messages
@@ -1673,14 +1828,10 @@
 
 %%% distance between instruments (added to \interportee)
 
-\newdimen\interinstrument
-
-\let\interinstrumenti\interinstrument
-\let\interinstrumentii\interinstrument
-\let\interinstrumentiii\interinstrument
-\let\interinstrumentiv\interinstrument
-\let\interinstrumentv\interinstrument
-\let\interinstrumentvi\interinstrument
+% [T115] moved out to the above of the new register allocation code
+% \newdimen\interinstrument
+% [T115] moved out to the new register allocation code
+% \let\interinstrumenti\interinstrument
 
 \def\setinterinstrument#1#2{\n@v#1\relax % select instrument
   \expandafter\def\csname interinstrument\romannumeral\n@v\endcsname{#2}}
@@ -1896,7 +2047,7 @@
   \repeat
 % cutslur
   \ifnum\N@s>\z@%     % any pending slurs ?
-    \n@viii\maxinstruments % test all possible numbers
+    \n@viii\maxslurs % test all possible slur numbers [T115] (Hiroaki)
     \advance\n@viii\m@ne
     \loop\ifnum\n@viii>\m@ne
       \s@l@ctslur\n@viii\relax
@@ -2544,6 +2695,14 @@
 \def\treblelowoct{\trebleclef\raise -7\internote\hbox\@to\z@{\smalltype\it\kern -2.3\Interligne 8\hss}}
 \def\basslowoct{\bassclef\raise -6\internote\hbox\@to\z@{\smalltype\it\kern -2.5\Interligne 8\hss}}
 
+% [T115] reqest from Hermann Hinsch
+\def\smalltrebleoct{\smalltrebleclef\raise 7.2\internote\hbox\@to\z@{\smalltype\it\kern -1.8\Interligne 8\hss}}
+\def\smalltreblelowoct{\smalltrebleclef\raise-6.8\internote\hbox\@to\z@{\smalltype\it\kern -2.1\Interligne 8\hss}} 
+\def\smallbassoct{\smallbassclef\raise 2\internote\hbox\@to\z@{\smalltype\it\kern -2.0\Interligne 8\hss}}
+\def\smallbasslowoct{\smallbassclef\raise-6.2\internote\hbox\@to\z@{\smalltype\it\kern -2.2\Interligne 8\hss}}
+% [T115] reqest from Hermann Hinsch: end
+
+
 \newskip\clef@skip
 
 \def\changeclefs{\t@rmskip\writ@newclefs}
@@ -2664,7 +2823,7 @@
 
 \def\setname#1#2{\n@v#1\relax % select instrument
 %  \let\Writ@names\writ@names
-  \expandafter\edef\csname instrument\romannumeral\n@v\endcsname{#2}}
+  \expandafter\def\csname instrument\romannumeral\n@v\endcsname{#2}}% [T115] changed from \edef to \def (Hiroaki)
 
 \def\writ@names{\n@loop
   \setbox\toks@box\null\relax
@@ -3301,14 +3460,17 @@
 % \b@p slope (-9) - (9)
 % \b@n number of pending beamlines (-4) - (4)
 
-\def\test@num{%
+\def\test@beamnum{% [T115] new macro to make it independent from slur
   \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxinstruments \else
-    \n@i\z@ \errmessage{Wrong slur or beam number!}\fi
-  \advance\n@i\@ne}
+    \count@\maxinstruments \advance\count@\m@ne
+    \errmessage{Wrong beam reference number \the\n@i! (valid: 0 to \the\count@)}
+    \n@i\z@
+  \fi
+  \advance\n@i\@ne}%
 
 \def\s@l@ctbeam#1\relax{%
-  \n@i#1\relax\test@num
+  \n@i#1\relax\test@beamnum % [T115] make it independent from slur
   \edef\b@x{\csname b@x\romannumeral\n@i\endcsname}%
   \edef\b@z{\csname b@z\romannumeral\n@i\endcsname}%
   \edef\b@n{\csname b@n\romannumeral\n@i\endcsname}%
@@ -3750,7 +3912,7 @@
 % \n@ii positive signature limit, \n@ii-8 negative signature limit
     \advance\n@ii-\a@s \advance\n@ii\si@ \divide\n@ii\s@v@n
     \@Tii
-  \fi \advance\n@v\@l \advance\n@v\n@vi \@Ti
+  \fi \advance\n@v\@l \advance\n@v\n@vi \expandafter\@Ti % [T115] (Hiroaki)
   \fi}
 
 \def\@nod{Can't double }
@@ -3933,7 +4095,10 @@
 \let\Trille\TrilleX
 \def\C@trille#1#2{\zcharnote{#1}{\y@v#2\noteskip \trill@}}
 
-\let\maxtrilles\si@
+\let\maxtrilles\si@ 
+% \maxtrilles and \@itrille[i] are only for obsolete Legacy \trillC 
+% and \TrillC; not related with new register allocation code.  Leave 
+% it as-is. [T115]
 
 \newskip\@itrillei
 \newskip\@itrilleii
@@ -3973,28 +4138,12 @@
 
 %%%%%%
 
-\let\maxtrills\si@
+% \let\maxtrills\si@ % here disabled to avoid conflict with new register allocation code
+% [T115] moved out to the new register allocation code
+%  \newskip\tr@xi \tr@xi\maxdimen\relax % starting horizontal pos
+%  \newtoks\tr@swi % heading of trill
+%  \newskip\tr@yi % height of trill
 
-\newskip\tr@xi \tr@xi\maxdimen\relax % starting horizontal pos
-\newskip\tr@xii \tr@xii\maxdimen\relax % starting horizontal pos
-\newskip\tr@xiii \tr@xiii\maxdimen\relax % starting horizontal pos
-\newskip\tr@xiv \tr@xiv\maxdimen\relax % starting horizontal pos
-\newskip\tr@xv \tr@xv\maxdimen\relax % starting horizontal pos
-\newskip\tr@xvi \tr@xvi\maxdimen\relax % starting horizontal pos
-
-\newtoks\tr@swi % heading of trill
-\newtoks\tr@swii % heading of trill
-\newtoks\tr@swiii % heading of trill
-\newtoks\tr@swiv % heading of trill
-\newtoks\tr@swv % heading of trill
-\newtoks\tr@swvi % heading of trill
-
-\newskip\tr@yi % height of trill
-\newskip\tr@yii % height of trill
-\newskip\tr@yiii % height of trill
-\newskip\tr@yiv % height of trill
-\newskip\tr@yv % height of trill
-\newskip\tr@yvi % height of trill
 \newcount\tr@number
 
 \def\tr@loop{\tr@number\z@ \loop\ifnum\tr@number<\maxtrills
@@ -4004,7 +4153,10 @@
 \def\s@l@cttrill#1\relax{%
   \n@i#1\relax  \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxtrills \else
-    \n@i\z@ \errmessage{Wrong trill number!}\fi
+    \count@\maxtrills \advance\count@\m@ne
+    \errmessage{Wrong trill reference number \the\n@i! (valid: 0 to \the\count@)}% [T115]
+    \n@i\z@ % [T115]
+  \fi
   \advance\n@i\@ne
   \xdef\tr@x{\csname tr@x\roman@n@i}%
   \xdef\tr@y{\csname tr@y\roman@n@i}%
@@ -4072,29 +4224,12 @@
 
 %%%%%%
 
-\let\maxoctlines\si@
-
-\newskip\o@xi \o@xi\maxdimen\relax % starting horizontal pos
-\newskip\o@xii \o@xii\maxdimen\relax % starting horizontal pos
-\newskip\o@xiii \o@xiii\maxdimen\relax % starting horizontal pos
-\newskip\o@xiv \o@xiv\maxdimen\relax % starting horizontal pos
-\newskip\o@xv \o@xv\maxdimen\relax % starting horizontal pos
-\newskip\o@xvi \o@xvi\maxdimen\relax % starting horizontal pos
-
-\newskip\o@yi % height of octline
-\newskip\o@yii % height of octline
-\newskip\o@yiii % height of octline
-\newskip\o@yiv % height of octline
-\newskip\o@yv % height of octline
-\newskip\o@yvi % height of octline
-
+% \let\maxoctlines\si@ % here disabled to avoid conflict with new register allocation code, except for \o@swz
+% [T115] moved out to the new register allocation code
+%  \newskip\o@xi \o@xi\maxdimen\relax % starting horizontal pos
+%  \newskip\o@yi % height of octline
 \newtoks\o@swz % sense of octline for \octfin[up][down] without number
-\newtoks\o@swi % sense of octline
-\newtoks\o@swii % sense of octline
-\newtoks\o@swiii % sense of octline
-\newtoks\o@swiv % sense of octline
-\newtoks\o@swv % sense of octline
-\newtoks\o@swvi % sense of octline
+%  \newtoks\o@swz % sense of octline for \octfin[up][down] without number
 
 \newcount\o@number
 
@@ -4105,7 +4240,10 @@
 \def\s@l@ctoctline#1\relax{%
   \n@i#1\relax  \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxoctlines \else
-    \n@i\z@ \errmessage{Wrong octaviation line number!}\fi
+    \count@\maxoctlines \advance\count@\m@ne
+    \errmessage{Wrong octaviation line reference number \the\n@i! (valid: 0 to \the\count@)}% [T115]
+    \n@i\z@% [T115]
+  \fi
   \advance\n@i\@ne
   \xdef\o@x{\csname o@x\roman@n@i}%
   \xdef\o@y{\csname o@y\roman@n@i}%
@@ -4341,12 +4479,8 @@
 \def\setsongraise#1#2{\n@v#1\relax % select instrument
   \expandafter\def\csname T@R\romannumeral\n@v\endcsname{#2}}
 
-\let\T@Ri\z@
-\let\T@Rii\z@
-\let\T@Riii\z@
-\let\T@Riv\z@
-\let\T@Rv\z@
-\let\T@Rvi\z@
+% [T115] moved out to the new register allocation code
+%  \let\T@Ri\z@
 
 \def\qlrlap#1{\rlap{\hbox to \qn@width{\hss#1\hss}}}
 \def\zsong{\let\@Ti\rlap \C@t}
@@ -4439,30 +4573,43 @@
 \def\downtrio{\n@vi\@ne \let\@text\@ne \unbkt}
 
 %%% standard settings
-
+% [115] make them compatible to >12 instruments
 \def\resetlayout{\let\interfacteur\nin@
   \stafftopmarg\thr@@\Interligne \staffbotmarg\thr@@\Interligne
-  \let\n@li\fiv@ \let\n@lii\fiv@ \let\n@liii\fiv@
-  \let\n@liv\fiv@ \let\n@lv\fiv@ \let\n@lvi\fiv@
-  \noinstrum@nt1\s@l@ctinstr\internote\Internote
+  \count@\z@ \loop
+    \advance\count@ by\@ne
+    \expandafter \let\csname n@l\roman@c@\endcsname \fiv@
+  \ifnum\count@<\maxinstruments\repeat
   \resetclefsymbols}
 
 \def\resetclefsymbols{%
-  \let\bassc@si\z@ \let\bassc@sii\z@ \let\bassc@siii\z@
-  \let\bassc@siv\z@ \let\bassc@sv\z@ \let\bassc@svi\z@
-  \let\altoc@si\z@ \let\altoc@sii\z@ \let\altoc@siii\z@
-  \let\altoc@siv\z@ \let\altoc@sv\z@ \let\altoc@svi\z@
-  \let\treblec@si\z@ \let\treblec@sii\z@ \let\treblec@siii\z@
-  \let\treblec@siv\z@ \let\treblec@sv\z@ \let\treblec@svi\z@
+  \count@\z@ \loop
+    \advance\count@ by\@ne
+    \expandafter \let\csname treblec@s\roman@c@\endcsname \z@
+    \expandafter \let\csname altoc@s\roman@c@\endcsname \z@
+    \expandafter \let\csname bassc@s\roman@c@\endcsname \z@
+  \ifnum\count@<\maxinstruments\repeat
 }
 
-\resetlayout
-\let\nbinstruments\maxinstruments
-\normalnotesize
+% [T115] setup the default maximum element numbers to the same values of T.114
+\setmaxinstruments\si@
+\setmaxcxxviiibeams\si@ % 128th beam
+\setmaxcclvibeams\z@ % 256th beam
+\setmaxgroups\thr@@ % groups of inst's or choirs
+\setmaxslurs\maxinstruments
+\setmaxtrills\maxinstruments
+\setmaxoctlines\maxinstruments
+%
+
+% [T115] new register allocation code requires some changes
+%\resetlayout % no need
+%\let\nbinstruments\maxinstruments % no need
+%\normalnotesize % already executed in \setmaxinstruments
 \normalmusicsize
-\normalnotesize% needs rerun to initialize \metron stem length (a very historical bug since T.103 or earlier) (T.114, Hiroaki)
-\resetlayout
+\normalnotesize % important: execute it again after the first execute of \normalmusicsize --- to initialize \metron stem length.  but why? 
+%\resetlayout % no need
 \def\nbinstruments{1}
+\noinstrum@nt1\s@l@ctinstr\internote\Internote
 
 %%%
 %
@@ -4723,5 +4870,4 @@
 
 \catcode`\@=\catcodeat
 \endinput
-
 

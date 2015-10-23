@@ -1,33 +1,31 @@
-#define VERSION "0.83"
+#define MUSIXFLXVERSION "0.83"
 #define MYVERSION "/T.63dt+jh.2\0" /* Revision jh.2  jh-2 */
 
 /****************************************************************************
  Line breaking program for MusiXTeX.
- Ross Mitchell, August 1992.
- - enabled endline signature changes, May 1993
- - enabled \zbar, March 1994
- - enabled \leftrightrepeat at eoline, April 1994
- - converted to (TURBO/PURBO/Pure)C, thanks to MiSi for compiling, June 1994
- remark: this is my very first attempt using C, if your harddisk crushes
-         or your computer blows up -> Your problem !
- - MusixFlx now gives back a number to the parent process (batch, shell, o.s.e.)
-    0 -> OK
-    3 -> error (freely be changed in error_exit())
- - introduced \raggedstoppiece, August 1994
- - introduced barno for more transparence of .mx2, September 1994
- - introduced (reluctant) the use of 'hard' offsets, September 1994
-   therefore the computing of mean space factor changed
- - introduced \leftrepeat, September 1994
- - enabled moretimes use of \startpiece, September 1994
- - added logfile for bughunting, September 1994
- - added test of versionnumber from MusiXTeX, September 1994
- - reintroduced \autolines, October 1994
- - renamed MuFlex to musixflx (as suggested by DT), October 1994
- - adapted ANSI coding (as suggested by CLARY Olivier), February 1995
- - added some safeties for weird situations, March 1995
- - fix bug in line breaking when xbars have sign changes - November 1997 jh-1
- - support possible \linegoal instead of \mulooseness - November 1997, jh-2
+ (c) Copyright Ross Mitchell 1992-1997 ross.mitchell@csiro.au
+ (c) Copyright J. Hunsberger 1997 jhunsberger@i2k.co
+ (c) Copyright 2009, 2010 Peter Breitenlohner <tex-live@tug.org>
+
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
 *****************************************************************************/
+
+/* #include <config.h>   */
+# define VERSION "0.83.2"
 
 #include <stdio.h>
 #include <string.h>
@@ -37,6 +35,13 @@
 #define TRUE  1
 #define FALSE 0
 
+/* FILENAME_MAX should be in stdio.h, but if your compiler loses,
+   here's a replacement.  */
+#ifndef FILENAME_MAX
+#define FILENAME_MAX 512
+#endif
+#define FNL FILENAME_MAX
+
 /* attention: every \changecontext reports a change of \sign@skip */
 
 #define MAX_SIGNS    128  /* max signature changes  */
@@ -44,9 +49,6 @@
 #define MAX_BARS    2048  /* max number of bars */
 
 #define GETLINE fgets(linebuf, (int) sizeof(linebuf), infile)
-
-/* ! If next line causes trouble, comment it out ! */
-void error_exit(int error_number);
 
 int zbar[MAX_BARS], lr_repeat[MAX_BARS], raggedline[MAX_BARS],
     l_repeat[MAX_BARS], barno[MAX_BARS], autolines[MAX_SECTIONS],
@@ -64,8 +66,8 @@ double hardbarlength[MAX_BARS], softbarlength[MAX_BARS],
 FILE *infile, *outfile, *logfile;
 char linebuf[128];
 
-void error_exit(error_number)
-     int error_number;
+static void
+error_exit(int error_number)
 {
   switch (error_number){
 
@@ -85,9 +87,8 @@ void error_exit(error_number)
   default:
     printf("!!! Can't go on !!!\n"); exit(3);}}
 
-int main(argc, argv)
-     int argc;
-     char **argv;
+int
+main(int argc, char **argv)
 {
   register int i, j, bar;
 
@@ -110,9 +111,11 @@ int main(argc, argv)
          beforerule, cor_beforerule, afterrule, cor_afterrule, lastbar,
          eff_linewidth, fill_length, hardlength, softlength, clefskip;
 
-  char name_of_file [128], n_o_f [128], n_o_logfile[128], MusiXFlxVersion[6];
+  char name_of_file [FNL], n_o_f [FNL], n_o_logfile[FNL], MusiXFlxVersion[6];
 
-  printf("\n <<< musixflex %s%s >>>\n", VERSION, MYVERSION);
+  char *p;
+
+  printf("\n <<< musixflex %s >>>\n", VERSION);
   printf("\n ... decoding command line\n");
 
   if (argc<2 || argc >3) error_exit(1);
@@ -136,7 +139,14 @@ int main(argc, argv)
 
   strcpy (name_of_file, argv[1]);
 
-  strcpy(n_o_f, strtok(name_of_file, "."));
+  p = strrchr(name_of_file, '.');
+  if (p && !strchr(p + 1, '/')
+#if defined(__MSDOS__) || defined(WIN32)
+      && !strchr(p + 1, '\\')
+#endif
+      )
+    *p = '\0';
+  strcpy(n_o_f, name_of_file);
   strcat(name_of_file, ".mx1");
 
 /*****************************************************
@@ -154,13 +164,16 @@ int main(argc, argv)
  and stop if they differ
 ************************/
 
-  strcpy(MusiXFlxVersion, VERSION);
+  strcpy(MusiXFlxVersion, MUSIXFLXVERSION);
   strcat(MusiXFlxVersion, "\n");
   printf(" ... testing versionnumber\n");
   ++currentline;
   if (GETLINE && strcmp(linebuf, MusiXFlxVersion)){
-    printf("\n!!! Wrong version !!!\n\nMusiXTeX : %s",linebuf);
-    printf("musixflx : %s\n",MusiXFlxVersion); error_exit(99);}
+    puts("!!! Wrong version (or incompatible end-of-line characters) !!!");
+    printf("MusiXTeX : %s",linebuf);
+    printf("musixflx : %s",MusiXFlxVersion); 
+    error_exit(99);
+  }
 
 /*********************
  Open the output file.
@@ -630,7 +643,7 @@ int main(argc, argv)
  added correct computing of fill_length
 ****************************************************************/
 
-    for (j=1; j<=lines; ++j, ++line_in_section){
+    for (j=1; j<=lines; ++j, ++line_in_section) {
       ++line_number;
       fill_length=(lines-j+1)*(linewidth-(clefskip+signskip[sign]));
 
@@ -646,8 +659,8 @@ int main(argc, argv)
       if (!eff_softlength[section]) error_exit(5);
       spc_factor=(fill_length-eff_hardlength[section])/eff_softlength[section];
 
-    if ((xbar[mark+1]>1) && (mark>0)){ 
-       /* The bar is an bar+xbar with a sign change. jh-1 */
+      if ((xbar[mark+1]>1) && (mark>0)) { 
+        /* The bar is an bar+xbar with a sign change. jh-1 */
         eff_linewidth=linewidth-(clefskip+signskip[sign-1])-parindent;
       } else { /* This is a normal bar. jh-1 */
         eff_linewidth=linewidth-(clefskip+signskip[sign])-parindent;
@@ -665,9 +678,10 @@ int main(argc, argv)
       hardlength= 0;
       softlength = 0;
       x = 0;
+      lastbar = 0.0;
       detect_end= FALSE;
 
-      while (x<eff_linewidth){
+      while (x<eff_linewidth) {
         if (detect_end) break;
         ++i;
 
@@ -694,7 +708,8 @@ int main(argc, argv)
         else if (line_in_section==lines){detect_end=FALSE; x=0;}
 
         hardlength += hardbarlength[i];
-        softlength += softbarlength[i];}
+        softlength += softbarlength[i];
+      }
 
 /************************************************
  If the overhang is less than half the barlength,
@@ -702,7 +717,7 @@ int main(argc, argv)
  and shrink the line accordingly.
 *************************************************/
 
-      if ((x-eff_linewidth)<(lastbar/2)){
+      if ((x-eff_linewidth)<(lastbar/2)) {
         barsinline=i-mark;
         mark=i;
         lastbarno=barno[mark];
@@ -713,9 +728,10 @@ int main(argc, argv)
  the amount of afterruleskip
 *********************************************/
 
-        if (zbar[mark]){
+        if (zbar[mark]) {
           softbarlength[i+1] += afterrule;
-          eff_softlength[section] += afterrule;}
+          eff_softlength[section] += afterrule;
+        }
 
 /********************************************
  last bar in line a leftrightrepeat?
@@ -724,7 +740,7 @@ int main(argc, argv)
             advance the softwidth of next bar
 *********************************************/
 
-        if (lr_repeat[mark]){
+        if (lr_repeat[mark]) {
 /*          printf("mark=%d\n",mark);
             printf("width_leftright=%f\n",width_leftrightrepeat[i]);
             printf("width_left=%f\n",width_leftrepeat[i]);   */
@@ -735,7 +751,7 @@ int main(argc, argv)
           softbarlength[i+1] += afterrule/2;
           eff_softlength[section] += afterrule/2;
           
-          }
+        }
 
 /********************************************
  last bar in line a leftrepeat?
@@ -744,13 +760,14 @@ int main(argc, argv)
             advance the softwidth of next bar
 *********************************************/
 
-        if (l_repeat[mark]){
+        if (l_repeat[mark]) {
           hardlength -= (width_leftrepeat[i]-lthick);
           hardbarlength[i+1] += width_leftrepeat[i];
           softbarlength[i+1] += afterrule/2;
-          eff_softlength[section] += afterrule/2;}
+          eff_softlength[section] += afterrule/2;
+        }
 
-        if (signchange[sign+1]==mark+1){ /* s.b. */
+        if (signchange[sign+1]==mark+1) { /* s.b. */
           ++sign;
           /* Because the bar is staying here in the line, we look ahead
              to see if the upcoming bar is a sign change, and adjust space
@@ -759,15 +776,18 @@ int main(argc, argv)
              sign change bar is really a bar+xbar set, where the sign change
              is buried in the xbar, then we don't do the move because the
              change notice really won't be posted in this line.  jh-1 */
-         if (xbar[mark+1]<2){ /* okay to do the move.  jh-1 */
-          hardlength += oldsignskip[sign];
-          hardbarlength[mark+1] -= oldsignskip[sign];}}}
+          if (xbar[mark+1]<2) { /* okay to do the move.  jh-1 */
+            hardlength += oldsignskip[sign];
+            hardbarlength[mark+1] -= oldsignskip[sign];
+          }
+        }
+      }
 
 /*********************************************
  Exclude the latest bar, and stretch the line.
 **********************************************/
 
-      else{
+      else {
 
         barsinline=i-1-mark;
         if (barsinline<1) error_exit(2);
@@ -778,19 +798,21 @@ int main(argc, argv)
 
         if (zbar[mark]) softbarlength[i] += afterrule;
 
-        if (lr_repeat[mark]){
+        if (lr_repeat[mark]) {
           hardlength -= (width_leftrightrepeat[i-1]-width_leftrepeat[i-1]);
           eff_hardlength[section] +=
                         (width_leftrightrepeat[i-1]-width_leftrepeat[i-1]);
           hardbarlength[i] += width_leftrepeat[i-1];
           softbarlength[i] += afterrule/2;
-          eff_softlength[section] += afterrule/2;}
+          eff_softlength[section] += afterrule/2;
+        }
 
-        if (l_repeat[mark]){
+        if (l_repeat[mark]) {
           hardlength -= (width_leftrepeat[i-1]-lthick);
           hardbarlength[i] += width_leftrepeat[i-1];
           softbarlength[i] += afterrule/2;
-          eff_softlength[section] += afterrule/2;}
+          eff_softlength[section] += afterrule/2;
+        }
 
 /*********************************************************************
  Error (o/u-hbox) occurs only when signature change start in next line
@@ -799,13 +821,16 @@ int main(argc, argv)
               reduce next hard barlength by signature change
 **********************************************************************/
 
-        if (signchange[sign]==mark+1){
+        if (signchange[sign]==mark+1) {
           /* However, if the next bar is a bar+xbar set where the
              sign change comes from the xbar, then don't do this
              move, because the extra skip is not really there! jh-1 */
-         if (xbar[mark+1]<2) { /* alright, do the move.   jh-1 */
-          hardlength += oldsignskip[sign];
-          hardbarlength[mark+1] -= oldsignskip[sign];}}}
+          if (xbar[mark+1]<2) { /* alright, do the move.   jh-1 */
+            hardlength += oldsignskip[sign];
+            hardbarlength[mark+1] -= oldsignskip[sign];
+          }
+        }
+      }
 
 /***********************************************
  Define a flex factor for this line as the ratio
