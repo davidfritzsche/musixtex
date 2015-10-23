@@ -1,8 +1,4 @@
 %
-%  mxdoc111d.tex (formerly file 110d, internally called 109d1)
-%    Different from version posted in that it has the extra paragraph
-%    "You may wonder ..." in section 1.3
-%
 %   This file is part of MusiXTeX
 %
 %   MusiXTeX is free software; you can redistribute it and/or modify
@@ -20,20 +16,17 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-%  This version 109d1 postdates the one posted to the site.
 %
-
-\ifx\documentclass\undefined
-  \documentstyle[twoside,11pt,musixdoc,multicol,backgrnd]{report}
-\else
-  \documentclass[twoside,11pt,a4paper]{report}
-  \usepackage{multicol}
-  \usepackage{musixdoc}
-  \usepackage{etex}
-  \usepackage[dvips,bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,colorlinks=true,pdfborder={0 0 0}]{hyperref}
-  \usepackage{url}
-  \usepackage{indentfirst}
-  \usepackage[ansinew]{inputenc}
+%   musixdoc.tex : the document
+%
+\documentclass[twoside,11pt,a4paper]{report}
+\usepackage{multicol}
+\usepackage{musixdoc}
+\usepackage{etex}
+\usepackage[dvips,bookmarks=true,bookmarksnumbered=true,bookmarksopen=false,colorlinks=true,pdfborder={0 0 0},pdfstartview={FitH},pdfmenubar=false]{hyperref}
+\usepackage{url}
+\usepackage{indentfirst}
+\usepackage[ansinew]{inputenc}
 \makeatletter
 \def\notesintext#1{% no staff lines, no clefs
   {\let\extractline\relax
@@ -57,7 +50,7 @@
    \nobarnumbers
    \staffbotmarg0pt \setclefsymbol1\empty
    \startextract\addspace{-\afterruleskip}#1\endextract}}
-\fi
+
 \def\musictex{Music\TeX{}}
 \def\onen{{\tt\char123}$n${\tt\char125}}
 \def\pitchp{{\tt\char123}$p${\tt\char125}}
@@ -74,7 +67,7 @@
 %\changebarsep 10 pt
 \title{\Huge\bf\musixtex\raise1.5ex\hbox{\large\copyright}\\[\bigskipamount]
 \LARGE\bf Using \TeX{} to write polyphonic\\or
-instrumental music\\\Large\sl Version T.114~-- June, 2006}
+instrumental music\\\Large\sl Version 1.15~-- January, 2011}
 \author{\Large\rm Daniel \sc Taupin\\\large\sl
  Laboratoire de Physique des Solides\\\normalsize\sl
  (associ\'e au CNRS)\\\normalsize\sl
@@ -181,8 +174,7 @@ the inclusion of lyrics.
 \bigskip
 
 \begin{flushright}
-In the name of the community, Olivier Vogel
-(\href{mailto:oliviervogel@freesurf.ch}{\url{oliviervogel@freesurf.ch}}),
+In the name of the community, Olivier Vogel,
 July 30, 2005
 \end{flushright}
 
@@ -225,6 +217,69 @@ Postscript slur facilities.
 Don Simons, Andre van Ryckeghem, Cornelius Noack, August 30, 2005
 \end{flushright}
 
+\chapter*{Preface to Version 1.15}
+
+From the time of \musixtex's predecessor \musictex\ until the
+previous version of \musixtex~(T.114), 
+the maximum numbers of simultaneous appearances of certain basic musical 
+elements were limited: 
+12 instruments, 12 or 6 beams depending on the type,  
+12 font-based slurs%
+\footnote{\texttt{musixps.tex} by Stanislav Kneifl provides different limits.}%
+, and 6 trills or octave lines,
+even with \texttt{musixmad.tex}.
+For some purposes these limits are too tight, and because of them,  
+developers of open-source GUI music editors may deem \musixtex{} 
+unworthy of support in their software. Without such support or enhanced capacity,
+\musixtex{} risks consignment to the junk heap of obsolete software. 
+
+It has been the \musixtex{} community's long-cherished desire to have a 
+new official version with greater capacity. However, for quite some time
+the limits were due not only to the design of 
+\musixtex{} itself but also to limitations in older versions of \TeX\ on the maximum 
+numbers of available registers---256 each  
+for counts (\texttt{\string\count}), dimensions (\texttt{\string\dimen}), 
+skips (\texttt{\string\skip}), and tokens (\texttt{\string\toks}). 
+
+But now, an extended variation of 
+\TeX{}---$\varepsilon$\hbox{-}\nobreak\TeX---is available.\footnote{
+$\varepsilon$\hbox{-}\nobreak\TeX{} (e-\TeX) is a trademark 
+of the NTS group.}  
+One of $\varepsilon$\hbox{-}\nobreak\TeX's features is that it can handle 
+32768 registers. Furthermore, 
+ \LaTeXe\ and other well-known extension packages require the  
+$\varepsilon$\hbox{-}\nobreak\TeX{} engine, 
+so it has spread widely among many \TeX\ users. 
+In fact, the current executable file called \texttt{latex} 
+relies on the $\varepsilon$\hbox{-}\nobreak\TeX{} engine.  
+Many other advanced branches based on $\varepsilon$\hbox{-}\nobreak\TeX{} 
+are also available. 
+
+Here we provide the new \musixtex{} 1.15 as the solution for typesetting larger 
+musical scores, 
+taking advantage of $\varepsilon$\hbox{-}\nobreak\TeX's 32768-register capacity. 
+We have made the new version 1.15 as compatible as possible with 
+earlier versions of \musixtex, existing scores, extension packages, 
+and Prof.~Knuth's original (non~$\varepsilon$\hbox{-}\nobreak) \TeX. 
+With it, you can use many more instruments and other musical elements within the capacity of 
+$\varepsilon$\hbox{-}\nobreak\TeX{} or even with original \TeX.
+Also, as of version 2.6, the preprocessor \textbf{PMX} has been enhanced to 
+allow up to 24 lines of music, and requires both \musixtex{} 1.15 and
+$\varepsilon$\hbox{-}\nobreak\TeX.\footnote{This should pose no problems for
+users, owing 
+to the free availability of all the software, and to capacities of all modern 
+computer hardware.}
+Unfortunately, we have found a few rarely used old extensions 
+not compatible with 1.15; 
+we will provide information for adapting them to the new version.
+
+We hope the new version 1.15 will keep \musixtex{} relevant well into the twenty-first century.
+
+
+\begin{flushright}
+Hiroaki Morimoto, Don Simons, January 2011
+\end{flushright}
+
 \clearpage
 
 %\pagenumbering{roman}
@@ -249,8 +304,8 @@ Don Simons, Andre van Ryckeghem, Cornelius Noack, August 30, 2005
 This chapter is not a tutorial on the use of \musixtex, but instead serves as
 an overview of some of its capabilities, quirks, and history.
 
-\musixtex\ is a set of \TeX\ macros which enables the typesetting of music with
-systems of up to twelve staves. It requires as a prerequisite a working
+\musixtex\ is a set of macros and fonts which enables music typesetting 
+within the \TeX\ system. It requires as a prerequisite a working
 installation of \TeX\footnote{See section \ref{installation}~for guidance on
 installing \TeX.}.
 \musixtex\ might be regarded as the digital equivalent of a box of type. It
@@ -324,14 +379,15 @@ is of the form
 \begin{center}
 \verb|\notes ... & ... & ... \enotes|\footnote{The abbreviation
 \keyindex{en} can be used in place of \keyindex{enotes}.}
-\end{center}\index{\&}
+\end{center}\index{"&@{\tt\char'046}}
 \noindent where the character \verb|&| is used to separate the notes to be
 typeset on respective staves of the various instruments, starting from the
 bottom.
 
 In the case of an instrument whose score has to be written with
 several staves, they are separated by the
-character \|. \index{"|@{\tt\char'174}}
+character \|\index{\tt\char'174@{\tt\char'174}}. 
+
 Thus, a score written for a keyboard instrument and
 a single-line instrument (e.g., piano and violin)
 will be coded as follows:
@@ -860,8 +916,8 @@ or \verb|\afterruleskip|.
 \section{Further highlights}
  %\check
  \subsection{Key signatures}
-A single key signature can be assigned to all \nolinebreak3
-instruments, for example by \keyindex{generalsignature}\verb|{-2}|
+A single key signature can be assigned to all instruments, for example by 
+\keyindex{generalsignature}\verb|{-2}|
 which sets two flats on each staff. \keyindex{generalsignature}
 can be overridden for selected instruments, for example by
 \keyindex{setsign}\verb|2{1}| which puts one sharp on each staff
@@ -1006,8 +1062,9 @@ Significant enhancements to \musixtex, which have already been mentioned, have b
 by Stanislav {\sc Kneifl} (Type K postscript slurs) and
 Rainer {\sc Dunker} (Lyrics handling via \verb|musixlyr.tex|).
 
-Since Dr. Taupin passed away in 2003, the primary maintainer of \musixtex\ has been
-Olivier {\sc Vogel}, with substantial assistance from Andre {\sc Van Ryckeghem},
+Since Dr. Taupin passed away in 2003, \musixtex\ has been maintained by a 
+varying cast including Olivier {\sc Vogel}, Hiroaki {\sc Morimoto}, 
+Bob {\sc Tennent}, Andre {\sc Van Ryckeghem}, 
 Cornelius {\sc Noack}, and Don {\sc Simons}.
 
 No discussion of the history of \musixtex\ would be complete without mentioning
@@ -1030,8 +1087,18 @@ special is that it must contain the command
 \verb|\input musixtex|
 before any reference to \musixtex\ macros. After that might follow
 \verb|\input musixadd| or \verb|\input musixmad| if you want to have
-respectively more than six or nine instruments or simultaneous beams,
+respectively up to nine or twelve instruments or simultaneous beams,
 ties, or slurs.\ixtt{musixtex.tex}\ixtt{musixadd.tex}\ixtt{musixmad.tex}
+If you want to have greater numbers of these elements, you can assign them 
+directly by including one or more of these commands: 
+\verb|\setmaxinstruments|, 
+\verb|\setmaxcxxviiibeams|, 
+\verb|\setmaxcclvibeams|, 
+\verb|\setmaxgroups|, 
+\verb|\setmaxslurs|, 
+\verb|\setmaxtrills|, 
+\verb|\setmaxoctlines|.
+
 Since it is still a \TeX\ file, after that, if you wished to,
 you could write a whole non-musical book
 using normal \TeX\ commands provided that you did not
@@ -1144,6 +1211,9 @@ So for example the clefs for a standard piano score
 could be specified by
 \keyindex{setclef}\verb|1{\bass}|.
 
+Treble and bass clefs with the digit 8 above or below are also possible; see 
+section~\ref{treblelowoct}.
+
 To set a common key signature for all instruments, use
  \keyindex{generalsignature}\verb|{|$s$\verb|}|,
 where $s>0$ is the number of \itxem{sharps} in the
@@ -1245,7 +1315,12 @@ groups, numbered from 1 to 3. The command \verb|\songtop| is equivalent
 to \verb|\grouptop 1|; \verb|\songbottom| is equivalent to
 \verb|\groupbottom 1|.
 
-With \ttxem{musixadd.tex}, the allowable number of groups is increased to four.
+With \ttxem{musixadd.tex} or \ttxem{musixmad.tex}, the allowable number of 
+groups is increased to four.
+Alternatively, you can specify the allowable number of groups to $m$ by 
+\keyindex{setmaxgroups}\verb|{|$m$\verb|}|%
+\footnote{Using $m>4$ may require e-\TeX.}.
+\label{musixmad_setmaxgroups}
 
 If any of the instruments grouped this way has more than one staff, the
 heavy curly brace will be shifted to the left of the square brace.
@@ -1579,7 +1654,7 @@ When entering notes inside \verb|\notes ... \enotes|, the usual way to suspend
 input for one instrument and start the next (higher) is with  the character
 ``\verb|&|''\index{"&@{\tt\char'046}}. If the instrument has more than one
 staff, to switch to the next (higher) one you can use the character
-``\verb+|+''\index{"|@{\tt\char'174}}.
+``\verb+|+''\index{\tt\char'174@{\tt\char'174}}.
 
 There are some alternate navigation commands that may be useful in
  special situations. Due to ``catcode
@@ -1670,9 +1745,12 @@ within this macro name stands for the equivalent British term ``crotchet''} with
  \item[\keyindex{cccu}{\tt\char123}$p${\tt\char125} :]32nd note with stem up.
  \item[\keyindex{cccl}{\tt\char123}$p${\tt\char125} :]32nd note with stem down.
  \item[\keyindex{ccca}{\tt\char123}$p${\tt\char125} :]32nd note with automatic stem direction.
- \item[\keyindex{ccccu}{\tt\char123}$p${\tt\char125} :]64nd note with stem up.
- \item[\keyindex{ccccl}{\tt\char123}$p${\tt\char125} :]64nd note with stem down.
- \item[\keyindex{ccccl}{\tt\char123}$p${\tt\char125} :]64nd note with automatic stem direction.
+ \item[\keyindex{ccccu}{\tt\char123}$p${\tt\char125} :]64th note with stem up.
+ \item[\keyindex{ccccl}{\tt\char123}$p${\tt\char125} :]64th note with stem down.
+ \item[\keyindex{cccca}{\tt\char123}$p${\tt\char125} :]64th note with automatic stem direction.
+ \item[\keyindex{cccccu}{\tt\char123}$p${\tt\char125} :]128nd note with stem up.
+ \item[\keyindex{cccccl}{\tt\char123}$p${\tt\char125} :]128nd note with stem down.
+ \item[\keyindex{ccccca}{\tt\char123}$p${\tt\char125} :]128nd note with automatic stem direction.
 \end{description}\end{quote}
  As an example, the sequence
 
@@ -1682,7 +1760,8 @@ within this macro name stands for the equivalent British term ``crotchet''} with
 \Notes\cu c\cl j\enotes\bar
 \Notes\ccu c\ccl j\enotes\bar
 \Notes\cccu c\cccl j\enotes\bar
-\Notes\ccccu c\ccccl j\enotes
+\Notes\ccccu c\ccccl j\enotes\bar
+\Notes\cccccu c\cccccl j\enotes
 \zendextract
 \end{music}
  \noindent was coded as
@@ -1690,7 +1769,8 @@ within this macro name stands for the equivalent British term ``crotchet''} with
 \Notes\cu c\cl j\enotes\bar
 \Notes\ccu c\ccl j\enotes\bar
 \Notes\cccu c\cccl j\enotes\bar
-\Notes\ccccu c\ccccl j\enotes
+\Notes\ccccu c\ccccl j\enotes\bar
+\Notes\cccccu c\cccccl j\enotes
 \end{verbatim}\end{quote}
 
  \subsection{Non-spacing note heads}
@@ -1739,10 +1819,12 @@ preceding non-spacing note heads.
 \verb|\qu| for chord building.
  \item[\keyindex{zql}\pitchp~:]quarter note with stem down but no spacing. It acts
 like \verb|\ql| for chord building.
- \item[\keyindex{zcu}\pitchp, \keyindex{zccu}, \keyindex{zcccu}, \keyindex{zccccu}
+ \item[\keyindex{zcu}\pitchp, \keyindex{zccu}, \keyindex{zcccu}, 
+ \keyindex{zccccu}, \keyindex{zcccccu}
 :]eighth, ..., note with stem up but no spacing. They act like
 \verb|\cu| for chord building.
- \item[\keyindex{zcl}\pitchp, \keyindex{zccl}, \keyindex{zcccl}, \keyindex{zccccl}
+ \item[\keyindex{zcl}\pitchp, \keyindex{zccl}, \keyindex{zcccl}, 
+ \keyindex{zccccl}, \keyindex{zcccccl}
 :]eighth, ..., note with stem down but no spacing. They act
 like \verb|\cl| for chord building.
  \item[\keyindex{zqb}\pitchp~:]note belonging to a beam but no spacing. (DAS: put this later!)
@@ -1884,12 +1966,30 @@ cases.
 The basic form of the macros for starting fixed-slope beams is exemplified
 by the one for a single upper beam, \keyindex{ibu}\nps. Here
 $n$ is the reference number of the beam, $p$ the starting ``pitch'', and
-$s$ the slope. The reference number is assigned by the user. By default it must be
-in the range [0-5], but the maximum can be increased to 8 or 11 respectively
-if \verb|musixadd| or \verb|musixmad| has been \verb|\input|. The beam number is
-needed because more than one beam may be open at a time, and it
-tells \musixtex\ to which beam subsequent beamed notes and other beam specification
-commands are assigned. The ``pitch'' parameter is a pitch that is three
+$s$ the slope. 
+
+The reference number is assigned by the user. 
+It is needed because more than one beam may be open at 
+a time, and it tells \musixtex\ to which beam subsequent beamed notes and 
+other beam specification commands are assigned. 
+By default, the reference number must be in the range [0-5], 
+but the range for 8th to 128th beams will be expanded to [0-8] or [0-11] 
+if \verb|musixadd| or \verb|musixmad| respectively has been \verb|\input|. 
+
+Alternatively, you can specify the number of 8th to 64th beams 
+directly\footnote{8th to 64th beams are so basic that the maximum 
+number of these beams are related with the maximum number of instruments 
+by this command. 
+Using $m>12$ may require e-\TeX.}
+with \keyindex{setmaxinstruments}\verb|{|$m$\verb|}| 
+within the range $7<m\leq 100$; the corresponding reference number may then be 
+in the range from 0 to $(m-1)$. 
+\label{musixmad_setmaxinstruments_ccxviiibeams}  
+For 128th beams, use \keyindex{setmaxcxxviiibeams}\verb|{|$m$\verb|}|.
+
+For 256th notes, which can only appear in beams, see section \ref{musixbbm}.
+
+The ``pitch'' parameter $p$ is a pitch that is three
 staff spaces \ital{below} the bottom of the heavy connecting bar (\ital{above}
 the bar for a lower beam); in many (but not all)
 cases it should be input as the actual pitch of the first note. The slope $s$
@@ -2874,8 +2974,16 @@ Both restrictions are removed with the use of the alternate macros \keyindex{Ioc
 \keyindex{Ioctfindown} and
 \keyindex{Toctfin}.
 
-{\Bslash Ioctfinup}~$np$ indicate an upward octave transposition line with reference number
-$n$ ($0\le n<6$) and with dashed line at pitch $p$. Usually $p$ will be numeric and $>9$,
+{\Bslash Ioctfinup}~$np$ indicates an upward octave transposition line with reference number
+$n$ and with dashed line at pitch $p$. 
+By default $n$ must be in the range [0-5], but 
+you can specify a larger maximum number 
+directly with \keyindex{setmaxoctlines}\verb|{|$m$\verb|}| 
+where $7<m\leq 100$\footnote{This may require e-\TeX.}; the
+reference number will be in the range between 0 and $(m-1)$.
+\label{musixmad_setmaxoctlines}
+
+Usually $p$ will be numeric and $>9$,
 but it can also be a letter.
 {\Bslash Ioctfindown}~$np$ starts a lower octave transposition line at pitch $p$
 (usually $p<-1$). Both extend until terminated with {\Bslash Toctfin}. The
@@ -2978,19 +3086,29 @@ similar to beams.
  \subsubsection{Font-based slur initiation}
 A slur must be initiated \ital{before}
 the spacing note on which the slur begins, and terminated \ital{before} the
-note on which it ends. The basic slur initiation macro is
+note on which it ends. 
+
+The basic slur initiation macro is
 \keyindex{isluru}\enpee, which initiates an upper slur, with reference
 number $n$, beginning on a note at pitch $p$. The starting point of the slur is
 centered above a virtual quarter note head at pitch
 $p$\footnote{The slur will start in the same place regardless of whether there is
 {\it actually} a note at pitch $p$.}.
-As with beams, the reference number $n$ can take values from 0 to 5, or
-up to 8 or 11 respectively if \ttxem{musixadd.tex} or \ttxem{musixmad.tex} is included.
 Similarly, \keyindex{islurd}\enpee\ initiates a lower slur.
 These slurs are terminated by coding
 \keyindex{tslur}\enpee\ where $n$ is the reference number and $p$ is the
-termination pitch. To illustrate with an elementary example, the following
-passage
+termination pitch. 
+
+As with beams, the reference number $n$ by default can take values from 0 to 5, or
+up to 8 or 11 respectively if \ttxem{musixadd.tex} or \ttxem{musixmad.tex} is included.
+You can also specify the maximum number 
+directly with \keyindex{setmaxslurs}\verb|{|$m$\verb|}| where 
+$7<m\leq 100$%
+\footnote{This may require e-\TeX.}; 
+the reference number $n$ will be in the range between 0 and $(m-1)$.
+\label{musixmad_setmaxslurs}
+
+To illustrate with an elementary example, the following passage
 
 \begin{music}\nostartrule
 \startextract
@@ -3643,10 +3761,13 @@ slur rather than the middle.}.
 %original ones.
 
 \subsubsection{Type K postscript ties}
-All of the foregoing Type K slur commands have counterparts for ties. Simply
+All of the foregoing Type K slur commands 
+except the shape-changing ones
+have counterparts for ties. Simply
 replace ``\verb|slur|'' with ``\verb|tie|'', and for terminations omit
 the pitch parameter. Type K ties not only are positioned differently by
-default, but they also have different shapes than slurs.
+default, but they also have different shapes than slurs. If you want to change
+the shape of a tie, redefine \verb|\pstiehgt| from its default of 0.7. 
 
 \subsubsection{Dotted type K slurs and ties.}%please check the capital D(otted)
 A slur or tie can be made dotted simply by entering \keyindex{dotted} anywhere before
@@ -4585,6 +4706,12 @@ staff of instrument $n$ with blanks.
 Normal symbols for those clefs that have been substituted can be restored by
 \keyindex{resetclefsymbols}.
 
+Four other small clef symbols are available: \verb|\smalltrebleoct|, 
+\verb|\smalltreblelowoct|, \verb|\smallbassoct|, and \verb|\smallbasslowoct|. 
+They look just like the corresponding normal-sized symbols, and are useful by
+clef symbol substitution for clef changes after the beginning of a piece, as
+demonstrated in the following example.
+
 The various clef symbol substitution commands can only be used to substitute for
 \texttt{treble}, \texttt{alto}, or \texttt{bass} clefs.
 
@@ -4594,7 +4721,8 @@ back to treble and then the \verb|\treblelowoct| symbol is substituted by using
 When changing the clef away from treble and then back as at (3), the substitution
 symbol is still in force. At (4), \verb|\resetclefsymbols| cancels the symbol substitution.
 If using \verb|\setclefsymbol| all available clefs are changed to the same symbol, as you can see
-in the two clefs after (5) in comparison with (2). Obviously the second clef after (5) is
+in the three clefs after (5) in comparison with (2). These also illustrate the use of the small
+octave clef symbol. Obviously the second clef after (5) is
 nonsense; \verb|\resetclefsymbols| puts matters in order at (6) and (7).
 
 \begin{music}
@@ -4610,10 +4738,10 @@ nonsense; \verb|\resetclefsymbols| puts matters in order at (6) and (7).
 \notes\zchar{-5}{4}\qu J\en\resetclefsymbols\setclef1\treble\changeclefs
 \notes\qu i\en\setclef1\bass\changeclefs\doublebar
 \notes\zchar{-5}{5}\qu J\en
-\setclef1\treble\setclefsymbol1\treblelowoct\changeclefs
+\setclef1\treble\setclefsymbol1\smalltreblelowoct\changeclefs
 \notes\qu i\en\setclef1\bass\changeclefs\bar
-\notes\zchar{-5}{6}\qu I\en\setclef1\treble\changeclefs
-\notes\qu i\en\resetclefsymbols\setclef1\bass\changeclefs\bar
+\notes\qu I\en\setclef1\treble\changeclefs
+\notes\zchar{-5}{6}\qu i\en\resetclefsymbols\setclef1\bass\changeclefs\bar
 \notes\zchar{-5}{7}\qu J\en\setclef1\treble\changeclefs
 \notes\qu i\en
 \endpiece
@@ -4635,10 +4763,10 @@ nonsense; \verb|\resetclefsymbols| puts matters in order at (6) and (7).
 \notes\zchar{-5}{4}\qu J\en\resetclefsymbols\setclef1\treble\changeclefs
 \notes\qu i\en\setclef1\bass\changeclefs\doublebar
 \notes\zchar{-5}{5}\qu J\en
-\setclef1\treble\setclefsymbol1\treblelowoct\changeclefs
+\setclef1\treble\setclefsymbol1\smalltreblelowoct\changeclefs
 \notes\qu i\en\setclef1\bass\changeclefs\bar
-\notes\zchar{-5}{6}\qu I\en\setclef1\treble\changeclefs
-\notes\qu i\en\resetclefsymbols\setclef1\bass\changeclefs\bar
+\notes\qu I\en\setclef1\treble\changeclefs
+\notes\zchar{-5}{6}\qu i\en\resetclefsymbols\setclef1\bass\changeclefs\bar
 \notes\zchar{-5}{7}\qu J\en\setclef1\treble\changeclefs
 \notes\qu i\en
 \endpiece
@@ -5118,6 +5246,12 @@ respectively coded as
 \keyindex{metron}\verb|{\hup}{60}| and \keyindex{metronequiv}\verb|{\qup}{\qu}|,
 which are normally emplaced using \keyindex{Uptext}.
 
+Also, you can set a smaller metronomic indication like~~~{\def\nbinstruments{0}
+\metron{\smallnotesize\lqu}{ca. 72}}~~~ or ~~~{\def\nbinstruments{0}
+\metron{\tinynotesize\lqu}{ca. 72}}~~~ by writing 
+\verb|\metron{\smallnotesize\lqu}{ca. 72}| or \verb|\metron{\tinynotesize\lqu}{ca. 72}|.
+
+
  \subsection{Accents}
 
 You may use\footnote{Note from the editor: the reason the names of some of
@@ -5349,10 +5483,17 @@ current \verb|\noteskips|.
 
 To let \musixtex\ compute the length of the trill, or if it extends across a
 system break, you can use \keyindex{Itrille}$n$\pitchp\ to start a plain
-trill, where $n$ is a trill reference number between 0 and 6; then
+trill, where $n$ is a trill reference number between 0 and 5; then
 \keyindex{Ttrille}$n$ to terminate it. To get the {\it tr} at the
 beginning, use \keyindex{ITrille}$n$\pitchp\ to start the trill and
 \verb|\Ttrille|$n$ to close it.
+
+As with other elements, you can specify the maximum number 
+directly with \keyindex{setmaxtrills}\verb|{|$m$\verb|}| where $7<m\leq 100$%
+\footnote{This may require e-\TeX.}; 
+the reference number $n$ will be in the range between 0 and $(m-1)$.
+\label{musixmad_setmaxtrills}
+
 
 For example:
 
@@ -6215,7 +6356,7 @@ symbols to standard clef symbols.
 
 \section{Lyrics}\index{lyrics}\label{lyrics}
 \musixtex{} itself doesn't manage lyrics very well. You should use
-\verb+musixlyr+ instead, a MusiXTeX extension package for lyrics handling by Rainer Dunker.
+\verb+musixlyr+ instead, a \musixtex\ extension package for lyrics handling by Rainer Dunker.
 The \TeX~source and
 \href{http://icking-music-archive.org/software/musixtex/add-ons/mxlyrdoc.pdf}
 {\underline{documentation}}~are included in the \musixtex~distribution.
@@ -6715,7 +6856,7 @@ end the extract with \keyindex{endextract} instead of \verb|\endpiece|
 or \verb|\stoppiece|, followed by \keyindex{end\LBR music\RBR}.
 
 To terminate an extract without any bar line, use \keyindex{zendextract}
-instead of \verb|\zendextract|.
+instead of \verb|\endextract|.
 
 To create a left-justified excerpt, use the sequence
 \keyindex{let\Bslash extractline\Bslash leftline}.
@@ -6822,7 +6963,7 @@ The symbols are given their special meanings by executing the macro
 \keyindex{endcatcodesmusic}. When setting either a self-contained score or
 a musical extract, you normally need not worry
 about this at all, because \verb|\startpiece| or \verb|\startextract| executes
-\verb|\catcodesmusic| and \verb|\endpiece| or \verb|\zendextract| executes
+\verb|\catcodesmusic| and \verb|\endpiece| or \verb|\endextract| executes
 \verb|\endcatcodesmusic|. But there are some special situations where you
 might need to use these catcode-modifying macros explicitly. One is if you
 were to define a personalized macro outside
@@ -6849,8 +6990,13 @@ brackets (see \ref{curlybrackets}).
  \subsection{musixadd}\ixtt{musixadd.tex}
 Increases the number of instruments, slurs and beams from six to nine.
 
+
  \subsection{musixbm}
- Provides 128th notes, either with flags or with beams, via the commands
+This file does nothing; it is retained only for compatibility with 
+\musixtex{} T.110 or earlier. 
+Since version T.111, \verb|musixtex.tex| itself contains all the functions 
+of the older \texttt{musixbm}, namely 
+commands for 128th notes, either with flags or with beams:
 \keyindex{ibbbbbu},
 \keyindex{ibbbbbl},
 \keyindex{nbbbbbu},
@@ -6860,13 +7006,14 @@ Increases the number of instruments, slurs and beams from six to nine.
 \keyindex{Ibbbbbu},
 \keyindex{Ibbbbbl},
 \keyindex{cccccu},
+\keyindex{cccccl},
 \keyindex{ccccca},
-\keyindex{zcccccu},
-\keyindex{cccccl} and
+\keyindex{zcccccu} and
 \keyindex{zcccccl}.
 
- \subsection{musixbbm}
- Provides 256th notes, only with beams, via the commands
+
+ \subsection{musixbbm}\label{musixbbm}
+ Provides 256th notes, but only for use within beams, via the commands
 \keyindex{ibbbbbbu},
 \keyindex{ibbbbbbl},
 \keyindex{nbbbbbbu},
@@ -6875,6 +7022,12 @@ Increases the number of instruments, slurs and beams from six to nine.
 \keyindex{tbbbbbbl},
 \keyindex{Ibbbbbbu} and
 \keyindex{Ibbbbbbl}.
+
+By default \texttt{musixbbm} provides six 256th beams with 
+reference number 0 to 5.  
+You can specify a larger maximum number 
+directly with \keyindex{setmaxcclvibeams}\verb|{|$m$\verb|}| within the
+range\footnote{This may require e-\TeX.} $7\leq m\leq 100$.
 
 \subsection{musixcho}\label{song}
  Enables certain macros intended for choral music\footnote{Remember
@@ -8189,6 +8342,13 @@ staffs, rather that over them. This is an arbitrary question of taste...
 instruments, slurs and beams up to twelve. When using this extension, it is
 not necessary to explicitly input \verb|musixadd.tex|.
 
+If you need greater numbers of these elements, see sections 
+\ref{musixmad_setmaxgroups}, 
+\ref{musixmad_setmaxinstruments_ccxviiibeams}, 
+\ref{musixmad_setmaxoctlines}, 
+\ref{musixmad_setmaxslurs}, and
+\ref{musixmad_setmaxtrills}.
+
 
 \subsection{musixper}\label{perc}
 
@@ -8643,15 +8803,18 @@ The most up-to-date versions of \musixtex\ and friends are located in the
 \href{http://icking-music-archive.org/software/indexmt6.html}{\underline{software}}
 section of the archive. The stable distribution of \musixtex\ will be contained in
 \href{http://icking-music-archive.org/software/musixtex/musixtex.zip}
-{\underline{\verb|musixtex.zip|}}, which is intended to serve all operating
-systems.
-The CTAN servers are official mirrors. The main CTAN server's
-web link is\\
-\href{http://www.ctan.org/tex-archive/macros/musixtex/taupin/}
-{\underline{http://www.ctan.org/tex-archive/macros/musixtex/taupin/}}
-and the FTP link is\\
-\href{http://ftp.ctan.org/tex-archive/macros/musixtex/taupin/}
-{\underline{http://ftp.ctan.org/tex-archive/macros/musixtex/taupin/}}.
+{\underline{\verb|musixtex.zip|}}. This will serve any operating system, but 
+has some Windows-specific installation instructions and batch scripts that simplify 
+installing and running the software.
+There is a somewhat differently organized distribution on the CTAN servers at\\ 
+\href{http://www.ctan.org/tex-archive/macros/musixtex/}
+{\underline{http://www.ctan.org/tex-archive/macros/musixtex/}}
+with FTP link\\
+\href{ftp://ftp.ctan.org/tex-archive/macros/musixtex/}
+{\underline{ftp://ftp.ctan.org/tex-archive/macros/musixtex/}}.\\
+This one is "TDS compliant," which means that it adheres to a recently announced
+standard directory structure for \TeX\ systems, and does not contain any 
+Windows batch scripts. 
 
 \subsection{End of line char in text files}
 The files in the Werner Icking Archive have been contributed by such a wide
@@ -8698,7 +8861,7 @@ such as \textbf{Adobe Reader}. You also can use a DVI viewer, but if you are usi
 \end{itemize}
 
 
-\section{Running Musix\TeX\ }
+\section{Running \musixtex}
 
 In most systems the commands run in a shell. Unix people are familiar with it.
 Also in MS Windows systems, there are a large number of editor/shell programs. Although not recommended, you always can use the DOS
@@ -8756,7 +8919,7 @@ If you want to make a PDF output, you may add the line (after \verb+dvips+):
 \verb+gswin32c -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -r600 -sOutputFile=%1.pdf -c save pop -f %1.ps+
 }
 
-\subsubsection{Using La\TeX\ }
+\subsubsection{Using \LaTeX\ }
 Replace ``\verb+tex+'' by ``\verb+latex+'' in the file \verb+musixtex.bat+~.
 
 
@@ -8804,7 +8967,7 @@ that produced them, while for a few only an image of the extract is included and
 have to look in \verb|musixdoc.tex| to see the coding.
 
 Other useful examples cannot be embedded in the source, either because they are
-meant to be in \TeX, not La\TeX, or because they are simply to large. For
+meant to be in \TeX, not \LaTeX, or because they are simply to large. For
 these the source files also are provided separately.
 
 When compiling or viewing any of the examples, you should keep in mind that
@@ -8855,7 +9018,7 @@ commands (section \ref{glorias}). {\tt gloriab.tex} is the same piece, but with 
 
 \end{itemize}
 
-\subsection{Other examples, provided by the authors of MusiX\TeX }
+\subsection{Other examples, provided by the authors of \musixtex }
 
 \begin{itemize}\setlength{\itemsep}{0ex}
 
@@ -8883,21 +9046,39 @@ to create staff-jumping doubly beamed notes.
 \section{Compiling musixdoc.tex}
 \subsection{Command sequence}
 
-This is an example of a command sequence (in fact this is the normal procedure for La\TeX\ files). \verb|musixdoc.tex| is a large file, if you use an older version of La\TeX, use ``elatex'' in the command file.
+Before compiling or recompiling \verb|musixdoc.tex|, you should remove all the auxilliary 
+files {\tt musixdoc.[mx1|\allowbreak mx2|\allowbreak aux|\allowbreak toc|\allowbreak ind|\allowbreak idx|\allowbreak ilg|\allowbreak out]} 
+if they are present.
+
+Here is an example of a command sequence:
 \begin{quote}\begin{verbatim}
 latex musixdoc
 musixflx musixdoc
 latex musixdoc
 makeindex -l musixdoc
 latex musixdoc
-(may require several more runs of elatex to get rid of
-    "labels may have changed ..." warnings)
-dvips -ta4 musixdoc
+latex musixdoc
+dvips -e0 -t a4 -P pdf -G0 musixdoc
 \end{verbatim}\end{quote}
 
+The initial three steps \verb|latex|\allowbreak$\to$\allowbreak\verb|musixflx|\allowbreak$\to$\allowbreak\verb|latex| build up the basic appearance of the document including many musical examples.
+\verb|makeindex| produces the database for the index.  
+After that, \verb|latex| must be run at least twice to complete cross referencing.  
+Finally, \verb|dvips| converts the \verb|.dvi| file into \verb|.ps| (making PostScript type K slurs
+visible).
 To produce \verb|musixdoc.pdf|, open \verb|musixdoc.ps| in \texttt{GSview}. Go to
-\verb+File|Convert+, select \verb|pdfwrite| at 600 dpi resolution, click
+\verb+File|Convert+, select \verb|pdfwrite| at 600 dpi resolution, and click
 \verb|OK|.
+
+If you use an older version of \LaTeX\ which doesn't automatically 
+invoke $\varepsilon$\hbox{-}\nobreak\TeX, you will encounter the 
+error ``{\tt !~No room for new \string\count}''. 
+This is because \verb|musixdoc.tex| invokes \verb|musixtex.tex|, which together with \LaTeX\ 
+requires more storage registers than available in \TeX.
+You may be able get around this by using the command 
+\verb|elatex| instead of \verb|latex|;
+however, it is strongly recommended to upgrade your \TeX\ system to a more recent 
+version in which \verb|latex| automatically invokes $\varepsilon$\hbox{-}\nobreak\TeX.   
 
 \subsection{Using batch files}
 There are
@@ -8905,20 +9086,33 @@ many other files that are required to compile this document but all of them
 are included in \verb|musixtex.zip|, and will be placed in the proper locations
 if you have followed the installation instructions for \musixtex.
 
-The two following batch files reside in the same dir as \texttt{musixdoc.tex} (or \texttt{musixdoc114.tex}).
+The two following batch files reside in the same dir as \texttt{musixdoc.tex}.
 
 This batch file makes a DVI, Postscript and PDF file, then displays the Postscript file.
 The full path names are shown as a comment.
 {\small
 \begin{quote}\begin{verbatim}
 rem filename: lapdfview
+del %1.mx1
+del %1.mx2
+del %1.aux
+del %1.toc
+del %1.ind
+del %1.idx
+del %1.ilg
+del %1.out
+LATEX.EXE %1 %2.tex
+if errorlevel 1 goto end
+rem C:\musixtex\system\musixflx\win32\musixflx %1
+musixflx %1
+if errorlevel 1 goto end
 LATEX.EXE %1 %2.tex
 if errorlevel 1 goto end
 makeindex -l  %1
-rem C:\musixtex\system\musixflx\win32\musixflx %1
-musixflx %1
+if errorlevel 1 goto end
 LATEX.EXE %1 %2.tex
 if errorlevel 1 goto end
+LATEX.EXE %1 %2.tex
 rem C:\"Program Files\MiKTeX 2.7"\miktex\bin\DVIPS.EXE -e0 -t a4 -P pdf -G0 %1.dvi
 DVIPS.EXE -e0 -t a4 -P pdf -G0 %1.dvi
 rem C:\"program files"\gs\gs8.63\bin\gswin32c -dBATCH ^

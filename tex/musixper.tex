@@ -16,15 +16,15 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-\immediate\write16{MusiXPERcussion T.60\space<23 September 1996>}%
-
 \ifx\undefined\drumclef \else \endinput \fi
 
-\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+\immediate\write16{MusiXPERcussion T.60\space<27 September 2010>}%
 
 \ifx\undefined\dqb
   \input musixdia
 \fi
+
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 
 % if you need pointed percussion notes, say '\p[p][p]t n\xqu n' or '\xqu{.n}'
 % if you need them more often define them by your one

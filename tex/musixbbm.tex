@@ -16,27 +16,20 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-
-\ifx\undefined\ibbbbbu
-  \input musixbm
-\fi
-
-\immediate\write16{MusiXBBeaM T.405\space<30 October 1995>}% 256th beams
-
+%
+%   musixbbm.tex : allocate registers and define macros for 256th beam
+%
+\immediate\write16{MusiXBBeaM T.115 <19 Nov 2010>}%
+%
 \ifx\undefined\ibbbbbbu \else \endinput \fi
-
+%
+% setup the maximum element numbers
+\setmaxcclvibeams{6}%
+%
+%
+% definitions for 256th beams
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
-
-\newdimen\g@xi  \newskip\g@zi
-\newdimen\g@xii \newskip\g@zii
-\newdimen\g@xiii\newskip\g@ziii
-\newdimen\g@xiv \newskip\g@ziv
-\newdimen\g@xv  \newskip\g@zv
-\newdimen\g@xvi \newskip\g@zvi
-%\newdimen\g@xvii \newskip\g@zvii
-%\newdimen\g@xviii\newskip\g@zviii
-%\newdimen\g@xix  \newskip\g@zix
-
+%
 \def\s@l@ctg{\edef\g@x{\csname g@x\romannumeral\n@i\endcsname}%
   \edef\g@z{\csname g@z\romannumeral\n@i\endcsname}\s@l@ctf}
 
@@ -74,6 +67,3 @@
 
 \catcode`\@=\catcodeat
 \endinput
-
-
-
