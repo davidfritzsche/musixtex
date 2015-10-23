@@ -1,0 +1,297 @@
+\ifx\mxversion\undefined
+ \input musixtex
+ \input musixcpt
+ \input musixsty
+\fi
+ \title{Ave Verum}
+ \author{Charles Gounod}
+ \shortauthor{C. Gounod}
+ \subtitle{\relax}
+ \maketitle
+\parindent 13mm
+\musicsize=20
+\normal
+\relativeaccidentals
+\def\nbinstruments{1}
+\def\instrumenti{Orgue}
+\def\instrumentii{Basse}
+\def\instrumentiii{T\'{e}nor}
+\def\instrumentiv{\vbox{\hsize\parindent\centerline{Soprano}\centerline{Alto}}}
+\nbporteesi=2\relax
+\generalmeter{\allabreve}
+\setinterinstrument1{10pt}
+\setinterinstrument2{10pt}
+\setinterinstrument3{10pt}
+\cleftoksi{6000}
+\cleftoksii{6000}
+\cleftoksiii{6000}
+
+\ifx\Transpose\undefined
+  \def\Transpose{0}
+  \def\Signature{-3}
+\fi  
+\generalsignature{\Signature}
+
+\ifx\chorale\undefined
+  \setsize1{\normalvalue}
+  \setsize2{\smallvalue}
+  \setsize3{\smallvalue}
+  \setsize4{\smallvalue}
+\else  
+  \setsize1{\smallvalue}
+  \setsize2{\normalvalue}
+  \setsize3{\normalvalue}
+  \setsize4{\normalvalue}
+\fi  
+\ninepoint
+
+\def\Zsong{\zsong}
+
+\stemcut
+
+\transpose=\Transpose
+\debutmorceau
+\qspace
+\NOtes\itenl1E\itenl2L\zw E\wh L|\hpause\enotes
+\NOtes\hu N|\zh b\hu e\enotes
+\barre % 2
+\NOtes\tten1\tten2\itenl1E\itenl2L\zw E\zwh L\hu a|\itenl0c\zwh c\hu f\enotes
+\NOtes\hu N|\hu g\enotes
+\barre %3
+\NOtes\tten1\tten2\zhl E\roff{\itenu1M}\rh M\hu L|\tten0\zhl c\hu h\enotes
+\NOtes\zhl F\tten1\zh M\hu a|\zh d\hu j\enotes
+\barre %4
+\NOtes\zhl G\zh N\hu b|\zwh e\hu i\enotes
+\NOtes\zhl H\zh J\hu a|\hu e\enotes
+\barre %5
+\NOtes\itenl2I\zwh I\hu b|\itenl1e\zh e\hu g\enotes
+\NOtes\hu N|\tten1\itenu1e\zh b\hu e\enotes
+\barre %6
+\NOtes\tten2\zwh I\hu M|\zwh a\zh c\tten1\hu e\enotes
+\NOtes|\zh b\hu d\enotes
+\barre %7
+\NOTes\zhlp E\hup L|\zhp N\zhp b\hup e\enotes
+\Notes\soupir|\soupir\enotes
+\suspmorceau
+\def\nbinstruments{4}%
+\debutmorceau %8
+\barno 8\relax
+\qspace
+\def\H#1#2#3#4#5{\NOtes\zhl{#1}\hu{#2}|\zhl{#3}\hu{#4}&\Zsong{#5}\hu{#1}&\Zsong{#5}\hl{#2}&\Zsong{#5}\zhl{#3}\hu{#4}\enotes}%
+\def\Hh#1#2#3#4#5{\NOtes\hl{#1}|\zhl{#2}\zh{#3}\hu{#4}&\Zsong{#5}\hu{#1}&\Zsong{#5}\hl{#2}&\Zsong{#5}\zhl{#3}\hu{#4}\enotes}%
+\def\Hqhq#1#2#3#4#5{\Notes\zhl{#1}\qu{#2}|\zhl{#3}\qu{#4}&\Zsong{#5}\hu{#1}&\Zsong{#5}\ql{#2}&\Zsong{#5}\zhl{#3}\qu{#4}\enotes}%
+\def\Hhhq#1#2#3#4#5{\Notes\zhl{#1}\hu{#2}|\zhl{#3}\qu{#4}&\Zsong{#5}\hu{#1}&\Zsong{#5}\hl{#2}&\Zsong{#5}\zhl{#3}\qu{#4}\enotes}%
+\H LNei{A--}%
+\Hqhq I{ba}d{gf}{ve}%
+\barre %9
+\H JNee{ve--}%
+\NOtes \zhl I\hu N|\Fl d\zhu e\roff{\hl d}&\Zsong{rum }\hu I&\Zsong{rum }\hl
+N&\Zsong{rum }\Fl d\zhu e\roff{\hl d}\enotes
+\barre %10
+\H Hacj{Cor--}%
+\Hqhq I{NM}{=d}{ih}{pus }%
+\barre %11
+\Hh Lceh{na--}%
+\Hh Lbeg{tum }%
+\barre %12
+\H LNgi{de }%
+\Hqhq K{^a^b}f{jk}{Ma--}%
+\barre %13
+\H Jcel{ri--}%
+\H Lcgg{a }%
+\barre %14
+\Notes\zw M\wh{=a}|\zhl c\qu{fg}\zql f\qu h\zql e\qu j\relax
+ &\Zsong{Vir-}\hup M\sk\sk\Zsong{gi-}\qu M\relax
+ &\Zsong{Vir-}\hup{=a}\sk\sk\Zsong{gi-}\qu a\relax
+ &\Zsong{Vir-}\zhl c\qu{fg}\Zsong{gi-}\zql f\qu h\zql e\qu j\enotes
+\barre %15
+\NOtes\zw I\wh a|\zw d\hu {ji}&\Zsong{ne.}\wh I&\Zsong{ne.}\wh a&\Zsong{ne.}\zw
+ d\hu {ji}\enotes
+\barre %16
+\H LNei{Ve-}%
+\Hqhq I{ba}d{gf}{re}%
+\barre %17
+\H JNee{pas-}%
+\NOtes \zhl I\hu N|\Fl d\zhu e\roff{\hl d}&\Zsong{sum }\hu I&\Zsong{sum }\hl
+N&\Zsong{sum }\Fl d\zhu e\roff{\hl d}\enotes
+\barre %18
+\H Hacj{im-}%
+\Hqhq I{NM}{=d}{ih}{mo-}%
+\barre %19
+\Hh Lceh{la-}%
+\Hh Lbeg{tum }%
+\barre %20
+\H Kbfi{In }%
+\H Ibfk{cru-}%
+\barre %21
+\Hhhq Lbe{g^f}{ce }%
+\Hhhq JLe{g^h}{pro }%
+\barre %22
+\NOtes\zw K\hu d|\zhl g\hu i&\Zsong{ho-}\hup K&\Zsong{ho-}\hl
+d&\Zsong{ho-}\zhl g\hu i\enotes
+\Notes\qup c|\lSh f\zqlp f\qup{^h}&&\Zsong{-}\qlp c&\Zsong{-}\lSh f\zqp f\qup{^h}\enotes
+\notes\sk\cu c|\sk\lNa h\zq{=f}\cu h&\Zsong{mi-}\qu K&\sk\Zsong{mi-}\cl
+c&\sk\Zsong{mi-}\lNa h\zcl{=f}\cu h\enotes
+\barre %23
+\def\Hp#1#2#3#4#5{\NOTes\zhlp{#1}\hup{#2}|\zhlp{#3}\hup{#4}&\Zsong{#5}\hup{#1}&\Zsong{#5}\hlp{#2}&\Zsong{#5}\zhlp{#3}\hup{#4}\enotes}%
+\def\Qhhq#1#2#3#4#5{\Notes\zhu{#2}\ql{#1}|\zhl{#3}\qu{#4}&\Zsong{#5}\qu{#1}&\Zsong{#5}\hl{#2}&\Zsong{#5}\zhl{#3}\qu{#4}\enotes}%
+\Hp Nbgg{ne }%
+\Notes\soupir|\soupir&\soupir&\soupir&\soupir\enotes
+\barre %24
+\H Nbei{Cu-}%
+\Qhhq {ML}be{=hg}{jus }%
+\barre %25
+\NOtes\roff{\zhl a}\hu b|\zhl d\hu g&\Zsong{la-}\hu a&\Zsong{la-}\hl
+b&\Zsong{la-}\zhl d\hu g\enotes
+\NOtes\roff{\zhl a}\hu b|\zhl d\hu f&\Zsong{tus }\hu a&\Zsong{tus }\hl
+b&\Zsong{tus }\zhl d\hu f\enotes
+\barre %26
+\H Nbei{per-}%
+\Qhhq {ML}be{hg}{fo-}%
+\barre %27
+\NOtes\roff{\zhl a}\hu b|\zhl d\hu g&\Zsong{ra-}\hu a&\Zsong{ra-}\hl
+b&\Zsong{ra-}\zhl d\hu g\enotes
+\NOtes\roff{\zhl a}\hu b|\zhl d\hu f&\Zsong{tum }\hu a&\Zsong{tum }\hl
+b&\Zsong{tum }\zhl d\hu f\enotes
+\barre %28
+\H Nbee{flu-}%
+\Hhhq Kbf{ih}{xit}%
+\barre %29
+\def\Qqqq#1#2#3#4#5{\Notes\rlap{\qu{#2}}\ql{#1}|\rlap{\ql{#3}}\qu{#4}&\Zsong{#5}\qu{#1}&\Zsong{#5}\ql{#2}&\Zsong{#5}\rlap{\ql{#3}}\qu{#4}\enotes}%
+\H Lbgg{un-}%
+\Qqqq L{^b}gk{da }%
+\Qqqq Lcgj{et }%
+\barre %30
+\Notes\zhlp M\qu {dc=b}\zql M\qu c|\zhl f\qu{i^h}\zhl
+e\qu{g=h}\relax
+ &\Zsong{san-}\hup M\sk\sk\Zsong{gui-}\qu M\relax
+ &\Zsong{san-}\ql{dc}\Zsong{gui-}\ql{=bc}\relax
+ &\Zsong{san-}\zhl f\qu{i^h}\Zsong{gui-}\zhl e\qu{g=h}\enotes
+\barre %31
+\Hp Ibdi{ne, }%
+\Notes\soupir|\soupir&\soupir&\soupir&\soupir\enotes
+\barre %32
+\H LNei{Es-}%
+\Hqhq I{ba}d{gf}{to }%
+\barre %33
+\H JNee{no-}%
+\NOtes \zhl N\hu b|\Fl d\zhu e\roff{\hl d}&\Zsong{bis }\hu N&\Zsong{bis }\hl
+b&\Zsong{bis }\Fl d\zhu e\roff{\hl d}\enotes
+\barre %34
+\def\Qqhh#1#2#3#4#5{\Notes\rlap{\qu{#2}}\ql{#1}|\zhl{#3}\hu{#4}&\Zsong{#5}\qu{#1}&\Zsong{#5}\ql{#2}&\Zsong{#5}\zhl{#3}\hu{#4}\enotes}%
+\def\Qqqh#1#2#3#4#5{\Notes\rlap{\qu{#2}}\ql{#1}|\zhu{#4}\ql{#3}&\Zsong{#5}\qu{#1}&\Zsong{#5}\ql{#2}&\Zsong{#5}\zhu{#4}\ql{#3}\enotes}%
+\Qqhh {aN}{cb}cj{pr\ae{}-}%
+\Qqqh {ML}{aN}{=de}j{gus-}%
+\barre %35
+\H Kafj{ta-}%
+\H Kafi{tum }%
+\barre %36
+\H LNei{Mor-}%
+\Hh Jegj{tis }%
+\barre %37
+\Hhhq Mcf{ih}{in }%
+\Hqhq H{ba}c{gf}{ex-}%
+\barre %38
+\NOtes\zhlp I\hu N|\zhlp b\hu e&\Zsong{a-}\hup
+I&\Zsong{a-}\hl N&\Zsong{a-}\zhlp b\hu e\enotes
+\Notes\hu a\ql I|\hu d\ql b&\sk\Zsong{mi-}\qup I&\Zsong{ni-}\hl
+a&\Zsong{mi-}\hu d\ql b\enotes
+\barre %39
+\NOtes\zhlp L\hup N|\zhlp b\hup e&\Zsong{ne }\hu L&\Zsong{ne
+}\hlp N&\Zsong{ne }\zhlp b\hup e\enotes
+\Notes\sk\soupir|\sk\soupir&\Zsong{O }\hu L&\sk\soupir&\sk\soupir\enotes
+\barre %40
+\NOtes\zhl L\hu c|\zhl e\hu h&\Zsong{Je-}\hu L&\Zsong{O }\hl c&\Zsong{O }\zhl
+e\hu h\enotes
+\Notes\zhl L\qu{bb}|\zhl d\qu{hg}&\Zsong{su }\hu L&\Zsong{Je-}\ql b\Zsong{su
+}\ql b&\Zsong{Je-}\zql d\qu h\Zsong{su }\zql d\qu g\enotes
+\barre %41
+\def\qhhh#1#2#3#4#5{\Notes\zhu{#2}\ql{#1}|\zhl{#3}\qu{#4}&\Zsong{#5}\qu{#1}&\Zsong{#5}\hl{#2}&\Zsong{#5}\zhl{#3}\hu{#4}\enotes}%
+\H Lacg{dul-}%
+\Notes \zhu a\zhl{LL}|\zhl c\hu f&\Zsong{cis }\qu L\Zsong{O }\qu L&\Zsong{cis
+}\hl a&\Zsong{cis }\zhl c\hu f\enotes
+\barre %42
+\NOtes\zhl L\hu e|\zhl h\hu j&\Zsong{Je-}\hu L&\Zsong{O }\hl e&\Zsong{O }\zhl
+h\hu j\enotes
+\Notes\zhl L\qu{_dd}|\zhl g\qu{ji}&\Zsong{su }\hu L&\Zsong{Je-}\ql {_d}\Zsong{su
+}\ql d&\Zsong{Je-}\zql g\qu j\Zsong{su }\zql g\qu i\enotes
+\barre %43
+\H Lcfi{pi-}%
+\H Lcfh{e }%
+\barre %44
+\H b{=d}hm{Je-}%
+\NOtes\zhu c\roff{\hl b}|\zhl h\hu l&\Zsong{su, }\hu b&\Zsong{su, }\hl
+f&\Zsong{su, }\zhl h\hu l\enotes
+\barre %45
+\H bfhk{Je-}%
+\H begj{su }%
+\barre %46
+\Hhhq Idf{ji}{fi-}%
+\Qqqq Icej{li }%
+\Qqqq Ibdh{Ma-}%
+\barre %47
+\H Lbeh{ri-}%
+\Qqqq Lbeg{\ae{} }%
+\Qqqq bbeg{In }%
+\barre %48
+\Qqqq aceg{no-}%
+\Notes \zql a\qu c|\zqu f\roff{\ql e}&\Zsong{bis }\qu a&\Zsong{bis }\ql c&\Zsong{bis }\roff{\zql
+e}\qu f\enotes
+\Notes \roff{\zql a}\qu b|\zqu f\ql d&\Zsong{mi-}\qu a&\Zsong{mi-}\ql b&\Zsong{mi-}\roff{\zql
+e}\qu f\enotes
+\Notes \roff{\zql a}\qu b|\zqu j\ql d&\Zsong{se-}\qu a&\Zsong{se-}\ql b&\Zsong{se-}\zql
+d\qu j\enotes
+\barre %49
+\H Nbej{re-}%
+\Qqqq Nbei{re }%
+\Qqqq Nbei{O }%
+\barre %50
+\Qqqq {Lb}{bd}{gh}{nm}{Je-}%
+\Qqqq cegl{su }%
+\Qqqq N{^b}fk{In }%
+\barre %51
+\Qqqq acej{no-}%
+\Qqqq {^L}{_d}gi{bis }%
+\Qqqq Mcfh{mi-}%
+\Qqqq Hacf{se-}%
+\barre %52
+\def\Whhh#1#2#3#4#5{\NOtes\zwh{#1}\hu{#2}|\rlap{\hl{#3}}\hu{#4}&\Zsong{#5}\zwh{#1}&\Zsong{#5}\hl{#2}&\Zsong{#5}\rlap{\hl{#3}}\hu{#4}\enotes}%
+\Whhh I{Na}{eb}{id}{re-}%
+\barre %53
+\NOtes\zhl L\hup N|\zhlp b\hup e&\Zsong{re }\hu L&\Zsong{re }\hlp N&\Zsong{re }\zhlp b\hup e\enotes
+\Notes\itenl1E\itenl2L\zh E\hl L\raise2\Interligne\soupir|\sk\soupir&\itenl3L\Zsong{A-}\hu L&\sk\soupir&\sk\soupir\enotes
+\barre %54
+\NOtes\tten1\tten2\zwh c\zh E\hl L|\zw g\wh l&\Zsong{--}\tten3\hu L&\Zsong{A-}\wh
+c&\Zsong{A-}\zw g\wh l\enotes
+\Notes\itenl1E\itenl2L\zh E\hl L&\csong{men !}\itenl3L\hu L\enotes
+\barre %55
+\NOtes\tten1\tten2\zh E\zhl L\hup b|\zhlp g\hup k&\tten3\Zsong{--}\hu L&\csong{men !}\hlp b&\csong{men !}\zhlp g\hup k\enotes
+\Notes\itenl1E\itenl2L\zh E\hl L\raise2\Interligne\soupir|\sk\soupir&\itenl3L\Zsong{A-}\hu L&\sk\soupir&\sk\soupir\enotes
+\barre %56
+\NOtes\tten1\tten2\zwh {^a}\zh E\hl L|\zw {^f}\wh j&\tten3\Zsong{--}\hu L&\Zsong{A-}\wh
+{^a}&\Zsong{A-}\zw {^f}\wh j\enotes
+\Notes\itenl1E\itenl2L\zh E\hl L&\csong{men !}\itenl3L\hu L\enotes
+\barre %57
+\NOtes\tten1\tten2\zh E\zhl L\hu b|\zhlp g\hup i&\tten3\Zsong{--}\hu L&\csong{men !}\hlp b&\csong{men !}\zhlp g\hup i\enotes
+\Notes\itenl1E\itenl2L\zh E\hl L\raise2\Interligne\soupir|\sk\soupir&\itenl3L\Zsong{A-}\hu L&\sk\soupir&\sk\soupir\enotes
+\barre %58
+\NOtes\tten1\tten2\zwh c\zh E\hl L|\zw e\wh h&\tten3\Zsong{--}\hu L&\Zsong{A-}\wh
+c&\Zsong{A-}\zw e\wh h\enotes
+\Notes\itenl1E\itenl2L\zh E\hl L&\csong{men !}\itenl3L\hu L\enotes
+\barre %59
+\NOtes\tten1\tten2\zhp E\zhlp L\hup b|\zhlp e\hup g&\tten3\hu L&\csong{men !}\hlp b&\csong{men !}\zhlp e\hup g\enotes
+\Notes\sk\soupir|\sk\soupir&\sk\soupir&\sk\soupir&\sk\soupir\enotes
+\barre %60
+\NOtes\zw I\rw b\wh a|\zw d\hu{gf}&\Zsong{A-}\wh I&\Zsong{A-}\rw b\wh
+a&\Zsong{A-}\zw d\hu{gf}\enotes
+\barre %61
+\NOtes\zw E\wh L|\pointdorgue l\zw{Nb}\wh e&\Zsong{men.}\zw E\wh L&\Zsong{men.}\zw N\wh
+b&\pointdorgue l\Zsong{men.}\wh e\enotes
+\ifnum\Signature<-3\relax
+\mulooseness1\relax
+\else
+\mulooseness2\relax
+\fi
+\finmorceau
+\bye
+

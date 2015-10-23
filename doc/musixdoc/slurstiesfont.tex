@@ -1,0 +1,566 @@
+\chapter{Font-based Slurs, Ties and Hairpins}
+Two fundamentally different implementations of slurs, ties, and hairpins are
+available. First, there are the
+original \ital{font-based} versions. These are constructed with traditional
+\TeX\ font characters that were created with \MF\ and stored in \TeX\ font files.
+Second, it is now possible
+to generate these shapes directly with Postscript, dispensing altogether with
+the font characters\footnote{Please do not be confused by the availability of
+Postscript versions of the font-based slur fonts (along with all other \musixtex\ fonts).
+Once installed in a \TeX\ system,
+their function and use are 100\% transparently identical with bitmapped versions
+of the slur fonts. On the other
+hand, Postscript slurs are functionally distinct from font-based slurs, and only
+ share some of the same syntax.}. We shall first describe the font-based versions,
+then Type~K Postscript slurs, which are one of two available Postscript slur
+options\footnote{An
+alternate approach to Postscript slurs, called {\it Type~M} after its developer
+Hiroaki {\sc Morimoto}, is available from the
+\href{http://icking-music-archive.org/software/indexmt6.html}
+{\underline{Icking Music Archive}}.}. If you plan to use Type~K Postscript slurs,
+you may skip directly to Chapter~\ref{PostscriptSlurs}.
+
+Font-based slurs and ties provided by \musixtex\ can be divided into two categories:
+\label{simpleslur}
+\begin{itemize}\setlength{\itemsep}{0ex}
+   \item Those where the complete slur symbol is composed of a single
+   character from one of the slur fonts, and
+   \item those where the slur symbol is composed of three distinct
+   characters, to form the beginning, middle and end of the slur.
+\end{itemize}
+The former are called \ital{simple slurs} and the latter,
+\ital{compound slurs}. In many cases the distinction between the two is
+invisible to the user, in that many of the macros described below will
+automatically select between the two types. However, there are other macros
+that allow simple slurs to be forced.
+
+The next few sections describe the usual method of slur coding, where the
+choice between simple or compound slurs is made automatically.
+In this case, slurs are initiated and terminated by separate macros,
+similar to beams.
+
+ \section{Font-based slur initiation}
+A slur must be initiated \ital{before}
+the spacing note on which the slur begins, and terminated \ital{before} the
+note on which it ends. 
+
+The basic slur initiation macro is
+\keyindex{isluru}\enpee, which initiates an upper slur, with reference
+number $n$, beginning on a note at pitch $p$. The starting point of the slur is
+centered above a virtual quarter note head at pitch~$p$\footnote{The slur will start in the same place regardless of whether there is
+{\it actually} a note at pitch $p$.}.
+Similarly, \keyindex{islurd}\enpee\ initiates a lower slur.
+These slurs are terminated by coding
+\keyindex{tslur}\enpee\ where $n$ is the reference number and $p$ is the
+termination pitch. 
+
+As with beams, the reference number $n$ by default can take values from $0$ to $5$, or
+up to $8$ or $11$ respectively if \ttxem{musixadd.tex} or \ttxem{musixmad.tex} is included.
+You can also specify the maximum number 
+directly with \keyindex{setmaxslurs}\verb|{|$m$\verb|}| where 
+$7<m\leq 100$%
+\footnote{This may require e-\TeX.}; 
+the reference number $n$ will be in the range between $0$ and $m-1$.
+\label{musixmad_setmaxslurs}
+
+To illustrate with an elementary example, the following passage
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\islurd0g\qu g\tslur0{'c}\qu c\en
+\Notes\isluru0{'e}\ibl0e{-2}\qb0{edc}\tslur0b\tqb0b\en
+\bar
+\NOtes\islurd0{'a}\qu a\tslur0{`f}\qu f\en
+\NOTes\hu g\en
+\zendextract
+\end{music}
+
+\noindent was coded as:
+\begin{quote}\begin{verbatim}
+\NOtes\islurd0g\qu g\tslur0{'c}\qu c\en
+\Notes\isluru0{'e}\ibl0e{-2}\qb0{edc}\tslur0b\tqb0b\en
+\bar
+\NOtes\islurd0{'a}\qu a\tslur0{`f}\qu f\en
+\NOTes\hu g\en
+\end{verbatim}\end{quote}
+
+Other macros are provided to change the horizontal starting and ending points of the slur
+in relation to the initial and final notes. Thus, \keyindex{issluru}\enpee\
+initiates a ``short'' upper slur suitable for linking notes involved in chords.
+The
+starting point is shifted to the right, and is vertically aligned with the
+center of a virtual quarter note head at pitch~$p$. If a lower short slur
+is wanted, one should use \keyindex{isslurd}\enpee.
+
+Sometimes, busy scores call for slurs which are vertically aligned with the
+ends of note stems rather than note heads. These ``beam'' slurs---so called
+because the slur is written at usual beam height---are provided by the
+macros \keyindex{ibsluru}\enpee\ and \keyindex{ibslurd}\enpee. These macros
+initiate slurs raised or lowered by the current stem height to accommodate
+stems or beams above or below.
+ %\check
+
+ \section{Font-based slur termination}
+Font-based slurs that are not forced to be simple must be terminated by an explicit
+command right before the last note under the slur. There are termination
+commands analogous to each of the initiation commands alread presented. They
+are summarized in the following table:
+\begin{center}
+  \begin{tabular}{ll}
+    Initiation                             &   Termination \\
+    \hline
+    \keyindex{isluru},  \keyindex{islurd}  & \keyindex{tslur}  \\
+    \keyindex{issluru}, \keyindex{isslurd} & \keyindex{tsslur} \\
+    \keyindex{ibsluru}                     & \keyindex{tbsluru}\\
+    \keyindex{ibslurd}                     & \keyindex{tbslurd}\\
+    \hline
+  \end{tabular} \end{center}
+
+\noindent All of these command have two parameters, $n$ and $p$.
+
+These specific termination macros are not restricted to being used with their
+initiation counterpart. A slur
+started in one sense can be terminated in another. For example, a slur beginning
+as a ``beam'' slur may be terminated as a normal slur. This would be achieved
+using the macro pair \verb|\ibslur...\tslur|.
+
+ \section{Font-based ties} Font-based ties will have the same shapes as
+ordinary font-based slurs of the same length between notes of equal pitch,
+but there are two important distinctions:
+(1) There cannot be any pitch difference between start and end, and (2) the
+positions of both the beginning and end of a tie relative to the note heads
+are slightly different from those of an ordinary slur\footnote{Editor's note: In
+fact, it appears that the default positioning of the ends of ties is exactly
+the same as that of short slurs.}.
+Upper ties are initiated by \keyindex{itieu}\enpee, which starts an upper tie of
+reference number $n$ at pitch $p$.
+Lower ties are initiated by \keyindex{itied}\enpee, which starts an lower tie of
+reference number $n$ at pitch $p$. The starting position of the tie is the same
+as \verb|\issluru| and
+\verb|\isslurd| respectively. The tie is terminated by coding
+\keyindex{ttie}\onen. Note that no pitch parameter is required.
+
+There are also \ital{short ties}, which bear the same relation to ordinary
+ties as short slurs to ordinary slurs. They are intended to be used between chords.
+They are initiated with
+\keyindex{itenu}\enpee~or \keyindex{itenl}\enpee\footnote{Editor's note: It is
+not clear why this command uses ``{\tt l}'' when all other similar ones use
+``{\tt d}''.}, and terminated with \keyindex{tten}\onen.
+
+The following example illustrates the differences in positioning of the various
+slur and tie options:
+
+\begin{music}\nostartrule
+\startextract
+\NOTes\islurd0g\qu g\tslur0g\qu g\isslurd0g\qu g\tsslur0g\qu g%
+\ibsluru0g\qu g\tbsluru0g\qu g\itied0g\qu g\ttie0\qu g%
+\itenl0g\qu g\tten0\qu g\en
+\zendextract
+\end{music}
+\noindent It was coded as
+\begin{quote}\begin{verbatim}
+\NOTes\islurd0g\qu g\tslur0g\qu g\isslurd0g\qu g\tsslur0g\qu g%
+\ibsluru0g\qu g\tbsluru0g\qu g\itied0g\qu g\ttie0\qu g%
+\itenl0g\qu g\tten0\qu g\en
+\end{verbatim}\end{quote}
+
+\noindent Here are some more general examples of font-based slurs and ties
+discussed so far:
+
+\begin{music}\nostartrule
+\startextract
+\NOTes\isluru0g\hl g\tslur0h\hl h\en
+\NOTes\islurd0c\issluru1g\zh{ce}\hu g\tslur0d\tsslur1h\zh{df}\hu h\en
+\NOTes\ibsluru0g\islurd1g\hu g\tubslur0h\hu h\en
+\NOTes\itieu0k\hl k\ttie0\tdbslur1f\hl k\en
+\zendextract
+\end{music}
+\noindent This was coded as:
+\begin{quote}\begin{verbatim}
+\NOTes\isluru0g\hl g\tslur0h\hl h\en
+\NOTes\islurd0c\issluru1g\zh{ce}\hu g\tslur0d\tsslur1h\zh{df}\hu h\en
+\NOTes\ibsluru0g\islurd1g\hu g\tubslur0h\hu h\en
+\NOTes\itieu0k\hl k\ttie0\tdbslur1f\hl k\en
+\end{verbatim}\end{quote}
+
+\section{Dotted slurs}
+
+Any font-based slur may be made dotted by specifying \keyindex{dotted}
+just before it is initiated:
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\dotted\islurd0g\qu g\tslur0{'c}\qu c\en
+\Notes\dotted\isluru0{'e}\ibl0e{-2}\qb0{edc}\tslur0b\tqb0b\en\bar
+\NOtes\dotted\slur{'a}{`f}d1\qu{'a`f}\en
+\NOTes\hu g\en
+\zendextract
+\end{music}
+
+\noindent This was coded as:
+\begin{quote}\begin{verbatim}
+\NOtes\dotted\islurd0g\qu g\tslur0{'c}\qu c\en
+\Notes\dotted\isluru0{'e}\ibl0e{-2}\qb0{edc}\tslur0b\tqb0b\en\bar
+\NOtes\dotted\slur{'a}{`f}d1\qu{'a`f}\en
+\NOTes\hu g\en
+\end{verbatim}\end{quote}
+
+ \section{Modifying font-based slur properties}
+Several macros are provided to modify the shape of slurs already initiated.
+These macros must be coded right before the slur \ital{termination}. Invoking
+any of the macros described in this section will force the slur to be compound.
+
+By default, the midpoint of a font-based slur is three \verb|\internote|s
+above or below a line between its ends. This can be changed using the macro
+\keyindex{midslur}~$h$ where $h$ is the revised vertical displacement. For
+example, \verb|\midslur6| coded right before \verb|\tslur| causes an upper slur to
+rise to a maximum height of \verb|6\internote| above the starting position.
+For example,
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\multnoteskip8\isluru0g\ql g\en
+\notes\tslur0g\ql g\en
+\zendextract
+\startextract
+\NOtes\multnoteskip8\isluru0g\ql g\en
+\notes\midslur7\tslur0g\ql g\en
+\zendextract
+\startextract
+\NOtes\multnoteskip8\isluru2g\ql g\en
+\notes\midslur{11}\tslur2g\ql g\en
+\zendextract
+\end{music}
+\noindent was coded as
+\begin{quote}\begin{verbatim}
+\NOtes\multnoteskip8\isluru0g\ql g\en
+\notes\tslur0g\ql g\en
+\NOtes\multnoteskip8\isluru0g\ql g\en
+\notes\midslur7\tslur0g\ql g\en
+\NOtes\multnoteskip8\isluru2g\ql g\en
+\notes\midslur{11}\tslur2g\ql g\en
+\end{verbatim}\end{quote}
+
+The macro \keyindex{curve}$hij$ allows more precise control over the shape
+of a slur or tie. The first parameter $h$
+is the vertical deviation and it works exactly like the sole parameter of
+\verb|\midslur| described above. The second and
+third parameters $i$ and $j$ set the initial and final gradient respectively.
+They are defined as the horizontal distance required to attain maximum
+vertical deviation. Thus smaller numbers for $i$
+and $j$ lead to more extreme gradients.
+The default setting is \verb|\curve344|. Hence, coding \verb|\curve322|
+doubles the initial and final gradient relative to the default.
+As with \verb|\midslur|, \verb|\curve| must be coded {\em immediately} before
+the slur termination. The example below illustrates the use of \verb|\curve|.
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\multnoteskip8\itieu0g\ql g\en
+\notes\ttie0\ql g\en
+\zendextract
+\startextract
+\NOtes\multnoteskip8\itieu1g\ql g\en
+\notes\curve 322\ttie1\ql g\en
+\zendextract
+\startextract
+\NOtes\multnoteskip8\itieu2g\ql g\en
+\notes\curve 111\ttie2\ql g\en
+\zendextract
+\end{music}
+\noindent This was coded as
+\begin{quote}\begin{verbatim}
+\NOtes\multnoteskip8\itieu0g\ql g\en
+\notes\ttie0\ql g\en
+\zendextract
+\startextract
+\NOtes\multnoteskip8\itieu1g\ql g\en
+\notes\curve 322\ttie1\ql g\en
+\zendextract
+\startextract
+\NOtes\multnoteskip8\itieu2g\ql g\en
+\notes\curve 111\ttie2\ql g\en
+\end{verbatim}\end{quote}
+
+Two macros are provided to control the behaviour of slurs which extend across
+line breaks. Normally, the part of the slur before the line break is
+treated as a tie.  This can be changed using \keyindex{breakslur}\enpee,
+which sets the termination height of
+the broken slur at the line break to pitch $p$, for slur number $n$.
+
+After the line break, the slur is normally resumed at the initial pitch
+reference, i.e., the one coded in \verb|\islur|. To change this, the macro
+\keyindex{Liftslur}\verb|{|$n$\verb|}{|$h$\verb|}| may be used.
+Here $n$ is again the slur reference
+number and $h$ is the change in height relative to the initialization height.
+This macro is normally used following line breaks, in which case it is best
+coded using the \verb|\atnextline| macro. For example, coding
+\verb|\def\atnextline{\Liftslur06}| raises the continuation of slur zero
+by \verb|6\internote| relative to its initialization height.
+
+The following example illustrates the use of the macros for broken slurs:
+\medskip
+
+\begin{minipage}[t]{85mm}
+Default, without adjustments:
+
+\begin{music}
+\hsize=50mm
+\generalmeter{\meterfrac24}%
+\parindent 0pt\staffbotmarg0pt%
+%
+%\interstaff{14\internote}%
+%
+\nostartrule
+\startpiece\bigaccid
+\Notes\ibsluru1b\qu b\qu g\en\bar
+\Notes\qu{'c!}\tslur1f\qu f\en
+\mulooseness1\Endpiece
+\end{music}
+\begin{verbatim}
+\Notes\ibsluru1b\qu b\qu g\en\bar
+\Notes\qu{'c!}\tslur1f\qu f\en
+\end{verbatim}
+\end{minipage}%
+\begin{minipage}[t]{75mm}
+With~\verb|\Liftslur|~and~\verb|\breakslur|~:\\
+\begin{music}
+\hsize=50mm
+\generalmeter{\meterfrac24}%
+\parindent 0pt\staffbotmarg0pt%
+%
+%\interstaff{14\internote}%
+%
+\nostartrule
+\startpiece\bigaccid
+\def\atnextline{\Liftslur17}%
+\Notes\ibsluru1b\qu b\qu g\breakslur1g\en\bar
+\Notes\qu{'c!}\tslur1f\qu f\en
+\mulooseness1\Endpiece
+\end{music}
+\begin{verbatim}
+\def\atnextline{\Liftslur17}%
+\Notes\ibsluru1b\qu b\qu g%
+\breakslur1g\en\bar
+\Notes\qu{'c!}\tslur1f\qu f\en
+\end{verbatim}
+\end{minipage}\medskip
+
+Occasionally in keyboard works one needs to begin a slur in one
+staff but end it in another. This can be done using the macro
+\keyindex{invertslur}\onen\ which is best described by
+reference to the example
+shown below.
+
+% Finding the final pitch is try and error, sorry, no way out.
+
+\begin{music}
+\setstaffs1{2}
+\setclef1\bass\interstaff{10.5}
+\startextract
+\NOtes\multnoteskip5\isluru0a\ql a\en
+\notes\invertslur0\curve311\tslur0j|\qu d\en
+\NOtes\multnoteskip{10}\isluru0a\ql a\en
+\notes\invertslur0\curve333\tslur0j|\qu d\en
+\zendextract
+\end{music}
+\noindent This was coded as
+\begin{quote}\begin{verbatim}
+\NOtes\multnoteskip5\isluru0a\ql a\en
+\notes\invertslur0\curve311\tslur0g|\qu d\en
+\NOtes\multnoteskip{10}\isluru0a\ql a\en
+\notes\invertslur0\curve333\tslur0g|\qu d\en
+\end{verbatim}\end{quote}
+
+\noindent Slur inversion as just described takes effect where the slope is zero; therefore it
+only works with ascending slurs that were started with \verb|\isluru|, and with
+descending slurs started with \verb|\islurd|. Otherwise no horizontal place
+can be found and the result is erratic.
+
+A different approach removes this restriction. The idea is to stop the slur at 
+the desired inversion point and restart it in the other sense at the
+same place. The commands to do this are as follows:
+ \begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{Tslurbreak}\enpee~stops slur number $n$ \ital{exactly} at pitch $p$,
+not above or below the virtual note head.
+ \item \keyindex{Islurubreak}\enpee~restarts an upper slur at the same position,
+not above a virtual note head.
+ \item \keyindex{Islurdbreak}\enpee~restarts a lower slur at the same position,
+not below a virtual note head.
+ \end{itemize}
+
+\noindent The vertical position may have to be adjusted to minimize any discontinuity
+in the slope. For example, the following pattern
+
+ \begin{music}\nostartrule
+\setclef1\treble
+\startextract
+\NOTes\multnoteskip 3\isluru0a\ql a\en
+\NOTes\multnoteskip 3\Tslurbreak0d\Islurdbreak0d\sk\en
+\Notes\tslur0h\qu h\en
+\NOTes\multnoteskip 3\islurd0a\ql a\en
+\NOTes\multnoteskip 3\Tslurbreak0d\Islurubreak0d\sk\en
+\Notes\tslur0h\qu h\en
+\zendextract
+\end{music}
+\noindent was coded as
+\begin{quote}\begin{verbatim}
+\begin{music}\nostartrule
+\NOTes\multnoteskip 3\isluru0a\ql a\en
+\NOTes\multnoteskip 3\Tslurbreak0d\Islurdbreak0d\sk\en
+\Notes\tslur0h\qu h\en
+\NOTes\multnoteskip 3\islurd0a\ql a\en
+\NOTes\multnoteskip 3\Tslurbreak0d\Islurubreak0d\sk\en
+\Notes\tslur0h\qu h\en
+\end{music}
+\end{verbatim}\end{quote}
+
+\section{Simple slurs}
+
+\ital{Simple} slurs and ties have advantages in some cases: (1) They will
+always have the best possible shape, and (2) if \verb|\noteskip| doesn't
+change from start to finish, they are easier to code. But they have drawbacks
+as well: (1) They are limited in length to 68pt
+for slurs and 220pt for
+ties, (2) their maximum vertical extent is \verb|8\internote|, and (3) they
+may not extend across a line break.
+Despite all these limitations, simple slurs are extremely useful in many
+applications where the slurs are short and contained within a bar.
+
+Simple slurs must be coded {\em before} the note on which the slur begins.
+The primary macro is
+\keyindex{slur}\verb|{|$p_1$\verb|}{|$p_2$\verb|}|$sl$
+where $p_1$ and $p_2$ are respectively the initial and final pitches,
+$s$ is the sense (either ``{\tt u}'' or ``{\tt d}''), and $l$ is the length,
+in {\tt noteskip}s.
+Thus, thirds slured in pairs can be coded
+
+ %\check
+
+\begin{quote}\begin{verbatim}
+\NOtes\slur ced1\qu{ce}\en
+\NOtes\slur dfd1\qu{df}\en
+\NOtes\slur egd1\qu{eg}\en
+\NOtes\slur{'e}cu1\ql{ec}\en
+\NOtes\slur{'d}bu1\ql{db}\en
+\NOtes\slur{'c}au1\ql{ca}\en
+\end{verbatim}\end{quote}
+which yields
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\slur ced1\qu{ce}\en
+\NOtes\slur dfd1\qu{df}\en
+\NOtes\slur egd1\qu{eg}\en
+\NOtes\slur{'e}cu1\ql{ec}\en
+\NOtes\slur{'d}bu1\ql{db}\en
+\NOtes\slur{'c}au1\ql{ca}\en
+\zendextract
+\end{music}
+%%
+
+There are similar commands to force simple versions of the other
+variants of font-based slurs and ties. Simple ties may be set using
+\keyindex{tie}\verb|{|$p$\verb|}|$sl$ (only one pitch is needed).
+Simple short slurs and short ties can be forced with the macros
+\keyindex{sslur}\verb|{|$p_1$\verb|}{|$p_2$\verb|}|$sl$ and
+\keyindex{stie}\verb|{|$p$\verb|}|$sl$ respectively. Finally,
+simple beam slurs can be forced with
+\keyindex{bslur}$s$\verb|{|$p_1$\verb|}{|$p_2$\verb|}|$l$.
+
+
+\section{Font-based hairpins (crescendos and decrescendos)}\label{sec:crescnd}
+
+There are two categories of font-based hairpins. The first type requires only
+one command, \keyindex{crescendo}\verb|{|$\ell$\verb|}| or
+\keyindex{decrescendo}\verb|{|$\ell$\verb|}|, where $\ell$ is any \TeX{}
+dimension, either a fixed one---for example in points---or a scalable one
+expressed either explicitly or implicitly as some number of
+\verb|\noteskip|s. These should be used as arguments to
+\verb|\zcharnote|, \verb|\zchar|, \verb|\uptext|, \verb|\zmidstaff|, etc., to
+post them at the desired altitude. The longest such symbol is $\simeq$ 68 mm.
+
+The second type of font-based hairpin requires two commands, one to start it
+and another to end it. The starting macro is \keyindex{icresc}. It has no
+arguments. Only one invocation suffices to start any number and combination of
+crescendos and diminuendos. The ending macros are \keyindex{tcresc} or
+\keyindex{tdecresc}. They should be used as arguments of \verb|\zcharnote| etc,
+which will set the altitude. For example,
+
+\begin{music}
+\parindent0pt
+\generalmeter{\meterfrac{12}8}
+\setstaffs1{2}
+\startextract
+\Notes\cmidstaff\ppp|\ca c\en
+\Notes\icresc|\ca{defgh'abcde}\en
+\Notes\zmidstaff{\loff\tcresc}\cmidstaff\fff|\ca{'f}\en
+\endextract
+\end{music}
+
+\noindent which was coded as
+\begin{quote}\begin{verbatim}
+\Notes\cmidstaff\ppp|\ca c\en
+\Notes\icresc|\ca{defgh'abcde}\en
+\Notes\zmidstaff{\loff\tcresc}\cmidstaff\fff|\ca{'f}\en
+\end{verbatim}\end{quote}
+\medskip
+
+\noindent while
+
+\begin{music}
+\parindent0pt
+\generalmeter{\meterfrac{12}8}
+\setstaffs1{2}
+\startextract
+\Notes\cmidstaff\ppp|\ca c\en
+\Notes\icresc|\ca{defgh'abcde}\en
+\Notes\zcharnote N{\tcresc}\cmidstaff\fff|\zcharnote q{\tcresc}\ca{'f}\en
+\endextract
+\end{music}
+
+\noindent was coded as
+\begin{quote}\begin{verbatim}
+\Notes\cmidstaff\ppp|\ca c\en
+\Notes\icresc|\ca{defgh'abcde}\en
+\Notes\zcharnote N{\tcresc}\cmidstaff\fff|\zcharnote q{\tcresc}\ca{'f}\en
+\end{verbatim}\end{quote}
+
+ \section{Limitations of font-based slurs}
+  The change in altitude between slur initiation and slur termination is limited to
+\verb|16\Internote|. Thus unexpected vertical gaps can appear, as seen in
+
+ \begin{music}\nostartrule
+\instrumentnumber{1}
+\generalmeter{\meterfrac34}
+\startextract\NOTes\multnoteskip3\isluru0c\ql c\tslur0j\ql j\en
+  \bar\NOTes\multnoteskip3\isluru0c\ql c\tslur0n\ql n\en\zendextract
+
+\startextract\NOTes\multnoteskip3\isluru0c\ql c\tslur0s\ql s\en
+  \bar\NOTes\multnoteskip3\isluru0c\ql c\tslur0z\ql z\en\zendextract
+ \end{music}
+ \noindent whose coding was
+ \begin{quote}\begin{verbatim}
+\NOTes\multnoteskip3\isluru0c\ql c\tslur0j\ql j\en
+  \bar\NOTes\multnoteskip3\isluru0c\ql c\tslur0n\ql n\en
+\NOTes\multnoteskip3\isluru0c\ql c\tslur0s\ql s\en
+  \bar\NOTes\multnoteskip3\isluru0c\ql c\tslur0z\ql z\en
+ \end{music}
+ \end{verbatim}\end{quote}
+
+Furthermore, if the slope becomes too steep, even worse results can occur, such as
+
+\medskip
+ \begin{music}\nostartrule
+\instrumentnumber{1}
+\generalmeter{\meterfrac34}
+\startextract\NOTes\isluru0c\ql c\en\notes\tslur0j\ql j\en
+  \bar\NOTes\isluru0c\ql c\en\notes\tslur0n\ql n\en
+ \NOTes\isluru0c\ql c\en\notes\tslur0s\ql s\en
+ \bar\NOTes\isluru0c\ql c\en\notes\tslur0z\ql z\en
+ \zendextract
+ \end{music}
+
+Another limitation of font-based slurs crops up when one attempts to
+generate bitmapped versions for high-resolution printers: the characters
+for long ties can exceed \MF's maximum capacity.

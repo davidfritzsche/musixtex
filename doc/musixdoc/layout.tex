@@ -1,0 +1,126 @@
+\chapter{Managing the Layout of your Score}
+\section{Line and page breaking}\label{linebreak}
+If every bar ends with \verb|\bar| and no other line- or page-breaking commands
+are used, then the external program \verb|musixflx| will decide where to insert
+line and page breaks. Line breaks will only come at bar lines. The total
+number of lines will depend on the initial value of \verb|\elemskip|, which by
+default is \verb|6pt| in \verb|\normalmusicsize|.
+
+You can force a line or page break by replacing \keyindex{bar} with
+\keyindex{alaligne} or \keyindex{alapage} respectively. On the other hand,
+to forbid line-breaking at a particular bar, replace \verb|\bar|
+with \keyindex{xbar}. To force a line or page break where there is
+no bar line, use \keyindex{zalaligne} or \keyindex{zalapage}. To mark any
+mid-bar location as an optional line-breaking point, use \keyindex{zbar}.
+
+The heavy final double bar of a piece is one of the consequences of
+\keyindex{Endpiece} or \keyindex{Stoppiece}. If you just want to terminate
+the text with a simple bar, say \keyindex{stoppiece} or \keyindex{endpiece}.
+To terminate it with no bar line at all, code \keyindex{zstoppiece}.
+
+Once you have stopped the score by any of these means, you may want to restart
+it, and there are several ways to do so. If you don't need to change the key
+signature, meter, or clef,
+you can use \keyindex{contpiece} for no indentation, or \keyindex{Contpiece}
+to indent by \keyindex{parindent}. If you do want to change some score
+attribute that takes up space, for example
+with \keyindex{generalsignature} after \verb|\stoppiece|, then to restart you
+must use \keyindex{startpiece}. However, if you don't want \verb|\barno| reset
+to 1, you must save its new starting value to \verb|\startbarno|. You may also
+wish to modify instrument names or \verb|\parindent| before restarting.
+
+Recall that thin-thin or thin-thick double bars or blank bar lines can be
+inserted without stopping by using the commands described in Section~\ref{doublebars}. 
+Those commands can also be used before \verb|\stoppiece|,
+\verb|\alaligne|, or \verb|\alapage|
+
+\section{Page layout}
+Blank space above and below each staff is controlled by the dimension
+registers \keyindex{stafftopmarg} and \keyindex{staffbotmarg}. For more
+info see Chapter~\ref{LayoutParameters}.
+
+The macro \keyindex{raggedbottom} will remove all vertical glue and
+compact everything toward the top of page.
+In contrast, the macro \keyindex{normalbottom} will restore default
+behavior, in which vertical space between the systems is distributed
+so that the first staff
+on the page is all the way at the top and the last staff all the way at
+the bottom.
+
+The macro \keyindex{musicparskip} will allow the existing space between
+systems to increase by up to \verb|5\Interligne|.
+
+The following values of page layout parameters will allow the maximum material
+to fit on each page, provided the printer allows the margins that are implied.
+
+\begin{center}
+\begin{tabular}{|l|l|l|}\hline
+\multicolumn{1}{|c|}{A4}&\multicolumn{1}{|c|}{letter}&\multicolumn{1}{|c|}{A4 or letter}\\\hline
+\multicolumn{3}{|c|}{\tt\Bslash parindent= 0pt}\\\hline
+\multicolumn{3}{|c|}{\tt\Bslash hoffset= -15.4mm}\\\hline
+\multicolumn{3}{|c|}{\tt\Bslash voffset= -10mm}\\\hline
+\verb+\hsize= 190mm+&\verb+\hsize= 196mm+&\verb+\hsize= 190mm+\\\hline
+\verb+\vsize= 260mm+&\verb+\vsize= 247mm+&\verb+\vsize= 247mm+\\\hline
+\end{tabular}
+\end{center}
+%avre
+\zkeyindex{parindent}\zkeyindex{hoffset}\zkeyindex{voffset}
+\zkeyindex{hsize}\zkeyindex{vsize}
+
+
+\section{Page numbering, headers and footers}\index{page
+number}\index{footnote}
+
+There are no special page numbering facilities in \musixtex; you must rely on
+macros from plain \TeX. There is a count register in \TeX\ called
+\verb|\pageno|. It is always initialized to $1$ and incremented by one
+at every page break. By saying \keyindex{pageno}\verb|=|$n$, it can be reset to any
+value at any time, and will continue to be incremented from the new value.
+
+By default, \TeX\ will place a page number on
+every page, centered at the bottom. Unfortunately, this is not the preferred
+location according to any standard practice. To suppress this default
+behavior, say \keyindex{nopagenumbers}.
+
+One way to initiate page numbering in a more acceptable location is to take
+advantage of the facts that (a) \TeX\ prints the contents of the control sequences
+\keyindex{headline} and \keyindex{footline} at the top and bottom
+respectively of every page, and (b) the value of \verb|\pageno| can be printed by
+saying \keyindex{folio}. Therefore, for example, the following sequence of
+commands, issued anywhere before the end of the first page, will cause page
+numbers and any desired text to be printed at the top of every page,
+alternating between placement of the number at the left and right margins, and
+alternating between the two different text strings (the capitalized text in
+the example):
+
+\begin{quote}\begin{verbatim}
+\nopagenumbers
+\headline={\ifodd\pageno\rightheadline\else\leftheadline\fi}%
+\def\rightheadline{\tenrm\hfil RIGHT RUNNING HEAD\hfil\folio}%
+\def\leftheadline{\tenrm\folio\hfil LEFT RUNNING HEAD\hfil}%
+\voffset=2\baselineskip
+\end{verbatim}\end{quote}
+
+\section{Controlling the total number of systems and pages}\index{page/line layout}
+
+Once all the notes are entered into a \musixtex\ score, it would be convenient
+if there were a simple sequence of commands to
+cause a specified number of systems to be uniformly distributed over a
+specified number of pages. Unfortunately that's not directly
+possible\footnote{It \textit{is} possible in \textbf{PMX}.}.
+Rather, some trial and error will usually be required to achieve the desired final
+layout. To this end, some combination of the following strategies may be used:
+
+ \begin{enumerate}\setlength{\itemsep}{0ex}
+  \item Assign a value to the count register \keyindex{linegoal} representing
+the total number of systems. The count register \keyindex{mulooseness} must be $0$ if using
+\verb|\linegoal|.
+  \item Explicitly force line and page breaking as desired, using
+the macros \verb|\alaligne|, \verb|\alapage|, \verb|\zalaligne|
+or \verb|\zalapage|.
+  \item Adjust both \keyindex{mulooseness} and the initial value of
+\keyindex{elemskip}: increasing \verb|\mulooseness| from its default of 0 will
+increase the total number of systems, while changing the initial value of
+\verb|\elemskip| (use \verb|\showthe\elemskip| to find its default value) may change the
+total number of systems accordingly.
+ \end{enumerate}

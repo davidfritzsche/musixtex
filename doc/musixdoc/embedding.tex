@@ -1,0 +1,180 @@
+\chapter{Embedding Musical Excerpts in Text Documents}
+
+Here we discuss the options for including music in text documents. The first
+decision is whether or not to use \LaTeX\footnote{We'll assume a user wanting
+to embed a musical excerpt in a \LaTeX\ document is already familiar with the
+fundamentals of \LaTeX. For more information about it, see for example the manual
+\ital{\LaTeX: A Document Preparation System} by Leslie {\sc Lamport}}.
+Because \LaTeX\ so effectively simplifies
+production of text-based \TeX\ documents, most users take that path, and most of the
+descriptions given here will assume that's the case\footnote{Please do not be confused;
+while \LaTeX\ is recommended for text-based documents containing musical
+excerpts, its use is definitely discouraged for ordinary self-contained musical scores
+of any sort.}.
+
+If for some reason you choose not to use \LaTeX\ for musical excerpts,
+the basic approach is simply to set off the musical
+parts between \verb|\startpiece| or \verb|\contpiece| and \verb|\stoppiece| or
+\verb|\endpiece|, or between \verb|\startextract| and \verb|\zendextract|. But
+some details in what follows will also apply without \LaTeX.
+
+There are two basic approaches to embedding musical excerpts in \LaTeX\
+documents. The first method is to directly include the \musixtex\ code in
+the \LaTeX\ source file. That will be the subject of the next subsection. The
+other is to create an EPS (encapsulated Postscript) or PDF file containing only the
+excerpt, and then ``paste'' it into the \LaTeX\ file. That will be covered in
+Section~\ref{embedeps}.
+
+The advantages of using the direct method are that all of the source code for
+all excerpts can be kept in the same file as the text, and that there is no
+limit on the length of the excerpt.
+The advantage of the EPS/PDF method is that you don't have to burden the \LaTeX\
+source with any of the \musixtex\ paraphernalia. That in turn permits use of
+primitive versions of the \TeX\ compiler that may not have the capacity
+to handle the direct method (due to the number of registers consumed by \LaTeX\
+and \musixtex). The disadvantages are that you must create and keep
+track of a separate \TeX\ and EPS/PDF file for every excerpt, and that the excerpt
+must not span any page breaks. On balance, the
+direct method is probably to be preferred.
+
+\section{Directly embedding excerpts in \LaTeX\ documents}\label{excerpts}
+
+To use the direct method, add \verb|\usepackage{musixtex}| to the preamble.
+This will cause the file
+\ttxem{musixtex.sty} to be loaded, so naturally you must make that file
+available in a place where \TeX\ can find it. That file simply inputs two
+other files, \verb|musixtex.tex| and \ttxem{musixltx.tex}, which again must
+obviously be available to \TeX.
+
+Now you are in position to directly embed an excerpt by inserting code at the
+appropriate place in the source file. The most common type of excerpt is
+one that occupies less than a full line and is to be horizontally centered. In
+that case, the extract should begin with the command \keyindex{begin\LBR music\RBR},
+followed by any preliminary commands. Then, instead of \verb|\startpiece|,
+use \keyindex{startextract}. Now comes the normal \musixtex\ coding. Finally,
+end the extract with \keyindex{endextract} instead of \verb|\endpiece|
+or \verb|\stoppiece|, followed by \keyindex{end\LBR music\RBR}.
+
+To terminate an extract without any bar line, use \keyindex{zendextract}
+instead of \verb|\endextract|.
+To create a left-justified excerpt, use the sequence
+\begin{quote}
+\verb|\let\extractline\leftline|.
+\end{quote}
+If several extracts are to be placed on the same line, you can
+redefine \keyindex{extractline} as demonstrated in the following
+example\footnote{The macro {\tt\Bslash extractline} is defined once and for all in
+{\tt musixtex.tex} as {\tt\Bslash centerline}. You might think that the suggested
+coding would permanently redefine {\tt\Bslash extractline}, thereby upsetting the
+normal function of {\tt\Bslash startextract ... \Bslash endextract} for subsequent use.
+But it doesn't, because any actions within
+\keyindex{begin\LBR music\RBR}...\keyindex{end\LBR music\RBR} are local, not
+global.}:
+
+% DAS temp (where is the reference???)
+%An example of this is given at \ref{extractline} on page \pageref{extractline}.
+% end DAS temp
+\begin{quote}\begin{verbatim}
+\begin{music}\nostartrule
+\let\extractline\hbox
+\hbox to \hsize{%
+\hss\startextract ... \zendextract\hss%
+\hss\startextract ... \zendextract\hss}
+\end{music}
+\end{verbatim}\end{quote}
+
+An even shorter type of extract is one that is embedded \ital{within} a line of text.
+To insert \musixtex\ symbols within a line of text, you could begin by defining
+\keyindex{notesintext} as follows\footnote{provided by Rainer {\sc Dunker}}:
+
+\begin{quote}\begin{verbatim}\begin{music}\nostartrule
+\makeatletter
+\def\notesintext#1{%
+  {\let\extractline\relax
+   \setlines10\smallmusicsize \nobarnumbers \nostartrule
+   \staffbotmarg0pt \setclefsymbol1\empty \global\clef@skip0pt
+   \startextract\addspace{-\afterruleskip}#1\zendextract}}
+\makeatother
+\end{music}\end{verbatim}\end{quote}
+
+Then, for example, the code
+
+\begin{verbatim}
+Use \raisebox{0ex}[0ex][0ex]{\notesintext{\notes\rql1\qu2\en}}
+not \raisebox{0ex}[0ex][0ex]{\notesintext{\notes\ql2\lqu1\en}}
+\end{verbatim}
+
+\noindent would produce: ``Use \raisebox{0ex}[0ex][0ex]{\notesintext{\notes\rql1\qu2\en}} not
+\raisebox{0ex}[0ex][0ex]{\notesintext{\notes\ql2\lqu1\en}}~''.
+
+\noindent The \verb|\raisebox| voids the vertical space that is introduced by the notes.
+
+Finally, you may want to insert an extract containing more than one line
+of music. This is the easiest of all: between
+\verb|\begin{music}| and \verb|\end{music}|, use \ital{exactly} the same
+coding you would to make an ordinary score.
+
+\enlargethispage*{4ex}
+The best way to learn how to apply these methods is to study
+the source files for this document\footnote{Do note,
+however, that {\tt musixdoc.tex} loads a \texttt{musixdoc.sty} package 
+in its preamble, not just \texttt{musixtex.sty}; the former performs the functions of \texttt{musixtex.sty}
+as well as numerous tasks peculiar to this particular document.}.
+
+%DAS I don't think this section is worth including.
+
+% \section{Wide music in \LaTeX}\label{musixblx}
+% Another difficulty appears with \LaTeX: internal \LaTeX\ macros handle the
+%page size in a way which is not supposed to be changed within a given document.
+%This means that text horizontal and vertical sizes are somewhat frozen so that
+%one can hardly insert pieces of music of page size different from the size
+%specified by the \LaTeX{} \itxem{style}.
+%Although a \ttxem{musixblx.tex} has been provided, which makes the
+%\ital{environment} \verb|bigmusic| available.
+%\zkeyindex{begin\LBR bigmusic\RBR}
+%The main drawback is an unpredictable behaviour of top and bottom
+%printouts, especially page numberings.
+%
+% If the whole of a document has wide pages, it can be handled with the
+%\ttxem{a4wide} style option, or any derivate of it.
+
+\section{Embedding musical excerpts as PDF or EPS files}
+\label{embedeps}
+To use this method of including excerpts, you first must create a separate
+\musixtex\ input file for each excerpt. Process each such file with
+\TeX\ and \verb|musixflx| to generate a \verb|.dvi| file. Generate
+a Postscript file from each \verb|.dvi| using \verb|dvips|. Then
+convert each Postscript file to a \verb|.pdf| or \verb|.eps| file using 
+\verb\ps2pdf\ or \verb\ps2eps\;
+if you are using Windows, {GSview} can be used for either. Note that
+conversion to EPS (Encapsulated Postscript) is possible only for \emph{single-page} Postscript files.
+
+To set up your \LaTeX\ document for including \verb|.pdf| or \verb|.eps| files, you must post
+the command \verb|\usepackage{graphicx}| in the preamble of the
+document. Now, you may include each \texttt{sample.pdf} or \texttt{sample.eps} file at the appropriate place
+in the {\LaTeX} document with a command
+like \keyindex{includegraphics}\verb|{sample}|.  If an embedded file is a PDF (rather than an EPS), 
+the document must be processed with \verb|pdflatex| (rather than \verb|latex|).
+
+\section{Issues concerning \texorpdfstring{{\Bslash catcodes}}{catcodes}}
+\label{catcodeprobs}
+
+\musixtex\ uses the following symbols differently from plain \TeX: \verb|>|,
+ \verb|<|, \verb&|&, \verb|&|, \verb|!|, \verb|*|, \verb|.|, and \verb|:|\ .\\
+The symbols are given their special meanings by executing the macro
+\keyindex{catcodesmusic}, and are restored to their plain \TeX\ meanings with
+\keyindex{endcatcodesmusic}. When setting either a self-contained score or
+a musical extract, you normally need not worry
+about this at all, because \verb|\startpiece| or \verb|\startextract| executes
+\verb|\catcodesmusic| and \verb|\endpiece| or \verb|\endextract| executes
+\verb|\endcatcodesmusic|. But there are some special situations where you
+might need to use these catcode-modifying macros explicitly. One is if you
+were to define a personalized macro outside
+\verb|\startpiece ... \endpiece|, but which incorporated any of the
+symbols with their \musixtex\ meanings. Another would be if you wished to have
+access to facilities enabled by alternate style files such as
+{\tt\ixem{french.sty}} which change \keyindex{catcode}s themselves. In
+such cases, provided you have input \verb|musixtex.tex|, you can always
+invoke \keyindex{catcodesmusic} to set the \keyindex{catcode}s at their
+\musixtex\ values, and \keyindex{endcatcodesmusic} to restore them to their
+prior values.

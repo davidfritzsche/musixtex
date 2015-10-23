@@ -1,0 +1,283 @@
+ \chapter{Writing Notes}\label{autostemdirections}
+There are two major kinds of note macros, those that include a space (of
+length \keyindex{noteskip}) after
+the printed symbol, and those that don't cause any space. A single-line melody would be
+written using the first type. All notes of a chord except the last would
+use the second.
+
+Another distinction concerns stemmed notes. Some macros explicitly set the
+stem direction with either ``\verb|u|'' or ``\verb|l|'' contained in the name of
+the macro. On the other hand, an ``\verb|a|'' in the macro's name usually signifies
+\ital{automatic} stem direction selection. In this case notes below the middle
+staff line will get up stems, otherwise down.
+
+Note pitches can be specified either by letters or numbers. If no transposition
+or octaviation is in effect, letters ranging
+from \verb|a| to \verb|z| represent notes starting with the A below
+middle C. Upper case letters from \verb|A| to \verb|N| represent pitches
+two octaves lower than their lower case counterparts. Any letter can be used in
+any clef, but some users may
+prefer to use the lower case letters in treble clef, and the upper case ones
+in bass clef.
+
+Alternatively, a one- or two-digit, positive or negative integer can always be used.
+The number represents
+the vertical position on the staff, with \verb|0| for the lowest line and
+\verb|1| for the space right above, \ital{regardless of the clef}.
+Unlike with letters, the
+associated pitch will depend on the clef, and notes entered this way are
+immune to transposition and octaviation.
+
+Notes lower than \verb|A| and higher than \verb|z| can be entered, with
+either numbers as just described, or with octaviation as will be explained in
+Chapter~\ref{octaviation}.
+
+ \section{Normal (unbeamed) spacing notes}\label{NormalNotes}
+In the following, \verb|{|$p$\verb|}| signifies a pitch specification as
+described above. However it
+is understood that if the pitch is a single character, the brackets are
+not necessary, provided that if it is a letter, a space separates the
+macro from the letter.
+
+
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+ \item[\keyindex{breve}{\tt\char123}$p${\tt\char125} :]breve (\hbox to 8pt{\zbreve1\hss}) .
+ \item[\keyindex{longa}{\tt\char123}$p${\tt\char125} :]longa (\hbox to8pt{\zlonga1\hss}) .
+ \item[\keyindex{longaa}{\tt\char123}$p${\tt\char125} :]longa with automatic stem direction\footnote{Editor's note: Evidently there is no explicit up-stemmed longa} .
+ \item[\keyindex{zmaxima}{\tt\char123}$p${\tt\char125} :]maxima(\hbox to16pt{\zmaxima1\hss}) .
+ \item[\keyindex{wq}{\tt\char123}$p${\tt\char125} :]arbitrary duration note (\hbox to8pt{\zwq1\hss})
+(also used as alternate representation of a \ital{breve}).
+ \item[\keyindex{wqq}{\tt\char123}$p${\tt\char125} :]long arbitrary duration note
+(\hbox to8pt{\zwqq1\hss}) (also used as alternate
+representation of a \ital{longa}).
+ \item[\keyindex{wh}{\tt\char123}$p${\tt\char125} :]whole note.
+ \item[\keyindex{hu}{\tt\char123}$p${\tt\char125} :]half note with stem up.
+ \item[\keyindex{hl}{\tt\char123}$p${\tt\char125} :]half note with stem down.
+ \item[\keyindex{ha}{\tt\char123}$p${\tt\char125} :]half note with automatic stem direction
+ \item[\keyindex{qu}{\tt\char123}$p${\tt\char125} :]quarter note with stem up.
+ \item[\keyindex{ql}{\tt\char123}$p${\tt\char125} :]quarter note with stem down.
+ \item[\keyindex{qa}{\tt\char123}$p${\tt\char125} :]quarter note with automatic stem direction.
+ \item[\keyindex{cu}{\tt\char123}$p${\tt\char125} :]eighth note\footnote{The ``{\tt c}''
+within this macro name stands for the equivalent British term ``crotchet''} with stem up.
+ \item[\keyindex{cl}{\tt\char123}$p${\tt\char125} :]eighth note with stem down.
+ \item[\keyindex{ca}{\tt\char123}$p${\tt\char125} :]eighth note with automatic stem direction.
+ \item[\keyindex{ccu}{\tt\char123}$p${\tt\char125} :]sixteenth note with stem up.
+ \item[\keyindex{ccl}{\tt\char123}$p${\tt\char125} :]sixteenth note with stem down.
+ \item[\keyindex{cca}{\tt\char123}$p${\tt\char125} :]sixteenth note with automatic stem direction.
+ \item[\keyindex{cccu}{\tt\char123}$p${\tt\char125} :]$32$nd note with stem up.
+ \item[\keyindex{cccl}{\tt\char123}$p${\tt\char125} :]$32$nd note with stem down.
+ \item[\keyindex{ccca}{\tt\char123}$p${\tt\char125} :]$32$nd note with automatic stem direction.
+ \item[\keyindex{ccccu}{\tt\char123}$p${\tt\char125} :]$64$th note with stem up.
+ \item[\keyindex{ccccl}{\tt\char123}$p${\tt\char125} :]$64$th note with stem down.
+ \item[\keyindex{cccca}{\tt\char123}$p${\tt\char125} :]$64$th note with automatic stem direction.
+ \item[\keyindex{cccccu}{\tt\char123}$p${\tt\char125} :]$128$th note with stem up.
+ \item[\keyindex{cccccl}{\tt\char123}$p${\tt\char125} :]$128$th note with stem down.
+ \item[\keyindex{ccccca}{\tt\char123}$p${\tt\char125} :]$128$th note with automatic stem direction.
+\end{description}\end{quote}
+ As an example, the sequence
+
+ %\check
+\begin{music}\nostartrule
+\startextract
+\Notes\cu c\cl j\en\bar
+\Notes\ccu c\ccl j\en\bar
+\Notes\cccu c\cccl j\en\bar
+\Notes\ccccu c\ccccl j\en\bar
+\Notes\cccccu c\cccccl j\en
+\zendextract
+\end{music}
+ \noindent was coded as
+\begin{quote}\begin{verbatim}
+\Notes\cu c\cl j\en\bar
+\Notes\ccu c\ccl j\en\bar
+\Notes\cccu c\cccl j\en\bar
+\Notes\ccccu c\ccccl j\en\bar
+\Notes\cccccu c\cccccl j\en
+\end{verbatim}\end{quote}
+
+
+
+For \keyindex{breve} there is a possibility of
+confusion with a command in \TeX's math mode that has exactly the same name.
+However, there will generally be no problem, because inside
+\verb|\startpiece...\endpiece|,
+\verb|\breve| will take the musical meaning, while outside, it will have the
+mathematical one.
+If for some reason you need the math \verb|\breve| inside, you can use
+\verb|\endcatcodesmusic...\breve...\catcodesmusic|.
+
+ \section{Non-spacing note heads}
+These macros are used to create chords. Any number of them can be entered
+in sequence, followed by a spacing note. All of the note heads will be
+joined to the spacing note and the stem length will automatically be adjusted
+as needed.
+
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+ \item[\keyindex{zq}{\tt\char123}$p${\tt\char125} :]quarter (or shorter) note head.
+ \item[\keyindex{zh}{\tt\char123}$p${\tt\char125} :]half note head.
+\end{description}\end{quote}
+%das ???
+% \begin{remark} Notes of duration longer than whole notes are
+%always non-spacing. This saves one useless definition, since these notes are
+%always longer than other simultaneous ones. If needed they can be followed by
+%\keyindex{sk} to force spacing.
+%\end{remark}
+
+ \section{Shifted non-spacing note heads}
+These symbols are used mainly
+in chords containing an interval of a \ital{second}. They provide note
+heads shifted either to the left or right of the default position by
+the width of one note head.
+
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+\item[\keyindex{rw}{\tt\char123}$p${\tt\char125} :]whole note head shifted right.
+\item[\keyindex{lw}{\tt\char123}$p${\tt\char125} :]whole note head shifted left.
+\item[\keyindex{rh}{\tt\char123}$p${\tt\char125} :]half note head shifted right\footnote{Some may not
+have realized that half and whole note heads have different shapes}.
+\item[\keyindex{lh}{\tt\char123}$p${\tt\char125} :]half note head shifted left.
+\item[\keyindex{rq}{\tt\char123}$p${\tt\char125} :]quarter note head shifted right.
+\item[\keyindex{lq}{\tt\char123}$p${\tt\char125} :]quarter note head shifted left.
+\end{description}\end{quote}
+
+ \section{Non-spacing notes}
+These macros provide normal notes, with stems if applicable, but without any
+following space.
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+ \item[\keyindex{zhu}\pitchp~:]half note with stem up but no spacing. It acts like
+\verb|\hu| for chord building, i.e., it will join together any immediately
+preceding non-spacing note heads.
+ \item[\keyindex{zhl}\pitchp~:]half note with stem down but no spacing. It acts like
+\keyindex{hl} for chord building.
+ \item[\keyindex{zqu}\pitchp~:]quarter note with stem up but no spacing. It acts like
+\verb|\qu| for chord building.
+ \item[\keyindex{zql}\pitchp~:]quarter note with stem down but no spacing. It acts
+like \verb|\ql| for chord building.
+ \item[\keyindex{zcu}\pitchp, \keyindex{zccu}, \keyindex{zcccu}, 
+ \keyindex{zccccu}, \keyindex{zcccccu}
+:]eighth, ..., note with stem up but no spacing. They act like
+\verb|\cu| for chord building.
+ \item[\keyindex{zcl}\pitchp, \keyindex{zccl}, \keyindex{zcccl}, 
+ \keyindex{zccccl}, \keyindex{zcccccl}
+:]eighth, ..., note with stem down but no spacing. They act
+like \verb|\cl| for chord building.
+ \item[\keyindex{rhu}\pitchp, \keyindex{rhl}, \keyindex{rqu}, \keyindex{rql},
+  \keyindex{rcu}, \keyindex{rcl} :] \verb|\rhu| acts like \verb|\zhu|,
+  but the note is shifted one note width to the right; others analogous.
+ \item[\keyindex{lhu}\pitchp, \keyindex{lhl}, \keyindex{lqu}, \keyindex{lql},
+  \keyindex{lcu}, \keyindex{lcl} :]same
+  as above, but the note is shifted one note width to the left.
+ \item[\keyindex{zw}\pitchp~:]whole note with no following space.
+ \item[\keyindex{zwq}\pitchp~:]arbitrary duration note
+  (\hbox to8pt{\zwq1\hss}) with no following space.
+ \item[\keyindex{zbreve}\pitchp~:]breve
+  (\hbox to8pt{\zbreve1\hss}) with no following space.
+ \item[\keyindex{zlonga}\pitchp~:]longa
+  (\hbox to8pt{\zlonga1\hss}) with no following space.
+ \item[\keyindex{zmaxima}\pitchp~:]maxima
+  (\hbox to16pt{\zmaxima1\hss}) with no following space.
+\end{description}\end{quote}
+ %\check
+
+\section{Spacing note heads}
+
+Although not needed in normal music scores, these may be useful in
+very special cases.
+
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+\item[\keyindex{nh}{\tt\char123}$p${\tt\char125} :]spacing half note head.
+\item[\keyindex{nq}{\tt\char123}$p${\tt\char125} :]spacing quarter note head.
+\end{description}\end{quote}
+
+\noindent As an example, the sequence
+
+\begin{music}\nostartrule
+ \startextract
+\notes\nq c\nq j\en\barre
+\Notes\nh c\nh j\en\barre
+\notes\nq {cdef}\en
+\zendextract
+\end{music}
+
+\noindent was coded as
+
+\begin{quote}\begin{verbatim}
+\notes\nq c\nq j\en\barre
+\Notes\nh c\nh j\en\barre
+\notes\nq {cdef}\en
+\end{verbatim}\end{quote}
+
+Non spacing variants are also provided, namely
+\keyindex{znh} and \keyindex{znq}.
+% DAS: why???
+
+ \section{Dotted notes}\label{dots}
+
+By appending one or two \verb|p|'s (for ``pointed'') to the name, many of the
+macros just introduced provide one or two dots after the notehead:
+\keyindex{whp}\pitchp, \keyindex{whpp},
+\keyindex{zwp}, \keyindex{zwpp},
+\keyindex{hup}, \keyindex{hupp},
+\keyindex{hlp}, \keyindex{hlpp},
+\keyindex{zhp}, \keyindex{zhpp},
+\keyindex{qup}, \keyindex{qupp},
+\keyindex{qlp}, \keyindex{qlpp},
+\keyindex{zqp}, \keyindex{zqpp},
+\keyindex{cup}, \keyindex{cupp},
+\keyindex{clp}, \keyindex{clpp},
+\keyindex{qbp} and \keyindex{qbpp}.
+Naturally, the ones that start with ``\verb|z|'' are used in chords.
+The dot(s) will be raised if the note is on a line.
+
+A more explicit way uses one of the macros \keyindex{pt}{\tt\char123}$p${\tt\char125},
+\keyindex{ppt}, or \keyindex{pppt} right
+before any note macro to place one to three dots after the normal note
+head at pitch $p$. Again they will be raised if on a line. In fact this is the only
+way to get a triple-dotted note.
+For example a
+quarter note with one dot could be coded \verb|\pt h\qu h|, with two dots
+as \keyindex{ppt}\verb| h\qu h| and with three as
+\keyindex{pppt}\verb| h\qu h|.
+
+Yet another method for posting a dot is to insert a \ital{period} before
+the letter representing the pitch. Thus \verb|\qu{.a}| is equivalent to
+either \verb|\pt a\qu a| or \verb|\qup a| . This may be useful when
+using \ital{collective coding}, which will be discussed in the next
+section.
+
+Non-spacing dotted notes can be produced using
+\keyindex{zhup}, \keyindex{zhlp}, \keyindex{zqup}, \keyindex{zqlp},
+\keyindex{zcup}, \keyindex{zclp}, \keyindex{zqbp},
+and similarly with two \verb|p|'s for
+double-dotted notes.
+
+As a matter of style, if two voices share one staff, the dots in
+the lower voice should be lowered if the note is on a line. For
+this you can use \keyindex{lpt}{\tt\char123}$p${\tt\char125} and
+\keyindex{lppt}{\tt\char123}$p${\tt\char125}.
+
+\section{Sequences of equally spaced notes; collective coding}
+\label{CollectiveCoding}
+
+It isn't necessary to write a separate macro
+sequence \verb|\notes...\en| for every individual column of notes.
+Rather, a single such macro can contain all the notes in all staves
+over an extended horizontal range, as long as all spacings are equal or
+multiples of a unique value of \keyindex{noteskip}.
+The notes in each staff could be entered one after another as normal
+spacing notes as already described in Section~\ref{NormalNotes}. Then
+each spacing note will cause the insertion point to advance horizontally by the
+operative value of \verb|\noteskip| defined by the choice of
+\verb|\notes|, \verb|\Notes|, \verb|\NOtes|, etc. Of course in such sequences
+non-spacing chord notes can be entered right before their associated
+spacing note. If you need to skip forward by one \verb|\noteskip|, for
+example after a quarter note when there are two eighth notes in
+another staff, you can use \keyindex{sk}.
+
+If there are only spacing notes in such a sequence, a further
+simplification is available, called \ital{collective coding}. For instance
+\verb|\qu{cdefghij}| writes the C major scale in quarters with
+up stems. Similarly \verb|\cl{abcdef^gh}| writes the
+\ital{A-minor} scale in non-beamed eighths. (Here ``\verb|^|'' represents
+a sharp). If necessary a void can be inserted in a collective coding sequence
+by using~\verb|*|\index{*}. Not all note-generating macros can be
+used to perform collective coding, but most of them can.

@@ -1,0 +1,272 @@
+%%
+%% This is file `musixcrd.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% musixcrd.dtx 
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from musixcrd.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file musixcrd.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% musixcrd - typsetting chord symbols with                   %%
+%%                   musixtex                                 %%
+%% main source file contains code, doc, and examples          %%
+%% $Id: musixcrd.dtx,v 1.7 2004/11/02 13:13:41 hennig Exp $   %%
+%% copyright 2004 , Robert Hennig                             %%
+%% this code is licensed in terms of the                      %%
+%% GNU Public License                                         %%
+%%                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\makeatletter\undefined\def\makeatletter{\catcode`\@=11\relax}\fi
+\ifx\makeatother\undefined\def\makeatother{\catcode`\@=12\relax}\fi
+
+\makeatletter% ^^A allows to use @ as ordinary letter
+\def\crddefaultheight{10}
+\def\crdtranspose{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\crd@append#1\to#2{%
+  \toks0=\expandafter{#1}\toks2=\expandafter{#2}%
+  \edef#2{\the\toks2 \the\toks0}}
+\def\crd@prepend#1\by#2{%
+  \toks0=\expandafter{#1}\toks2=\expandafter{#2}%
+  \edef#1{\the\toks2 \the\toks0}}
+\def\crd@movetoken#1\to#2{%
+  \ifx#1\empty\else\expandafter\crd@moveoff#1\crd@moveoff#1#2\fi}%
+\def\crd@moveoff#1#2\crd@moveoff#3#4{\def#3{#2}\crd@prepend#4\by#1}
+\newif\ifcrd@parsematched%  true if parse matched
+\newcount\crd@parsedepth%   internal register
+
+\def\crd@parse#1\for#2{% parse tokens #1 for occurence of items of table #2
+  \crd@parsedepth=1 % default if not defined
+  \expandafter\ifx\csname#2depth\endcsname\relax\else%
+    \crd@parsedepth=\csname#2depth\endcsname%
+  \fi%
+  \def\stack{}%\def\crd@parseresult{}
+  \crd@parsematchedfalse% initialisation
+  \crd@parser#1\for#2% call the recursive part
+}
+\def\crd@parser#1\for#2{% recursive part of parser
+  \ifx#1\empty\else% is list filled ?
+    \ifnum\crd@parsedepth>0 %  and do we have to read more chars into stack
+      \advance\crd@parsedepth by-1 %
+      \crd@movetoken#1\to\stack%
+      \crd@parser#1\for#2%   recursive call
+      \ifcrd@parsematched\else%  if still not matched
+        \expandafter\ifx\csname#2\stack\endcsname\relax% does item match
+          \crd@movetoken\stack\to#1% no match, put char back to source
+        \else% match
+          \csname#2\stack\endcsname%
+          \crd@parsematchedtrue% signal success
+        \fi%
+      \fi%
+    \fi%
+  \fi%
+}
+\newcount\crd@vshift%
+\newcount\crd@hshift%
+\def\crd@number{crd@number}%
+\def\crd@numberdepth{2}%
+\expandafter\def\csname\crd@number0\endcsname{\crd@numberval=0 }%
+\expandafter\def\csname\crd@number1\endcsname{\crd@numberval=1 }%
+\expandafter\def\csname\crd@number2\endcsname{\crd@numberval=2 }%
+\expandafter\def\csname\crd@number3\endcsname{\crd@numberval=3 }%
+\expandafter\def\csname\crd@number4\endcsname{\crd@numberval=4 }%
+\expandafter\def\csname\crd@number5\endcsname{\crd@numberval=5 }%
+\expandafter\def\csname\crd@number6\endcsname{\crd@numberval=6 }%
+\expandafter\def\csname\crd@number7\endcsname{\crd@numberval=7 }%
+\expandafter\def\csname\crd@number8\endcsname{\crd@numberval=8 }%
+\expandafter\def\csname\crd@number9\endcsname{\crd@numberval=9 }%
+\expandafter\def\csname\crd@number1-\endcsname{\crd@numberval=-1 }%
+\expandafter\def\csname\crd@number2-\endcsname{\crd@numberval=-2 }%
+\expandafter\def\csname\crd@number3-\endcsname{\crd@numberval=-3 }%
+\expandafter\def\csname\crd@number4-\endcsname{\crd@numberval=-4 }%
+\expandafter\def\csname\crd@number5-\endcsname{\crd@numberval=-5 }%
+\expandafter\def\csname\crd@number6-\endcsname{\crd@numberval=-6 }%
+\expandafter\def\csname\crd@number7-\endcsname{\crd@numberval=-7 }%
+\expandafter\def\csname\crd@number8-\endcsname{\crd@numberval=-8 }%
+\expandafter\def\csname\crd@number9-\endcsname{\crd@numberval=-9 }%
+\newcount\crd@quint% register used to represent notes in the circle of
+\def\crd@quintval{crd@quintval}%
+\def\crd@quintvalA{\crd@quint=3 }%   A
+\def\crd@quintvalB{\crd@quint=5 }%   B
+\def\crd@quintvalC{\crd@quint=0 }%   C
+\def\crd@quintvalD{\crd@quint=2 }%   D
+\def\crd@quintvalE{\crd@quint=4 }%   E
+\def\crd@quintvalF{\crd@quint=-1 }%  F
+\def\crd@quintvalG{\crd@quint=1 }%   G
+\def\crd@quintmod{crd@quintmod}
+\def\crd@quintmoddepth{2}
+\def\crd@quintmods{\advance\crd@quint by7 }%    sharp
+\def\crd@quintmodf{\advance\crd@quint by-7 }%   flat
+\def\crd@quintmodsd{\advance\crd@quint by14 }%  double sharp
+\def\crd@quintmodfd{\advance\crd@quint by-14 }% double flat
+\def\crd@note{crd@note}
+\expandafter\def\csname\crd@note3\endcsname{A}
+\expandafter\def\csname\crd@note5\endcsname{B}
+\expandafter\def\csname\crd@note0\endcsname{C}
+\expandafter\def\csname\crd@note2\endcsname{D}
+\expandafter\def\csname\crd@note4\endcsname{E}
+\expandafter\def\csname\crd@note-1\endcsname{F}
+\expandafter\def\csname\crd@note1\endcsname{G}
+\def\crd@notelow{-1} % lowest quint without accidental
+\def\crd@notehigh{5} % highest quint without accidental
+\def\crd@sharp{\sharp}
+\def\crd@flat{\flat}
+\def\crd@doublesharp{\sharp\sharp}
+\def\crd@doubleflat{\flat\flat}
+\def\crd@parsenote#1#2{% parse input results: #1
+  \def#1{}\def#2{}%
+  \crd@parse\crd@input\for\crd@quintval%
+  \ifcrd@parsematched%         we got an valid note
+    \crd@parse\crd@input\for\crd@quintmod%
+    \advance\crd@quint by\crdtranspose \relax% transposition, space is needed!
+    \crd@enharmonic%
+    \ifnum\crd@quint>\crd@notehigh % sharps ?
+      \advance\crd@quint by-7 %
+      \ifnum\crd@quint>\crd@notehigh % double sharp ?
+        \advance\crd@quint by-7 %
+        \ifnum\crd@quint>\crd@notehigh % too much sharps !
+          \relax ERROR:too much sharps%
+        \else\edef#2{\crd@doublesharp}\fi%
+      \else\edef#2{\crd@sharp}\fi%
+    \fi%
+    \ifnum\crd@quint<\crd@notelow % flats ?
+      \advance\crd@quint by7 %
+      \ifnum\crd@quint<\crd@notelow % double flat ?
+        \advance\crd@quint by7 %
+        \ifnum\crd@quint<\crd@notelow % too much flats !
+          \relax ERROR:too much flats%
+        \else\edef#2{\crd@doubleflat}\fi%
+      \else\edef#2{\crd@flat}\fi%
+    \fi%
+    \expandafter\ifx\csname\crd@note\number\crd@quint\endcsname\relax%
+      ERROR:notename for (\number\crd@quint) is not defined.
+    \fi%
+    \edef#1{\csname\crd@note\number\crd@quint\endcsname}% set note
+  \fi%
+}
+\def\crd@enharmonic{}%
+\def\crd@qualinit{%
+  \def\crd@lo{}%    lower extensions
+  \def\crd@up{}%    upper extensioins
+  \def\crd@alt{}%   alterations
+}
+\def\crd@qual{crd@qual}%
+\def\crd@qualdepth{2}
+\def\crd@qualm{\crd@append{\crd@smalltype m}\to\crd@lo}% minor
+\def\crd@qualM{\crd@append{\crd@capitaltype M}\to\crd@lo}% major7
+\expandafter\def\csname\crd@qual5+\endcsname% aug. 5
+{\crd@append{+}\to\crd@lo}
+\expandafter\def\csname\crd@qual6\endcsname% 6
+{\crd@append{\crd@numbertype6}\to\crd@up}
+\expandafter\def\csname\crd@qual7\endcsname% dominant 7
+{\crd@append{\crd@numbertype7}\to\crd@up}
+\def\crd@quald{\crd@append{\crd@dim}\to\crd@up}% diminished
+\def\crd@qualh{\crd@append{\crd@hdim}\to\crd@up}% half diminished
+\expandafter\def\csname\crd@qual9-\endcsname% -9
+{\crd@append{\crd@numbertype\crd@numberflat9}\to\crd@alt}
+\expandafter\def\csname\crd@qual9+\endcsname% +9
+{\crd@append{\crd@numbertype\crd@numbersharp9}\to\crd@alt}
+\def\crd@skipcrdnote{crd@skipcrdnote}
+\expandafter\def\csname\crd@skipcrdnote/\endcsname{}
+\def\crd@parsecrd{%
+  \crd@vshift=0 %
+  \let\crd@numberval=\crd@vshift%
+  \crd@parse\crd@input\for\crd@number%
+  \crd@hshift=0 %
+  \let\crd@numberval=\crd@hshift%
+  \crd@parse\crd@input\for\crd@number%
+  \def\crd@crdnote{}%  chord note
+  \def\crd@crdacc{}%   chord note accidental
+  \def\crd@bassnote{}% bass note
+  \def\crd@bassacc{}%  bass note accidental
+  \crd@qualinit%       initialize qualifiers
+  \let\crd@flat=\crd@noteflat%
+  \let\crd@doubleflat=\crd@notedoubleflat%
+  \let\crd@sharp=\crd@notesharp%
+  \let\crd@doublesharp=\crd@notedoublesharp%
+  \crd@parsenote\crd@crdnote\crd@crdacc%    read chord note
+  \loop\crd@parse\crd@input\for\crd@qual%   read qualifiers
+     \ifcrd@parsematched\repeat%
+  \crd@parse\crd@input\for\crd@skipcrdnote% skip eventually
+  \let\crd@flat=\crd@bassflat%
+  \let\crd@doubleflat=\crd@bassdoubleflat%
+  \let\crd@sharp=\crd@basssharp%
+  \let\crd@doublesharp=\crd@bassdoublesharp%
+  \crd@parsenote\crd@bassnote\crd@bassacc%  read bass note
+  \crd@formatcrd\hfil% call rendering
+}
+\def\crd@crddelim{crd@crddelim}%
+\expandafter\def\csname\crd@crddelim,\endcsname{}%
+\def\crd@parsecrds{%
+  \crd@parsecrd%
+  \crd@parse\crd@input\for\crd@crddelim%
+  \ifcrd@parsematched\crd@parsecrds\fi%
+}
+\def\c#1 {\def\crd@input{#1}\crd@output\crd@parsecrds}
+\def\crd@fontstylea{%
+  \font\crd@eightrm=cmr8
+  \font\crd@eightit=cmmi8
+  \font\crd@seventeenrm=cmr17
+  \font\crd@fourteenrm=cmr14
+  \font\crd@twelverm=cmr12
+  \font\crd@ninerm=cmr9
+  \font\crd@smallninerm=cmr9 scaled 900
+  \font\crd@bigninerm=cmr9 scaled 1100
+  \let\crd@notetype=\crd@seventeenrm
+  \def\crd@noteflat{\raise0.6ex\hbox{\kern-0.085em\musictwenty2}}
+  \def\crd@notedoubleflat{\raise0.6ex\hbox{\kern-0.085em\musictwenty3}}
+  \def\crd@notesharp{\raise0.8ex\hbox{\musictwenty4}}
+  \def\crd@notedoublesharp{\raise0.8ex\hbox{\musictwenty5}}
+  \let\crd@basstype=\crd@fourteenrm
+  \def\crd@bassflat{\raise.5ex\hbox{\musicsixteen2}}
+  \def\crd@bassdoubleflat{\raise0.6ex\hbox{\kern-0.085em\musicsixteen3}}
+  \def\crd@basssharp{\raise1ex\hbox{\musicsixteen4}}
+  \def\crd@bassdoublesharp{\raise0.8ex\hbox{\musicsixteen5}}
+  \let\crd@numbertype=\crd@ninerm
+  \def\crd@numberflat{\raise.5ex\hbox{\musiceleven2}}
+  \def\crd@numbersharp{\raise1ex\hbox{\musiceleven4}}
+  \def\crd@numberminus{\crd@ninerm-}
+  \def\crd@numberplus{\crd@ninerm+}
+  \let\crd@capitaltype=\crd@smallninerm % capitals
+  \let\crd@smalltype=\crd@bigninerm   % small
+  \def\crd@hdim{\crd@eightit$\circ$\kern-4.4pt\raise.9pt\hbox{\crd@eightrm/}}
+  \def\crd@dim{\crd@eightit$\circ$}
+}
+\def\crd@formatcrda{%
+  \hbox{\kern\crd@hshift\elemskip\raise\crd@vshift\internote\hbox{%
+    {\crd@notetype\crd@crdnote\crd@crdacc}%
+    \vbox{%
+      \hbox{%
+        \crd@up%
+        \ifx\crd@alt\empty\else\crd@numbertype(\crd@alt\crd@numbertype)\fi%
+      }%
+      \nointerlineskip\vskip1pt%
+      \hbox{\vphantom{\crd@capitaltype M}\crd@lo}}%
+    \ifx\crd@bassnote\empty\else%
+      {\crd@basstype/%
+        \lower0.5ex\hbox{\kern-0.17em \crd@bassnote\crd@bassacc}}%
+    \fi%\
+  }}
+}
+\let\crd@formatcrd=\crd@formatcrda
+\crd@fontstylea
+\def\crd@musixOutput#1{\hbox{\zchar{\crddefaultheight}{\hbox to\elemskip{#1\hss}}}}
+\let\crd@output=\crd@musixOutput
+\makeatother
+\endinput
+%%
+%% End of file `musixcrd.tex'.

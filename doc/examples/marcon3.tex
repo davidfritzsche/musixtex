@@ -1,0 +1,1106 @@
+\ifx\mxversion\undefined
+  \input musixtex
+  \input musixcpt
+  \input musixsty
+\fi
+
+%
+\title{Concerto pour hautbois --- finale}
+\fulltitle{Concerto pour hautbois --- finale}
+\othermention{Transcription pour hautbois, fl\^{u}te et orgue\\{\bf
+ \ifFlute Partition fl\^{u}te\fi
+ \ifOboe Partition hautbois\fi
+ \ifOrgue Partition orgue\fi}
+}
+\shorttitle{Concerto pour hautbois --- finale}
+\author{Benedetto MARCELLO\\Transcription Daniel TAUPIN}
+\shortauthor{B. Marcello, D. Taupin}
+\maketitle
+%
+\parindent 13mm
+\def\interfacteur{10} % was 9
+\ifOrgue
+  \def\nbinstruments{3}
+  \global\cleftoksi={{6}{6}{0}{0}}%
+  \global\cleftoksii={{0}{0}{0}{0}}%
+  \global\cleftoksiii={{0}{0}{0}{0}}%
+  \nbporteesi=3\relax%
+  \nbporteesii=1\relax%
+  \nbporteesiii=1\relax%
+  \def\instrumenti{Orgue}%
+  \def\instrumentii{Fl\^{u}e}%
+  \def\instrumentiii{Hautbois}%
+  \def\staffspacingii{0.64}\def\staffspacingiii{0.64}%
+\else
+  \def\nbinstruments{2}
+  \global\cleftoksi={{0}{0}{0}{0}}%
+  \global\cleftoksii={{0}{0}{0}{0}}%
+  \nbporteesi=1\relax%
+  \nbporteesii=1\relax%
+  \def\instrumenti{Fl\^{u}te}%
+  \def\instrumentii{Hautbois}%
+  \ifFlute\def\staffspacingi{1.0}\else\def\staffspacingi{0.64}\fi
+  \ifOboe\def\staffspacingiii{1.0}\else\def\staffspacingii{0.64}\fi%
+  \def\everystaff{\vrule width 0pt depth 5mm\relax}%
+\fi
+
+\ifOboe\def\interinstrumenti{2\Interligne}\fi
+%
+\signaturegenerale{-3}\relax
+%\check
+\def\doubler{\multiply\noteskip by 2\relax}%
+% formes frequentes
+\def\Pause{\sk\sk\qsk\pause}%
+%
+%
+\def\sixlpl#1#2#3#4#5#6{\Ibbl0{#1}{#6}5%
+\isluru0{#1}\qb0{#1}\tslur0{#2}\qb0{#2}\upz{#3}\qb0{#3}%
+\upz{#4}\qb0{#4}\upz{#5}\qb0{#5}\upz{#6}\tqb0{#6}}%
+%
+\def\Sixlpl#1#2#3#4#5#6{{\advance \transpose -1\relax\Ibbl0{#1}{#6}5}%
+\isluru0{#1}\qb0{#1}\tslur0{#2}\qb0{#2}\upz{#3}\qb0{#3}%
+\upz{#4}\qb0{#4}\upz{#5}\qb0{#5}\upz{#6}\tqb0{#6}}%
+%
+\def\fiveplpl#1#2#3#4#5{\Ibbl0{#1}{#5}4%
+\isluru0{#1}\qb0{#1}\qb0{#2}\qb0{#3}%
+\tslur0{#4}\tbbl0\qb0{#4}\upz{#5}\tqb0{#5}}%
+%
+\def\fourplpl#1#2#3#4{\Ibl0{#1}{#4}4%
+\upz{#1}\qb0{#1}\sk\isluru0{#2}\nbbl0\qb0{#2}\tbbl0\tslur0{#3}\qb0{#3}%
+\upz{#4}\tqb0{#4}\sk}%
+%
+\def\threelpl#1#2#3{\Ibbl0{#1}{#3}2%
+\isluru0{#1}\qb0{#1}%
+\tslur0{#2}\tbbl0\qb0{#2}\upz{#3}\tqb0{#3}}%
+%
+\def\threell#1#2#3{\Ibbl0{#1}{#3}2%
+\isluru0{#1}\qb0{#1}%
+\tslur0{#2}\tbbl0\qb0{#2}\tqb0{#3}}%
+%
+\def\sixlpu#1#2#3#4#5#6{\Ibbu0{#1}{#6}5%
+\islurd0{#1}\qh0{#1}\tslur0{#2}\qh0{#2}\lpz{#3}\qh0{#3}%
+\lpz{#4}\qh0{#4}\lpz{#5}\qh0{#5}\lpz{#6}\tqh0{#6}}%
+%
+\def\Sixlpu#1#2#3#4#5#6{{\advance\transpose 1\relax\Ibbu0{#1}{#6}5}%
+\islurd0{#1}\qh0{#1}\tslur0{#2}\qh0{#2}\lpz{#3}\qh0{#3}%
+\lpz{#4}\qh0{#4}\lpz{#5}\qh0{#5}\lpz{#6}\tqh0{#6}}%
+%
+\def\fiveplpu#1#2#3#4#5{\Ibbu0{#1}{#5}4%
+\islurd0{#1}\qh0{#1}\qh0{#2}\lpz{#3}\qh0{#3}%
+\tslur0{#4}\tbbu0\qh0{#4}\lpz{#5}\tqh0{#5}}%
+%
+\def\fourplpu#1#2#3#4{\Ibu0{#1}{#4}4%
+\lpz{#1}\qh0{#1}\sk\islurd0{#2}\nbbu0\qh0{#2}\tbbu0\tslur0{#3}\qh0{#3}%
+\lpz{#4}\tqh0{#4}\sk}%
+%
+\def\threelpu#1#2#3{\Ibbu0{#1}{#3}2%
+\islurd0{#1}\qh0{#1}%
+\tslur0{#2}\tbbu0\qh0{#2}\lpz{#3}\tqh0{#3}}%
+%
+\def\threelu#1#2#3{\Ibbu0{#1}{#3}2%
+\islurd0{#1}\qh0{#1}%
+\tslur0{#2}\tbbu0\qh0{#2}\tqh0{#3}}%
+%
+\def\sixppl#1#2#3#4#5#6{\Ibbl0{#1}{#6}5%
+\upz{#1}\qb0{#1}\upz{#2}\qb0{#2}\upz{#3}\qb0{#3}%
+\upz{#4}\qb0{#4}\upz{#5}\qb0{#5}\upz{#6}\tqb0{#6}}%
+%
+\def\Sixppl#1#2#3#4#5#6{{\advance\transpose -1\relax\Ibbl0{#1}{#6}5}%
+\upz{#1}\qb0{#1}\upz{#2}\qb0{#2}\upz{#3}\qb0{#3}%
+\upz{#4}\qb0{#4}\upz{#5}\qb0{#5}\upz{#6}\tqb0{#6}}%
+%
+\def\threeppl#1#2#3{\Ibbl0{#1}{#3}2%
+\upz{#1}\qb0{#1}\tbbl0\upz{#2}\qb0{#2}\tqb0{#3}}%
+%
+\def\sixppu#1#2#3#4#5#6{\Ibbu0{#1}{#6}5%
+\lpz{#1}\qh0{#1}\lpz{#2}\qh0{#2}\lpz{#3}\qh0{#3}%
+\lpz{#4}\qh0{#4}\lpz{#5}\qh0{#5}\lpz{#6}\tqh0{#6}}%
+%
+\def\threeppu#1#2#3{\Ibbu0{#1}{#3}2%
+\lpz{#1}\qh0{#1}\tbbu0\lpz{#2}\qh0{#2}\tqh0{#3}}%
+%
+\def\triol#1#2#3{\doubler\Ibl0{#1}{#3}2\qb0{#1}\qb0{#2}\tqb0{#3}}%
+\def\triou#1#2#3{\doubler\Ibu0{#1}{#3}2\qh0{#1}\qh0{#2}\tqh0{#3}}%
+\def\triopl#1#2#3{\doubler\Ibl0{#1}{#3}2\upz{#1}\qb0{#1}\upz{#2}\qb0{#2}\upz{#3}\tqb0{#3}}%
+\def\triopu#1#2#3{\doubler\Ibu0{#1}{#3}2\lpz{#1}\qh0{#1}\lpz{#2}\qh0{#2}\lpz{#3}\tqh0{#3}}%
+%
+\def\clpz#1{\upz{#1}\cl{#1}}
+\def\cupz#1{\lpz{#1}\cu{#1}}
+% Siciliano : O. oO
+\def\sicu#1#2#3{\Ibu0{#1}{#3}4\qhp0{#1}\sk\sk\tbbu0\qh0{#2}\tqh0{#3}\sk}
+\def\sicl#1#2#3{\Ibl0{#1}{#3}4\qbp0{#1}\sk\sk\tbbl0\qb0{#2}\tqb0{#3}\sk}
+
+\catcodesmusic
+\def\org#1&{\ifOrgue #1\relax
+ &\relax\fi}
+%
+%\check
+%
+\generalmeter{\meterfrac 38}%
+\sepbarrules
+%
+\debutmorceau
+\notes\org\relax
+ &\relax
+ &\zcharnote{w}{\kern -20mm\moyen Allegro \bf(\metron{\cu}{160})}\enotes
+%
+%\check
+% mesure 1
+\notes\org\Pause
+ |\zmidtwotext{\llap{\bf II}}\qlp c\relax
+ |\zqp e\qup g\relax
+ &\qlp j\relax
+ &\uptext{\p}\sixlpl jgjklj\enotes
+%\check
+ \barre % mesure 2
+\notes\org\Pause
+ |\qlp{=b}\relax
+ |\zqp d\qup g\relax
+ &\qlp k\relax
+ &\sixlpl kgklmk\enotes
+%\check
+ \barre % mesure 3
+\notes\org\Pause
+ |\doubler\cl c\ql a\relax
+ |\doubler\zq e\cu g\zq c\qu f\relax
+ &\doubler\Ibu0ii1\bupz0\qh0j\bupz0\qh0l\bupz0\tqh0j\relax
+ &\sixppl lkjklm\enotes
+%\check
+ \barre % mesure 4
+\Notes\org\sk\pause
+ |\qlp N\relax
+ |\zqp d\qup g\relax
+ &\qup{=i}\relax
+ &\isluru0n\ql n\sk\tslur0g\cl g\enotes
+%\check
+ \barre % mesure 5
+\notes\org\Pause
+ |\qup J\relax
+ |\sixppl lkj{_i}hg\relax
+ &\sixppl nmlkj{_i}\relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 6
+\notes\org\Pause
+ |\sixppl MNMLKJ\relax
+ |\qu f\sk\sk\sk\ds\relax
+ &\threeppl hjm\sk\ds\relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 7
+\notes\org\Pause
+ |\zqlp I\Ibbu0KN2\qh0K\tbbu0\qh0M\tqh0b\sk\ds\relax
+ |\sixppu kjihgf\relax
+ &\sixppl mlkjih\relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 8
+\notes\org\Pause
+ |\sixppl LMLKJI\relax
+ |\qu e\sk\sk\sk\ds\relax
+ &\threeppl gil\sk\ds\relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 9
+\notes\org\Pause
+ |\zqlp H\Ibbu0JM2\qh0J\tbbu0\qh0L\tqh0a\sk\ds\relax
+ |\sixppu jihgfe\relax
+ &\sixppl lkjihg\relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 10
+\notes\org\Pause
+ |\sixppl KLKJIH\relax
+ |\qu d\sk\sk\sk\ds\relax
+ &\threeppl fhk\sk\ds\relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 11
+\notes\org\Pause
+ |\zqlp G\Ibbu0IL2\qh0{=I}\tbbu0\qh0K\tqh0N\sk\ds\relax
+ |\sixppu {=i}hgfed\relax
+ &\relax
+  \ifx\Quer\undefined \sixppu kj{=i}onm\else\sixppu kj{=i}hgf\fi
+  \relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 12
+\notes\org\Pause
+ |\sicu JKL\relax
+ |\Ibbu0cg4\qh0{cde}\tbbu0\qh0f\tqh0g\sk\relax
+ &\relax
+  \ifx\Quer\undefined \Ibbu0li2\qh0l\tqh0k\itenl0j\qu j\sk
+  \else\Ibbu0ei2\qh0e\tqh0g\itenl0j\qu j\sk
+  \fi\relax
+ &\Pause\enotes
+%\check
+ \barre % mesure 13
+\notes\org\Pause
+ |\doubler\Ibl0MI2\qb0M\qb0N\tqb0G\relax
+ |\doubler
+\Ibu0fd2\zq f\qb0h\zq g\qh0d\zq f\tqh0d\relax
+ &\tten0\ibbu0j0\qh0j\tbbu0\qh0k\qhp0{=i}\sk\sk\tbbu0\tqh0j\enotes
+%\check
+ \barre % mesure 14
+\notes\org\qup J\relax
+ |\zmidtwotext{\llap{\bf I}}\qlp c\relax
+ |\zqp e\qup g\relax
+ &\qlp j\relax
+ &\sixlpl jgjklj\enotes
+%\check
+ \barre % mesure 15
+\notes\org\doubler\qup {=I}\relax
+ |\doubler\qlp{=b}\relax
+ |\zqp d\qup g\relax
+ &\qlp k\relax
+ &\sixlpl kgklmk\enotes
+%\check
+ \barre % mesure 16
+\notes\org\doubler\cu J\qu H\relax
+ |\doubler\cl c\ql a\relax
+ |\doubler\zq e\cu g\zq c\qu f\relax
+ &\doubler\Ibl0ii1\upz j\qb0j\upz l\qb0l\upz j\tqb0j\relax
+ &\sixppl lkjklm\enotes
+%\check
+ \barre % mesure 17
+\notes\org\qup G\relax
+ |\qlp N\relax
+ |\zqp d\qup g\relax
+ &\fourplpl{=i}kji\relax
+ &\doubler\isluru0n\ql n\sk\tslur0g\cl g\enotes
+%\check
+ \barre % mesure 18
+\notes\org\doubler\qu J\sk\lpz H\cu H\relax
+ |\doubler\ql c\sk\upz a\cl a\relax
+ |\doubler\zq e\qu g\sk\ds\relax
+ &\fourplpl llkj\relax
+ &\sixlpl nljlom\enotes
+ %\check
+ \barre % mesure 19
+\notes\org\doubler\qu I\sk\lpz G\cu G\relax
+ |\doubler\ql b\sk\upz N\cl N\relax
+ |\qu d\sk\ds\relax
+ &\fiveplpl iklmn\relax
+ &\threelpl kmp\sk\ds\enotes
+%\check
+ \barre % mesure 20
+\notes\org\doubler\qu H\sk\lpz F\cu F\relax
+ |\doubler\ql a\sk\upz M\cl M\relax
+ |\doubler\zq c\qu e\sk\ds\relax
+ &\fourplpl jjih\relax
+ &\sixlpl ljhjlj\enotes
+ %\check
+ \barre % mesure 21
+\notes\org\doubler\qu G\sk\ds\relax
+ |\doubler\ql N\sk\ds\relax
+ |\doubler\qu {=b}\sk\ds\relax
+ &\fiveplpl gh{=i}jk\relax
+ &\threelpl {=i}kn\sk\ds\enotes
+ %\check
+ \barre % mesure 22
+\notes\org\Pause
+ |\Pause
+ |\doubler\ibu0g0\zq e\qh0g\zq e\qh0g\zq e\tqh0g\relax
+ &\fourplpl jlkj\relax
+ &\sixlpl lkjklj\enotes
+ %\check
+ \barre % mesure 23
+\notes\org\Pause
+ |\Pause
+ |\doubler\ibu0h0\zq {df}\qh0h\zq {df}\qh0h\zq {df}\tqh0h\relax
+ &\fourplpl imlk\relax
+ &\sixlpl mlklmk\enotes
+ %\check
+ \barre % mesure 24
+\notes\org\Pause
+ |\Pause
+ |\doubler\ibu0g0\zq e\qh0g\zq e\qh0g\zq e\tqh0g\relax
+ &\fourplpl inml\relax
+ &\sixlpl nmlmnl\enotes
+ %\check
+ \barre % mesure 25
+\notes\org\Pause
+ |\Pause
+ |\doubler\ibu0h0\zq f\qh0h\zq f\qh0h\zq f\tqh0h\relax
+ &\fourplpl ionm\relax
+ &\sixlpl pnmlkj\enotes
+ %\check
+ \barre % mesure 26
+\notes\org \Pause
+ |\Pause
+ |\doubler\Ibl0hg2\zq g\qb0i\zq f\qb0 h\zq e\tqb0 g\relax
+ &\Ibbl0li5\qb0{lkkjj}\tqb0i\relax
+ &\rlap{\sk\sk\sk\sk\itenu0l}\sicl iil\enotes
+ %\check
+ \barre % mesure 27
+\notes\org\Pause
+ |\doubler\ql c\sk\cl b\relax
+ |\doubler\Ibu0hi2\zq f\qh0{hi}\rq i\zq h\tqh0f\relax
+ &\doubler\Ibl0jk2\qb0{jk}\tqb0k\relax
+ &\tten0\ibbl0l0\qb0l\tbbl0\qb0m\isluru0m\Pince o\qb0m\sk\sk\tslur0l\tbbl0\tqb0l\enotes
+ %\check
+ \barre % mesure 28
+ \notes\org\doubler\ibl0L0\qb0{LN}\tqb0L\relax
+ |\doubler\zq g\ql b\sk\itenu1b\itenu2e\zq e\cl
+b\relax
+ |\sixppu iilmnl\relax
+ &\sixppl lilmnl\relax
+ &\doubler\ql l\sl\ds\enotes
+ %\check
+ \barre % mesure 29
+ \notes\org\doubler\ibl0J0\qb0{IK}\tqb0I\relax
+ |\tten1\tten2\doubler\zql b\cu e\qu
+d\cl b\relax
+ |\sixppu miklmk\relax
+ &\sixppl mimnom\relax
+ &\relax\Pause\enotes
+ %\check
+ \barre % mesure 30
+ \notes\org\doubler\ibl0M0\qb0{LN}\tqb0L\relax
+ |\doubler\ibl0c0\qb0{be}\tqb0b\relax
+ |\sixppl lkjklm\relax
+ &\sixppl nmlmno\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 31
+ \notes\org\qup I\relax
+ |\Ibbl0bM5\qb0{bcbaN}\tqb0M\relax
+ |\doubler\isluru0k\ql k\sk\tslur0i\cl i\relax
+ &\doubler\ql p\sk\ds\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 32
+ \notes\org\Pause
+ |\zmidtwotext{\llap{\bf II}}\doubler\ibl0L0\upz L\qb0L\upz N\qb0 N\upz
+L\tqb0L\relax
+ |\doubler\zq g\qu i\sk\zq g\cu i\relax
+ &\doubler\ibl0j0\isluru0l\qb0l\tslur0i\qb0i\upz l\tqb0l\relax
+ &\uptext{\mf}\sixlpl lilmnl\enotes
+ %\check
+ \barre % mesure 33
+ \notes\org\Pause
+ |\doubler\ibu0J0\lpz I\qb0I\lpz K\qb0 K\lpz I\tqh0I\relax
+ |\doubler
+\zq f\qu i\sk\zq k\cu i\relax
+ &\doubler\ibl0j0\isluru0l\qb0l\tslur0k\qb0k\upz m\tqb0m\relax
+ &\Sixlpl mimnom\enotes
+ %\check
+ \barre % mesure 34
+ \notes\org\Pause
+ |\doubler\ibl0L0\upz L\qb0L\upz N\qb0 N\upz
+L\tqb0L\relax
+ |\doubler\zq i\ql l\sk\zq i\cl l\relax
+ &\doubler\ibl0l0\isluru0n\qb0n\tslur0i\qb0i\upz n\tqb0n\relax
+ &\sixlpl nmlmno\enotes
+ %\check
+ \barre % mesure 35
+ \notes\org\Pause
+ |\doubler\ql b\sk\ds\relax
+ |\doubler\zql i\Ibu0lk1\qh0l\tqh0k\ds\relax
+ &\doubler\Ibl0nm1\isluru0n\qb0n\tslur0m\tqb0m\ds\relax
+ &\doubler\isluru0p\ql p\sk\tslur0i\cl i\ds\enotes
+ %\check
+ \barre % mesure 36
+ \notes\org\Pause
+ |\doubler\ql L\sk\ds\relax
+ |\doubler\zq e\zq g\ql i\sk\ds\relax
+ &\doubler\ql l\sk\ds\relax
+ &\Sixlpl ligili\enotes
+ %\check
+ \barre % mesure 37
+ \notes\org\Pause
+ |\doubler\ibl0a0\upz c\zq a\qb0c\upz c\zq a\qb0c\upz c\zq a\tqb0c\relax
+ |\Pause\relax
+ &\sixlpl ljhjlj\relax
+ &\threelpl jlo\sk\ds\enotes
+ %\check
+ \barre % mesure 38
+ \notes\org\Pause
+ |\doubler\zq M\ql c\sk\ds\relax
+ |\doubler\qu{=h}\sk\ds\relax
+ &\threelpl {=h}jm\sk\ds\relax
+ &\Sixlpl mj{=h}jmj\enotes
+ %\check
+ \barre % mesure 39
+ \notes\org\Pause
+ |\doubler\ibl0c0\zq b\upz d\qb0d\zq b\upz d\qb0d\zq b\upz d\tqb0d\relax
+ |\Pause\relax
+ &\sixlpl mkikmk\relax
+ &\threelpl kmp\sk\ds\enotes
+ %\check
+ \barre % mesure 40
+ \notes\org\Pause
+ |\doubler\zq N\ql d\sk\ds\relax
+ |\doubler\qu{=i}\sk\ds\relax
+ &\threelpl {=i}kn\sk\ds\relax
+ &\Sixlpl nk{=i}knk\enotes
+ %\check
+ \barre % mesure 41
+ \notes\org\doubler\qu J\sk\cupz F\relax
+ |\zmidtwotext{\llap{\bf I}}\doubler\ql c\sk\clpz M\relax
+ |\doubler\ds\Ibu0gh1\qh0g\tqh0{_h}\relax
+ &\doubler\isluru0l\ql l\sk\tslur0m\clpz m\relax
+ &\sixlpl lnlj{_o}m\enotes
+ %\check
+ \barre % mesure 42
+ \notes\org\doubler\qu I\sk\cupz E\relax
+ |\doubler
+   \ql b\sk\clpz L\relax
+ |\doubler\Ibu0fg2\qh0f\qh0 i\tqh0g\relax
+ &\doubler\isluru0k\ql k\sk\tslur0j\clpz j\relax
+ &\sixlpl kmkinl\enotes
+ %\check
+ \barre % mesure 43
+ \notes\org\doubler\qu H\sk\cupz D\relax
+ |\doubler
+  \ql a\sk\clpz K\relax
+ |\doubler\ds\Ibu0eh1\zq c\qh0e\zq f\tqh0h\relax
+ &\Ibl0ji5\isluru0j\qb0j\sk\qb0l\sk\nbbl0\qb0h\tslur0i\tqb0i\relax
+ &\sixlpl jljhmk\enotes
+ %\check
+ \barre % mesure 44
+ \notes\org\doubler\qu G\sk\cupz C\relax
+ |\doubler\ql N\sk\clpz J\relax
+ |\doubler\Ibu0de2\qh0d\qh0g\tqh0e\relax
+ &\doubler\isluru0i\ql i\sk\tslur0h\cl h\relax
+ &\sixlpl ikiglj\enotes
+ %\check
+ \barre % mesure 45
+ \notes\org\doubler\qu F\sk\cupz I\relax
+ |\doubler\ql M\sk\clpz b\relax
+ |\doubler\ds\Ibu0cd1\qh0c\tqh0d\relax
+ &\itenl0h\qu h\sk\sk\sk\Ibbu0hg1\tten0\qh0h\tqh0g\relax
+ &\sixlpu hjhfki\enotes
+ %\check
+ \barre % mesure 46
+ \notes\org\doubler\qu E\sk\cupz C\relax
+ |\doubler\ql L\sk\clpz J\relax
+ |\doubler\Ibu0dd2\qh0e\qh0N\tqh0e\relax
+ &\doubler\islurd0g\qu g\sk\tslur0h\cu {=h}\relax
+ &\sixlpu gigej{=h}\enotes
+ %\check
+ \barre % mesure 47
+ \notes\org\doubler\qu D\sk\ds\relax
+ |\doubler\ql K\sk\ds\relax
+ |\zq c\rq d\qu{^f}\sk\ds\relax
+ &\doubler\qu {=h}\sk\ds\relax
+ &\sixlpu {^f}df{=h}kh\enotes
+ %\check
+ \barre % mesure 48
+ \notes\org\doubler\qu G\sk\ds\relax
+ |\ql N\sk\ds\doubler\relax
+ |\doubler\zq {bd}\qu g\sk\ds\relax
+ &\doubler\qu i\sk\ds\relax
+ &\sixlpl igiknk\enotes
+ %\check
+ \barre % mesure 49
+ \notes\org\doubler\qu J\sk\ds\relax
+ |\doubler\ql c\sk\ds\relax
+ |\doubler\zq e\qu g\sk\ds\relax
+ &\doubler\ql j\sk\ds \relax
+ &\sixlpl ljlnqn\enotes
+ %\check
+ \barre % mesure 50
+ \notes\org\doubler\qu K\sk\cupz L\relax
+ |\doubler\ql{=a}\sk\ds\relax
+ |\doubler\zq d\qu{^f}\sk\zq e\cu g\relax
+ &\Ibu0hk5\qh0{=h}\sk\nbbu0\bupz0\qh0h\bupz0\qh0i\bupz0\qh0j\bupz0\tqh0k\relax
+ &\rlap{\sk\sk\sk\sk\itenu0n}\sicl {^m}kn\enotes
+ %\check
+ \barre % mesure 51
+ \notes\org\doubler\qu J\sk\cupz G\relax
+ |\doubler\ql c\sk\cupz N\relax
+ |\doubler
+  \ibu0g0\lpz g\qh0g\lpz f\qh0{^f}\lpz g\tqh0g\relax
+ &\doubler\Ibl0lj2\qb0l\qb0k\tqb0j\relax
+ &\tten0\ibbl0n0\qb0n\tbbl0\qb0{=o}\Pince o\isluru0m\qh0{^m}\sk\sk\tslur0n\tbbl0\tqb0n\enotes
+ %\check
+ \barre % mesure 52
+ \notes\org\doubler\qu G\sk\ds\relax
+ |\doubler\ql N\sk\ds\relax
+ |\doubler\zq {bd}\qu g\sk\ds\relax
+ &\doubler\qu i\sk\ds\relax
+ &\sixlpl nknkik\enotes
+ %\check
+ \barre % mesure 53
+ \notes\org\qup G\relax
+ |\qlp N\relax
+ |\sixppu i{=h}gfed\relax
+ &\advance\transpose 7\relax\sixppl kji{=h}gf\relax
+ &\doubler\qu g\sk\ds\enotes
+ %\check
+ \barre % mesure 54
+ \notes\org\doubler\qu E\sk\ds\relax
+ |\sixppu JKJI{=H}G\relax
+ |\doubler\qu c\sk\ds\relax
+ &\advance\transpose 7\relax \threeppl egj\sk\ds\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 55
+ \notes\org\qup F\relax
+ |\threeppu {=H}JM\sk\ds\relax
+ |\sixppu {=h}gfedc\relax
+ &\advance\transpose 7\relax  \sixppl ji{=h}gfe\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 56
+ \notes\org\doubler\qu D\sk\ds\relax
+ |\sixppu IJI{=H}GF\relax
+ |\doubler\qu b\sk\ds\relax
+ &\advance\transpose 7\relax \threeppl dfi\sk\ds\relax
+ &\pause\enotes
+ %\check
+ \barre % mesure 57
+ \notes\org\qup E\relax
+ |\threeppu GIL\sk\ds\relax
+ |\sixppu gfedcb\relax
+ &\advance\transpose 7\relax \sixppl i{=h}gfed\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 58
+ \notes\org\doubler\qu C\sk\ds\relax
+ |\sixppu {=H}IHGF{=E}\relax
+ |\doubler\qu {=a}\sk\ds\relax
+ &\advance\transpose 7\relax \threeppl c{=e}{=h}\sk\ds\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 59
+ \notes\org\doubler\qu D\sk\ds\relax
+ |\threeppu{^F}{=H}K\sk\ds\relax
+ |\sixppu {^f}{_e}dcb{=a}\relax
+ &\advance\transpose 7\relax \sixppu{=h}g{^f}{_e}dc\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 60
+ \notes\org\sicu G{=H}I\relax
+ |\Ibbl0Nd4\qb0N\qb0{=a}\qb0b\tbbl0\qb0c\tqb0d\sk\relax
+ |\Ibbu0bd1\qh0b\tqh0d\itenu1g\qu g\relax
+ &\advance\transpose 7\relax \Ibbl0bd1\qb0b\tqb0d\itenu0g\ql g\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 61
+ \notes\org\doubler\Ibu0IG2\qh0J\qh0K\tqh0D\relax
+ |\doubler
+ \Ibl0eb2\qb0e\zq{=a}\qb0d\zq a\tqb0c\relax
+ |\tten1\ibbu0g0\qh0g\tbbu0\qh0{=h}\qhp0{^f}\sk\sk\tbbu0\tqh0g\relax
+ &\advance\transpose 7\relax \tten0\ibbl0g0\qb0g\tbbl0\qb0{=h}\isluru0f\qbp0{^f}\sk\sk\tbbl0\tslur0g\tqb0g\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 62
+ \notes\org\qup G\relax
+ |\zqp{=b}\qlp N\relax
+ |\doubler\qup g\relax
+ &\relax\advance\transpose 7\relax
+ \qlp g\relax
+ &\Pause\enotes
+ \ifOrgue
+  \setrightrepeat
+  \alapage  % mesure 63
+  \addspace{-\afterruleskip}%
+  \leftrepeatsymbol
+ \else
+  \setleftrightrepeat
+  \barre  % mesure 63
+ \fi
+ \notes\org\triou GIG\relax
+ |\zmidtwotext{\llap{\bf I}}\triol NbN\relax
+ |\doubler\zq d\qu g\sk\zq d\cu g\relax
+ &\fourplpl ikji\relax
+ &\sixlpl nknopn\enotes
+ %\check
+ \barre  % mesure 64
+ \notes\org\triou JIH\relax
+ |\triol cba\relax
+ |\doubler\zq c\zq {=e}\qu g\sk \itenl0c\zq c\cu h\relax
+ &\doubler\ql n\sk\itenu1 j\cl j\relax
+ &\Ibl0lh5\qbp0{=l}\sk\sk\nbbl0\qb0{jm}\tqb0h\enotes
+ %\check
+ \barre  % mesure 65
+ \notes\org\triou IJJ\relax
+ |\triol bcc\relax
+ |\doubler\tten0\ibu0g0\zq c\qh0g\rq g\qh0f\zq{=e}\tqh0g\relax
+ &\doubler\tten1\ql j\sk\cl j\relax
+ &\ibbl0i0\qb0{gmgmg}\tqb0{=l}\enotes
+ %\check
+ \barre  % mesure 66
+ \notes\org\qu F\sk\ds\relax
+ |\triol MaM\relax
+ |\doubler\qu h\sk\ds\relax
+ &\Sixlpl mjmnom\relax
+ &\doubler\ql m\sk\ds\enotes
+ %\check
+ \barre % mesure 67
+ \notes\org\Pause
+ |\doubler\qu I\sk\cu J\relax
+ |\ibu0i0\zqp h\zqp f\qhp0f\sk\sk\nbbu0\qh0{ij}\tqh0g\relax
+ &\doubler\ql k\sk\clpz l\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 68
+ \notes\org\Pause
+ |\triou HII\relax
+ |\ibbl0h0\qb0{flflf}\tqb0k\relax
+ &\triopl mmm\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 69
+ \notes\org\Pause
+ |\triopl LNL\relax
+ |\doubler\ibu0i0\lpz g\zq g\qh0i\lpz g\zq g\qh0i\lpz g\zq g\tqh0i\relax
+ &\doubler\ql l\sk\clpz l\relax
+ &\sixlpl lilmnl\enotes
+ %\check
+ \barre % mesure 70
+ \notes\org\Pause
+ |\triopl IKI\relax
+ |\doubler\ibu0i0\lpz d\zq d\zq f\qh0i\lpz d\zq d\zq f\qh0i\lpz
+d\zq d\zq f\tqh0i\relax
+ &\doubler\ql l\sk\clpz m\relax
+ &\Sixlpl mimnom\enotes
+ %\check
+ \barre % mesure 71
+ \notes\org\Pause
+ |\triopl LNL\relax
+ |\doubler\ibu0k0\lpz g\zq g\zq i\qh0l\lpz g\zq g\zq i\qh0l\lpz
+g\zq g\zq i\tqh0l\relax
+ &\doubler\ql n\sk\clpz n\relax
+ &\sixlpl nmlmno\enotes
+ %\check
+ \barre % mesure 72
+ \Notes\org\sl\qsk\pause
+ |\ql b\sk\ds\relax
+ |\zql i\Ibu0lk1\qh0l\tqh0k\ds\relax
+ &\Ibl0nm1\isluru0n\qh0n\tslur0m\tqb0m\ds\relax
+ &\isluru0p\ql p\sk\tslur0i\cl i\enotes
+ %\check
+ \barre % mesure 73
+%
+ \def\sixllpl#1#2#3#4#5#6{\Ibbl0{#1}{#6}5%
+\isluru0{#1}\qb0{#1}\tslur0{#2}\qb0{#2}\isluru0{#3}\qb0{#3}%
+\tslur0{#4}\qb0{#4}\upz{#5}\qb0{#5}\upz{#6}\tqb0{#6}}%
+%
+ \def\sixllpu#1#2#3#4#5#6{\Ibbu0{#1}{#6}5%
+\islurd0{#1}\qh0{#1}\tslur0{#2}\qh0{#2}\islurd0{#3}\qh0{#3}%
+\tslur0{#4}\qh0{#4}\lpz{#5}\qh0{#5}\lpz{#6}\tqh0{#6}}%
+%
+ \def\sixllll#1#2#3#4#5#6{\Ibbl0{#1}{#6}5%
+\isluru0{#1}\qb0{#1}\tslur0{#2}\qb0{#2}\isluru0{#3}\qb0{#3}%
+\tslur0{#4}\qb0{#4}\isluru0{#5}\qb0{#5}\tslur0{#6}\tqb0{#6}}%
+%
+ \def\sixlllu#1#2#3#4#5#6{\Ibbu0{#1}{#6}5%
+\islurd0{#1}\qh0{#1}\tslur0{#2}\qh0{#2}\islurd0{#3}\qh0{#3}%
+\tslur0{#4}\qh0{#4}\islurd0{#5}\qh0{#5}\tslur0{#6}\tqh0{#6}}%
+%
+ \notes\org\Pause
+ |\zmidtwotext{\bf II}\doubler\ql L\sk\ds\relax
+ |\doubler\zq e\zq g\ql i\sk\ds\relax
+ &\doubler\ql l\sk\ds\relax
+ &\uptext{\p}\sixllpl liij{_k}k\enotes
+ %\check
+ \barre % mesure 74
+ \notes\org\Pause
+ |\doubler\ibl0a0\upz a\qb0a\upz a\qb0a\upz a\tqb0a\relax
+ |\doubler\soupir\ibu0e0\lpz c\qh0c\lpz c\zq c\tqh0e\relax
+ &\sixllpu ihhijj\relax
+ &\usf m\threell {_k}jj\enotes
+ %\check
+ \barre % mesure 75
+ \notes\org\Pause
+ |\doubler\zq M\ql{=a}\sk\ds\relax
+ |\qu e\sk\ds\relax
+ &\doubler\ql j\sk\ds\relax
+ &\sixllpl mjj{=k}ll\enotes
+ %\check
+ \barre % mesure 76
+ \notes\org\Pause
+ |\doubler\ibl0b0\upz b\qb0b\upz b\qb0b\upz b\tqb0b\relax
+ |\doubler\soupir\ibu0f0\lpz d\qh0d\lpz d\zq f\tqh0d\relax
+ &\sixllpl jiijkk\relax
+ &\usf m\threell lkk\enotes
+ %\check
+ \barre % mesure 77
+ \notes\org\Pause
+ |\doubler\zq N\ql{=b}\sk\ds\relax
+ |\doubler\qu f\sk\ds\relax
+ &\doubler\ql k\sk\ds\relax
+ &\sixllpl nkklmm\enotes
+ %\check
+ \barre % mesure 78
+ \notes\org\Pause
+ |\doubler\ibl0c0\upz c\qb0c\upz c\qb0c\upz c\tqb0c\relax
+ |\doubler\soupir\ibu0g0\lpz e\qh0e\lpz e\zq e\tqh0g\relax
+ &\sixllpl kjjkll\relax
+ &\usf n\threell mll\enotes
+ %\check
+ \barre % mesure 79
+ \notes\org\Pause
+ |\doubler\zq a\ql c\sk\ds\relax
+ |\doubler\qu {_g}\sk\ds\relax
+ &\doubler\ql l\sk\ds\relax
+ &\sixllpl ollm{_n}n\enotes
+ %\check
+ \barre % mesure 80
+ \notes\org\Pause
+ |\doubler\ibl0d0\upz d\qb0{_d}\upz d\qb0d\upz d\tqb0d\relax
+ |\doubler\soupir\ibu0h0\lpz f\qh0f\lpz f\zq h\tqh0f\relax
+ &\sixllpl l{_k}klmm\relax
+ &\sixlpl {_n}mm{=n}op\enotes
+ %\check
+ \barre % mesure 81
+ \notes\org\doubler\soupir\sk\cu J\relax
+ |\doubler\ust e\ql e\sk\zmidtwotext{\bf I}\clpz c\relax
+ |\doubler\lst g\qu g\sk\zq h\upz l\ql l\relax
+ &\doubler\ql l\sk\clpz o\relax
+ &\ibbl0k0\isluru0k\qb0{_k}\qb0j\tslur0k\qb0k\upz m\qb0m\upz l\qh0l\upz k\tqb0k\enotes
+ %\check
+ \barre % mesure 82
+ \notes\org\triopl {_K}LE\relax
+ |\triopl {_d}eL\relax
+ |\doubler\Ibu0ki2\zq f\qh0m\zq i\qh0l\zq i\tqh0{_k}\relax
+ &\triopl oon\relax
+ &\uptext{\f}%
+ \Ibbl0in1\isluru0j\qb0j\tslur0o\tqb0o\Ibl0ih3\Pince m\isluru0i\qbp0i\sk\sk\tslur0h\tbbl0\tqb0h\enotes
+ %\check
+ \barre % mesure 83
+ \notes\org\triopu HJH\relax
+ |\triopl aca\relax
+ |\zq h\sixppu jehijh\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\sixppl hehijh\relax
+ &\relax\doubler\qu h\sk\ds\enotes
+ %\check
+ \barre % mesure 84
+ \notes\org\triopu EGE\relax
+ |\triopu LNL\relax
+ |%\rlap{\roff{\ql h}\sk\ql g}%
+  \sixppu ieij{_k}i\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\Sixppl ieij{_k}i\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 85
+ \notes\org\doubler\qu H\sk\cupz H\relax
+ |\doubler\ql a\sk\clpz a\relax
+ |\sixppu hgfghi\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\sixppl jihij{=k}\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 86
+ \Notes\org\qup E\relax
+ |\qlp L\relax
+ |\zq g\qu i\sk\cu e\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\isluru0l\ql l\sk\tslur0e\cl e\relax
+ &\sk\qsk\pause\enotes
+ %\check
+ \barre % mesure 87
+ \notes\org\qup J\relax
+ |\doubler\qlp c\sk\zmidtwotext{\bf II}\relax
+ |\zqp e\zqp h\qlp l\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\qlp h\relax
+ &\sixlpl ljhjlh\enotes
+ %\check
+ \barre % mesure 88
+ \notes\org\Pause
+ |\doubler\ibl0L0\zq {_K}\upz a\qb0a\zq K\upz a\qb0a\zq K\upz a\tqb0a\relax
+ |\Pause\relax
+ &\sixlpl om{_k}mom\relax
+ &\doubler\ql m\sk\ds\enotes
+ %\check
+ \barre % mesure 89
+ \notes\org\Pause
+ |\doubler\zq I\ql a\sk\ds\relax
+ |\doubler\ql i\sk\ds\relax
+ &\doubler\ql{=k}\sk\ds\relax
+ &\sixlpl mkikmi\enotes
+ %\check
+ \barre % mesure 90
+ \notes\org\Pause
+ |\doubler\ibl0L0\zq L\upz N\qb0N\zq L\upz N\qb0N\zq L\upz N\tqb0N\relax
+ |\Pause\relax
+ &\sixlpl pnlnpn\relax
+ &\doubler\ql n\sk\ds\enotes
+ %\check
+ \barre % mesure 91
+ \notes\org\Pause
+ |\doubler\zq J\ql N\sk\ds\relax
+ |\doubler\ql j\sk\ds\relax
+ &\doubler\ql{=l}\sk\ds\relax
+ &\sixlpl n{=l}jlnj\enotes
+ %\check
+ \barre % mesure 92
+ \notes\org\Pause
+ |\doubler\isluru0a\Ibbl0Ma2\zq M\qb0a\zq N\qb0 b\tslur0c\zq
+a\tqb0c\relax
+ |\rlap{\triol f{=e}f}\Ibu0jg5\qhp0j\sk\sk\nbbu0\qh0i\qh0h\tqh0g\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\Ibl0jg5\qbp0j\sk\sk\nbbl0\qb0i\qb0h\tqb0g\relax
+ &\Ibl0ol5\isluru0o\qbp0o\sk\sk\nbbl0\qb0n\qb0m\tslur0l\tqb0{=l}\enotes
+ %\check
+ \barre % mesure 93
+ \notes\org\Pause
+ |\doubler\Ibl0bK2\lq b\qb0c\qb0c\zq b\tqb0J\relax
+ |\zcl f\Ibbu0hj4\qh0h\tbbu0\qh0i\zql{=e}\qh0g\sk\tqh0j\relax
+ &\Ibbl0oq4\qb0o\tbbl0\qb0p\qb0n\sk\tqb0q\relax
+ &\ibbl0m0\isluru0m\qb0m\tslur0n\tbbl0\qb0n\Pince n\isluru0l\qbp0{=l}\sk\sk\tbbl0\tslur0m\tqb0m\enotes
+ %\check
+ \barre % mesure 94
+ \notes\org\triopu MFF\relax
+ |\zmidtwotext{\bf I}\triopl aMM\relax
+ |\sixlpu jhfhjf\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\sixppl jhfhjf\relax
+ &\doubler\ql m\sk\ds\enotes
+ %\check
+ \barre % mesure 95
+ \notes\org\qup I\relax
+ |\triopl bbb\relax
+ |\doubler\ql {_k}\sk\ds\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\ql{_k}\sk\ds\relax
+ &\sixlpl m{_k}ikmi\enotes
+ %\check
+ \barre % mesure 96
+ \notes\org\triopu EEE\relax
+ |\qup L\relax
+ |\sixlpu igegie\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\sixppl igegie\relax
+ &\doubler\ql n\sk\ds\enotes
+ %\check
+ \barre % mesure 97
+ \notes\org\qup H\relax
+ |\triopl aaa\relax
+ |\doubler\ql j\sk\ds\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\ql j\sk\ds\relax
+ &\sixlpl ljhjlh\enotes
+ %\check
+ \barre % mesure 98
+ \notes\org\triopu {_D}DD\relax
+ |\qup {_K}\relax
+ |\sixlpu hf{_d}fhd\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\sixppl hf{_d}fhd\relax
+ &\doubler\ql m\sk\ds\enotes
+ %\check
+ \barre % mesure 99
+ \notes\org\qup G\relax
+ |\triopl NNN\relax
+ |\doubler\ql i\sk\ds\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\ql i\sk\ds\relax
+ &\sixlpl {_k}igikg\enotes
+ %\check
+ \barre % mesure 100
+ \notes\org\triopu CCC\relax
+ |\qup J\relax
+ |\sixlpu g{=e}cegc\relax
+ &\ifx\Quer\undefined \advance\transpose 7\fi\sixppl g{=e}cegc\relax
+ &\doubler\ql n\sk\ds\enotes
+ %\check
+ \barre % mesure 101
+ \notes\org\triopu FFF\relax
+ |\zqup c\triopl MMM\relax
+ |\islurd0h\Ibbu0he5\qh0{hihgf}\tslur0e\tqh0e\relax
+ &\ifx\Quer\undefined \advance\transpose 7\relax\isluru0h\Ibbl0he5\qb0{hihgf}\tslur0e\tqb0e\relax
+ \else\isluru0h\Ibbu0he5\qh0{hihgf}\tslur0e\tqh0e\fi
+ &\isluru0m\Ibbl0mj5\qb0{mnml=k}\tslur0j\tqb0j\enotes
+ %\check
+ \barre % mesure 102
+ \notes\org\doubler\qu G\sk\ds\relax
+ |\doubler\zql
+N\cu{=b}\sk\ds\relax
+ |\doubler\ibu0g0\qh0d\rq g\zq d\qh0f\rq g\zq d\tqh0f\relax
+ &\doubler\ifx\Quer\undefined \Ibu0ki2\qh0k\else\Ibu0gi2\qh0d\fi\qh0{=i}\tqh0i\relax
+ &\ibbu0h0\rlap{\sl\islurd0g}\qh0{=igigi}\tslur0g\tqh0g\enotes
+ %\check
+ \barre % mesure 103
+ \notes\org\doubler\qu J\sk\cu{=I}\relax
+ |\doubler\ql c\sk\cl{=b}\relax
+ |\doubler\ibu0g0\zq
+e\qh0g\zq e\qh0g\zq d\tqh0 g\relax
+ &\triopl jjk\relax
+ &\ibbl0i0\isluru0j\qb0{jgjgk}\tslur0j\tqb0g\enotes
+ %\check
+ \barre % mesure 104
+ \notes\org\sicu J{_I}H\relax
+ |\sicl c{_b}a\relax
+ |\doubler\ibu0i0\zq e\zq j\qh0g\zq e\zq j\qh0g\zq
+f\zq j\tqh0h\relax
+ &\triopl llm\relax
+ &\ibbl0i0\isluru0l\qb0{lglgm}\tslur0l\tqb0h\enotes
+ %\check
+ \barre % mesure 105
+ \notes\org\doubler\qu G\sk\cupz J\relax
+ |\doubler\ql N\sk\clpz c\relax
+ |\doubler\ibl0h0\zq
+g\zq{=i}\qb0m\zq{gi}\qb0k\zq h\tqb0j\relax
+ &\Ibl0nk4\isluru0n\qbp0n\sk\sk\nbbl0\qb0{ml}\tslur0k\tqb0k\relax
+ &\Ibl0nk4\isluru0n\qbp0n\sk\sk\nbbl0\qb0{ml}\tslur0k\tqb0k\enotes
+ %\check
+ \barre % mesure 106
+ \notes\org\triopu MNG\relax
+ |\triopl ffN\relax
+ |\doubler\zq h\cl j\zql g\Ibu0ji1\qh0j\tqh0{=i}\relax
+ &\isluru0l\Ibbl0lm1\qb0l\tslur0m\tqb0m\ql k\relax
+ &\Ibbl0lj5\isluru0l\qb0l\tslur0m\tbbl0\qb0m\isluru0k\Pince n\qbp0k\sk\sk\tslur0j\tbbl0\tqb0j\enotes
+ %\check
+ \barre % mesure 107
+ \notes\org\qup J\relax
+ |\triopl eec\relax
+ |\doubler\ql j\sk\ds\relax
+ &\sixppu jgjklj\relax
+ &\doubler\ql j\sk\ds\enotes
+ %\check
+ \barre % mesure 108
+ \notes\org\qup G\relax
+ |\qlp N\relax
+ |\doubler\cl j\ql{=i}\relax
+ &\sixppu kgklmk\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 109
+ \notes\org\qup J\relax
+ |\doubler\Ibl0ec2\zq e\qb0g\zq d\qb0f\zq c\tqb0e\relax
+ |\sixppl j{=i}jklm\relax
+ &\sixppl lklmno\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 110
+ \notes\org\qup G\relax
+ |\sixppl NaNMLK\relax
+ |\doubler\zqlp d\qu {=i}\sk\cu g\relax
+ &\doubler\isluru0n\ql n\sk\tslur0h\cu g\relax
+ &\Pause\enotes
+ %\check
+ \barre % mesure 111
+ \notes\org\doubler\qu J\sk\ds\relax
+ |\doubler\ql c\sk\ds\relax
+ |\doubler\ibl0h0\zq g\upz j\qb0j\upz
+j\qb0j\upz g\tqb0g\relax
+ &\triopl ljn\relax
+ &\uptext{\mf}\sixppl  nmlkji\enotes
+ %\check
+ \barre % mesure 112
+ \notes\org\qup F\relax
+ |\sixppl MNMLKJ\relax
+ |\sixppu hihgfe\relax
+ &\sixppl oponml\relax
+ &\threell hjm\sk\ds\enotes
+ %\check
+ \barre % mesure 113
+ \notes\org\doubler\qu I\sk\ds\relax
+ |\doubler\ql b\sk\ds\relax
+ |\threelu dfi\sk\ds\relax
+ &\threell kmp\sk\ds\relax
+ &\sixppl mlkjih\enotes
+ %\check
+ \barre % mesure 114
+ \notes\org\qup E\relax
+ |\sixppl LMLKJI\relax
+ |\sixppu ghgfed\relax
+ &\sixppl nonmlk\relax
+ &\threell gil\sk\ds\enotes
+ %\check
+ \barre % mesure 115
+ \notes\org\doubler\qu H\sk\ds\relax
+ |\doubler\ql a\sk\ds\relax
+ |\threelu ceh\sk\ds\relax
+ &\threell jlo\sk\ds\relax
+ &\sixppl lkjihg\enotes
+ %\check
+ \barre % mesure 116
+ \notes\org\doubler\qup D\relax
+ |\sixppl KLKJIH\relax
+ |\sixppu fgfedc\relax
+ &\sixppl mnmlkj\relax
+ &\threell fhk\sk\ds\enotes
+ %\check
+ \barre % mesure 117
+ \notes\org\doubler\qu G\sk\ds\relax
+ |\doubler\ql N\sk\ds\relax
+ |\threelu {=b}dg\sk\ds\relax
+ &\threell {=i}kn\sk\ds\relax
+ &\sixppl kj{=i}hgf\enotes
+ %\check
+ \barre % mesure 118
+ \notes\org\sicu JKL\relax
+ |\doubler\zq N\cl c\soupir\relax
+ |\Ibbu0eg4\lpz e\qh0e\lpz
+d\qh0d\lpz e\qh0 e\lpz f\tbbu0\qh0f\lpz g\tqh0g\relax
+ &\advance\transpose 7\relax\Ibbl0eg4\upz e\qb0e\upz
+d\qb0d\upz e\qb0 e\upz f\tbbl0\qb0f\upz g\tqb0g\relax
+ &\islurd0e\Ibbu0eg1\qh0e\tslur0g\tqh0g\itenu0j\ql j\enotes
+ %\check
+ \barre % mesure 119
+ \notes\org\triopu MNG\relax
+ |\triopl c{=b}N\relax
+ |\doubler\Ibu0hf2\lpz e\zq e\qh0h\lpz
+d\zq d\qh0g\lpz d\zq d\tqh0f\relax
+ &\triopl onm\relax
+ &\tten0\ibbl0j0\isluru0j\qb0j\tslur0k\tbbl0\qb0k\Pince n\isluru0i\qlp{=i}\sk\sk\tbbl0\tslur0j\tqb0j\enotes
+ %\check
+ \barre % mesure 120
+ \notes\org\doubler\qu J\sk\cupz I\relax
+ |\doubler\ql N\sk\ds\relax
+ |\doubler\zq c\qu e\sk\ds\relax
+ &\doubler\ql l\sk\ds\relax
+ &\sixllll joonnm\enotes
+ %\check
+ \barre % mesure 121
+ \notes\org\doubler\qu H\sk\cupz F\relax
+ |\doubler\ql a\sk\clpz M\relax
+ |\triou cff\relax
+ &\sixlllu fjkjj{=i}\relax
+ &\Ibl0mk5\qb0{mm}\isluru0m\qb0m\tslur0l\qb0l\isluru0l\qh0l\tslur0k\tqb0k\enotes
+ %\check
+ \barre % mesure 122
+ \notes\org\qup G\relax
+ |\doubler\ql N\sk\clpz N\relax
+ |\doubler\ibu0f0\zq d\qh0f\rq f\zq d\qh0g\rq f\zq d\tqh0g\relax
+ &\triopu {=i}ii\relax
+ &\Ibbl0ih5\qb0{kg=igi}\tqb0g\enotes
+ %\check
+ \barre % mesure 123
+ \notes\org\doubler\qu J\sk\cupz{=I}\relax
+ |\doubler\ql c\sk\clpz {=b}\relax
+ |\doubler\ibu0f0\zq e\qh0g\zq e\qh0g\zq d\tqh0g\relax
+ &\triopl jjk\relax
+ &\Ibbl0hi5\qb0{jgjgk}\tqb0g\enotes
+ %\check
+ \barre % mesure 124
+ \notes\org\sicu J{_I}H\relax
+ |\doubler\ql c\sk\clpz a\relax
+ |\doubler\ibu0h0\zq {eg}\qh0j\zq {eg}\qh0j\zq {fh}\tqh0j\relax
+ &\triopl llm\relax
+ &\Ibbl0hi5\qb0{lglgm}\tqb0h\enotes
+ %\check
+ \barre % mesure 125
+ \notes\org\doubler\qu G\sk\cupz H\relax
+ |\doubler\cl N\sk\clpz c\relax
+ |\doubler\ibl0h0\zq{m=i}\qb0g\zq{ki}\qb0g\tqb0j\relax
+ &\Ibl0nk5\isluru0n\qbp0n\sk\sk\nbbl0\qb0{ml}\tslur0k\tqb0k\relax
+ &\Ibl0nk5\isluru0n\qbp0n\sk\sk\nbbl0\qb0{ml}\tslur0k\tqb0k\enotes
+ %\check
+ \barre % mesure 126
+ \notes\org\triopu FGG\relax
+ |\doubler\ql a\qu d\zq N\cl N\relax
+ |\doubler\zq j\cl h\zql f\Ibu0ji1\qh0j\tqh0{=i}\relax
+ &\Ibbl0lm1\qb0l\tqb0m\ql k\relax
+ &\isluru0l\Ibbl0lj5\qb0l\tslur0q\tbbl0\qb0q\Pince n\isluru0k\qbp0k\sk\sk\tbbl0\tslur0j\tqb0j\enotes
+ \setvoltabox{1}%\check
+ \barre % mesure 127
+ \Notes\org\qu J\sk\ds\relax
+ |\ql c\sk\ds\relax
+ |\zq e\zq g\qu j\sk\ds\relax
+ &\ql j\sk\ds\relax
+ &\ql j\sk\ds\enotes
+ \endvoltabox
+ \nspace
+\setrightrepeat
+ \setvoltabox{2}\setrightrepeat%\check
+ \barre % mesure 128
+ \NOtes\org\qup J\relax
+ |\qlp c\relax
+ |\zqp e\zqp g\qup j\relax
+ &\qlp j\relax
+ &\qlp j\enotes
+ \endvoltabox
+\ifOrgue \advance\mulooseness -1\relax
+\else \advance\mulooseness 1\relax
+\fi
+\finmorceau
+
+\bye
+

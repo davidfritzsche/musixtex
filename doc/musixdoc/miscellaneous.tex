@@ -1,0 +1,596 @@
+\chapter{Miscellaneous Other Notations}
+%avre
+ \section{Metronomic indications}
+%Metronomic indication deserves a special macro. The mention:
+%
+%\medskip
+%\centerline{\def\nbinstruments{0}\metron{\hup}{60}}
+%
+%\smallskip\noindent
+%is coded by \keyindex{metron}\verb|{\hup}{60}| (normally embedded in
+%\keyindex{Uptext} which is in turn embedded within \verb|\notes...\en|).
+%
+% On the other hand, music writers sometimes want to specify that the duration
+%of a previous note is equal to a distinct furthernote. Thus
+%
+% \smallskip
+%\centerline{\def\nbinstruments{0}\metronequiv{\qup}{\qu}}
+%
+%\smallskip\noindent
+%is coded by \keyindex{metronequiv}\verb|{\qup}{\qu}|.
+
+By way of example, the notations 
+\begin{quote}
+\def\nbinstruments{0}
+\metron{\hup}{60}
+\quad and\quad
+\def\nbinstruments{0}\metronequiv{\qup}{\qu}
+\end{quote}
+are
+respectively coded as
+\keyindex{metron}\verb|{\hup}{60}| and \keyindex{metronequiv}\verb|{\qup}{\qu}|,
+which are normally placed using \keyindex{Uptext}.
+Also, you can set a smaller metronomic indication like
+\begin{quote}
+  \def\nbinstruments{0}\metron{\smallnotesize\lqu}{ca.~72}
+\quad or \quad
+\def\nbinstruments{0}\metron{\tinynotesize\lqu}{ca.~72}
+\end{quote}
+by writing 
+\begin{quote}
+\verb|\metron{\smallnotesize\lqu}{ca.~72}| 
+\end{quote}
+or 
+\begin{quote}
+\verb|\metron{\tinynotesize\lqu}{ca.~72}|
+\end{quote}
+
+
+ \section{Accents}
+
+You may use\footnote{Note from the editor: the reason the names of some of
+these macros don't seem to be constructed to suggest the terms used in the
+descriptions is that whoever originally defined the macros had in mind terms
+that did not agree with normal English usage.}
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{upz}\pitchp~(upper \itxem{staccato}) to put a dot above a note
+head at pitch $p$,
+ \item \keyindex{lpz}\pitchp~(lower \ital{staccato}) to put a dot below a note
+head at pitch $p$,
+ \item \keyindex{usf}\pitchp~(upper \itxem{sforzando}) to put a $>$ accent above
+a note head at pitch $p$,
+ \item \keyindex{lsf}\pitchp~(lower \itxem{sforzando}) to put a $>$ accent below
+a note head at pitch $p$,
+ \item \keyindex{ust}\pitchp~(upper \itxem{tenuto}) to put a
+hyphen above a note head at pitch $p$,
+ \item \keyindex{lst}\pitchp~(lower \ital{tenuto}) to put a
+hyphen below a note head at pitch $p$,
+ \item \keyindex{uppz}\pitchp~(upper \itxem{staccatissimo}) to put a solid vertical
+wedge above a note head at pitch $p$,
+ \item \keyindex{lppz}\pitchp~(lower \ital{staccatissimo}) to put an inverted
+solid vertical wedge below a note head at pitch $p$,
+ \item \keyindex{usfz}\pitchp~(upper \itxem{forzato}) to put a
+``dunce cap'' above a note head at pitch $p$,
+ \item \keyindex{lsfz}\pitchp~(lower \ital{forzato}) to put an inverted
+``dunce cap'' below a note head at pitch $p$,
+ \item \keyindex{upzst}\pitchp~(upper \itxem{staccato/tenuto}) to put a
+dot and a hyphen above a note head at pitch $p$,
+ \item \keyindex{lpzst}\pitchp~(lower \ital{staccato/tenuto}) to put a
+dot and a hyphen below a note head at pitch $p$,
+ \item \keyindex{flageolett}\pitchp~to put a
+small circle above a note head at pitch $p$.
+\end{itemize}
+These marks are horizontally centered relative to solid note heads. To
+compensate for the fact that whole notes are wider, you should use
+\keyindex{wholeshift}\verb|{|\ital{Any nonspacing macro}\verb|}| to center accents
+and other items (e.g.,~\verb|\Fermataup|) above a whole note.
+
+There are also variants of the most common accents\footnote{Thanks to Klaus
+{\sc Bechert}'s corrections.} which will be automatically positioned
+above or below a beam. They are spelled like the corresponding normal
+accent, but preceded with the letter \verb|b|, and their argument, instead of
+the pitch, is the beam reference number . Thus
+
+\medskip
+\begin{music}\nostartrule
+\startextract
+\Notes\ibu0f3\busfz0\qb0f\bupz0\qb0g\bust0\qb0h%
+  \buppz0\qb0i\busf0\qb0j\butext0\tqh0k\en
+\Notes\Ibl0lg5\blsfz0\qb0l\blpz0\qb0k\blst0\qb0j%
+  \blppz0\qb0i\blsf0\qb0h\bltext0\tqb0g\en
+\zendextract
+\end{music}
+\noindent was coded as
+\begin{quote}\begin{verbatim} \startextract
+\Notes\ibu0f3\busfz0\qb0f\bupz0\qb0g\bust0\qb0h%
+  \buppz0\qb0i\busf0\qb0j\butext0\tqh0k\en
+\Notes\Ibl0lg5\blsfz0\qb0l\blpz0\qb0k\blst0\qb0j%
+  \blppz0\qb0i\blsf0\qb0h\bltext0\tqb0g\en
+\zendextract
+\end{verbatim}\end{quote}
+\zkeyindex{busfz}
+\zkeyindex{bupz}
+\zkeyindex{bust}
+\zkeyindex{buppz}
+\zkeyindex{busf}
+\zkeyindex{butext}
+\zkeyindex{blsfz}
+\zkeyindex{blpz}
+\zkeyindex{blst}
+\zkeyindex{blppz}
+\zkeyindex{blsf}
+\zkeyindex{bltext}
+
+The macros \verb|\bltext| and \verb|\butext| are detailed in the next section,
+where the mystery of why they produce the number~$3$ is resolved.
+
+
+\section{Numbers and brackets for xtuplets}\label{tuplet}
+
+The following table lists all the special macros that place a number indicating
+an xtuplet. Some also place a bracket above or below the notes, and are
+intended for use with unbeamed notes.
+In the table, $p$ is a pitch, $k$ is a number, $n$ is a beam number,
+$w$ is a bracket width in \verb|\internote|s, and $s$ is the bracket slope as
+a multiple of $1.125$~degrees. The macro \verb|\txt| contains a default number
+which will be placed by the first and third through sixth macros,
+and is initially defined as \verb|\def\txt{3}|. 
+The macro
+\verb|\tuplettxt| serves the same role for the last two macros. 
+The font used is
+\verb|\txtfont| which is by default \verb|\eightit| but may be re-defined. 
+The first four
+are to be used with beamed xtuplets. As indicated in the
+last column, the last four produce a sloping bracket and are to be used with
+unbeamed xtuplets. 
+
+
+\begin{center}
+  \begin{tabular}{lclcc}
+    \hline
+    ~ & Number & ~ & Needs & ~ \\
+    Macro and arguments & printed & Where invoked & Bracket \\
+    \hline
+    \verb|\triolet|\pitchp & \verb|\txt| & before beam & none \\
+    \verb|\xtuplet|\itbrace{k}\pitchp & $k$ & before beam & none \\
+    \verb|\butext|\itbrace{n} & \verb|\txt| & before note at number & none \\
+    \verb|\bltext|\itbrace{n} & \verb|\txt| & before note at number & none \\
+    \verb|\uptrio|\pitchp\itbrace{w}\itbrace{s} & \verb|\txt| & before first note & solid \\
+    \verb|\downtrio|\pitchp\itbrace{w}\itbrace{s} & \verb|\txt| & before first note &  solid \\
+    \verb|\uptuplet|\pitchp\itbrace{w}\itbrace{s} & \verb|\tuplettxt| & before first note & with gap \\
+    \verb|\downtuplet|\pitchp\itbrace{w}\itbrace{s} & \verb|\tuplettxt| & before first note & with gap \\
+    \hline
+  \end{tabular}
+\end{center}
+\medskip
+
+Here are some examples of the first six macros in the table:\\
+\vskip-3pt
+\begin{music}
+\parindent0mm
+\generalmeter{\meterfrac24}
+\nostartrule
+\startpiece
+\addspace\afterruleskip
+\notesp\xtuplet6n\isluru0l\ibl0l0\qb0{lllll}\tslur0l\tqb0l\en\bar
+\notesp\triolet n\isluru0l\Ibl0ln2\qb0{lm}\tslur0n\tqb0n\en
+\notesp\ibslurd0k\Ibl0km2\qb0k\bltext0\qb0l\tdbslur0m\tqb0m\en\bar
+\Notesp\triolet o\isluru0l\ql{lm}\tslur0n\ql n\en\bar
+\Notesp\uptrio o16\ql l\en\notesp\cl n\en
+%avrb
+\Notesp\downtrio O16\qu e\en\notesp\cu g\en
+%avre
+\endpiece
+\end{music}
+whose coding is
+\begin{quote}\begin{verbatim}
+\notesp\xtuplet6n\isluru0l\ibl0l0\qb0{lllll}\tslur0l\tqb0l\en\bar
+\notesp\triolet n\isluru0l\Ibl0ln2\qb0{lm}\tslur0n\tqb0n\en
+\notesp\ibslurd0k\Ibl0km2\qb0k\bltext0\qb0l\tdbslur0m\tqb0m\en\bar
+\Notesp\triolet o\isluru0l\ql{lm}\tslur0n\ql n\en\bar
+\Notesp\uptrio o16\ql l\en\notesp\cl n\en
+\Notesp\downtrio O16\qu e\en\notesp\cu g\en
+\end{verbatim}\end{quote}
+\zkeyindex{xtuplet}\zkeyindex{triolet}
+
+\medskip
+Next are examples using \keyindex{uptuplet} and \keyindex{downtuplet}. 
+A re-definition of \verb|\tuplettxt| inside a notes group only applies
+inside that group and leaves the default definition intact.
+To get the
+number properly centered in the gap, you must include some extra space after
+the number in the definition of \verb|\tuplettxt|. As you can see in
+the last bar, if the span becomes too small, the macros still won't provide
+enough room for the number in the gap; in this case it would be better to
+use the macros without gaps.
+
+%   Examples:
+%
+%       Draw a triplet bracket over the notes, starting at pitch "p",
+%       1.25\noteskip wide, with a slope up of 3-3/8 degrees:
+%
+%           \uptuplet p{1.25}3
+%
+%       Draw a sextuplet bracket under the notes, starting at pitch "a",
+%       2.5\noteskip wide, with a slope down of 4-1/2 degrees:
+%
+%           \def\tuplettxt{\smallppff 6\/\/}
+%           \downtuplet{a}{2.5}{-4}
+
+\begin{music}
+%\input tuplet
+\parindent0mm
+\generalmeter{\meterfrac24}
+%\startpiece
+\nostartrule
+\startextract
+\addspace\afterruleskip
+\notesp\triolet o\Ibl0ln2\qb0{lm}\tqb0n\en
+\notesp\Ibl0km2\qb0k\bltext0\qb0l\tqb0m\en\bar
+\notesp\def\tuplettxt{5\/\/}\uptuplet o{4.1}2\cl{jklmn}\en\bar
+\Notesp\uptuplet o16\ql l\en\notesp\cl n\en
+\Notesp\downtuplet O16\qu e\en\notesp\cu g\en\bar
+\notesp\uptuplet o16\ccl l\en\notesp\cccl n\en
+\notesp\downtuplet O16\ccu e\en\notesp\cccu g\en
+%\endpiece
+\endextract
+\end{music}
+
+\noindent with coding
+
+\begin{quote}\begin{verbatim}
+\parindent0mm
+\generalmeter{\meterfrac24}
+\startextract
+\addspace\afterruleskip
+\notesp\triolet o\Ibl0ln2\qb0{lm}\tqb0n\en
+\notesp\Ibl0km2\qb0k\bltext0\qb0l\tqb0m\en\bar
+\notesp\def\tuplettxt{5\/\/}\uptuplet o{4.1}2\cl{jklmn}\en\bar
+\Notesp\uptuplet o16\ql l\en\notesp\cl n\en
+\Notesp\downtuplet O16\qu e\en\notesp\cu g\en\bar
+\notesp\uptuplet o16\ccl l\en\notesp\cccl n\en
+\notesp\downtuplet O16\ccu e\en\notesp\cccu g\en
+\end{verbatim}\end{quote}
+
+ \section{Ornaments}
+
+ \subsection{Arpeggios}
+\ital{Arpeggios} (i.e.~~~\arpeggio{-2}3) can be coded with the macro
+\keyindex{arpeggio}\pitchp\itbrace{m}
+where $p$ is the pitch of
+the base of the arpeggio symbol and $m$ is its height in units of
+\verb|\interligne|, the distance from one staff line to the next. It should be
+issued before the affected chord. It is
+automatically positioned to the left of the chord, but inserts no spacing.
+Its variant \keyindex{larpeggio} sets the arpeggio symbol roughly
+one note head width to the left of the default position, and is intended to
+avoid collision with single accidentals on chord notes.
+
+ \subsection{Arbitrary length trills}
+ There are two styles of arbitrary length trills\index{trills}, each with two
+variants.
+For a trill with preassigned length, use \keyindex{trille}\pitchp\itbrace{l}
+for \hbox to 1cm{\noteskip1cm\trille11\hss} or
+\keyindex{Trille}\pitchp\itbrace{l} for~~\hbox to
+2cm{\noteskip1cm\Trille12\hss}, where $p$ is the pitch and $l$ the length in
+current \verb|\noteskips|.
+
+To let \musixtex\ compute the length of the trill, or if it extends across a
+system break, you can use \keyindex{Itrille}$n$\pitchp\ to start a plain
+trill, where $n$ is a trill reference number between 0 and 5; then
+\keyindex{Ttrille}$n$ to terminate it. To get the {\it tr} at the
+beginning, use \keyindex{ITrille}$n$\pitchp\ to start the trill and
+\verb|\Ttrille|$n$ to close it.
+
+\begin{sloppypar}
+As with other elements, you can specify the maximum number 
+directly with \keyindex{setmaxtrills}\verb|{|$m$\verb|}|, where $7<m\leq 100$%
+\footnote{This may require e-\TeX.}; 
+the reference number $n$ will be in the range between $0$ and $m-1$.
+\label{musixmad_setmaxtrills}
+\end{sloppypar}
+
+
+For example:
+
+\medskip
+ \begin{music}
+\instrumentnumber{1}
+\setstaffs12
+\setclef1{6000}
+%
+\startextract
+\notes\qu{CDEFGH}|\hu k\sk\ITrille 1p\itenu1l\wh l\en
+\bar
+\notes\Itrille 2A\itenu2E\whp E|\tten1\hlp l\sk\Ttrille 1\qu {mno}\en
+\bar
+\Notes\tten2\itenu2E\whp E|\ql{nmlkji}\en
+\bar
+\Notes\tten2\whp E\sk\sk\sk\sk\Ttrille2|\qu{hgfedc}\en
+\endextract
+\end{music}
+whose coding is
+\begin{quote}\begin{verbatim}
+\begin{music}\nostartrule
+\instrumentnumber{1}
+\setstaffs12
+\setclef1{6000}
+%
+\startextract
+\notes\qu{CDEFGH}|\hu k\sk\ITrille 1p\itenu1l\wh l\en
+\bar
+\notes\Itrille 2A\itenu1e\whp E|\tten1\hlp l\sk\Ttrille 1\qu {mno}\en
+\bar
+\Notes\tten1\itenu1E\whp E|\ql{nmlkji}\Toctfin1\en
+\bar
+\Notes\tten1\whp E\sk\sk\sk\sk\Ttrille2|\qu{hgfedc}\en
+\endextract
+\end{verbatim}\end{quote}
+
+ \subsection{Piano pedal commands}
+The macro \keyindex{PED} inserts a piano pedal command below the staff;
+\keyindex{DEP}, a pedal release. Alternate symbols, the first of which
+occupies less space, are invoked with \keyindex{sPED} and \keyindex{sDEP}.
+For example,
+
+\begin{music}
+\setclef1\bass
+\setstaffs1{2}
+\startextract
+\NOtes\PED\wh J|\qu h\en
+\NOtes|\qu g\en
+\NOtes|\hu k\en
+\Notes\DEP\en
+\bar
+\NOtes\sPED\wh J|\qu h\en
+\NOtes|\qu g\en
+\NOtes|\hu k\en
+\Notes\sDEP\en
+\endextract
+\end{music}
+ \noindent was coded as \begin{quote}\begin{verbatim}
+ \NOtes\PED\wh J|\qu h\en
+ \NOtes|\qu g\en
+ \NOtes|\hu k\en
+ \Notes\DEP\en \bar
+ \NOtes\sPED\wh J|\qu h\en
+ \NOtes|\qu g\en
+ \NOtes|\hu k\en
+ \Notes\sDEP\en
+ \end{verbatim}\end{quote}
+
+ The vertical position of
+\keyindex{PED}, \keyindex{sPED}, \keyindex{DEP} and \keyindex{sDEP} can be
+globally changed by redefining its elevation, which has the default
+definition \verb|\def|\keyindex{raiseped}\verb|{-5}|.
+To locally change the vertical position of a pedal symbol, use one of the more
+fundamental
+macros \keyindex{Ped}, \keyindex{sPed}, \keyindex{Dep} and \keyindex{sDep}
+in combination with \keyindex{zchar} or \keyindex{zcharnote}.
+Since the \hbox to .7cm{ \Ped\hss} symbol is rather wide, it might collide
+with adjacent bass notes. To shift it horizontally, you could use \verb|\loff{\PED}|.
+
+ \subsection{Other ornaments}\index{ornaments}
+
+The argument $p$ in the following macros for ordinary ornaments is the
+pitch at which the ornament itself appears. They are all nonspacing macros.
+You may use
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{mordent}\pitchp\ for \hbox to .75em{\mordent 0\hss},
+ \item \keyindex{Mordent}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Mordent 0\hss},
+ \item \keyindex{shake}\pitchp\ for \hbox to .75em{\shake 0\hss},
+ \item \keyindex{Shake}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shake 0\hss},
+ \item \keyindex{Shakel}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakel 0\hss},
+ \item \keyindex{Shakesw}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakesw 0\hss},
+ \item \keyindex{Shakene}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakene 0\hss},
+ \item \keyindex{Shakenw}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakenw 0\hss},
+ \item \keyindex{turn}\pitchp\ for \hbox to 1.5em{\kern 0.6em\turn 0\hss},
+ \item \keyindex{backturn}\pitchp\ for \hbox to 1.5em{\kern 0.6em\backturn 0\hss}.
+ \end{itemize}
+
+In the following macros for fermatas, the argument $p$ is the pitch of the
+notehead on which the fermata rests, assuming no additional vertical
+adjustments are needed for stems or intervening staff lines. They are all
+nonspacing macros. You may use
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{fermataup}\pitchp\ for
+\raisebox{0ex}[0ex][0ex]{\notesintext{\notes\fermataup1\en}},
+\end{itemize}
+\begin{itemize}\setlength{\itemsep}{3ex}
+ \item \keyindex{fermatadown}\pitchp\ for
+\raisebox{0ex}[0ex][0ex]{\notesintext{\notes\fermatadown2\en}},
+ \item \keyindex{Fermataup}\pitchp\ for
+\raisebox{-1ex}[-1ex][0ex]{\musicintextnoclef{\notes\Fermataup 7\zwh{'c}\en}}~,
+centered over a whole note,
+ \item \keyindex{Fermatadown}\pitchp\ for
+\raisebox{-1ex}[0ex][0ex]{\musicintextnoclef{\notes\Fermatadown1\zwh{'c}\en}}~,
+centered under a whole note.
+ \end{itemize}
+\bigskip
+
+A \itxem{breath} mark
+\raisebox{-5ex}[0ex][0ex]{\notesintext{\notes\zbreath\en}}
+can be put just above the staff with \keyindex{zbreath}. This is a nonspacing
+macro. On the other hand, \keyindex{cbreath} will cause a space of one
+\verb|\noteskip| and place the comma midway through the space.
+
+The \keyindex{caesura} command inserts a slash \verb|0.5\noteskip| before
+the place it is entered, while adding no space:
+
+\begin{music}\nostartrule
+\startextract
+\NOTes\zhu j\hl{^e}\caesura\en
+\Notes\zcu j\cl e\en
+\zendextract
+\end{music}
+
+\section{Alphabetic dynamic marks}
+ Conventional dynamic symbols
+\pppp, \ppp, \pp,
+\p,
+\mezzopiano,
+\mf,
+\f,
+\fp,
+\sF,
+\ff,
+\fff,
+\ffff,
+\sfz\ and
+\sfzp\  can be posted using the macros
+\keyindex{pppp},
+\keyindex{ppp},
+\keyindex{pp},
+\keyindex{p},
+\keyindex{mp},
+\keyindex{mf},
+\keyindex{f},
+\keyindex{fp},
+\keyindex{sF},
+\keyindex{ff},
+\keyindex{fff},
+\keyindex{ffff},
+\keyindex{sfz} and
+\keyindex{sfzp},  respectively, as the second argument of \verb|\zcharnote| or
+\verb|\ccharnote|.
+See also Section~\ref{musixppff} for an alternative set of dynamic marks.
+
+
+ \section{Length of note stems}
+
+The default length of note stems is the distance of one octave, i.e.,~\verb|7\internote| or \texttt{4.66}\keyindex{interbeam}. The default may be changed
+with the macro \keyindex{stemlength}\itbrace{b}\ where $b$ is the length in
+\verb|\interbeam|s.
+
+The command \keyindex{stemcut} causes stems that extend outside the staff
+to be shortened depending on the pitch of the notes. It is the default
+behavior. To suppress this adjustment, issue the command
+\keyindex{nostemcut}.
+
+Normally, down stems never end above the middle line of the staff and up stems
+never below that line. The command \keyindex{stdstemfalse} will inhibit this
+adjustment, but only for the next stem generated.  There is no command to globally
+suppress this behavior.
+
+ \section{Brackets, parentheses, and oblique lines}\label{brapar}
+
+Several varieties of brackets, parentheses and oblique lines are provided for
+use within a score.
+ \begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{lpar}\verb|{|$p$\verb|}| and
+\keyindex{rpar}\verb|{|$p$\verb|}| yield left and right
+parentheses at pitch $p$. They could be used to enclose notes or to build
+\ital{cautionary} accidentals, although the latter are more easily
+obtained with predefined macros (see Chapter~\ref{cautionary}).
+
+%avrb
+For example,
+
+\begin{tabular}{ll}
+\raisebox{-1.5ex}[0ex][0ex]{\musicintextnoclefn{\notes\bsk\lpar{g}\rpar{g}\hu{g}\sk%
+\loffset{1.5}{\lpar{g}}\loffset{1.5}{\rpar{g}}\loffset{.4}{\sh g}\hu{g}\en}}
+&\begin{tabular}{ll}
+&\verb+\notes\lpar{g}\rpar{g}\hu{g}\sk%+\\
+is coded as&\verb+\loffset{1.5}{\lpar{g}}\loffset{1.5}{\rpar{g}}%+\\
+&\verb+\loffset{.4}{\sh g}\hu{g}\en}+
+\end{tabular}
+\end{tabular}
+%avre
+
+ \item \keyindex{bracket}\verb|{|$p$\verb|}{|$n$\verb|}| posts a
+square bracket to the left of a chord, vertically spanning $n$
+\verb|internote|s.
+ \item \keyindex{doublethumb}\verb|{|$p$\verb|}| indicates a bracket as
+above spanning 2\verb|\internote|s.
+ \item \keyindex{ovbkt}\verb|{|$p$\verb|}{|$n$\verb|}{|$s$\verb|}| and
+\keyindex{unbkt}\verb|{|$p$\verb|}{|$n$\verb|}{|$s$\verb|}|
+draw a sloped bracket starting at the current position at pitch $p$,
+with horizontal extent $n$ \verb|noteskip|s and slope $s$ in multiples of
+$1.125$~degrees.
+ \item \keyindex{uptrio}\verb|{|$p$\verb|}{|$n$\verb|}{|$s$\verb|}| and
+\keyindex{downtrio}\verb|{|$p$\verb|}{|$n$\verb|}{|$s$\verb|}| are like
+\verb|\ovbkt| but with freely definable \keyindex{txt} centered inside.
+
+ \item \keyindex{varline}\itbrace{h}\itbrace{\ell}\itbrace{s}\ builds an
+oblique line starting at the current horizontal position. It must be used
+inside a zero-width box, such as for example as the second argument of
+\verb|\zcharnote|. $h$ is the height of the starting point, $\ell$ is the
+length, and $s$ is the slope. It is used in the definitions of some of
+the foregoing macros, and could be used, for example, to construct various
+obscure baroque ornaments made up of diagonal lines.
+
+\end{itemize}
+
+For example,
+
+\begin{music}
+\setstaffs1{2}
+\setclef1\bass
+\startextract
+\NOtes\bracket C8\zq C\qu J\en
+\NOtes|\doublethumb g\rq h\qu g\en
+\NOtes\lpar c\rpar c\qu c\en
+\NOtes\unbkt C15\qu {FH}|\ovbkt n14\ql{kl}\en
+\NOtes\downtrio C16\qu {FH}|\uptrio o14\ql{lm}\en
+\endextract
+\end{music}
+\noindent is coded as
+\begin{quote}\begin{verbatim}
+\begin{music}
+\setstaffs1{2}
+\setclef1{\bass}
+\startextract
+\NOtes\bracket C8\zq C\qu J\en
+\NOtes|\doublethumb g\rq h\qu g\en
+\NOtes\lpar c\rpar c\qu c\en
+\NOtes\unbkt C15\qu {FH}|\ovbkt n14\ql{kl}\en
+\NOtes\downtrio C16\qu {FH}|\uptrio o14\ql{lm}\en
+\zendextract
+\end{music}
+\end{verbatim}\end{quote}
+
+ \section{Forcing activity at the beginning of systems}
+A macro named \keyindex{everystaff} is executed each time a new system
+begins. It is normally void, but it can be defined (simply by \verb|\def|%
+\keyindex{everystaff}\verb|{...}|) to cause \musixtex\ to post anything
+reasonable at the beginning of each system. For it to affect the first system
+in a score, it must be defined \ital{before}
+\verb|\startpiece|.
+
+If a macro named \keyindex{atnextline} is defined at any point in a score,
+it will be executed just once, viz., at the next computed or forced system
+break. More
+precisely, it is executed after the break and before the next system begins.
+Thus it is suitable for redefining layout parameters.
+
+ \index{octave treble clef}In some scores, tenor parts are not coded using the
+\ital{bass} clef, but using rather the \ital{octave treble clef}, which is
+subscripted by a numeral {\tt8}.
+This clef is supported by the clef substitution command
+\keyindex{settrebleclefsymbol}\onen\keyindex{treblelowoct}, as already
+explained in Section~\ref{treblelowoct}. However, if for some reason you
+aren't happy with the height of the ``8'', it can be posted on selected
+staves at the beginning of every system using \keyindex{everystaff} and
+\keyindex{zcharnote} as follows:
+
+\begin{music}
+\instrumentnumber{4}
+\setclef1\bass
+\def\everystaff{%
+  \znotes&\zchar{-6}{\eightrm\kern-2\Interligne8}%
+  &\zchar{-6}{\eightrm\kern-2\Interligne8}\en}%
+\startextract
+\NOTes\ha{HIJK}&\ha{efgh}&\ha{hijk}&\ha{hmlk}\en
+\zendextract
+\end{music}
+\noindent The coding is
+\begin{quote}\begin{verbatim}
+\instrumentnumber{4}
+\setclef1\bass
+\def\everystaff{%
+  \znotes&\zchar{-6}{\eightrm \kern -2\Interligne 8}%
+  &\zchar{-6}{\eightrm \kern -2\Interligne 8}\en}%
+\startextract
+\NOTes\ha{HIJK}&\ha{efgh}&\ha{hijk}&\ha{hmlk}\en
+\endextract
+\end{verbatim}\end{quote}

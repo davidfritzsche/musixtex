@@ -1,0 +1,178 @@
+\chapter{Repeats}
+
+To replace a bar line with a left, right, or left-right repeat, use one of the
+commands \keyindex{leftrepeat}, \keyindex{rightrepeat} or
+\keyindex{leftrightrepeat} in place of \verb|\bar|. If a \verb|\leftrepeat|
+happens to come at the end of a system, it will automatically be moved to the
+start of the next system. If a \verb|\leftrightrepeat| happens to come at the
+end if a system, \musixtex\ will automatically post a right repeat at the end
+of the system and a left repeat at the beginning of the next.
+
+For example,
+
+\begin{music}\nostartrule
+\startextract
+\NOTes\ha g\en
+\leftrepeat
+\NOTes\ha h\en
+\leftrightrepeat
+\NOTes\ha i\en
+\rightrepeat
+\NOTEs\wh j\en
+\zendextract
+\end{music}
+ \noindent has been coded as:
+\begin{quote}\begin{verbatim}
+\NOTes\ha g\en
+\leftrepeat
+\NOTes\ha h\en
+\leftrightrepeat
+\NOTes\ha i\en
+\rightrepeat
+\NOTEs\wh j\en
+\end{verbatim}\end{quote}
+
+To insert a right repeat at a forced line break or at the end of a piece, use
+\verb|\setrightrepeat| \textit{before}\ \verb|\alaligne| or \verb|\endpiece|.
+In contrast, to insert a left repeat at a forced line break or at the
+beginning of a piece, simply use \verb|\leftrepeat| immediately \textit{after}
+\verb|\startpiece| or \verb|\alaligne|. To insert a left-right repeat at a
+forced line break, use \verb|\setrightrepeat\alaligne\leftrepeat|.
+
+In fact it is possible to use \keyindex{setleftrepeat},
+\keyindex{setrightrepeat} or \keyindex{setleftrightrepeat} before any
+\keyindex{bar}, \keyindex{stoppiece} or \keyindex{changecontext}. But
+be aware that while \verb|\setleftrepeat| behaves properly if the
+bar is at the end of a system, \verb|\setleftrightrepeat| does not, placing
+the symbol only at the end of the system.
+
+ \section{First and second endings (Voltas)}\index{volta}
+
+All volta commands must be entered right before the bar line command
+(or repeat, etc.) where they are to take effect. There are three
+commands that suffice to set all voltas. To start one, use
+\keyindex{Setvolta}\verb|{|\textit{text}\verb|}|; to terminate it
+with or without a vertical line, use \keyindex{endvolta} or
+\keyindex{endvoltabox} respectively. The text by default will be followed
+by a period. There are also various alternate
+commands (e.g., \verb|\setendvoltabox| is equivalent to \verb|\endvoltabox|).
+Some such alternate forms are used in the following example, but the first three
+mentioned above are all that are required:
+
+\medskip \begin{music}
+ \parindent0pt
+ \startpiece
+ \addspace\afterruleskip
+ \NOTEs\wh a\en\bar
+ \NOTEs\wh b\en\setvoltabox{1.-3}\bar
+ \NOTEs\wh c\en\setvolta4\setendvolta\rightrepeat
+ \NOTEs\wh d\en\doublebar
+ \NOTEs\wh e\en\bar
+ \NOTEs\wh f\en\leftrepeat
+ \NOTEs\wh g\en\bar
+ \NOTEs\wh h\en\Setvolta1\bar
+ \NOTEs\wh i\en\bar
+ \NOTEs\wh j\en\Setvolta2\setendvoltabox\rightrepeat
+ \NOTEs\wh i\en\bar
+ \NOTEs\wh h\en\setendvoltabox
+ \Endpiece
+ \end{music}
+ \noindent This was coded as
+ \begin{quote}\begin{verbatim}
+ \startpiece \addspace\afterruleskip
+ \NOTEs\wh a\en\bar
+ \NOTEs\wh b\en\setvoltabox{1.-3}\bar
+ \NOTEs\wh c\en\setvolta4\setendvolta\rightrepeat
+ \NOTEs\wh d\en\doublebar
+ \NOTEs\wh e\en\bar
+ \NOTEs\wh f\en\leftrepeat
+ \NOTEs\wh g\en\bar
+ \NOTEs\wh h\en\Setvolta1\bar
+ \NOTEs\wh i\en\bar
+ \NOTEs\wh j\en\Setvolta2\setendvoltabox\rightrepeat
+ \NOTEs\wh i\en\bar
+ \NOTEs\wh h\en\setendvoltabox
+ \Endpiece
+\end{verbatim}\end{quote}
+ \zkeyindex{leftrepeat}\zkeyindex{rightrepeat}
+
+If the volta only spans one measure and ends without a vertical segment,
+it can be specified simply by saying
+\keyindex{setvolta}\verb|{|\textit{text}\verb|}| before the bar line command
+that starts it, and it will automatically terminate at the
+second bar line command:
+
+\medskip \begin{music}
+ \parindent0pt \startpiece \addspace\afterruleskip
+ \NOTEs\wh a\en\bar
+ \NOTEs\wh b\en\setvolta{1.-3}\bar \NOTEs\wh c\en\setvolta4\rightrepeat
+ \NOTEs\wh d\en\bar
+ \NOTEs\wh e\en\Endpiece
+\end{music}
+\noindent which was coded as:
+ \begin{quote}\begin{verbatim}
+ \parindent0pt \startpiece \addspace\afterruleskip
+ \NOTEs\wh a\en\bar
+ \NOTEs\wh b\en\setvolta{1.-3}\bar \NOTEs\wh c\en\setvolta4\rightrepeat
+ \NOTEs\wh d\en\bar
+ \NOTEs\wh e\en\Endpiece
+\end{verbatim}\end{quote}
+
+The height above the top staff line of the horizontal line in a volta symbol
+is determined by the token \keyindex{raisevolta} which is \verb|4\internote| by
+default. You can change this to any desired dimension.
+
+The period after the text can be
+removed by saying \verb|\def|\keyindex{voltadot}\verb|{}|
+and restored by \verb|\def|\keyindex{voltadot}\verb|{.}|\ .
+
+ \section{Special symbols for repeating long sections}
+
+Four special symbols and corresponding macros are available, namely
+\keyindex{coda}~$p$, \keyindex{Coda}~$p$,
+and \keyindex{segno}~$p$, where $p$ specifies the pitch; and \keyindex{Segno}
+with no argument. Their behavior is illustrated in this example:
+
+\begin{music}
+\startextract
+\NOtes\segno n\en
+\bar
+\NOtes\coda n\en
+\NOtes\Segno\en
+\bar
+\NOtes\Coda n\en
+\endextract
+\end{music}
+\noindent which has been coded:
+\begin{quote}\begin{verbatim}
+\NOtes\segno m\en\bar
+\NOtes\coda m\en
+\NOtes\Segno\en\bar
+\NOtes\Coda m\en
+\end{verbatim}\end{quote}
+
+\section{Repeating a single bar}
+ The special symbol for a single bar repeat is generated by \keyindex{duevolte}, as shown
+in the following example:
+
+\begin{music}
+\generalmeter\meterC
+\setclef1\bass\setstaffs1{2}
+\startextract
+\NOtes\sk\sk\pause|\qa{cegj}\en
+\bar\NOtes\qa{cdef}|\sk\hsk\duevolte\en
+\endextract
+\end{music}
+\noindent whose coding is:
+\begin{quote}\begin{verbatim}
+\generalmeter\meterC
+\setclef1\bass\setstaffs1{2}
+\startextract
+\NOtes\sk\sk\pause|\qa{cegj}\en
+\bar\NOtes\qa{cdef}|\sk\hsk\duevolte\en
+\endextract
+\end{verbatim}\end{quote}
+
+\noindent This is often used with \verb|\centerbar| to more easily center the
+symbol between bar lines, as shown in the example in Section~\ref{barcentered}.
+

@@ -1,0 +1,101 @@
+\chapter{Extracting Parts from a Multi-Instrument Score}\label{parts}
+From the typesetting viewpoint, the major characteristic of orchestral and
+chamber music is that the scores not only have several instruments, but 
+variants of the same basic score are needed in which one of the instruments is
+highlighted while some others are typeset in smaller notes or are
+omitted.
+Of course, it must be possible to permute the highlighted instruments and
+the small-type instruments or 
+omitted instruments, depending on the instrument to which the
+version of the score is dedicated.  
+
+The following is the most general approach to part extraction when
+using \musixtex\ without \textbf{PMX} or \textbf{M-Tx} pre-processors.  A 
+simpler approach which will work for most purposes is described in Section~\ref{musixtnt}.
+
+\section{Coding rules}
+ To make a ``selectable'' orchestral score you must prepare the master score
+(i.e., the score with all instruments typed) as follows:
+
+ \begin{enumerate}
+ \item Avoid referring to instrument numbers with roman
+numerals. For example use \verb|\setclefs|~$n$ instead of
+\verb|\cleftoksiii=| .
+ \item Introduce symbolic names for the instruments; for example, define:
+ \begin{verbatim}
+ \def\Piano{1}%
+ \def\Flute{2}%
+ \def\Oboe{3}%
+ \def\Soprano{4}%
+ \end{verbatim}
+and code, for example
+ \smallskip
+
+ \verb|\setstaffs\Piano2| rather than \verb|\setstaffs12|.
+
+ \item If, initially, the Piano is the instrument number 1, replace all
+\verb|\notes|, \verb|\Notes|, \verb|\NOtes|, etc., with
+\verb|\notes\selectinstrument\Piano|, \verb|\Notes\selectinstrument\Piano|,
+\verb|\NOtes\selectinstrument\Piano|, etc.
+
+ \item Instead of using \verb|&| or \verb|\nextinstrument| to move to
+instrument $n+1$, use \verb|\selectinstrument\Flute| and similar instead.
+ \end{enumerate}
+For example,
+\begin{verbatim}
+      \Notes\selectinstrument\Piano ... | ...
+            \selectinstrument\Flute ... 
+            \selectinstrument\Oboe  ...
+            \selectinstrument\Soprano ... \en
+\end{verbatim}
+With this coding, difficult things such as putting the Flute above the Oboe
+are done easily: just say \verb|\def\Flute{3}| and \verb|\def\Oboe{2}|.
+
+ \section{Selecting, hiding or putting instruments in the background}
+
+ To put, for example, the Flute and the Oboe in the background, i.e., typesetting
+them in small notes, state at the beginning:
+ \begin{quote}
+ \verb|\setsize\Flute\tinyvalue\setsize\Oboe\tinyvalue|
+ \end{quote}
+where the value \keyindex{tinyvalue} for \keyindex{setsize} corresponds to notes and staffs
+of size \keyindex{tinynotesize}.
+ If, instead of putting an instrument in the background, one wants to omit it,
+this is done by:
+ \begin{quote}
+ \verb|\setstaffs\Flute{0}\setstaffs\Oboe{0}|
+ \end{quote}
+since nothing is typeset for
+instruments having \emph{zero} staffs (not to be confused with one-line staffs such
+as percussions).
+
+ \section{Recommendations}
+ \begin{itemize}
+ \item When hiding instruments, reduce
+\keyindex{instrumentnumber} by the number of hidden instruments; otherwise
+bars and leading braces will enclose the position of these dummy arguments,
+which would be ugly.
+
+ \item Exchange the actual instrument numbers so that hidden instruments have
+numbers \emph{greater} than the value of \verb|\instrumentnumber|.
+ Hidden instruments with numbers 
+less than  \verb|\instrumentnumber| will cause an excess of vertical
+space at their phantom positions; this is not
+recommended.
+
+ \item In hidden instruments, rests no longer behave like \verb|\hbox{...}| and
+\verb|raise|-ing them will result in an error.
+
+ \item In hidden instruments, explicit \verb|\hbox|es will remain as empty
+boxes, thus causing abnormal vertical spacings between instruments. Therefore,
+anything suspect should be made conditional with:
+
+\begin{quote}
+\keyindex{ifactiveinstrument}\ \textit{code to be omitted if instrument is hidden}\ \verb|\fi|
+\end{quote}
+Most \musixtex{} commands become properly hidden if requested. But 
+problematic
+parts of code can nonetheless be protected with \verb|\ifactiveinstrument|.
+
+ \end{itemize}
+

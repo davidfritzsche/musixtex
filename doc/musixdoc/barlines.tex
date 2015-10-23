@@ -1,0 +1,308 @@
+\chapter{Bar Lines}
+ \section{Single, double, and invisible bar lines}\label{doublebars}
+The usual macro to typeset a single bar line is \keyindex{bar}.
+There is a possibility of
+confusion with a command in \TeX's math mode that has exactly the same name.
+However, there will generally be no problem, because inside
+\verb|\startpiece...\endpiece|,
+\verb|\bar| will take the musical meaning, while outside, it will have the
+mathematical one.
+If for some reason you need the math \verb|\bar| inside, you can use
+\verb|\endcatcodesmusic...\bar...\catcodesmusic|.
+
+To typeset a double bar line with two thin rules, use \keyindex{doublebar}. You could
+also issue \keyindex{setdoublebar} to cause the next \verb|\bar| (or
+\keyindex{stoppiece}, \keyindex{alaligne}, or \keyindex{alapage}) to be replaced
+by a double bar.
+
+There is no specific command to print a thin-thick double bar line, but
+\keyindex{setdoubleBAR} will cause one in the same cases where
+\verb|\setdoublebar| would cause a thin-thin double bar line.
+
+To make the next bar line invisible, use \keyindex{setemptybar} before
+\verb|\bar|.
+
+You can suppress the beginning vertical rule with saying \keyindex{nostartrule}
+and restore the default with \keyindex{startrule} after that. Note that
+it is conventional practice to omit beginning rules for single-staff music.
+
+\section{Simple discontinuous bar lines}
+Normally, bars (as well as double bars, final bars and repeat bars) are
+drawn continuously from the bottom of the lowest staff of the
+lowest instrument to the top of the highest staff of the uppermost
+instrument. However, if desired, they can be made discontinuous between
+instruments by saying \keyindex{sepbarrules}. An example of this is given in
+%avrb
+%{\tt ANGESCAO} (or {\tt ANGESCAM}) example; it has also been used in the
+%avre
+\texttt{avemaria.tex} in Section~\ref{avemaria}\label{avemaria2}.
+
+Continuous bar lines can be restored with \keyindex{stdbarrules}. In
+the extension library are some more types of bar rules, mainly for very old
+music, see Section~\ref{otherbars}.
+
+% DAS. Andre, are there some other kinds of bars in an addon?
+
+\section{Elementary asynchronous bar lines}
+
+ Situations may arise where the bar lines in different instruments are not
+aligned with one another.  To set this up, first say \verb|\sepbarrules|.
+Then use a combination of the following five commands:
+
+\begin{itemize}\setlength{\itemsep}{0ex}
+\item\keyindex{hidebarrule}\onen~hides the bar rule for instrument $n$, until
+this is changed by \verb|\showbarrule|\onen.
+\item\keyindex{showbarrule}\onen~stops hiding the bar rule for instrument $n$,
+until this is changed by \verb|\hidebarrule|\onen.
+\item\keyindex{Hidebarrule}\onen~hides the bar rule for instrument $n$, only
+for the next bar.
+\item\keyindex{Showbarrule}\onen~shows the bar rule for instrument
+$n$ once only,
+and then resets it.
+%
+% DAS ???
+%  and then resets it to \verb|hidebarrule|.
+%
+\item\keyindex{showallbarrules} resets all defined instruments to
+\verb|\showbarrule|\onen. This command is automatically inserted with double
+bars, final bars and repeats.
+\end{itemize}
+
+Thus, this example
+
+\begin{music}
+\instrumentnumber3
+\setmeter3{{\meterfrac{3}{4}}}
+\setmeter2{{\meterfrac{2}{4}}}
+\setmeter1{{\meterfrac{3}{8}}}
+\nobarnumbers
+\sepbarrules
+
+\startextract
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\hidebarrule2\hidebarrule3\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\showbarrule2\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\hidebarrule2\showbarrule3\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\showbarrule2\hidebarrule3\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\hidebarrule2\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\setdoublebar
+\bar\hidebarrule3
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\Hidebarrule2\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\message{Showbarrule3 coming}%
+\Hidebarrule2\Showbarrule3\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\Hidebarrule2\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\setrightrepeat
+\endextract
+\end{music}
+
+\noindent was obtained with the following coding:
+\begin{quote}\begin{verbatim}
+\instrumentnumber3
+\setmeter3{{\meterfrac{3}{4}}}
+\setmeter2{{\meterfrac{2}{4}}}
+\setmeter1{{\meterfrac{3}{8}}}
+\nobarnumbers
+\sepbarrules
+
+\startextract
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\hidebarrule2\hidebarrule3\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\showbarrule2\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\hidebarrule2\showbarrule3\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\showbarrule2\hidebarrule3\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\hidebarrule2\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\setdoublebar
+\bar\hidebarrule3
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\Hidebarrule2\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\message{Showbarrule3 coming}%
+\Hidebarrule2\Showbarrule3\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\bar
+\NOtes\pt f\qa f&\qa f&\qa f\en
+\Hidebarrule2\bar
+\NOtes\multnoteskip{.333}\Tqbu fff&\qa f&\qa f\en
+\setrightrepeat
+\zendextract
+\end{verbatim}\end{quote}
+
+\section{Dotted, dashed, asynchronous and discontinuous bar lines}\label{musixdbr}
+
+The extension
+package \href{http://icking-music-archive.org/software/musixtex/add-ons/musixdbr.tex}
+{\underline{\ttxem{musixdbr.tex}}} by Rainer {\sc Dunker} provides commands for
+dashed, dotted, and arbitrarily discontinuous bar lines. It supports
+individual bar line settings for each instrument, multi-staff instruments,
+different sizes of staves, and even different numbers of lines per staff,
+
+To use the package, you must \verb|\input musixdbr| after \verb|musixtex|, and
+execute the macro \keyindex{indivbarrules} which activates individual bar line
+processing. Then the following commands are available:
+
+\begin{itemize}\setlength{\itemsep}{0ex}
+
+\item  \keyindex{sepbarrule}\onen~separates bar lines of instrument $n$ from those of instrument $n-1$
+
+\item \keyindex{condashbarrule}\onen~connects bar lines of instrument $n$ to those of instrument $n-1$
+   with a dashed line
+
+\item \keyindex{condotbarrule}\onen~connects bar lines of instrument $n$ to those of instrument $n-1$
+   with a dotted line
+
+\item \keyindex{conbarrule}\onen~connects bar lines of instrument $n$ to those of instrument $n-1$
+
+\item \keyindex{hidebarrule}\onen~hides bar lines of instrument $n$
+
+\item \keyindex{showdashbarrule}\onen~dashes bar lines of instrument $n$
+
+\item \keyindex{showdotbarrule}\onen~dots bar lines of instrument $n$
+
+\item \keyindex{showbarrule}\onen~shows bar lines of instrument $n$
+
+\item \keyindex{sepmultibarrule}\onen~separates bar lines within multistaff instrument $n$
+
+\item \keyindex{condashmultibarrule}\onen~dashes bar lines between staves of multistaff instrument $n$
+
+\item \keyindex{condotmultibarrule}\onen~dots bar lines between staves of multistaff instrument $n$
+
+\item \keyindex{conmultibarrule}\onen~ shows bar lines between staves of multistaff instrument $n$
+
+\item \keyindex{allbarrules}[\ital{any of the above commands, without numerical parameter}] sets bar
+line style for all instruments together.
+
+\end{itemize}
+
+Dashing and dotting style may be changed by redefining the macros
+\verb|\barlinedash| or \verb|\barlinedots| respectively (see original definitions in \verb|musixdbr.tex|).
+
+Here is an example of the use of these macros:
+
+\begin{music}
+\input musixdbr
+
+\instrumentnumber4 \setstaffs23 \setstaffs32 \setlines14\setsize2\tinyvalue
+\indivbarrules
+\parindent0pt\startextract
+%\startpiece
+%\scale{2}
+  % normal barlines
+  \bar
+  % separate instrument 2 from 1
+  \sepbarrule2
+  \notes\en\bar
+  % barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showbarrule
+  \NOTes\en\bar
+  % barlines between staves
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+  \allbarrules\hidebarrule
+  \NOTes\en\bar
+  % dashed barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdashbarrule
+  \NOTes\en\bar
+  % dashed barlines between staves
+  \allbarrules\condashbarrule
+  \allbarrules\condashmultibarrule
+  \allbarrules\hidebarrule
+  \NOTes\en\bar
+  % dotted barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdotbarrule
+  \NOTes\en\bar
+  % dotted barlines between staves
+  \allbarrules\condotbarrule
+  \allbarrules\condotmultibarrule
+  \allbarrules\hidebarrule
+  \NOTes\en\bar
+  % a wild mixture of all
+  \showdotbarrule1\hidebarrule2\showdashbarrule3\showbarrule4%
+  \condashbarrule2\conbarrule3\condotbarrule4%
+  \condashmultibarrule2\sepmultibarrule3%
+  \NOTes\en\bar
+  % conventional ending
+  \allbarrules\showbarrule
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+  \NOTes\en\setdoubleBAR\endextract
+\end{music}
+
+This is the code:
+
+\begin{quote}\begin{verbatim}
+\input musixdbr
+\instrumentnumber4\setstaffs23\setstaffs32\setlines14\setsize2\tinyvalue
+\indivbarrules\parindent0pt\startextract
+  % normal barlines
+  \bar
+  % separate instrument 2 from 1
+  \sepbarrule2
+  \notes\en\bar
+  % barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showbarrule
+  \NOTes\en\bar
+  % barlines between staves
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+  \allbarrules\hidebarrule
+  \NOTes\en\bar
+  % dashed barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdashbarrule
+  \NOTes\en\bar
+  % dashed barlines between staves
+  \allbarrules\condashbarrule
+  \allbarrules\condashmultibarrule
+  \allbarrules\hidebarrule
+  \NOTes\en\bar
+  % dotted barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdotbarrule
+  \NOTes\en\bar
+  % dotted barlines between staves
+  \allbarrules\condotbarrule
+  \allbarrules\condotmultibarrule
+  \allbarrules\hidebarrule
+  \NOTes\en\bar
+  % a wild mixture of all
+  \showdotbarrule1\hidebarrule2\showdashbarrule3\showbarrule4%
+  \condashbarrule2\conbarrule3\condotbarrule4%
+  \condashmultibarrule2\sepmultibarrule3%
+  \NOTes\en\bar
+  % conventional ending
+  \allbarrules\showbarrule
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+  \NOTes\en\setdoubleBAR\zendextract
+\end{verbatim}\end{quote}
+

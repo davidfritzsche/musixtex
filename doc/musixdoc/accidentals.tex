@@ -1,0 +1,73 @@
+\chapter{Accidentals}
+\vspace*{-3ex}
+Accidentals can be introduced in two ways.
+ The first way, using explicit macros, consists for
+example in coding \keyindex{fl}\pitchp~to put a \ital{flat} at the
+pitch $p$, presumably right before a note at the same pitch. This is a
+non-spacing command and will automatically place the accidental an
+appropriate distance to the left of the anticipated note head.
+Naturals, sharps, double flats and double sharps are coded \keyindex{na}\pitchp,
+\keyindex{sh}\pitchp, \keyindex{dfl}\pitchp~and \keyindex{dsh}\pitchp~respectively.
+
+The alternate macros \keyindex{lfl}, \keyindex{lna}, \keyindex{lsh},
+\keyindex{ldfl} and \keyindex{ldsh}
+place the same accidentals, but shifted one note head width
+to the left. These can be used if a note head has been shifted to the left, or
+to avoid collision with other accidentals
+in a chord. If you want to shift an accidental by some other amount for
+more precise positioning, you could use \keyindex{loffset} with the normal
+accidental macro as the second parameter.
+
+ The second way of coding accidentals is to modify the parameter of a
+note command. Just put the symbol
+\verb|^| for a sharp, \verb|_| for a flat, \verb|=|~for a natural,
+\verb|>| for a double sharp, or \verb|<| for a double
+flat, right before the letter or number representing the pitch.
+For example, \verb|\qb{^g}| yields a
+$G\sharp$. This may be used effectively in collective coding, e.g.
+\verb|\qu{ac^d}|.
+
+ There are two sizes of accidentals. By default they will be large unless there
+is not enough space between notes, in which case they will be made small. Either
+size can be forced locally by coding \keyindex{bigfl}, \keyindex{bigsh}, etc., or
+\keyindex{smallfl}, \keyindex{smallsh}, etc. If you want all accidentals to
+be large, then declare \keyindex{bigaccid} near the top of the input file. For
+exclusively small ones use \keyindex{smallaccid}; \keyindex{varaccid} will restore
+variable sizes.
+
+ For editorial purposes, small accidentals can be placed \ital{above} note
+heads. This is done using \keyindex{uppersh}\pitchp, \keyindex{upperna}\pitchp, or
+\keyindex{upperfl}\pitchp:
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\uppersh l\qa l\en
+\NOtes\upperna m\qa m\en
+\NOtes\upperfl l\qa l\en
+\zendextract
+\end{music}
+
+\vspace*{-2ex}
+It also possible to introduce \ital{\ixem{cautionary accidental}s},
+i.e.,~small accidentals enclosed in parentheses. This done by preceding
+the name of the accidental keyword with ``\verb|c|'',\label{cautionary}
+e.g.,~\keyindex{cfl}\pitchp~for a cautionary flat.
+ Available cautionary accidentals are \keyindex{csh}, \keyindex{cfl},
+\keyindex{cna},
+\keyindex{cdfl} and \keyindex{cdsh}, which give
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\csh g\qa g\en
+\NOtes\cfl h\qa h\en
+\NOtes\cna i\qa i\en
+\NOtes\cdfl j\qa j\en
+\NOtes\cdsh k\qa k\en
+\zendextract
+\end{music}
+
+\vspace*{-2ex}
+\noindent The distance between notes and accidentals is controlled by
+\keyindex{accshift}\verb|=|\ital{any \TeX\ dimension}, where
+positive values shift to the left and negative to right, with a
+default of~\verb|0pt|.

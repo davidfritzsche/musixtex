@@ -1,0 +1,353 @@
+\chapter{Setting up the Input File}
+\section{What makes a \TeX\ file a \musixtex\ file?}
+A \musixtex\ input file is a special kind of \TeX\ input file. What makes it
+special is that it must contain the command
+\verb|\input musixtex|
+before any reference to \musixtex\ macros. After that might follow
+\verb|\input musixadd| or \verb|\input musixmad| if you want to have
+respectively up to nine or twelve instruments or simultaneous beams,
+ties, or slurs.\ixtt{musixtex.tex}\ixtt{musixadd.tex}\ixtt{musixmad.tex}
+If you want to have greater numbers of these elements, you can assign them 
+directly by including one or more of these commands: 
+\verb|\setmaxinstruments|, 
+\verb|\setmaxcxxviiibeams|, 
+\verb|\setmaxcclvibeams|, 
+\verb|\setmaxgroups|, 
+\verb|\setmaxslurs|, 
+\verb|\setmaxtrills|, 
+\verb|\setmaxoctlines|.
+
+Since it is still a \TeX\ file, after that, if you wished to,
+you could write a whole non-musical book
+using normal \TeX\ commands provided that you did not
+use \verb|&| as a tab character like in plain \TeX; in \TeX\ lingo,
+its \keyindex{catcode} has been changed.
+
+ \section{Cautions for the non \TeX pert}
+When \TeX\ reads anything, it inputs one \ital{token} at a time. A token
+may be either a \ital{command} or a character. A command (or \ital{macro},
+or \ital{control sequence}) is a
+\ital{backslash} (``{\Bslash}'') immediately followed by sequence of
+letters with no intervening spaces. For practical purposes, any single symbol (letter, digit,
+special character, or space) that is not part of a command counts as a character
+and therefore as a token.
+
+Each command expects a specific number of parameters.
+The tokens ``\verb|{|'' and ``\verb|}|'' are very special, in that (1) they
+must occur in matched pairs, and (2) any matched pair together with
+the stuff inside counts as a single parameter.
+If the first
+parameter expected is a single letter, it must either be
+separated from the command by a space or
+enclosed in braces (otherwise it would be interpreted as part of the command).
+For example the command \verb|\ibu| expects three parameters, so the
+following are all OK: \verb|\ibu123|, \verb|\ibu1A3|, \verb|\ibu1{`A}3|,
+\verb|\ibu{1}{2}{3}|, \verb|\ibu1{-2}3|, or \verb|\ibu1{23}4|, but
+\verb|\ibu1234| is not OK; the first three digits are taken as parameters,
+leaving the ``4'' with no purpose other than to cause some of the dreaded
+unrecorded space that we have already mentioned.
+
+In the rest of this manual, when describing commands we will write
+things like \verb|\qb{|$n$\verb|}{|$p$\verb|}|. It should be understood that
+when $n$ and $p$ are replaced by their literal values, the braces may
+or may not be necessary. In particular, if both are single digits, no
+braces are needed; but if $n$ has two digits, or if $p$ has more than
+one character, they must be surrounded by braces.
+
+Spaces (blank characters) in the input file must be handled very carefully.
+They are ignored at the beginning of a line, enabling logical
+indentation schemes to help make the file human-readable. There are also a few
+other places within lines where blank spaces are OK (such as mentioned in the prior paragraph),
+but in general is it safest to avoid
+any unnecessary blanks between the beginning and end of an input line.
+At the end of a line, the truth is that a command with no parameters, such as
+\verb|\bar| or \verb|\en| will cause no trouble. However if a command with
+one or more parameters is the last item in an input line, it will cause
+unrecorded space. The way around this is to end the line with either ``\verb|%|''
+or \verb|\relax|.
+
+ \section{Usual setup commands}\label{whatspecify}
+
+\subsection{Music size}
+
+ The first decision is what size type to use. \musixtex\ offers four sizes:
+``small'' \mbox{(\texttt{16pt}-high staves),} ``normal'' (\texttt{20pt}),\index{sizes} ``large''
+(\texttt{24pt}), and ``Large'' (\texttt{29pt}). The default is
+\keyindex{normalmusicsize}. If you want a different size, then you have to
+enter \keyindex{smallmusicsize}, \keyindex{largemusicsize}, or
+\keyindex{Largemusicsize}. Each of these commands defines not only the
+desired staff size but many other related sizes such as note heads, ornaments,
+stem lengths, etc.
+
+\subsection{Number of instruments}
+
+ The command \keyindex{instrumentnumber}\onen~defines the
+number of instruments to be $n$. If not entered, the default is $1$. This number is used in loops
+that build staves,
+set key signatures, set meters, etc., so if it differs from $1$ it must be explicitly
+defined before any further commands.
+
+\subsection{Number of staves per instrument}
+
+An instrument may have one or more staves (e.g.,~a piano would normally have 2 staves).
+The differences between one
+instrument of several staves and several instruments with one staff each are as follows:
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item Different instruments may have different \itxem{key signatures}, while different
+staves of an instrument will all have the same key signature.
+ \item A \itxem{beam} may include notes in different
+staves of the same instrument.
+ \item A \itxem{chord} may extend across several staves of the same
+instrument.
+ \item If an instrument has more than one staff, they will be linked together
+with a big, curly brace at the beginning of each line.
+\end{itemize}
+The default number of staves per instrument is $1$. If it is different, then it
+must be specified by \keyindex{setstaffs}\verb|{|$n$\verb|}{|$p$\verb|}|
+where $p$ is the number of staves and $n$ is the
+number of the instrument. In \musixtex, instruments are numbered
+\ital{starting with the lowest}.
+So for example \verb|setstaffs32|
+assigns two staves to the third instrument from the bottom.
+
+\subsection{Clefs for each staff}
+
+ The default clef for every staff is the \ital{treble} clef. To assign
+any other clef, the command is
+\keyindex{setclef}\verb|{|$n$\verb|}{|$s_1s_2s_3s_4$\verb|}|
+where $n$ is the number of the instrument, $s_1$ is a digit specifying the
+clef for the first (lowest) staff, $s_2$ for the second staff, and so forth.
+Note that like
+instruments, staves of a given instrument are numbered starting with
+the lowest. The parameters $s_2$, $s_3$ and $s_4$ can be omitted, in which case
+any unspecified staves will be assigned a treble clef.
+
+The digits $s$ can range from $0$ to $9$, with the following meanings:
+$s=0$ signifies treble or G clef.
+$s=1$ to $4$ mean C-clef, respectively on the first (lowest) through fourth staff line.
+$1$ is also called \ital{soprano}, $3$ \ital{alto} and $4$ \ital{tenor}.
+$s=5$ to $s=7$ mean F-clef, respectively on the third through fifth staff line. $5$ is
+also called \ital{baritone} and $6$ is the normal \ital{bass}.
+ $s=8$ is not used.
+$s=9$ represents a G clef on the first line, also called \ital{French violin} clef.
+
+The three tokens \verb|\treble|, \verb|\alto|, and \verb|\bass| can be used instead
+of a digit for $s$, but only if there would have been but one digit in the string.
+So for example the clefs for a standard piano score
+could be specified by
+\keyindex{setclef}\verb|1{\bass}|.
+
+Treble and bass clefs with the digit $8$ above or below are also possible; see 
+Section~\ref{treblelowoct}.
+
+\subsection{Key signatures}
+
+To set a common key signature for all instruments, use
+ \keyindex{generalsignature}\verb|{|$s$\verb|}|,
+where $s>0$ is the number of \itxem{sharps} in the
+signature and $s<0$ the number of \itxem{flats}\footnote{We once saw a
+score in G-minor where the signature consisted of two flats (B and E) plus
+one sharp (F). This is not directly supported by \musixtex.}. To override
+the common key signature for instrument $n$, use
+\keyindex{setsign}\verb|{|$n$\verb|}{|$s$\verb|}|. Note that differing
+key signatures cannot be assigned to different staves of the same instrument.
+
+\subsection{Meters}
+
+A common \itxem{meter} for all staves can be specified by
+ \keyindex{generalmeter}\verb|{|$m$\verb|}|,\label{generalmeter}
+where $m$ describes the appearance of the meter indication, and can take several
+different forms. If the meter is a \ital{fraction} (e.g.,~$3/4$) the command is
+ \verb|\generalmeter{|\keyindex{meterfrac}\verb|{3}{4}}|.
+Other possible tokens~$m$ are \keyindex{meterC},
+\keyindex{allabreve}, \keyindex{reverseC}, \keyindex{reverseallabreve} and
+\keyindex{meterplus}. These are illustrated in the following example:
+
+ %\check
+\begin{music}
+\generalmeter\meterC
+\nostartrule
+\parindent0pt\startpiece
+\NOtes\qa{cegj}\en
+\generalmeter\allabreve\changecontext
+\NOTes\ha{ce}\en
+\generalmeter\reverseC\changecontext
+\NOTEs\zbreve g\en
+\generalmeter\reverseallabreve\changecontext
+\NOTEs\zwq g\en
+\generalmeter{\meterfrac{3\meterplus2\meterplus3}8}\changecontext
+\Notes\Tqbu ceg\Dqbl jg\Tqbu gec\en\setemptybar
+\endpiece
+\end{music}
+\noindent which was coded as:
+\begin{quote}\begin{verbatim}
+\generalmeter\meterC
+\nostartrule
+\parindent0pt\startpiece
+\NOtes\qa{cegj}\en
+\generalmeter\allabreve\changecontext
+\NOTes\ha{ce}\en
+\generalmeter\reverseC\changecontext
+\NOTEs\zbreve g\en
+\generalmeter\reverseallabreve\changecontext
+\NOTEs\zwq g\en
+\generalmeter{\meterfrac{3\meterplus2\meterplus3}8}\changecontext
+\Notes\Tqbu ceg\Dqbl jg\Tqbu gec\en\setemptybar
+\endpiece
+\end{verbatim}\end{quote}
+
+To override the common meter for any  staff, use
+\keyindex{setmeter}\verb|{|$n$\verb|}{{|$m_1$\verb|}{|$m_2$\verb|}{|$m_3$\verb|}{|$m_4$\verb|}}|.\linebreak
+This works just like \verb|\setclef|. For example,
+\verb|setmeter3{{\meterfrac{12}8}\allabreve}|
+sets the meter to 12/8 for the first staff of the third instrument, and
+\ital{alla breve} for the second staff.
+
+To insert extra space before the meter is
+written, use \keyindex{meterskip}$d$ where $d$ is any hard \TeX\
+%dimension\footnote{{\Bslash\tt meterskip} is not a macro but a
+dimension\footnote{{\tt\Bslash meterskip} is not a macro but a
+dimension register. Whatever follows it
+must be a \TeX\ dimension and {\it it must not be enclosed in braces}.}.
+The assignment must occur outside \verb|\startpiece...\endpiece| and will be
+reset to zero after first meter is posted.
+
+\subsection{Instrument names}
+
+To set an \itxem{instrument name}, use
+\keyindex{setname}\verb|{|$n$\verb|}{|\ital{name of the instrument}\verb|}|.
+This will place the name in the space to the left of the
+first staff or group of staves for instrument $n$. To specify the amount of space
+available, use \verb|\parindent|$d$ where $d$ is any hard \TeX\ dimension.
+ \section{Groupings of instruments}\label{curlybrackets}
+By default, all staves in a system will be joined
+at the left by a thin, vertical rule. In addition, if an instrument has more than
+one staff, they will be joined by a big, curly brace. Now we introduce a way
+to delineate groups of instruments or choirs with a square brace containing two parallel
+vertical rules, the left one thick and the right one thin. This is commonly used
+to group together the voices in a choir.
+
+If there is only one choir, this can be done with
+ \begin{quote}
+\keyindex{songtop}\onen\\
+\keyindex{songbottom}\verb|{|$m$\verb|}|
+\end{quote}
+\noindent where $m$ and $n$ are the instrument numbers of the first
+and last voices. An example is shown in Section~\ref{song}.
+
+If there is more than one choir to be set off with
+square braces, each one can be specified with
+ \begin{quote}
+\keyindex{grouptop}\verb|{|$g$\verb|}{|$n$\verb|}|\\
+\keyindex{groupbottom}\verb|{|$g$\verb|}{|$m$\verb|}|
+\end{quote}
+\noindent where $m$ and $n$ are the instrument numbers of the first
+and last voices of group number~$g$. \musixtex{} allows up to three
+groups, numbered from $1$ to $3$. The command \verb|\songtop| is equivalent
+to \verb|\grouptop 1|; \verb|\songbottom| is equivalent to
+\verb|\groupbottom 1|.
+
+With \ttxem{musixadd.tex} or \ttxem{musixmad.tex}, the allowable number of 
+groups is increased to four.
+Alternatively, you can specify the allowable number of groups to $m$ by 
+\keyindex{setmaxgroups}\verb|{|$m$\verb|}|%
+\footnote{Using $m>4$ may require e-\TeX.}.
+\label{musixmad_setmaxgroups}
+
+If any of the instruments grouped this way has more than one staff, the
+heavy curly brace will be shifted to the left of the square brace.
+
+Previously defined square braces can be removed by declaring
+\verb|\songtop| less than \verb|\songbottom|. The same applies to
+\verb|\grouptop| and \verb|\groupbottom| for the same group number.
+
+ An alternate command allows you to specify all choirs at once:
+\begin{quote}
+ \keyindex{akkoladen}\verb|{{|{\it lower\_1\/}\verb|}{|{\it upper\_1\/}%
+   \verb|}{|{\it lower\_2\/}\verb|}{|{\it upper\_2\/}\verb|}{|%
+   {\it lower\_3\/}\verb|}{|{\it upper\_3\/}\verb|}}|
+\end{quote}
+\noindent where {\it lower\_n\/} and {\it upper\_n\/} are instrument
+numbers that denote the span of bracket number $n$. For
+setting fewer than three brackets, just omit all unneeded
+\verb|{|{\it lower\_n\/}\verb|}{|{\it upper\_n\/}\verb|}|~pairs.
+
+For example,
+ \verb|\instrumentnumber{5}\akkoladen{{1}{2}{3}{5}}|
+\noindent yields the first example below, with five single-staff instruments
+divided into two groups.
+The second example has two instruments, the first (lower) with two staves and the
+second with three. Each instrument is set off by default with a curly bracket.
+
+If for some reason you want more than one \ital{instrument}\ grouped
+within a curly
+bracket, then you can use the 
+command
+
+ \keyindex{curlybrackets}\verb|{{|{\it lower\_1\/}\verb|}{|{\it upper\_1\/}%
+   \verb|}{|{\it lower\_2\/}\verb|}{|{\it upper\_2\/}\verb|}...|
+
+\noindent to be used as illustrated in the third example below.\\
+\begin{small}
+\begin{minipage}[t]{29ex}
+\begin{music}
+ % just to avoid wasting space ...
+ \sepbarrules
+ \smallmusicsize
+ \instrumentnumber{5} \akkoladen{{1}{2}{3}{5}}
+ \startextract\notes\en\bar\notes\en\zendextract
+\end{music}
+\begin{quote}is coded as:
+\begin{verbatim}
+ \sepbarrules
+ \smallmusicsize
+ \instrumentnumber{5}
+ \akkoladen{{1}{2}{3}{5}}
+ \startextract
+ \notes\en\bar\notes\en
+ \zendextract
+\end{verbatim}\end{quote}
+\end{minipage}
+\begin{minipage}[t]{27ex}
+\begin{music}
+  \sepbarrules
+  \smallmusicsize
+  \instrumentnumber2 \setstaffs12\setstaffs23
+  \startextract \notes\en\bar\notes\en\zendextract
+\end{music}
+\begin{quote}is coded as:
+\begin{verbatim}
+ \sepbarrules
+ \smallmusicsize
+ \instrumentnumber2
+ \setstaffs12
+ \setstaffs23
+ \startextract
+ \notes\en\bar\notes\en
+ \zendextract
+\end{verbatim}\end{quote}
+\end{minipage}
+\begin{minipage}[t]{27ex}
+\begin{music}
+ \sepbarrules
+ \smallmusicsize
+ \instrumentnumber5 %\setstaffs12\setstaffs23
+ \curlybrackets{1235}
+ \startextract \notes\en\bar\notes\en\zendextract
+\end{music}
+\begin{quote}is coded as:
+\begin{verbatim}
+ \sepbarrules
+ \instrumentnumber5
+ \smallmusicsize
+ \curlybrackets{1235}
+ \startextract
+ \notes\en\bar\notes\en
+ \zendextract
+\end{verbatim}\end{quote}
+\end{minipage}
+\end{small}
+
+
+
+

@@ -1,0 +1,114 @@
+\chapter{Rests}
+ \section{Ordinary rests}
+ A separate macro is defined for each kind of ordinary rest. They cause
+a space after the symbol, just like spacing note commands, but they have
+no parameters. A whole rest is coded as
+\keyindex{pause}, 
+half rest \keyindex{hpause} or \keyindex{hp}, 
+quarter rest \keyindex{qp} or \keyindex{soupir},
+eighth rest \keyindex{ds}, sixteenth rest \keyindex{qs},
+$32$nd~rest \keyindex{hs}, and $64$th rest \keyindex{qqs}.
+Dotted rests may be obtained by 
+using 
+\keyindex{hpausep} or \keyindex{hpp}, \keyindex{qpp}, \keyindex{dsp}, \keyindex{qsp},
+\keyindex{hsp} and \keyindex{qqsp}.
+
+ Longer rests, normally interpreted as lasting
+two or four bars respectively, can be coded as \keyindex{PAuse}
+and \keyindex{PAUSe}, which yield:
+
+\begin{music}\nostartrule
+\generalmeter{\meterfrac44}
+\startextract
+\def\atnextbar{\znotes\centerbar\PAuse\en}%
+\NOTEs\en\bar
+\def\atnextbar{\znotes\centerbar\PAUSe\en}%
+\NOTEs\en
+\endextract
+\end{music}
+ %\check
+
+
+ \section{Raising rests}\index{raising rests}
+All the
+previous rests except \keyindex{pausep} and
+\keyindex{hpausep} are \ital{hboxes}, which means that
+they can be vertically offset if needed using the
+standard \TeX\ command \keyindex{raise}. For example:
+
+ \begin{quote}
+ \begin{verbatim}
+ \raise 2\Interligne\qp
+ \raise 3mm\qqs
+ \end{verbatim}
+ \end{quote}
+
+\noindent where \keyindex{Interligne} is the distance from one staff line to the
+next.
+
+In addition, two macros are available to put a whole or
+half rest above or below the staff. The ordinary \verb|\pause| or
+\verb|\hpause| cannot be used outside the staff because a short horizontal line
+must be added to distinguish between the whole and the half rest. The commands,
+which are non-spacing\footnote{Editor's note: The reason for having defined these
+as non-spacing is not obvious}, are
+ \begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{liftpause}~$n$ to get a
+  \hbox to10pt{\liftpause{-2}\hss}
+  raised from original position by $n$ staff line intervals,
+ \item \keyindex{lifthpause}~$n$ to get
+  \hbox to10pt{\lifthpause{-1}\hss} raised the same way.
+ \item \keyindex{liftpausep}~$n$ to get a
+  \hbox to10pt{\liftpausep{-2}\hss}
+  raised from original position by $n$ staff line intervals,
+ \item \keyindex{lifthpausep}~$n$ to get
+  \hbox to10pt{\lifthpausep{-1}\hss} raised the same way.
+ \end{itemize}
+ %\check
+
+ \section{Bar centered rests}\label{barcentered}
+Sometimes it is necessary to place a rest (or any other symbol) exactly in the middle
+of a bar. This can be done with combinations of the commands
+\keyindex{atnextbar},
+\keyindex{centerbar},
+\keyindex{centerPAUSe},
+\keyindex{centerPAuse},
+\keyindex{centerpause},
+\keyindex{centerhpause},
+as demonstrated in the following example:
+
+\begin{music}
+\generalmeter\meterC
+\setclef1\bass
+\setstaffs1{2}
+\parindent0pt
+\startpiece\addspace\afterruleskip
+\NOtes|\qa{cegj}\en
+\def\atnextbar{\znotes\centerpause\en}\bar
+\NOtes|\qa{jgec}\en
+\def\atnextbar{\znotes\centerpause\en}\bar
+\Notes\ca{`jihgfedc}\en
+\def\atnextbar{\znotes|\centerpause\en}\bar
+\NOTes\ha{Nc}\en
+\def\atnextbar{\znotes|\centerpause\en}\bar
+\addspace{10\elemskip}%
+\def\atnextbar{\znotes\centerbar\duevolte|\centerbar\duevolte\en}\endpiece
+\end{music}
+\noindent with the coding
+\begin{verbatim}
+\generalmeter\meterC
+\setclef1\bass
+\setstaffs1{2}
+\parindent0pt
+\startpiece\addspace\afterruleskip
+\NOtes|\qa{cegj}\en
+\def\atnextbar{\znotes\centerpause\en}\bar
+\NOtes|\qa{jgec}\en
+\def\atnextbar{\znotes\centerpause\en}\bar
+\Notes\ca{`jihgfedc}\en
+\def\atnextbar{\znotes|\centerpause\en}\bar
+\NOTes\ha{Nc}\en
+\def\atnextbar{\znotes|\centerpause\en}\bar
+\addspace{10\elemskip}%
+\def\atnextbar{\znotes\centerbar{\duevolte}|\centerbar{\duevolte}\en}\endpiece
+\end{verbatim}

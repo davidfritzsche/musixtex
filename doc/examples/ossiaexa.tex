@@ -1,0 +1,30 @@
+\input musixtex
+\startmuflex
+\hsize70mm
+\def\xnum#1#2#3{\off{#1\elemskip}\zcharnote{#2}{\smalltype\it #3}%
+\off{-#1\elemskip}}%
+\newbox\ornamentbox
+\setbox\ornamentbox=\hbox to 0pt{\kern-4pt\vbox{\hsize=2.6cm%
+\nostartrule\smallmusicsize\setsize1{\smallvalue}\setclefsymbol1\empty%
+\startpiece\addspace{2pt}%
+\notes\ibbbl2{'c}0\qb2b\qb2c\qb2d\tbbbl2\qb2c\en%
+\notes\xnum{1.15}{'e}3\qb2d\qb2c\tbl2\qb2d\en%
+\notes\ibl2{'c}1\usf e\qb2c\en%
+\notes\tbl2\qb2{'d}\en%
+\zstoppiece%
+}\hss}
+\normalmusicsize\nopagenumbers
+\def\nbinstruments{1}%
+\setstaffs12\setclef1{60}%
+\generalsignature{-2}\generalmeter{\meterfrac{3}{4}}%
+\parindent 0pt%
+\stafftopmarg0pt\staffbotmarg5\Interligne\interstaff{10}\relax
+\startpiece\addspace\afterruleskip%
+\notes\ibl1{'G}{-1}\qb1G\sk\bigna F\tbl1\qb1F|%
+\ibbl2{'b}0\qb2b\qb2a\qb2b\tbl2\qb2c\en%
+\notes\hl{'E}\bsk\raise6\internote\ds\ibu3{G}1\bigsh F%
+\qb3F\qb3G\tbu3\qb3{'A}|\zcharnote{10}{\copy\ornamentbox}\qlp{'c}\sk\sk%
+\cl d\en%
+\endpiece
+\vfill\eject\endmuflex
+\bye

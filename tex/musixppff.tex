@@ -1,0 +1,134 @@
+%% musippff.tex   This is an extension library for Musix\Tex which
+%% replaces the macros used for dynamic marks to use a mini-font xppff10 
+%% 
+%%   Author:
+%%   Hiroaki MORIMOTO <CQX05646\atmark nifty.com>
+%%     Tokyo, Japan
+%%     URL: http://homepage1.nifty.com/kuuku/pub/musixtex/index-e.html
+%%
+%% usage: 
+%%    \input musixtex
+%%    \input musixppff
+%%    ...
+%%
+%% 
+\immediate\write16{MusiXppff \noexpand\ppff font replacement <2015/02/23>}%
+
+\font\xppffsixteen=xppff10
+\font\xppfftwenty=xppff10 scaled \magstep1
+\font\xppfftwentyfour=xppff10 scaled \magstep2
+\font\xppfftwentynine=xppff10 scaled \magstep3
+\font\smallxppff=xppff10
+\font\normxppff=xppff10 scaled \magstep1
+\font\medxppff=xppff10 scaled \magstep2
+
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+
+\def\f{{\xppff f}}%
+\def\ff{{\xppff ff}}%
+\def\fp{{\xppff fp}}%
+\def\sF{{\xppff sf}}%
+\def\fff{{\xppff fff}}%
+\def\ffff{{\xppff ffff}}%
+\def\mf{{\xppff mf}}%
+\def\p{{\xppff p}}%
+\def\pp{{\xppff pp}}%
+\def\ppp{{\xppff ppp}}%
+\def\pppp{{\xppff pppp}}%
+\def\sfz{{\xppff sfz}}%
+\def\sfzp{{\xppff sfzp}}%
+\def\mp@{{\xppff mp}}%
+\let\mezzopiano\mp@
+
+\def\comput@fonts{%    
+  \ifnum\musicsize=\sixt@@n
+    \let\musicLargefont\musictwentyfour
+    \let\musiclargefont\musictwenty
+    \let\musicnorfont\musicsixteen
+    \let\musicsmallfont\musicthirteen
+    \let\musictinyfont\musiceleven
+    \let\xgregLargefont\xgregtwentyfour
+    \let\xgreglargefont\xgregtwenty
+    \let\xgregnorfont\xgregsixteen
+    \let\xgregsmallfont\xgregthirteen
+    \let\xgregtinyfont\xgregeleven
+    \let\slurd\slurdsixteen \let\sluru\slurusixteen
+    \let\hslurd\hslurdsixteen \let\hsluru\hslurusixteen
+    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % T116  RDT
+    \let\meterbigfont\twelvebf \let\meterlargefont\frtbf
+    \let\meterLargefont\svtbf
+    \let\ppff\ppffsixteen
+    \let\xppff\xppffsixteen
+  \else\ifnum\musicsize=\@xxiv
+    \let\musicLargefont\musictwentynine
+    \let\musiclargefont\musictwentynine
+    \let\musicnorfont\musictwentyfour
+    \let\musicsmallfont\musictwenty
+    \let\musictinyfont\musicsixteen
+    \let\xgregLargefont\xgregtwentynine
+    \let\xgreglargefont\xgregtwentynine
+    \let\xgregnorfont\xgregtwentyfour
+    \let\xgregsmallfont\xgregtwenty
+    \let\xgregtinyfont\xgregsixteen
+    \let\sluru\slurutwenty \let\slurd\slurdtwenty
+    \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
+    \let\meternorfont\frtbf \let\metersmallfont\twelvebf % T116  RDT
+    \let\meterbigfont\svtbf \let\meterlargefont\twtybf
+    \let\meterlargefont\twfvbf
+    \let\ppff\ppfftwentyfour
+    \let\xppff\xppfftwentyfour
+  \else\ifnum\musicsize=\@xxix
+    \let\musicLargefont\musictwentynine
+    \let\musiclargefont\musictwentynine
+    \let\musicnorfont\musictwentynine
+    \let\musicsmallfont\musictwentyfour
+    \let\musictinyfont\musictwenty
+    \let\xgregLargefont\xgregtwentynine
+    \let\xgreglargefont\xgregtwentynine
+    \let\xgregnorfont\xgregtwentynine
+    \let\xgregsmallfont\xgregtwentyfour
+    \let\xgregtinyfont\xgregtwenty
+    \let\sluru\slurutwenty \let\slurd\slurdtwenty
+    \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
+    \let\slurud\slurutwentyd \let\slurdd\slurdtwentyd %    +ickd
+    \let\hslurud\hslurutwentyd \let\hslurdd\hslurdtwentyd %+ickd
+    \let\meternorfont\svtbf \let\metersmallfont\frtbf     % T116  RDT
+    \let\meterbigfont\twtybf \let\meterlargefont\twfvbf
+    \let\meterLargefont\twfvbf
+    \let\ppff\ppfftwentynine
+    \let\xppff\xppfftwentynine
+  \else
+    \ifnum\musicsize=\tw@nty
+    \else\ifnum\musicsize=\z@
+         \else\errmessage{\noexpand\musicsize=\the\musicsize\space not supported,
+           set to default of 20}%
+         \fi
+    \fi\musicsize\tw@nty
+    \let\musicLargefont\musictwentynine
+    \let\musiclargefont\musictwentyfour
+    \let\musicnorfont\musictwenty
+    \let\musicsmallfont\musicsixteen
+    \let\musictinyfont\musicthirteen
+    \let\xgreglargefont\xgregtwentyfour
+    \let\xgregLargefont\xgregtwentynine
+    \let\xgregnorfont\xgregtwenty
+    \let\xgregsmallfont\xgregsixteen
+    \let\xgregtinyfont\xgregthirteen
+    \let\sluru\slurutwenty \let\slurd\slurdtwenty
+    \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
+    \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % T116  RDT
+    \let\meterbigfont\frtbf \let\meterlargefont\svtbf
+    \let\meterLargefont\twtybf
+    \let\ppff\ppfftwenty
+    \let\xppff\xppfftwenty
+  \fi\fi\fi
+}%
+%
+\def\smalldyn{\let\ppff\smallppff\let\xppff\smallxppff\let\p@@f\ppff}%
+\def\normdyn{\let\ppff\normppff\let\xppff\normxppff\let\p@@f\ppff}%
+\def\meddyn{\let\ppff\medppff\let\xppff\medxppff\let\p@@f\ppff}%
+
+\catcode`\@=\catcodeat
+
+\endinput
+

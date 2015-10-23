@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage[textwidth=6.5in,textheight=8.5in]{geometry}
+\usepackage[osf]{mathpazo}
+\usepackage{textcomp}
+\PassOptionsToPackage{urlcolor=black,colorlinks}{hyperref}
+\RequirePackage{hyperref}
+\usepackage{xcolor}
+\newcommand{\myurl}[1]{\textcolor{blue}{\underline{\textcolor{black}{\url{#1}}}}}
+\newcommand{\musixflxVersion}{0.83.3}
+\begin{document}
+\title{Installation of MusiXTeX}
+\author{Bob Tennent\\
+\small\url{rdt@cs.queensu.ca}}
+\date{\today}
+\maketitle 
+\thispagestyle{empty}
+
+\section{Introduction}
+Before trying to install from CTAN, check whether your TeX distribution
+provides packages for MusiXTeX; this will be easier than doing it yourself.
+But if your TeX distribution
+doesn't have MusiXTeX (or doesn't have the most recent version), this distribution
+of MusiXTeX is very easy to install, though
+you may need to read the material on 
+installation of (La)TeX files in the 
+TeX FAQ\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html}},
+particularly
+the pages on 
+which tree to use\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=what-TDS}}
+and installing files\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}}.
+
+\section{Installing \texttt{musixtex.tds.zip}}
+
+In this distribution of MusiXTeX, most of the files to be installed 
+(including macros, scripts, and documentation) are in a zipped TEXMF hierarchy
+\begin{list}{}{}\item
+\myurl{http://mirror.ctan.org/install/macros/musixtex.tds.zip}
+\end{list}
+at CTAN. Simply download and unzip this archive in the root folder/directory of whichever TEXMF tree
+you decide is most appropriate, likely a ``local'' or ``personal'' one.
+This should work with any TDS\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=tds}}
+compliant TeX distribution, including MikTeX, TeXlive and teTeX.
+
+After unzipping the archive, update the filename database as necessary,
+for example, by executing \verb\texhash ~/texmf\ or 
+clicking the button labelled ``Refresh FNDB" in the MikTeX settings program.
+
+MusiXTeX requires a large set of specialized fonts. If necessary, install the 
+\texttt{musixtex-fonts} package.
+
+You should now be able to process files that use the MusiXTeX macros using
+\verb\etex\ or \verb\pdfetex\;
+documentation for MusiXTeX is installed under \verb\.../doc/generic/musixtex...\
+in the TEXMF tree.  But the music will be ``squeezed'' to the left; to produce
+proper spacing, go on.
+
+\section{Installing \texttt{musixflx}}
+
+The next step in the installation is to install
+the one crucial file that can't be installed in a TEXMF tree: a \texttt{musixflx} executable, which calls
+the script that implements
+the second pass of the three-pass MusiXTeX typesetting system described in Section~1.3 of the
+MusiXTeX manual (\verb\musixdoc.pdf\). In this MusiXTeX package, the 
+calculations are done by a Lua script 
+\begin{list}{}{}
+\item \verb|.../scripts/musixtex/musixflx.lua| 
+\end{list}
+On a Unix-like system (with \texttt{luatex} installed), you can put a
+symbolic link to \texttt{musixflx.lua} in any directory on the executable PATH as follows:
+\begin{list}{}{}
+\item \verb\ln -s <path to musixflx.lua> musixflx\
+\end{list}
+On Windows, you can \emph{either}
+copy the batch file
+\begin{list}{}{}
+\item \verb|Windows\musixflx.bat| 
+\end{list}
+to a folder
+on the executable PATH \emph{or} add the folder
+\verb|Windows| to the executable PATH
+as follows: 
+in ``My Computer''
+click on 
+\begin{center}
+View System Information\quad$\rightarrow$\quad Advanced\quad$\rightarrow$\quad Environment Variables
+\end{center}
+scroll
+down to ``path'', select it, click edit, and add the path to \verb|Windows| after a semi-colon.
+Documentation for \verb\musixflx\ is in the \verb\doc/generic/musixtex/scripts\ directory.
+
+\section{Installing \texttt{musixtex}}
+
+The Lua script \verb\.../scripts/musixtex/musixtex.lua\ 
+is simply a convenient wrapper that, by default, 
+runs the following processes in order (and then deletes intermediate files):
+\begin{itemize}\topsep=0pt\itemsep=0pt
+\item \verb\etex\  (1st pass)
+\item \verb\musixflx\ (2nd pass)
+\item \verb\etex\ (3rd pass)
+\item \verb\dvips\ (to convert \verb\dvi\ output to Postscript)
+\item \verb\ps2pdf\ (to convert \verb\ps\ output to Portable Document Format)
+\end{itemize}%
+To install, follow the instructions given in the preceding section; i.e., 
+on Unix-like systems, 
+install a symbolic link \verb\musixtex\; on Windows,
+ensure that the corresponding batch file
+is in a folder on the executable PATH. Documentation is in the
+\verb\doc/generic/musixtex/scripts\ directory.
+
+If the \verb\musixps.tex\ package is not used to produce slurs, it is possible to use \verb\pdfetex\
+rather than \verb\etex\, in which case a PDF file will be produced directly,
+without the use of \verb\dvips\ and \verb\ps2pdf\;  use the \verb\-p\ option in the call to \verb\musixtex\. 
+The \verb\-d\ option will replace \verb\dvips\ and \verb\ps2pdf\ by \verb\dvipdfm\; again,
+this option is usable only if Postscript slurs are \emph{not} used. Use the \verb\-s\ option
+to stop processing after the third pass; i.e., at the \verb\dvi\ file.
+Use the \verb\-l\ option for \verb\LaTeX\ processing and the \verb\-f\ option to restore the defaults for subsequent files.
+
+The cross-platform TeXWorks editing environment can 
+be configured
+to use the relevant \verb\musixtex\ script as a typesetting process as follows:
+\begin{center}
+Edit\quad$\rightarrow$\quad Preferences\quad$\rightarrow$\quad Typesetting
+\end{center}
+then click on + to add a new processing tool as follows:
+\begin{description}\itemsep=0pt
+\item[Name:] \verb\musixtex\
+\item[Program:] \verb\musixtex\
+\item[Arguments:] \verb\$basename\
+\end{description}
+If necessary, add the path to the directory/folder containing the \verb\musixtex\
+script to the list of Paths for TeX and related programs.
+
+\section{Discussion}
+Many users, especially beginners, will find it easier to use the PMX and
+M-Tx pre-processors, which accept a simpler input language than MusiXTeX
+itself. These pre-processor packages may be found at CTAN under \verb\support\.  Additional documentation, additional
+add-on packages, and many examples of MusiXTeX typesetting may be found
+at the Werner Icking Music Archive\footnote{%
+\myurl{http://icking-music-archive.org}}.
+Support for users of MusiXTeX and related software may be obtained via
+the MusiXTeX mail list\footnote{%
+\myurl{http://tug.org/mailman/listinfo/tex-music}}.
+MusiXTeX may be freely copied, duplicated and used in conformance to the
+GNU General Public License (Version~2, 1991, see included file \verb\gpl.txt\).
+
+\end{document}

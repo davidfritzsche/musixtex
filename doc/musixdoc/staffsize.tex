@@ -1,0 +1,101 @@
+\chapter{Staff Size} \index{staff size}\label{staffspacing}
+In contrast with the prior section, here we describe how to change the sizes
+of everything...staff, notes, and all other symbols. In
+Section~\ref{whatspecify} we saw how to set the size for all instruments at
+the start of a score. Any one of the same macros---\verb|\normalmusicsize|,
+\verb|\smallmusicsize|, \verb|\largemusicsize|, or
+\verb|\Largemusicsize|---can be used to change the size of all instruments
+midway through a score, but in this case it must come between
+\verb|\stoppiece| and \verb|\startpiece|.
+
+Once the overall staff size is set, you can alter the size of any desired
+instrument with the macro \keyindex{setsize}\itbrace{n}\itbrace{s}, where
+$n$ is the instrument number and $s$ is a factor by which the size is to be
+changed from the prevailing overall size. There are five predefined macros
+that should be used for the size factor $s$. Their names and respective values
+are \keyindex{normalvalue}~($1.0$), \keyindex{smallvalue}~($0.80$),
+\keyindex{tinyvalue}~($0.64$), \keyindex{largevalue}~($1.2$), and
+\keyindex{Largevalue}~($1.44$). \musixtex\ should not crash if you use an
+explicit number different from any of these, but the result may be
+less than satisfactory.
+
+Once again, if used at the beginning of a piece, the \verb|\setsize| macro
+must precede \verb|\startpiece| (not \verb|\contpiece|), and if used after
+the beginning, must be preceded by \verb|\stoppiece|.
+
+As an example, we give two bars of the \ital{Ave Maria} by Charles {\sc
+Gounod}\index{Gounod, C.@{\sc Gounod, C.}}, based on the first prelude of
+J. S. Bach's \ital{Well Tempered Clavier}, as transcribed for
+organ, violin and voice by Markus {\sc Veittes}:\label{avemaria}
+
+\begin{music}
+\def\oct{\advance\transpose by 7}
+\def\liftqs#1{\raise#1\Interligne\qs}
+\parindent0pt
+\sepbarrules
+\instrumentnumber{3}
+\generalmeter{\meterC}
+\setinterinstrument2{3\Interligne}
+\setsize3\tinyvalue
+\setsize2\tinyvalue
+\setclef1\bass
+\setstaffs1{2}
+\startpiece\addspace\afterruleskip
+%Takt 9
+\notes\zhl c\liftqs6\qupp e|\ds&\oct
+  \itieu5h\hl h&\tx ~~~gra---*\itied4h\hu h\en
+\notes|\ibbl0j3\qb0h\tqb0l\en
+\notes|\ibbl1k0\qb1{ohl}\tqb1o\en
+\notes\zhl c\liftqs6\qupp e|\ds&\oct
+  \ttie5\ibl4c0\qb4h&\ttie4\ibu5g{-3}\qb5h\en
+\notes|\ibbl0j3\qb0h\tqb0l&\oct\qb4a&\tx ---*\tqh5a\en
+\notes|\ibbl1k0\qb1o\qb1h&\oct\qb4b&\tx ~~ti~-*\cu b\en
+\notes|\qb1l\tqb1o&\oct\tqb4c&\tx a*\cu c\en
+\bar
+%Takt 10
+\notes\zhl c\liftqs6\qupp d|\ds&\oct
+  \qlp d&\tx ~~~ple---*\ibsluru4e\qup d\en
+\notes|\ibbu1g3\bigaccid\qb1{^f}\tqh1h\en
+\notes|\ibbu2i0\qb2k\qb2f\en
+\notes|\qb2h\tqh2k&\oct\cl e&\tubslur4f\cu e\en
+\notes\zhl c\liftqs6\qupp d|\ds&\oct\ql d&\tx na,*\qu d\en
+\notes|\ibbu1g3\qb1f\tqh1h\en
+\notes|\ibbu2i0\qb2{kfh}\tqh2k&\qp&\qp\en
+\endpiece
+\end{music}
+ This example was coded as:
+\begin{quote}\begin{verbatim}
+\def\oct{\advance\transpose by 7}
+\def\liftqs#1{\raise#1\Interligne\qs}
+\parindent0pt
+\sepbarrules
+\instrumentnumber{3}
+\generalmeter{\meterC}
+\setinterinstrument2{3\Interligne}
+\setsize3\tinyvalue
+\setsize2\tinyvalue
+\setclef1\bass
+\setstaffs1{2}
+\startpiece\addspace\afterruleskip
+%Takt 9
+\notes\zhl c\liftqs6\qupp e|\ds&\oct
+  \itieu5h\hl h&\tx ~~~gra---*\itied4h\hu h\en
+\notes|\ibbl0j3\qb0h\tqb0l\en
+\notes|\ibbl1k0\qb1{ohl}\tqb1o\en
+\notes\zhl c\liftqs6\qupp e|\ds&\oct
+  \ttie5\ibl4c0\qb4h&\ttie4\ibu5g{-3}\qb5h\en
+\notes|\ibbl0j3\qb0h\tqb0l&\oct\qb4a&\tx ---*\tqh5a\en
+\notes|\ibbl1k0\qb1o\qb1h&\oct\qb4b&\tx ~~ti~-*\cu b\en
+\notes|\qb1l\tqb1o&\oct\tqb4c&\tx a*\cu c\en
+\bar
+%Takt 10
+\notes\zhl c\liftqs6\qupp d|\ds&\oct
+  \qlp d&\tx ~~~ple---*\ibsluru4e\qup d\en
+\notes|\ibbu1g3\bigaccid\qb1{^f}\tqh1h\en
+\notes|\ibbu2i0\qb2k\qb2f\en
+\notes|\qb2h\tqh2k&\oct\cl e&\curve222\tubslur4f\cu e\en
+\notes\zhl c\liftqs6\qupp d|\ds&\oct\ql d&\tx na,*\qu d\en
+\notes|\ibbu1g3\qb1f\tqh1h\en
+\notes|\ibbu2i0\qb2{kfh}\tqh2k&\qp&\qp\en
+\endpiece
+\end{verbatim}\end{quote}

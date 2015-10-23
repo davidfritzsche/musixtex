@@ -1,0 +1,22 @@
+2015-02-20  RDT
+
+   Clean up title page and preface(s).
+   Three-pass system material revised.
+   Link to WIMA for installation instructions.
+   Extracting-parts material (DT) restored from T114.
+   Chapter 3 (Acquiring, Installing, and Using MusiXTeX) deleted.
+   musixdoc.sty revamped to allow use of Times or Palatino fonts.
+   musixdoc.tex broken up into separate chapter files for use with includeonly.
+   Many corrections and improvements, too numerous to list.
+
+2011-04
+
+  Musixdoc: Update links to CTAN in 3.1. 
+
+  Musixdoc: Set link for musixtex.zip once we decide if it should be 1.15
+
+  Musixdoc: Edit 128th beam stuff. 
+
+  Musixdoc: Add smalltreblelowoct etc. 
+
+  Musixdoc: Explain where musixflx source and binaries are.

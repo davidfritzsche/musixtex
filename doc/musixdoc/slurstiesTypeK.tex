@@ -1,0 +1,366 @@
+ \chapter{Postscript Slurs, Ties and Hairpins}\label{PostscriptSlurs}
+
+\input musixps
+
+
+All of the aforementioned limitations of font-based slurs can be circumvented
+by using type~K Postscript slurs\footnote{``K'' stands for Stanislav Kneifl,
+the developer of the type~K Postscript slur package.}. As well as slurs, the package includes
+ties and crescendos.
+Its use is very similar to font-based slurs, and in fact identical if only
+the elementary slur and tie initiation and termination macros are used.
+
+In order to use type~K Postscript slurs, ties and hairpins, you must first place \texttt{musixps.tex}
+anywhere \TeX\ can find it. You must also place \texttt{psslurs.pro}
+somewhere that \texttt{dvips} can find it.
+
+The \index{mxsk font}\texttt{mxsk} font is required for ``half ties,'' which
+are special symbols that are used by default for the second portion of a tie
+that crosses a line break. If you like
+this treatment you must install the font in your \TeX\ system. However, perfectly
+acceptable line-breaking ties will appear if you invoke \keyindex{nohalfties},
+and then you will not have to install this font.
+
+Once the software mentioned in the prior two paragraphs is installed and the
+\TeX\ filename database is refreshed, the type~K package can be
+invoked by including the command \verb|\input musixps|
+near the beginning of your source file.
+The resulting dvi file should then be converted into Postscript using \textbf{dvips}.
+If desired, a PDF file can then be generated with \textbf{ps2pdf}, \textbf{ghostscript},
+or \textbf{Adobe Acrobat} (see Section~\ref{using} for more information on this).
+
+Two minor inconveniences with type~K Postscript slurs are that (1) they won't appear
+in many dvi previewers, and (2) they won't appear in PDF files generated with
+\textbf{pdftex} or \textbf{dvipdfm}. The former limitation can be circumvented by using a Postscript
+viewer such as \textbf{GSview}. The latter simply requires that you create an intermediate
+Postscript file with \textbf{dvips}, then make the PDF with any of the software
+mentioned above.
+
+
+\section{Initiating and terminating type K Postscript slurs}
+
+Basic usage of type K slurs is the same as for font-based slurs. To initiate one,
+use for example \verb|\isluru0g| to start an upper slur with ID 0 above a virtual note
+at pitch level {\tt g}. To terminate one, use a command like
+\verb|\tslur0i| which terminates the slur with ID 0 on a
+virtual note at pitch level {\tt i}.
+Both types of commands are non-spacing and must precede the first or last
+note under the slur.
+
+You can shift the starting or ending point slightly to the left
+or right by substituting one of the commands \keyindex{ilsluru},
+\keyindex{ilslurd}, \keyindex{irsluru},
+\keyindex{irslurd}, \keyindex{trslur} or \keyindex{tlslur}.
+
+You can control the shape of type~K slurs with variants of
+the termination command. To make the slur a bit flatter than default use
+\keyindex{tfslur}0f; a bit higher, \keyindex{thslur}0f; higher still,
+\keyindex{tHslur}0f;  or
+even higher, \keyindex{tHHslur}0f.  These commands have an effect like
+\keyindex{midslur} does for font-based slurs.
+
+All combinations of the shifting and curvature variants are allowed,
+e.g.\ \verb|\trHHslur|.
+
+
+The following examples demonstrate how much better the type K slurs perform
+in the extreme situations of the prior two typeset examples. The coding is
+exactly the same as above except that \verb|\input musixps| has been added:
+\begin{quote}\begin{verbatim}
+\begin{music}\nostartrule
+\input musixps
+\startextract\NOTes\multnoteskip3\isluru0c\ql c\tslur0s\ql s\en
+....
+\end{verbatim}\end{quote}
+
+\begin{music}\nostartrule
+\instrumentnumber{1}
+\generalmeter{\meterfrac34}
+\startextract\NOTes\multnoteskip3\isluru0c\ql c\tslur0j\ql j\en
+  \bar\NOTes\multnoteskip3\isluru0c\ql c\tslur0n\ql n\en\zendextract
+\startextract\NOTes\multnoteskip3\isluru0c\ql c\tslur0s\ql s\en
+  \bar\NOTes\multnoteskip3\isluru0c\ql c\tslur0z\ql z\en\zendextract
+
+\startextract
+\NOTes\isluru0c\ql c\en\notes\tslur0j\ql j\en\bar
+\NOTes\isluru0c\ql c\en\notes\tslur0n\ql n\en
+\NOTes\isluru0c\ql c\en\notes\tslur0s\ql s\en\bar
+\NOTes\isluru0c\ql c\en\notes\tslur0z\ql z\en
+\zendextract
+\end{music}
+
+ 
+
+
+For maximal control over type K slurs, you can use one of the commands
+\keyindex{iSlur}~$npvh$ and
+\keyindex{tSlur}~$npvhca$, where the characters in
+$npvhca$ respectively stand for ID number, height, vertical offset, horizontal offset,
+curvature, and angularity.
+All offsets are in \verb|internote|, and the slur direction is determined
+by the sign of the vertical offset. See the comments in \verb|musixps.tex|
+for precise definitions of the other parameters. Examples of permissible forms for
+these commands are
+\verb|iSlur0c11| and \verb|tSlur0{!d}11{.2}0|.
+
+The next example shows how you can use \verb|iSlur| in difficult
+circumstances:
+
+
+\begin{music}\nostartrule
+\nobarnumbers
+\generalsignature1%
+\generalmeter{\meterfrac{2}{4}}%
+\nostartrule
+\startextract
+\NOtes\zchar{-8}{\Bslash irslur...\Bslash tlslur}\irslurd0{'b}\zhl b\sk\zq{!e}\qu{'c}\en\bar
+\NOtes\zh{'d}\zhu{`f}\off{7.2pt}\tlslur0{'b}\ql b\ql b\en\bar
+%
+\NOtes\zchar{-8}{\Bslash irslur...\Bslash tlfslur}\irslurd0{'b}\zhl b\sk\zq{!e}\qu{'c}\en\bar
+\NOtes\zh{'d}\zhu{`f}\off{7.2pt}\tlfslur0{'b}\ql b\ql b\en\bar
+%
+\NOtes\zchar{-8}{\Bslash iSlur...\Bslash tSlur}\iSlur0{'b}{-.5}3\zhl b\sk\zq{!e}\qu{'c}\en\bar
+\NOtes\zh{'d}\zhu{`f}\off{7.2pt}\tSlur0{'b}{.5}{-1}{.3}0\ql b\ql b\en
+\zendextract
+\end{music}
+\noindent with this coding:
+
+\begin{quote}\begin{verbatim}
+\NOtes\irslurd0{'b}\zhl b\sk\zq{!e}\qu{'c}\en\bar
+\NOtes\zh{'d}\zhu{`f}\off{7.2pt}\tlslur0{'b}\ql b\ql b\en\bar
+%
+\NOtes\irslurd0{'b}\zhl b\sk\zq{!e}\qu{'c}\en\bar
+\NOtes\zh{'d}\zhu{`f}\off{7.2pt}\tlfslur0{'b}\ql b\ql b\en\bar
+%
+\NOtes\iSlur0{'b}{-.5}3\zhl b\sk\zq{!e}\qu{'c}\en\bar
+\NOtes\zh{'d}\zhu{`f}\off{7.2pt}\tSlur0{'b}{.5}{-1}{.3}0\ql b\ql b\en
+\end{verbatim}\end{quote}
+
+
+The ID number for a slur, tie or crescendo should
+normally range from $0$ to $9$. If it is bigger
+than nine but less than $15$,
+the object can cross a line break but not a page break. If bigger than
+14 but less than $2^{31}$, it can't be broken at all,
+        nor can a slur termination be positioned at a beam with
+        e.g., \verb|\tbsluru{17684}{16}|; however \verb|\ibsluru{152867}{16}| is okay.
+
+It's also okay to have opened simultaneously a slur, tie and crescendo all
+with the same ID, or a slur, tie and decrescendo, but not a crescendo and
+decrescendo.
+
+\def\emen{{\tt\char123}$n${\tt\char125\char123}$m${\tt\char125}}
+
+`
+\section{Type~K Postscript beam slurs}
+Type~K beam slurs are defined differently than the font-based ones:
+They require as parameters both a slur ID number $n$ and a beam ID number $m$,
+but that's all. The commands are
+\keyindex{iBsluru}\emen, \keyindex{iBslurd}\emen, and
+\keyindex{tBslur}\emen.
+They must be placed \ital{after} the beam initiation or termination command.
+Type~K slurs may start on one beam and end on another.
+For example,
+
+\begin{quote}\begin{verbatim}
+\Notes\ibu0i0\iBsluru00\qb0{eh}\tbu0\qb0i\ibu0j0\qb0{jl}\tbu0%
+ \slurtext{6}\tBslur00\qb0e\en
+\end{verbatim}\end{quote}
+
+\noindent produces
+%\begin{center}
+%\includegraphics[scale=1]{./mxdexamples/psbeamslur.eps}
+%\end{center}
+
+\begin{music}\nostartrule\startextract
+\Notes\ibu0g2\iBsluru00\qb0{eh}\tbu0\qb0i\ibu0j0\qb0{jl}\tbu0%
+ \slurtext{6}\tBslur00\qb0e\en
+\zendextract
+\end{music}
+
+This example also illustrates the use of the macro
+\keyindex{slurtext}. It has just one parameter---some text to be
+printed---and it centers it just above or below the midpoint of
+the next slur that is closed.
+This works only for non-breaking slurs; if the slur is broken,
+the text
+disappears\footnote{If you insist on viewing files with a dvi viewer that
+doesn't display 
+type~K slurs, you may also find that
+figures placed with \keyindex{slurtext} will appear at the end of the
+slur rather than the middle.}.
+%The placing of the slur text is done with a very dirty Postscript
+%hack, so I am not really sure that everything you want to typeset
+%will be placed at the correct position (if you are interested, see
+%the end of psslurs.pro for details). If you find something that won't
+%work, let me know.
+
+% DAS: why do we need this ???
+%\paragraph{General coding for Postscript slurs and ties of type K.}
+%This can be done by:
+%\begin{quote}\begin{verbatim}
+%\i[h.shift]slur[u|d]{slur ID}{note height}
+%\t[h.shift][slur height]slur{slur ID}{note height}
+%\iBslur[u|d]{slur ID}{beam ID}
+%\tB[slur.height]slur{slur ID}{beam ID}
+%\end{verbatim}\end{quote}
+%\noindent where h.shift can be 'l', 'r' or nothing
+%and slur.height can be 'f', nothing, 'h', 'H' or 'HH'
+%
+%Example: \keyindex{tlfslur} means 'terminate left flat slur'.
+%
+%
+%There are also simple slurs with same invocation and parameters as the
+%original ones.
+
+\section{Type~K Postscript ties}
+All of the foregoing Type~K slur commands 
+except the shape-changing ones
+have counterparts for ties. Simply
+replace ``\verb|slur|'' with ``\verb|tie|'', and for terminations omit
+the pitch parameter. Type~K ties not only are positioned differently by
+default, but they also have different shapes than slurs. If you want to change
+the shape of a tie, redefine \verb|\pstiehgt| from its default of $0.7$. 
+
+\section{Dotted type K slurs and ties.}%please check the capital D(otted)
+A slur or tie can be made dotted simply by entering \keyindex{dotted} anywhere before
+the beginning of the slur or tie. Only the first slur or tie following this
+command will be affected. On the other hand, if you enter \keyindex{Dotted}, then \emph{all}
+slurs and ties from this point forward will be dotted until you say
+\keyindex{Solid}. Furthermore, inside \verb|\Dotted...\Solid| you can make any individual
+slur or tie solid saying \verb|\solid| before its beginning.
+
+\section{Avoiding collisions with staff lines.}
+In Postscript it is possible to do computations that would be very hard
+to implement directly in TeX. Type~K slurs can use this facility to check whether
+the curve of a slur or tie is anywhere nearly tangent to any staff line, and if
+so, to adjust
+the altitude of the curve to avoid the collision. By default this feature is turned
+on.
+You can disable it either
+globally (\keyindex{Nosluradjust}, \keyindex{Notieadjust}) or locally
+(\keyindex{nosluradjust}, \keyindex{notieadjust}), and you can also turn it
+back on globally (\keyindex{Sluradjust},
+\keyindex{Tieadjust}) or locally (\keyindex{sluradjust}, \keyindex{tieadjust}).
+Here ``locally''
+means that the command will only affect the next slur or tie to be opened.
+
+\section{Type K Postscript hairpins}\label{kcresc}
+
+There are two different types. The first type is normally initiated with either
+\keyindex{icresc}\onen~or \keyindex{idecresc}\onen, and terminated with
+\keyindex{tcresc}\onen, where $n$ is a hairpin index,
+which is virtually unlimited but certain restrictions apply if it exceeds $14$.
+The altitude is set by the value of \keyindex{setcrescheight}, which by default
+is $-5$ and which must be expressed numerically. Note that
+\keyindex{tcresc}~is the same as \keyindex{tdecresc}.
+
+You can shift the starting or ending point horizontally by replacing the
+foregoing macros with
+\keyindex{ilcresc},    \keyindex{ildecresc},
+\keyindex{ircresc},    \keyindex{irdecresc},
+\keyindex{tlcresc},    \keyindex{tldecresc},
+\keyindex{trcresc},    \keyindex{trdecresc},
+for example to make space for an alphabetic dynamic mark.
+
+The second form of Postscript hairpin macros allows individual and arbitrary
+specification of the altitude and horizontal offset. The syntax is
+\keyindex{Icresc}\itbrace{n}\itbrace{h}\itbrace{s}, where $h$ is the
+altitude---which must be numerical---and $s$ is the horizontal offset
+in \verb|\internote|. Similar syntax obtains for \keyindex{Idecresc}\
+and \keyindex{Tcresc}.
+
+These hairpins may span several lines. If one of them spans three systems
+then the height of the middle section can be adjusted with
+\keyindex{liftcresc}\itbrace{n}\itbrace{h}. The height of the first and last
+parts of a broken crescendo will be defined by the height parameter in
+\keyindex{Icresc}~or \keyindex{Tcresc}.
+
+There are numerous other nuances and shorthand macros that are described
+in the comments in \verb|musixps.tex|.
+
+As an example of a Postscript hairpin,
+
+\begin{music}\nostartrule
+\generalmeter{\meterfrac{12}8}
+\startextract
+\Notes\ccharnote{-8}{\ppp}\Icresc0{-7}6\ca{bdegh'bde}\en
+\Notes\Tcresc0{-4}{-2}\zcharnote{-5}{\fff}\ca{'f}\en
+\zendextract
+\end{music}
+
+\noindent  was coded as
+\begin{quote}\begin{verbatim}
+\input musixps
+\generalmeter{\meterfrac{12}8}
+\startextract
+\Notes\ccharnote{-8}{\ppp}\Icresc0{-7}6\ca{bdegh'bde}\en
+\Notes\Tcresc0{-4}{-2}\zcharnote{-5}{\fff}\ca{'f}\en
+\zendextract
+\end{verbatim}\end{quote}
+
+
+\section{Line-breaking slurs, ties and hairpins}
+Tyle K slurs, ties and crescendos going across line breaks are handled
+automatically. In fact they can go over more lines than two (this is
+true also for ties, though it would be somewhat strange).
+
+There is a switch \verb|\ifslopebrkslurs| that controls the default
+height of the end point
+of the first segment of all broken slurs. By default the height will be
+the same as the beginning. To have it raised by \verb|3\internote|, simply
+issue the command \keyindex{slopebrkslurstrue}. To revert to the default,
+use \keyindex{slopebrkslursfalse}.
+
+To locally override the default height of the end of the first segment,
+use the command \keyindex{breakslur}\enpee,
+which sets the height for slur number $n$ to pitch $p$, just like with
+font-based slurs.
+
+You can raise or lower the starting point of the second segment of a broken slur
+with the command \keyindex{liftslur}\verb|{|$n$\verb|}{|$h$\verb|}|, with
+parameters slur ID and relative offset in
+\verb|\internote|s measured from the slur beginning. Its effect is
+the same as \keyindex{Liftslur} for font-based slurs, except it is not
+necessary to code
+it within \verb|\atnextstaff{}|, just anywhere inside the slur.
+
+As already mentioned, anything with $\mathrm{ID}<10$ is broken fully automatically, but
+you should be careful about slurs, ties and crescendos with $10\le\mathrm{ID}<15$.
+These cannot cross page breaks, although they can cross line breaks.
+
+If the second segment of a broken tie is less than 15pt long, then by
+default it will have a special shape which begins horizontally. These shapes are
+called \ital{half ties} and are contained in the font \index{mxsk font}\verb|mxsk|.
+Of course if they are to be used, the font files must be integrated into the
+\TeX\ installation. Their use can be turned off with \keyindex{nohalfties}
+and back on with \keyindex{halfties}.
+
+%\paragraph{Backwards compatibility.}
+%There are several ``aliases'' which allow to use the old, bitmapped slur
+%commands for PS slurs without any change. There are however a few differences:
+%the \keyindex{invertslur} is not implemented yet and
+%the \keyindex{curve} and \keyindex{midslur} macros have no effect.
+
+%\paragraph{Memory requirements.}
+\enlargethispage*{4ex}
+\section{A few final technical details}
+Each \verb|\i...| and \verb|\t...|
+produces a \verb|\special| command, which must be stored in TeX's main memory.
+Therefore, if too many slurs occur in one page, some memory problems could
+occur. The only solution is to use font-based slurs.
+%The only solutions are to use Big\TeX\ 
+%BigTex? it is apparently the mascot for the Texas State Fair
+
+Type~K slurs need the Postscript header file
+\index{psslurs.pro}\texttt{psslurs.pro} to be included in the
+output Postscript file. This is made to happen by the \TeX\ command
+\verb|\special{header=psslurs.pro}|, which is automatically
+included when you \verb|\input musixps|. So normally this is not
+of concern. However if you wish to extract a subset of pages from
+the master \verb|dvi| file using \index{dvidvi}\texttt{dvidvi}, then
+you have three options: (1)~include the first page in the subset,
+(2)~manually issue the
+\verb|\special| command in the \TeX\ source for the first page of the subset, or
+(3)~use the option \texttt{-h psslurs.pro} when you run \texttt{dvips}.
+

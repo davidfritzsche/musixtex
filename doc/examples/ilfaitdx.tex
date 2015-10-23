@@ -1,0 +1,171 @@
+\fulltitle{Il fait danser les mondes}
+\shorttitle{Il fait danser les mondes}
+ \fullauthor{Jean-S‚bastien Bach\\Transposition
+Daniel Taupin\\paroles Jacques Tournier}
+ \shortauthor{J.-S. Bach}
+ \maketitle
+ %
+\tracingstats=1\relax
+\relativeaccidentals
+\sepbarrules
+ %
+\parindent 15mm
+ % soufflets crescendo et decrescendo
+ %
+\def\soufflcr#1{\zcharnote{#1}{\kern -0.5cm\cresc}}%
+\def\Soufflcr#1{\zcharnote{#1}{\kern -0.5cm\CResc}}%
+ %
+\def\souffldim#1{\zcharnote{#1}{\kern -0.5cm\dimin}}%
+\def\Souffldim#1{\zcharnote{#1}{\kern -0.5cm\DImin}}%
+ %
+ %au moins deux croches basses et hautes
+\def\dqb#1#2{\Ibl0{#1}{#2}1\qb0{#1}\tqb0{#2}}%
+\def\dqh#1#2{\Ibu0{#1}{#2}1\qh0{#1}\tqh0{#2}}%
+ %
+ %\check
+\def\nbinstruments{2}\resetsignatures
+\global\nbporteesi=1\relax
+\global\nbporteesii=1\relax
+\global\cleftoksi={{6}{0}{0}{0}}%
+\global\cleftoksii={{0}{0}{0}{0}}%
+\def\lowersonginstrum{1}  % to be used to make heavy bars at staff left
+\def\uppersonginstrum{2}  % to be used to make heavy bars at staff left
+ %
+\signaturegenerale{\Signature}%
+\generalmeter{\meterC}
+ %\check
+\def\interfacteur{20}%
+\def\instrumenti{\vbox{\hsize=\parindent
+\centerline{T\'enors}\centerline{basses}}}%
+\def\instrumentii{\vbox{\hsize=\parindent
+\centerline{Sopran.}\centerline{Altos}}}%
+ %\check
+ %
+\def\eightpoint{\Tenpoint}%
+ %\check
+\catcode`\@=13
+\catcodesmusic
+ %
+\def\respire{\notes&\cbreath\enotes}%
+ %
+\def\txt#1|#2|#3&{{\vbox to 0pt{\Smalltype\baselineskip 9pt
+\vss\hrule width 9pt height 0pt
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #3\kern\internote}\smallskip
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #2\kern\internote}\smallskip
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #1\kern\internote}\kern -12pt}}}%
+ %
+\elemskip 20pt\relax
+\debutmorceau
+ %\autolines 754\relax
+ \transpose=\Transpose
+ \qspace
+ %
+ \NOtes\zql J\qu L&\hsong{\txt Chaque|Il|Il&}\zql N\qu c\enotes
+ \barre %1
+\hardlyrics{\txt homme |est|fait&}\notes\zql L\qu N&\hsong\thelyrics\zql c\qu g\enotes
+ \Notes\zql J\qu c&\hsong{\txt est |en |dan-&}\zql e\qu g\enotes
+ \Notes\zql M\qu c&\hsong{\txt son |cha-|ser &}\zql f\qu h\enotes
+ \Notes\zql{^G}\qu b&\hsong{\txt re-|que |les &}\zql e\qu i\enotes
+ %
+ %\check
+ \barre %2
+ \NOtes\zhl H\hu a&\hsong{\txt fu- |pier-|mon-&}\zhl e\hu j\enotes
+ \Notes\zql H\qu a&\hsong{\txt ge |re |des &}\zql e\qu j\enotes
+ \Notes\zql a\qu c&\hsong{\txt Il |En |Les &}\zql h\qu l\enotes
+ %
+ %\check
+ \barre %3
+ \Notes\zql M\qu a&\hsong{\txt se |cha-|as-&}\zql h\qu k\enotes
+ \Notes\zql K\qu a&\hsong{\txt re-|que |tres &}\zql f\qu j\enotes
+ \Notes\zql N\qu N&\hsong{\txt pose |c\oe ur |les &}\zql e\qu j\enotes
+ \Notes\zql G\qu N&\hsong{\txt en |vi-|sau-&}\zql d\qu i\enotes
+ %
+ %\check
+ \barre %4
+ \NOTes\zhlp J\hup N&\hsong{\txt lui, |vant |sons &}\zhlp e\hup j\enotes
+ \Notes\zql J\qu L&\hsong{\txt Mais |Au |Il &}\zql N\qu c\enotes
+ %
+ %\check
+ \barre %5
+ \Notes\zql L\qu N&\hsong{\txt y |cen-|pŠ-&}\zql c\qu g\enotes
+ \Notes\zql J\qu c&\hsong{\txt p‚-|tre |se &}\zql e\qu g\enotes
+ \hardlyrics{\txt nŠtre |de |juge &}\notes\zql M\qu c&\hsong\thelyrics\zql f\qu h\enotes
+ \Notes\zql{^G}\qu b&\hsong{\txt en |la |et &}\zql e\qu i\enotes
+ %
+ %\check
+ \barre %6
+ \NOtes\zhl H\hu a&\hsong{\txt Ju- |ter-|son-&}\zhl e\hu j\enotes
+ \Notes\zql H\qu a&\hsong{\txt ge |re |de &}\zql e\qu j\enotes
+ \Notes\zql a\qu c&\hsong{\txt L'‚- |Au |Ren-&}\zql h\qu l\enotes
+ %
+ %\check
+ \barre %7
+ \hardlyrics{\txt prouve |fond |ver-&}\notes\zql M\qu a&\hsong\thelyrics\zql h\qu k\enotes
+ \Notes\zql K\qu a&\hsong{\txt et |des |se &}\zql f\qu j\enotes
+ \Notes\zql N\qu N&\hsong{\txt le |o-|les &}\zql e\qu j\enotes
+ \Notes\zql G\qu N&\hsong{\txt con-|c‚-|pri-&}\zql d\qu i\enotes
+ %
+ %\check
+ \barre %8
+ \NOTes\zhlp J\hup N&\hsong{\txt duit. |ans. |sons. &}\zhlp e\hup j\enotes
+ \notes\zql J\qu L&\zsong{\txt L'a |Il |Il &}\rlap{\dqb ef}\dqh jk\enotes
+ %
+ %\check
+ \barre %9
+ \notes\zqu c\dqb cb&\zsong{\txt fait |fait |per-&}\zql g\qu l\enotes
+ \notes\zqu c\dqb aN&\zsong{\txt … |ger-|ce &}\zql h\qu l\enotes
+ \Notes\zql {^M}\qu d&\hsong{\txt son |mer |l'im-&}\zql h\qu k\enotes
+ \Notes\zql K\qu d&\hsong{\txt i-|les |pos-&}\zql {^f}\qu j\enotes
+ %
+ %\check
+ \barre %10
+ \notes\zhl N\dqh dc&\zsong{\txt ma-|grai-|tu-&}\rlap{\dqb g{^f}}\dqh ih\enotes
+ \Notes\qu d&\hsong{\txt -- |--|-- &}\zql g\qu i\enotes
+ \Notes\zql G\qu b&\hsong{\txt ge |nes, |re &}\zql d\qu g\enotes
+ \Notes\zql {=M}\qu d&\hsong{\txt D'a-|Di-|A-&}\zql g\qu i\enotes
+ %
+ %\check
+ \barre %11
+ \Notes\zql L\qu c&\hsong{\txt mour |ri-|bais-&}\zql g\qu j\enotes
+ \Notes\zql K\qu d&\hsong{\txt et |ge |se &}\zql f\qu i\enotes
+ \Notes\zql J\qu e&\hsong{\txt de |les |les &}\zql e\qu h\enotes
+ \notes\zql K\dqh dc&\hsong{\txt bon-|ruis-|plus &}\zql{^f}\qu h\enotes
+ %
+ %\check
+ \barre %12
+ \NOTes\zhlp G\hup b&\hsong{\txt heur |seaux |forts &}\zhlp d\hup g\enotes
+ \Notes\zql I\qu N&\hsong{\txt Et |Fait |D‚-&}\zql d\qu g\enotes
+ %
+ %\check
+ \barre %13
+ \notes\zql J\qu N&\hsong{\txt l'at-|jail-|mas-&}\rlap{\dqb cd}\dqh ef\enotes
+ \Notes\zql {_I}\qu c&\hsong{\txt tend |lir |que &}\zql e\qu g\enotes
+ \notes\zqu c\dqb H{=I}&\hsong{\txt au |les |le &}\zql f\qu h\enotes
+ \notes\zql {^J}\qu {_b}&\hsong{\txt ri-|fon-|par-&}\zql e\qu g\enotes
+ %
+ %\check
+ \barre %14
+ \Notes\zhl K\hu a&\hsong{\txt va-|tai-|ju-&}\islurd1e\isluru2g\zql e\qu g\enotes
+ \Notes&\hsong{\txt --|--|--&}\tslur1d\tslur2f\zql d\qu f\enotes
+ \Notes\zql H\qu a&\hsong{\txt ge |nes, |re &}\zql c\qu e\enotes
+ \Notes\zql {_I}\qu L&\hsong{\txt Dont |Et |Et &}\zql c\qu g\enotes
+ %
+ %\check
+ \barre %15
+ \Notes\zql H\qu M&\hsong{\txt il |chan-|com-&}\zql c\qu f\enotes
+ \hardlyrics{\txt est |ter |mande &}\notes\zql G\qu N&\hsong\thelyrics\zql c\qu e\enotes
+ \Notes\cNa F\zql F\qu a&\hsong{\txt le |les |… &}\roff{\zql c}\qu d\enotes
+ \notes\zql G\dqh NM&\zsong{\txt Sei-|oi-|la &}\zql b\qu d\enotes
+ %
+ %\check
+ \barre %16
+ \NOTes\zhlp J\hup L&\hsong{\txt gneur.|seaux.|mort.&}\zhlp N\hup c\enotes
+ \finmorceau
+\medskip\rightline{\it le \aujourdhui}
+\absoluteaccidentals
+\vfil\eject
+ 
+\endinput

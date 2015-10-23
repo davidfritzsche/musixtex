@@ -1,0 +1,2151 @@
+\chapter{Extension Library}
+All of the following files are invoked by saying \keyindex{input} \ital{filename}\ .
+Most of them are fully compatible with \musixtex\ in that they do not redefine
+any existing macros but rather provide additional functionality. In future
+versions of \musixtex\ we may very well incorporate many of them directly into
+\verb|musixtex.tex|, but for now we leave them separate.
+
+ \section{musixadd}\ixtt{musixadd.tex}
+Increases the number of instruments, slurs and beams from six to nine.
+
+ \section{musixadf}
+\input musixadf
+This file and the associated fonts (by Hiroaki \textsc{Morimoto})
+define some additional and alternative musical accents, as follows.
+\begin{description}
+\item[small swells, larger sforzatos:]
+\ \\\begin{music}
+\nostartrule
+\startextract
+\NOTes
+  \ccharnote{-8}{\Bslash ulsw}\ulsw l\ql l%
+  \ccharnote{13}{\Bslash llsw}\llsw f\qu f%
+\en\bar
+\NOtes
+  \ccharnote{-8}{\Bslash uSfz}\uSfz l\ql l%
+  \ccharnote{13}{\Bslash lSfz}\lSfz f\qu f\qsk%
+\en
+\endextract
+\end{music}
+\item[breaths:]
+\ \\
+\begin{music}
+\nostartrule
+\startextract
+\NOTes
+  \zcharnote{-8}{\Bslash cuBreath}\cuBreath \qu f%
+  \zcharnote{13}{\Bslash clBreath}\clBreath \qu f%
+\en\bar
+\NOtes
+  \ccharnote{-8}{\Bslash zuBreath}\zuBreath \qu f%
+  \ccharnote{13}{\Bslash zlBreath}\zlBreath \qu f%
+\en
+\endextract
+\end{music}
+\item[coda with serifs, upright segno:]
+\ \\
+\begin{music}
+\nostartrule
+\startextract
+\NOTes
+  \sk
+  \ccharnote{-4}{\Bslash scoda}\scoda n\sk\sk%
+  \ccharnote{-4}{\Bslash upsegno}\upsegno n\sk%
+\en
+\endextract
+\end{music}
+\end{description}
+The following commands will replace the default specified accents by the new ones
+defined in \texttt{musixadf.tex}:
+  \verb|\replacesforzato|, 
+  \verb|\replacecoda|,
+  \verb|\replacesegno|.
+
+ \section{musixbm}
+This file does nothing; it is retained only for compatibility with 
+\musixtex{} T.110 or earlier. 
+Since version T.111, \verb|musixtex.tex| itself contains all the functions 
+of the older \texttt{musixbm}, namely 
+commands for 128th notes, either with flags or with beams:
+\keyindex{ibbbbbu},
+\keyindex{ibbbbbl},
+\keyindex{nbbbbbu},
+\keyindex{nbbbbbl},
+\keyindex{tbbbbbu},
+\keyindex{tbbbbbl},
+\keyindex{Ibbbbbu},
+\keyindex{Ibbbbbl},
+\keyindex{cccccu},
+\keyindex{cccccl},
+\keyindex{ccccca},
+\keyindex{zcccccu} and
+\keyindex{zcccccl}.
+
+
+ \section{musixbbm}\label{musixbbm}
+ Provides $256$th notes, but only for use within beams, via the commands
+\keyindex{ibbbbbbu},
+\keyindex{ibbbbbbl},
+\keyindex{nbbbbbbu},
+\keyindex{nbbbbbbl},
+\keyindex{tbbbbbbu},
+\keyindex{tbbbbbbl},
+\keyindex{Ibbbbbbu} and
+\keyindex{Ibbbbbbl}.
+
+By default \texttt{musixbbm} provides six $256$th beams with 
+reference number $0$ to $5$.  
+You can specify a larger maximum number 
+directly with \keyindex{setmaxcclvibeams}\verb|{|$m$\verb|}| within the
+range\footnote{This may require e-\TeX.} $7\leq m\leq 100$.
+
+\section{musixcho}\label{song}
+ Enables certain macros intended for choral music\footnote{Remember
+that we now recommend using \texttt{musixlyr} for any except the
+simplest lyrics. The extension \texttt{musixcho} is only for those
+diehards who choose to ignore this advice}. Provides the following commands:
+\keyindex{biglbrace}, \keyindex{bigrbrace}, \keyindex{braceheight},
+\keyindex{Dtx} and \keyindex{Drtx} for two-line text, \keyindex{Ttx} and
+\keyindex{Trtx} for three-line text, \keyindex{Qtx} and \keyindex{Qrtx} for
+four-line text.  To eliminate zigzagging lyrics lines, all multiple line texts
+are automatically vertically justified with the macro \keyindex{ChroirStrut},
+defined as \verb|\vphantom{\^Wgjpqy}|.
+
+The macros \keyindex{tx}\verb|{|$text$\verb|}|,
+\keyindex{rtx}\verb|{|$text$\verb|}| cause song text to be left-justified
+on the insertion point rather then centered.
+ \keyindex{hf}\verb|{|$m$\verb|}| sets a text
+continuation rule of length $m$ \verb|\noteskip|.
+
+Consult the source file {\tt musixdoc.tex} to see the coding of the following
+example:
+
+\begin{music}
+\ninerm
+\parindent9mm
+\braceheight5.4\Interligne\relax
+%\rightline{Arr.: H.~W.~Eichholz}
+\instrumentnumber2
+\generalsignature{-2}
+\generalmeter{\meterfrac22}
+\setclef1\bass
+\relativeaccid
+\setinterinstrument1{11\Interligne}
+\songtop2
+\songbottom1
+\setname2{\vbox{\hsize\parindent\centerline{Sop}\centerline{Alt}}}
+\setname1{\vbox{\hsize\parindent\centerline{Ten}\centerline{Bass}}}
+\sepbarrules\nobarnumbers
+\beforeruleskip-2pt
+\startpiece
+%% bar 1
+\znotes&\rlap{\kernm2em\Qrtx 1.|2.|3.|4.*}\en
+\NOTes\sslur ILd1\sslur bNu1\zhl I\hu b%
+  &\Qtx\ixhf{Oh}|No|No|There'll*\issluru0f\sslur dad1\zhup f\hl d\en
+\Notes\zhl L\hu N&\Qtx ~|more|more|~be*\hl{^c}\en
+\NOtes&\tsslur0g\qu g\en
+%%% bar 2
+\bar
+\NOtes\zql I\qu b&\Qrtx\thf freedom,|weepin',|moanin',|singin',*\zqu i\ql d\en
+\NOTesp\lpt I\zhl I\hup b&\zhup i\hlp d\en
+%%% bar 3
+\bar
+\nspace
+\NOTes\sslur JMd1\sslur bau1\zhl J\hu b%
+  &\Qtx\ixhf{oh}|no|no|there'll*\issluru0j\sslur edd1\zhup j\hl{^e}\en
+\Notes\zhl M\hu a&\Qtx~|more|more|~be*\hl{=e}\en
+\NOtes&\tsslur0k\qu k\en
+%%% bar 4
+\bar
+\NOtes\zql I\qu b&\Qrtx\thf freedom,|weepin',|moanin',|singin',*\zqu j\ql d\en
+\NOTesp\lpt I\zhl I\hup b&\zhup i\hlp d\en
+%%% bar 5
+\bar
+\NOTesp\sslur IJd1\sslur bau1\lpt I\zhl I\hup b%
+  &\Qtx\ixhf{oh}|no|no|~there'll*\isslurd0f\issluru1j\zhup k\hlp f\en
+\NOtes\zql J\qu a&\Qtx~|more|more|~be*\tsslur1f\zqu f\roff{\tsslur0e\ql e}\en
+%%% bar 6
+\bar
+\NOtes\zql K\qu b&\Qrtx\thf freedom,|weepin',|moanin',|singin',*\zqu i\ql f\en
+\NOtes\zql J\qu b&\zqu i\ql e\en
+\NOtes\zql I\qu b&\rlap{\kernm1\Internote\bigrbrace}\rtx~~~~over*\zqu i\ql d\en
+\NOtes\zql G\qu b&\zqu k\ql f\en
+%%% bar 7
+\bar
+\nspace
+\NOTes\zhl J\hu b\caesura&\tx ~me,*\zhu j\hl{^e}\caesura\en
+\Notes\zcl J\cu b&\rtx ~over*\zcu j\cl e\en
+\NOtesp\zqlp J\qup b&\zqup k\lpt e\ql e\en
+\endpiece
+\end{music}
+
+\section{musixcpt}
+
+Empowers \musixtex\ to run files created under
+Musi\textbf{c}TeX, the predecessor of \musixtex, such as some of the examples
+provided by Daniel {\sc Taupin}. It is not needed for any files created
+under \musixtex, and is included mainly for historical completeness.
+
+\section{musixdat}
+Enables the command \keyindex{today}, which sets the current date in one of
+several possible languages. The language is selected by an optional
+ preparatory command \verb|\date...|.
+The default is \keyindex{dateUSenglish}, but this can changed, either at the
+end of \ttxem{musixdat.tex} for a permanant change, or right before issuing
+\verb|\today|. Available choices and sample results are summarized below:
+\smallskip
+\begin{quote}\begin{tabular}{ll}\hline
+\verb|\dateUSenglish|&\dateUSenglish\today\\
+\verb|\dateaustrian|&\dateaustrian\today\\
+\verb|\dateenglish|&\dateenglish\today\\
+\verb|\datefrench|&\datefrench\today\\
+\verb|\dategerman|&\dategerman\today\\\hline
+\end{tabular}\end{quote}
+
+\section{musixdbr}
+Enables dashed and dotted bar lines (see Section~\ref{musixdbr}).
+
+\section{musixdia}\label{diam}
+Enables notes with diamond-shaped heads as follows:
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item Solid note heads (\raise.5ex\hbox to .6em{\musixchar37}) are obtained
+using the macros
+ \keyindex{yqu}, \keyindex{yqup},
+\keyindex{yqupp}, \keyindex{yql}, \keyindex{yqlp}, \keyindex{yqlpp},
+\keyindex{yzq}, \keyindex{yzqp}, \keyindex{yzqpp}, \keyindex{yqb},
+\keyindex{ycu}, \keyindex{yccu}, \keyindex{ycccu}, \keyindex{yccccu},
+\keyindex{ycl}, \keyindex{yccl}, \keyindex{ycccl}, \keyindex{yccccl},
+\keyindex{ycup}, \keyindex{ycupp}, \keyindex{yclp}, \keyindex{yclpp}.
+(Think of d{\it y}\kern.5pt amond). A solid diamond with no stem is obtained
+with \keyindex{ynq} (spacing) or \keyindex{yznq} (non-spacing).
+ \item Open note heads (\raise.5ex\hbox to .6em{\musixchar38}) are obtained
+using the macros
+\keyindex{dqu}, \keyindex{dqup},
+\keyindex{dqupp}, \keyindex{dql}, \keyindex{dqlp}, \keyindex{dqlpp},
+\keyindex{dzq}, \keyindex{dzqp}, \keyindex{dzqpp}, \keyindex{dqb},
+\keyindex{dcu}, \keyindex{dccu}, \keyindex{dcccu}, \keyindex{dccccu},
+\keyindex{dcl}, \keyindex{dccl}, \keyindex{dcccl}, \keyindex{dccccl},
+\keyindex{dcup}, \keyindex{dcupp}, \keyindex{dclp}, \keyindex{dclpp}.
+(Think of {\it d}\kern.5pt iamond).
+An open diamond with no stem is obtained
+with \keyindex{dnq} (spacing) or \keyindex{dznq} (non-spacing).
+ \end{itemize}
+
+One use of these note heads is for a string part with \itxem{harmonic notes}.
+%(see \ref{othernotes})
+% DAS removed description which was misplaced in the samll=notes section 2.18 4/30/06
+For example,
+
+\begin{music}
+\parindent0pt
+\generalsignature{-2}
+\generalmeter\allabreve
+\startextract
+\NOTes\dzq o\zh d\hu h\en
+\Notes\ibu0k0\zq g\yqb0k\qb0j\zq e\yqb0i\tbu0\qb0j\en
+\bar
+\NOTes\dzq g\hu k\en
+\NOTes\hpause\en
+\bar
+\NOTes\dzq o\zh d\hl h\en
+\Notes\ibl0e0\zq g\yqb0k\qb0j\zq e\yqb0i\tbl0\qb0j\en
+\bar
+\NOTes\dzq g\hu k\en
+\NOTes\hpause\en
+\endextract
+\end{music}
+\noindent was coded as follows:
+\begin{quote}\begin{verbatim}
+\generalsignature{-2}
+\generalmeter\allabreve
+\startextract
+\NOTes\dzq o\zh d\hu h\en
+\Notes\ibu0k0\zq g\yqb0k\qb0j\zq e\yqb0i\tbu0\qb0j\en
+\bar
+\NOTes\dzq g\hu k\en
+\NOTes\hpause\en
+\bar
+\NOTes\dzq o\zh d\hl h\en
+\Notes\ibl0e0\zq g\yqb0k\qb0j\zq e\yqb0i\tbl0\qb0j\en
+\bar
+\NOTes\dzq g\hu k\en
+\NOTes\hpause\en
+\endextract
+\end{verbatim}\end{quote}
+
+Another use is for percussion parts. In fact the file \verb|musixdia.tex|
+is automatically loaded if you input {\tt musixper.tex} (see Section~\ref{perc}).
+
+\section{musixec}\label{ecfonts}
+ This package will replace the \texttt{OT1}-encoded Computer Modern fonts
+by \texttt{T1}-encoded EC versions.  
+Use as follows:
+\begin{quote}\begin{verbatim}
+\input musixtex
+\input musixec
+...
+\end{verbatim}\end{quote}
+
+
+ \section{musixeng}
+ This package is provided for music typesetters who are allergic to the default
+rest names, which are
+taken from French, German or Italian. It does not provide new features, only
+new command names:
+\medskip
+ \begin{quote}\begin{tabular}{ll}\hline
+\ital{original}&\ital{alternate}\\\hline
+\keyindex{PAUSe}&\keyindex{Qwr}\\
+\keyindex{PAuse}&\keyindex{Dwr}\\
+\keyindex{liftpause}&\keyindex{liftwr}\\
+\keyindex{pausep}&\keyindex{wrp}\\
+\keyindex{pause}&\keyindex{wr}\\
+\keyindex{lifthpause}&\keyindex{lifthr}\\
+\keyindex{hpausep}&\keyindex{hrp}\\
+\keyindex{hpause}&\keyindex{hr}\\
+\keyindex{qp}&\keyindex{qr}\\
+\keyindex{ds}&\keyindex{er}\\
+\keyindex{qs}&\keyindex{eer}\\
+\keyindex{hs}&\keyindex{eeer}\\
+\keyindex{qqs}&\keyindex{eeeer}\\\hline
+\end{tabular}\end{quote}
+
+\section{musixext}
+Defines the following two specific macros:
+
+\keyindex{slide}\itbrace{p}\itbrace{x}\itbrace{s}~, which provides a glissando
+starting at pitch {\it p} and extending for {\it x} \verb|\internote|s with
+slope {\it s} (ranging from $-8$ to $8$).
+
+\keyindex{raggedstoppiece}~, which inhibits right-justification of the last
+line of a score.
+
+ \section{musixf{}l{}l}
+ \input musixfll
+ Enables modification of \ixem{ledger lines}. Ledger lines normally exceed the
+width of a note head by $25$ percent in each direction. If the space between
+notes is insufficient, the ledger lines of
+consecutive notes may meet, creating visual ambiguities. Therefore,
+\musixtex{} shortens the
+ledger lines if notes are set so close together that the ledger lines may
+meet. But because \musixtex{} does not know whether consecutive notes need
+ledger lines, this automatic shortening may be superfluous. The extension
+file \ttxem{musixfll.tex} allows this feature to be switched off and on.
+Upon inputting \verb|musixfll.tex|, the automatic shortening of ledger lines
+is switched off. From then on, it may be switched on again using
+\keyindex{autoledgerlines} and switched off again using
+\keyindex{longledgerlines}. Both macros have global effect.
+
+ The following example shows that narrowly set scales look better with
+\keyindex{autoledgerlines} (the default behavior), whereas single notes
+requiring ledger lines look better with \keyindex{longledgerlines}.
+
+\medskip
+\begin{music}
+\nostartrule
+\startextract
+\notes\multnoteskip{0.7}\Uptext{autoledgerlines}\autoledgerlines
+    \ibbbu0b0\qb0{cba`gfg'a}\tbu0\qb0b%
+    \ibbbl0{''b}0\qb0{abcdedc}\tbl0\qb0b%
+    \ibbbu0{``b}0\qb0{dad}\tbu0\qb0a%
+    \ibbbl0{''b}0\qb0{`g'c`g}\tbl0\qb0{'c}\en
+\endextract
+\medskip
+\startextract
+\notes\multnoteskip{0.7}\Uptext{longledgerlines}\longledgerlines
+    \ibbbu0b0\qb0{cba`gfg'a}\tbu0\qb0b%
+    \ibbbl0{''b}0\qb0{abcdedc}\tbl0\qb0b%
+    \ibbbu0{``b}0\qb0{dad}\tbu0\qb0a%
+    \ibbbl0{''b}0\qb0{`g'c`g}\tbl0\qb0{'c}\en
+\endextract
+\autoledgerlines
+\end{music}
+
+ \section{musixgre}\label{gregnotes}\index{gregorian chant}
+
+% \section{Gregorian chant: staffs and clefs}
+Gregorian chant is often coded using four line staffs
+(see
+%sections \ref{gregorian} and
+Section~\ref{stafflinenumber}) and using special notes called
+\itxem{neumes} (which are described later in this section). It also requires
+special clefs. One way to substitute them for the modern ones is for example
+with commands like
+
+\keyindex{setaltoclefsymbol}\verb|3\gregorianCclef|
+
+\noindent or
+
+\keyindex{setbassclefsymbol}\verb|3\gregorianFclef| ,
+
+\noindent which will cause instrument number~$3$ to display the selected gregorian
+clef. The standard clefs can be restored for every instrument with
+\keyindex{resetclefsymbols}. Note that when using this method you must
+specify whether to substitute for the bass or alto clef
+symbol (there is no treble clef in gregorian
+chant). The reason is that \musixtex\ selects and
+raises the F and C clefs differently, according to the arguments of the
+\keyindex{setclef} command. Therefore, if one had substituted any F clef
+symbol while saying \verb|\setclef1{1000}|, then an F clef would duly appear
+on the staff, but it would be set at the position of an alto clef, thus
+seriously misleading the musician.
+
+Another method of clef substitution employs \keyindex{setclefsymbol} (see
+Section~ \ref{treblelowoct}), which substitutes the clef given by
+the second argument \ital{for all clef symbols} of the instrument given by the first,
+regardless of the actual musical meaning of the new clef symbol. This method is
+generally appropriate only if you want to change the clef symbol(s) of
+an instrument for the whole of the score.
+
+ As an example, the same gregorian scale has been written with a gregorian C
+clef on all four lines of the staff:
+
+ \begin{music}\nostartrule
+ \parindent 19mm
+ \instrumentnumber{4}
+ \setname1{1st line} \setname2{2nd line} 
+ \setname3{3rd line} \setname4{4th line}
+ \setlines1{4}\setlines2{4}\setlines3{4}\setlines4{4}
+ \sepbarrules
+ \generalmeter{\empty}
+ \setclef1{1000} \setclef2{2000} \setclef3{3000} \setclef4{4000}
+ \setaltoclefsymbol1\gregorianCclef
+ \setaltoclefsymbol2\gregorianCclef
+ \setaltoclefsymbol3\gregorianCclef
+ \setaltoclefsymbol4\gregorianCclef
+\startextract
+\Notes\squ{abcdefghi}&\squ{abcdefghi}&\squ{abcdefghi}&\squ{abcdefghi}&\en
+\zendextract
+\end{music}
+
+ The coding was:
+ \begin{verbatim}
+ \instrumentnumber{4}
+ \setname1{1st line} \setname2{2nd line} 
+ \setname3{3rd line} \setname4{4th line}
+ \setlines1{4}\setlines2{4}\setlines3{4}\setlines4{4}
+ \sepbarrules
+ \generalmeter{\empty}
+ \setclef1{1000} \setclef2{2000} \setclef3{3000} \setclef4{4000}
+ \setaltoclefsymbol1\gregorianCclef
+ \setaltoclefsymbol2\gregorianCclef
+ \setaltoclefsymbol3\gregorianCclef
+ \setaltoclefsymbol4\gregorianCclef
+\startextract
+\Notes\squ{abcdefghi}&\squ{abcdefghi}&\squ{abcdefghi}&\squ{abcdefghi}&\en
+\zendextract
+ \end{verbatim}
+
+All of the special gregorian symbols available in \musixtex\ are described
+in the following subsections.
+
+\subsection{Clefs}
+
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item Gregorian C clef: \raise 2.5pt\hbox to 1cm{\gregorianCclef\hfil}~=
+ \keyindex{gregorianCclef}, normally activated for instrument $n$ with the
+command
+ \keyindex{setaltoclefsymbol}\itbrace{n}\keyindex{gregorianCclef}
+\item Gregorian F clef:  \raise 2.5pt\hbox to 1cm{\gregorianFclef\hfil}~=
+\keyindex{gregorianFclef}, normally activated with the command
+\keyindex{setbassclefsymbol}\itbrace{n}\keyindex{gregorianFclef}
+ \end{itemize}
+
+ \subsection{Elementary symbols}
+
+
+ \begin{itemize}\setlength{\itemsep}{0ex}
+
+ \item Diamond shaped \itxem{punctum} (This has a different shape compared to the
+percussion diamond): \raise 2.5pt\hbox{\xgregchar1}~ =
+\keyindex{diapunc}\pitchp\ .
+ \item Square \itxem{punctum}: \raise 2.5pt\hbox{\xgregchar5}~ =
+\keyindex{squ}\pitchp\ or \keyindex{punctum}\pitchp\ .
+ \item Left stemmed \itxem{virga} (not in the 1905 gregorian standard): \raise
+2.5pt\hbox{\xgregchar6}~ = \keyindex{lsqu}\pitchp\ .
+ \item Right stemmed \itxem{virga}: \raise 2.5pt\hbox{\xgregchar7}~ =
+\keyindex{rsqu}\pitchp\ or \keyindex{virga}\pitchp\ .
+ \item \ital{Apostropha}\index{apostropha}: \raise 2.5pt\hbox{\xgregchar3}~ =
+\keyindex{apostropha}\pitchp\ .
+ \item \ital{Oriscus}\index{oriscus}: \raise 2.5pt\hbox{\xgregchar10}~ =
+\keyindex{oriscus}\pitchp\ .
+
+ \item \ital{Quilisma}\index{quilisma}: \raise 2.5pt\hbox{\xgregchar125}~ =
+\keyindex{quilisma}\pitchp\ .
+ \item \ital{Punctum auctum} (up)\index{punctum auctum}: \raise
+2.5pt\hbox{\xgregchar9}~ =
+\keyindex{punctumauctup}\pitchp\ .
+ \item \ital{Punctum auctum} (down)\index{punctum auctum}: \raise
+2.5pt\hbox{\xgregchar8}~ =
+\keyindex{punctumauctdown}\pitchp\ .
+ \item Diamond shaped \ital{punctum auctum} (down)\index{punctum auctum}:
+\raise 2.5pt\hbox{\xgregchar2}~ = \keyindex{diapunctumauctdown}\pitchp\ .
+ \item \ital{Punctum deminutum}\index{punctum deminutum}: \raise
+2.5pt\hbox{\xgregchar4}~ = \keyindex{punctumdeminutum}\pitchp\ .
+ \item \ital{Apostropha aucta}\index{apostropha aucta}: \raise
+2.5pt\hbox{\xgregchar11}~ = \keyindex{apostropha aucta}\pitchp\ .
+
+\end{itemize}
+ All non-\ital{liquescens} symbols have non-spacing variants, namely
+\keyindex{zdiapunc}, \keyindex{zsqu}, \keyindex{zlsqu}, \keyindex{zrsqu},
+\keyindex{zapostropha} and \keyindex{zoriscus}.
+
+\subsection{Plain complex neumes}
+Other \itxem{neumes} can be obtained by combining two or more of these
+symbols. Since \itxem{neumes} have a special note head width, an additional
+shifting macro is provided, namely \keyindex{groff}. It is similar to
+\verb|\roff|, but the offset is smaller. For use with comples neumes, another
+shifting macro is provided, namely \keyindex{dgroff}, which causes an
+offset twice the offset of \verb|\groff|.
+
+ Since most of these symbols depend on relative pitches of their components,
+we cannot provide all possible compact combinations as single symbols. The ones
+that are available in \verb|musixgre| are described below. In the following,
+$p_1$, $p_2$, $p_3$, and $p_4$ represent pitches specified as usual. Please refer to
+the source file \verb|musixtex.tex| if you wish to see the coding of those
+examples for which it is not quoted here.
+
+\def\twop{\itbrace{p_1}\itbrace{p_2}}
+\def\threep{\twop\itbrace{p_3}}
+\def\fourp{\threep\itbrace{p_4}}
+
+\begin{description}\setlength{\itemsep}{0ex}
+ \item[\keyindex{bivirga}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \bivirga ab\en
+ \notes \bivirga cc\en
+ \zendextract
+ \end{music}
+
+  This example was coded as:
+  \begin{quote}\begin{verbatim}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \bivirga ab\en
+ \notes \bivirga cc\en
+ \zendextract
+  \end{verbatim}\end{quote}
+
+ \item[\keyindex{trivirga}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \trivirga abc\en
+ \Notes \trivirga cca\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{bistropha}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \bistropha ab\en
+ \notes \bistropha cc\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{tristropha}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \tristropha abc\en
+ \Notes \tristropha cca\en
+ \zendextract
+ \end{music}
+
+  \item[\keyindex{clivis}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \clivis ba\en
+ \notes \clivis ca\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{lclivis}\twop], for example:
+
+ \begin{music}\nostartrule
+ \setsize1{\Largevalue}
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \lclivis ba\en
+ \notes \lclivis ca\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{podatus}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \podatus ab\en
+ \notes \podatus ac\en
+ \notes \podatus cf\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{podatusinitiodebilis}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \podatusinitiodebilis ab\en
+ \notes \podatusinitiodebilis ac\en
+ \notes \podatusinitiodebilis cf\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{lpodatus}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+  \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \lpodatus ab\en
+ \notes \lpodatus ce\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{pesquassus}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \pesquassus ab\en
+ \notes \pesquassus ae\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{quilismapes}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \quilismapes ab\en
+ \notes \quilismapes ae\en
+ \zendextract
+ \end{music}
+
+  \item[\keyindex{torculus}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \torculus aba\en
+ \notes \torculus cfd\en
+ \notes \torculus afc\en
+ \zendextract
+ \end{music}
+
+  \item[\keyindex{torculusinitiodebilis}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \torculusinitiodebilis aba\en
+ \notes \torculusinitiodebilis cfd\en
+ \notes \torculusinitiodebilis afc\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{Porrectus}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \Porrectus bab\en
+ \notes \Porrectus bac\en
+ \notes \Porrectus bNd\en
+ \notes \Porrectus bMe\en
+ \notes \Porrectus bLe\en
+ \zendextract
+ \end{music}
+\noindent coded:
+ \begin{quote}\begin{verbatim}
+ \notes \Porrectus bab\en
+ \notes \Porrectus bac\en
+ \notes \Porrectus bNd\en
+ \notes \Porrectus bMe\en
+ \notes \Porrectus bLe\en
+ \end{verbatim}\end{quote}
+
+ \verb|\Porrectus| exists in four different shapes, depending on the
+difference between first and second argument. The constraint is that
+ $$ p_1-4 \leq p_2 \leq p_1-1 $$ otherwise a diagnostic occurs. Note also that
+\keyindex{bporrectus} provides the first curved part of the \verb|porrectus|
+command, if you should need it. It has two arguments, the starting pitch and the lower
+pitch.
+
+ \item[\keyindex{Porrectusflexus}\fourp], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \Porrectusflexus  bacN\en
+ \notes \Porrectusflexus  bNdb\en
+ \notes \Porrectusflexus  bMeb\en
+ \notes \Porrectusflexus  bLea\en
+ \zendextract
+ \end{music}
+\noindent coded:
+ \begin{quote}\begin{verbatim}
+ \notes \Porrectusflexus  bacN\en
+ \notes \Porrectusflexus  bNdb\en
+ \notes \Porrectusflexus  bMeb\en
+ \notes \Porrectusflexus  bLea\en
+ \end{verbatim}\end{quote}
+
+
+ \item[\keyindex{climacus}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \climacus cbN\en
+ \Notes \climacus cba\en
+ \Notes \climacus dbN\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{climacusresupinus}\fourp], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \climacusresupinus cbNa\en
+ \Notes \climacusresupinus cbab\en
+ \Notes \climacusresupinus dbNb\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{lclimacus}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+  \setsize1{\Largevalue}
+\instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \lclimacus cbN\en
+ \notes \lclimacus cfd\en
+ \notes \lclimacus afc\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{scandicus}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \scandicus abe\en
+ \notes \scandicus ceg\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{salicus}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \salicus abe\en
+ \Notes \salicus ceg\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{salicusflexus}\fourp], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \salicusflexus abec\en
+ \Notes \salicusflexus cegd\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{trigonus}\threep],
+%DAS ????????????
+%for example\footnote{The second example is in principle irrelevant,
+%but it shows the possibilities, in case of.}:
+for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \trigonus aaN\en
+ \Notes \trigonus cef\en
+ \zendextract
+ \end{music}
+
+\end{description}
+
+\subsection{Liquescens complex neumes}\index{liquescens neumes}
+\begin{description}\setlength{\itemsep}{0ex}
+  \item[\keyindex{clivisauctup}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \clivisauctup ba\en
+ \notes \clivisauctup ca\en
+ \zendextract
+ \end{music}
+  \item[\keyindex{clivisauctdown}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \clivisauctdown ba\en
+ \notes \clivisauctdown ca\en
+ \zendextract
+ \end{music}
+ \item[\keyindex{podatusauctup}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \podatusauctup ab\en
+ \notes \podatusauctup ac\en
+ \notes \podatusauctup cf\en
+ \zendextract
+ \end{music}
+ \item[\keyindex{podatusauctdown}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \podatusauctdown ab\en
+ \notes \podatusauctdown ac\en
+ \notes \podatusauctdown cf\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{pesquassusauctdown}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \pesquassusauctdown ab\en
+ \notes \pesquassusauctdown ae\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{quilismapesauctdown}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \quilismapesauctdown ab\en
+ \notes \quilismapesauctdown ae\en
+ \zendextract
+ \end{music}
+
+  \item[\keyindex{torculusauctdown}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \torculusauctdown aba\en
+ \notes \torculusauctdown cfd\en
+ \notes \torculusauctdown afc\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{Porrectusauctdown}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \Porrectusauctdown bac\en
+ \notes \Porrectusauctdown bNd\en
+ \notes \Porrectusauctdown bMe\en
+ \notes \Porrectusauctdown bLe\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{climacusauctdown}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \climacusauctdown cbN\en
+ \Notes \climacusauctdown caM\en
+ \Notes \climacusauctdown aNM\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{scandicusauctdown}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \scandicusauctdown abe\en
+ \notes \scandicusauctdown ceg\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{salicusauctdown}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \salicusauctdown abe\en
+ \Notes \salicusauctdown ceg\en
+ \zendextract
+ \end{music}
+
+  \item[\keyindex{clivisdeminut}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \setsize1{\Largevalue}
+ \instrumentnumber 1
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \clivisdeminut ba\en
+ \notes \clivisdeminut ca\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{podatusdeminut}\twop], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \podatusdeminut ab\en
+ \notes \podatusdeminut ac\en
+ \notes \podatusdeminut cf\en
+ \zendextract
+ \end{music}
+
+  \item[\keyindex{torculusdeminut}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \torculusdeminut aba\en
+ \notes \torculusdeminut cfd\en
+ \notes \torculusdeminut afc\en
+ \zendextract
+ \end{music}
+
+  \item[\keyindex{torculusdebilis}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \torculusdebilis aba\en
+ \notes \torculusdebilis cfd\en
+ \notes \torculusdebilis afc\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{Porrectusdeminut}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \Porrectusdeminut bac\en
+ \notes \Porrectusdeminut bNd\en
+ \notes \Porrectusdeminut bMe\en
+ \notes \Porrectusdeminut bLe\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{climacusdeminut}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \Notes \climacusdeminut cbN\en
+ \Notes \climacusdeminut caM\en
+ \Notes \climacusdeminut aML\en
+ \zendextract
+ \end{music}
+
+ \item[\keyindex{scandicusdeminut}\threep], for example:
+
+ \begin{music}\nostartrule
+ \elemskip 10pt
+ \instrumentnumber 1
+ \setsize1{\Largevalue}
+ \setstaffs 1 1
+ \setlines 1 4
+ \setclef 1{3000}
+ \setaltoclefsymbol 1 \gregorianCclef
+ \startextract
+ \notes \scandicusdeminut abe\en
+ \notes \scandicusdeminut ceg\en
+ \zendextract
+ \end{music}
+\end{description}
+
+\section{musixgui}\ixtt{musixgui.tex} Provides macros for
+typesetting modern style \itxem{guitar chords}. For example:
+
+\begin{music}
+\hsize130mm
+\tenrm
+\parindent0pt
+\generalmeter{\meterfrac34}
+\generalsignature1
+\startbarno0
+\def\txh{-6.5}
+\def\tx#1*{\zchar\txh{\lrlap{\kern3\Internote#1}}}
+\def\rtx#1*{\zchar\txh{\kern-3\Internote#1}}
+\stafftopmarg10\Interligne
+\raiseguitar{20}
+\nostartrule
+\startpiece
+\addspace{.5\afterruleskip}%
+\NOtes\tx We*\qa d\en
+\bar
+\NOtes\guitar G{}o-----\gbarre3\gdot25\gdot35\gdot44\tx wish*\qa g\en
+\Notes\tx you*\ca g\en
+\Notes\tx a*\ca h\en
+\Notes\zchar\txh{merry}\ca g\en
+\Notes\ca f\en
+\bar
+\NOtes\guitar C5o-----\gbarre4\gdot26\gdot36\gdot45\rtx christmas,*\qa e\en
+\NOtes\qa e\en
+\NOtes\guitar {e/H}5o-----\gbarre3\gdot35\gdot45\gdot54\tx we*\qa e\en
+\bar
+\NOtes\guitar {A$\!^7$}5o-----\gbarre1\gdot23\gdot42\tx wish*\qa h\en
+\Notes\tx you*\ca h\en
+\Notes\tx a*\ca i\en
+\Notes\zchar\txh{merry}\ca h\en
+\Notes\ca g\en
+\bar
+\NOtes\guitar D{}xxo---\gdot42\gdot53\gdot62\rtx christmas,*\qa f\en
+\NOtes\qa d\en
+\zbar
+\NOtes\guitar{D/c}{}xo----\gdot23\gdot42\gdot53\gdot62\tx we*\qa d\en
+\bar
+\NOtes\guitar{B$^7$}{}xo----\gdot22\gdot31\gdot42\gdot62\tx wish*\qa i\en
+\Notes\tx you*\ca i\en
+\Notes\tx a*\ca j\en
+\Notes\tx ~mer-*\ca i\en
+\Notes\tx ry*\ca h\en
+\bar
+\NOtes\guitar e{}xxo---\gdot32\tx ~christ-*\qa g\en
+\NOtes\tx mas*\qa e\en
+\Notes\guitar {G/d}{}xxo---\gdot63\tx and*\ca d\en
+\Notes\tx a*\ca d\en
+\bar
+\NOtes\guitar{C$^6$}{}xo----\gdot23\gdot32\gdot42\gdot51\tx ~~hap~-*\qa e\en
+\NOtes\tx py*\qa h\en
+\NOtes\guitar{D$^7$}{}xo---x\gdot25\gdot34\gdot45\gdot45\gdot53\tx new*\qa f\en
+\bar
+\NOTes\guitar G{}o-----\gbarre3\gdot25\gdot35\gdot44\tx ~year.*\ha g\en
+\setdoublebar\endpiece
+\end{music}
+
+\medskip
+The macro \keyindex{guitar} sets the grid, chord name, barre type,
+and on-off indicators for the strings. For example, the first
+chord in above example was coded as
+
+\verb|\guitar G{}o-----\gbarre3\gdot25\gdot35\gdot44|
+
+\noindent where the first argument is the text to be placed above the grid, the
+second is empty (relative barre), and the next six characters indicate if the string
+is played or not with either \verb|x|, \verb|o| or \verb|-|. The dots are set with
+\keyindex{gdot}~$sb$ where the $s$ is the string and $b$ is the barre. The
+rule is set with \keyindex{gbarre}~$b$ where $b$ indicates the position of the barre.
+
+The whole symbol may be vertically shifted with
+\keyindex{raiseguitar}\onen, where $n$ is a number
+in units of \keyindex{internote}. When using guitar chords, it might be
+useful to reserve additional
+space above the chord by advancing \keyindex{stafftopmarg} to
+something like \verb|stafftopmarg=10\Interligne|.
+
+For frequently used chords, it might be useful to define your own
+macros, e.g.
+
+\verb|\def\Dmajor{\guitar D{}x-----\gdot42\gdot53\gdot62}%|
+
+\section{musixhv}\label{helvetica}
+
+
+Replaces the default Computer Modern text fonts by Helvetica (sans serif) fonts;
+see Section~\ref{UserFonts}.
+Use as follows:
+\begin{quote}\begin{verbatim}
+\input musixtex
+\input musixhv
+...
+\end{verbatim}\end{quote}
+
+The usual ``small'' type commands are supported:
+\begin{quote}
+\begin{tabular}{lr}
+\keyindex{smalltype} & 8pt \\
+\keyindex{Smalltype} & 9pt \\
+\keyindex{normtype}& 10pt \\
+\keyindex{medtype} & 12pt \\
+\end{tabular}
+\end{quote}
+For all of these, the following variants are supported:
+\begin{quote}
+\begin{tabular}{ll}
+\verb|\rm| & ``Roman'' (sans serif) \\
+\verb|\bf| & bold \\
+\verb|\it| & ``italic'' (oblique) \\
+\verb|\bi| & ``bold-italic'' (bold-oblique) \\
+\verb|\sc| & small capitals\\
+\end{tabular}
+\end{quote}
+The ``big'' type commands are as follows:
+\begin{quote}
+\begin{tabular}{lr}
+\keyindex{bigtype} & 14pt\\
+\keyindex{Bigtype} & 17pt\\
+\keyindex{BIgtype}& 20pt\\
+\keyindex{BIGtype} & 25pt\\
+\end{tabular}
+\end{quote}
+The default variant for all of these is small-caps;
+however, \keyindex{font} commands are defined
+for all the usual variants at all of these sizes.
+To letter-space a title, use the \verb|\so|
+command in the \verb\soul\ package.
+
+
+The following bold-oblique fonts for dynamic marks are defined:
+\begin{quote}\begin{tabular}{lr}
+\keyindex{ppffsixteen} & 10pt\\
+\keyindex{ppfftwenty} & 12pt \\
+\keyindex{ppfftwentyfour} & 14pt \\
+\keyindex{ppfftwentynine} & 17pt \\
+\keyindex{tinyppff} & 8pt \\
+\keyindex{smallppff} & 10pt \\
+\keyindex{normppff} & 12pt \\
+\keyindex{medppff} & 14pt \\
+\end{tabular}\end{quote}
+
+The default font for typesetting \keyindex{txt} and \keyindex{tuplettxt}
+arguments 
+is \keyindex{eightit} (\verb\8pt\~oblique).  
+
+ \section{musixlit}\label{litu}\label{otherbars}
+ Provides a notation style intermediate between gregorian and baroque, for
+example
+
+\makeatletter
+\catcodesmusic
+%\def\vnotes#1\elemskip{\noteskip#1\@l@mskip \multnoteskip\scal@noteskip
+%  \not@s}
+
+%\def\not@s{\def|{\nextstaff}\def&{\nextinstrument}\normaltranspose\transpose
+%  \check@nopen\notes@open\@ne
+%  \kern\n@skip\advance\x@skip\n@skip \locx@skip\x@skip
+%  \n@skip\noteskip \noinstrum@nt\z@ \begininstrument}
+
+%\def\en{\@ndstaff\notes@open\z@
+%  \ifx\@ne\V@sw \widthtyp@\z@\t@rmskip \let\V@sw\empty \fi}
+
+\def\double#1{\roffset{1.2}{\advancefalse#1}#1}
+\makeatother
+
+ % Don't know if this example correct ??? But looks nice...
+\begin{music}
+\ninerm
+\parindent0pt
+\instrumentnumber{2}
+\interstaff{11}
+\generalsignature2
+\setclefsymbol2\oldGclef
+\setstaffs1{2}
+\setclef1\bass
+\setinterinstrument1{-\Interligne}
+\startpiece
+\shortbarrules
+\addspace\afterruleskip
+\hardlyrics{Il nous a sign\'es de son
+  }\notes\zw d\wh K|\zw f\wh h&\rtx\thelyrics*\Hpause h1\en
+\qspace\qspace
+\NOTes\zhl N\hu d|\zhl g\hu i&\tx sang*\double{\cnql i}\en
+\bar
+\hardlyrics{Et nous avons \'e-
+  }\notes\zw d\wh K|\zw f\wh h&\rtx\thelyrics~-*\Hpause h1\en
+\qspace\qspace
+\NOTes\zhl M\hu c|\zhl f\hu h&\rtx t\'e*\double{\cnql i}\en
+\NOtes\zql L\qu e|\zql b\qu g&\tx ~pro-*\cnqu g\en
+\NOtes\zql b\qu d|\zql d\qu f&\tx ~t\'e-*\cnqu f\en
+\NOTes\zhl a\hu c|\zhl e\hu h&\tx g\'es.*\double{\cnqu h}\en
+\bar
+\NOtes\zql M\qu d|\zql d\qu h&\tx ~~Al~-*\cnqu h\en
+\NOtes\zql K\qu a|\zql f\qu k&\tx ~~le~-*\cnql k\en
+\NOTes\zhl H\hu a|\zhl e\hu j&\tx ~~lu~-*\double{\cnql j}\en
+\bar
+\NOTEs\zhl K\hu a|\zhl f\hu k&\tx ~~ia !*\cnhl k\en
+\sepbarrules
+\endpiece
+
+\startpiece
+\interbarrules
+\addspace\afterruleskip
+\hardlyrics{Il nous a sign\'es de son
+  }\notes\zw d\wh K|\zw f\wh h&\rtx \thelyrics*\Hlonga h1\en
+\qspace\qspace
+\NOTes\zhl N\hu d|\zhl g\hu i&\tx sang*\chl i\en
+\bar
+\hardlyrics{Et nous avons \'e
+  }\notes\zw d\wh K|\zw f\wh h&\rtx \thelyrics~-*\Hlonga h1\en
+\qspace\qspace
+\NOTes\zhl M\hu c|\zhl f\hu h&\rtx t\'e*\chl i\en
+\NOtes\zql L\qu e|\zql b\qu g&\tx ~pro-*\cqu g\en
+\NOtes\zql b\qu d|\zql d\qu f&\tx ~t\'e-*\cqu f\en
+\NOTes\zhl a\hu c|\zhl e\hu h&\tx g\'es.*\chu h\en
+\bar
+\NOtes\zql M\qu d|\zql d\qu h&\tx ~~Al~-*\cqu h\en
+\NOtes\zql K\qu a|\zql f\qu k&\tx ~~le~-*\cql k\en
+\NOTes\zhl H\hu a|\zhl e\hu j&\tx ~~lu~-*\chl j\en
+\bar
+\NOTEs\zbreve K\breve a|\zbreve f\breve k&\tx ~~ia !*\zbreve k\en
+\sepbarrules
+\endpiece
+\end{music}
+\endcatcodesmusic
+
+ This package provides:
+ \begin{itemize}\setlength{\itemsep}{0ex}
+ \item\keyindex{oldGclef} which replaces the ordinary G clef with an old one,
+using (for instrument 2 as an example):
+ \verb|\settrebleclefsymbol2\oldGclef|
+
+ \item\keyindex{cqu} $p$ provides a square headed quarter note with stem up at
+pitch $p$.
+
+ \item\keyindex{cql} $p$ provides a square headed quarter note with stem down at
+pitch $p$.
+
+ \item\keyindex{chu} $p$ provides a square headed half note with stem up at
+pitch $p$.
+
+ \item\keyindex{chl} $p$ provides a square headed half note with stem down at
+pitch $p$.
+
+ \item\keyindex{cnqu} $p$ and \keyindex{cnql} $p$ provide a stemless square
+headed
+quarter note at pitch $p$.
+
+ \item\keyindex{cnhu} $p$ and \keyindex{cnhl} $p$ provide a stemless square
+headed half note at pitch $p$.
+
+ \item\keyindex{Hpause} $p$ $n$ provides an arbitrary length pause at pitch
+$p$ and of length $n$ \keyindex{noteskip}. However, in the first of the above
+example, this feature has been used to denote an arbitrary length note rather
+than a rest!
+
+ \item\keyindex{Hlonga} $p$ $n$ provides an arbitrary length note at pitch
+$p$ and of length $n$ \keyindex{noteskip}.
+This feature has been used to denote an arbitrary length note in the second of
+the above examples.
+
+ \item\keyindex{shortbarrules} has been used to provide bar rules shorter than
+the staff vertical width.
+
+ \item\keyindex{interbarrules} has been used to provide bars between the
+staffs, rather that over them. This is an arbitrary question of taste...
+ \end{itemize}
+
+ \section{musixlyr} \ixtt{musixlyr.tex}
+ Enables the recommended method for adding lyrics to a score (see Section~\ref{musixlyr}).
+
+ \section{musixmad} \ixtt{musixmad.tex} Increases the number of
+instruments, slurs and beams up to twelve. When using this extension, it is
+not necessary to explicitly input \verb|musixadd.tex|.
+If you need greater numbers of these elements, see Sections~\ref{musixmad_setmaxgroups}, 
+\ref{musixmad_setmaxinstruments_ccxviiibeams}, 
+\ref{musixmad_setmaxoctlines}, 
+\ref{musixmad_setmaxslurs} and
+\ref{musixmad_setmaxtrills}.
+
+
+\section{musixper}\label{perc}
+
+Provides special symbols intended for percussion parts. Included are a
+\ital{drum clef}---comprising two vertical parallel lines---and notes with
+various specially shaped heads. The note symbols that are available are as
+follows:
+
+ \begin{itemize}\setlength{\itemsep}{0ex}
+ \item The \raise.5ex\hbox{\musixchar113}~{}~symbol which is obtained using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc. macros preceded by a
+``\verb|dc|'' (think of {\it d}iagonal {\it c}ross).
+Available are
+\keyindex{dcqu},
+\keyindex{dcql},
+\keyindex{dcqb},
+\keyindex{dczq},
+\keyindex{dccu},
+\keyindex{dcccu},
+\keyindex{dccl} and
+\keyindex{dcccl}.
+
+ \item The \raise.5ex\hbox{\musixchar112}~{}~symbol which is obtained using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc. macros preceded by a
+``\verb|dh|''
+(think of {\it d}iagonal cross {\it h}alf open).
+Available are
+\keyindex{dhqu},
+\keyindex{dhql},
+\keyindex{dhqb},
+\keyindex{dhzq},
+\keyindex{dhcu},
+\keyindex{dhccu},
+\keyindex{dhcl} and
+\keyindex{dhccl}.
+
+ \item The \raise.5ex\hbox{\musixchar111}~{}~symbol which is obtained using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc. macros preceded by a
+``\verb|do|''
+(think of {\it d}iagonal cross {\it o}pen).
+Available are
+\keyindex{doqu},
+\keyindex{doql},
+\keyindex{doqb},
+\keyindex{dozq},
+\keyindex{docu},
+\keyindex{doccu},
+\keyindex{docl} and
+\keyindex{doccl}.
+
+ \item The \raise.5ex\hbox{\musixchar114}~{}~symbol which is obtained using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc. macros preceeded by
+``\verb|x|'' (e.g.\ for spoken text of songs).
+Available are
+\keyindex{xqu},
+\keyindex{xql},
+\keyindex{xqb},
+\keyindex{xzq},
+\keyindex{xcu},
+\keyindex{xccu},
+\keyindex{xcl} and
+\keyindex{xccl}.
+
+ \item The \raise.5ex\hbox{\musixchar115}~{}~symbol which is obtained using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc. macros preceeded by
+``\verb|ox|'' .
+Available are
+\keyindex{oxqu},
+\keyindex{oxql},
+\keyindex{oxqb},
+\keyindex{oxzq},
+\keyindex{oxcu},
+\keyindex{oxccu},
+\keyindex{oxcl} and
+\keyindex{oxccl}.
+
+ \item The \raise.5ex\hbox{\musixchar118}~{}~symbol which is obtained using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc. macros preceeded by
+``\verb|ro|'' (think of {\it r}h{\it o}mbus).
+Available are
+\keyindex{roqu},
+\keyindex{roql},
+\keyindex{roqb},
+\keyindex{rozq},
+\keyindex{rocu},
+\keyindex{roccu},
+\keyindex{rocl} and
+\keyindex{roccl}.
+
+ \item The \raise.5ex\hbox{\musixchar116}~{}~symbol which is obtained using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc. macros preceeded by
+``\verb|tg|'' (think of {\it t}rian{\it g}le).
+Available are
+\keyindex{tgqu},
+\keyindex{tgql},
+\keyindex{tgqb},
+\keyindex{tgzq},
+\keyindex{tgcu},
+\keyindex{tgccu},
+\keyindex{tgcl} and
+\keyindex{tgccl}.
+
+ \item The \raise.5ex\hbox to 1em{\musixchar117\hfil}~{}~symbol which is obtained
+using the
+\verb|\qu|, \verb|\qb|, \verb|\cu|, etc.~macros preceeded by
+``\verb|k|'' .
+Available are
+\keyindex{kqu},
+\keyindex{kql},
+\keyindex{kqb},
+\keyindex{kzq},
+\keyindex{kcu},
+\keyindex{kccu},
+\keyindex{kcl} and
+\keyindex{kccl}.
+ \end{itemize}
+
+The diamond shaped noteheads described in Section~\ref{diam} are also
+available, because \verb|musixper.tex| inputs \verb|musixdia.tex|.
+
+If any of the foregoing notes need to be dotted, you must use the explicit
+dotting macros \verb|\pt|, \verb|\ppt|, or \verb|\pppt| as described in
+Section~\ref{dots}.
+
+Since the usage of these note symbols is
+not standardized, it would be wise to include in the score a explanation
+of which symbol corresponds to which specific percussion instrument.
+
+A special \itxem{drum clef}---comprising two heavy vertical bars---can
+be made to replace the normal clef for the $n$-th intrument by saying
+\keyindex{setclefsymbol}\onen\keyindex{drumclef} .
+To cause this to appear at the right vertical position, the instrument should
+previously have been assigned a treble clef (or not explicitly assigned any
+clef, thereby giving it a treble clef by default).
+
+Percussion music might be written on a staff with either one or five lines.
+If there are several different percussions instruments it may be useful to
+use a five-line staff with a drum clef, and differentiate the instruments
+by the type of the note heads and the apparent
+pitch of the note on the staff. Here is an example of the
+latter\footnote{provided by Agusti {\sc Mart\'in Domingo}}:
+
+\medskip
+\begin{music}
+\generalmeter{\meterfrac44}
+\setclefsymbol1\drumclef
+\parindent0pt\startpiece
+\leftrepeat
+\Notes\zql f\rlap\qp\ibu0m0\xqb0{nn}\en
+\Notes\kzq d\zql f\zq j\xqb0n\tbu0\xqb0n\en
+\Notes\zql f\rlap\qp\ibu0m0\xqb0{nn}\en
+\Notes\kzq d\zql f\zq j\xqb0n\tbu0\xqb0n\en
+\bar
+\Notes\zql f\rlap\qp\ibu0m0\kqb0{nn}\en
+\Notes\xzq d\zql f\zq j\kqb0n\tbu0\kqb0n\en
+\Notes\zql f\rlap\qp\ibu0m0\kqb0{nn}\en
+\Notes\xzq d\zql f\zq j\kqb0n\tbu0\kqb0n\en
+\bar
+\Notes\zql f\rlap\qp\ibu0m0\oxqb0{nn}\en
+\Notes\oxzq d\zql f\zq j\kqb0n\tbu0\oxqb0n\en
+\Notes\zql f\rlap\qp\ibu0m0\oxqb0{nn}\en
+\Notes\oxzq d\zql f\zq j\kqb0n\tbu0\oxqb0n\en
+\setrightrepeat\endpiece
+\end{music}
+\noindent Its coding is
+ \begin{quote}\begin{verbatim}
+\begin{music}
+\instrumentnumber{1}
+\generalmeter{\meterfrac44}
+\setclefsymbol1\drumclef
+\parindent0pt\startpiece
+\leftrepeat
+\Notes\zql f\rlap\qp\ibu0m0\xqb0{nn}\en
+\Notes\kzq d\zql f\zq j\xqb0n\tbu0\xqb0n\en
+\Notes\zql f\rlap\qp\ibu0m0\xqb0{nn}\en
+\Notes\kzq d\zql f\zq j\xqb0n\tbu0\xqb0n\en
+\bar
+\Notes\zql f\rlap\qp\ibu0m0\kqb0{nn}\en
+\Notes\xzq d\zql f\zq j\kqb0n\tbu0\kqb0n\en
+\Notes\zql f\rlap\qp\ibu0m0\kqb0{nn}\en
+\Notes\xzq d\zql f\zq j\kqb0n\tbu0\kqb0n\en
+\bar
+\Notes\zql f\rlap\qp\ibu0m0\oxqb0{nn}\en
+\Notes\oxzq d\zql f\zq j\kqb0n\tbu0\oxqb0n\en
+\Notes\zql f\rlap\qp\ibu0m0\oxqb0{nn}\en
+\Notes\oxzq d\zql f\zq j\kqb0n\tbu0\oxqb0n\en
+\setrightrepeat\endpiece
+\end{music}
+ \end{verbatim}\end{quote}
+
+Here is an example of a single-line percussion staff using
+diamond-shaped note heads:
+
+\begin{music}
+\parindent 19mm
+\instrumentnumber{3}
+\setname1{keyboard} \setname2{drum} \setname3{monks}
+\setlines2{1}
+\setlines3{4}
+\setinterinstrument1{-2\Interligne}% less vertical space above
+\setinterinstrument2{-2\Interligne}% and below the percussion
+\sepbarrules
+\setsign1{-1} % one flat at keyboard
+\generalmeter{\meterfrac24}
+\setmeter3\empty
+\setclef3\alto
+\setclef1\bass
+\setstaffs12 % 2 staffs at keyboard
+\setclefsymbol3\gregorianCclef % gregorian C clef at instrument 3
+\setclefsymbol2\drumclef       % cancel G clef at instrument 2
+\startextract
+\Notes\hu F|\zh c\hu h&\dnq4&\squ{acd}\en\bar
+\NOtes\qu I|\zq N\qu d&\qp&\diapunc f\en
+\NOtes\qu J|\zq a\qu e&\ynq4&\diapunc e\en\bar
+\notes\hu G|\zh b\hu d&\dnq4&\zsqu d\rsqu g\squ{hgh}\en
+\endextract
+\end{music}
+\noindent which is coded as follows:
+
+\begin{verbatim}
+\parindent 19mm
+\instrumentnumber{3}
+\setname1{keyboard} \setname2{drum} \setname3{monks}
+\setlines2{1}
+\setlines3{4}
+\setinterinstrument1{-2\Interligne}% less vertical space above
+\setinterinstrument2{-2\Interligne}% and below the percussion
+\sepbarrules
+\setsign1{-1} % one flat at keyboard
+\generalmeter{\meterfrac24}
+\setmeter3{\empty}
+\setclef3{\alto}
+\setclef1{\bass}
+\setstaffs1{2} % 2 staffs at keyboard
+\setclefsymbol3{\gregorianCclef} % gregorian C clef at instrument 3
+\setclefsymbol2{\drumclef}       % cancel G clef at instrument 2
+\startextract
+\end{verbatim}
+
+% (DAS) Sorry, guys, I couldn't figure out how to get the |'s to work in this
+% verbatim.
+%
+\vskip-11pt
+\def\Vert{{\tt\char'174}}
+\noindent\verb|\Notes\hu F|\Vert\verb|\zh c\hu h&\dnq4&\squ{acd}\en\bar|\\
+\verb|\NOtes\qu I|\Vert\verb|\zq N\qu d&\qp&\diapunc f\en|\\
+\verb|\NOtes\qu J|\Vert\verb|\zq a\qu e&\ynq4&\diapunc f\en\bar|\\
+\verb|\notes\hu G|\Vert\verb|\zh b\hu d&\dnq4&\zsqu d\rsqu g\squ{hgh}\en|\\
+\verb|\endextract|
+
+ \section{musixplt}\index{musixplt@{\tt musixplt.tex}}\label{palatino}
+Replaces the default Computer Modern text fonts by Palatino fonts;
+see Section~\ref{UserFonts}.
+Use as follows:
+\begin{quote}\begin{verbatim}
+\input musixtex
+\input musixplt
+...
+\end{verbatim}\end{quote}
+
+The usual ``small'' type commands are supported:
+\begin{quote}
+\begin{tabular}{lr}
+\keyindex{smalltype} & 8pt \\
+\keyindex{Smalltype} & 9pt \\
+\keyindex{normtype}& 10pt \\
+\keyindex{medtype} & 12pt \\
+\end{tabular}
+\end{quote}
+For all of these, the following variants are supported:
+\begin{quote}
+\begin{tabular}{ll}
+\verb|\rm| & Roman \\
+\verb|\bf| & bold \\
+\verb|\it| & italic \\
+\verb|\bi| & bold italic \\
+\verb|\sc| & small capitals (and old-style figures)\\
+\verb|\sl| & oblique \\
+\end{tabular}
+\end{quote}
+The ``big'' type commands are as follows:
+\begin{quote}
+\begin{tabular}{lr}
+\keyindex{bigtype} & 14pt\\
+\keyindex{Bigtype} & 17pt\\
+\keyindex{BIgtype}& 20pt\\
+\keyindex{BIGtype} & 25pt\\
+\end{tabular}
+\end{quote}
+The default variant for all of these is small-caps;
+however, \keyindex{font} commands are defined
+for all the usual variants at all of these sizes.
+To letter-space a title, use the \verb|\so|
+command in the \verb\soul\ package.
+
+
+The following bold-italic fonts for dynamic marks are defined:
+\begin{quote}\begin{tabular}{lr}
+\keyindex{ppffsixteen} & 10pt\\
+\keyindex{ppfftwenty} & 12pt \\
+\keyindex{ppfftwentyfour} & 14pt \\
+\keyindex{ppfftwentynine} & 17pt \\
+\keyindex{tinyppff} & 8pt \\
+\keyindex{smallppff} & 10pt \\
+\keyindex{normppff} & 12pt \\
+\keyindex{medppff} & 14pt \\
+\end{tabular}\end{quote}
+
+The default font for typesetting \keyindex{txt} and \keyindex{tuplettxt}
+arguments 
+is \keyindex{eightit} (\verb\8pt\~italic).  
+
+ \section{musixpoi}
+ Adds definitions of less common singly and doubly dotted notes.
+Available are
+\keyindex{ccup},
+\keyindex{zccup},
+\keyindex{cclp},
+\keyindex{zcclp},
+\keyindex{ccupp},
+\keyindex{zccupp},
+\keyindex{cclpp},
+\keyindex{zcclpp},
+\keyindex{cccup},
+\keyindex{zcccup},
+\keyindex{ccclp},
+\keyindex{zccclp},
+\keyindex{cccupp},
+\keyindex{zcccupp},
+\keyindex{ccclpp},
+\keyindex{zccclpp},
+\keyindex{ccccup},
+\keyindex{zccccup},
+\keyindex{cccclp},
+\keyindex{zcccclp},
+\keyindex{ccccupp},
+\keyindex{zccccupp},
+\keyindex{cccclpp} and
+\keyindex{zcccclpp}.
+
+ \section{musixppff}\label{musixppff}\index{musixppff@{\tt musixppff.tex}}
+
+This replaces the default definitions used for dynamic marks to use a ``mini-font''
+\verb\xppff10\ designed by Hiroaki \textsc{Morimoto}. It is used as follows:
+
+\begin{quote}\begin{verbatim}
+\input musixtex
+\input musixppff
+...
+\end{verbatim}\end{quote}
+\noindent The new dynamic marks are as follows:
+\font\xppff=xppff10  
+\begin{quote}
+\xppff
+pppp\ ppp\ pp\ p\ mp\ mf\ f\ fp\ sf\ ff\ fff\ ffff\ sfz\ sfzp
+\end{quote}
+Note that the \verb|xppff10| font has defined glyphs only for the following five characters:  f, m, p, s and~z;
+use \keyindex{ppff} etc.\@
+for other bold-italic text in music.
+
+ \section{musixps}\label{musixps}\index{musixps@{\tt musixps.tex}}
+ Activates type K Postscript slurs, ties,  and hairpins; see Chapter~\ref{PostscriptSlurs}.
+
+ \section{musixstr}\label{musixstr}\index{musixstr@{\tt musixstr.tex}}
+ Provides bowing and other symbols for \itxem{string instruments}\footnote{provided
+by Werner {\sc Icking}}. The symbol can be posted at the desired position using
+ \verb|\zcharnote|\pitchp\verb|{|$command$\verb|}|. The available symbols and
+their meanings are as follows:
+
+{\input musixstr
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+
+ \item[\hbox to 1em{\AB}~: \keyindex{AB} or  \keyindex{downbow}] down-bow
+
+ \item[\hbox to 1em{\AUF}~: \keyindex{AUF} or \keyindex{upbow}] up-bow
+
+ \item[\hbox to 1em{\SP}~: \keyindex{SP}] at the top of bow
+
+ \item[\hbox to 1em{\FR}~: \keyindex{FR}] at the nut of bow
+
+ \item[\GB\ or \Gb~: \keyindex{GB} or  \keyindex{Gb}] whole bow
+
+ \item[\UH\ or \Uh~: \keyindex{UH} or  \keyindex{Uh}] lower half of bow
+
+ \item[\OH\ or \Oh~: \keyindex{OH} or  \keyindex{Oh}] upper half of bow
+
+ \item[\MI\ or \Mi~: \keyindex{MI} or \keyindex{Mi}] middle of bow
+
+ \item[\UD\ or \Ud~: \keyindex{UD} or  \keyindex{Ud}] lower third of bow
+
+ \item[\OD\ or \Od~: \keyindex{OD} or  \keyindex{Od}] upper third of bow
+
+ \item[\Pizz~: \keyindex{Pizz}] left hand pizzicato or trill
+
+ \end{description}\end{quote}
+ }
+
+
+ %\check
+ \section{musixsty}\index{musixsty@{\tt musixsty.tex}}
+
+ Provides certain text-handling facilities for titles, footnotes, and other
+items not related to lyrics. It should not be used with \LaTeX. It includes
+ \begin{itemize}\setlength{\itemsep}{0ex}
+ \item definitions of \keyindex{hsize}, \keyindex{vsize},
+\keyindex{hoffset}, \keyindex{voffset} suitable for A$4$ paper; those using
+other sizes may wish to modify it once and for all;
+ \item a set of text size commands:
+
+ \begin{description}\setlength{\itemsep}{0ex}
+  \item[\keyindex{eightpoint}] which sets the usual \keyindex{rm},
+\keyindex{bf}, \keyindex{sl}, \keyindex{it} commands to $8$ point font size;
+  \item[\keyindex{tenpoint}] which sets the usual \keyindex{rm},
+\keyindex{bf}, \keyindex{sl}, \keyindex{it} commands to $10$ point font size;
+  \item[\keyindex{twlpoint}] (or \keyindex{twelvepoint}) to get $12$ point font size;
+  \item[\keyindex{frtpoint}] to get $14.4$ point font size;
+  \item[\keyindex{svtpoint}] to get $17.28$ point font size;
+  \item[\keyindex{twtypoint}] to get $20.74$ point font size;
+  \item[\keyindex{twfvpoint}] to get $24.88$ point font size;
+ \end{description}
+ \item commands for creating titles:
+  \begin{itemize}\setlength{\itemsep}{0ex} \item \keyindex{author} or
+\keyindex{fullauthor} to be put at the right of the first page, below the
+title of the piece; the calling sequence is, for example
+
+  \verb|     \author{Daniel TAUPIN\\organiste \`a Gif-sur-Yvette}|
+
+  \noindent where the \verb|\\| causes the author's name to be displayed on
+two lines;
+
+  \item \keyindex{shortauthor} to be put at the bottom of each page;
+  \item \keyindex{fulltitle} which is the main title of the piece;
+  \item \keyindex{subtitle} is displayed below the main title of the piece;
+  \item \keyindex{shorttitle} or \keyindex{title}
+  which is the title repeated at the bottom of each page;
+  \item \keyindex{othermention} which is displayed on the left of the page,
+vertically aligned with author's name. It may contain \verb|\\| to display it on
+several lines;
+  \item \keyindex{maketitle}  which displays all the previous stuff;
+  \end{itemize}
+
+ \item  commands for making \itxem{footnotes}:
+  \begin{itemize}\setlength{\itemsep}{0ex}
+   \item The normal Plain-\TeX\ \keyindex{footnote} command, which has two
+arguments---not just one as in \LaTeX\protect\index{LATEX@\LaTeX}---namely
+the label of the footnote, which can be any sequence of characters, and
+the text of the footnote. This command does not work inside
+boxes, so it cannot be issued within music;
+
+ \item The \keyindex{Footnote} command, which counts the footnotes and uses a
+number as the label of the footnote (equivalent to \LaTeX's \verb|\footnote|
+command). The same restriction as with \verb|\footnote| applies concerning
+its use within the music coding;
+
+ \item The \keyindex{vfootnote} command, taken from the Plain-\TeX, which
+places a footnote at the bottom of the current page, but does not put
+the footnote label at the place the command is entered in the main text. This
+also may not be used within music, but if a footnote is needed whose reference
+lies inside the music, it can be entered in two steps:
+ \begin{enumerate}
+  \item manually insert the reference inside the music, using e.g., \verb|zcharnote|;
+  \item post the footnote itself with \verb|\vfootnote| outside the music,
+either before \keyindex{startpiece} or between \keyindex{stoppiece} and
+\keyindex{contpiece} or equivalent commands.
+ \end{enumerate}
+
+  \end{itemize}
+
+ \end{itemize}
+
+ \section{musixtmr}\index{musixtmr@{\tt musixtmr.tex}}\label{times}
+ Replaces the default Computer Modern text fonts by Times fonts;
+ see Section~\ref{UserFonts}.
+Use as follows:
+\begin{quote}\begin{verbatim}
+\input musixtex
+\input musixtmr
+...
+\end{verbatim}\end{quote}
+
+The usual ``small'' type commands are supported:
+\begin{quote}
+\begin{tabular}{lr}
+\keyindex{smalltype} & $8$pt \\
+\keyindex{Smalltype} & $9$pt \\
+\keyindex{normtype}& $10$pt \\
+\keyindex{medtype} & $12$pt \\
+\end{tabular}
+\end{quote}
+For all of these, the following variants are supported:
+\begin{quote}
+\begin{tabular}{ll}
+\verb|\rm| & Roman \\
+\verb|\bf| & bold \\
+\verb|\it| & italic \\
+\verb|\bi| & bold italic \\
+\verb|\sc| & small capitals \\
+\verb|\sl| & oblique \\
+\end{tabular}
+\end{quote}
+The ``big'' type commands are as follows:
+\begin{quote}
+\begin{tabular}{lr}
+\keyindex{bigtype} & $14$pt\\
+\keyindex{Bigtype} & $17$pt\\
+\keyindex{BIgtype}& $20$pt\\
+\keyindex{BIGtype} & $25$pt\\
+\end{tabular}
+\end{quote}
+The default variant for all of them is Roman;
+however, \keyindex{font} commands are defined
+for all the usual variants at all of these sizes.
+To letter-space a title, use the \verb|\so|
+command in the \verb\soul\ package.
+
+
+The following bold-italic fonts for dynamic marks are defined:
+\begin{quote}\begin{tabular}{lr}
+\keyindex{ppffsixteen} & 10pt\\
+\keyindex{ppfftwenty} & 12pt \\
+\keyindex{ppfftwentyfour} & 14pt \\
+\keyindex{ppfftwentynine} & 17pt \\
+\keyindex{tinyppff} & 8pt \\
+\keyindex{smallppff} & 10pt \\
+\keyindex{normppff} & 12pt \\
+\keyindex{medppff} & 14pt \\
+\end{tabular}\end{quote}
+
+The default font for typesetting \keyindex{txt} and \keyindex{tuplettxt}
+arguments 
+is \keyindex{eightit} (\verb|8pt| italic).  
+
+\section{musixtnt}\label{musixtnt}
+This package (tnt = Transform Notes) provides a macro \keyindex{TransformNotes} which makes 
+possible several ``transformations'' of the effect of notes commands such as \keyindex{notes}.
+The \verb\musixtnt\ package is distributed separately from \verb\musixtex\.
+
+In general the effect of \verb|\TransformNotes(|\textit{input}\verb|}{|\textit{output}\verb|}|
+is that subsequent notes commands in the source will expect their arguments 
+to match the \textit{input} pattern but
+the notes will be typeset according to the \textit{output} pattern.
+
+For example,
+\begin{verbatim}
+  \TransformNotes{#2&#3&#4&#5}{#2&#3&#5}
+\end{verbatim}
+would be appropriate for a four-instrument score (arguments \verb|#2|, \verb|#3|, \verb|#4|, and \verb|#5|, separated by three
+\verb\&\s, but the third instrument (\verb|#4|) will be discarded.
+
+The instrument/staff numbers in the first argument must start at $2$ and increase
+consecutively, using \verb|&| (or \| for multi-staff instruments) as a separator.  
+The reason that the segment identifiers start at $2$ is that the first argument for \keyindex{vnotes}
+is a spacing parameter.
+
+It  is
+essential  that  every \verb|\znotes|, \verb|\notes|, \verb|\Notes|, \verb|\NOtes|, etc.\@ command in
+the score match the pattern of the first argument to \keyindex{TransformNotes} exactly; for example,
+too few (or too  many)
+note segments  will result in unintentionally discarded material and possibly compilation failure.
+Similarly, it is not possible to use \keyindex{nextinstrument}, \keyindex{nextstaff}, \keyindex{selectinstrument} or \keyindex{selectstaff}, or to hide the \verb|&| (or \|) tokens inside
+a user-defined macro.
+An auxiliary program \verb|msxlint| distributed in the \verb\musixtnt\ package can be used to detect such incompatibilities.
+
+\keyindex{TransformNotes} may be used anywhere between \keyindex{startpiece}
+and the command that ends the piece.
+
+\subsection{Extracting single-instrument parts from multi-instrument scores}
+
+To extract 
+a single-instrument part from a (copy of a) multi-instrument \musixtex\ score:
+\begin{itemize}
+\item Set \verb|\nbinstrument| to 1; for example, with command \verb|\instrumentnumber1|.
+\item Use \keyindex{TransformNotes} to discard all but one of the note segments in notes
+commands.
+For example, the following line placed  after
+\verb|\startpiece|  (but  before any note commands) would be appropriate for a
+four-instrument score and will result in a single-instrument part for the second of
+these:
+\begin{verbatim}
+  \TransformNotes{#2&#3&#4&#5}{#3}
+\end{verbatim}
+\end{itemize}
+Caveats:
+\begin{itemize}
+\item
+Some additional revisions to the source for the part might be necessary:
+\begin{itemize}
+\item  adjusting \verb|\setname1|, \verb|\setclef1|, \verb|\setsign1|, 
+\verb|\setmeter1| and \verb|\setstaffs1|  commands, as necessary;
+
+\item  ensuring  that  tempo and roadmap markings (\textbf{D.C.}, \textbf{Fine}, etc.) are in
+  the appropriate instrument segment;
+\end{itemize}
+\item
+When the extracted part score is compiled and viewed, it  may be seen
+that horizontal-spacing commands designed for \emph{multiple} instruments can produce bad
+spacing when used for a \emph{single} instrument.  Bad spacing can be corrected  manually  but
+this is very tedious; an auxiliary program called \verb\fixmsxpart\
+automates this process (for single-staff instruments only).
+\end{itemize}
+
+\subsection{Other applications}
+
+The \keyindex{TransformNotes} macro may be used for other purposes. Here are some examples:
+\begin{list}{}{}\item
+     \verb|\TransformNotes{#2&#3}{#2&\transpose+7#3}|
+\end{list}
+will begin transposing\index{transpose@{\Bslash transpose}} just the second instrument (argument \verb|#3|).
+\begin{list}{}{}\item
+  \verb|\TransformNotes{#2|\|\verb|#3&#4}{#2|\|\verb|#3&\tinynotesize#4}|
+\end{list}
+will begin typesetting the notes of the second instrument (\verb|#4|) in tiny size.
+\begin{list}{}{}\item
+     \verb|\TransformNotes{#2&#3}{#3&#2}|
+\end{list}
+will switch the order of the two instruments.
+\begin{list}{}{}\item
+     \verb|\TransformNotes{#2&#3}{#2&#3}|
+\end{list}
+will restore normal two-instrument processing.
+
+
+The \keyindex{TransformNotes} macro is currently not compatible with the 
+\texttt{musixlyr} extension
+package for lyrics described in Section~\ref{musixlyr}.  For extracting or omitting parts
+in scores with lyrics, use the techniques described in Chapter~\ref{parts}. 
+
+ \section{musixtri}\index{musixtri@{\tt musixtri.tex}}
+Provides triply dotted note symbols.
+Available are:
+\keyindex{lpppt},
+\keyindex{whppp},
+\keyindex{zwppp},
+\keyindex{huppp},
+\keyindex{hlppp},
+\keyindex{zhppp},
+\keyindex{zhuppp},
+\keyindex{zhlppp},
+\keyindex{quppp},
+\keyindex{qlppp},
+\keyindex{zquppp},
+\keyindex{zqlppp},
+\keyindex{zqppp},
+\keyindex{cuppp},
+\keyindex{zcuppp},
+\keyindex{clppp},
+\keyindex{zclppp},
+\keyindex{qbppp} and
+\keyindex{zqbppp}.
+

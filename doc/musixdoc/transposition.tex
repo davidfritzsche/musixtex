@@ -1,0 +1,221 @@
+ \chapter{Transposition and Octaviation}\label{octaviation}
+Two different subjects are discussed in this section. First, there
+are commands that cause notes to be printed at different pitches than
+entered. We shall refer to this as \ital{logical} transposition.
+Second, there are notations for octaviation that do
+not otherwise alter the appearance of the score, which we'll call
+\ital{octaviation lines}.
+
+\section{Logical transposition and octaviation}
+
+Logical transposition is controlled by an integer-valued \TeX\ register
+\keyindex{transpose}. Its default value is 0. If you enter
+\verb|\transpose=|$n$, then all subsequent pitches specified by
+letters will be transposed by $n$ positions. Normally this method would be
+used to transpose an entire piece. Pitches specified with
+numbers will not be affected, so if you think you will ever want to
+transpose a piece, you should enter all note pitches with letters.
+
+One way to transpose up or down by one octave would be to set
+\keyindex{transpose} to $7$ or $-7$. For example, to make a quarter note
+octave as a chord, you could define a macro as
+\verb|\def\soqu#1{\zq{#1}{\transpose=7 \qu{#1}}}|.
+Note that because \verb|\transpose| is altered inside a pair of braces, the
+effect of the alteration is only local and does not reach outside the braces.
+
+ Another more convenient way to transpose locally up or down by one octave
+makes use respectively of the characters
+\verb|'| (close-quote, interpreted as an \itxem{acute accent}) and \verb|`| (open-quote, interpreted as
+a \itxem{grave accent}),
+placed immediately before the letter specifying the pitch. So
+for example \verb|\qu{'ab}| is equivalent to \verb|\qu{hi}| and
+\verb|\qu{`kl}| is equivalent to \verb|\qu{de}|. These characters have
+cumulative effects but in a somewhat restricted sense. They will alter the value of
+\verb|\transpose|, but only until changing to a different staff or
+instrument or encountering \verb|\en|, at which time it will be reset to the
+value it had before the accents were used. (That value is stored in
+another register called \keyindex{normaltranspose}). Thus for example
+\verb|\qu{''A'A}| and \verb|\qu{''A}\qu{'A}|
+are both equivalent to \verb|\qu{ah}|.
+
+At any point it is possible to reset the \verb|\transpose| register
+explicitly to the value it had
+when entering \verb|\notes|, by prefacing a pitch indication with
+``\verb|!|''. Thus \verb|\qu{!a'a}| always
+gives the note \verb|a| and its upper octave \verb|h|, shifted by the
+value of {\Bslash transpose} at the beginning of the current
+\verb|\notes...\en| group, regardless of the number of grave and
+acute accents occurring previously within that group.
+
+ \section{Behavior of accidentals under logical transposition}\label{transposeaccids}
+ The above processes indeed change the vertical position of the note heads
+and associated symbols (e.g., stems and beams), but they don't take
+care of the necessary changes of accidentals when transposing. For example,
+suppose an F$\sharp$ occurs in the key of C major. If the piece is
+transposed up three steps to the key of F, the F$\sharp$ should logically
+become a
+B$\natural$. But if all you do is set \verb|\transpose=3|, the note will
+be typeset as a B$\sharp$. In other words, \musixtex\ will interpret the~\verb|\sh|
+or~\verb|^| to mean ``print a $\sharp$''.
+
+Naturally there is a solution, but it requires the typesetter to plan
+ahead: To force accidentals to behave well under transposition, they
+must be entered according to the \ital{relative
+accidental convention}. To alert \musixtex\ that you are using this
+convention to enter notes, you must issue the command
+\keyindex{relativeaccid}. Once you have done this, the meaning of
+accidental macros and characters (accents) in the input file is changed.
+Under the convention, when for example a
+\verb|\sh| is entered, it indicates a note that is supposed to sound
+\ital{one half step higher than what it would normally be under the
+current key signature}. Flats and naturals on entry similarly indicate
+notes one half step lower or at the same pitch as what the key signature
+dictates. \musixtex\ will take account of the key signature, and print
+the correct symbol according to the modern notational convention,
+provided you have explicitly entered the transposed key signature using
+for example \verb|\generalsignature|.
+
+Many people have a difficult time understanding how this works, so
+here are two simple examples in great detail. Consider the case already mentioned
+of the F$\sharp$ in the key of C major. With
+\verb|\relativeaccid| in effect, it should still be entered as \verb|\sh f|, and
+with no transposition it will still appear as F$\sharp$. With
+\verb|\transpose=3| and \verb|\generalsignature{-1}| it will appear
+(correctly) as B$\natural$. Conversely, suppose you want to enter a
+B$\natural$ when originally in the key of F. With \verb|\relativeaccid| in effect, it
+should be entered as \verb|\sh i|. (That's the part that people
+have the most trouble with: ``If I want a natural, why do I have to enter a sharp?'' Answer:
+``Go back and re-read the previous paragraph very carefully.'') With no transposition, it will be
+printed as B$\natural$. Now to transpose this to C major, set
+\verb|\transpose=-3| and \verb|\generalsignature0|, and it will appear
+as F$\sharp$.
+
+If you have invoked \verb|\relativeaccid| and then
+later for some reason wish to revert to the ordinary convention,
+enter \keyindex{absoluteaccid}.
+
+\section{Octaviation lines}
+The first kind of notation for octave transposition covers a
+horizontal range that must be specified at the outset. The sequence
+
+\medskip
+\begin{music}\nostartrule
+\startextract
+\NOTEs\octfinup{10}{3.5}\ql{!'a}\ql b\ql c\ql d\en
+\zendextract
+\end{music}
+\noindent can be coded as
+\verb|\NOTEs\octfinup{10}{3.5}\qu a\qu b\qu c\qu d\en|.
+\zkeyindex{octfinup}
+Here, the dashed line is at staff level 10 and extends \verb|3.5\noteskip|.
+Conversely, lower octaviation can be coded. For example
+
+\begin{music}\nostartrule
+\startextract
+\NOTEs\octfindown{-5}{2.6}\ql j\ql i\ql h\en
+\zendextract
+\end{music}
+\noindent is coded as
+\verb|\NOTEs\octfindown{-5}{2.6}\ql j\ql i\ql h\en|.
+\zkeyindex{octfindown}
+ To change the text that is part of these notations, redefine one of
+the macros \keyindex{octnumberup} or \keyindex{octnumberdown}. The reason for
+the distinction between up and down is that, traditionally, upper octaviation
+only uses the figure
+``8'' to denote its beginning, while lower octaviation uses a more
+elaborate indication such as \hbox{\ppffsixteen8$^{va}$\kern 0.2em\eightit bassa}. Thus
+
+\bigskip
+\begin{music}\nostartrule
+\startextract
+\NOTEs\def\octnumberup{\ppffsixteen8$^{va}$}\octfinup{10}{2.5}\qu c\qu d\qu e\en
+\zendextract
+\end{music}
+\noindent is coded
+
+\noindent\verb|\NOTEs\def\octnumberup{\ppffsixteen8$^{va}$}\octfinup{10}{2.5}\qu c\qu d\qu e\en|
+
+\noindent while
+
+\begin{music}
+\startextract
+\NOTEs\def\octnumberdown{\ppffsixteen8$_{ba}$}\octfindown{-5}{2.5}\ql l\ql
+k\ql j\en
+\endextract
+\end{music}
+\noindent is coded as
+\begin{quote}\begin{verbatim}
+\NOTEs\def\octnumberdown{\ppffsixteen8$_{ba}$}%
+  \octfindown{-5}{2.5}\ql l\ql k\ql j\en
+\end{verbatim}\end{quote}
+
+The foregoing constructions have the drawbacks that (a) the span must be
+indicated ahead of time and (b) they cannot extend across a line break.
+Both restrictions are removed with the use of the alternate macros \keyindex{Ioctfinup},
+\keyindex{Ioctfindown} and
+\keyindex{Toctfin}.
+
+{\Bslash Ioctfinup}~$np$ indicates an upward octave transposition line with reference number
+$n$ and with dashed line at pitch $p$. 
+By default $n$ must be in the range $[0,5]$, but 
+you can specify a larger maximum number 
+directly with \keyindex{setmaxoctlines}\verb|{|$m$\verb|}| 
+where $7<m\leq 100$\footnote{This may require e-\TeX.}; the
+reference number will be in the range between $0$ and $m-1$.
+\label{musixmad_setmaxoctlines}
+
+Usually $p$ will be numeric and $>9$,
+but it can also be a letter.
+{\Bslash Ioctfindown}~$np$ starts a lower octave transposition line at pitch $p$
+(usually $p<-1$). Both extend until terminated with {\Bslash Toctfin}. The
+difference between {\Bslash Ioctfinup}~$n$ and {\Bslash Ioctfindown}~$n$ is
+the relative position of the figure ``8'' with respect to the dashed line, and
+the sense of the terminating hook As shorthand, \keyindex{ioctfinup} is equivalent to
+\verb|\Ioctfinup 0| and \keyindex{ioctfindown} is equivalent to
+\verb|\Ioctfindown 0|.
+
+For example,
+
+\medskip
+ \begin{music}\nostartrule
+\instrumentnumber{1}
+\setstaffs12
+\setclef1{6000}
+%
+\startextract
+\notes\wh{CDEFGH}|\wh{cde}\Ioctfinup 1p\wh{fgh}\en
+\bar
+\notes\Ioctfindown 2A\wh{IJKLMN}|\wh{ijklmn}\en
+\bar
+\Notes\wh{NMLKJI}|\wh{nmlkji}\Toctfin1\en
+\bar
+\Notes\wh{HGFED}\Toctfin2\wh C|\wh{hgfedc}\en
+\zendextract
+\end{music}
+\noindent is coded as
+\begin{quote}\begin{verbatim}
+\begin{music}\nostartrule
+\instrumentnumber{1}
+\setstaffs12
+\setclef1{6000}
+%
+\startextract
+\notes\wh{CDEFGH}|\wh{cde}\Ioctfinup 1p\wh{fgh}\en
+\bar
+\notes\Ioctfindown 2A\wh{IJKLMN}|\wh{ijklmn}\en
+\bar
+\Notes\wh{NMLKJI}|\wh{nmlkji}\Toctfin1\en
+\bar
+\Notes\wh{HGFED}\Toctfin2\wh C|\wh{hgfedc}\en
+\zendextract
+\end{music}
+\end{verbatim}\end{quote}
+ %\check
+
+ The elevation of octaviation lines may be changed in midstream using
+\keyindex{Liftoctline}~$n$$p$, where $n$ is the reference number of the
+ octave line, and $p$ a (possibly negative) number of
+\keyindex{internote}s (staff pitch positions) by which elevation of the dashed line should be changed.
+This may be useful when octaviation lines extend over several systems and the
+elevation needs to be changed in systems after the one where it was initiated.
+

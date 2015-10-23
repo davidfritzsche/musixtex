@@ -1,0 +1,85 @@
+This is MusiXTeX, version 1.16 (packaged 2015-04-21).
+MusiXTeX is a TeX-based system for typesetting music.
+
+The main author was Daniel Taupin, who died in a climbing
+accident in 2003; other authors credited in the MusiXTeX
+manual are Andreas Egler and Ross Mitchell. MusiXTeX is now
+being maintained by
+
+Don Simons dsimons(at)roadrunner(dot)com
+Hiroaki Morimoto CQX05646(at)nifty(dot)com
+Bob Tennent rdt(at)cs(dot)queensu(dot)ca
+
+The package includes
+
+   + Postscript slur support, due to Stanislav Kneifl
+
+   + musixlyr support for lyrics, due to Rainer Dunker
+
+   + musixcrd support for chord symbols, due to Robert Hennig
+
+   + support for music text in Palatino, Helvetica, Times 
+     and EC fonts
+
+   + several other extension packages 
+
+   + a script musixflx.lua for the 2nd-pass processing
+
+   + a script musixtex.lua that automates the 3-pass 
+     etex -> musixflx -> [pdf]etex process, 
+     possibly followed by calls to dvips and ps2pdf (or dvipdfm) 
+     to convert the output to Portable Document Format (PDF)
+
+   + wrapper scripts musixflx.bat and musixtex.bat for use on Windows
+
+MusiXTeX fonts, including both the original metafont sources
+and Type 1 versions by Takanori Uchiyama are in a separate
+musixtex-fonts package, which must be installed before using
+the MusiXTeX macros.
+
+musixtex-install.{pdf,tex} is a more-detailed version of the
+following instructions:
+
+To install (on TDS-compliant TeX systems):
+
+ +  unzip tex-archive/install/macros/musixtex.tds.zip at the root of a
+    texmf tree and, if necessary, update the filename database; 
+    e.g., texhash texmf.
+
+ +  on Windows: move the scripts in Windows to a folder
+    on the executable PATH (or add that folder to the PATH)
+
+ +  on any Unix-like system: install symbolic links musixflx
+    and musixtex in a directory on the executable PATH to
+    scripts/musixtex/musixflx.lua and scripts/musixtex/musixtex.lua,
+    respectively.
+
+Documentation for MusiXTeX and friends is installed under 
+
+doc/generic/musixtex
+
+Documentation for the musixflx and musixtex scripts are in 
+
+doc/generic/musixtex/scripts 
+
+Many users, especially beginners, will find it easier to
+use the PMX and M-Tx pre-processors, which accept a simpler
+input language than MusiXTeX itself. These pre-processor
+packages may be found at CTAN under support. Additional
+documentation, additional add-on packages, and many examples
+of MusiXTeX typesetting may be found at the Werner Icking
+Music Archive at
+
+http://icking-music-archive.org/
+
+Support for users of MusiXTeX and related software may be
+obtained via the MusiXTeX mail list at
+
+http://tug.org/mailman/listinfo/tex-music
+
+MusiXTeX may be freely copied, duplicated and used in
+conformance to the GNU General Public License (Version 2,
+1991, see included file gpl.txt).
+
+This distribution is maintained by Bob Tennent
+rdt(at)cs(dot)queensu(dot)ca.

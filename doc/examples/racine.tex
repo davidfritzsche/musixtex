@@ -1,0 +1,596 @@
+
+\ifx\mxversion\undefined
+  \input musixtex
+  \input musixcpt
+  \input musixsty
+\fi
+
+\hsize 190mm \vsize 280mm
+\hoffset -1.84cm
+
+
+\fulltitle{Cantique de Jean Racine}
+\shorttitle{Cantique de Jean Racine}
+\shortauthor{G. Faur\'e}
+\fullauthor{Gabriel Faur\'e\\Transcription Orgue Daniel Taupin}
+\othermention{Gif~: 2.4/9.11.13/19.23/33.37.41/54/46.47.48.51}
+\maketitle
+
+%
+\parindent 14mm
+\musicsize=20
+
+\def\quatreinstruments{\def\nbinstruments{4}\relax
+\nbporteesi=1\relax
+\nbporteesii=2\relax
+\nbporteesiii=1\relax
+\nbporteesiv=1\relax
+\cleftoksi{6000}\relax
+\cleftoksii{6000}\relax
+\cleftoksiii{6000}\relax
+\cleftoksiv{0000}\relax
+\def\staffspacingi{1.0}\def\interinstrumenti{0pt}\relax
+\def\staffspacingii{1.0}\def\interinstrumentii{-2\Interligne}\relax
+\def\staffspacingiii{0.64}\def\interinstrumentiii{0pt}\relax
+\def\staffspacingiv{0.64}\def\interinstrumentiv{0pt}\relax
+}
+ %
+\def\sanspedale{\def\nbinstruments{3}\relax
+\nbporteesi=2\relax
+\nbporteesii=1\relax
+\nbporteesiii=1\relax
+\cleftoksi{6000}\relax
+\cleftoksii{6000}\relax
+\cleftoksiii{0000}\relax
+\def\staffspacingi{1.0}\def\interinstrumenti{-2\Interligne}\relax
+\def\staffspacingii{0.64}\def\interinstrumentii{0pt}\relax
+\def\staffspacingiii{0.64}\def\interinstrumentiii{0pt}\relax
+}
+ %
+
+\def\paroles{\eightrm}
+
+%\paroles
+% \line{G.O. ({\bf I}) : 8'+4', acc. Positif/R\'ecit\hss Gabriel Faur\'e}
+% \line{Positif ({\bf II}) : 8'+4'+1 1/3, acc. R\'ecit\hss Transcription Orgue Daniel
+%Taupin }
+% \line{R\'ecit ({\bf III}) : 8'+4'\hss... }
+% \line{P\'edale : 16'+8', acc. Positif\hss }
+
+\quatreinstruments
+\normal
+\def\instrumenti{P\'edale}
+\def\instrumentii{Manuel}
+\def\instrumentiii{\vbox{\hbox{T\'enors}\hbox{Basses}}}
+\def\instrumentiv{\vbox{\hbox{Sopran.}\hbox{Altos}}}
+\generalmeter{\meterC}%
+%
+%
+% formes frequentes
+% deux croches hautes
+\def\dqb#1#2{\bigaccid\Ibl0{#1}{#2}1\qb0{#1}\varaccid\tqb0{#2}}
+\def\dqh#1#2{\bigaccid\Ibu0{#1}{#2}1\qh0{#1}\varaccid\tqh0{#2}}
+\def\sdqh{\ds\dqh}
+\def\lsdqb{\raise-3\Internote\ds\dqb}
+\def\sdqb{\ds\dqb}
+\def\Tqb#1#2#3{\Ibl0{#1}{#3}2\qb0{#1}\varaccid\qb0{#2}\tqb0{#3}}
+\def\tQb#1#2#3{\ibl0{#2}0\qb0{#1}\varaccid\qb0{#2}\tqb0{#3}}
+\def\Tqh#1#2#3{\Ibu0{#1}{#3}2\qh0{#1}\varaccid\qh0{#2}\tqh0{#3}}
+\def\tQh#1#2#3{\ibu0{#2}0\qh0{#1}\varaccid\qh0{#2}\tqh0{#3}}
+\def\Sqh#1#2#3{\bigaccid\Tqh{#1}{#2}{#3}\Tqh}
+\def\Sqb#1#2#3{\bigaccid\Tqb{#1}{#2}{#3}\Tqb}
+\def\Qqh#1#2{\sdqh{#1}{#2}\Tqh}
+\def\Qqb#1#2{\sdqb{#1}{#2}\Tqb}
+\def\dnu#1#2{\bigaccid\qu{#1}\sk\sk\qu{#2}}%
+\def\Dnu#1#2{\bigaccid\zq{!#1}\qu{!`#1}\sk\sk\zq{!`#2}\qu{!#2}}%
+\def\dnb#1#2{\bigaccid\ql{#1}\sk\sk\ql{#2}}%
+\def\Dnb#1#2{\bigaccid\zq{!#1}\ql{!`#1}\sk\sk\zq{!`#2}\ql{!#2}}%
+\def\dnl{\dnb}\def\Dnl{\Dnb}
+\def\Hu#1{\bigaccid\zh{!`#1}\hu{!#1}}
+\def\Hl#1{\bigaccid\zh{!`#1}\hl{!#1}}
+\def\hlu#1#2{\bigaccid\zhl{#1}\hu{#2}}
+\def\huu#1#2{\bigaccid\zh{#1}\hu{#2}}
+\def\hll#1#2{\bigaccid\zh{#1}\hl{#2}}
+\def\qlu#1#2{\bigaccid\zql{#1}\qu{#2}}
+\def\quu#1#2{\bigaccid\zq{#1}\qu{#2}}
+\def\qll#1#2{\bigaccid\zq{#1}\ql{#2}}
+\def\Pause{\sk\sk\sk\sk\sk\pause}
+\def\Hpause{\sk\sk\hpause}
+%
+\def\zmid#1{\zcharnote{12}{\paroles #1}}
+%
+\staffbotmarg\Interligne
+
+\generalsignature{-5}
+\def\nbinstruments{2}%
+\debutmorceau
+\autolines{14}{4}{4}%
+%Takt 1
+\notes\zcharnote b{$\wedge$}\wh K&\uptext{\kern -1.5\Interligne
+  \bf II}\sdqb cd\Tqb fcd|\uptext{\moyen Andante}\Hpause\enotes
+\temps\notes&\Tqb acd\sdqb cd|\sk\sk\sk\qu f\enotes
+%Takt 2
+\barre\notes\hu F&\Sqb acdfda|\hu h\enotes
+\temps\notes\hu H&\Qqb {=b}ceca|\hu g\enotes
+%Takt 3
+\autolines{13}{4}{4}%
+\barre\notes\hu K&\Qqb acdaM|\hup f\enotes
+\temps\notes\hu J&\Sqb acdfda|\sk\sk\sk\qu h\enotes
+%Takt 4
+\def\atnextline{\autolines{13}44}%
+\barre\notes\qu I&\sdqb{=e}f|\qu k\enotes
+\temps\notes\qu H&\sdqb fc|\qu j\enotes
+\temps\notes\qu G&\sdqb cd|\qu i\enotes
+\temps\notes\qu F&\sdqb da|\qu h\enotes
+%Takt 5
+\barre\notes\hu H&\sdqb{=b}c|\qu h\enotes
+\temps\notes     &\Tqb eca|\qu g\enotes
+\temps\notes\qu K&\sdqb{=N}a|\qu f\enotes
+\temps\notes\qu F&\Tqb daM|\qu f\enotes
+%Takt 6
+\barre\notes\hu G&\Qqb{=a}bdbL|\hu e\enotes
+\temps\notes\hu H&\Qqb {=b}cec{_a}|\hu g\enotes
+%Takt 7
+\barre\notes\dnu KJ&\Qqb{=N}adaM|\hu f\enotes
+\temps\notes\dnu IH&\sdqb cd\sdqb da|\soupir\sk\sk\qu f\enotes
+%Takt 8
+\barre\notes\hup G&\Qqb {=a}bdbL|\hu e\enotes
+\temps\notes\sk\sk\sk\ql N&\Qqb{=b}cedc|\hu i\enotes
+%Takt 9
+\barre\notes\dnb ML&\Qqb{=b}cfc{=a}|\hu{=h}\enotes
+\temps\notes\dnb KJ&\sdqb ae\sdqb ea|\sk\sk\sk\qu f\enotes
+%Takt 10
+\barre\notes\dnu IH&\sdqb{=e}f\sdqb fc|\dnu kj\enotes
+\temps\notes\dnu GF&\sdqb cd\Tqb fd{_a}|\dnu i{_h}\enotes
+%Takt 11
+\barre\notes\hu H&\Qqb{=b}ceca|\dnu hg\enotes
+\temps\notes\dnu DF&\Qqb{=N}adad|\dnu fh\enotes
+%Takt 12
+\advance\linesinpage by -1\relax
+ %
+\barre\notes\hu G&\Qqb{=a}bdb{_N}|\hu f\enotes
+\temps\notes\hu H&\Qqb N{_a}caN|\hu e\enotes
+\def\atnextline{\sanspedale\def\nbinstruments{2}\savemeters}%
+ %
+%Takt 13
+\barre\notes\zcharnote B{\kern -2\Interligne\rm(P\'ed.)}\zhl K\relax
+   \raise 2\Interligne\sdqb Ma\sdqb aM|\cu d\sk\ds\itenl1d\qu d&\Hpause\enotes
+\temps\notes\cl a\sk\ds|\tten1\Tqh dcd&\soupir\enotes
+\temps\notes\zcharnote C{\bf I \rm(G.O.)}\soupir|\Tqh fda&\relax
+  \zmid{Verbe \'e-}\clp M\sk\ccl M\enotes
+%Takt 14
+\barre\notes\hu F|\Qqh cdfda&\zmid{gal}\hl a\enotes
+\temps\notes\hu H|\Qqh {=b}ceca&\zmid{au}\qlp N\sk\sk\sk\zmid{Tr\`es-}\sk\cl N\enotes
+%Takt 15
+\barre\notes\hu K|\Qqh acdaM&\zmid{Haut}\hlp M\enotes
+\temps\notes\hu J|\Sqh acdfda&\sk\sk\sk\zmid{notre}\qll Ma\enotes
+%Takt 16
+\barre\notes\qu I|\sdqh{=e}f&\zmid{u-}\qll Md\enotes
+\temps\notes\qu H|\sdqh fc&\zmid{ni-}\zq M\ql c\enotes
+\temps\notes\qu G|\sdqh cd&\zmid{que es-}\zq K\ql b\enotes
+\temps\notes\qu F|\sdqh da&\zmid{p\'e}\zq a\ql a\enotes
+ %\check
+%Takt 17
+\def\atnextline{\sanspedale\def\nbinstruments{3}\savemeters}%
+\barre\notes\hu H|\Qqh aceca&\zmid{ran-}\zql a\hu c\sk\sk\ql N&\Pause\enotes
+\temps\notes\dnu DF|\Qqh acdaM&\zmid{ce}\zq M\ql d\sk\sk\zmid{Jour}\zq M\ql d\enotes
+ %\check
+%Takt 18
+\barre\notes\hu G|\Qqh bdedb&\zmid{\'e-}\zh L\hl d&\Pause\enotes
+\temps\notes\hu H|\Qqh NcecN&\zmid{ter-}\zh N\hl c\enotes
+ %\check
+%Takt 19
+\barre\notes\wh I|\Qqh MbdbM&\zmid{nel}\zh M\hl d&\Hpause\enotes
+\temps\notes|\Sqh bcdfdb&\zmid{de}\zq M\ql d\sk\sk
+  \zmid{la}\zq M\ql d&\soupir\sk\sk\zmid{De}\qu f\enotes
+ %\check
+%Takt 20
+\barre\notes\wh H|\Qqh cdfda&\zmid{terre}\hll Md&\zmid{la}\qu h\sk\sk
+  \zmid{pai-}\qu h\enotes
+\temps\notes|\Qqh NdedN&\zmid{et}\zq L\ql d\sk\sk
+  \zmid{des}\zq M\ql c&\zmid{si-}\qu g\sk\sk
+  \zmid{ble}\qu g\enotes
+ %\check
+%Takt 21
+\barre\notes\hu K|\Qqh MadaM&\zmid{cieux,}\zh K\hlp d&\zmid{nuit,}\hup f\enotes
+\temps\notes\hu J|\Sqh acdfda&\hl J\sk\sk\zmid{nous}\qu a&\sk\sk\sk
+  \zq f\qu h\enotes
+ %\check
+%Takt 22
+\barre\notes\dnu IH|\sdqh{=e}f\sdqh fc&\zmid{rom-}\qll Ib\sk\sk
+   \zmid{pons}\qll Hd&\quu fk\sk\sk\quu fj\enotes
+\temps\notes\dnu {=G}J|\sdqh bf\sdqh eb&\zmid{le}\qll {=G}d\sk\sk
+   \zmid{si-}\qll Jc&\quu fi\sk\sk\quu {=e}j\enotes
+ %\check
+%Takt 23
+\barre\notes\hup F|\Qqh {=N}c{=e}cN&\zmid{len-}\hll Fc&\huu {=e}i\enotes
+\temps\notes\sk\sk\sk\qu J|\Sqh acfh{_e}c&\zmid{ce,}\qll Mc\sk\sk
+  \zmid{Di-}\qll Je&\quu fh\sk\sk\quu hj\enotes
+ %\check
+%Takt 24
+\barre\notes\hu K|\Qqh bfhfb&\zmid{vin}\hll Kf&\zhu i\qsk\hl h\enotes
+\temps\notes\hu L|\Qqh bd{=g}db&\zmid{Sau-}\hll Lb&\zh{=g}\hu k\enotes
+ %\check
+%Takt 25
+\barre\notes\Dnu a{=N}|\sdqh ce\ds\rq c\dqh b{=e}\relax
+   &\zmid{veur,}\qll aa\sk\sk\qll{=N}b&\zhup j\dnb e{=e}\enotes
+\temps\notes\Dnu ML|\ds\zq a\dqh cf\ds\zq{=a}\dqh c{_g}&\relax
+\qll Ma\sk\sk\zmid{jet-}\qll L{=a}&\ql f\sk\sk\quu{_g}j\enotes
+ %\check
+%Takt 26
+\barre\notes\Hu K|\Qqh bdfdb&\zmid{te}\zh K\hlp b\sk\sk\zmid{sur}\relax
+  &\zhl f\qu i\sk\sk\qu i\enotes
+\temps\notes\Hu L|\Qqh bd{=g}db&\hl L\sk\sk\qu b&\zhl{=g}\qu k\sk\sk\qu k\enotes
+ %\check
+%Takt 27
+\barre\notes\Hu{=L}|\Qqh c{=g}igc&\zmid{yeux,}\hll {=L}b&\zhl{=g}\hup j\enotes
+\temps\notes\zq F\dnu MH|\Qqh ch{_g}ca&\quu Ma\sk\sk\zmid{Di-}\qll ac\relax
+  &\ql h\sk\sk\lfl g\zqu h\qsk\ql g\enotes
+ %\check
+%Takt 28
+\barre\notes\Dnu KM|\sdqh fk\zq{=h}\Tqh jfe&\zmid{vin}\qll Kd\sk\sk\quu M{=a}\relax
+  &\Ilegu1q\zhl f\qu m\sk\sk\qu j\sk\tleg1\enotes
+\temps\notes\Dnu ba|\Qqh di{_j}f{=d}&\zmid{Sau-}\qll bb\sk\sk\quu a{=d}&\relax
+ \Ilegu1q\quu fk\sk\sk\quu {_j}m\sk\tleg1\enotes
+ %\check
+%Takt 29
+\barre\notes\Dnu{=N}{=L}|\Qqh ei{=g}{_d}i&\zmid{veur}\qll {=N}e\sk\sk
+  \zmid{jet-}\qll {=L}b&\quu il\sk\sk\quu {=g}k\enotes
+\temps\notes\Dnu{M}{=K}|\Qqh chfca&\zmid{te}\qll Ma\sk\sk
+  \zmid{sur}\qll {=K}a&\quu hj\sk\sk\quu fj\enotes
+ %\check
+%Takt 30
+\barre\notes\zh E\hu L|\Qqh c{=g}ec{=N}&\zmid{nous}\hll L{=N}&\huu ej\enotes
+\temps\notes\hu E|\Qqh dgedN&\zmid{les}\hll LN&\huu di\enotes
+ %\check
+%Takt 31
+\barre\notes\hu H|\Qqh cehec&\zmid{yeux !}\hll Ha&\huu ch\enotes
+\temps\notes\Hpause|\Tqh e{=g}h\zqu j\Tqb jgh&\Hpause
+  &\Hpause\enotes
+ %\check
+%Takt 32
+\barre\notes\hu J|\zhu l\Qqb{=g}hjgh&\Pause&\Pause\enotes
+\temps\notes\hu L|\zhu k\raise -\interligne\ds\dqb{^f}g\Tqb ifg\enotes
+\def\atnextline{\sanspedale\def\nbinstruments{1}}%
+ %\check
+%Takt 33
+\advance\linesinpage by -1\relax
+ %
+\barre\notes\hl a|\zhup j\raise -\interligne\ds\dqb e{=g}\Tqb hec\enotes
+\temps\notes\hl{=N}|\Tqb egh\zqu l\sdqb jh\enotes
+ %\check
+%Takt 34
+\barre\notes\dnb ML|\bigaccid\zqu o\sdqb{=i}j\bigaccid\zqu{=n}\sdqb kj\enotes
+\temps\notes\dnb KJ|\bigaccid\zqu m\sdqb{=g}h\zqu l\sdqb ih\enotes
+ %\check
+%Takt 35
+\barre\notes\dnu IL|\zqu l\sdqb fh\zqu k\raise -\Interligne\ds\dqb e{=g}\enotes
+\temps\notes\dnu HJ|\zqu j\raise -2\Interligne\ds\dqb eg\zqu j\Tqb heh\enotes
+ %\check
+%Takt 36
+\barre\notes\hl K|\zhu i\raise -2\Interligne\ds\dqb fh\Tqb dfh\enotes
+\temps\notes\hl L|\zhu k\raise -2\Interligne\ds\dqb e{=g}\Tqb ieg\enotes
+ %\check
+\def\atnextline{\quatreinstruments\savemeters}%
+ %\check
+%Takt 37
+\barre\notes&\hl{=L}|\zhu j\raise -2\Interligne\ds\dqb {=g}i\Tqb {=e}gi&\Pause
+ &\Pause\enotes
+\temps\notes\soupir\sk\sk\qu J&\dnb Mc|\Sqh cfhjeh\enotes
+ %\check
+%Takt 38
+\barre\notes\hl K&\hl b|\Qqh fhifh&\Pause&\Pause\enotes
+\temps\notes\hl L&\hl d|\Qqh e{=g}ieg\enotes
+ %\check
+%Takt 39
+\barre\notes\wh H&\hlp c|\Qqh e{=g}hec&\Hpause&\Hpause\enotes
+\temps\notes&\uptext{\bf II}\sk\sk\sk\soupir|\Sqh eghjhe&\soupir\sk\sk
+    \zmid{R\'e-}\qll Ha&\soupir\sk\sk\quu ej\enotes
+ \ifx\mxversion\undefined\hskip -\Interligne\fi % only with MusiCTeX, not MusiX
+\cleftoksii{0000}\changeclefs
+ %\check
+%Takt 40
+\barre\notes\hu H&\Qqh eecee|\zh h\hu j&\zmid{pands}\hll Ha&\huu ej\enotes
+\temps\notes\hu I&\Qqh ddbdd|\zh f\hu i&\zmid{sur}\hll IM&\huu di\enotes
+ %\check
+%Takt 41
+\barre\notes\wh J&\Qqh cc{=N}cc|\lna e\zq e\qu{=g}\sk\sk\qu e&\relax
+ \zmid{nous}\qll J{=L}\sk\sk
+  \zmid{le}\qll Jc&\quu c{=g}\sk\sk\zq c\qu {=e}\enotes
+\temps\notes&\Qqh ccbcc|\zq{=d}\qu f\sk\sk\zq e\qu g&\zmid{feu}\qll
+Jb\sk\sk\zmid{de la}\zq J\cl b\sk\zq J\cl b&\zq {=d}\qu f\sk
+ \sk\zq{=e}\cu h\sk\zq e\cu h\enotes
+ %\check
+%Takt 42
+\barre\notes\wh M&\sdqh cc\sdqh cc|\zq f\qu h\sk\sk\zq f\qu h&\zmid{gr\^a-}\zhl
+M\qu a\sk\sk\ql f&\huu fh\enotes
+\temps\notes&\Qqh ffeff|\zq{=g}\qu i\sk\sk\zq{=h}\qu j&\zmid{ce}\qll Mf\sk\sk
+ \zmid{puis-}\qll Me&\zq {=g}\qu i\sk\sk\zq {=h}\qu j\enotes
+ %\check
+%Takt 43
+\barre\notes\wh I&\Qqh ffeff|\zh{=h}\hu j&\zmid{gr\^a}\hll Ie&\zh h\hu j\enotes
+\temps\notes&\Qqh ffiff|\zq i\qu k\sk\sk\zcharnote{n}{\bf I\rm(G.O.)}\soupir
+  &\zmid{te,}\qll Id\sk\sk\zmid{que}\qll bf&\zq i\qu k\sk\sk\zq i\qu k\enotes
+ %\check
+%Takt 44
+\barre\notes\hl b&\Qqh ffdff|\zh i\hu k&\zmid{tout}\hll bf&\huu ik\enotes
+\temps\notes\hl L&\Qqh eecee|\zh{_g}\hu j&\zmid{l'en-}\hll Le&\zh{_g}\hu j\enotes
+ %\check
+%Takt 45
+\barre\notes\wh M&\Qqh ccfcc|\zh f\hu{=h}&\zmid{fer,}\qll Mc\sk\sk
+  \zmid{que}\qll Mf&\quu f{=h}\sk\sk\quu fh\enotes
+\temps\notes&\Qqh ffeff|\zq{=g}\qu i\sk\sk\zq h\qu j&\zmid{tout}\qll {=N}f\sk\sk
+  \zmid{l'en-}\qll {=a}e&\quu fi\sk\sk\quu fj\enotes
+ %\check
+%Takt 46
+\barre\notes\wh b&\Qqh ffiff|\zh i\hl k&\zmid{fer}\qll bd\sk\sk
+  \zmid{fuie}\ql b&\quu fk\sk\sk\quu ik\enotes
+\temps\notes&\Qqh iihii|\zq j\ql l\sk\sk\zq{=k}\ql m&\zmid{au}\lq c\ql b\sk\sk
+  \zmid{son}\qll b{=d}&\quu il\sk\sk\qll hm\enotes
+ %\check
+%Takt 47
+\barre\notes\wh L&\Qqb iihii|\zh{=k}\hl m\zcharnote m{\bf II \rm(Pos.)}\relax
+  &\zmid{de}\zqp L\qlp{=d}\sk\sk\sk\zmid{ta}\relax
+  \zq L\cl d&\zhp h\hup m\sk\sk\sk\zq g\cu n\enotes
+\temps\notes&\sdqb ig\Tqb ebe|\zq l\cl n\sk\ds\sk\soupir&\zmid{voix}\qll Le\sk
+ \sk\soupir&\quu gn\sk\sk\zmid{Dis-}\quu in\enotes
+\cleftoksii{6000}\changeclefs
+ %\check
+%Takt 48
+\barre\notes\itenl0F\wh F&\Hpause|\sdqh{c}f\zql g\Tqh geb&\soupir\sk\sk
+  \zmid{Dis-}\qll bg&\Ilegu1o\zmid{si}\quu {=h}m\sk\sk\quu ej\tleg1\enotes
+\temps\notes&\soupir\sk\sk\ql N|\zql f\Tqh fc{=h}\zql i\Tqh iec&\relax
+  \zmid{si-}\qll{=a}f\sk\sk\zmid{pe}\qll{N}e&\zq e\hu j\sk\sk\qu i\enotes
+\def\atnextline{\sanspedale\savemeters}%
+ %\check
+%Takt 49
+\barre\notes\tten0\zhl F\zhlp M\qsk\zcharnote D{\it(Ped.)}\relax
+ |\zhu h\raise -3\Interligne\ds\dqb ce\tQb fce\relax
+  &\zmid{le}\qll Me\sk\sk\zmid{som-}\zql M\noteskip=1.5\noteskip\dqh dc\relax
+  &\zq j\zqu{=h}\noteskip=1.5\noteskip\sk\sk\zql h\dqh kl\enotes
+\temps\notes\ql I\sk\sk\soupir|\Sqh idfifd&\zmid{meil}\qll Id\sk\sk\soupir
+  &\quu ik\sk\sk\zmid{d'une}\quu fk\enotes
+ %\check
+%Takt 50
+\barre\notes\itenl1J\wh J\sk\sk\ql d|\sdqh{=e}{=g}\zql f\Tqh fgi&\soupir
+ \sk\sk\zmid{lan-}\qll Md&\zmid{\^a-}\quu{=e}j\sk\sk\zmid{me}\quu d{=g}\enotes
+\temps\notes\ql c\sk\sk\itenu2b\ql b|\bigaccid\zql{=e}\Tqh egi\ds\zq d\dqh fg\relax
+ &\qll{=L}c\sk\sk\zmid{guis-}\qll{_K}b&\zmid{lan-}\quu bg\sk\sk\rq g\qu f\enotes
+ %\check
+%Takt 51
+\barre\notes\tten1\zhl J\tten2\ql b\sk\sk\noteskip=1.5\noteskip\dqh{=a}{=N}\relax
+   |\ds\zq c\dqh{=e}{=g}\Tqh{=h}ei&\zmid{san-}\zhl J\ql b\sk\sk\noteskip
+  =1.5\noteskip\dqb {=a}{=N}&\zhl{=e}\qu{=g}\sk\sk\noteskip=1.5\noteskip
+  \dqh{=h}i\enotes
+\temps\notes\zcl M\cu a\sk\ds\zq F\qu M|\Qqh cfhfc&\zmid{te,}\qll Fa\sk
+  \sk\zmid{qui}\ql M&\quu fh\sk\sk\soupir\enotes
+ %\check
+%Takt 52
+\barre\notes\Hu b|\Qqh dfifd&\hl b\sk
+  \zmid{qui}\sk\qu b&\hpause\enotes
+\temps\notes\Hu{_a}|\Qqh cfjfc&\zmid{la}\zhl a\ql f\sk
+ \sk\zmid{con-}\ql f&\soupir\sk\sk\qu f\enotes
+ %\check
+%Takt 53
+\barre\notes\Hu N|\Qqh fiebe&\zmid{duit}\zhl N\ql f\sk\sk\ql e\relax
+  &\hlp i\sk\sk\qu i\enotes
+\temps\notes\Dnu MK|\Qqh dfifb&\zmid{\`a}\qll Md\sk\sk\zmid{l'ou-}\qll Kf\relax
+ &\qu m\sk\sk\qlu ii\enotes
+ %\check
+%Takt 54
+\barre\notes\Hu L|\Qqh cgigc&\zmid{bli}\hll Lb&\rq j\qu i\sk\sk\noteskip
+ =1.5\noteskip\rq j\cu i\rq j\cu i\enotes
+\temps\notes\Hu M|\Qqh ce{=h}ec&\zmid{ de}\zql M\noteskip=1.5\noteskip
+  \dqh fe\zmid{tes}\dqh dc&\quu {=h}j\sk\sk\noteskip=1.5\noteskip
+  \zq h\cu k\zq h\cu l\enotes
+ %\check
+%Takt 55
+\barre\notes\Hu N|\Qqh d{=h}igd&\zmid{lois,}\zhl N\ql c\sk\sk\ql b\relax
+  &\quu{=h}l\sk\sk\quu ik\enotes
+\temps\notes\zmidtwotext{\kern -2\Interligne\bf I \rm(G.O.)}\Dnu ML|\relax
+  \Qqh df{=h}fc&\soupir\sk\sk\ql M&\Hpause\enotes
+ %\check
+%Takt 56
+\barre\notes\Hu K\zcharnote I{(+P\'ed.)}|\sdqh bf\itenu1i\zqu i\Tqb ifb&\hl b\sk
+  \zmid{qui}\sk\qu b&\hpause\enotes
+\temps\notes\Hu J\zcharnote I{(+P\'ed.)}|\tten1\zqu i\raise -2\Interligne\ds
+  \dqb bf\zqu {_h}\qsk
+  \Tqb ifb&\zmid{la}\qll bf\sk\sk\zmid{con-}\qll af&\soupir\sk\sk\qu f\enotes
+ \def\atnextline{\quatreinstruments}%
+ %\check
+%Takt 57
+\barre\notes\wh I&\hu I|\zhu g\raise -5\Internote\ds\dqb bf\Tqb ifb\relax
+ &\zmid{duit}\zhl N\ql f\sk\sk\ql e&\hlp i\sk\sk\qu i\enotes
+\temps\notes&\Hl b|\zqu f\raise -6\Internote\ds\dqb df\zqu i\Tqb ifd\relax
+ &\zmid{\`a}\qll Md\sk\sk\zmid{l'ou-}\qll bd&\qu m\sk\sk\quu fk\enotes
+ %\check
+%Takt 58
+\barre\notes\hu H&\Hl a|\itenu1j\zh h\zhu j\raise -3\Interligne\ds
+ \dqb ce\Tqb ece&\zmid{bli}\hll ac&\quu hl\sk\sk\noteskip=1.5\noteskip
+ \zq h\cu l\zq h\cu l\enotes
+\temps\notes\hu G&\Hl N|\tten1\rh i\zhu j\raise -3\Interligne\ds
+ \dqb ce\Tqb ece&\zmid{de}\qll Nb\sk\sk\zmid{tes}\qll Nb&\quu il\sk\sk
+ \noteskip=1.5\noteskip\zq i\cu k\zq i\cu l\enotes
+ %\check
+%Takt 59
+\barre\notes\hu F&\zw F\wh M|\zq{=h}\zqu j\raise -3\Interligne\ds
+ \dqb c{=e}\Tqb fc{=a}&\zmid{lois !}\zhp M\hl c&\huu {=h}m\enotes
+\temps\notes\Hpause&\zmidtwotext{\bf II \rm(Pos.)}|\Sqh cefhfc&\sk
+  \sk\sk\zmid{\^O}\ql M&\Hpause\enotes
+\def\atnextline{\sanspedale}%
+ %\check
+%Takt 60
+\barre\notes\Pause
+  &\hu F|\Qqh cdfd{_a}&\zmid{Christ sois}\dnb aa&\Pause\enotes
+\temps\notes&\hu H|\Qqh {=b}c{_e}ca&\zmid{fa-\ \ \ \ vo-}\dnb NN\enotes
+ %\check
+%Takt 61
+\barre\notes\hu K|\Qqh acdaM&\zmid{ra-}\hl M&\Pause\enotes
+\temps\notes\hu J|\Sqh acdfda&\zmid{ble \`a}\ql M\sk\sk\zmid{\ ce}\zql M\cu
+a\sk\cu a\enotes
+ %\check
+%Takt 62
+\barre\notes\dnu IH|\sdqh{=e}f\sdqh fc&\zmid{peu-}\zhl M\qu d\sk
+  \sk\qu c&\Pause\enotes
+\temps\notes\qu G|\sdqh cd&\zmid{ple}\qll Kb\enotes
+\temps\notes\qu F|\sdqh da&\zmid{fi-}\qll aa\enotes
+ %\check
+%Takt 63
+\barre\notes\hu H|\sdqh ac\Tqh eca&\relax
+   \Ilegl1F\zmid{d\`e-}\zql a\hu c\sk\sk\ql N\tleg1&\Pause\enotes
+\temps\notes\qu D|\sdqh ac&\zmid{le}\qll Md&\enotes
+\temps\notes\qu F|\Tqh daM&\zmid{pour}\qll Md\sk\sk\enotes
+ %\check
+%Takt 64
+\barre\notes\hu G|\Qqb bdedb&\zmid{te}\hll Ld&\Pause\enotes
+\temps\notes\hu H|\Qqb NcecN&\zmid{b\'e-}\hll Nc\enotes
+ %\check
+%Takt 65
+\barre\notes\wh I|\Qqh MbdbM&\zmid{nir}\hll Md&\Hpause\enotes
+\temps\notes|\Sqh bcdfdb&\zmid{main-}\qll Md\sk\sk\zmid{te-}\qll Md&\relax
+  \soupir\sk\sk\zmid{Re-}\qu f\enotes
+%Takt 66
+\barre\notes\wh H|\zh f\zhu h\raise -4\Interligne\ds\dqb ac\Tqb dad&\relax
+  \zmid{nant}\hll Md&\zmid{\c cois}\ql h\sk\sk\zmid{\c les}\ql h\enotes
+\temps\notes|\zh e\zhu g\raise -4\Interligne\ds\dqb ac\Tqb dad&\relax
+  \zmid{ras-}\qll Ld\sk\sk\zmid{sem-}\qll Lc&\zmid{chants}\ql g\sk\sk
+  \zmid{qu'il}\ql g\enotes
+ %\check
+%Takt 67
+\barre\notes\zql D\sdqh ac\zql H\Tqh daM|\zh d\zhu f&\relax
+ \zmid{bl\'e,}\zw d\ql K\sk\sk\qu H&\zmid{of-}\hu f\enotes
+\temps\notes\dnb KJ|\Sqh adfhfd&\ql K\sk\sk\ql J&\zmid{re}\hl f\sk
+  \sk\zmid{Re-}\qu h\enotes
+ %\check
+%Takt 68
+\barre\notes\wh I|\sdqh ad\zqu h\Tqb fda&\zmid{chants}\zhl I\raise\Interligne
+  \soupir\sk\sk
+  \qu a&\zmid{\c cois}\zhlp f\qu k\sk\sk\zmid{les}\qu j\enotes
+\temps\notes|\zqu k\Tqb fdf\zqu j\Tqb hfd&\zmid{qu'il}\zhl I\ql d\sk\sk\ql c&\relax
+  \zmid{chants}\qu i\sk\sk\zmid{qu'il}\quu fh\enotes
+ %\check
+%Takt 69
+\barre\notes\qsk\dnu LI|\zhu i\qsk\tQb hbe\Tqb heb&\zmid{offre}\zql L\hu b\sk
+  \sk\zmid{\`a}\ql I&\zmid{of-}\zh e\hu h\enotes
+\temps\notes\dnu LK|\zqu i\Sqb gbegeb&\zmid{ta}\zql L\hu b\sk\sk
+  \zmid{gloi-}\ql K&\zmid{fre,}\zq e\qu g\sk\sk\zmid{\`a}\qu i\enotes
+ %\check
+%Takt 70
+\barre\notes\zmidtwotext{\kern -\Interligne\bf I \rm(G.O.)}\wh J|\sdqb be\zqu i\Tqb geb\relax
+  &\zmid{ta}\zhl J\raise\Interligne\soupir\sk\sk\zmid{gloire}\qu b\relax
+  &\zhlp g\qu l\sk\sk\qu k\enotes
+\temps\notes|\zqu l\Tqb geg\zqu k\Tqb ige&\zmid{im-}\zhl J\ql e\sk\sk
+  \zmid{mor-}\ql d&\qu j\sk\sk\quu gi\enotes
+ %\check
+%Takt 71
+\barre\notes\qsk\Dnl MJ|\zhu j\qsk\tQb icf\Tqb ifc&\zmid{tel-}\zql M\hl c\sk\sk
+ \ql J&\zh f\hu i\enotes
+\temps\notes\Dnl ML|\zqu j\tQb hcf\itenu1h\zqu h\qsk\Tqb gca&\zmid{le,}\relax
+ \qll Mc\sk\sk\zmid{et}\qll Lc&\zq f\qu h\sk\sk\rq h\qu g\enotes
+ %\check
+%Takt 72
+\barre\notes\Dnl KM|\tten1\zqu h\tQb fdf\zqu{=h}\tQb ece&\zmid{de}\qll Kd\sk\sk
+  \qll M{=a}&\zhl f\qu m\sk\sk\qu j\enotes
+\temps\notes\Dnl ba|\zqu i\Tqb dfd\zqu{_j}\tQb f{=d}f&\zmid{tex}\ql b\sk\sk
+  \qll {_a}{=d}&\zq f\qu k\sk\sk\zq{j}\qu m\enotes
+ %\check
+%Takt 73
+\barre\notes\Dnl{=N}{=L}|\zqu i\tQb ebe\zqu{=g}\tQb{_d}bd&\zmid{dons}\qll {=N}e\sk
+  \sk\qll{=L}b&\zq i\qu l\sk\sk\zq{=g}\qu k\enotes
+\temps\notes\Dnl M{=K}|\zqu h\tQb cac\zq h\zqu j\tQb fcf&\zmid{qu'il}\qll Ma\sk
+ \sk\qll{=K}a&\quu hj\sk\sk\quu fj\enotes
+ %\check
+%Takt 74
+\barre\notes\zh E\hu L|\zh{=g}\zhu j\tQb ece\tQb ece&\zmid{tour-}\hll L{=N}\relax
+  &\huu ej\enotes
+\temps\notes\zh{_D}\hu{_K}|\zh g\zhu i\raise -3\Interligne\ds
+  \dqb be\Tqb ebe&\zmid{ne}\zqp{_K}\qlp N\sk\sk\sk\zmid{com-}\zq K\cl N&\zqp e\qup i\sk
+ \sk\sk\zq e\cu i\enotes
+ %\check
+%Takt 75
+\barre\notes\Hu J|\zhu h\raise -3\Interligne\ds\dqb ae\tQb eae\relax
+ &\hll Ja&\zh e\hup h\enotes
+\temps\notes|\zcharnote n{\bf II}\sk\enotes
+\temps\notes\hu K|\zhu{_j}\tQb fdf\Tqb hfd&\zmid{Et}\hll K{_c}&\hu f\sk
+ \sk\ql h\enotes
+ %\check
+%Takt 76
+\barre\notes\dnu GI|\zqu i\raise -3\Interligne\ds\dqb dg\zqu h\relax
+ \raise -3\Interligne\ds\dqb {=d}f&\zmid{de}\qll Gd\sk\sk\qll Ia&\zq d\qu i\sk
+ \sk\zq{=d}\qu f\enotes
+\temps\notes\dnb L{_K}|\zqu{_g}\raise -3\Interligne\ds
+   \dqb be\zq{=g}\zqu i\tQb gb{=e}&\zmid{tes}\qll LN\sk\sk\qll K{=N}&\relax
+  \zq d\qu g\sk\sk\zq{=f}\qu i\enotes
+ %\check
+%Takt 77
+\def\atnextline{\quatreinstruments\savemeters}%
+ %
+\barre\notes\Pause&\dnu JG|\zqu h\raise -3\Interligne\ds
+  \dqb a{_e}\zqu j\tQb {=h}eh&\zmid{dons}\qll Ja\sk\sk\qll Nc&\quu eh\sk\sk
+  \dfl i\quu il\enotes
+\temps\notes\Pause&\dnu F{=G}\relax
+  |\zqu k\tQb {_h}fh\raise 2\Interligne\rlap{\ds}\Tqh bdb&\zmid{qu'il}\relax
+ \qll Md\sk\sk\zmid{re-}\qll {=N}b&\zq h\qu k\sk\sk\zq d\qu f\enotes
+ %\check
+%Takt 78
+\barre\notes&\wh H|\Qqh acfca&\zmid{tour-}\hll  aa&\zh c\hu h\enotes
+\temps\notes&|\Qqh NcecN&\zmid{ne}\zqp H\qlp{_N}\sk\sk\sk
+  \zmid{com-}\zq H\cl N&\zqp c\qup e\sk\sk\sk\cu d\enotes
+ %\check
+ %Takt 79
+\barre\notes\zcharnote b{$\wedge$}\hl K&\zmidtwotext{\bf III
+  \rm(r\'ecit)}\sdqb Ma\Tqb daM|\sk\hpause&\zmid{bl\'e !}\zhp K\hlp M\relax
+  &\hup d\enotes
+\temps\notes\hpause&\Tqb acd\sdqb da|\soupir\sk\sk\qu f&\sk\sk\sk\soupir
+ &\sk\sk\sk\soupir \enotes
+ %\check
+ %Takt 80
+\barre\notes\hu F&\Qqb cdfda|\hu h&\Pause&\Pause\enotes
+\temps\notes\hu G&\Qqb {=a}bdbN|\hu g\enotes
+ %\check
+ %Takt 81
+\barre\notes\itenl1H\wh H&\Qqb {=N}adaM|\hup f&\Hpause&\Hpause\enotes
+\temps\notes&\Sqb acdfda|\sk\sk\sk\soupir&\soupir\sk\sk
+\zmid{Et}\qll Ha&\soupir\sk\sk\zq d\qu f\enotes
+ %\check
+ %Takt 82
+\barre\notes\tten1\wh H&\Qqb NdedN|&\zmid{de}\zhl H\dnu NM&\zhu e\qsk\hl d\enotes
+\temps\notes&\Qqb NcecN|&\zmid{tes}\hll HL&\huu cg\enotes
+ %\check
+ %Takt 83
+\barre\notes\wh K&\Qqb MadaM|&\zmid{dons}\zhp K\hlp M&\zhp d\hup f\enotes
+\temps\notes&\Tqb acd\sdqb da|\soupir\sk\sk\qu f&\sk\sk\sk\soupir
+   &\sk\sk\sk\soupir\enotes
+ %\check
+ %Takt 84
+\barre\notes\hu{=H}&|\zqu k\Tqb efe\zqu j\Tqb fef&\Pause&\Pause\enotes
+\temps\notes\dnu IJ&|\zqu i\Tqb dfd\zqu h\tQb fcf&\enotes
+ %\check
+ %Takt 85
+\barre\notes\dnu KL&|\zqu h\Tqb cfc\zqu g\tQb ebe&\Hpause&\Hpause\enotes
+\temps\notes\dnu MF&\Sqb {=a}cMd{_a}M|\qu f\sk\sk\soupir
+  &\zmid{qu'il}\qll F{=a}\sk\sk
+  \zmid{re-}\qll F{_a}&\zq c\qu f\sk\sk\zq d\qu {_h}\enotes
+ %\check
+ %Takt 86
+\barre\notes\wh G&\Qqh MbdbM|&\zmid{tour-}\zw G\wh b&\zw d\wh f\enotes
+\temps\notes&|\Tqh bdf\zq i\cu k\ds\enotes
+ %\check
+ %Takt 87
+\barre\notes\wh H&\sdqh Na|\sk\sk\sk\Tqh ceg&\zmid{ne}\relax
+  \zhlp H\hup N&\zhp c\hup e\enotes
+\temps\notes&|\zq  h\cu j\sk\ds\soupir&\sk\sk\zmid{com-}\qll HN\relax
+  &\sk\sk\quu dd\enotes
+ %\check
+ %Takt 88
+\barre\notes\itenl1K\wh K&|\Qqh acdaM&\relax
+  \zmid{bl\'e}\itenl0K\itenu3M\zw K\wh M&\itenl4d\wh d\enotes
+\temps\notes&|\Tqb acd\itenu2f\zqu f\Tqb fda\enotes
+  \advance\barsinline by -1\relax  % accepter une mesure de plus
+ %\check
+ %Takt 89
+\barre\notes\tten1\wh K&|\tten2\zw {Mad}\wh f\sk
+  &\tten0\tten3\zw K\wh M&\tten4\wh d\enotes
+\finmorceau
+\bye
+

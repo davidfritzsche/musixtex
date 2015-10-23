@@ -1,0 +1,202 @@
+\fulltitle{Il est n\'e, le divin enfant}
+\title{Il est n\'e, le divin enfant}
+\author{traditionnel\\Harmonisation Pierre Darmon}
+\shortauthor{traditionnel}
+\maketitle
+
+\tracingstats=1\relax
+\relativeaccidentals
+\sepbarrules
+%
+\bigskip
+% au moins deux croches basses et hautes
+\def\dql#1#2{\Ibl0{#1}{#2}1\qb0{#1}\tqb0{#2}}%
+\def\dqu#1#2{\Ibu0{#1}{#2}1\qh0{#1}\tqh0{#2}}%
+\def\dqh{\dqu}\def\dqb{\dql}%
+%
+%
+% soufflets crescendo et decrescendo
+%
+\def\soufflcr#1{\zcharnote{#1}{\kern -1cm\cresc}}%
+\def\Soufflcr#1{\zcharnote{#1}{\kern -1cm\CResc}}%
+%
+\def\souffldim#1{\zcharnote{#1}{\kern -1cm\dimin}}%
+\def\Souffldim#1{\zcharnote{#1}{\kern -1cm\DImin}}%
+%
+%\check
+\def\nbinstruments{2}\resetsignatures
+\barsinline=0\relax\linesinpage=0\relax
+\global\nbporteesi=1\relax
+\global\nbporteesii=1\relax
+\global\cleftoksi={{6}{0}{0}{0}}%
+\global\cleftoksii={{0}{0}{0}{0}}%
+\songbottom{1}  % to be used to make heavy bars at staff left
+\songtop{2}   % to be used to make heavy bars at staff left
+%
+\ifx\Signature\undefined\def\Signature{1}\fi
+\ifx\Transpose\undefined\def\Transpose{0}\fi
+%
+\signaturegenerale{\Signature}%
+\generalmeter{\meterfrac{4}{4}}
+%\check
+\def\interfacteur{12}%
+\def\instrumenti{\vbox{\hsize=\parindent
+\centerline{T\'enors}\centerline{basses}}}%
+\def\instrumentii{\vbox{\hsize=\parindent
+\centerline{Sopran.}\centerline{Altos}}}%
+%\check
+\def\respire{\notes&\cbreath\enotes}%
+%
+\def\eightpoint{\Tenpoint}%
+%\check
+\catcodesmusic
+
+\def\txt#1|#2|#3&{{\vbox to 0pt{\Smalltype\baselineskip 9pt
+\vss\hrule width 9pt height 0pt
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #3\kern\internote}\smallskip
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #2\kern\internote}\smallskip
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #1\kern\internote}\kern -12pt}}}%
+ %
+\def\interfacteur{16}%
+%
+\debutmorceau
+\autolines 784\relax
+\transpose=\Transpose
+\notes&\Uptext{\raise 2\Interligne\hbox{\moyen Lent}}\enotes
+ %
+%
+\Notes\zql N\qu b&\hsong{\txt |Il |&}\qu d\enotes
+\temps\Notes\zql N\qu b&\hsong{\txt |est|&}\qu g\enotes
+%
+%\check
+\barre\Notes\zql N\qu b&\hsong{\txt |n\'e|&}\qu g\enotes
+\notes\rlap{\dqb NK}\dqu db&\zsong{\txt |le di-|&}\thelyrics\dqu ig\enotes
+%
+%\check
+\barre\Notes\zql I\qu N&\hsong{\txt |vin|&}\qu d\enotes
+\temps\notes\zqu b\dql KM&\hsong{\txt |en-|&}\qu g\enotes
+%
+%\check
+\barre\hardlyrics{\txt |fant !|&}\notes\zql N\qu b&\hsong\thelyrics\qu g\enotes
+\temps\Notes\soupir&\soupir\enotes
+%
+%\check
+\barre\Notes\zql N\qu b&\hsong{\txt |Jou-|&}\qu g\enotes
+\temps\notes\rlap{\dqb NM}\dqu bc&\zsong{\txt |ez haut-|&}\dqu gh\enotes
+%
+%\check
+\barre\hardlyrics{\txt |bois, |&}\notes\zql L\qu d&\hsong\thelyrics\ql i\enotes
+\temps\notes\rlap{\dqb NL}\dqu ed&\zsong{\txt |r\'eson-|&}\dql ji\enotes
+%
+%\check
+\barre\Notes\zql M\qu c&\hsong{\txt |nez|&}\qu h\enotes
+\temps\Notes\zql L\qu b&\hsong{\txt |mu-|&}\qu g\enotes
+%
+%\check
+\barre\Notes\zql K\qu c&\hsong{\txt |set-|&}\qu h\enotes
+\temps\notes\zcl M\cu c&\zsong{\txt |tes |&}\cu d\enotes
+\temps\notes\ds&\ds\enotes
+%
+%\check
+\barre\notes\zql N\qu b&\hsong{\txt |Il |&}\zql d\dqu nm\enotes
+\temps\notes\zql N\qu b&\zsong{\txt |est |&}\zql g\dqu lk\enotes
+%
+%\check
+\barre\notes\zql N\qu b&\hsong{\txt |n\'e |&}\zql g\dqu lk\enotes
+\temps\notes\rlap{\dqb NK}\dqu db&\zsong{\txt |le di-|&}%
+ \Ibl0 ig1\zqb0 i\loff{\Ibu1ji1\qh1j}\tbl0\zqb0g\tqh1i\enotes
+%
+%\check
+\barre\notes\zql I\qu N&\hsong{\txt |vin|&}\zql d\dqu ji\enotes
+\temps\notes\zqu b\dql KM&\hsong{\txt |en-|&}\zql g\qsk\dqu hg\enotes
+%
+%\check
+\barre\hardlyrics{\txt |fant !|&}\notes\zql N\qu b&\hsong\thelyrics\zql g\qu k\enotes
+\temps\Notes\soupir&\soupir\enotes
+%
+%\check
+\barre\hardlyrics{\txt |Chan-|&}\notes\zql N\qu b&\hsong\thelyrics\zql g\qu k\enotes
+\temps\notes\zql M\dqu ca&\zsong{\txt |tons|&}\zql h\qu k\enotes
+%
+%\check
+\barre\hardlyrics{\txt |tous |&}\notes\zql L\qu N&\hsong\thelyrics\zql i\qu l\enotes
+\temps\notes\rlap{\dqb LJ}\qu a&\zsong{\txt |son a-|&}\zqu l\dql ji\enotes
+%
+%\check
+\barre\Notes\zql K\qu d&\hsong{\txt |v\`e-|&}\zql h\qu m\enotes
+\temps\Notes\zql K\qu c&\hsong{\txt |ne-|&}\zql k\qu m\enotes
+%
+%\check
+\barre\NOTes\zhl N\hu b&\hsong{\txt |ment|&}\zhl g\zh k\hu n\enotes
+\setdoublebar
+%
+%\check
+\barre\Notes\itenu0N\tten0\itenu0N\hl N&\hsong{\txt |De-|&}\zql g\qu i\enotes
+\temps\Notes&\hsong{\txt |puis|&}\zql h\qu j\enotes
+%
+%\check
+\barre\Notes\tten0\itenu0N\hl N&\hsong{\txt |plus|&}\zql i\qu k\enotes
+\temps\notes&\zsong{\txt |de qua-|&}\rlap{\dqb hg}\dqu ji\enotes
+%
+%\check
+\barre\Notes\tten0\itenu0N\hl N&\hsong{\txt |tre|&}\zql h\qu j\enotes
+\temps\Notes&\hsong{\txt |mille|&}\zql j\qu l\enotes
+%
+%\check
+\barre\NOtes\tten0\itenu0N\hl N&\hsong{\txt |ans|&}\zhl i\hu k\enotes
+%
+%\check
+\barre\Notes\tten0\itenu0N\hl N&\hsong{\txt |Nous|&}\zql g\qu i\enotes
+\temps\Notes&\hsong{\txt |le|&}\zql h\qu j\enotes
+%
+%\check
+\barre\Notes\tten0\itenu0N\hl N&\hsong{\txt |pro-|&}\zql i\qu k\enotes
+\temps\notes&\zsong{\txt |mettaient|&}\rlap{\dqb ji}\dqu lk\enotes
+%
+%\check
+\barre\Notes\tten0\itenu0N\hl N&\hsong{\txt |les|&}\zql h\qu j\enotes
+\temps\Notes&\hsong{\txt |pro-|&}\zql g\qu i\enotes
+%
+%\check
+\barre\Notes\tten0\qlp N&\hsong{\txt |ph\`e-|&}\zql g\qu i\enotes
+\temps\notes&\hsong{\txt |tes|&}\zcl f\cu h\enotes
+\temps\notes\ds&\ds\enotes
+%
+%\check
+\barre\Notes\ql N&\hsong{\txt |De-|&}\zql g\qu i\enotes
+\temps\Notes\ql M&\hsong{\txt |puis|&}\zql h\qu j\enotes
+%
+%\check
+\barre\Notes\ql L&\hsong{\txt |plus|&}\zql i\qu k\enotes
+\temps\notes\dqb MN&\zsong{\txt |de qua-|&}\rlap{\dqb hg}\dqu ji\enotes
+%
+%\check
+\barre\Notes\ql K&\hsong{\txt |tre|&}\zql h\qu j\enotes
+\temps\Notes\ql N&\hsong{\txt |mille|&}\zql j\qu l\enotes
+%
+%\check
+\barre\NOtes\hl N&\hsong{\txt |ans|&}\zhl i\hu k\enotes
+%
+%\check
+\barre\Notes\ql N&\hsong{\txt |Nous|&}\zql g\qu i\enotes
+\temps\Notes\ql M&\hsong{\txt |at-|&}\zql h\qu j\enotes
+%
+%\check
+\barre\Notes\ql L&\hsong{\txt |ten-|&}\zql i\qu k\enotes
+\temps\notes\dqb aL&\zsong{\txt |dions cet|&}\rlap{\dqb ji}\dqu lk\enotes
+%
+%\check
+\barre\Notes\ql M&\hsong{\txt |heu-|&}\zql h\qu j\enotes
+\temps\notes\dql LI&\zsong{\txt |reux|&}\zql g\qu i\enotes
+%
+%\check
+\barre\NOtes\hl K&\hsong{\txt |temps.|&}\zhl f\hu h\enotes
+%
+\finmorceau
+\medskip\rightline{\it le \aujourdhui}
+\absoluteaccidentals
+\vfil\eject
+ 

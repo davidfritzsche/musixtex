@@ -1,0 +1,407 @@
+\chapter{Lyrics}\index{lyrics}\label{lyrics}
+\musixtex{} itself doesn't manage lyrics very well. You should use
+\verb+musixlyr+ instead, a \musixtex\ extension package for lyrics handling by Rainer Dunker.
+The \TeX~source and
+\href{http://icking-music-archive.org/software/musixtex/add-ons/mxlyrdoc.pdf}
+{\underline{documentation}}~are included in the \musixtex~distribution.
+
+But first we recall briefly the older methods, which may still be useful when
+only a small number of words are involved.
+
+\section{Native lyrics method: placing single words}
+\subsection{Native \musixtex\ commands for lyrics}
+ \begin{enumerate}\setlength{\itemsep}{0ex}
+ \item An obvious solution is to use the commands
+\keyindex{zcharnote} (expanded to the right),
+\keyindex{lcharnote} (expanded to the left),
+\keyindex{ccharnote} (centered), to post the text at any position (computed in
+\verb|\internote|s) with respect to the lower line of the current staff.
+The pitch should be usually negative, to have the text below the staff.
+
+Example:\quad
+\raisebox{0ex}[4ex][3ex]{\musicintextnoclefn{\notes\sk\zcharnote{N}{Word}\wh g\sk\en}}
+\quad is coded by \quad
+\verb|\zcharnote{N}{Word}\wh g|~.
+
+\item The vertical position can also be given with a number in the commands
+\keyindex{zchar} (expanded to the right),
+\keyindex{lchar} (expanded to the left),
+\keyindex{cchar} (centered). The number is internally multiplied by \verb|\internote|~.
+
+Example:\quad
+\raisebox{0ex}[4ex][3ex]{\musicintextnoclefn{\notes\sk\cchar{-4}{Word}\wh g\sk\en}}
+\quad is coded by \quad
+\verb|\cchar{-5}{Word}\wh g|~.
+
+\item Of easier use are the commands \keyindex{zsong} (right of the note),
+\keyindex{lsong} (left) and \keyindex{csong} (centered) which post the lyrics
+at the lower staff line \ital{minus} the previous
+\keyindex{interinstrument}~$n$ or the \keyindex{staffbotmarg} quantity. These
+commands only have one argument, namely the lyrics text:
+%\begin{center}
+\keyindex{zsong}\verb|{|\ital{text}\verb|}|\quad
+\keyindex{lsong}\verb|{|\ital{text}\verb|}|\quad
+\keyindex{csong}\verb|{|\ital{text}\verb|}|
+%\end{center}
+ Depending on the values of the inter-instrument spacings and margins, the
+resulting vertical position might be inappropriate. Then it can be changed for
+any specific $n$-th instrument until further change using
+\begin{quote}
+\keyindex{setsongraise}~$n$\verb|{|\ital{any \TeX-dimension}\verb|}|
+\end{quote}
+As an example, the following French song\\
+ \begin{music}
+ \generalsignature{1}
+ \startextract
+ \geometricskipscale
+ \NOtes\zsong{Au }\qu g\en
+ \NOtes\zsong{clair }\qu g\en
+ \NOtes\zsong{de }\qu g\en
+ \NOtes\zsong{la }\qu h\en
+ \bar
+ \NOTes\zsong{lu- }\hu i\en
+ \NOTes\zsong{ne, }\hu h\en
+ \bar
+ \NOtes\zsong{mon }\qu g\en
+ \NOtes\zsong{a- }\qu i\en
+ \NOtes\zsong{mi }\qu h\en
+ \NOtes\zsong{Pier- }\qu h\en
+ \bar
+ \NOTes\zsong{rot, }\wh g\sk\en
+ \endextract
+ \end{music}
+
+\noindent was coded as:
+\begin{quote}\begin{verbatim}
+ \generalsignature{1}
+ \startextract
+ \geometricskipscale
+ \NOtes\zsong{Au }\qu g\zsong{clair }\qu g\en
+ \NOtes\zsong{de }\qu g\zsong{la }\qu h\en\bar
+ \NOTes\zsong{lu- }\hu i\zsong{ne, }\hu h\en\bar
+ \NOtes\zsong{mon }\qu g\zsong{a- }\qu i\en
+ \NOtes\zsong{mi }\qu h\zsong{Pier- }\qu h\en\bar
+ \NOTes\zsong{rot, }\wh g\sk\en
+ \zendextract
+\end{verbatim}\end{quote}
+\end{enumerate}
+
+\subsection{Adapting note spacing for lyrics}
+
+The command \keyindex{hardlyrics}\verb|{longword}| provides a spacing that is equal to the length
+of the text argument \verb|{longword}|. In the same time the argument \verb|{longword}|
+is saved in \keyindex{thelyrics}
+
+As an example \quad
+\raisebox{0ex}[5ex][4ex]%
+{\musicintextnoclefn{\staffbotmarg2\Interligne%
+\hardlyrics{clair}\notes\hsong{\thelyrics}\wh g\en\notes\wh{gg}\en}}
+\quad is coded by:
+\begin{tabular}{l}
+\verb|\hardlyrics{clair}%|\\
+\verb|\notes\hsong{\thelyrics}\wh g\en|\\
+\verb|\notes\wh{gg}\en|\\
+\end{tabular}
+
+All notes with long lyrics need such a treatment. The commands only carry out on
+\verb|\notes| (not on \verb|\Notes|, \verb|\NOtes|...).
+
+If you want to go back to the normal placing on an easy way, you simply can replace
+'\verb|\hardlyrics|' by '\verb|\softlyrics|'.
+
+ A complete score is given in example {\tt glorias.tex}\label{glorias} and in
+{\tt gloriab.tex}, the latter exhibiting not only the song tune but also the
+organ accompaniment.
+
+Alternate versions of \verb|\hsong| are \keyindex{dhsong} which has a fixed
+length of \verb|2\noteskip| and \keyindex{thsong} whose fixed length is
+\verb|3\noteskip|. These are useful when the text is set below (or above) a
+collective coding of two or three notes.
+
+\section{Musixlyr}\label{musixlyr}
+
+Lyrics are best handled by the \texttt{musixlyr}\index{musixlyr} package by Rainer Dunker.
+The package can be used by inserting a line in your source code:
+\begin{quote}\begin{verbatim}
+\input musixtex
+\input musixlyr
+...
+\end{verbatim}\end{quote}
+
+The manual, the input file and a few examples are in \musixtex\ distributions, or they 
+may be downloaded 
+\href{http://icking-music-archive.org/software/musixtex/add-ons/musixlyr21c.zip}
+{\underline{for Windows}} or \href{http://icking-music-archive.org/software/musixtex/add-ons/musixlyr21c.tgz}
+{\underline{for \unix}}. Look at the manual for a detailed description. Here is an overview
+of the commands and an example of use.\pagebreak
+
+\def\keyexample#1{\keyindex{#1}}
+
+\noindent\begin{small}\begin{tabbing}
+\verb|\NOtes|\keyexample{assignlyricshere}\verb|{alto}\qa c\en|\quad\= assigning without staff number\kill
+Example\> Explanation 
+\end{tabbing}
+\vspace{-1ex}
+\hrule
+\vspace{-2ex}
+\begin{tabbing}
+\verb|\NOtes|\keyexample{assignlyricshere}\verb|{alto}\qa c\en|\quad\= assigning without staff number\kill
+\keyexample{setlyrics}\verb|{sopr}{the ly_-ric words_}|\> defining the lyrics text\\
+\keyexample{copylyrics}\verb|{sopr}{alto}|\> alto has same lyrics as soprano\\
+\keyexample{appendlyrics}\verb|{alto}{more words}|\> alto lyrics is longer\\
+\keyexample{assignlyrics}\verb|2{sopr,alto}|\>soprano and alto lyrics at staff $2$\\
+\keyexample{assignlyricsmulti}\verb|{1}{2}{alto}|\>assign alto lyrics to staff $2$ of instrument $1$\\
+\verb|\NOtes|\keyexample{assignlyricshere}\verb|{alto}\qa c\en|\>assigning without staff number\\
+\keyexample{auxlyr}\verb|\assignlyrics{2}{sopr}|\> assign soprano above staff $2$\\[.8ex]
+\keyexample{lyrrule}\verb|\qu c|...\keyexample{lyrruleend}\verb|\qu c|\>make a melisma by hand\\
+\keyexample{beginmel}\verb|\qu c|...\keyexample{endmel}\verb|\qu c|\>melisma, same as word extension underline\\[.8ex]
+\keyexample{lyr}\verb|\qu c|\>force a syllable from lyrics text at this note or rest\\
+\keyexample{lyric}\verb|{word}\qu c|\>insert syllable 'word' at this note\\
+\verb|\loffset{2}{|\keyexample{lyric*}\verb|{1.}}\qu c|\>combine \verb|1.| with regular syllable\\
+\keyexample{lyrich}\verb|{syl}\qu c|\>same as \verb|\lyric|, but with hyphenation\\
+\keyexample{lyrich*}\verb|{}\qu c|\>same as \verb|\lyric*|, but with hyphenation\\
+\keyexample{lyricsoff}...\keyexample{lyricson}\>stop lyrics, then start again\\
+\keyexample{nolyr}\verb|\qu c|\>no syllable at this note\\[.8ex]
+\keyexample{llabel}\verb|{labelname}name|\>labelling a ``go to'' target in text\\
+\keyexample{golyr}\verb|{labelname}\qu c|\>perform a jump, in music code\\[.8ex]
+\keyexample{lyrpt}\verb|,\qu c|\>add a comma to the syllable under this note\\
+\keyexample{lyrnop}\verb|\qu c|\>remove last character in syllable\\
+\keyexample{lclyr}\verb|\qu c|\>make first character lower case\\
+\keyexample{llyr}\verb|\qu c|\>left justified syllable\\
+\keyexample{leftlyrtrue}\verb|\qu c|...\keyexample{leftlyrfalse}\verb|\qu c|\>start and stop left justification as the default\\
+\keyexample{lyroffset}\verb|{-4}\qu c|\>shift syllable $1$ notehead to the left\\[.8ex]
+\keyexample{minlyrspace}\verb|{3pt}\qu c|\>define minimum space between the words\\
+\keyexample{forcelyrhyphenstrue}\verb|\qu c|\>always use a hyphen from now on\\
+\keyexample{forcelyrhyphensfalse}\verb|\qu c|\>remove hyphen and make one word if necessary \\
+\keyexample{showlyrshifttrue}\verb|\qu c|\>show the lyric shift\\[.8ex]
+\keyexample{lyrraise}\verb|{1}{a 2\Interligne}|\>raise lyrics below staff $1$ by \verb|2\Interligne|\\
+\keyexample{lyrraisemulti}\verb|{1}{2}{a 2\Interligne}|\>raise alto lyrics above staff $2$ of instrument $1$\\
+\keyexample{lyrraisehere}\verb|{b 2\Interligne}\qu c|\>raise lyrics below this staff by \verb|2\Interligne|\\[.8ex]
+\keyexample{minlyrrulelength}\verb|{2mm}|\>melismas shorter than $2$mm are not shown \\
+\keyexample{minmulthyphens}\verb|{15mm}|\>distance between hyphens in 'hyphen melisma'\\
+\verb|\def|\keyexample{lyrhyphenchar}\verb|{-}|\>chose a hyphen character\\
+\verb|\setlyrics{|\keyexample{lyrlayout}\verb|{\it}..}|\>apply italics to all lyrics lines\\
+\keyexample{verses}\verb|{,\beginmel}\qu c|\>initiate melisma at second verse\\[.8ex]
+\verb|\small|\keyexample{setlyrstrut}\>adapt the vertical distance between lyrics lines\\
+\keyexample{lyrstrutbox}\verb|{10pt}|\> (re)define the distance between the lyrics lines\\[.8ex]
+\keyexample{lyrmodealter}\verb|2|\>attach lyrics of staff $2$ to the upper voice\\
+\keyexample{lyrmodealtermulti}\verb|{1}{2}|\>attach lyrics of instr.\ $1$ staff $2$ to the upper voice\\
+\keyexample{lyrmodealterhere}\verb|\qu c|\>attach lyrics of this staff to the upper voice\\
+\keyexample{lyrmodenormal}\verb|2|\>restore the default behaviour\\
+\keyexample{lyrmodenormalmulti}\verb|{1}{2}|\>restore the default behaviour at staff $2$ of instr.\ $1$\\
+\keyexample{lyrmodenormalhere}\verb|\qu c|\>restore the default behaviour of this staff\\[.8ex]
+\keyexample{lyrlink}\>linking two words with a '$_{_\smile}$'\\
+\keyexample{lowlyrlink}\>same as \verb|\lyrlink| but a little bit lower\\[.8ex]
+\keyexample{resetlyrics}\>set word pointer to the first word in all lyrics lines\\[.8ex]
+\keyexample{enableauxlyrics}\>don't use this anymore\\
+\keyexample{setsongraise}\verb|{1}{2\Interligne}|\>same as \verb|{\lyrraise}{1}{b 2\Interligne}|\\
+\keyexample{auxsetsongraise}\verb|{1}{2\Interligne}|\>same as \verb|{\lyrraisemulti}{1}{b 2\Interligne}|\\
+\keyexample{oldlyrlinestart}\>don't let the lyrics extend to the left margin\\
+\end{tabbing}\end{small}
+
+As a further illustration of the use of the commands, have a look at the following
+example\footnote{The example is taken from the \texttt{musixlyr} manual.}:
+
+\medskip\medskip
+%\oneversespace
+\begin{music}
+\input musixlyr
+ \resetlyrics \small
+\lyrmodealter0
+ \setlyrics{soprano}{bring her die Gans,} \auxlyr{\assignlyrics1{soprano}}
+ \copylyrics{soprano}{alto}                       \assignlyrics1{alto}
+
+ \generalsignature{-2}
+ \advance\stafftopmarg1\Interligne
+ \advance\staffbotmarg2\Interligne
+
+ \startextract\addspace\afterruleskip
+  \NOtes\zqu g\ql e\en
+  \bar
+  \Notes\zqu i\beginmel\ibslurd0f\ibl0f{-1}\qb0{fe}\en
+  \Notes\auxlyr\beginmel\ibsluru1i\zqup i\qb0d\en
+  \Notes\tqb0e\en
+  \Notes\endmel\tbslurd0e\ql c\en
+  \notes\ibbu0h{-1}\qb0h\tqh0g\en
+  \NOtes\auxlyr\endmel\tbsluru1h\zqu h\ql c\en
+  \bar
+  \NOTEs\auxlyr\lyr\zwh i%       The lyrics of the whole notes
+    \lyr\wh b\en     %       must be given manually.
+ \endextract
+ \lyrmodenormal0
+\end{music}
+\medskip
+
+%\oneversespace
+
+which was coded as:
+\begin{quote}
+\begin{verbatim}
+% define lyrics above the staff
+\setlyrics{soprano}{bring her die Gans,}
+% lyric beneath the staff are the same
+\copylyrics{soprano}{alto}
+% assign alto lyrics below staff 1 on the notes with stem down
+\assignlyrics1{alto}
+% assign soprano lyrics above staff 1 on the notes with stem up
+\auxlyr{\assignlyrics1{soprano}}
+% attach both lyrics to the upper voice
+\lyrmodealter0
+\generalsignature{-2}
+% make place for the lyrics
+\advance\stafftopmarg1\Interligne\advance\staffbotmarg2\Interligne
+\startextract\addspace\afterruleskip
+\NOtes\zqu g\ql e\en\bar
+% start melisma in lower lyrics
+\Notes\zqu i\beginmel\ibslurd0f\ibl0f{-1}\qb0{fe}\en
+% start melisma in upper lyrics
+\Notes\auxlyr\beginmel\ibsluru1i\zqup i\qb0d\tqb0e\en
+% end melisma in lower lyrics
+\Notes\endmel\tbslurd0e\ql c\en
+\notes\ibbu0h{-1}\qb0h\tqh0g\en
+% start melisma in upper lyrics
+\NOtes\auxlyr\endmel\tbsluru1h\zqu h\ql c\en\bar
+% The lyrics of the whole notes (without stem) must be given manually.
+\NOTEs\auxlyr\lyr\zwh i\lyr\wh b\en
+\endextract
+\lyrmodenormal0
+\end{verbatim}\end{quote}
+
+  \section{Getting enough vertical space for lyrics}
+  Since songs are
+usually equivalent to a one-staff instrument (possibly with several voices)
+the recommended solution consists in adjusting the distance between
+instruments using either \keyindex{interinstrument}\verb|=|\ital{any
+\TeX-dimension} to give more place below all instruments or using
+\keyindex{setinterinstrument} to make more space above. Note that {\Bslash
+setinterinstrument} defines spacing above and not below an instrument. Since
+lyrics are usually set below the staff, the first argument of a
+\verb|\setinterinstrument| should be the song instrument number \ital{minus
+one}.
+
+ In the case of a single staff tune, or if the song instrument is the lowest
+one, then additional place can be provided using \keyindex{staffbotmarg}.
+
+\section{Fine tuning the placement of the lyrics}
+ When not using \verb|\hardlyrics|, on short notes, sometimes
+ the lyrics are shifted away from the notes or they collide with other words.
+ This are a few approaches to get around this:
+\begin{enumerate}\setlength{\itemsep}{0ex}
+\item Making more music lines for the notes to go further apart. This could be done with
+\verb|\mulooseness|.
+\item Stretch a bar with short notes in it by i.e.,~replacing \verb|\notes| by \verb|\NOTes|.
+\item Insert space between the notes by using \verb|\sk|, \verb|\hsk|, \verb|\qsk|, \verb|\qqsk|, ...
+\item Stretch a bar with short notes in it by using the command \keyindex{scale}:
+\begin{verbatim}
+\scale{1.6}\notes..\en\scale{1}%
+\end{verbatim}
+This method can be used in \textbf{PMX} but only with care, because it changes horizontal spacing
+in a way that \textbf{PMX} will not be aware of. It will not move bars to the next line, but
+will shorten the other bars on the line.
+
+As an example, the lyrics of this music line are better placed by using \verb|\scale| in
+the first bar and moving to the left the word 'mon'. Note that the hyphen is removed
+when there is no place for it:
+
+ \begin{music}
+ \input musixlyr
+ \resetlyrics
+ \setlyrics{v1}{Au clair de la lu-ne, mon a-mi Pier-rot,}%
+ \assignlyrics1{}\assignlyrics1{v1}%
+ \staffbotmarg2\Interligne\generalsignature{1}%
+ \startextract
+ \geometricskipscale
+ \notes\qu{gggh}\en\bar
+ \Notes\hu{ih}\en\bar
+ \notes\qu{gihh}\en\bar
+ \Notes\wh g\en
+ \endextract
+% \end{music}
+%%%%% combined for saving registers %%%%%
+% \begin{music}\nostartrule
+% \input musixlyr
+ \resetlyrics
+ \setlyrics{v1}{Au clair de la lu-ne, \kernm1exmon a-mi Pier-rot,}%
+ \assignlyrics1{}\assignlyrics1{v1}%
+ \staffbotmarg2\Interligne\generalsignature{1}%
+ \startextract \geometricskipscale
+ \scale{1.4}\notes\qu{gggh}\en\bar\scale{1}%
+ \Notes\hu{ih}\en\bar
+ \notes\qu{gihh}\en\bar
+ \Notes\wh g\en
+ \endextract
+ \end{music}
+
+\medskip
+The code of the second music line is (\verb|\assignlyrics1{}| is only needed because
+lyrics are assigned before this in this manual):
+\begin{quote}\begin{verbatim}
+ \begin{music}
+ \input musixlyr
+ \resetlyrics
+ \setlyrics{v1}{Au clair de la lu-ne, \kernm1exmon a-mi Pier-rot,}%
+ \assignlyrics1{}\assignlyrics1{v1}%
+ \staffbotmarg2\Interligne\generalsignature{1}%
+ \startextract \geometricskipscale
+ \scale{1.4}\notes\qu{gggh}\en\bar\scale{1}%
+ \Notes\hu{ih}\en\bar
+ \notes\qu{gihh}\en\bar
+ \Notes\wh g\en
+ \endextract
+ \end{music}
+\end{verbatim}\end{quote}
+
+\item Moving a word in any direction
+
+\begin{small}
+\noindent\begin{tabular}{ll}
+\multicolumn{2}{l}{\Bslash setlyrics\{alto\}\{\Bslash kernm3ex1.$\sim\sim$firstsyllable...\}}\\
+& left-move verse number\\
+\verb|\setlyrics{alto}{...\kern1exword...}| &right-move a single word\\
+\verb|\setlyrics{alto}{...\lower2pt\hbox{word}...}|& lower a single word\\
+\verb|\setlyrics{alto}{...\raise2pt\hbox{word}...}|& raise a single word\\
+\multicolumn{2}{l}{\Bslash def\Bslash strut\{\Bslash vbox to 2\Bslash Interligne\{\}\}%
+\Bslash setlyrics\{alto\}\{\Bslash lyrlayout\{\Bslash strut\}...\}} \\
+& control distance between verses\\
+\verb|\lyrlayout{\vphantom{Mp(\lowlyrlink}|& minimum distance between verses\\
+\multicolumn{2}{l}{\Bslash setbox\Bslash lyrstrutbox=\Bslash hbox\{\Bslash vphantom\{yM\Bslash lyrlink\}\}}\\
+& redefine default lyrstrut
+\end{tabular}
+\end{small}
+
+\item Placing of accents can be made easier as shows this example:
+\begin{center}
+\begin{minipage}{50mm}
+\begin{music}\nostartrule
+\input musixlyr
+\catcode`\ä\active \defä{\"a}
+\catcode`\ö\active \defö{\"o}
+\catcode`\å\active \letå\aa
+\setlyrics1{å ä ö}
+\assignlyrics1{}\assignlyrics11
+\startextract
+ \setsongraise1{1ex}\NOtes\qa{ggg}\en
+\zendextract
+\end{music}
+\end{minipage}%
+\begin{minipage}{80mm}
+\verb|\catcode`\|\"a\verb|\active \def|\"a\verb|{\"a}|\\
+\verb|\catcode`\|\"o\verb|\active \def|\"o\verb|{\"o}|\\
+\verb|\catcode`\|\aa\verb|\active \let|\aa\verb|\aa|\\
+\verb|\setlyrics1{|\aa\ \"a\ \"o\verb|} \assignlyrics1{}|\\
+\verb|\assignlyrics11|\\
+\verb|\startextract|\\
+\verb|\NOtes\qa{ggg}\en|\\
+\verb|\zendextract|\\
+\end{minipage}
+\end{center}
+\item Using an 8-bit encoded characterset.\label{8bit}
+If you use default (Computer Modern) fonts, you will want to switch to
+the EC variants 
+by putting
+%\verb+\input plainenc\relax\inputencoding{cp850}+  % doesn't work!
+\verb+\input musixec+
+after \verb+\input musixtex+ in your source file.
+
+\end{enumerate}
+

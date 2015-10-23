@@ -16,21 +16,6 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-%   Main changes of T.115 (Search the string "T115" for details.)
-%   New user macros:
-%     \mxvernumber, \mxversuffix
-%     \setmaxinstruments, \setmaxcxxviiibeams, \setmaxcclvibeams,
-%     \setmaxgroups, \setmaxslurs, \setmaxtrills, \setmaxoctlines
-%     \smalltrebleoct, \smalltreblelowoct, \smallbassoct, \smallbasslowoct
-%     
-%   Changes functionally/syntax compatible:
-%     \mxversion
-%     \resetlayout, \resetclefsymbols
-%     
-%   Changes which may be incompatible:
-%     \maxinstruments
-%     \setname
-%
 %
 \ifx\undefined\startpiece \else \endinput \fi
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
@@ -39,13 +24,43 @@
 \ifx\makeatother\undefined\def\makeatother{\catcode`\@=12\relax}\fi
 
 \def\mufl@x{0.83}%
-\def\mxvernumber{115}% make it possible to compare with \ifnum
-\def\mxversuffix{-beta4}% optional; Should be empty on fixed version.
-\edef\mxversion{T.\mxvernumber\mxversuffix}
-\def\mxdate{1 Jan 2011}
+\def\mxmajorvernumber{1}
+\def\mxminorvernumber{16}
+\def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
+\def\mxversuffix{}% 
+\edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
+\def\mxdate{2015-04-21}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% T116:
+
+% RDT corrected the definitions of \nnotes and \nnnotes
+
+% HM corrected the definitions for cautionary small accidentals
+
+% RDT added \check@staff ... \fi to \@qa h, \@mca, \hs, \qqs 
+% so that \qa, \ca, \ha, etc. can be "hidden" using \setstaffs{n}{0}
+
+% RDT incorporated tuplet.tex (approved by George Sicherman)
+% and introduced \txtfont to allow changing size or style
+
+% RDT introduced 
+% \qqsk, a one-quarter notehead skip
+% \tqu and \tql, synonyms for \tqh and \tqb
+% \ztqu and \ztql, synonyms for \ztqh and \ztqb
+% \hpp, \qpp, \dsp, \qsp, \hsp, \qqsp for pointed rests
+% \nnotes, \nnnotes: 1.6 and 1.28 \elemskip spacing
+% \zcn, \ccn, \lcn, synomyms for \zcharnote etc.
+
+% RDT incorporated curly.tex (approved by Mthimkhulu Molekwa)
+
+% RDT modernized the treatment of text fonts
+% meterfonts must be bf, even if titling fonts are rm or sc
+% added dynamic-mark  macros \sfz \sfzp
+
+% T115:
 
 % moved out:
 % - 1/128th beams        -> musixbm
@@ -512,234 +527,129 @@
 
 %%% fonts
 
-%%
-% Font package for Musixtex.
-%
-% Ross Mitchell
-% February 1995
-%%
-
-%%
-% Find current font prefix (cm, dc, ec)
-%%
-\def\@onetoks#1#2+{#1}
-\def\@secondtoks#1#2#3+{#2}
-\def\@twotoks#1#2#3+{#1#2}
-\def\@svntoks#1#2#3#4#5#6#7#8+{#7}
-\rm
-\edef\fontid{\expandafter\@twotoks\fontname\the\font+}
-\edef\DynFontId{\fontid}
-\edef\fontfid{\expandafter\@onetoks\fontname\the\font+}
-\edef\fontsid{\expandafter\@secondtoks\fontname\the\font+}
-%
-% Find out whether \rm font name of the form dcr1000 , i.e. with a digit at
-% 7th position
-
-\edef\Thelastfontname{\expandafter\@svntoks\fontname\the\font---------+}
-
 \newif\iflongDCfontnames
 \newif\iflongECfontnames
-\if\Thelastfontname 0 \longDCfontnamestrue\fi
-\if\Thelastfontname 1 \longDCfontnamestrue\fi
-\if\Thelastfontname 2 \longDCfontnamestrue\fi
-\if\Thelastfontname 3 \longDCfontnamestrue\fi
-\if\Thelastfontname 4 \longDCfontnamestrue\fi
-\if\Thelastfontname 5 \longDCfontnamestrue\fi
-\if\Thelastfontname 6 \longDCfontnamestrue\fi
-\if\Thelastfontname 7 \longDCfontnamestrue\fi
-\if\Thelastfontname 8 \longDCfontnamestrue\fi
-\if\Thelastfontname 9 \longDCfontnamestrue\fi
-\iflongDCfontnames
-  \if\fontfid e
-     \longECfontnamestrue
-     \longDCfontnamesfalse
-  \fi
-  \if\fontfid r
-     \if\fontsid x
-       \longECfontnamestrue
-       \longDCfontnamesfalse
-       \def\DynFontId{cm}
-     \fi
-  \fi
+\longDCfontnamesfalse  % obsolete
+\longECfontnamesfalse  % to use EC fonts, \input musixec
+\def\fontid{cm}        % deprecated but used in pmx.tex
+
+%%
+% Seven point fonts: roman, bold, and italic.
+%%
+
+\ifx\undefined\sevenrm
+  \font\sevenrm=cmr7
+  \font\sevenbf=cmbx7
+  \font\sevenit=cmti7
 \fi
 
 %%
-% Eight point fonts: roman, bold, and italic.
+% Eight point fonts: roman, bold, and italic; tt and sl needed for musixsty
 %%
 
 \ifx\undefined\eightrm
-\iflongDCfontnames
-  \font\eightrm=\fontid r0800
-  \font\eightbf=\fontid bx0800
-  \font\eightit=\fontid ti0800
-\else\iflongECfontnames
-  \font\eightrm=\fontid rm0800
-  \font\eightbf=\fontid bx0800
-  \font\eightit=\fontid ti0800
-\else
-  \font\eightrm=\fontid r8
-  \font\eightbf=\fontid bx8
-  \font\eightit=\fontid ti8
-\fi
-\fi
+  \font\eightrm=cmr8
+  \font\eightbf=cmbx8
+  \font\eightit=cmti8
+  \font\eighttt=cmtt8
+  \font\eightsl=cmsl8
 \fi
 
 %%
-% Nine point fonts: roman, bold, and italic.
+% Nine point fonts
 %%
 
 \ifx\undefined\ninerm
-\iflongDCfontnames
-  \font\ninerm=\fontid r0900
-  \font\ninebf=\fontid bx0900
-  \font\nineit=\fontid ti0900
-\else\iflongECfontnames
-  \font\ninerm=\fontid rm0900
-  \font\ninebf=\fontid bx0900
-  \font\nineit=\fontid ti0900
-\else
-  \font\ninerm=\fontid r9
-  \font\ninebf=\fontid bx9
-  \font\nineit=\fontid ti9
-\fi
-\fi
+  \font\ninerm=cmr9
+  \font\ninebf=cmbx9
+  \font\nineit=cmti9
+  \font\ninett=cmtt9
+  \font\ninesl=cmsl9
 \fi
 
 %%
-% Ten point fonts: roman, bold, and italic and typewriter.
-% Load only if not already defined (Necessary in Latex2e).
+% Ten point fonts
 %%
 
 \ifx\undefined\tenrm
-\iflongDCfontnames
-  \font\tenrm=\fontid r1000
-  \font\tenbf=\fontid bx1000
-  \font\tenit=\fontid ti1000
-\else\iflongECfontnames
-  \font\tenrm=\fontid rm1000
-  \font\tenbf=\fontid bx1000
-  \font\tenit=\fontid ti1000
-\else
-  \font\tenrm=\fontid r10
-  \font\tenbf=\fontid bx10
-  \font\tenit=\fontid ti10
+  \font\tenrm=cmr10
+  \font\tenbf=cmbx10
+  \font\tenit=cmti10
+  \font\tentt=cmtt10
+  \font\tensl=cmsl10
 \fi
-\fi
+
+
+%%
+% Eleven point fonts
+%%
+\ifx\undefined\elevenrm
+  \font\elevenrm=cmr9 scaled \magstephalf
+  \font\elevenbf=cmbx9 scaled \magstephalf
+  \font\elevenit=cmti9 scaled \magstephalf
+  \font\eleventt=cmtt9 scaled \magstephalf
+  \font\elevensl=cmsl9 scaled \magstephalf
 \fi
 
 %%
-% Twelve point fonts: roman, bold, and italic.
+% Twelve point fonts
 %%
 \ifx\undefined\twelverm
-\iflongDCfontnames
-  \font\twelverm=\fontid r1200
-  \font\twelvebf=\fontid bx1200
-  \font\twelveit=\fontid ti1200
-\else\iflongECfontnames
-  \font\twelverm=\fontid rm1200
-  \font\twelvebf=\fontid bx1200
-  \font\twelveit=\fontid ti1200
-\else
-  \font\twelverm=\fontid r12
-  \font\twelvebf=\fontid bx12
-  \font\twelveit=\fontid ti12
-\fi
-\fi
+  \font\twelverm=cmr12
+  \font\twelvebf=cmbx12
+  \font\twelveit=cmti12
+  \font\twelvett=cmtt12
+  \font\twelvesl=cmsl12
 \fi
 
+% 14pt:  roman, bold, italic and small caps; tt and sl needed for musixsty
+\ifx\undefined\frtrm
+  \font\frtrm=cmr12 scaled \magstep1
+  \font\frtbf=cmbx12 scaled \magstep1
+  \font\frtit=cmti12 scaled \magstep1
+  \font\frtsc=cmcsc10 scaled \magstep2
+  \font\frttt=cmtt12 scaled \magstep1
+  \font\frtsl=cmsl12 scaled \magstep1
+\fi
+%
+% 17pt
+\ifx\undefined\svtrm
+  \font\svtrm=cmr12 scaled \magstep2
+  \font\svtbf=cmbx12 scaled \magstep2
+  \font\svtit=cmti12 scaled \magstep2
+  \font\svtsc=cmcsc10 scaled \magstep3
+  \font\svttt=cmtt12 scaled \magstep2
+\fi
+%
+% 20pt
+\ifx\undefined\twtyrm
+  \font\twtyrm=cmr12 scaled \magstep3
+  \font\twtybf=cmbx12 scaled \magstep3
+  \font\twtyit=cmti12 scaled \magstep3
+  \font\twtysc=cmcsc10 scaled \magstep4
+  \font\twtytt=cmtt12 scaled \magstep3
+  \font\twtysl=cmsl12 scaled \magstep3
+\fi
+%
+% 25pt
+\ifx\undefined\twfvrm
+  \font\twfvrm=cmr12 scaled \magstep4
+  \font\twfvbf=cmbx12 scaled \magstep4
+  \font\twfvit=cmti12 scaled \magstep4
+  \font\twfvsc=cmcsc10 scaled \magstep5
+  \font\twfvtt=cmtt12 scaled \magstep4
+  \font\twfvsl=cmsl12 scaled \magstep4
+\fi
+%
+% Large fonts for titles
+% (If you prefer Roman, use ..rm instead of ..bf)
+% (If you prefer small-caps, use ..sc instead of ..bf)
+\let\bigfont=\frtbf
+\let\Bigfont=\svtbf
+\let\BIgfont=\twtybf
+\let\BIGfont=\twfvbf
+%
 %%
-% Large fonts for titles: boldface only.
-%%
-\ifx\bigfont\undefined
-\iflongDCfontnames
-\font\bigfont=\fontid bx1440 % 14pt, formerly \moyen.
-\else\iflongECfontnames
-\font\bigfont=\fontid bx1440 % 14pt, formerly \moyen.
-\else
-\font\bigfont=\fontid bx12 scaled \magstep1 % 14pt, formerly \moyen.
-\fi
-\fi
-\fi
-
-\ifx\Bigfont\undefined
-\iflongDCfontnames
-\font\Bigfont=\fontid bx1728 % 17pt, formerly \gros.
-\else\iflongECfontnames
-\font\Bigfont=\fontid bx1728 % 17pt, formerly \gros.
-\else
-\font\Bigfont=\fontid bx12 scaled \magstep2 % 17pt, formerly \gros.
-\fi
-\fi
-\fi
-
-\ifx\BIgfont\undefined
-\iflongDCfontnames
-\font\BIgfont=\fontid bx2074 % 20pt, formerly \gros.
-\else\iflongECfontnames
-\font\BIgfont=\fontid bx2074 % 20pt, formerly \gros.
-\else
-\font\BIgfont=\fontid bx12 scaled \magstep3 % 20pt.
-\fi
-\fi
-\fi
-
-\ifx\BIGfont\undefined
-\iflongDCfontnames
-\font\BIGfont=\fontid bx2488 % 25pt, formerly \enorme.
-\else\iflongECfontnames
-\font\BIGfont=\fontid bx2488 % 25pt, formerly \enorme.
-\else
-\font\BIGfont=\fontid bx12 scaled \magstep4 % 25pt, formerly \emorme.
-\fi
-\fi
-\fi
-
-%%
-% Bold italic fonts for dynamic markings.
-%%
-
-\iflongDCfontnames
-\font\ppffsixteen=\DynFontId bi1000
-\font\ppfftwenty=\DynFontId bi1200
-\font\ppfftwentyfour=\DynFontId bi1440
-\font\ppfftwentynine=\DynFontId bi1728
-\font\smallppff=\DynFontId bi1000
-\font\normppff=\DynFontId bi1200
-\font\medppff=\DynFontId bi1440
-\else\iflongECfontnames
-\font\ppffsixteen=\DynFontId bi1000
-\font\ppfftwenty=\DynFontId bi1200
-\font\ppfftwentyfour=\DynFontId bi1440
-\font\ppfftwentynine=\DynFontId bi1728
-\font\smallppff=\DynFontId bi1000
-\font\normppff=\DynFontId bi1200
-\font\medppff=\DynFontId bi1440
-\else
-\font\ppffsixteen=\DynFontId bxti10
-\font\ppfftwenty=\DynFontId bxti10 scaled \magstep1
-\font\ppfftwentyfour=\DynFontId bxti10 scaled \magstep2
-\font\ppfftwentynine=\DynFontId bxti10 scaled \magstep3
-\font\smallppff=\DynFontId bxti10
-\font\normppff=\DynFontId bxti10 scaled \magstep1
-\font\medppff=\DynFontId bxti10 scaled \magstep2
-\fi
-\fi
-
-\def\smalldyn{\let\ppff\smallppff \let\p@@f\ppff}
-\def\normdyn{\let\ppff\normppff \let\p@@f\ppff}
-\def\meddyn{\let\ppff\medppff \let\p@@f\twelveit}
-
-\font\musiceleven=musix11
-\font\musicthirteen=musix13
-\font\musicsixteen=musix16
-\font\musictwenty=musix20
-\font\musictwentyfour=musix24
-\font\musictwentynine=musix29
-
-% piano brackets, slides, guitar chords, lines, (de)crescendi, circles
-
-\font\mxsps=musixspx
-
 %%
 % Define six font families.
 %%
@@ -784,6 +694,34 @@
   \let\bf\BIGfont
   \let\it\BIGfont
   \bf}
+%
+%%
+% Bold italic fonts for dynamic markings.
+%%
+
+\font\ppffsixteen=cmbxti10
+\font\ppfftwenty=cmbxti10 scaled \magstep1
+\font\ppfftwentyfour=cmbxti10 scaled \magstep2
+\font\ppfftwentynine=cmbxti10 scaled \magstep3
+\font\smallppff=cmbxti10
+\font\normppff=cmbxti10 scaled \magstep1
+\font\medppff=cmbxti10 scaled \magstep2
+
+\def\smalldyn{\let\ppff\smallppff\let\p@@f\ppff}
+\def\normdyn{\let\ppff\normppff\let\p@@f\ppff}
+\def\meddyn{\let\ppff\medppff\let\p@@f\twelveit}
+
+\font\musiceleven=musix11
+\font\musicthirteen=musix13
+\font\musicsixteen=musix16
+\font\musictwenty=musix20
+\font\musictwentyfour=musix24
+\font\musictwentynine=musix29
+
+% piano brackets, slides, guitar chords, lines, (de)crescendi, circles
+
+\font\mxsps=musixspx
+
 
 %%%
 %
@@ -1592,7 +1530,7 @@
 \def\Largemusicsize{\musicsize\@xxix \comput@specifics
   \afterruleskip\t@n\p@ \elemskip\fontdimen\si@\musicnorfont \clef@skip\z@}
 
-\def\comput@fonts{%
+\def\comput@fonts{%    
   \ifnum\musicsize=\sixt@@n
     \let\musicLargefont\musictwentyfour
     \let\musiclargefont\musictwenty
@@ -1606,9 +1544,9 @@
     \let\xgregtinyfont\xgregeleven
     \let\slurd\slurdsixteen \let\sluru\slurusixteen
     \let\hslurd\hslurdsixteen \let\hsluru\hslurusixteen
-    \let\meternorfont\tenbf \let\metersmallfont\eightbf
-    \let\meterbigfont\twelvebf \let\meterlargefont\bigfont
-    \let\meterLargefont\Bigfont
+    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % T116  RDT
+    \let\meterbigfont\twelvebf \let\meterlargefont\frtbf
+    \let\meterLargefont\svtbf
     \let\ppff\ppffsixteen
   \else\ifnum\musicsize=\@xxiv
     \let\musicLargefont\musictwentynine
@@ -1623,9 +1561,9 @@
     \let\xgregtinyfont\xgregsixteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
-    \let\meternorfont\bigfont \let\metersmallfont\twelvebf
-    \let\meterbigfont\Bigfont \let\meterlargefont\BIgfont
-    \let\meterlargefont\BIGfont
+    \let\meternorfont\frtbf \let\metersmallfont\twelvebf % T116  RDT
+    \let\meterbigfont\svtbf \let\meterlargefont\twtybf
+    \let\meterlargefont\twfvbf
     \let\ppff\ppfftwentyfour
   \else\ifnum\musicsize=\@xxix
     \let\musicLargefont\musictwentynine
@@ -1642,9 +1580,9 @@
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
     \let\slurud\slurutwentyd \let\slurdd\slurdtwentyd %    +ickd
     \let\hslurud\hslurutwentyd \let\hslurdd\hslurdtwentyd %+ickd
-    \let\meternorfont\Bigfont \let\metersmallfont\bigfont
-    \let\meterbigfont\BIgfont \let\meterlargefont\BIGfont
-    \let\meterLargefont\BIGfont
+    \let\meternorfont\svtbf \let\metersmallfont\frtbf     % T116  RDT
+    \let\meterbigfont\twtybf \let\meterlargefont\twfvbf
+    \let\meterLargefont\twfvbf
     \let\ppff\ppfftwentynine
   \else
     \ifnum\musicsize=\tw@nty
@@ -1665,12 +1603,13 @@
     \let\xgregtinyfont\xgregthirteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
-    \let\meternorfont\twelvebf \let\metersmallfont\tenbf
-    \let\meterbigfont\bigfont \let\meterlargefont\Bigfont
-    \let\meterLargefont\BIgfont
+    \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % T116  RDT
+    \let\meterbigfont\frtbf \let\meterlargefont\svtbf
+    \let\meterLargefont\twtybf
     \let\ppff\ppfftwenty
   \fi\fi\fi
 }%
+
 
 \def\comput@specifics{\comput@fonts\comput@sizes}
 
@@ -1820,7 +1759,7 @@
 \def\writezbarno{a}
 \def\barnoadd{\ifx\z@sw\@ne \writezbarno \fi}
 
-% supress the beginning vertical rule for one line sheets
+% suppress the beginning vertical rule for single-staff scores
 
 \def\startrule{\let\b@rule\empty}
 \def\nostartrule{\let\b@rule\z@}
@@ -3198,7 +3137,9 @@
   \else
     \let\st@m\upst@m
   \fi
-  \let\n@fon\@qa \let\n@sym\q@u \y@v\qn@width \writ@note}
+  \check@staff  % T116
+    \let\n@fon\@qa \let\n@sym\q@u \y@v\qn@width \writ@note
+  \fi}
 
 \def\@qu{\let\st@m\upst@m    \g@q}
 \def\@ql{\let\st@m\downst@m  \g@q}
@@ -3256,7 +3197,9 @@
   \else
     \let\st@m\up@flag \advance\n@vii -\fiv@\relax
   \fi
-  \let\n@fon\@mca \let\n@sym\q@u  \y@v\qn@width \writ@note}
+  \check@staff  % T116
+    \let\n@fon\@mca \let\n@sym\q@u  \y@v\qn@width \writ@note
+  \fi}
 
 \def\@cu{\n@vii\@xl \let\st@m\up@flag \g@q}
 \def\@ccu{\n@vii\@xli \let\st@m\up@flag \g@q}
@@ -3440,9 +3383,13 @@
 \def\zqbpp{\advancefalse\qbpp}
 
 \def\tqh{\q@symbol\@tqh}
+\def\tqu{\q@symbol\@tqh}  % T116  RDT
 \def\tqb{\q@symbol\@tqb}
+\def\tql{\q@symbol\@tqb}  % T116  RDT
 \def\ztqh{\advancefalse\q@symbol\@tqh}
+\def\ztqu{\advancefalse\q@symbol\@tqh}  % T116  RDT
 \def\ztqb{\advancefalse\q@symbol\@tqb}
+\def\ztql{\advancefalse\q@symbol\@tqb}  % T116  RDT
 
 %%% grace notes
 
@@ -3818,16 +3765,22 @@
  \advance\lift@rest -2.5\fontdimen\fiv@\musixfont
  \raise\lift@rest\hbox\@to\noteskip{#1\hss}}\advance\locx@skip\noteskip}
 
-\def\qp{\check@staff
-  \adv@restbox{\musixchar62}\fi}
+\def\qp{\adv@restbox{\check@staff\musixchar62\fi}}
 \let\soupir\qp
 
-\def\ds@oup{\check@staff
-  \adv@restbox{\musixchar63}\fi}
-\def\qs{\check@staff
-  \adv@restbox{\musixchar64}\fi}
-\def\hs{\adv@restbox{\musixchar65}}
-\def\qqs{\adv@restbox{\musixchar66}}
+\def\ds@oup{\adv@restbox{\check@staff\musixchar63\fi}}
+\def\qs{\adv@restbox{\check@staff\musixchar64\fi}}
+\def\hs{\adv@restbox{\check@staff\musixchar65\fi}}
+\def\qqs{\adv@restbox{\check@staff\musixchar66\fi}}
+
+% pointed rests  T116  RDT
+\def\qpp{\adv@restbox{\check@staff\pt5\musixchar62\fi}}
+\def\dsp{\adv@restbox{\check@staff\pt5\musixchar63\fi}}
+\def\qsp{\adv@restbox{\check@staff\pt5\musixchar64\fi}}
+\def\hsp{\adv@restbox{\check@staff\pt5\musixchar65\fi}}
+\def\qqsp{\adv@restbox{\check@staff\pt5\musixchar66\fi}}
+
+\let\hpp\hpausep
 
 %%% accidentals
 
@@ -3861,8 +3814,6 @@
 
 \def\@sa{\ifnum\n@vii=\maxdimen \C@ChaR \musixchar\n@v \kern.3\qn@width
   \else \musixchar\n@v \fi \n@vii\z@}
-\def\writ@sa{\pl@base\raise\y@i\llap{\@sa\kern\accshift}}
-\def\set@sa{\let\@Ti\writ@sa \n@iv\fiv@ \n@vi\@xl }
 
 \def\smallna{\set@sa  \let\@Tii\@Na  \n@v\f@ur \C@acc}
 \def\smallfl{\set@sa  \let\@Tii\@Fl  \n@v\z@   \C@acc}
@@ -3870,11 +3821,16 @@
 \def\smalldfl{\set@sa \n@iv\si@ \let\@Tii\@dFl \n@v\@ne  \C@acc}
 \def\smalldsh{\set@sa \let\@Tii\@dSh \n@v\thr@@ \C@acc}
 
-\def\cna{\n@vii\maxdimen \smallna}
-\def\cfl{\n@vii\maxdimen \smallfl}
-\def\csh{\n@vii\maxdimen \smallsh}
-\def\cdfl{\n@vii\maxdimen \smalldfl}
-\def\cdsh{\n@vii\maxdimen \smalldsh}
+\def\cna{\set@ca  \let\@Tii\@Na  \n@v\f@ur \C@acc} % T116 HM
+\def\cfl{\set@ca  \let\@Tii\@Fl  \n@v\z@   \C@acc}
+\def\csh{\set@ca  \let\@Tii\@Sh  \n@v\tw@  \C@acc}
+\def\cdfl{\set@ca \n@iv\si@ \let\@Tii\@dFl \n@v\@ne \C@acc}
+\def\cdsh{\set@ca \let\@Tii\@dSh \n@v\thr@@ \C@acc}
+%
+\def\writ@sa{\pl@base\raise\y@i\llap{\musixchar\n@v\kern\accshift}}
+\def\set@sa{\let\@Ti\writ@sa \n@iv\fiv@ \n@vi\@xl }       
+\def\writ@ca{\pl@base\raise\y@i\llap{\C@ChaR \musixchar\n@v\kern.3\qn@width\kern\accshift}}
+\def\set@ca{\let\@Ti\writ@ca \n@iv\fiv@ \n@vi\@xl }
 
 \def\writ@ua{\advance\n@i\thr@@ \zchar\n@i{\kern\qu@rt\qn@width\@sa}}
 \def\set@upper{\let\@Ti\writ@ua \n@iv\fiv@ \n@vi\@xl }
@@ -4032,14 +3988,12 @@
 
 % The next macros puts triplets (and others def'd with \txt) on beams
 
-\def\txt{\eightit3}
-
 \def\butext#1{\txt@ff\qn@width
-  \def\balk@accent{\uplap{\lrlap{\kern\tw@\txt@ff\txt}\kern\internote}}%
+  \def\balk@accent{\uplap{\lrlap{\kern\tw@\txt@ff\txtfont\txt}\kern\internote}}%
   \acc@ubalk{#1}\txt@ff\h@lf\qn@width \let\balk@accent\C@ChaR}
 
 \def\bltext#1{\txt@ff\z@
-  \def\balk@accent{\vbox\@to\z@{\kern\internote\lrlap\txt\vss}}%
+  \def\balk@accent{\vbox\@to\z@{\kern\internote\txtfont\lrlap\txt\vss}}%
   \acc@lbalk{#1}\txt@ff\h@lf\qn@width \let\balk@accent\C@ChaR}
 
 %%% end of accents on beams (correction proposed by Klaus Bechert)
@@ -4196,7 +4150,7 @@
 
 \def\octnumberup{\octnumberdefault\vrule width 0pt height2ex}
 \def\octnumberdefault{\ppffsixteen8}
-\def\octnumberdown{\octnumberdefault$^a$\eightit\kern 0.3em bassa\vrule width 0pt depth \Internote}
+\def\octnumberdown{\octnumberdefault$^a$\txtfont\kern 0.3em bassa\vrule width 0pt depth \Internote}
 
 \def\octfinup{\check@staff
   \n@v\@xxiii\n@ii\@xxiv\global\o@swz={\@ne}\fi
@@ -4296,10 +4250,147 @@
 \def\metron#1#2{{\stemlength\f@ur\noteskip\t@n\p@ #1 1\ = #2}}
 \def\metronequiv#1#2{{\stemlength\f@ur\noteskip\t@n\p@ #1 1\ = #2 1}}
 
+
+\def\txtfont{\eightit}  % T116 RDT
+\def\txt{3}
 \def\xtuplet#1#2{\n@iv#1\advance\n@iv\m@ne {\sign@skip=\n@iv\noteskip
   \sign@skip=0.5\sign@skip \xdef\half@sign@skip{\the\sign@skip}}%
-  \zcharnote{#2}{\kern\h@lf\qn@width\kern \half@sign@skip\lrlap{\eightit#1}}}
+  \zcharnote{#2}{\kern\h@lf\qn@width\kern \half@sign@skip\lrlap{\txtfont#1\/\/}}}  
 \def\triolet{\xtuplet3}
+
+%
+%   Following definitions based on tuplet.tex - conventional tuplet brackets for MusiXTeX.
+%   Col. G. L. Sicherman.  Last revised 2003-05-17.
+%
+%   Added to musixtex.tex T116 by RDT.
+%
+%   Standard MusiXTeX uses \uptrio and \downtrio to print tuplet brackets.
+%   We define \uptuplet and \downtuplet, with the same arguments:
+%
+%       #1 : starting pitch
+%       #2 : width of bracket, in (\noteskip)s
+%       #3 : slope of bracket, in multiples of 1-1/8 degrees
+%
+%   The user defines the text to appear in the opening as \tuplettxt.
+%   This is to avoid conflicting with the \txt in standard MusiXTeX.
+%
+%   Examples:
+%
+%       Draw a triplet bracket over the notes, starting at pitch "p",
+%       1.25\noteskip wide, with a slope up of 3-3/8 degrees:
+%
+%           \uptuplet p{1.25}3
+%
+%       Draw a sextuplet bracket under the notes, starting at pitch "a",
+%       2.5\noteskip wide, with a slope down of 4-1/2 degrees:
+%
+%           \def\tuplettxt{6\/\/}
+%           \downtuplet{a}{2.5}{-4}
+%
+%   Send comments, complaints, and bouquets to the Colonel at
+%   <colonel@monmouth.com>.
+%
+
+% Standard MusiXTeX prints a small "3" (or other number) within
+% the bracket.  Here we print the "3" in an opening in the bracket,
+% so we need not use a small font.
+%
+% The double italic correction compensates for centering the number
+% on the bracket line.
+
+\def\tuplettxt{3\/\/}
+
+%%% The rest is adapted from standard MusixTeX.
+
+\newdimen\y@vii		% x of right end of left part of bracket.
+\newdimen\y@viii	% x of left end of right part of bracket.
+\newdimen\y@ix
+\newbox\tuptxtb@x
+
+% v@rline #1=height[dimen] #2=length[dimen] #3=slope (1\eqiv 1.125degree)
+% (comments and ideas from Ian Collier)              (from -20 upto 20 )
+% This macro is used by some of the others which follow,
+% using it directly it must be set in zero box
+
+\def\v@rline#1#2#3{\n@v#3\y@i#2%
+  \setbox\tuptxtb@x\hbox{\hskip1pt\txtfont\tuplettxt\hskip1pt}%
+  \y@vii=\h@lf\y@i\advance\y@vii-\h@lf\wd\tuptxtb@x%
+  \n@ii-\tw@nty \min@n@v\n@ii
+  \max@n@v\tw@nty \n@iii\n@v
+  \ifnum\n@v<\z@ \n@v-\n@v \advance\n@v\tw@nty \fi % offset to lower linechars
+  \advance\n@v\@xxix
+  \setbox\ch@box\hbox{\mxsps\char\n@v}%
+  \ifdim\y@vii<\wd\ch@box \y@vii\wd\ch@box\fi% At least one whole segment!
+  \y@viii=\y@i\advance\y@viii-\y@vii%
+  \y@iv\wd\ch@box \y@ii\qu@rt\p@ \y@ii\n@iii\y@ii \y@iii\z@
+  \raise#1\internote\hbox{\mxsps\char\n@iv
+%
+% Build bracket with slanted line segments of width 10pt.
+% Left part of bracket:
+%
+    \loop\ifdim\y@iv<\y@vii\raise\y@iii\copy\ch@box
+    \advance\y@iv\wd\ch@box \advance\y@iii\y@ii \repeat
+%
+% last element
+%
+%  \finalheight=2.5\completewidth
+%  \finalheight=\n@iii\finalheight
+%  \divide\finalheight by 100
+%  \advance\overlapwidth by -\completewidth
+%  \stepheight=-2.5\overlapwidth
+%  \stepheight=\n@iii\stepheight
+%  \divide\stepheight by 100
+%  \advance\curheight by \stepheight
+%  \kern -\overlapwidth \raise\curheight \box\ch@box
+%
+  \y@ix=\y@vii\advance\y@ix-\y@iv\hbox to\y@ix{\hss}%
+  \y@ix\y@vii\advance\y@ix-\wd\ch@box%
+  \y@iii\n@iii\y@ix\y@iii2\h@lf\y@iii\divide\y@iii\@c\raise\y@iii\copy\ch@box%
+%
+% Text:
+%
+  \y@v2\h@lf\y@i \y@v\n@iii\y@v \divide\y@v\@c%
+  \y@ix=-\y@vii \advance\y@ix\h@lf\y@i \advance\y@ix-\h@lf\wd\tuptxtb@x%
+  \hbox to\y@ix{\hss}%
+  \y@iii\h@lf\y@v \raise\y@iii\vbox to\z@{%
+  \vss{\copy\tuptxtb@x}\vss}
+  \y@ix=\y@viii \advance\y@ix-\h@lf\y@i \advance\y@ix-\h@lf\wd\tuptxtb@x
+  \hbox to\y@ix{\hss}% To start of right part. No-op unless bracket is short.
+%
+% Right part of bracket:
+%
+  \y@iii2\h@lf\y@viii \y@iii\n@iii\y@iii \divide\y@iii\@c%
+  \y@iv=\y@viii \advance\y@iv\wd\ch@box%
+  \loop\ifdim\y@iv<\y@i\raise\y@iii\copy\ch@box%
+  \advance\y@iv\wd\ch@box \advance\y@iii\y@ii \repeat
+%
+% Finish off the right part:
+%
+  \y@iii\y@i\advance\y@iii-\wd\ch@box\y@iii2\h@lf\y@iii\y@iii\n@iii\y@iii%
+  \y@ix=\y@i\advance\y@ix-\y@iv\hbox to\y@ix{\hss}%
+  \divide\y@iii\@c%
+  \raise\y@iii\copy\ch@box%
+%
+  \raise\y@v\hbox{\mxsps\char\n@iv}}}
+%
+% y@i   =complete length
+% y@ii  =height of linechar
+% y@iii =current height
+% y@iv  =current width
+% y@v   =height of ending line
+% y@vii =width of left segment of bracket
+% y@viii=y@vii + width of opening
+% y@ix  =adjustment register
+%
+% n@iii=slope
+% n@iv =(number of char for hooks)
+% n@v  =slope (number of linechar)
+
+\def\X@bkt#1#2#3{\y@v#2\noteskip \advance\y@v\wn@width
+  \inhgetn@i#1\relax \rlap{\kernm\p@ne\qn@width\v@rline\n@i\y@v{#3}}}
+
+\def\uptuplet{\n@iv22\X@bkt}
+\def\downtuplet{\n@iv21\X@bkt}
 
 %\check
 
@@ -4339,6 +4430,8 @@
 \def\pp{{\ppff p\p@kern p}}
 \def\ppp{{\ppff p\p@kern p\p@kern p}}
 \def\pppp{{\ppff p\p@kern p\p@kern p\p@kern p}}
+\def\sfz{{\ppff s\p@kern f\f@kern z}}              % T116
+\def\sfzp{{\ppff s\p@kern f\f@kern z\p@kern p}}    % T116
 
 %%% spacings
 
@@ -4362,6 +4455,7 @@
 %   Otherwise, over/underfull boxes will occur on rescaled (pass 2) material
 %%
 
+\def\qqsk{\off{\qu@rt\@l@mskip}}  % T116  RDT
 \def\hqsk{\off{\h@lf\@l@mskip}}
 \def\qsk{\off\@l@mskip}
 
@@ -4399,6 +4493,10 @@
   \def\NOTEsp{\vnotes9.52\elemskip}%       1th
   \def\NOTES{\vnotes11.32\elemskip}%       1th
 }%
+
+\def\nnotes{\vnotes1.6\elemskip}    % T116  RDT (corrected 2015-03-31)
+\def\nnnotes{\vnotes1.28\elemskip}  % T116  RDT (corrected 2015-03-31)
+
 \arithmeticskipscale
 
 \def\scale#1{\def\scalenoteskip{#1}}
@@ -4458,6 +4556,10 @@
 \def\ccharnote{\let\@Ti\lrlap \C@ch}
 \def\hcharnote{\let\@Ti\hard@box \C@ch}
 \def\charnote#1#2{\zcharnote{#1}{#2}\sk}
+
+\def\zcn{\zcharnote}  % T116
+\def\ccn{\ccharnote}
+\def\lcn{\lcharnote}
 
 \def\C@ch#1#2{\check@staff\inhgetn@i#1\relax\pl@base\raise\y@i\@Ti{#2}\fi}
 
@@ -4539,7 +4641,7 @@
 % text in the middle
   \ifx\@text\@ne \ifnum\n@vi=\@ne \y@iii\p@ \else\y@iii-\p@ \fi
     \advance\y@iii\h@lf\y@v \kernm\h@lf\y@i\raise\y@iii\vbox\@to\z@{%
-    \ifnum\n@vi=\@ne \vss \fi\lrlap\txt\ifnum\n@vi=\@ne \else\vss \fi}\fi}%
+    \ifnum\n@vi=\@ne \vss \fi\lrlap{\txtfont\txt}\ifnum\n@vi=\@ne \else\vss \fi}\fi}%
   \let\@hook\empty \let\@text\empty}
 %
 % y@i  =complete length
@@ -4718,6 +4820,54 @@
   \ifx\empty#3\else\@akkoladen#3\@nd\fi}
 \def\incr@akk@count{%
   \count@\akk@count\relax \advance\count@\@ne \edef\akk@count{\the\count@}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  This is MusiXTex code for multiple left curly brackets              %
+%                                                                      %
+%         submitted by Mthimkhulu Molekwa                              %
+%                   to the mutex list on 19 May 1999                   %
+%                                                                      %
+%                                                                      %
+% usage:                                                               %
+%   \curlybrackets{<instrument1lower><instrument1upper>                %
+%                  <instrument2lower><instrument2upper>                %
+%                  ...                                                 %
+%                  <instrument_n_lower><instrument_n_upper>            %
+%                 }                                                    %
+%                                                                      %
+%                                                                      %
+%                                                                      %
+%  This version corrected 07/23/2007 by Rainer Dunker to make it       %
+%  insensitive to changes in \interstaff by PMX                        %
+%                                                                      %
+%  Added to musixtex.tex T116 by RDT                                   %
+%                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\let\origin@lwrit@staffs\writ@staffs
+\def\writ@staffs{%
+  \origin@lwrit@staffs
+  \ifx\br@cks\empty\else\expandafter\@bracks\br@cks\ende\fi}
+
+\let\br@cks\empty
+\def\curlybrackets#1{\def\br@cks{#1}}
+
+\def\@bracks#1#2#3\ende{%
+    \ifnum #1<#2 %=========================== inserted by D.S.(?)
+      \noinstrum@nt=#1\s@l@ctinstr\b@zi\altitude
+      \noinstrum@nt=#2\s@l@ctinstr\b@zii\altitude
+      \advance\b@zii-\b@zi
+      \C@Inter  
+      \advance\b@zii\nblines\internote
+      \advance\b@zii\nblines\internote
+      \advance\b@zii-2\internote
+      \n@v\b@zii \sp@pt\tw@ \advance\n@v\@cxxviii
+      \divide\b@zii\tw@
+      \advance\b@zi\b@zii
+      \raise\b@zi\rlap{\mxsps\char\n@v\kern\instrum@in@group}%
+    \fi %==================================== inserted by D.S.(?)
+    \ifx\empty#3\else\@bracks#3\ende\fi}
 
 
 %%

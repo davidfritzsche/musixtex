@@ -1,0 +1,723 @@
+\ifx\mxversion\undefined
+  \input musixtex
+  \input musixcpt
+  \input musixsty
+\fi
+
+%
+\title{Concerto pour hautbois --- adagio}
+\fulltitle{Concerto pour hautbois --- adagio}
+\othermention{Transcription pour hautbois, fl\^{u}te et orgue\\{\bf
+ \ifFlute Partition fl\^{u}te\fi
+ \ifOboe Partition hautbois\fi
+ \ifOrgue Partition orgue\fi}
+}
+\shorttitle{Concerto pour hautbois --- adagio}
+\author{Benedetto MARCELLO\\Transcription Daniel TAUPIN}
+\shortauthor{B. Marcello, D. Taupin}
+\maketitle
+%
+\parindent 13mm
+\def\interfacteur{10} % was 9
+\def\OrgelManual{%
+  \global\cleftoksi={{6}{0}{0}{0}}%
+  \def\interinstrumentii{0pt}%
+  \def\interinstrumenti{0pt}%
+  \nbporteesi=2\relax%
+}
+\def\OrgelPedal{%
+  \global\cleftoksi={{6}{6}{0}{0}}%
+  \def\interinstrumentii{0pt}%
+  \def\interinstrumenti{0pt}%
+  \nbporteesi=3\relax%
+}
+\ifOrgue
+  \def\nbinstruments{3}
+  \global\cleftoksi={{6}{0}{0}{0}}%
+  \global\cleftoksii={{0}{0}{0}{0}}%
+  \global\cleftoksiii={{0}{0}{0}{0}}%
+  \nbporteesi=3\relax%
+  \nbporteesii=1\relax%
+  \nbporteesiii=1\relax%
+  \def\instrumenti{Orgue}%
+  \def\instrumentii{Fl\^{u}te}%
+  \def\instrumentiii{Hautbois}%
+  \def\staffspacingii{0.64}\def\staffspacingiii{0.64}%
+\else
+  \def\nbinstruments{2}
+  \global\cleftoksi={{0}{0}{0}{0}}%
+  \global\cleftoksii={{0}{0}{0}{0}}%
+  \nbporteesi=1\relax%
+  \nbporteesii=1\relax%
+  \def\instrumenti{Fl\^{u}te}%
+  \def\instrumentii{Hautbois}%
+  \ifFlute\def\staffspacingi{1.0}\else\def\staffspacingi{0.64}\fi
+  \ifOboe\def\staffspacingiii{1.0}\else\def\staffspacingii{0.64}\fi%
+  \def\everystaff{\vrule width 0pt depth 8mm\relax}%
+\fi
+
+\ifOboe\def\interinstrumenti{2\Interligne}\fi
+%
+\signaturegenerale{-3}\relax
+%\check
+\def\doubler{\multiply\noteskip by 2\relax}%
+%
+% formes frequentes
+%
+\def\Pause{\sk\sk\qsk\pause}%
+%
+ \def\twobbu#1#2{\Ibbu0{#1}{#2}1\qh0{#1}\tqh0{#2}}
+ \def\twobbl#1#2{\Ibbl0{#1}{#2}1\qb0{#1}\tqb0{#2}}
+%
+ \def\fourbbu#1#2#3#4{\Ibbu0{#1}{#4}3\qh0{#1#2#3}\tqh0{#4}}
+ \def\fourbbl#1#2#3#4{\Ibbl0{#1}{#4}3\qb0{#1#2#3}\tqb0{#4}}
+%
+ \def\fourlll#1#2#3#4{\Ibbl0{#1}{#4}3%
+\isluru0{#1}\qb0{#1}\tslur0{#2}\qb0{#2}\isluru0{#3}\qb0{#3}%
+\tslur0{#4}\tqb0{#4}}%
+%
+ \def\fourllu#1#2#3#4{\Ibbu0{#1}{#4}3%
+\islurd0{#1}\qh0{#1}\tslur0{#2}\qh0{#2}\islurd0{#3}\qh0{#3}%
+\tslur0{#4}\tqh0{#4}}%
+%
+ \def\twobu#1#2{\Ibu0{#1}{#2}1\qh0{#1}\tqh0{#2}}
+ \def\twobl#1#2{\Ibl0{#1}{#2}1\qb0{#1}\tqb0{#2}}
+%
+ \def\sixbu#1#2#3#4#5#6{\Ibu0{#1}{#2}1\qh0{#1}\qh0{#2}\qh0{#3}\qh0{#4}\qh0{#5}\tqh0{#6}}
+ \def\sixbl#1#2#3#4#5#6{\Ibl0{#1}{#2}1\qb0{#1}\qb0{#2}\qb0{#3}\qb0{#4}\qb0{#5}\tqb0{#6}}
+%
+ \def\twolbu#1#2{\Ibu0{#1}{#2}1\islurd0{#1}\qh0{#1}\tslur0{#2}\tqh0{#2}}
+ \def\twolbl#1#2{\Ibl0{#1}{#2}1\isluru0{#1}\qb0{#1}\tslur0{#2}\tqb0{#2}}
+
+%
+%\check
+%
+\catcodesmusic
+\def\org#1|#2&{\ifOrgue \ifnum\nbporteesi=3#1|\fi #2&\relax\fi}
+%
+\generalmeter{\meterfrac 34}%
+\sepbarrules
+%
+\debutmorceau
+%\check
+%
+\notes\org\relax
+ |&&\zcharnote{w}{\kern -20mm\moyen Adagio
+\bf(\metron{\cu}{84})}\enotes
+%
+%\check
+%
+% mesure 1
+\NOTes\org\Pause\relax
+ |\Pause\relax
+ |\ibl0j0\qb0{jjjjj}\tqb0j\relax
+ &\ifFlute\zcharnote N{\sl (orgue solo)}\fi
+  \ifFlute\tinynotesize\ibl0j0\qb0{jjjjj}\tqb0j\relax
+  \else\Pause
+  \fi\relax
+ &\ifOboe\zcharnote N{\sl (orgue solo)}\fi
+  \ifOboe\tinynotesize\ibl0j0\qb0{jjjjj}\tqb0j\relax
+  \else\Pause\fi\enotes
+% mesure 2
+\barre\NOTes\org\Pause
+ |\Pause\relax
+ |\ibl0j0\qb0j\qb0j\qb0j\qb0j\qb0j\tqb0j\relax
+ &\ifFlute\zcharnote N{\sl fl\^{u}te}\fi\ibl0k0\qb0k\qb0k\qb0k\qb0k\qb0k\tqb0k\relax
+ &\ifOboe\tinynotesize\ibl0j0\qb0j\qb0j\qb0j\qb0j\qb0j\tqb0j\relax
+  \else\Pause\fi\enotes
+% mesure 3
+\barre\NOTes\org\hup G\relax
+ |\roff{\pt g}\rh g\hup f\relax
+ |\na i\ibl0i0\qb0{iiiii}\tqb0i\relax
+ &\ibl0k0\qb0{kkkkk}\tqb0k\relax
+ &\ifOboe\tinynotesize\na i\ibl0i0\qb0{iiiii}\tqb0i\relax
+  \else\Pause\fi\enotes
+% mesure 4
+\def\motif{\zq j\qh0 l}%
+\barre\NOTes\org\Ibu1CJ1\qh1C\itenl5J\tqh1J\relax
+ |\itenl1e\zhp c\zhp g\hlp e\relax
+ |\ibl3j0\qb3{jj}\relax
+ &\ibl4l0\qb4{ll}\relax
+ &\ifOboe\zcharnote N{\sl hautbois}\fi\twolbl jl\enotes
+\NOTes\org\tten5\hu J\relax
+ |\relax
+ |\qb3{jj}\relax
+ &\qb4{ll}\relax
+ &\twolbl ln\enotes
+\NOTes\org\relax
+ |\relax
+ |\qb3j\relax
+ &\qb4l\relax
+ &\isluru5n\ibl5n0\qb5n\enotes
+\NOtes\org\relax
+ |\relax
+ |\tqb3j\relax
+ &\tqb4l\relax
+ &\nbbl5\qb5o\tslur5n\tqb5n\enotes
+% mesure 5
+\barre\NOTes\org\hup F\relax
+ |\tten1\zql e\roff{\hup f}\sk\ql d\sk\ql c\relax
+ |\ibu3h0\qh3{hhhhh}\tqh3h\relax
+ &\ibl4j0\qb4{jjjjj}\tqb4j\relax
+ &\mordant q\hl o\sk\sk\sk\soupir\enotes
+% mesure 6
+\barre\temps\NOTes\org\hup I\relax
+ |\zhl b\hup f\relax
+ |\ibu3h0\qh3{hh}\relax
+ &\ibl4k0\qh4{kk}\relax
+ &\twolbl ik\enotes
+\NOTes\org\relax
+ |\relax
+ |\qh3{h}\relax
+ &\qh4k\relax
+ &\Ibl5kl2\isluru5k\qb5k\enotes
+\NOtes\org\relax
+ |\relax
+ |\qh3h\relax
+ &\qb4k\relax
+ &\nbbl5\qb5m\tslur5l\tqb5l\enotes
+\NOtes\org\relax
+ |\itenl2d\ql d\relax
+ |\qb3h\sk\tqh3h\relax
+ &\qb4k\sk\tqb4k\relax
+ &\Ibbl5mn3\isluru5m\qb5{mno}\tslur5n\tqb5n\enotes
+% mesure 7
+\barre
+\NOTes\org\hup E\relax
+ |\tten2\qu d\sk\qu c\sk\qu b\relax
+ |\sixbu gggggg\relax
+ &\sixbu iiiiii\relax
+ &\doubler\mordant p\hl n\sk\soupir\enotes
+% mesure 8
+\def\motif{\zq h\qh0j}%
+\barre\NOtes\org\hup H\relax
+ |\doubler\doubler\zhl a\hup e\sk\itenl2c\qu c\relax
+ |\doubler\sixbu hhhhhh\relax
+ &\doubler\sixbl jjjjjj\relax
+ &\isluru0h\fourbbl hiji\fourbbl jklk\rlap{\sk\sk\sk\tslur0m}\fourbbl lmnm\enotes
+% mesure 9
+\def\motif{\zq f\qh0h}%
+\def\motifa{\zq f\qh0i}%
+\barre\NOTes\org\hup K\relax
+ |\doubler\tten2\qu c\qu b\qu a\relax
+ |\ibu0h0\motif\tbu0\motif\ibu0i0\motifa\motifa\motifa\tbu0\motifa\relax
+ &\sixbl kkkkkk\relax
+ &\doubler\mordant o\hl m\sk\soupir\enotes
+% mesure 10
+\barre
+\Notes\org\Ibu1NG4\qh1N\sk\sk\sk\itenl1G\tqh1G\relax
+ |\hup f\relax
+ |\doubler\doubler\bigna i\ibu3i0\qh3{ii}\relax
+ &\doubler\doubler\ibl4k0\qb4k\qb4k\relax
+ &\islurd5f\Ibbbu5gk7\qh5{g^fgh=ihi}\tslur5i\tqh5j\enotes
+\Notes\org\tten1\hu G\relax
+ |\relax
+ |\doubler\doubler\qh3{ii}\relax
+ &\doubler\doubler\qb4{kk}\relax
+ &\isluru5l\Ibbbl0jj7\qb0{kijkn=ml}\tslur5l\tqb0k\enotes
+\NOtes\org\relax
+ |\relax
+ |\doubler\qh3i\tqh3i\relax
+ &\doubler\qb4k\tqb4k\relax
+ &\isluru5l\Ibbl0kl3\qb0{klm}\tslur5m\tqb0l\enotes
+% mesure 11
+%\check
+\def\motif{\zq e\qh3 g}%
+\barre\notes\org\Ibu1CJ5\qh1C\relax
+ |\hup c\relax
+ |\ibu3g0\motif\relax
+ &\ibl4j0\qb4j\relax
+ &\isluru5l\ibbbbl5l0\qb5{lkl}\tbbbbl5\tbbbl5\tbbl5\qb5m\enotes
+\NOtes\org\relax
+ |\relax
+ |\relax
+ &\relax
+ &\tbl5\tslur5l\qbp5l\enotes
+\NOTes\org\itenl1J\tqh1J\relax
+ |\relax
+ |\motif\relax
+ &\qb4j\relax
+ &\enotes
+\NOtes\org\tten1\itenl1J\hu J\relax
+ |\relax
+ |\motif\sk\motif\relax
+ &\qb4j\sk\qb4j\relax
+ &\qsoupir\isluru5n\Ibbl5ln2\qb5{lo}\tslur5o\tqb5n\enotes
+\NOtes\org\relax
+ |\relax
+ |\motif\sk\tbu3\motif\relax
+ &\qb4j\sk\tqb4j\relax
+% &\Ibbl5ol3\qb5{omm}\tqb5l\enotes
+ &\fourlll omml\enotes
+% mesure 12
+%\check
+\barre
+\NOTes\org\tten1\qu J\relax
+ |\roff{\zql c}\hu d\relax
+ |\ibu3f0\qh3f\tqh3f\relax
+ &\ibu4h0\qh4h\tqh4h\relax
+ &\mordant p\ql k\sk\enotes
+\NOtes\org\itenl1I\hu I\relax
+ |\hl b\relax
+ |\ibu0g0\qh0g\sk\tqh0g\relax
+ &\ibu0i0\qh0i\sk\tqh0i\relax
+ &\qsoupir
+ \isluru5m\Ibbl5km2\qb5{kn}\tslur5m\tqb5m\enotes
+\NOtes\org\relax
+ |\qu e\relax
+ |\ibu3g0\qh3g\sk\relax
+ &\ibu4j0\qh4j\sk\relax
+ &\isluru5n\ibbl5k0\qb5n\qbp5l\enotes
+\Notes\org\relax
+ |\relax
+ |\tqh3g\relax
+ &\tqh4j\relax
+ &\sk\nbbbl5\qb5{kj}\tslur5k\tqb5k\enotes
+% mesure 13
+\barre
+\notes\org\tten1\qu I\relax
+ |\roff{\zql b}\hu c\relax
+ |\ibu3e0\qh3e\relax
+ &\ibu4g0\qh4g\relax
+ &\isluru5k\ibbbbl1j0\qb1{j=ij}\relax
+\tbbbbl1\tbbbl1\tbbl1\qb1k\enotes
+\NOtes\org\relax
+ |\relax
+ |\relax
+ &\relax
+ &\tslur5k\tbl1\qbp1j\enotes
+\NOTes\org\relax
+ |\relax
+ |\tqh3e\relax
+ &\tqh4g\relax
+ &\enotes
+\temps\Notes\org\hu H\relax
+ |\hl a\relax
+ |\ibu0f0\qh0f\sk\sk\sk\tqh0f\relax
+ &\ibu0h0\qh0h\sk\sk\sk\tqh0h\relax
+ &\qsoupir\sk\isluru5k\ibbbl1j0\qb1j\tbbl1\qb1l\nbbbl1\qb1{kjk}\tslur5l\tqb1l\enotes
+\temps\Notes\org\relax
+ |\qu d\relax
+ |\ibu0f0\qh0f\sk\sk\sk\tqh0f\relax
+ &\ibu0h0\qh0h\sk\sk\sk\tqh0h\relax
+ &\isluru5n\ibbbl1k0\qb1{mnlmkl}\relax
+\triolet n\qb1{jk}\tslur5k\tqb1j\enotes
+% mesure 14
+%\check
+\def\motif{\rq g\qh3f}%
+\barre
+\NOTes\org\hup G\relax
+ |\hup b\relax
+ |\zhlp d\ds\ibu3g0\motif\motif\motif\motif\tbu3\motif
+ &\ds\ibu0i0\qh0{=iiii}\tqh0i\relax
+ &\bigna i\hl i\sk\sk\sk\soupir\enotes
+% mesure 15
+\barre\NOTes\org\hup J\relax
+ |\hup c\relax
+ |\bigna e\ibu0g0\zq e\qh0g\zq e\tqh0g\relax
+ &\twobu jg\relax
+ &\bigna l\twolbl ln\enotes
+\NOTes\org\relax
+ |\relax
+ |\ibu0g0\zq e\qh0g\zq e\tqh0g\relax
+ &\twobu gg\relax
+ &\twolbl nl\enotes
+\NOtes\org\relax
+ |\relax
+ |\doubler\twobu ee\relax
+ &\doubler\twobl jj\relax
+ &\fl i\isluru5m\ibbl1i0\qb1{inl}\tslur5m\tqb1i\enotes
+% mesure 16
+\barre\NOTes\org\hlp M\relax
+ |\qu c\relax
+ |\ibu3g0\qh3g\relax
+ &\ibl4j0\qb4j\relax
+ &\ibu5k0\itenl5i\qh5i\enotes
+\Notes\org\relax
+ |\relax
+ |\tqh3g\relax
+ &\tqb4j\relax
+ &\tten5\nbbbu5\islurd5i\qh5{ihj}\tslur5i\tqh5i\enotes
+\temps\NOTes\org\relax
+ |\hu f\relax
+ |\ibu0h0\qh0{hhh}\tqh0h\relax
+ &\ibl0j0\qb0{jjj}\tqb0j\relax
+ &\qu h\sk\soupir\enotes
+% mesure 17
+\def\motif{\zq h\qh0 k}%
+\barre
+\NOtes\org\hup K\relax
+ |\hup {^f}\relax
+ |\ibu3h0\na h\qh3h\sk\qh3h\relax
+ &\ibl4k0\qb0k\sk\qb0k\relax
+ &\ibbl1m0\sh m\qb1{m=om}\tqb1n\enotes
+\Notes\org\relax
+ |\relax
+ |\qh3h\sk\sk\sk\qh3h\sk\sk\sk\relax
+ &\qb4k\sk\sk\sk\qb4k\sk\sk\sk\relax
+ &\Ibbbl1oh7\qb1{onm=lkji}\tqb1{=h}\enotes
+\Notes\org\relax
+ |\relax
+ |\qh3h\sk\sk\sk\sk\tqh3h\sk\sk\sk\relax
+ &\qb4k\sk\sk\sk\sk\tqb4k\sk\sk\sk\relax
+ &\Ibbbu1dl9\qh1{d=e^fghij}\pointdurgue e\qhp1k\qsk\tbbbbu1\tqh1j\enotes
+% mesure 18
+ \barre
+\NOTes\org\hup G\relax
+ |\qu d\relax
+ |\twobu gg\relax
+ &\twobl kk\relax
+ &\twolbl ji\enotes
+\NOTes\org\relax
+ |\itenl2e\hu e\relax
+ |\ibu3g0\qh3{ggg}\tqh3g\relax
+ &\ibl4i0\qb4{iii}\tqb4i\relax
+ &\bigfl l\twobl lk\mordant n\itenu5l\ql l\enotes
+% mesure 19
+\barre\NOTes\org\hl M\relax
+ |\tten2\qu e\relax
+ |\ibu3h0\qh3{_h}\relax
+ &\ibl4j0\qh4j\relax
+ &\tten5\isluru5m\ibl5l0\qb5l\enotes
+\NOtes\org\relax
+ |\relax
+ |\tqh3h\relax
+ &\tqb4j\relax
+ &\nbbl5\qb5m\tqb5l\enotes
+\NOTes\org\relax
+ |\hu d\relax
+ |\ibu3f0\qh3f\relax
+ &\ibu4h0\qh4h\relax
+ &\ibl5k0\qb5k\enotes
+\NOtes\org\relax
+ |\relax
+ |\qh3f\relax
+ &\qh4h\relax
+ &\nbbl5\qb5l\tslur5k\tqb5j\enotes
+\NOTes\org\qu F\relax
+ |\relax
+ |\qh3f\tqh3f\relax
+ &\qh4h\tqh4h\relax
+ &\itenu5k\mordant m\ql k\enotes
+% mesure 20
+\barre
+\NOtes\org\hu E\relax
+ |\qu d\relax
+ |\doubler\twobu gg\relax
+ &\doubler\twobu ii\relax
+ &\tten5\ibbl0k0\rlap{\sk\isluru5n}\qb0{knl}\tqb0k\enotes
+\temps\NOtes\org\relax
+ |\hu c\relax
+ |\ibu3e0\qh3{e*e}\relax
+ &\ibu4g0\qh4{g*g}\relax
+ &\ibbl0i0\qb0{jih}\tslur5i\tqb0i\enotes
+\NOTes\org\ql L\relax
+ |\relax
+ |\qh3e\sk\tqh3e\relax
+ &\qh4g\sk\tqh4g\relax
+ &\upperna j\mordant o\itenu5j\ql j\enotes
+% mesure 21
+\barre
+\NOtes\org\hup K\relax
+ |\hu b\relax
+ |\doubler\twobu ff\relax
+ &\doubler\twobu fh\relax
+ &\ibbl5j0\tten5\qb5j\isluru5k\qb5{_i}\qb5k\multnoteskip{0.71}\nbbbl5\qb5m\tqb5l\enotes
+\Notes\org\relax
+ |\relax
+ |\ibu3d0\qh3d\sk\sk\sk\qh3d\relax
+ &\ibu4f0\qh4f\sk\sk\sk\qh4f\relax
+ &\ibbbl5i0\qb5{kjihijk}\tqb5l\enotes
+\NOtes\org\relax
+ |\qu a\relax
+ |\qh3d\sk\tqh3d\relax
+ &\qh4f\sk\tqh4f\relax
+ &\Ibbl5mi3\qb5{mk}\relax
+\pince l\qb5j\enotes
+\NOtes\org\relax
+ |\relax
+ &\relax
+ &\tslur5k\itenu5i\tqb5i\enotes
+% mesure 22
+\barre
+\Notes\org\hup J\relax
+ |\qu N\relax
+ |\ibu3e0\qh3e\sk\sk\sk\tqh3e\relax
+ &\ibu4g0\qh4g\sk\sk\sk\tqh4g\relax
+ &\tten5\ibbbl1i0\rlap{\sk\isluru5m}\qb1{ijj}\tqb1i\Ibbbu1ig3\qh1{ihh}\tqh1g\enotes
+\Notes\org\relax
+ |\qu e\relax
+ |\ibu3g0\qh3g\sk\sk\sk\tqh3g\relax
+ &\ibu4j0\qh4j\sk\sk\sk\tqh4j\relax
+ &\ibbbu1g0\qh1{ghh}\tqh1g\Ibbbu1ge3\qh1{gff}\tqh1e\enotes
+\temps\NOtes\org\relax
+ |\qu e\relax
+ |\ibu3f0\qh3f\sk\tqh3f\relax
+ &\ibu4h0\qh4h\sk\zq f\tqh4h\relax
+ &\ibbu5k0\tslur5m\rlap{\sk\isluru5r}\qh5{flk}\tqh5j\enotes
+% mesure 23
+\barre
+\NOTes\org\hu I\relax
+ |\hu d\relax
+ |\ibu3f0\qh3{fff}\relax
+ &\ibu4h0\qh4{hhh}\relax
+ &\tslur5n\itenu5k\ql k\sk\tten5\Ibl5ki3\qbp5k\enotes
+\NOtes\org
+ |\relax
+ |\tqh3f\relax
+ &\tqh4h\relax
+ &\sk\tbbl5\tqb5i\enotes
+\NOTes\org\qu J\relax
+ |\qu c\relax
+ |\twobu ee\relax
+ &\twobu gg\relax
+ &\itenu5l\ql l\enotes
+% mesure 24
+\barre
+\NOTes\org\qu{H}\relax
+ |\relax
+ |\ibu3h0\zq e\qh3h\relax
+ &\ql j\relax
+ &\tten5\ibl5i0\itenu5l\qb5l\enotes
+\Notes\org\relax
+ |\relax
+ |\zq e\tqh3h\relax
+ &\relax
+ &\tten5\rlap{\sk\isluru5m}\nbbbl5\qb5{ljk}\tqb5l\enotes
+\NOTes\org\hu I\relax
+ |\hpause
+ |\ibu0f0\zq d\qh0f\zq d\qh0f\zq d\qh0f\zq e\tqh0g\relax
+ &\hl i\relax
+ &\ifOboe\rlap{\tinynotesize\ibl0d0\zq d\qb0f\zq d\qb0f\zq d\qb0f\loff{\zq e\tqb0g}\relax}\fi
+  \qlp m\sk\sk\tslur5m\cl l\enotes
+% mesure 25
+\barre\NOTes\org\hlp M\relax
+ |\relax
+ |\zhlp f\ibu3h0\qh3{hhh}\relax
+ &\Ibl4hk6\qb4h\qb4{_kk}\relax
+ &\Uptext{\pp}\bigfl k\qlp k\enotes
+\NOtes\org\relax
+ |\pause
+ |\doubler\qh3{hh}\tqh3h\relax
+ &\doubler\qb4{kk}\tqb4k\relax
+ &\ibbl5m0\isluru5n\qb5{mnonm}\tslur5m\tqb5l\enotes
+% mesure 26
+\barre
+\NOTes\org\hlp N\relax
+ |\relax
+ |\zhlp e\ibu3g0\qh3{gg}\relax
+ &\ibu4i0\qh4{ii}\relax
+ &\itenu5k\ql{_k}\enotes
+\NOtes\org\relax
+ |\sk\pause
+ |\doubler\qh3{ggg}\tqh3g\relax
+ &\doubler\qh4{iii}\tqh4i\relax
+ &\tten5\isluru5m\Ibbl1ko3\qb1{kln}\tqb1{o}\Ibbl1pk3\qb1{pnl}\tslur5m\tqb1k\enotes
+% mesure 27
+\barre
+\NOTes\org\hl a\relax
+ |\hu e\relax
+ |\ibu3h0\qh3h\relax
+ &\ibl4j0\qb4j\relax
+ &\bigfl k\ibl1j0\isluru5l\itenu1k\qb1k\enotes
+\Notes\org\relax
+ |\relax
+ |\qh3h\relax
+ &\qh4j\relax
+ &\tten1\nbbbl1\qb1{kjl}\tqb1k\enotes
+\NOtes\org\relax
+ |\relax
+ |\qh3h\sk\tqh3h\relax
+ &\qb4j\sk\tqb4j\relax
+ &\Ibbl1jn3\qb1{jlm}\tqb1n\enotes
+\NOtes\org\qu H\relax
+ |\itenl2f\qu f\relax
+ |\ibu3h0\qh3h\sk\tqh3h\relax
+ &\ibl4j0\qb4j\sk\tqb4j\relax
+ &\Ibbl1ol3\qb1{onm}\tslur5m\tqb1l\enotes
+% mesure 28
+\barre\NOTes\org\hu G\relax
+ |\tten2\hu f\relax
+ |\ibu3g0\qh3{gg}\relax
+ &\ibl4i0\bigna i\qb4{ii}\relax
+ &\itenu5m\ql m\enotes
+\NOtes\org\relax
+ |\relax
+ |\qh3g\sk\tqh3g\relax
+ &\qb4i\sk\tqb4i\relax
+ &\tten5\ibbl5h0\rlap{\sk\isluru5j}\qb1{mgh}\tqb5{=i}\enotes
+\NOtes\org\qu{H}\relax
+ |\itenl2f\qu f\relax
+ |\itenu3h\qu h\relax
+ &\itenu4j\ql j\relax
+ &\Ibbl1jk3\qb1{j=kl}\tqb1k\enotes
+% mesure 29
+\barre
+\NOtes\org\qu F\relax
+ |\tten2\qu f\relax
+ |\doubler\tten3\twobu hh\relax
+ &\doubler\tten4\twobl jk\relax
+ &\ibbl5l0\qb5{lom}\tslur5m\tqb5k\enotes
+\temps\NOTes\org\hu G\relax
+ |\qup d\sk\sk\cu e\relax
+ |\ibu0g0\qh0{ggg}\tqh0g\relax
+ &\qlp{=i}\sk\sk\cl j\relax
+ &\ifOboe\rlap{\tinynotesize\ibl0g0\qb0{ggg}\tqb0g\relax}\fi
+  \isluru5k\qlp{=i}\sk\sk\tslur5l\cu j\enotes
+% mesure 30
+%\check
+\barre
+\NOTes\org\hup{H}\relax
+ |\hup c\relax
+ |\ibu3h0\zq f\qh3h\zq f\qh3h\zq f\qh3h\zq f\qh3h\relax
+ &\ibl4j0\qb4{jjjj}\relax
+ &\itenl5f\hu f\enotes
+\NOtes\org\relax
+ |\relax
+ |\zq f\qh3h\sk\zq f\tqh3h\relax
+ &\qb4j\sk\tqb4j\relax
+ &\tten5\rlap{\sk\islurd5c}\Ibbu5fe3\qh5{fcd}\tqh5e\enotes
+% mesure 31
+%\check
+\barre
+\NOtes\org\hu G\relax
+ |\hu d\sk
+ |\doubler\ibu3g0\qh3{gggg}\relax
+ &\doubler\bigna i\ibl4i0\qb4{iii}\tqb4i\relax
+ &\Ibbu5fe3\qh5{fed}\tslur5d\tqh5e\islurd5e\Ibbu5fg3\qh5{fgh}\tslur5f\tqh5g\enotes
+\Notes\org\ql L\relax
+ |\qu c\relax
+ |\doubler\doubler\qh3g\tqh3g\relax
+ &\doubler\doubler\twobl jj\relax
+ &\islurd5f\Ibbbu1gi7\qh1{gfefghi}\tslur5g\tqh1{=i}\enotes
+% mesure 32
+%\check
+\barre
+\NOtes\org\bigaccid\zql{a}\relax
+ |\qu c\relax
+ |\ibu0f0\qh0f\sk\tqh0f\relax
+ &\doubler\twobu hh\relax
+ &\Ibl5jk3\qbp5j\sk\sk\tbbl5\tqb5k\enotes
+\NOTes\org\hl N\relax
+ |\qup d\sk\sk\cu e\relax
+ |\twobu ff\twobu gg\relax
+ &\qlp{=i}\sk\sk\cl j\relax
+ &\ifOboe\rlap{\tinynotesize\twobl ff\twobl gg\relax}\fi
+  \isluru5l\qlp k\sk\sk\tslur5l\cu j\enotes
+% mesure 33
+%\check
+\barre\NOTes\org\hu K\relax
+ |\zhu{^f}\hlp d\relax
+ |\na h\ibu3h0\qh3{hhh}\tqh3h\relax
+ &\ibl4j0\qb4{jjj}\tqb4j\relax
+ &\bigsh m\isluru5n\hl m\enotes
+\NOTes\org\qu G\relax
+ |\raise 2\internote\soupir
+ |\twobu gg\relax
+ &\bigna i\twobu ii\relax
+ &\tslur5o\isluru5o\twobl nk\enotes
+% mesure 34
+%\check
+\barre\NOTes\org\Ibl1JG5\qb1J\relax
+ |\qu e\relax
+ |\ibu3g0\qh3g\relax
+ &\ibl4j0\qb4j\relax
+ &\tslur5m\Ibl5lj2\qb5l\enotes
+\NOtes\org\qb1L\relax
+ |\relax
+ |\tqh3g\relax
+ &\tqb4j\relax
+ &\nbbl5\qb5k\tqb5j\enotes
+\NOTes\org\qb1{NMN}\tqb1G\relax
+ |\hu d\relax
+ |\hu g\relax
+ &\na i\qup i\sk\sk\cu j\relax
+ &\zcharnote o{\Trille{1.8\noteskip}}\na i\ql i\sk\rlap{\isluru5j\sk\tslur5k}\twobl ij\enotes
+ \ifOrgue\cleftoksi={{6}{6}{0}{0}}\changeclefs\fi
+% mesure 35
+%\check
+\barre
+\NOTes\org\hup J\relax
+ |\rlap{\sk\itenl2N}\twobl cN\relax
+ |\Ibu3ge1\zq e\qh3g\zq c\tqh3e\relax
+ &\Ibl4jl5\qh4{jl}\relax
+ &\hlp j\enotes
+\NOTes\org\relax
+ |\tten2\hl N\relax
+ |\ibu3e0\zq c\qh3e\zq c\qh3e\zq c\qh3e\zq c\tqh3e\relax
+ &\qb4{lll}\tqb4l\enotes
+% mesure 36
+%\check
+\barre\NOTes\org\hup G\relax
+ |\hlp N\relax
+ |\ibu3e0\zq c\qh3e\rq d\qh3c\rq d\qh3c\rq d\qh3c\zq
+{_b}\qh3d\zq b\tqh3d\relax
+ &\Ibl4lk5\qb4{lkkkk}\tqb4k\relax
+ &\sk\sk\qsk\pause\enotes
+% mesure 37
+%\check
+\barre\NOTes\org\hup J\relax
+ |\hlp N
+ |\na e\ibu3e0\relax
+\zq b\qh3 e\zq b\qh3 e\zq b\qh3 e\zq b\qh3 e\zq b\qh3 e\zq b\tqh3 e\relax
+ &\na l\ibl4l0\qb4{lllll}\tqb4l\relax
+ &\sk\sk\qsk\pause\enotes
+% mesure 38
+%\check
+\barre
+\NOTes\org\hlp M\relax
+ |\zql b\relax
+ |\ibu3f0\zq c\qh3f\zq c\qh3f\relax
+ &\ibl4m0\qb4m\qb4m\enotes
+\NOTes\org\relax
+ |\itenu2a\ql a\relax
+ |\zq c\qh3f\zq c\tqh3f\relax
+ &\qb4m\tqb4m\relax
+ &\sk\pause\enotes
+\temps\NOTes\org\relax
+ |\tten2\ql a\relax
+ |\zq {c}\rq f\qu e\relax
+ &\ql m\sk
+ &\enotes
+% mesure 39
+%\check
+\barre
+\NOTes\org\hl N\relax
+ |\na b\ibl2b0\zq b\qb2d\zq b\qb2d\zq b\qb2d\zq b\tqb2d\relax
+ |\qup f\sk\sk\Ibu3gc2\qh3g\relax
+ &\qlp m\sk\sk\Ibl4nj2\qb4n\relax
+ &\sk\sk\qsk\pause\enotes
+\NOTes\org\ql a\relax
+ |\ql c\relax
+ |\qh3e\tqh3d\relax
+ &\qb4l\tqb4k\enotes
+% mesure 40
+%\check
+\barre
+\NOTes\org\ql M\relax
+ |\zq c\ql a\sk\relax
+ |\twobu ef\relax
+ &\twobl lm\enotes
+\NOTes\org\ibu2N0\qh2{NMN}\tqh2G\relax
+ |\hl{=b}\relax
+ |\hu d\relax
+ &\hl k\sk\sk\relax
+ &\qsk\pause\enotes
+% mesure 41
+%\check
+%\ifOrgue\cleftoksi={{6}{6}{0}{0}}\changeclefs\fi
+\barre
+\NOTES\org\hup J\relax
+ |\zhp{LN}\hlp c\relax
+ |\sk\pause
+ &\hlp j\relax
+ &\sk\pause\enotes
+\ifOrgue \linegoal 9\relax
+\else  \linegoal 12\relax
+\fi
+\finmorceau
+
+\endinput
+
+
+

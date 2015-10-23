@@ -1,0 +1,219 @@
+% musixplt.tex : Palatino font definitions for MusiXTeX
+%
+% usage: 
+%
+%    \input musixtex
+%    \input musixplt
+%    ...
+%
+%   MusiXplt.tex is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2, or (at your option)
+%   any later version.
+%
+%   MusiXplt.tex is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with MusiXTeX; see the file COPYING.  If not, write to
+%   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+%   Boston, MA 02111-1307, USA.
+%
+%   Copyright 2015  Bob Tennent rdt@cs.queensu.ca
+%
+\immediate\write16{MusiXplt\space<2015/02/23>}
+%
+% 7pt roman, bold, italic, bold italic, slanted and small-cap
+\font\sevenrm=pplr8r at 7pt
+\font\sevenbf=pplb8r at 7pt
+\font\sevenit=pplri8r at 7pt
+\font\sevenbi=pplbi8r at 7pt
+\font\sevensc=pplrc8r at 7pt
+\font\sevensl=pplro8r at 7pt
+%
+% 8pt roman, bold, italic, bold italic, slanted and small-cap
+\font\eightrm=pplr8r at 8pt
+\font\eightbf=pplb8r at 8pt
+\font\eightit=pplri8r at 8pt
+\font\eightbi=pplbi8r at 8pt
+\font\eightsc=pplrc8r at 8pt
+\font\eightsl=pplro8r at 8pt
+%
+% 9pt
+\font\ninerm=pplr8r at 9pt
+\font\ninebf=pplb8r at 9pt
+\font\nineit=pplri8r at 9pt
+\font\ninebi=pplbi8r at 9pt
+\font\ninesc=pplrc8r at 9pt
+\font\ninesl=pplro8r at 9pt
+%
+% 10pt
+\font\tenrm=pplr8r at 10pt
+\font\tenbf=pplb8r at 10pt
+\font\tenit=pplri8r at 10pt
+\font\tenbi=pplbi8r at 10pt
+\font\tensc=pplrc8r at 10pt
+\font\tensl=pplro8r at 10pt
+%
+% 11pt
+\font\elevenrm=pplr8r at 11pt
+\font\elevenbf=pplb8r at 11pt
+\font\elevenit=pplri8r at 11pt
+\font\elevenbi=pplbi8r at 11pt
+\font\elevensc=pplrc8r at 11pt
+\font\elevensl=pplro8r at 11pt
+%
+% 12pt
+\font\twelverm=pplr8r at 12pt
+\font\twelvebf=pplb8r at 12pt
+\font\twelveit=pplri8r at 12pt
+\font\twelvebi=pplbi8r at 12pt
+\font\twelvesc=pplrc8r at 12pt
+\font\twelvesl=pplro8r at 12pt
+%
+% 14pt
+\font\frtrm=pplr8r at 14pt
+\font\frtbf=pplb8r at 14pt
+\font\frtit=pplri8r at 14pt
+\font\frtbi=pplbi8r at 14pt
+\font\frtsc=pplrc8r at 14pt
+\font\frtsl=pplro8r at 14pt
+%
+% 17pt
+\font\svtrm=pplr8r at 17pt
+\font\svtbf=pplb8r at 17pt
+\font\svtit=pplri8r at 17pt
+\font\svtbi=pplbi8r at 17pt
+\font\svtsc=pplrc8r at 17pt
+\font\svtsl=pplro8r at 17pt
+%
+% 20pt
+\font\twtyrm=pplr8r at 20pt
+\font\twtybf=pplb8r at 20pt
+\font\twtyit=pplri8r at 20pt
+\font\twtybi=pplbi8r at 20pt
+\font\twtysc=pplrc8r at 20pt
+\font\twtysl=pplro8r at 20pt
+%
+% 25pt
+\font\twfvrm=pplr8r at 25pt
+\font\twfvbf=pplb8r at 25pt
+\font\twfvit=pplri8r at 25pt
+\font\twfvbi=pplbi8r at 25pt
+\font\twfvsc=pplrc8r at 25pt
+\font\twfvsl=pplro8r at 25pt
+%
+% Large fonts for titles
+% (If you prefer bold, use ..bf instead of ..sc)
+% (If you prefer roman, use ..rm instead of ..sc)
+\let\bigfont=\frtsc
+\let\Bigfont=\svtsc
+\let\BIgfont=\twtysc
+\let\BIGfont=\twfvsc
+%
+%
+\font\ppffsixteen=pplbi8r at 10pt
+\font\ppfftwenty=pplbi8r at 12pt
+\font\ppfftwentyfour=pplbi8r at 14pt
+\font\ppfftwentynine=pplbi8r at 17pt
+\font\tinyppff=pplbi8r at 8pt
+\font\smallppff=pplbi8r at 10pt
+\font\normppff=pplbi8r at 12pt
+\font\medppff=pplbi8r at 14pt
+%
+\def\f{{\ppff f}}
+\def\ff{{\ppff ff}}
+\def\fp{{\ppff fp}}
+\def\fff{{\ppff fff}}
+\def\ffff{{\ppff ffff}}
+\def\mf{{\ppff mf}}
+\def\p{{\ppff p}}
+\def\pp{{\ppff pp}}
+\def\ppp{{\ppff ppp}}
+\def\pppp{{\ppff pppp}}
+
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+%
+\def\smalldyn{\let\ppff\smallppff \let\p@@f\ppff}%
+\def\normdyn{\let\ppff\normppff \let\p@@f\ppff}%
+\def\meddyn{\let\ppff\medppff \let\p@@f\ppff}%
+%
+\def\sF{{\ppff s\p@kern f}}
+\def\sfz{{\ppff s\p@kern f\f@kern z}}
+\def\sfzp{{\ppff s\p@kern f\f@kern z\p@kern p}}
+
+\def\mp@{{\ppff mp}}
+\let\mezzopiano\mp@
+\catcode`\@=\catcodeat
+
+\def\smalltype{%
+  \let\rm\eightrm
+  \let\bf\eightbf
+  \let\it\eightit
+  \let\bi\eightbi
+  \let\sc\eightsc
+  \let\sl\eightsl
+  \rm}
+\def\Smalltype{%
+  \let\rm\ninerm
+  \let\bf\ninebf
+  \let\it\nineit
+  \let\bi\ninebi
+  \let\sc\ninesc
+  \let\sl\ninesl
+  \rm}
+\def\normtype{%
+  \let\rm\tenrm
+  \let\bf\tenbf
+  \let\it\tenit
+  \let\bi\tenbi
+  \let\sc\tensc
+  \let\sl\tensl
+  \rm}
+\def\medtype{%
+  \let\rm\twelverm
+  \let\bf\twelvebf
+  \let\it\twelveit
+  \let\bi\twelvebi
+  \let\sc\twelvesc
+  \let\sl\twelvesl
+  \rm}
+\def\bigtype{%
+  \let\rm\bigfont
+  \let\bf\bigfont
+  \let\it\bigfont
+  \let\bi\bigfont
+  \let\sc\bigfont
+  \let\sl\bigfont
+  \sc}
+\def\Bigtype{%
+  \let\rm\Bigfont
+  \let\bf\Bigfont
+  \let\it\Bigfont
+  \let\bi\Bigfont
+  \let\sc\Bigfont
+  \let\sl\Bigfont
+  \sc}
+\def\BIgtype{%
+  \let\rm\BIgfont
+  \let\bf\BIgfont
+  \let\it\BIgfont
+  \let\bi\Bigfont
+  \let\sc\Bigfont
+  \let\sl\Bigfont
+  \sc}
+\def\BIGtype{%
+  \let\rm\BIGfont
+  \let\bf\BIGfont
+  \let\it\BIGfont
+  \let\bi\BIGfont
+  \let\sc\BIGfont
+  \let\sl\BIGfont
+  \sc}
+%
+
+
+\normtype
+\endinput

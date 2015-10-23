@@ -1,0 +1,141 @@
+%
+%   This file is part of MusiXTeX
+%
+%   MusiXTeX is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2, or (at your option)
+%   any later version.
+%
+%   MusiXTeX is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with MusiXTeX; see the file COPYING.  If not, write to
+%   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+%   Boston, MA 02111-1307, USA.
+%
+%
+
+\usepackage[papersize={210mm,11in},margin=1.125in]{geometry} % a4 width, letter-paper height
+\pagestyle{headings}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{etex}
+
+%\usepackage{indentfirst}
+
+\usepackage{mflogo}
+
+%\usepackage[ansinew]{inputenc}
+
+%  default is Computer Modern OT1 encoding
+\usepackage[T1]{fontenc}     % for CM, \input musixec after musixtex
+\usepackage[osf]{mathpazo}  % Palatino text, with old-style figures; use $n$ for lining figures
+%\usepackage{mathptmx}  % Times text
+%\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}     % Helvetica text
+
+
+\usepackage{textcomp}
+
+\input musixtex
+\input musixbm
+\input musixcho
+\input musixdat
+\input musixext
+\input musixgre
+\input musixgui
+\input musixlit
+\input musixltx
+\input musixper
+
+%%%  \input musixps deferred to Section 10.2
+
+%\input musixec   %  EC (Computer Modern) text in music
+\input musixplt  %  Palatino text in music
+%\input musixtmr  %  Times text in music
+%\input musixhv   %  Helvetica text in music
+
+\usepackage{paralist}
+\setlength{\pltopsep}{1pt plus 2pt minus 1pt}
+\setlength{\plitemsep}{4.5pt plus 2pt minus 1pt}
+\renewenvironment{enumerate}{\begin{compactenum}}{\end{compactenum}}
+\renewenvironment{itemize}{\begin{compactitem}}{\end{compactitem}}
+\renewenvironment{description}{\begin{compactdesc}}{\end{compactdesc}}
+
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{2}
+
+% more place for section numbers in \tableofcontents
+\usepackage{tocloft}
+\setlength{\cftsecnumwidth}{3.0em}
+
+\renewcommand{\chaptermark}[1]{\markboth{\itshape Chapter \thechapter. #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\itshape\thesection. #1}}
+
+\usepackage[colorlinks=true]{hyperref}
+
+\nobarnumbers
+
+\def\st@ffs{1}
+
+% for usage of notes inside text
+\let\nblines\z@
+
+\def\notesintext#1{% no staff lines, no clefs
+  {\let\extractline\relax
+   \setlines10\smallmusicsize \nobarnumbers \nostartrule
+   \staffbotmarg0pt \setclefsymbol1\empty \global\clef@skip0pt
+   \startextract\addspace{-\afterruleskip}#1\zendextract}}
+\def\musicintext#1#2{% normal
+  {\let\extractline\relax
+   \smallmusicsize \nobarnumbers
+   \staffbotmarg0pt \setclef1{#1}
+   \startextract\addspace{-\afterruleskip}#2\endextract}}
+% macro adapted to insert music without clef:
+\def\musicintextnoclef#1{% no clef small
+  {\let\extractline\relax
+   \smallmusicsize \nobarnumbers
+   \staffbotmarg0pt \setclefsymbol1\empty
+   \startextract\addspace{-\afterruleskip}#1\endextract}}
+\def\musicintextnoclefn#1{%  no clef normal
+  {\let\extractline\relax
+   \nobarnumbers
+   \staffbotmarg0pt \setclefsymbol1\empty
+   \startextract\addspace{-\afterruleskip}#1\endextract}}
+
+\def\musictex{Music\TeX{}}
+\def\onen{{\ttfamily\char123}$n${\ttfamily\char125}}
+\def\pitchp{{\ttfamily\char123}$p${\ttfamily\char125}}
+\def\itbrace#1{{\ttfamily\char123}$#1${\ttfamily\char125}}
+\def\nochange{{\ital{NOT to be changed}}}
+
+\ifx\setendvolta\undefined\def\setendvolta{\endvolta}\fi
+\ifx\setendvoltabox\undefined\def\setendvoltabox{\endvoltabox}\fi
+\def\tty{\csname normalshape\endcsname\csname mediumseries\endcsname\ttfamily}
+\def\mutex{M\raise\tw@\p@\hbox{\kern\m@ne\p@ u\kern\m@ne\p@}\TeX}
+\def\Bslash{\ttfamily\char'134}
+\def\|{\texttt{\char'174}}
+\def\LBR{\texttt{\char'173}}
+\def\RBR{\texttt{\char'175}}
+\def\keyindex#1{\leavevmode
+ \hbox{{\Bslash #1}}\index{#1@{\protect\small\protect\Bslash #1}}}
+\def\zkeyindex#1{\index{#1@{\protect\small\protect\Bslash #1}}}
+\def\ixem#1{#1\index{#1}}
+\def\itxem#1{\textit{#1}\index{#1}}
+\def\ttxem#1{\texttt{#1}\index{#1@\texttt{#1}}}
+\def\ixtt#1{\index{#1@\texttt{#1}}}
+\def\ital#1{\textit{#1\/}}
+\def\enpee{{\ttfamily{\char123$n$\char125\char123$p$\char125}}}
+
+\def\unix{\textsc{unix}}
+
+\sloppy
+
+
+\def\underscoreSymbol{\leavevmode \kern.06em \vbox{\hrule width.3em}}%
+\def\_{\protect\underscoreSymbol}
+
+
+\endinput
