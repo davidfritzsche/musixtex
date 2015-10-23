@@ -1,0 +1,74 @@
+
+     musixlyr -- a MusiXTeX Extension Package for Lyrics Handling
+                            Version 2.1c
+
+                    (C) Rainer Dunker 1996-2003
+
+
+musixlyr is a set of TeX macros to be used with Taupin MusiXTeX
+(version T.52 or later) for typesetting vocal music.  Its purpose is
+to compensate two drawbacks of MusiXTeX's lyrics handling:
+ 
+ o Typesetting lyrics with the ``native'' MusiXTeX commands \zcharnote,
+   \zsong etc. tends to be quite inefficient, particularly if the
+   lyrics have to be changed or corrected.  The idea underlying
+   musixlyr is to separate lyrics coding from music coding and let TeX
+   weave them together with as little manual interference as
+   possible. As a result you can enter and edit lyrics (nearly) as
+   easily as normal text.
+
+ o MusiXTeX has no built-in mechanism for centering hyphens between
+   syllables and for handling hyphenation at long melismas.  This is
+   implemented in musixlyr following the example of engraved music.
+
+
+New in version 2.1:
+
+ o \appendlyrics: Appends additional lyrics to existing lyrics line
+   without discarding the remainder of the current lyrics
+
+ o A couple of bugs fixed
+
+
+New in version 2.0:
+
+ o Support for lyrics on multi-staff instruments
+
+ o Melisma declaration as part of the lyrics definition,
+   i.e. within \setlyrics
+ 
+ o Improved scheme for vertical lyrics positioning
+
+ o Using PMX: Automatic detection of upper/lower voice context in
+   a two-voice staff; explicitly addressing lyrics commands to
+   auxiliary lyrics with \auxlyr is no longer required
+
+ o Context-dependent lyrics settings that do not need to be
+   adressed to absolute instrument/staff numbers, making lyrics
+   assignment robust against PMX part extraction
+
+ o No more TeX register allocations per verse
+   (i.e. musixlyr uses only a small, fixed number of registers)
+
+ o Facility for posting "extra" lyrics anywhere on a staff,
+   even where no notes are present at all
+ 
+ o Slightly more robust processing of undefined verses
+
+
+See the included file mxlyrdoc.dvi about how to make use of musixlyr.
+This DVI file has been created using MusiXTeX T.103.  If you have
+another version installed, the music examples of the manual may be
+corrupted due to font incompatibilities.  Nevertheless, the rest of
+the manual will remain readable so that you will be able to install
+musixlyr and recompile the mxlyrdoc.tex file in order to get
+everything right.
+
+All kinds of comments, suggestions, and bug reports are welcome!
+
+Author:  Rainer Dunker
+         Wachtelweg 31
+         85591 Vaterstetten
+         Germany
+
+         E-mail:  rainer.dunker@web.de

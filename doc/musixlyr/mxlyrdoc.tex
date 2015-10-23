@@ -1,0 +1,1877 @@
+%%
+%% mxlyrdoc.tex:  Manual for the MusiXTeX lyrics package musixlyr
+%%
+%% Copyright (C) 1996-2003  Rainer Dunker
+%%
+%% This document is free software; you can redistribute it and/or modify
+%% it under the terms of the GNU General Public License as published by
+%% the Free Software Foundation; either version 2 of the License, or
+%% any later version.
+%%
+%% This document is distributed in the hope that it will be useful,
+%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%% GNU General Public License for more details.
+%%
+%% You should have received a copy of the GNU General Public License
+%% along with this document; if not, write to the Free Software
+%% Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+%%
+%% Author:
+%%  Rainer Dunker
+%%  Wachtelweg 31
+%%  85591 Vaterstetten
+%%  Germany
+%%
+%%  E-mail:  rainer.dunker@web.de
+%%
+\documentclass[twoside]{article}
+\usepackage{musixtex,multicol,makeidx}
+\usepackage[dvips,bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,colorlinks=true,pdfborder={0 0 0}]{hyperref}
+
+\input musixlyr
+
+\textwidth210mm \advance\textwidth-2in               % These format settings
+\textheight297mm \advance\textheight-2in             % can be freely changed!
+\advance\textheight-\headheight \advance\textheight-\headsep
+\footskip0pt \topmargin0pt \evensidemargin0pt \oddsidemargin0pt
+
+\pagestyle{headings}
+\parskip0.5ex plus 0.25ex minus 0.25ex
+\parindent0pt
+\sloppy
+
+\nobarnumbers
+\smallmusicsize
+
+%
+% command index
+%
+\makeatletter
+\renewenvironment{theindex}
+  {\let\item\@idxitem
+   \begin{multicols}{2}
+   \parskip0pt}
+  {\end{multicols}}
+\def\printcmd#1{{\tt\char92 #1}}
+\def\ci#1{\printcmd{#1}\bci{#1}}
+\def\bci#1{\index{#1@\printcmd{#1}}} % "blind" command index entry
+\makeindex
+
+\let\myqnwidth\qn@width
+\makeatother
+
+\def\musixlyr{{\tt musixlyr}}
+\def\PMX{{\bf PMX}}
+\def\var#1{\hbox{$\langle$#1$\rangle$}}
+\def\oneversespace{\par\vspace*{2mm}}
+\def\twoversesspace{\par\vspace*{7mm}}
+
+
+
+
+\begin{document}
+
+
+\title{\musixlyr\ --- a \musixtex\ Extension Package for Lyrics Handling
+       (Version 2.1c)}
+\author{\copyright\ Rainer Dunker 1996--2003\\
+	{\tt rainer.dunker@web.de}}
+\maketitle
+\thispagestyle{empty}
+
+
+{\small\sl (The page layout of this document is tailored to A4 paper
+ format, but the text width and height can be freely changed in order
+ to meet other paper sizes; no part of the layout relies on a
+ particlular size.)\/}
+
+{\parskip0pt\tableofcontents}
+
+
+
+\section{Introduction}
+
+
+\subsection{Basic concepts}
+
+\musixlyr\ is a set of \TeX\ macros to be used with Taupin \musixtex\
+(version T.52 or later) for typesetting vocal music. Its purpose is
+to compensate two drawbacks of \musixtex's lyrics handling:
+\begin{itemize}
+ \item Typesetting lyrics with the ``native'' \musixtex\ commands
+   \verb|\zcharnote|, \verb|\zsong| etc.\ tends to be quite
+   inefficient, particularly if the lyrics have to be changed or
+   corrected. The idea underlying \musixlyr\ is to separate lyrics
+   coding from music coding and let \TeX\ weave them together with as
+   little manual interference as possible. As a result you can enter
+   and edit lyrics (nearly) as easily as normal text.
+ \item \musixtex\ has no built-in mechanism for centering hyphens between
+   syllables and for handling hyphenation at long melismas. This is
+   implemented in \musixlyr\ following the example of engraved music.
+\end{itemize}
+
+
+
+\subsection{New since version~2.0}
+
+\musixlyr~2.0 provides the following major enhancements:
+\begin{itemize}
+ \item Support for lyrics on multi-staff instruments
+   $\longrightarrow$~section~\ref{multi-staff-instruments}
+ %
+ \item Melisma declaration as part of the lyrics definition,
+   i.\,e.~within \ci{setlyrics}
+   $\longrightarrow$~section~\ref{melismas}
+ %
+ \item Improved scheme for vertical lyrics positioning
+   $\longrightarrow$~section~\ref{vertical-positioning}
+ % 
+ \item Facility for posting lyrics anywhere on a staff, even where no
+   notes are present at all
+   $\longrightarrow$~section~\ref{lyric*-verse-numbers}
+\end{itemize}
+
+These new features are especially interesting when \musixlyr\ is used in
+conjunction with \PMX:
+\begin{itemize}
+ \item Automatic detection of upper/lower voice context in
+   a two-voice staff; explicitly addressing lyrics commands to
+   auxiliary lyrics with \ci{auxlyr} is no longer required
+   $\longrightarrow$~section~\ref{auxlyr-attachment}
+ %
+ \item Context-dependent lyrics settings that do not need to be
+   adressed to absolute instrument/staff numbers, making lyrics
+   assignment robust against part extraction
+   $\longrightarrow$~section~\ref{assignment-by-context}
+\end{itemize}
+
+Finally, a few improvements have been made that do not bear explicit
+new features but work rather behind the scenes:
+\begin{itemize}
+ \item No more \TeX\ register allocations for each verse name newly
+   defined by \ci{setlyrics} or \ci{copylyrics}; the use
+   of those registers has been replaced by macros.
+ %
+ \item Due to the abandoned per-verse register allocations, the
+   \ci{enableauxlyrics} command is obsolete. It is retained for the
+   sake of backward compatibility, but it has no effect.
+ %
+ \item Slightly more robust processing of undefined verses. An error
+   is raised immediately when an undefined verse is assigned to a
+   staff/instrument, and the undefined verse name is implicitly
+   defined as having empty lyrics. This avoids obscure errors in later
+   stages of \TeX\ processing.
+\end{itemize}
+
+The current version~2.1c is mainly a bugfix version of~2.0, with a few
+functional additions:
+\begin{itemize}
+ \item Possibility to add additional lyrics to an existing lyrics
+   definition without discarding the remainder of the current lyrics
+   line contents; useful if lyrics are defined in several portions
+   spread over the score (see~\ref{appendlyrics}).
+ \item The \musixlyr\ version is identified by the predefined macro
+   \verb|\musixlyrversion|, enabling other \TeX\ code to check for
+   version compatibility (according to a suggestion by Dirk Laurie).
+\end{itemize}
+
+Suggestions for other useful things are welcome.
+
+
+
+\subsection{Backward incompatibility issues}
+
+The following properties make \musixlyr\ versions~2.$x$ incompatible
+to earlier versions:
+\begin{itemize}
+ \item
+   It is no longer possible to represent ``empty syllables'' by
+   empty \TeX\ environments `\verb|{}|' within \ci{setlyrics}; see
+   also section~\ref{empty-syllable}.
+ %
+ \item
+   Within \ci{setlyrics}, the underscore character has got a
+   special meaning and thus can no longer be used as usual; see
+   section~\ref{melismas-by-underscores}.
+ %
+ \item
+   By default, auxiliary lyrics are now placed vertically {\em
+   above\/} (no longer below) the staff they are assigned to; see
+   section~\ref{auxlyr-vertical-position-default}.
+\end{itemize}
+
+
+The following bugfix of \musixlyr~2.1b also implies a slight backward
+incompatibility:
+\begin{itemize}
+ \item
+   At the beginning of a music line (system), lyrics have often been
+   right-shifted because \musixlyr\ has assumed MusiXTeX's horizontal
+   ``zero'' position as the left boundary for lyrics positioning. Now,
+   lyrics are allowed to extend into the left margin as far as
+   required for centered placement under/above the note.
+
+   Although this is a more ``natural'' behaviour, it may lead to
+   collisions between lyrics and other stuff (like dynamic marks) that
+   have not occurred using older \musixlyr\ versions. In such a case,
+   there are two ways to solve the problem:
+   %
+   \begin{itemize}
+     \item Restore the former \musixlyr\ behaviour globally by saying
+       \begin{quote}
+	 \ci{oldlyrlinestart}
+       \end{quote}
+       near the top of your score source.
+       %
+     \item Right-shift the colliding lyrics where necessary using
+       \ci{lyroffset} (see~\ref{lyroffset}).
+   \end{itemize}
+ \end{itemize}
+
+
+
+\subsection{Restrictions}
+
+\begin{itemize}
+ \item \musixlyr\ does not influence the \musixtex/{\tt musixflx}
+   spacing algorithm in order to make the notes spacing dependent on
+   the space requirements of the lyrics. See section~\ref{horizpos}
+   about how spacing problems are handled.
+ %
+ \item \musixlyr\ seems to work correctly in my preferred working
+   environment, but I cannot exclude problems in situations I have
+   not undergone (especially concerning the use of \musixtex\
+   preprocessors, the \musixtex\ extension library, and past or
+   future \musixtex\ releases). Thus it is important that you point out
+   encountered bugs and incompatibilities to me; there is little
+   chance that I notice them on my own.
+
+   Please do also bother me if you find this manual --- or parts of
+   it --- incomprehensible or incomplete.
+\end{itemize}
+
+
+
+\section{Installation}
+
+Put the {\tt musixlyr.tex} file into a directory that is included in
+your \verb|TEXINPUTS| search path --- that's all. (Refer to your local \TeX\
+documentation for details on this.)
+
+
+
+\section{Usage}
+
+Before using \musixlyr\ macros, state
+\begin{quote}\verb|\input musixlyr|\end{quote}
+near the beginning of your source file but {\bf after} the
+\verb|\input musixtex| (\LaTeX: \verb|\usepackage{musixtex}|)
+command.
+
+
+
+\subsection{Entering lyrics}
+
+
+\subsubsection{Lyrics as lines of words}
+
+As opposed to the ``vertical'' music construction of
+\musixtex, \musixlyr\ treats lyrics ``horizontally'' as {\em lyrics
+lines.\/} Each separate ``thread'' of words is a separate lyrics
+line; thus, in the following example\footnote{Excerpt from
+``Tourdion'' by {\sc Pierre Attaignant} ({\sl ars
+musica\/} vol.\,4, M\"oseler Verlag Wolfenb\"uttel/Z\"urich)},
+
+\begin{music}
+ \setlyrics{soprano}
+	   {Quand je bois du vin clai-ret, a-mi tout}
+ \setlyrics{alto}{Le bon vin nous}
+ \setlyrics{tenor}{Bu-vons bien, bu-vons mes a-mis,}
+ \copylyrics{tenor}{bass}
+ \assignlyrics4{soprano}
+ \assignlyrics3{alto}
+ \assignlyrics2{tenor}
+ \assignlyrics1{bass}
+ \setsongraise3{-1.5mm}
+ \small
+ \instrumentnumber4
+ \generalsignature2
+ \generalmeter{\meterfrac32}
+ \setclef1\bass
+ \songtop4
+ \songbottom1
+ \sepbarrules
+ \startextract
+  \NOtes\wh{`e}\sk\sk\sk\ha e&%
+	\wh g\sk\sk\sk\ha e&%
+	\wh b\sk\sk\sk\ha b&%
+	\qa{efg'a!gf}\en\bar
+  \NOTesp\wh{`e}&\wh{'b}&\wh e&\hup e\en
+  \NOtes\sk\ha{`e}&\sk\ha{'b}&\sk\ha e&\qa{fg'a}\en
+  % force hyphens of incomplete words:
+  \def\atnextbar{\znotes\lyric{}&\lyric{}\en}%
+ \endextract
+\end{music}
+\oneversespace
+
+there are four lyrics lines notwithstanding that two of them consist
+of the same words.
+
+Note that the number of lyrics lines does not depend on the number
+of staves: Any number of lyrics lines (including none) can be attached
+to each staff (more about multiple lyrics lines per staff in
+section~\ref{multilyrlines}).
+
+
+\subsubsection{Setting up a lyrics line}
+
+A lyrics line is set up using the command
+\begin{quote}
+  \ci{setlyrics}\verb|{|\var{name}\verb|}{|\var{words}\/\verb|}|
+\end{quote}
+where \var{name} is a name\footnote{This name must not contain
+backslashes or commas. Most other characters do not cause problems;
+however, it is safer to use only letters and digits.} for the lyrics
+line (e.\,g.\ the name of the voice singing these lyrics) and
+\var{words} is the complete text where multi-syllable words must be
+given {\bf hyphenated.} For example, the soprano lyrics of the above
+example are set as follows:
+\begin{quote}
+ \bci{setlyrics}
+ \begin{verbatim}
+\setlyrics{soprano}{Quand je bois du vin clai-ret, a-mi tout}\end{verbatim}
+\end{quote}
+
+Important notes on using \ci{setlyrics}:
+\begin{itemize}
+  \item
+    Within the lyrics definition, spaces and hyphens are used to
+    split the whole text into words or syllables. If you want a space
+    or hyphen appear {\em within\/} a word/syllable, use the command
+    \verb|\space| or \ci{lyrhyphenchar}, respectively, instead.
+  \item
+    \label{empty-syllable}%
+    If you want the lyrics attachment to skip over a note,
+    i.\,e.~a certain note shall not receive a syllable, you may
+    achieve this by inserting an empty syllable in the \var{words}
+    text. However, neither a ``really empty'' syllable (i.\,e.~two
+    consecutive separating spaces) nor an empty environment \verb|{}|
+    will work, but you may use either \verb|{\empty}| or
+    \verb|\empty{}| for this.
+
+    Normally, the \ci{nolyr} command (discussed later in this
+    manual) should be used for this purpose, but an empty syllable may
+    be more handy if it occurs in only one of multiple assigned
+    verses; see also sections~\ref{melismas-by-underscores}
+    and~\ref{multilyrlines}.
+  \item
+    Note that, since lyrics lines are cut into pieces which are
+    processed separately, you cannot apply things like temporary font
+    changes in the usual manner (i.\,e.~using \TeX\
+    environments). See section~\ref{layoutpar} about how to accomplish
+    layout changes.
+  \item
+    Applying \ci{setlyrics} to an already defined \var{name}
+    redefines the lyrics line. This may be useful at very long pieces
+    because setting up and applying lyrics in smaller portions
+    (e.\,g.\ movement by movement) saves both time and memory.
+  \item
+    It is possible to specify melismas --- that shall occur later when
+    a verse is attached to the music --- already within
+    \ci{setlyrics}; see section~\ref{melismas-by-underscores} for
+    details.
+
+\end{itemize}
+
+There are two variants of the \verb|\setlyrics| command available:
+\begin{itemize}
+  \item
+    If several voices have the same lyrics, you do not have to copy
+    and paste the lyrics for each further voice; just say
+    \begin{quote}\ci{copylyrics}\verb|{|\var{from name}%
+			       \verb|}{|\var{to name}\verb|}|\end{quote}
+    to set up a lyrics line named \var{to name} with the same contents
+    as \var{from name}.
+  \item
+    Applying \ci{setlyrics} to an already defined \var{name}
+    has the effect of discarding all previous contents of \var{name},
+    even if part of the lyrics is still pending for being
+    processed. If you want to {\em append\/} further lyrics to an already
+    existing lyrics line instead --- without interrupting the
+    processing of the current lyrics contents ---, use the command
+    \label{appendlyrics}
+    \begin{quote}
+      \ci{appendlyrics}\verb|{|\var{name}\verb|}{|\var{words}\/\verb|}|
+    \end{quote}
+    instead of \verb|\setlyrics|.
+    % A warning about performance loss due to \appendlyrics's material
+    % accumulation may be added here; it should occur only if \golyr
+    % jumps to or near to the lyrics beginning are performed.
+\end{itemize}
+
+
+\subsubsection{Assigning lyrics lines to staves}
+
+{\bf Note:} During the following discussion, the term {\em staff\/} is
+used wherever \musixtex\ would precisely use the term {\em
+instrument\/} instead, assuming that lyrics are posted to single-staff
+instruments only. However, everything also applies to the assignment
+of lyrics to staves of multi-staff instruments; see
+section~\ref{multi-staff-instruments} about how to use lyrics in a
+multi-staff instrument context.
+
+To assign a lyrics line to a staff, say
+\begin{quote}\ci{assignlyrics}\verb|{|\var i%
+	     \verb|}{|\var{name}\verb|}|\end{quote}
+where \var i is the instrument number (counted as usual from bottom to
+top) and \var{name} the name of the lyrics line.
+
+The resulting assignment can be redefined everywhere. This is useful
+if the arrangement of voices on staves changes within the score; when
+a voice is continued on a different staff at the next system, use
+\ci{assignlyrics} (preferrably enclosed in \verb|\atnextline{...}|) to
+make the respective lyrics line follow this change without
+interrupting the flow of words.
+
+If a lyrics line is assigned to instrument \var i and you want it to be
+continued on a different instrument while assigning no other lyrics line
+to instrument \var i, you must explicitly cancel the former assignment by
+saying \ci{assignlyrics}\verb|{|\var i\verb|}{}|.
+
+{\bf Caution:} Never assign a lyrics line to more than one
+staff simultaneously; if the same lyrics are needed at
+several staves in parallel, use \ci{copylyrics} (see above).
+
+As a summary of this section, here is the complete ``lyrics
+definition section'' of the above example:
+\begin{quote}
+ \bci{setlyrics}
+ \bci{copylyrics}
+ \bci{assignlyrics}
+ \begin{verbatim}
+\setlyrics {soprano}{Quand je bois du vin clai-ret, a-mi tout}
+\setlyrics {alto}   {Le bon vin nous}
+\setlyrics {tenor}  {Bu-vons bien, bu}
+\copylyrics{tenor}  {bass}
+\assignlyrics4{soprano}
+\assignlyrics3{alto}
+\assignlyrics2{tenor}
+\assignlyrics1{bass}\end{verbatim}
+\end{quote}
+
+See also section~\ref{assignment-by-context} about an alternative way
+to assign lyrics to staves.
+
+
+
+\subsection{Managing the attachment of lyrics to notes}
+\label{manipulation}
+
+
+\subsubsection{Automatic lyrics attachment}
+\label{auto-attachment}
+
+By default, the syllables of a lyrics line are consecutively attached to
+all {\em spacing\/} notes of the assigned staff. Chords thus receive only
+one syllable since they usually contain exactly one spacing note.
+However, this may be different if you are using auxiliary lyrics;
+see section~\ref{auxlyrics} for details.
+
+``Spacing'' in this context means: generated by one of the commands
+\verb|\qu|, \verb|\hu|, \verb|\wh|, etc.\ and not by \verb|\zqu|,
+\verb|\zhu|, \verb|\zq|, etc. Spacing or not does {\em not\/} depend on
+whether the note-generating command is enclosed in \verb|\znotes| or
+any other \verb|\notes| command. So if any note seems to have been
+left out by the attachment automatism, first make sure that this
+note is generated using a command not beginning with \verb|\z|.
+
+If the number of words of a lyrics line gets exhausted before all
+notes of the respective staff are processed, ``???'' is posted at all
+remaining notes.
+
+
+\subsubsection{Addressing manipulations to lyrics}
+
+In the ``ideal'' case, the attachment automatism perfectly distributes the
+lyrics over the music. In practice, however, situations in which the
+automatism must be ``helped'' manually are frequent. Such
+manipulations must be posted within the music code. Here are the
+basic rules:
+\begin{enumerate}
+ \item All lyrics manipulations must be stated inside
+   \verb|\notes...\enotes|.
+   (Exception: melisma specifications within \verb|\setlyrics|, see
+   section~\ref{melismas-by-underscores}).
+ \item Lyrics manipulations solely refer to the lyrics line(s)
+   attached to the current staff (``current'' with respect to the
+   enclosing `\verb|&|' characters).
+ \item Similar to many other \musixtex\ commands (e.\,g.\ for beams
+   and slurs), lyrics manipulations must be issued before the
+   corresponding note commands.
+\end{enumerate}
+Examples in the following sections will illustrate the application.
+
+
+\subsubsection{Melismas}
+\label{melismas}
+
+Regarding lyrics and music separately, melismas are no property of
+either one; instead, they characterize the relation between both and
+play a role only where music and lyrics occur together. Using
+\musixlyr, however, lyrics coding and music coding are basically
+unrelated, but melismas do have to be specified somewhere. You have to
+decide yourself whether you regard melismas as an attribute rather of
+the lyrics or rather of the music (this may vary according to the type
+of score you are preparing, or may even differ within a score);
+\musixlyr\ provides two corresponding styles of melisma specification
+which are discussed in the following paragraphs.
+
+\begin{description}
+ \item[Melismas as a music property.]
+    Within the music code, a melisma is initiated and terminated by the
+    command pair
+    \begin{quote}
+     \hspace*{\fill}\ci{beginmel}\hfill\ci{endmel}\hspace*{\fill}
+    \end{quote}
+    issued before the first and last note, respectively, of the melisma.
+    This left-justifies the current word/syllable, suspends lyrics until
+    after the melisma, and sets up a ``word extension
+    underline''\footnote{I am not sure whether this is the appropriate
+    term; it is taken from the {\sl Finale\/} reference manual.} unless
+    the current word is continued afterwards and thus has to be
+    hyphenated. For example,
+    
+    \begin{music}
+     \resetlyrics
+     \instrumentnumber1
+     \small\scale{0.6}
+     \setlyrics{melismatic}{a me-lis-ma}
+     \assignlyrics1{melismatic}
+     \startextract
+      \NOtes\beginmel\qa{def}\endmel\qa e\en\bar
+      \NOtes\beginmel\qa{def}\endmel\qa g\en\bar
+      \NOtes\beginmel\qa{'a!gf}\endmel\qa e\en\bar
+      \NOtes\beginmel\qa{defe}\en\bar
+      \NOTEs\endmel\wh d\en
+     \endextract
+    \end{music}
+    \oneversespace
+    
+    has been coded as:
+    \begin{quote}
+     \bci{beginmel}
+     \bci{endmel}
+     \begin{verbatim}
+...
+\NOtes\beginmel\qa{def}\endmel\qa e\en\bar
+\NOtes\beginmel\qa{def}\endmel\qa g\en\bar
+\NOtes\beginmel\qa{'a!gf}\endmel\qa e\en\bar
+\NOtes\beginmel\qa{defe}\en\bar
+\NOTEs\endmel\wh d\en
+...\end{verbatim}
+    \end{quote}
+    If a system break occurs within the melisma, hyphenation or underline
+    is continued at the next system, thus automatic line breaking is
+    applicable.
+
+ \item[Melismas as a lyrics property.]
+   \label{melismas-by-underscores}
+   To specify a melisma within a lyrics definition (i.\,e.~within
+   \ci{setlyrics} or \ci{appendlyrics}), simply append an underscore
+   character to a syllable to make it span over an additional note,
+   two underscores to span over two additional notes, and so
+   on. Alternatively, you may append to a syllable a single underscore
+   followed by a number which denotes the number of {\em additional\/}
+   melisma notes: \verb|abc_| is equivalent to \verb|abc_1|,
+   \verb|abc__| to \verb|abc_2|, and so on.
+   
+   No matter which of the two underscore appendix styles you use: If a
+   melismatic syllable is hyphenated to the following one, the melisma
+   denotation must {\bf precede} the hyphen --- for example:
+   \verb|abc__-def| ({\bf not:} \verb|abc-__def|).
+   
+   All melisma properties mentioned above (lyrics suspension, left
+   justification of syllable, word extension underline, system break
+   support) also apply to melismas specified this way. For reference,
+   here is the lyrics definition section of the example above, this time
+   utilizing the underscore melisma technique (note that, in this case,
+   all \ci{beginmel} and \ci{endmel} commands must be omitted in the
+   music section):
+   
+   \begin{quote}
+    \ci{setlyrics}\verb|{melismatic}{a___ me_3-lis___-ma_4}|
+   \end{quote}
+
+ \item[Comparing both points of view.]
+   The music-oriented melisma view (using \ci{beginmel}/\ci{endmel}) is
+   advantageous for music with a rather loose binding to certain lyrics,
+   e.\,g.~folk songs that are to be printed with various verse compilations
+   or in different languages. You may then enter each verse without
+   taking care of melismas because they are coded just once as part of
+   the music.
+   
+   On the other hand, the lyrics-focused melisma style (using
+   underscores) is best suited to pieces with a fixed lyrics-to-music
+   binding; it is easier to type and to read, but less flexible as
+   regards combining the same lyrics with different music. It is
+   especially advantageous for multiple verses (see
+   section~\ref{multilyrlines}) with different syllables-to-notes
+   distribution (see verse~3 of the ``Drunken sailor'' example in
+   section~\ref{versenumbers}); it is much easier to code each verse's
+   melismas individually than tracking all melismas in parallel using
+   the \ci{verses} command (see again section~\ref{multilyrlines}).
+
+ \item[Note.]
+   You may use both styles within the same score but you should avoid
+   activating both melisma types simultaneously at the same lyrics line;
+   the result of such an occurrence is undefined.
+\end{description}
+
+
+\subsubsection{Turning automatic lyrics attachment on/off}
+
+If the attachment automatism is unsuitable for some
+situation --- e.\,g.\ at complex polyphonic voicings or wherever you
+want to place all syllables manually --- you can turn it off using
+\begin{quote}\ci{lyricsoff}\end{quote}
+after the last note that shall get a syllable. (If your piece begins
+with a lyrics-less section, state \ci{lyricsoff} before the first
+note of a staff.) To re-enable automatic lyrics attachment, use
+\begin{quote}\ci{lyricson}\end{quote}
+before the first note that shall get a syllable.
+
+If automatic lyrics attachment shall skip over certain single notes
+only, the \ci{nolyr} command is more suitable (see
+section~\ref{nolyr-command}).
+
+
+\subsubsection{Lyrics repetition and skipping}
+
+As in the following example of a polyphonic piece,
+
+\begin{music}
+ \resetlyrics
+ \instrumentnumber2
+ \setclef1\bass
+ \songtop2
+ \songbottom1
+ \small
+ \setlyrics{amen1}
+	   {\llabel{amenlabel}A-men!} \assignlyrics1{amen1}
+ \copylyrics{amen1}{amen2}            \assignlyrics2{amen2}
+ \startextract
+  \NOtes% lower staff:
+	  \itenu0K\beginmel\wh K\sk\sk\sk
+	  \midslur2\tten0\endmel\hlp K&%
+	% upper staff:
+	  \qa f\lyrnop\lyrpt,\qa g%
+	  \golyr{amenlabel}\lclyr\qa h\lyrnop\lyrpt,\qa{_i}%
+	  \golyr{amenlabel}\lclyr\beginmel\islurd1h\qa{hg}%
+	  \tslur1f\endmel\qa f\en
+  \NOTEs\wh N&\wh g\en
+ \endextract
+\end{music}
+\oneversespace
+
+it often happens that some lyrics phrases are repeated by some but
+not all voices, or that each voice has its individual arrangement of
+lyrics repetitions. Nevertheless, you do not have to enter
+these repetitions directly within \ci{setlyrics}; instead, you
+enter the lyrics as if they were performed in an unbroken
+sequence. Repetitions and skips are then handled using a ``go to''
+technique involving the following steps:
+\begin{description}
+ \item[Labelling ``go to'' targets.] A syllable which has to be jumped at
+   must be preceded (without spaces in between) by
+   \begin{quote}\ci{llabel}\verb|{|\var{label name}\verb|}|\end{quote}
+   within \ci{setlyrics}.
+ \item[Performing jumps.] Within the music code, say
+   \begin{quote}\ci{golyr}\verb|{|\var{label name}\verb|}|\end{quote}
+   before the note at which the jump has to be performed.
+
+   {\bf Caution:} If you try to jump to an undefined lyrics label, no
+   meaningful error message is produced. However, if \TeX\ reports an
+   error at a \ci{golyr} command, you should check conformity of
+   defined and used labels.
+\end{description}
+The following actions must be taken in special cases:
+\begin{description}
+ \item[Adding punctuation marks.] Usually a comma or period is
+   appended to the word preceding a jump; this is done by the command
+   \begin{quote}\ci{lyrpt}\var{punctuation char}\end{quote}
+   where \var{punctuation char} can be any single punctuation
+   character.
+ \item[Removing punctuation marks.] Before adding a punctuation mark
+   to a word as said above, an already existing punctuation mark
+   should be removed by the command:
+   \begin{quote}\ci{lyrnop}\end{quote}
+ \item[Lower case letters.] Words at jump targets often begin with a
+   capital letter which should appear lower case after a jump;
+   this can be forced by the command:
+   \begin{quote}\ci{lclyr}\end{quote}
+\end{description}
+Here is a code excerpt from the above example, summarizing the use of
+all mentioned commands:
+\begin{quote}\small
+ \bci{llabel}
+ \bci{copylyrics}
+ \bci{setlyrics}
+ \bci{lyrnop}
+ \bci{lyrpt}
+ \bci{golyr}
+ \bci{lclyr}
+ \bci{beginmel}
+ \bci{endmel}
+ \begin{verbatim}
+\setlyrics{amen1}
+          {\llabel{amenlabel}A-men!} \assignlyrics1{amen1}
+\copylyrics{amen1}{amen2}            \assignlyrics2{amen2}
+\startextract
+ \NOtes% lower staff:
+         \itenu0K\beginmel\wh K\sk\sk\sk
+         \midslur2\tten0\endmel\hlp K&%
+       % upper staff:
+         \qa f\lyrnop\lyrpt,\qa g%
+         \golyr{amenlabel}\lclyr\qa h\lyrnop\lyrpt,\qa{_i}%
+         \golyr{amenlabel}\lclyr\beginmel\islurd1h\qa{hg}%
+         \tslur1f\endmel\qa f\en
+ \NOTEs\wh N&\wh g\en
+\endextract\end{verbatim}
+\end{quote}
+Note that the ``go to'' technique is recommendable mainly if different
+voices perform different repetitions or skips on the same lyrics; if
+all voices perform the same sequence of repetitions, however, it is
+easier to hard-code them within \ci{setlyrics}.
+
+
+\subsubsection{Miscellaneous}
+\label{miscmanip}
+
+\begin{description}
+ \item[Excluding single notes.]
+   \label{nolyr-command}%
+   In the following situation,
+
+   \begin{music}
+    \resetlyrics
+    \instrumentnumber1
+    \setlyrics1{ca-den-za}
+    \assignlyrics11
+    \startextract
+     \NOtes\zqlp{'c}\qu e\en
+     \Notes\qu{'d}\nolyr\cl b\en
+     \bar
+     \NOTes\zhl{'c}\hu c\en
+    \endextract
+   \end{music}
+   \oneversespace
+
+   the eighth note must be excluded from receiving a syllable. This
+   can be accomplished saying
+   \begin{quote}\ci{nolyr}\end{quote}
+   before the command generating this note.
+ \item[Manual lyrics posting.] When automatic lyrics attaching is
+   switched off, a word or syllable can be placed manually saying
+   \begin{quote}\ci{lyr}\end{quote}
+   before the command generating the note that shall get this
+   word/syllable.
+
+   This command also works independently from a following note command;
+   you can issue it before a rest, a \verb|\sk| or even alone for
+   itself in order to place a word/syllable wherever you want (no
+   matter whether the attachment automatism is on or off).
+
+   Manipulations to the posted word/syllable have to be placed {\em
+   before\/} the \ci{lyr} command.
+ \item[Left justification.] Say
+   \begin{quote}\ci{llyr}\end{quote}
+   in order to have the next word/syllable left-justified to the
+   notehead instead of centered.
+
+   If you prefer to have left justification as the default, say
+   \begin{quote}\ci{leftlyrtrue}\end{quote}
+   before your piece begins (\ci{leftlyrfalse} to restore centered
+   lyrics).
+ \item[Word extension underlines.] The melisma commands (see
+   \ref{melismas}) automatically manage word extension underlines;
+   however, they can be set manually: Say
+   \begin{quote}\ci{lyrrule}\end{quote}
+   before the respective note command to initiate an underline {\em
+   after\/} the word, and
+   \begin{quote}\ci{lyrruleend}\end{quote}
+   before the note where the underline shall be terminated.
+
+   Note that no underline will be drawn if the word is continued
+   afterwards so that the underline would interfere with the
+   hyphenation.
+ \item[Horizontal offset.]\label{lyroffset}%
+   To shift a word/syllable out of its default
+   horizontal position, say
+   \begin{quote}\ci{lyroffset}\verb|{|\var n\verb|}|\end{quote}
+   which --- similar to \verb|\roffset| --- moves the next word/syllable
+   \var n quarter note head widths to the right (left if \var n
+   is negative).
+
+   Note that the effect of \ci{lyroffset} may be overridden by
+   automatic lyrics shifting. If you want to gain complete manual
+   control over the positioning, you have to disable the shifting
+   automatism; see section \ref{horizpos} for details.
+ \item[Extra lyrics.] If, as in the following
+   example\footnote{Excerpt from ``In the town where I was born''
+   ({\sl Eine kleine Melodie,\/} Strube, M\"unchen 1989)},
+
+   \begin{music}
+    \resetlyrics
+    \instrumentnumber2
+    \generalsignature1
+    \setclef1\bass
+    \songtop2
+    \songbottom1
+    \interinstrument=6mm
+    \setsongraise2{-0.5mm}
+    \scale{1.5}
+    \forcelyrhyphenstrue
+    \small
+    \setlyrics{lower}{yel-low sub-ma-rine,} \assignlyrics1{lower}
+    \copylyrics{lower}{upper}               \assignlyrics2{upper}
+    \startextract
+     \Notes\ibl0N0\zqbp0N\ibu1N0\qbp1b&%
+	   \ibl2f0\zqbp2d\ibu3g0\qbp3g\en
+     \notes\tbbl0\tbl0\zqb0N\tbbu1\tbu1\qb1b&%
+	   \tbbl2\tbl2\zqb2d\tbbu3\tbu3\qb3g\en
+     \Notes\ibl0M0\zqbp0M\ibu1N0\qbp1b&%
+	   \ibl2f0\zqbp2d\ibu3g0\qbp3g\en
+     \notes\tbbl0\tbl0\zqb0M\tbbu1\tbu1\qb1b&%
+	   \tbbl2\tbl2\zqb2d\tbbu3\tbu3\qb3g\en
+     \Notes\ibl0L{-1}\zqbp0L\hu b&\zhl d\hu g\en
+     \notes\tbbl0\tbl0\lyric{ya,}\qb0K\en
+     \Notes\ibl0L1\lyric{ya,}\qbp0L\en
+     \notes\tbbl0\tbl0\lyric{ya,}\qb0M\en
+    \endextract
+   \end{music}
+   \oneversespace
+
+   a voice has ``extra'' lyrics (such as ``hmm'', ``ah'', ``ya'', etc.)
+   in addition to the ``main'' lyrics, you need not enter them within
+   \ci{setlyrics} (which would inhibit using \ci{copylyrics});
+   instead, you can enter them directly within the music code using
+   the command
+   \begin{quote}\ci{lyric}\verb|{|\var{extra syllable}\verb|}|\end{quote}
+   before the note where they shall appear. (Note that the effect is
+   different from using \verb|\csong| which would not apply automatic
+   hyphenation, horizontal positioning control, and \musixlyr's
+   vertical positioning scheme.) Automatic lyrics attaching --- if
+   active --- is suspended at that note. All manipulations can be
+   applied; they must be given before the \ci{lyric} command.
+
+   If you want the syllable linked to the following one by a hyphen,
+   use \ci{lyrich} instead of \ci{lyric}.
+
+   It may sometimes be necessary to post lyrics where no note is
+   present at all, i.\,e.~in the empty space between notes. This is,
+   however, possible with \verb|\lyric|, but is is unsuitable because
+   automatic lyrics attachment shall {\em not\/} be suspended at the
+   next note. In this case one of the commands \ci{lyric*} or --- for
+   hyphenated syllables --- \ci{lyrich*} should rather be used; they
+   have no effect on the ``regular'' flow of lyrics.
+   \label{lyric*-verse-numbers}%
+   One application for this are vertically aligned verse numbers. For
+   example,
+
+   \begin{quote}
+     \bci{lyric*}
+     \bci{verses}
+     \begin{verbatim}
+\setlyrics1{Spring time}
+\setlyrics2{Au-tumn}
+\assignlyrics1{1,2}
+...
+\znotes\loffset{2.2}{\verses{\lyric*{1.},\lyric*{2.}}}\en
+\hardspace{4mm}%
+\NOTes\hu{ee}\en
+...\end{verbatim}
+   \end{quote}
+
+   yields:
+
+   \begin{music}
+     \resetlyrics
+     \setlyrics1{Spring time}
+     \setlyrics2{Au-tumn}
+     \assignlyrics1{1,2}
+     \lyrraise1{b -1.5mm}
+     \scale{1.2}
+     \startextract
+       \znotes\loffset{2.2}{\verses{\lyric*{1.},\lyric*{2.}}}\en
+       \hardspace{4mm}%
+       \NOTes\hu{ee}\en
+     \endextract
+     \twoversesspace
+   \end{music}
+
+   (See section~\ref{multilyrlines} about attaching multiple verses
+   to a single staff, a feature that has not been introduced so far.)
+
+   You may even obtain verse numbers that are repeated at the
+   beginning of each system by enclosing the \verb|\znotes...| command
+   for setting the numbers in \verb|\def\everystaff{...}|.
+   
+   Another possible application --- combined with empty syllables ---
+   is coping with unusual lyrics situations at voltas; for example,
+
+   \begin{music}
+     \twoversesspace
+     \setlyrics1{first pass}
+     \setlyrics2{se-cond pass}
+     \assignlyrics1{1,2}
+     \resetlyrics
+     \scale{2}
+     \startextract
+       \NOTEs\wh g\en
+	     \Setvolta1\def\atnextbar{\znotes\verses{,\lyric{}}\en}\bar
+       \NOTEs\wh g\en
+       \znotes\verses{,\lyrich*{}}\en \Setvolta2\setendvoltabox\rightrepeat
+       \NOTEs\verses\lyricsoff\pause\en\bar
+       \NOTEs\ha{gg}\en\setendvolta
+     \endextract
+     \twoversesspace
+   \end{music}
+
+   is accomplished by:
+
+   \begin{quote}
+     \bci{verses}
+     \bci{lyric}
+     \bci{lyrich*}
+     \begin{verbatim}
+\setlyrics1{first pass}
+\setlyrics2{se-cond pass}
+\assignlyrics1{1,2}
+\startextract
+  \NOTEs\wh g\en
+  \Setvolta1\def\atnextbar{\znotes\verses{,\lyric{}}\en}\bar
+  \NOTEs\wh g\en
+  \znotes\verses{,\lyrich*{}}\en
+  \Setvolta2\setendvoltabox\rightrepeat
+  \NOTEs\verses\lyricsoff\pause\en\bar
+  \NOTEs\ha{gg}\en\setendvolta
+\endextract\end{verbatim}
+   \end{quote}
+
+   The trick used here is to inject empty syllables into the second
+   verse at the barlines around the first volta; they serve as anchors
+   for the hyphenation suspended under this volta.
+   
+   Note that the \ci{lyric}, \ci{lyric*}, \ci{lyrich}, and
+   \ci{lyrich*} commands cannot be used at staves without assigned
+   lyrics lines.
+\end{description}
+
+
+
+\subsection{Horizontal positioning}
+\label{horizpos}
+
+\musixlyr\ takes care of blank space between words. If a word --- at
+its default position --- would come too close to or overlap the
+previous word, it is shifted right in order to ensure a minimum of
+blank space. This minimal interword space can be set by
+\begin{quote}\ci{minlyrspace}\verb|=|\var{any \TeX\ dimension}\end{quote}
+and is initially set to~3\,pt.
+
+%The situation is different if two syllables belong to the same
+%word. Such syllables are allowed to close up; only overlapping is
+%inhibited by shifting. If the space between such syllables is
+%narrower than a hyphen, the hyphen is omitted unless you force
+%hyphens in every spatial situation saying
+%\begin{quote}\verb|\forcelyrhyphenstrue|\end{quote}
+%(to restore the default behaviour: \verb|\forcelyrhyphensfalse|). In
+%this case, enough room is made for the hyphen by shifting the right
+%syllable if necessary.
+
+\leavevmode\label{nicerhyphens}%
+The situation is different if two syllables belong to the same
+word. Such syllables are allowed to close up; only overlapping is
+inhibited by shifting. If the ``natural'' space between such syllables is
+narrower than a hyphen, the hyphen is omitted and the two syllables
+close up completely (eventually by left-shifting the second syllable
+to prevent a small gap). You may though force
+hyphens in every spatial situation saying
+\begin{quote}\ci{forcelyrhyphenstrue}\end{quote}
+(to restore the default behaviour: \ci{forcelyrhyphensfalse}). In
+this case, enough room is made for the hyphen by right-shifting the 
+second syllable if necessary.
+
+If the note spacing is quite narrow, lyrics shifting may get
+accumulated within a system. In order to prevent shifting words too
+far out of their original position, a wider note spacing should be
+considered. The command
+\begin{quote}\ci{showlyrshifttrue}\end{quote}
+marks each lyric shift with a black rectangle of the respective
+width, thus making it easy to detect questionable positionings.
+
+If you prefer to completely disable lyrics shifting, set
+\ci{minlyrspace} to a large negative value (e.\,g.~$-10$\,cm).
+
+
+
+\subsection{Vertical positioning}
+\label{vertical-positioning}
+
+By default, \musixlyr\ places lyrics vertically centered between the
+two adjacent staves. Lyrics below the lowest or above the topmost
+staff of a system are centered around the system's bottom or top
+margin line.%
+\footnote{This is not necessarily the most reasonable way, but it is
+	  compatible to \musixtex's \printcmd{csong} behaviour.}
+
+In most scores, you will have to deviate from this standard and
+manually adjust the lyrics' vertical position. This can be done per
+staff with the command
+\begin{quote}
+  \ci{lyrraise}\verb|{|\var n\verb|}|\verb|{|\var{pos}\var{raise}\verb|}|
+\end{quote}
+which applies the following setting to the lyrics attached to staff
+number~\var n: \var{pos} is one of the letters \verb|a|
+and~\verb|b|. \verb|a| sets the lyrics above the staff, \verb|b| below
+the staff. \var{raise} is a dimension value by which the lyrics are
+lifted above (or lowered under, if it is negative) the default
+position as mentioned above. \ci{lyrraise}\verb|{|\var n\verb|}{b0pt}|
+is the initial setting for all staves.
+
+It is possible to apply changes to the vertical position at any place
+within the score, but in most cases it is most reasonable to do so
+within \verb|\atnextline{...}| which ensures consistent, even spacing
+within each system.
+
+For the sake of backward compatibility, applying \musixtex's command
+\ci{setsongraise}\verb|{|\var n\verb|}{|\var{raise}\verb|}|
+implicitly performs a
+\ci{lyrraise}\verb|{|\var n\verb|}|\verb|{b|\var{raise}\verb|}|,
+but not vice versa --- i.\,e.~\ci{lyrraise} has no effect on lyrics
+set with \musixtex's lyrics commands \verb|\csong|,
+\verb|\zsong|,~etc. Likewise, the obsolete \musixlyr\ command
+\ci{auxsetsongraise} implies \verb|\auxlyr{\lyrraise...{b...}}|, but
+not vice versa (see section~\ref{auxlyrics} to learn about the meaning
+of \verb|\auxlyr|).
+
+
+
+\subsection{Setting lyrics layout parameters}
+\label{layoutpar}
+
+
+\subsubsection{Available parameters}
+
+\begin{description}
+ \item[Font:] There is no special font command; the current font is
+   used for lyrics. It can be changed using the usual \TeX/\LaTeX\
+   commands.
+ \item[Minimum length of word extension underlines:] A word extension
+   underline is omitted if it would become too short. The minimum
+   length can be set by
+   \begin{quote}\ci{minlyrrulelength}\verb|=|\var{any \TeX\ dimension}
+   \end{quote}
+   and is initially set to~2\,mm. If you prefer to completely inhibit
+   the underlines, set this parameter to an unsurpassably high value
+   (e.\,g.~the width of your paper).
+ \item[Minimum inter-syllable distance for multiple hyphens:] If the
+   space between two hyphenated syllables (or between one of the
+   syllables and the respective system margin) is wider than this
+   distance, it is filled with a line of hyphens instead of a single
+   hyphen. The minimum distance to be filled with more than one
+   hyphen  can be set by
+   \begin{quote}\ci{minmulthyphens}\verb|=|\var{any \TeX\ dimension}\end{quote}
+   and is initially set to~15\,mm. If you prefer to completely inhibit
+   filling with multiple hyphens, set this parameter to an
+   unsurpassably high value.
+ \item[Hyphen character:] This can be redefined by:
+   \begin{quote}\verb|\def|\ci{lyrhyphenchar}\verb|{|\dots\verb|}|\end{quote}
+\end{description}
+Further layout parameters discussed elsewhere are: vertical
+positioning (section \ref{vertical-positioning}), word justification
+(section \ref{miscmanip}), minimum interword distance, and forcing
+hyphens (section \ref{horizpos}).
+
+{\bf Note:} In order to change the mentioned parameters globally, the
+respective commands must be issued {\em outside\/}
+\verb|\notes...\enotes|.
+
+\subsubsection{Individual settings per staff}
+\label{indivlayout}
+
+All layout parameters can be set either globally (applying to all
+lyrics lines) or individually, i.\,e.\ valid for a single specified staff.
+An individual change is accomplished by enclosing the proper command
+in
+\begin{quote}\ci{lyrlayout}\verb|{|\dots\verb|}|\end{quote}
+and issuing this within \verb|\notes...\enotes| in the section of the
+referred-to staff. For example,
+\begin{quote}
+ \verb|\notes...&|\ci{lyrlayout}\verb|{\it\leftlyrtrue}...&...\en|
+\end{quote}
+applies italic font and left justification to the lyrics line(s)
+assigned to the second staff.
+
+Applying \ci{lyrlayout} to the same staff again overrides
+{\em all\/} previous individual settings for this staff;
+pay attention to this if you have made several individual settings and
+want to reset some but retain others. Saying \ci{lyrlayout}\verb|{}|
+restores the global settings for a staff.
+
+The \ci{lyrlayout} command can also be used within
+\ci{setlyrics}; this is useful if an individual setting
+(especially a font change) should apply to a particular
+portion of lyrics rather than to a portion of music. For example,
+\begin{quote}
+ \ci{setlyrics}\verb|{x}{An |\ci{lyrlayout}%
+ \verb|{\it}em-pha-sized\lyrlayout{} phrase}|
+\end{quote}
+causes the word ``emphasized'' to appear italic wherever it is posted
+within the music. (Be sure to attach \ci{lyrlayout} commands to
+the corresponding lyrics portions {\em without\/} blank spaces in
+between.)
+
+{\bf As an exception,} the {\bf vertical positioning of lyrics} cannot be
+changed within \ci{lyrlayout}; instead, it is handled staff-wise
+using the special commands discussed in
+section~\ref{vertical-positioning}.
+
+
+
+\subsection{Multiple verses per staff}
+\label{multilyrlines}
+
+An arbitrary number of verses can be assigned to a staff
+straightforwardly by saying
+\begin{quote}\ci{assignlyrics}\verb|{|\var n\verb|}{|%
+	     \var{names}\verb|}|\end{quote}
+where \var{names} is a {\bf comma-separated list} of the desired
+lyrics line names, listed from top to bottom. In the following
+example\footnote{Excerpt from: ``Non moriar sed vivam'', motet by
+{\sc Martin Luther}},
+
+\begin{music}
+ \resetlyrics
+ \generalmeter\allabreve
+ \generalsignature2
+ \scale{0.9}
+ \setlyrics{latin} {Non mo-ri-ar sed}
+ \setlyrics{german}{Ich wer-de nicht ster-ben, son-dern}
+ \assignlyrics1{latin,german}
+ \small
+ \setsongraise1{-1.5mm}
+ \startextract
+  \znotes\verses{,\lyrlayout{\footnotesize\it}}\en
+  \NOTEs\wh{'a}\en\bar
+  \NOTes\verses{\beginmel}\ha{'b}\verses{\endmel}\ha a\en\bar
+  \NOtesp\beginmel\qup{'a}\en
+  \Notes\ca{'b}\en
+  \NOtes\verses{,\endmel}\qa{'c}\verses{,\beginmel}\itieu0d\qa d\en\bar
+  \NOtes\ttie0\qa{'d}\endmel\qa c\en
+  \NOtes\verses{\beginmel}\ha{'d}\en\bar
+  \NOTes\verses{\endmel}\ha{'ee}\en
+ \endextract
+\end{music}
+\twoversesspace
+
+the lyrics lines have been set up as follows:
+\begin{quote}
+ \bci{assignlyrics}
+ \begin{verbatim}
+\setlyrics{latin} {Non mo-ri-ar sed}
+\setlyrics{german}{Ich wer-de nicht ster-ben, son-dern}
+\assignlyrics1{latin,german}\end{verbatim}
+\end{quote}
+ 
+
+\subsubsection{Handling verses individually}
+
+If you code lyrics attachment manipulations the way
+described in section~\ref{manipulation}, these manipulations apply
+{\em to all lyrics lines\/} of the referred staff {\em
+simultaneously.\/} In order to address each lyrics line separately,
+use the command
+\begin{quote}
+ \ci{verses}\verb|{|\var{man1}\verb|,|\var{man2}\verb|,|\dots\verb|}|
+\end{quote}
+where \var{man1} is a sequence of commands to manipulate the upper
+lyrics line, \var{man2} to manipulate the second lyrics line from
+above, and so on. These command sequences may be empty. Delimiting
+commas after the last non-empty list entry can be omitted. For example,
+\begin{quote}
+ \ci{verses}\verb|{,,\beginmel,\golyr{abc}}|
+\end{quote}
+leaves the upper two lyrics lines unaltered, initiates a melisma at
+the third, performs a jump to label {\tt abc} at the fourth, and
+leaves all further ones (whatever their number may be) unaltered. As
+another example, the font change for the german lyrics of the above
+excerpt is accomplished by
+\begin{quote}
+ \verb|\znotes|\ci{verses}\verb|{,\lyrlayout{\footnotesize\it}}\en|
+\end{quote}
+before the first note is coded.
+
+
+\subsubsection{Vertical positioning}
+\label{multiple-vert-pos}
+
+A block of multiple lyrics lines is vertically centered around the position
+which a single lyrics line would have taken; thus you can do things
+like
+
+{\small\setlyrstrut
+ \resetlyrics
+ \setlyrics{Winter1}{Win-ter a-de\rlap{,} a-ber dein Schei-den macht\rlap{,}}
+ \setlyrics{Winter2}{schei-den tut weh\rlap,}
+ \assignlyrics1{Winter1,Winter2}
+ \generalmeter{\meterfrac34}
+ \generalsignature2
+ \setsongraise1{-2mm}
+ \startextract
+  \NOtes\qa{ffe}\en\bar
+  \NOTesp\hup d\en\rightrepeat
+  \assignlyrics1{Winter1}%
+  \NOtes\qa{fgh}\en\bar
+  \NOtes\qa h\en
+  \Notes\beginmel\Ibu0gf1\qb0g\endmel\tqh0f\en
+  \NOtes\qa g\en
+ \endextract}
+\twoversesspace
+
+without having to adjust the vertical position within the
+piece. (See the source of this manual for the coding of this
+example.)
+
+\leavevmode\label{lyrstrut}%
+The vertical distance between the baselines of multiple verses is
+appropriate for the default 10~points font size of plain \TeX.
+However, the size-switching commands \verb|\smalltype|,
+\verb|\medtype|~etc.\ do not implicitly adjust the vertical distance
+to the chosen font size. Since the vertical distance of lyrics is
+controlled by the concept of a {\em lyrics strut\/}\footnote{In
+analogy to \TeX's {\tt\char92 strut}; see {\sl The \TeX book\/} by
+{\sc D.~E.~Knuth.}}, you should perform this adjustment explicitly with
+the command
+\begin{quote}\ci{setlyrstrut}\end{quote}
+directly after each ``global'' font size change (i.\,e.~after each size
+change not issued within \verb|\lyrlayout{...}|;
+see~\ref{indivlayout}) unless you do not want the spacing to be
+adjusted. (\TeX perts only: If you like to define your own vertical
+spacing, you may redefine the \ci{lyrstrutbox} yourself.)
+
+
+
+\subsection{Auxiliary lyrics}
+\label{auxlyrics}
+
+If you have typeset two voices of a polyphonic arrangement within one
+staff, you normally want to give each voice its own lyrics lines.
+Usually, the two voices are distinguished by means of the notes' stem
+direction; the lyrics of the up-stemmed voice are typeset above,
+those of the down-stemmed voice below the staff. \musixlyr\
+provides the facility to maintain such two lyrics ``streams'' per
+staff; one of them --- which is handled exactly as described so
+far --- will be called {\em main lyrics,\/} the second one {\em
+auxiliary lyrics.\/}
+
+
+\subsubsection{Addressing auxiliary lyrics}
+
+Only two rules are to be obeyed for directing commands to auxiliary lyrics:
+\begin{enumerate}
+ \item Enclose everything concerning auxiliary lyrics in:
+   \begin{quote}\ci{auxlyr}\verb|{...}|\end{quote}
+   For example, assign lyrics line~{\tt verse1} to staff~2 as
+   auxiliary lyrics by:
+   \begin{quote}\ci{auxlyr}\verb|{\assignlyrics{2}{verse1}}|\end{quote}
+   For example, begin a melisma at the next note of the ``auxiliary'' voice by:
+   \begin{quote}\ci{auxlyr}\verb|{\beginmel}|\end{quote}
+   (For \TeX perts: If the argument of \ci{auxlyr} consists of
+   only one token, the braces can be omitted, so that
+   \verb|\auxlyr\beginmel| does the same.)
+ \item There are exactly two exceptions to the first rule. The first
+   one are the \ci{setlyrics}, \ci{appendlyrics}, and \ci{copylyrics}
+   commands which need not be enclosed in \ci{auxlyr}\verb|{...}|;
+   their function is independent of the later use of the defined
+   lyrics lines as either main or auxiliary lyrics.
+
+   The second exception concerns lyrics commands issued as type-1
+   \TeX\ strings in a \PMX\ source; see below for details.
+\end{enumerate}
+
+\label{auxlyr-vertical-position-default}%
+Auxiliary lyrics are lifted above the staff by default, i.\,e.~they have
+the same vertical position as main lyrics belonging to the staff above
+the current staff. If this causes collisions with the main lyrics of
+the upper staff, you have to shift the lyrics away from each other
+using the vertical spacing commands discussed in
+section~\ref{vertical-positioning}.
+
+
+\subsubsection{Automatic attachment of auxiliary lyrics}
+\label{auxlyr-attachment}
+
+While it is easy to attach only one lyrics ``stream'' to a single
+voice within a system automatically, the attachment of both main and
+auxiliary lyrics involves the task of determining which note belongs
+to which voice. Unfortunately, \musixtex\ does not explicitly state a
+note's membership of a particular voice; therefore, a heuristic
+method has to be used to gather this information. However,
+the situation is completely different if you prepare your scores with
+the \PMX%
+\footnote{If you don't know what \PMX\ is, have a look at:
+	  {\tt http://icking-music-archive.sunsite.dk/musixtex/software/pmx/}}
+preprocessor. The following paragraphs explain managing the lyrics
+attachment automatism for both cases --- \PMX\ and
+non-\PMX\ --- separately.
+
+
+\paragraph{Using \PMX.}
+\label{pmx-autodetection}
+
+(This paragraph requires some \PMX\ knowledge.) For \PMX-prepared
+scores (which \musixlyr\ detects automagically\footnote{%
+  This automatic \PMX\ detection may cause problems for processing
+  \PMX\ scores prepared with the \PMX-unaware \musixlyr\
+  version~1.0. See section~\ref{no-pmx-autodetection} about how to
+  solve this backward-incompatibility issue.
+}), the distinction
+between the two voices of a staff works fully automatic. This applies
+to both the automatic lyrics attachment as well as explicit lyrics
+manipulations --- i.\,e.,~you do not have to use \ci{auxlyr}\verb|{...}| for
+manipulating auxiliary lyrics. (This only applies to manipulations
+that appear in a voice's context, i.\,e.~within a type-1 \TeX\ string.)
+For reference, see the following example\footnote{Excerpt from
+``Waldesnacht, du wunderk\"uhle'' by {\sc Johannes Brahms} ({\sl Eine
+kleine Melodie,\/} Strube, M\"unchen 1989)},
+
+\oneversespace
+\begin{music}
+ \resetlyrics\small
+ \setlyrics{soprano}{all der ir-ren Qua-len los.}
+ \auxlyr{\assignlyrics1{soprano}}
+ \copylyrics{soprano}{alto}
+ \assignlyrics1{alto}
+
+ \auxlyr{\lyrraise1{a -3\internote}}
+ \staffbotmarg5.5\Interligne
+ \stafftopmarg5\Interligne
+ \generalsignature2
+ \lyrmodealter0
+ 
+ \startextract\addspace\afterruleskip
+  \scale{1.2}%
+  \NOtes\zhu{=j}\lower6\internote\qp\lifthpause{-3}\sk\qu h\en
+  \bar
+  \NOtes\auxlyr\beginmel\roffset{.8}{\isluru2j}\zhup f\lower8\internote\qp\en
+  \NOTes\hl{^d}\en
+  \NOTes\zql e\itieu0e\qu e\en
+  \bar
+  \NOtes\beginmel\islurd1c\zql c\ttie0\tslur2h\auxlyr\endmel\qu e%
+	\roff{\endmel\tsslur1d\zhl d}\qu{=d}%
+	\auxlyr\beginmel\itieu0d\hu d%
+	\ql d\en
+  \bar
+  \NOTes\zhl d\ttie0\auxlyr\endmel\hu d%
+	\zhl a\hu c\en
+  \bar
+  \NOTes\zhl a\fermataup l\hu d\hpause\en
+ \setdoubleBAR\endextract
+\end{music}
+\oneversespace
+
+which can be obtained by the following \PMX\ code (processed with
+\PMX\ version~2.3):
+\begin{quote}
+\bci{auxlyr}
+\begin{verbatim}
+---
+\input musixtex                     % These commands are necessary
+\input pmx                          % because pmx.tex MUST be \input
+\input musixlyr                     % before musixlyr.tex!
+
+\setlyrics{soprano}                 % \setlyrics and \copylyrics
+  {all der ir-ren Qua-len los.}     %  need not be enclosed in
+\copylyrics{soprano}{alto}          % \auxlyr{...}.
+
+\assignlyrics1{alto}
+\auxlyr{\assignlyrics1{soprano}
+        \lyrraise1{a 3\Interligne}}
+
+\let\BM\beginmel                    % For brevity within the subsequent
+\let\EM\endmel                      % music coding recommended.
+---
+1 1 4 4 0 0 3 2 0 5 20 0
+
+t
+./
+
+% 1st and 2nd bar: 
+r4-6 r2-6    |       r4-8    d24s             e4 //
+c25n      a4 | \BM\ f2d s+4       \isu0e{.8}\ e4 /
+% 3rd bar:
+\BM\        c s   \EM\ d2r s       d4   //
+\ts0e0\EM\  e s+3      dn     \BM\ d2 s /
+% 4th bar:
+      d2  a //                            % Note that \BM and \EM
+\EM\  d s c /                             % apply either to main
+% 5th bar:                                % or to auxiliary lyrics,
+a    r+0 //                               % depending on which voice
+d of rb  /                                % they appear in.\end{verbatim}
+\end{quote}
+
+By default, main lyrics are attached to the lower voice (whose
+lines end with \verb|//| in the \PMX\ source), auxiliary lyrics to the
+upper voice; due to \PMX\ internals, this ensures that if only one
+voice is present, main lyrics are attached to it. However, situations
+exist in which it is desirable to have main lyrics attached to the
+upper voice, e.\,g.~when you have only main lyrics and want to
+synchronize them with the soprano voice instead of the alto voice
+(both of them set on the same staff). In this case, you can toggle the
+attachment of lyrics to voices with the command
+\begin{quote}\ci{lyrmodealter}\verb|{|\var n\verb|}|\end{quote} for
+staff number \var n; the command
+\begin{quote}\ci{lyrmodenormal}\verb|{|\var n\verb|}|\end{quote}
+restores the default behaviour. If $\hbox{\var n}=0$ then the change
+affects all staves.
+
+
+\paragraph{Using ``plain'' \musixtex\ without \PMX.}
+
+In this context, there are two basically different modes for lyrics
+attachment:
+\begin{enumerate}
+ \item In {\em normal mode\/} (which is active by default) only main
+   lyrics are provided automatically as described in
+   section~\ref{auto-attachment}. All auxiliary lyrics must be issued
+   manually by saying \ci{auxlyr}\ci{lyr} before the respective note.
+   This mode is useful when you do not have auxiliary lyrics at all
+   or when auxiliary lyrics occur only occasionally within the piece.
+ \item In {\em alternative mode\/}, both main and auxiliary lyrics
+   are provided automatically. The two voices of a staff are
+   distinguished by means of their notes' stem direction; the lower
+   voice gets main lyrics, the upper one auxiliary lyrics. This
+   implies that the automatism fails at stemless
+   notes\footnote{Ancient notes, namely breve, longa, and maxima, are
+   also treated as stemless notes by \musixtex's internals.}, thus you
+   have to provide lyrics manually by saying \ci{lyr} or
+   \ci{auxlyr}\ci{lyr}, respectively, before such notes. This mode is
+   meant for staves which continuously contain two polyphonic voices
+   with separate lyrics.
+\end{enumerate}
+
+The appropriate mode can be chosen staff-wise: The command
+\begin{quote}\ci{lyrmodealter}\verb|{|\var n\verb|}|\end{quote}
+enables alternative mode for staff number \var n; the command
+\begin{quote}\ci{lyrmodenormal}\verb|{|\var n\verb|}|\end{quote}
+restores normal mode. As stated above, $\hbox{\var n}=0$ performs the
+choice affecting all staves.
+
+For illustration, have a look at the following
+example\footnote{Excerpt from ``Audite nova'' by {\sc Orlando di
+Lasso} ({\sl ars musica\/} vol.\,4, M\"oseler Verlag
+Wolfenb\"uttel/Z\"urich)}:
+
+\oneversespace
+\begin{music}
+ \resetlyrics \small
+ \lyrmodealter0
+ \setlyrics{soprano}{bring her die Gans,} \auxlyr{\assignlyrics1{soprano}}
+ \copylyrics{soprano}{alto}                       \assignlyrics1{alto}
+ 
+ \generalsignature{-2}
+ \advance\stafftopmarg3\Interligne
+ \advance\staffbotmarg2\Interligne
+ 
+ \startextract\addspace\afterruleskip
+  \NOtes\zqu g\ql e\en
+  \bar
+  \Notes\zqu i\beginmel\ibslurd0f\ibl0f{-1}\qb0f\en
+  \Notes\qb0e\en
+  \Notes\auxlyr\beginmel\ibsluru1i\zqup i\qb0d\en
+  \Notes\tqb0e\en
+  \Notes\endmel\tbslurd0e\ql c\en
+  \notes\ibbu0h{-1}\qb0h\en
+  \notes\tqh0g\en
+  \NOtes\auxlyr\endmel\tbsluru1h\zqu h\ql c\en
+  \bar
+  \NOTEs\auxlyr\lyr\zwh i%       The lyrics of the whole notes
+	\lyr\wh b\en     %       must be given manually.
+ \endextract
+ \lyrmodenormal0
+\end{music}
+\oneversespace
+
+The lyrics were defined as follows:
+\begin{quote}
+ \bci{auxlyr}
+ \bci{assignlyrics}
+ \begin{verbatim}
+\setlyrics{soprano}{bring her die Gans,}
+\copylyrics{soprano}{alto}
+
+\assignlyrics1{alto}
+\auxlyr{\assignlyrics1{soprano}}
+
+\lyrmodealter0                    % provide main + aux. lyrics automatically\end{verbatim}
+\end{quote}
+
+This is the complete notes section:
+\begin{quote}
+ \bci{auxlyr}
+ \begin{verbatim}
+\NOtes\zqu g\ql e\en
+\bar
+\Notes\zqu i\beginmel\ibslurd0f\ibl0f{-1}\qb0f\en
+\Notes\qb0e\en
+\Notes\auxlyr\beginmel\ibsluru1i\zqup i\qb0d\en
+\Notes\tqb0e\en
+\Notes\endmel\tbslurd0e\ql c\en
+\notes\ibbu0h{-1}\qb0h\en
+\notes\tqh0g\en
+\NOtes\auxlyr\endmel\tbsluru1h\zqu h\ql c\en
+\bar
+\NOTEs\auxlyr\lyr\zwh i%       The lyrics of the whole notes
+      \lyr\wh b\en     %       must be given manually.\end{verbatim}
+\end{quote}
+
+Note that, as opposed to using \PMX, there is no special provision
+for attaching main lyrics to the upper voice. If you desire a single
+lyrics ``thread'' synchronized with the upper voice, please use
+auxiliary lyrics instead and position them below the staff (see
+section~\ref{vertical-positioning}).
+Alternatively, you may use main lyrics in normal lyrics mode and code
+the lower voice completely non-spacing (in the sense explained
+in~\ref{auto-attachment}), the upper voice completely spacing; this
+should not be too complicated for mainly homophonic pieces.
+
+
+
+\subsection{Lyrics at multi-staff instruments}
+\label{multi-staff-instruments}
+
+So far in this manual, the term {\em staff\/} has always been used for
+what \musixtex\ precisely calls an {\em instrument\/}. This section,
+however, correctly adopts the \musixtex\ terminology.
+
+Lyrics can be assigned to staves of a multi-staff instrument. To do
+so, use
+\begin{quote}
+  \ci{assignlyricsmulti}\verb|{|\var i\verb|}{|\var s\verb|}{...}|
+\end{quote}
+instead of \verb|\assignlyrics...|; here, \var s~addresses the desired
+staff number (counted from bottom to top) of instrument~\var i.
+
+Nevertheless,
+\ci{assignlyrics}\verb|{|\var i\verb|}{...}|
+can be used as well if instrument~\var i has multiple staves; in this
+case, it is equivalent to
+\verb|\assignlyricsmulti{|\var i\verb|}{1}{...}|,
+i.\,e.~it affects only the first staff (and not all staves, as may be
+presumed).
+
+In the same spirit, the following ``multi'' commands replace the
+standard ones within a multi-staff instrument context:
+\begin{quote}
+  \ci{lyrraisemulti}\\
+  \ci{lyrmodenormalmulti}\\
+  \ci{lyrmodealtermulti}
+\end{quote}
+
+All other \musixlyr\ commands or features can be used the same way as
+within a single-staff instrument context.
+
+Using lyrics at multi-staff instruments can be useful, for example,
+for typesetting songs with piano accompaniment:%
+\footnote{Example taken from songbook {\sl Am Brunnen vor dem Tore\/},
+Delphin Verlag M\"unchen/Z\"urich 1981}
+
+\begin{music}
+ \resetlyrics
+ \setlyrics{verse}{Gu-ter Mond, du gehst_ so_ stil_-le}
+ \assignlyricsmulti11{}
+ \assignlyricsmulti12{verse}
+ \lyrraisemulti12{b 2\internote}
+ \setstaffs12
+ \generalsignature{-1}
+ \generalmeter\meterC
+ \setclef1\bass
+ \interstaff{13}
+ \scale{1.3}
+ \startextract
+  \Notes\qp|\ibl0j{-2}\qb0j\tqb0i\en
+  \bar\hardspace{1.7\myqnwidth}%
+  \NOtes\isluru1d\lq c\zq M\ql d|\qa h\en
+  \NOtes\zq c\zq M\ql e|\qa h\en
+  \Notes\lq c\zq M\ql d|\islurd0h\ibu0h2\qb0h\tslur0i\tqh0i\en
+  \Notes\tslur1e\zq c\zq M\ql e|\isluru0j\ibl0j2\qb0j\tslur0k\tqb0k\en
+  \bar\hardspace\myqnwidth
+  \Notes\isluru1d\lq c\zq M\ql d|\isluru0j\ibl0j{-2}\qb0j\tslur0i\tqb0i\en
+  \NOtes\zq c\zq M\ql e|\qa g\en
+  \NOtes\lq c\zq M\ql d|\qp\en
+  \znotes\midslur2\tsslur1d\en
+ \zendextract
+\end{music}
+
+The lyrics of this example are defined as follows:
+\begin{quote}
+ \bci{assignlyricsmulti}
+ \bci{lyrraisemulti}
+ \begin{verbatim}
+\setlyrics{verse}{Gu-ter Mond, du gehst_ so_ stil_-le}
+\assignlyricsmulti{1}{2}{verse}
+\lyrraisemulti    {1}{2}{b \internote}\end{verbatim}
+\end{quote}
+
+
+
+\subsection{Managing lyrics assignment according to current context}
+\label{assignment-by-context}
+
+Managing the properties of lyrics lines assignment to instruments by
+absolute instrument numbers --- as it is done with the
+\ci{assignlyrics}, \ci{lyrraise}, and \ci{lyrmodealter}
+commands --- may cause difficulties whenever the score's number and
+order of instruments shall be rearranged; in this case instrument
+numbers change, thus the instrument number parameters of the
+mentioned lyrics-related commands have to be adjusted.
+
+This is especially unpleasant where such a rearrangement is done
+automatically, e.\,g.~by \PMX's part extraction facility {\em
+scor2prt\/}; this is intended to work without any manual editing
+of the generated part files.
+
+To address this issue, \musixlyr\ provides {\em context-dependent\/}
+variants of the commands mentioned above. For example: Instead of
+\verb|\assignlyrics{2}{soprano}|, you may say something like:
+\begin{quote}
+  \verb|\notes...&|\ci{assignlyricshere}\verb|{soprano}...\en|
+\end{quote}
+\ci{assignlyricshere}\verb|{|\var{name(s)}\verb|}| assigns the given verse
+\var{name(s)} to the instrument/staff whose context it occurs in within the
+\verb|\notes...\en| construct; no absolute instrument/staff number needs to
+be specified.
+
+For example, the following two code fragments are equivalent:
+
+\begin{quote}
+ \footnotesize
+ \hfill
+ \def\arraystretch{1}%
+ \begin{tabular}{l@{\qquad}|@{\qquad}l}
+  \begin{tabular}[t]{@{}l@{}}
+   \ci{assignlyrics}\verb|     {1}   {acct}%|\\
+   \ci{assignlyricsmulti}\verb|{2}{2}{verse}%|\\
+   \verb.\NOtes\qa c&\qa e|\qa g\en.
+  \end{tabular}
+  &
+  \begin{tabular}[t]{@{}l@{}}
+   \verb|\NOtes|\ci{assignlyricshere}\verb|{acct}\qa c%|\\
+   \verb|     &\qa e%|\\
+   \verb.     |.\ci{assignlyricshere}\verb|{verse}\qa g\en|
+  \end{tabular}
+ \end{tabular}
+ \hfill\strut
+\end{quote}
+
+Using \PMX, the context-dependent commands must be given as type-1
+inline \TeX\ strings. Here is the same example, coded as \PMX input:
+
+\begin{quote}
+ \footnotesize
+ \hfill
+ \def\arraystretch{1}%
+ \begin{tabular}{l@{\qquad}|@{\qquad}l}
+  \begin{tabular}[t]{@{}l@{}}
+   \ci{assignlyrics}\verb|     {1}   {acct}\|\\
+   \ci{assignlyricsmulti}\verb|{2}{2}{verse}\|\\
+   \verb|c44 /|\\
+   \verb|e44 /|\\
+   \verb|g44 /|\\
+  \end{tabular}
+  &
+  \begin{tabular}[t]{@{}l@{}}
+   \hphantom{\tt .NOtes.assignlyricshere.acct..qa cg.en}\\
+   \\
+   \ci{assignlyricshere}\verb|{acct}\  c44 /|\\
+   \verb|                          e44 /|\\
+   \ci{assignlyricshere}\verb|{verse}\ g44 /|\\
+  \end{tabular}
+ \end{tabular}
+ \hfill\strut
+\end{quote}
+
+The first one (left) results in wrong lyrics assignments in {\em
+scor2prt\/} output; the second one (right) is robust against part
+extraction.
+
+This is the complete set of ``here'' commands that can be applied the
+same way:
+\begin{quote}
+  \ci{assignlyricshere}\\
+  \ci{lyrraisehere}\\
+  \ci{lyrmodenormalhere}\\
+  \ci{lyrmodealterhere}
+\end{quote}
+
+All other \musixlyr\ commands are context-driven anyway, i.\,e.~using
+the mentioned ``here'' commands you can completely omit any absolute
+instrument/staff number assignment.
+
+
+
+\subsection{Miscellaneous}
+
+\subsubsection{Avoiding problems after {\tt\char92
+	       endpiece...\char92 startpiece}}
+
+Sometimes, after having suspended the music with \verb|\endpiece| and
+restarted it with \verb|\startpiece| (or the respective
+\verb|\...extract| commands), the lyrics lines are totally misaligned
+because the internal lyrics positioning parameters are not reset
+properly. Saying
+\begin{quote}\ci{resetlyrics}\end{quote}
+before the beginning of the new music section should solve this
+problem.
+
+
+\subsubsection{Improved centering of words with punctuation marks}
+
+Centered words with an attached punctuation mark often seem a bit
+left-shifted since the punctuation mark also counts for the
+centering. To have a word centered solely with respect to its
+letters, enclose the punctuation mark in \verb|\rlap{...}| as it is
+done in the example of section~\ref{multiple-vert-pos}. Unfortunately,
+this circumvents the lyrics shifting automatism, and is incompatible
+with the use of \ci{lyrnop}.
+
+
+\subsubsection{Verse numbers}
+\label{versenumbers}
+
+There is no special command for this topic. See the following example:
+
+\begin{music}
+ \resetlyrics
+ \generalmeter{\meterfrac24}
+ \scale{1.8}
+ \setlyrics{sailor1}
+	   {\llap{1.} What shall we do with a drun-ken sail-or\rlap{?}}
+ \setlyrics{sailor2}
+	   {\llap{2.} Take him and shake him and try to\lyrlink a-wake him,}
+ \setlyrics{sailor3}{\llap{3.} Give him a dose of_ salt and wa-ter,}
+ \setlyrics{sailor4}{\llap{4.} Give him a dash with a bo-som's rub-ber,}
+ \assignlyrics1{sailor1,sailor2,sailor3,sailor4}
+ \small\setlyrstrut
+ \setsongraise1{-6mm}
+ \startextract
+  \znotes\llyr\lyroffset{-2}%    make the numbers stand off to the left
+	 \lyr%                   post the numbers
+  \en
+  \Notes\ibu0h0\qb0h\en
+  \notes\nbbu0\qb0h\tqh0h\en
+  \Notes\ibu0h0\qb0h\en
+  \notes\nbbu0\qb0h\tqh0h\en\bar
+  \Notes\Dqbu hd\Dqbu fh\en
+ \endextract
+\end{music}
+\oneversespace
+\twoversesspace
+
+To see how this is accomplished, look for the example's coding within
+{\tt mxlyrdoc.tex}.
+
+Section~\ref{lyric*-verse-numbers} explains an alternative method for
+setting vertically aligned verse numbers.
+
+
+\subsubsection{``Lyrics slurs''}
+
+If two consecutive syllables of a lyrics line share the same note (as
+in the second verse of the above example), you may want to link them
+together with a small slur under them \mbox{like\lyrlink this.} To do
+this, use the command \ci{lyrlink} instead of the respective blank
+space within the \verb|\setlyrics| definition.
+
+If any of the adjacent characters extend under their \TeX\ baseline
+(like `g', `j', `p', etc.), use \ci{lowlyrlink} which lowers the
+slur accordingly (e.\,g.: \mbox{sing\lowlyrlink gladly}).
+
+
+\subsubsection{Restoring the \PMX-unaware behaviour of \musixlyr~1.0}
+\label{no-pmx-autodetection}
+
+As stated in section~\ref{pmx-autodetection}, \musixlyr\ distinguishes
+between main and auxiliary lyrics context in a special way when it
+detects that the score has been set up using \PMX. However, this
+automatic \PMX\ detection may cause problems for processing \PMX\
+scores prepared with the \PMX-unaware \musixlyr\ version~1.0. To solve
+this, you can force the old \musixlyr\ behaviour by an explicit macro
+redefinition as follows:
+
+Within {\tt musixlyr.tex}, find the code fragment
+\begin{quote}\begin{verbatim}
+\ifx\nextvoice\undefined
+  \def\decide@lyrmode{%
+    \call@lyrmode
+    ...
+    \fi\fi\fi\fi\fi\fi\fi}
+\else\end{verbatim}\end{quote}
+(which is about 25 lines long). Copy it, exluding the first and the
+last line, to your score source and surround it by the
+\verb|\makeatletter...\makeatother| command pair. This
+should then look like this:
+\begin{quote}\begin{verbatim}
+\makeatletter
+  \def\decide@lyrmode{%
+    \call@lyrmode
+    ...
+    \fi\fi\fi\fi\fi\fi\fi}
+\makeatother\end{verbatim}\end{quote}
+
+To restore the \PMX-aware \musixlyr\ behaviour of version~1.1 and
+newer, copy the {\em second\/} \verb|\decide@lyrmode| definition
+from {\tt musixlyr.tex} to the desired place in your score and
+surround it with \verb|\makeatletter...\makeatother|.
+
+To do these redefinitions within a \PMX\ input file, it is probably
+always best to wrap them in macro definitions within the \PMX\ file
+preamble. This way, you can switch between the ``old'' and ``new''
+\musixlyr\ behaviour by simply calling these macros in \PMX's
+inline-\TeX\ style.
+
+\pagebreak[4]
+\section{Command index}
+\printindex
+
+
+
+\section{Software license}
+
+\musixlyr\ (including this manual) is free software; you can
+redistribute it and/or modify it under the terms of the GNU General
+Public License as published by the Free Software Foundation; either
+version~2 of the License, or any later version.
+
+\musixlyr\ is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with \musixlyr; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+\medskip
+Author:
+\begin{tabular}[t]{l}
+ Rainer Dunker\\
+ Wachtelweg 31\\
+ 85\,591 Vaterstetten\\[0.5ex]
+ Germany\\[1ex]
+ E-mail: \tt rainer.dunker@web.de
+\end{tabular}
+
+\end{document}
