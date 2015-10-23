@@ -1,0 +1,115 @@
+%
+%   This file is part of MusiXTeX
+%
+%   MusiXTeX is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2, or (at your option)
+%   any later version.
+%
+%   MusiXTeX is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with MusiXTeX; see the file COPYING.  If not, write to
+%   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+%   Boston, MA 02111-1307, USA.
+%
+% american people perhaps may want to change the paper size
+%
+% LaTeX2e compliant (6 Oct 2009)
+
+%\textheight= 50\baselineskip
+\textheight= 297mm \advance\textheight-2in %
+\textwidth= 210mm \advance\textwidth-1.8in %
+%
+% Allow dvips -tletter and it still fits. 
+%\voffset-5mm\hoffset-.1in
+\voffset1mm\hoffset-.1in
+
+\input musixtex
+\input musixbm
+\input musixcho
+\input musixdat
+\input musixext
+\input musixgre
+\input musixgui
+\input musixlit
+\input musixltx
+\input musixper
+%\input musixmad% removed because inessential (6 June 2008)
+
+% we don't need margin
+\oddsidemargin\z@ \evensidemargin\z@
+\marginparwidth\z@ \marginparsep\z@ \marginparpush\z@
+
+\topmargin-15pt \headheight12pt
+\headsep25pt \footskip25pt
+\columnsep10pt \columnseprule\z@ \parskip\smallskipamount
+
+\nobarnumbers
+
+% for usage of notes inside text
+\let\nblines\z@
+
+\long\def\theindex{\chapter{Index}\parindent\z@
+  \parskip\z@ plus.3\p@\relax \let\item\@idxitem \columnseprule\z@
+  \columnsep35\p@ \begin{multicols}{2}}
+
+\def\endtheindex{\end{multicols}}
+
+% saves paper
+\def\@listI{\leftmargin\leftmargini \parsep 4.5\p@ plus2\p@ minus\p@
+\topsep 1\p@ plus2\p@ minus1\p@
+\itemsep 4.5\p@ plus2\p@ minus\p@}
+
+% more place for digits in \tableofcontents
+\def\l@subsection{\@dottedtocline{2}{3.8em}{3.4em}}%original 2 3.8 3.2
+
+\def\tty{\csname normalshape\endcsname\csname mediumseries\endcsname\ttfamily}
+\def\mutex{M\raise\tw@\p@\hbox{\kern\m@ne\p@ u\kern\m@ne\p@}\TeX}
+\def\Bslash{\ttfamily \char'134}
+\def\|{\texttt{\char'174}}
+\def\LBR{\texttt{\char'173}}
+\def\RBR{\texttt{\char'175}}
+\def\keyindex#1{\leavevmode
+ \hbox{\Bslash #1}\index{#1@{\protect\Bslash #1}}}
+\def\zkeyindex#1{\index{#1@{\protect\Bslash #1}}}
+\def\ixem#1{#1\index{#1}}
+\def\itxem#1{\textsl{#1}\index{#1}}
+\def\ttxem#1{\texttt{#1}\index{#1@\texttt{#1}}}
+\def\ixtt#1{\index{#1@\texttt{#1}}}
+\def\ital#1{\textsl{#1\/}}
+
+\newfont{\mflogo}{logo10 scaled 1200}
+\def\MF{{\mflogo METAFONT}}
+\def\unix{\textsc{unix}}
+
+\iflongDCfontnames
+  \font\tentt=\fontid tt1000
+\else\iflongECfontnames  
+  \font\tentt=\fontid tt1000
+\else  
+  \font\tentt=\fontid tt10
+\fi\fi
+% It's under construction
+\tolerance10000\hbadness10000
+
+\def\printindex{\@input{\jobname.ind}}
+
+\def\underscoreSymbol{\leavevmode \kern.06em \vbox{\hrule width.3em}}%
+
+\def\_{\protect\underscoreSymbol}
+
+\def\remark{\par\noindent\slshape REMARK:}
+\def\endremark{\leavevmode\/}
+
+\def\important{\par\noindent\slshape IMPORTANT:}
+\def\endimportant{\leavevmode\/}
+
+\def\caution{\par\noindent\slshape CAUTION:}
+\def\endcaution{\leavevmode\/}
+
+\def\st@ffs{1}
+\endinput

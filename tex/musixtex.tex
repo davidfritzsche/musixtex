@@ -19,9 +19,15 @@
 %   New in this version
 %   macros: \lwp \lwpp \rwp \rwpp \lhp \rhp \lhpp \rhpp
 %
-%   Correction of a bug in the definition of choir bracket (l.1688-1698)
+%   Correction of signature spacing at change of the music size (l.1428-35)rev2
 %
-%   Correction of a bug in the macro \rul@sep (l. 2259)
+%   Correction of a bug in the definition of choir bracket (l.1690-1700)
+%
+%   Correction of a bug in the macro \rul@sep (l. 2259)(l.2273)
+%
+%   \cclp, \zccup, \zcclp from musixpoi.tex (l.3254)rev3 typo correction
+%
+%   Correction of a historical bug of stem length (l.4460)
 %
 \ifx\undefined\startpiece \else \endinput \fi
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
@@ -30,8 +36,8 @@
 \ifx\makeatother\undefined\def\makeatother{\catcode`\@=12\relax}\fi
 
 \def\mufl@x{0.83}%
-\def\mxversion{T.113}
-\def\mxdate{28 June 2005}
+\def\mxversion{T.114}
+\def\mxdate{1 Feb 2009} % T.114-rev.4
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
@@ -1232,8 +1238,11 @@
 \def\tbsluru{\t@slur1}
 \def\tbslurd{\t@slur0}
 
-\def\ttie#1{\let\T@i\@c \t@slur{-\p@ne}#1\@ne}
-\def\tleg#1{\let\T@i\@c \tslur #1\@ne}
+% \def\ttie#1{\let\T@i\@c \t@slur{-\p@ne}#1\@ne}
+% \def\tleg#1{\let\T@i\@c \tslur #1\@ne}
+% #1 should be braced... by David Alsop on January 11, 2009
+\def\ttie#1{\let\T@i\@c \t@slur{-\p@ne}{#1}\@ne}
+\def\tleg#1{\let\T@i\@c \tslur{#1}\@ne}
 \let\tten\ttie
 \let\Tten\ttie
 \let\Tleg\tleg
@@ -1419,13 +1428,13 @@
 %%%
 
 \def\normalmusicsize{\musicsize\tw@nty \comput@specifics
-  \afterruleskip\@ight\p@ \elemskip\fontdimen\si@\musicnorfont}
+  \afterruleskip\@ight\p@ \elemskip\fontdimen\si@\musicnorfont \clef@skip\z@}
 \def\smallmusicsize{\musicsize\sixt@@n \comput@specifics
-  \afterruleskip\si@\p@ \elemskip\fontdimen\si@\musicnorfont}
+  \afterruleskip\si@\p@ \elemskip\fontdimen\si@\musicnorfont \clef@skip\z@}
 \def\largemusicsize{\musicsize\@xxiv \comput@specifics
-  \afterruleskip\t@n\p@ \elemskip\fontdimen\si@\musicnorfont}
+  \afterruleskip\t@n\p@ \elemskip\fontdimen\si@\musicnorfont \clef@skip\z@}
 \def\Largemusicsize{\musicsize\@xxix \comput@specifics
-  \afterruleskip\t@n\p@ \elemskip\fontdimen\si@\musicnorfont}
+  \afterruleskip\t@n\p@ \elemskip\fontdimen\si@\musicnorfont \clef@skip\z@}
 
 \def\comput@fonts{%
   \ifnum\musicsize=\sixt@@n
@@ -3235,6 +3244,7 @@
 \def\rcu#1{\kern\qn@width\zcu{#1}\kernm\qn@width}
 
 \def\zcup{\advancefalse\cup}
+\def\zccup{\advancefalse\ccup}
 \def\zcupp{\advancefalse\cupp}
 
 \def\cl{\q@symbol\@cl}
@@ -3244,6 +3254,7 @@
 \def\cccccl{\q@symbol\@cccccl}
 
 \def\clp{\q@symbol\@clp}
+\def\cclp{\q@symbol\@cclp}
 \def\clpp{\q@symbol\@clpp}
 
 \def\zcl{\advancefalse\cl}
@@ -3253,6 +3264,7 @@
 \def\zcccccl{\advancefalse\cccccl}
 
 \def\zclp{\advancefalse\clp}
+\def\zcclp{\advancefalse\cclp}
 \def\zclpp{\advancefalse\clpp}
 
 \def\lcl#1{\kernm\qn@width\zcl{#1}\kern\qn@width}
@@ -4448,6 +4460,7 @@
 \let\nbinstruments\maxinstruments
 \normalnotesize
 \normalmusicsize
+\normalnotesize% needs rerun to initialize \metron stem length (a very historical bug since T.103 or earlier) (T.114, Hiroaki)
 \resetlayout
 \def\nbinstruments{1}
 
@@ -4710,4 +4723,5 @@
 
 \catcode`\@=\catcodeat
 \endinput
+
 

@@ -17,16 +17,18 @@
 %   Boston, MA 02111-1307, USA.
 %
 
-\immediate\write16{MusiXPOInted shorties 0.36\space<1 March 1995>}
+%\immediate\write16{MusiXPOInted shorties 0.36\space<1 March 1995>}
+\immediate\write16{MusiXPOInted shorties T.114\space<16 June 2008>}
 
-\ifx\undefined\ccup \else \endinput \fi
+%\ifx\undefined\ccup \else \endinput \fi % conflicts since musixtex.tex T.111 defines \ccup
+\ifx\undefined\zcccclpp \else \endinput \fi
 
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 
-\def\@ccup{\n@vii\@xli \let\st@m\up@flag \g@qp}
+%\def\@ccup{\n@vii\@xli \let\st@m\up@flag \g@qp}% moved into musixtex.tex since T.111
 \def\@cccup{\n@vii42\let\st@m\up@flag \g@qp}
 \def\@ccccup{\n@vii43\let\st@m\up@flag \g@qp}
-\def\@cclp{\n@vii46\let\st@m\down@flag \g@qp}
+%\def\@cclp{\n@vii46\let\st@m\down@flag \g@qp}% moved into musixtex.tex at T.114
 \def\@ccclp{\n@vii47\let\st@m\down@flag \g@qp}
 \def\@cccclp{\n@vii48\let\st@m\down@flag \g@qp}
 \def\@ccupp{\n@vii\@xli \let\st@m\up@flag \g@qpp}
@@ -35,10 +37,10 @@
 \def\@cclpp{\n@vii46\let\st@m\down@flag \g@qpp}
 \def\@ccclpp{\n@vii47\let\st@m\down@flag \g@qpp}
 \def\@cccclpp{\n@vii48\let\st@m\down@flag \g@qpp}
-\def\ccup{\q@symbol\@ccup}
-\def\zccup{\advancefalse\ccup}
-\def\cclp{\q@symbol\@cclp}
-\def\zcclp{\advancefalse\cclp}
+%\def\ccup{\q@symbol\@ccup}% moved into musixtex.tex since T.111
+%\def\zccup{\advancefalse\ccup}% moved into musixtex.tex at T.114
+%\def\cclp{\q@symbol\@cclp}% moved into musixtex.tex since T.111
+%\def\zcclp{\advancefalse\cclp}% moved into musixtex.tex at T.114
 \def\ccupp{\q@symbol\@ccupp}
 \def\zccupp{\advancefalse\ccupp}
 \def\cclpp{\q@symbol\@cclpp}
@@ -62,3 +64,4 @@
 
 \catcode`\@=\catcodeat
 \endinput
+

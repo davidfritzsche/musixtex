@@ -1,0 +1,74 @@
+%%
+%% musixtmr.tex : Times-series fonts definition for MusiXTeX
+%%
+%% usage: 
+%%    \input musixtex
+%%    \input musixtmr
+%%    ...
+%%
+%% This file is public domain.
+%%
+%% Author: 
+%%   Hiroaki MORIMOTO <CQX05646 at nifty dot com>
+%%     Tokyo, Japan
+%%     URL(en): http://homepage1.nifty.com/kuuku/pub/musixtex/index-e.html
+%%        (jp): http://homepage1.nifty.com/kuuku/pub/musixtex/index.html
+%%
+%% reference: musixtex.tex (T.99) 268-508
+%% MusiXTeX: (c) Daniel Taupin, et al.
+%%
+%% History: see trailer.
+%
+\immediate\write16{MusiXTimesFonts\space<2009/10/15>}
+%
+% 8pt roman, bold, and italic
+\font\eightrm=ptmr7t at 8pt
+\font\eightbf=ptmb7t at 8pt
+\font\eightit=ptmri7t at 8pt
+%
+% 9pt
+\font\ninerm=ptmr7t at 9pt
+\font\ninebf=ptmb7t at 9pt
+\font\nineit=ptmri7t at 9pt
+%
+% 10pt
+\font\tenrm=ptmr7t
+\font\tenbf=ptmb7t
+\font\tenit=ptmri7t
+%
+% 12pt
+\font\twelverm=ptmr7t scaled \magstep 1
+\font\twelvebf=ptmb7t scaled \magstep 1
+\font\twelveit=ptmri7t scaled \magstep 1
+%
+% Large fonts for titles
+% (If you prefer Times-bold, use ptmb7t instead of ptmr7t)
+\font\bigfont=ptmr7t scaled \magstep2 % 14pt
+\font\Bigfont=ptmr7t scaled \magstep3 % 17pt
+\font\BIgfont=ptmr7t scaled \magstep4 % 20pt
+\font\BIGfont=ptmr7t scaled \magstep5 % 25pt
+%
+% PMX changes font assignment in pmx.tex
+%   \BIGfont=\fontid bx10 scaled\magstep4
+%   \Bigfont=\fontid bx10 scaled\magstep2
+\ifx\pmxversion\undefined\relax\else
+  \font\Bigfont=ptmr7t scaled \magstep2 % 14pt
+  \font\BIGfont=ptmr7t scaled \magstep4 % 20pt
+\fi
+%
+\normtype
+\endinput
+%%
+%% History
+%%
+%% 2001/08/21
+%%   first publish
+%% 2004/12/24
+%%   no functional change. (email & real address change)
+%% 2007/06/11
+%%   no functional change. (email protection, real address change, URL change)
+%% 2008/08/01
+%%   Font assignment change on PMX.
+%% 2009/10/15
+%%   small update for MusiXTeX T.114 final release.
+%% 

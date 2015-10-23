@@ -1,0 +1,44 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  This is curly.tex, MusiXTex code for multiple left curly brackets   %
+%                                                                      %
+%         submitted by Mthimkhulu Molekwa <MMolekwa@rrs.co.za>         %
+%                   to the mutex list on 19 May 1999                   %
+%                                                                      %
+%                                                                      %
+% usage:                                                               %
+%   \curlybrackets{<instrument1lower><instrument1upper>                %
+%                  <instrument2lower><instrument2upper>                %
+%                  ...                                                 %
+%                  <instrument_n_lower><instrument_n_upper>            %
+%                 }                                                    %
+%                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\undefined\curlybrackets \else \endinput\fi
+\makeatletter
+
+\let\origin@lwrit@staffs\writ@staffs
+\def\writ@staffs{%
+  \origin@lwrit@staffs
+  \ifx\br@cks\empty\else\expandafter\@bracks\br@cks\ende\fi}
+
+\let\br@cks\empty
+\def\curlybrackets#1{\def\br@cks{#1}}
+
+\def\@bracks#1#2#3\ende{%
+    \ifnum #1<#2 %=========================== inserted by D.S.(?)
+      \noinstrum@nt=#1\s@l@ctinstr\b@zi\altitude
+      \noinstrum@nt=#2\s@l@ctinstr\b@zii\altitude
+      \advance\b@zii-\b@zi
+      \C@Inter
+      \advance\b@zii\nblines\internote
+      \advance\b@zii\nblines\internote
+      \advance\b@zii-2\internote
+      \n@v\b@zii \sp@pt\tw@ \advance\n@v\@cxxviii
+      \divide\b@zii\tw@
+      \advance\b@zi\b@zii
+      \raise\b@zi\rlap{\mxsps\char\n@v\kern\instrum@in@group}%
+    \fi %==================================== inserted by D.S.(?)
+    \ifx\empty#3\else\@bracks#3\ende\fi}
+
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%  End of curly.tex  %%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,95 @@
+\input musixtex
+\instrumentnumber2\setstaffs22%
+\hsize 100mm \vsize 230mm
+\generalmeter{\meterfrac{4}{4}\meterfrac{2}{4}\meterfrac{1}{4}}%
+\setclef1{\bass}\generalsignature2%
+\startpiece
+\notes\qu K&\qu d|\qu e\en
+%
+% Signatures
+% if there is no bar line, the signatures are confusing
+% it is not clear if they are for a single note or not
+% bar 1
+%% Signature changing in a single instrument with 2 staves
+\setsign21\changesignature
+\notes\qu J&\qu d|\qu e\en
+% Signature changing in a single instrument
+%\setsign1{-1}\changesignature
+%\notes\qu K&\qu d|\qu e\en
+% Signature changing in a single staff without naturals
+\setsign11\ignorenats\changesignature
+\notes\qu M&\qu d|\qu e\en
+% bar 2
+% New signatures after a bar line
+\generalsignature{-2}\changecontext%
+\notes\qu K&\qu d|\qu e\en%
+\notes\qu K&\qu d|\qu e\en%
+% New signatures after an invisible bar line
+\generalsignature{1}\zchangecontext%
+\notes\qu K&\qu d|\qu e\en%
+%
+% new music line caused by mulooseness
+\mulooseness1
+%
+% bar 3
+%\setsign2{-1}\changesignature\Changecontext%
+\setsign2{-1}\ignorenats\Changecontext%
+%\zalaligne%
+\notes\qu K&\qu d|\qu e\en%
+% bar 4
+\generalsignature{2}\ignorenats\Changecontext%
+\notes\qu K&\qu d|\qu e\en%
+% bar 5 OK :
+\setsign1{-3}\setsign2{-3}\changecontext%
+\notes\qu K&\qu d|\qu e\en%
+% bar 6
+% Are all this options common (choose 1 line of 3)?
+%\generalsignature{-3}\changecontext\alaligne%
+%\generalsignature{-3}\changesignature\setdoublebar\alaligne%
+\generalsignature{-3}\changesignature\Changecontext%
+%
+\notes\qu K&\qu d|\qu e\en%
+% bar 7
+\generalsignature{2}\ignorenats\Changecontext%
+\notes\qu K&\qu d|\qu e\en%
+%
+% Clefs
+% in 1 staff and taking space
+\setclef1\treble\changeclefs%
+\notes\qu k&\cu{.d}\ccu{e}|\qu e\en%
+% combined with signature change - space is already available
+\setclef1\bass\zchangeclefs\setsign1{-2}\setsign2{-2}%
+\ignorenats\changesignature%
+\notes\qu K&\cu{de}|\qu e\en%
+% clef change before barline
+\setclef1\treble\zchangeclefs\bar%
+\notes\qu k&\cu{de}|\qu e\en%
+% clef change after barline
+\setclef1\bass\bar\zchangeclefs%
+\notes\qu K&\cu{de}|\qu e\en%
+% bar 10
+% Meter
+\setmeter1{{\meterfrac{2}{4}}}%
+% How big the '2' must be?
+\setmeter2{{\lower2pt\hbox{\meterfrac{\Bigtype 2}{}}}%
+{\meterfrac{3}{4}}}\changecontext
+\notes\qu K&\cu{de}|\qu e\en
+% bar 11
+% Meter Clefs and Key Signatures
+% all 3 clefs after bar if no changeclefs
+\setmeter1{{\meterfrac{2}{8}}}%
+\setmeter2{{\meterfrac{3}{6}}{\meterfrac{3}{8}}}%
+\setsign2{-1}%
+% How to force showing the bass clef?
+\setclef1\bass\setclef2{23}%
+\Changecontext
+\notes\qu K&\cu{de}|\qu e\en
+% bar 12
+% Meter Clefs Keys Signatures all 3 with clef before the bar
+% probably not if signatures are involved
+\setmeter1{{\meterfrac{2}{4}}}%
+\setmeter2{{\meterfrac{3}{8}}{\meterfrac{3}{6}}}%
+\setsign2{-1}%
+\setclef1\treble\zchangeclefs\changecontext
+\notes\qu k&\cu{de}|\qu e\en
+\mulooseness1\Stoppiece\eject\bye
