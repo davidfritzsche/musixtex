@@ -476,7 +476,7 @@ never below that line. The command \keyindex{stdstemfalse} will inhibit this
 adjustment, but only for the next stem generated.  There is no command to globally
 suppress this behavior.
 
- \section{Brackets, parentheses, and oblique lines}\label{brapar}
+ \section{Brackets, parentheses, oblique lines and slides}\label{brapar}
 
 Several varieties of brackets, parentheses and oblique lines are provided for
 use within a score.
@@ -523,6 +523,10 @@ length, and $s$ is the slope. It is used in the definitions of some of
 the foregoing macros, and could be used, for example, to construct various
 obscure baroque ornaments made up of diagonal lines.
 
+\item \keyindex{slide}\itbrace{p}\itbrace{x}\itbrace{s}~ provides a \emph{glissando}
+starting at pitch {\it p} and extending for {\it x} \verb|\internote|s with
+slope {\it s} (ranging from $-8$ to $8$).
+
 \end{itemize}
 
 For example,
@@ -536,6 +540,7 @@ For example,
 \NOtes\lpar c\rpar c\qu c\en
 \NOtes\unbkt C15\qu {FH}|\ovbkt n14\ql{kl}\en
 \NOtes\downtrio C16\qu {FH}|\uptrio o14\ql{lm}\en
+\NOtesp\roffset{1.5}{\slide J33}\qa{JM}|\roffset{1.5}{\slide j33}\qa{jm}\en
 \endextract
 \end{music}
 \noindent is coded as
@@ -549,9 +554,12 @@ For example,
 \NOtes\lpar c\rpar c\qu c\en
 \NOtes\unbkt C15\qu {FH}|\ovbkt n14\ql{kl}\en
 \NOtes\downtrio C16\qu {FH}|\uptrio o14\ql{lm}\en
+\NOtesp\roffset{1.5}{\slide J33}\qa{JM}|\roffset{1.5}{\slide j33}\qa{jm}\en
 \zendextract
 \end{music}
 \end{verbatim}\end{quote}
+
+
 
  \section{Forcing activity at the beginning of systems}
 A macro named \keyindex{everystaff} is executed each time a new system

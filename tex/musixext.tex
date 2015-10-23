@@ -16,33 +16,11 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-\immediate\write16{MusiXEXTra 0.36\space<1 March 1995>}%
-
-\ifx\undefined\centerskip \else \endinput \fi
-
-\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
-\catcodesmusic
-
-%\def\barsrest#1{\centerskip\uplap{\lrlap{\meterfont{#1}}%
-%  \vskip\f@ur\internote\lrlap{\musixchar59}}%
-%  \advance\barno#1\global\advance\barno\m@ne }
-
 %
-% slide #1=height #2=number of elements #3=slope(-8 to 8 [step 10degree])
+%   musixext.tex 
 %
-
-\def\slide#1#2#3{\n@ii#3\relax\inhgetn@i#1\relax%
-  \ifnum\n@ii>\m@ne \advance\n@ii\m@ne\let\@Ti\raise
-  \else \n@ii-\n@ii \advance\n@ii\s@v@n\let\@Ti\lower \fi
-  \setbox\toks@box\hbox{\mxsps\char\n@ii}\n@iii\z@
-  \raise\n@i\internote\rlap{\hbox{\loop\ifnum\n@iii<#2%
-    \@Ti\n@iii\ht\toks@box\copy\toks@box\advance\n@iii\@ne\repeat}}}
-
-% if you need a line which appears ragged
-
-\def\raggedstoppiece{\ifx\ragg@d\empty \fil@{r}\fi
-  \check@nopen\n@wbar\hfill\z@suspend\@nds@ction}
-
-\endcatcodesmusic
-\catcode`\@=\catcodeat
+\immediate\write16{MusiXext T.118 <2015-07-25>}%
+%
+% (nothing to do. - T.118 or later provides \slide and \raggedstoppiece
+%
 \endinput

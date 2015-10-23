@@ -1,0 +1,11 @@
+Changes from MusiXTeX 117 to 118:
+
+2015-07-25
+
+  moved definitions of \raggedstoppiece and \slide 
+     from musixtext.tex to musixtex.tex.
+  \xppff musicsize-dependent as well as staffsize-dependent
+  revised musixtmr.tex, musixplt.tex and musixhv.tex to allow
+    traditional accented characters for etex
+  increased the length of beam stems
+
