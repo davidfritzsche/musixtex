@@ -63,8 +63,8 @@ defined in \texttt{musixadf.tex}:
 
  \section{musixbm}
 This file does nothing; it is retained only for compatibility with 
-\musixtex{} T.110 or earlier. 
-Since version T.111, \verb|musixtex.tex| itself contains all the functions 
+\musixtex{} version 1.10 or earlier. 
+Since version 1.11, \verb|musixtex.tex| itself contains all the functions 
 of the older \texttt{musixbm}, namely 
 commands for 128th notes, either with flags or with beams:
 \keyindex{ibbbbbu},
@@ -311,14 +311,21 @@ new command names:
 \end{tabular}\end{quote}
 
 \section{musixext}
-Defines the following two specific macros:
 
+This file does nothing; it is retained only for compatibility with 
+\musixtex{} version 1.17 or earlier. 
+Since version 1.18, \verb|musixtex.tex| itself contains all the functions 
+of the older \texttt{musixext}, namely 
+definitions of 
+\begin{itemize}
+\item
+\keyindex{raggedstoppiece}~, which inhibits right-justification of the last
+line of a score.
+\item
 \keyindex{slide}\itbrace{p}\itbrace{x}\itbrace{s}~, which provides a glissando
 starting at pitch {\it p} and extending for {\it x} \verb|\internote|s with
 slope {\it s} (ranging from $-8$ to $8$).
-
-\keyindex{raggedstoppiece}~, which inhibits right-justification of the last
-line of a score.
+\end{itemize}
 
  \section{musixf{}l{}l}
  \input musixfll
@@ -2069,7 +2076,7 @@ For example, the following line placed  after
 four-instrument score and will result in a single-instrument part for the second of
 these:
 \begin{verbatim}
-  \TransformNotes{#2&#3&#4&#5}{#3}
+  \TransformNotes{#2&#3&#4&#5}{#3}%
 \end{verbatim}
 \end{itemize}
 Caveats:
@@ -2095,19 +2102,19 @@ automates this process (for single-staff instruments only).
 
 The \keyindex{TransformNotes} macro may be used for other purposes. Here are some examples:
 \begin{list}{}{}\item
-     \verb|\TransformNotes{#2&#3}{#2&\transpose+7#3}|
+     \verb|\TransformNotes{#2&#3}{#2&\transpose+7#3}%|
 \end{list}
 will begin transposing\index{transpose@{\Bslash transpose}} just the second instrument (argument \verb|#3|).
 \begin{list}{}{}\item
-  \verb|\TransformNotes{#2|\|\verb|#3&#4}{#2|\|\verb|#3&\tinynotesize#4}|
+  \verb|\TransformNotes{#2|\|\verb|#3&#4}{#2|\|\verb|#3&\tinynotesize#4}%|
 \end{list}
 will begin typesetting the notes of the second instrument (\verb|#4|) in tiny size.
 \begin{list}{}{}\item
-     \verb|\TransformNotes{#2&#3}{#3&#2}|
+     \verb|\TransformNotes{#2&#3}{#3&#2}%|
 \end{list}
 will switch the order of the two instruments.
 \begin{list}{}{}\item
-     \verb|\TransformNotes{#2&#3}{#2&#3}|
+     \verb|\TransformNotes{#2&#3}{#2&#3}%|
 \end{list}
 will restore normal two-instrument processing.
 

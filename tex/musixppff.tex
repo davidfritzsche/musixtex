@@ -12,8 +12,9 @@
 %%    ...
 %%
 %% 
-\immediate\write16{MusiXppff \noexpand\ppff font replacement <2015/05/04>}%
+\immediate\write16{MusiXppff \noexpand\ppff font replacement <2015/07/25>}%
 
+\font\xppfftwelve=xppff10 at 8pt
 \font\xppffsixteen=xppff10
 \font\xppfftwenty=xppff10 scaled \magstep1
 \font\xppfftwentyfour=xppff10 scaled \magstep2
@@ -31,6 +32,7 @@
 \else\ifdim\internote<1.19\Internote \normxppff
 \else\medxppff\fi\fi\fi}
 
+
 \def\f{{\xppff f}}%
 \def\ff{{\xppff ff}}%
 \def\fp{{\xppff fp}}%
@@ -47,6 +49,12 @@
 \def\mp@{{\xppff mp}}%
 \let\mezzopiano\mp@
 
+%
+\def\tinydyn{\let\ppff\tinyppff\let\xppff\tinyxppff}%
+\def\smalldyn{\let\ppff\smallppff\let\xppff\smallxppff}%
+\def\normdyn{\let\ppff\normppff\let\xppff\normxppff}%
+\def\meddyn{\let\ppff\medppff\let\xppff\medxppff}%
+
 \def\comput@fonts{%    
   \ifnum\musicsize=\sixt@@n
     \let\musicLargefont\musictwentyfour
@@ -61,9 +69,17 @@
     \let\xgregtinyfont\xgregeleven
     \let\slurd\slurdsixteen \let\sluru\slurusixteen
     \let\hslurd\hslurdsixteen \let\hsluru\hslurusixteen
-    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % T116  RDT
+    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % version 1.16  RDT
     \let\meterbigfont\twelvebf \let\meterlargefont\frtbf
     \let\meterLargefont\svtbf
+    \let\tinyppff\ppfftwelve   % version 1.17  RDT
+    \let\smallppff\ppfftwelve
+    \let\normppff\ppffsixteen
+    \let\medppff\ppfftwenty
+    \let\tinyxppff\xppfftwelve   % version 1.17  RDT
+    \let\smallxppff\xppfftwelve
+    \let\normxppff\xppffsixteen
+    \let\medxppff\xppfftwenty
   \else\ifnum\musicsize=\@xxiv
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -77,9 +93,17 @@
     \let\xgregtinyfont\xgregsixteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
-    \let\meternorfont\frtbf \let\metersmallfont\twelvebf % T116  RDT
+    \let\meternorfont\frtbf \let\metersmallfont\twelvebf % version 1.18  RDT
     \let\meterbigfont\svtbf \let\meterlargefont\twtybf
     \let\meterlargefont\twfvbf
+    \let\tinyppff\ppffsixteen  
+    \let\smallppff\ppfftwenty
+    \let\normppff\ppfftwentyfour
+    \let\medppff\ppfftwentynine
+    \let\tinyxppff\xppffsixteen  
+    \let\smallxppff\xppfftwenty
+    \let\normxppff\xppfftwentyfour
+    \let\medxppff\xppfftwentynine
   \else\ifnum\musicsize=\@xxix
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -95,10 +119,18 @@
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
     \let\slurud\slurutwentyd \let\slurdd\slurdtwentyd %    +ickd
     \let\hslurud\hslurutwentyd \let\hslurdd\hslurdtwentyd %+ickd
-    \let\meternorfont\svtbf \let\metersmallfont\frtbf     % T116  RDT
+    \let\meternorfont\svtbf \let\metersmallfont\frtbf     % version 1.18  RDT
     \let\meterbigfont\twtybf \let\meterlargefont\twfvbf
     \let\meterLargefont\twfvbf
-  \else
+    \let\tinyppff\ppfftwenty   
+    \let\smallppff\ppfftwentyfour
+    \let\normppff\ppfftwentynine
+    \let\medppff\ppfftwentynine
+    \let\tinyxppff\xppfftwenty   
+    \let\smallxppff\xppfftwentyfour
+    \let\normxppff\xppfftwentynine
+    \let\medxppff\xppfftwentynine
+\else
     \ifnum\musicsize=\tw@nty
     \else\ifnum\musicsize=\z@
          \else\errmessage{\noexpand\musicsize=\the\musicsize\space not supported,
@@ -117,16 +149,18 @@
     \let\xgregtinyfont\xgregthirteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
-    \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % T116  RDT
+    \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % version 1.18  RDT
     \let\meterbigfont\frtbf \let\meterlargefont\svtbf
     \let\meterLargefont\twtybf
-  \fi\fi\fi
-}%
-%
-\def\tinydyn{\let\ppff\tinyppff\let\xppff\tinyxppff}%
-\def\smalldyn{\let\ppff\smallppff\let\xppff\smallxppff}%
-\def\normdyn{\let\ppff\normppff\let\xppff\normxppff}%
-\def\meddyn{\let\ppff\medppff\let\xppff\medxppff}%
+    \let\tinyppff\ppfftwelve  
+    \let\smallppff\ppffsixteen
+    \let\normppff\ppfftwenty
+    \let\medppff\ppfftwentyfour
+    \let\tinyxppff\xppfftwelve  
+    \let\smallxppff\xppffsixteen
+    \let\normxppff\xppfftwenty
+    \let\medxppff\xppfftwentyfour
+\fi\fi\fi}%
 
 \catcode`\@=\catcodeat
 

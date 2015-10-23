@@ -1,5 +1,5 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2014-05-18  "musixtex version 0.8" ""
+.TH MUSIXTEX 1 2014-07-16  "musixtex version 0.11" ""
 
 .SH NAME
 musixtex \- processes MusiXTeX files, deleting intermediate files
@@ -12,9 +12,12 @@ musixtex \- processes MusiXTeX files, deleting intermediate files
 |
 .IR jobname 
 [ .tex ] 
+|
+.IR jobname 
+[ .aspc ] 
 } ...
 .TP 
-The default effect is to process each file using 
+If a jobname argument has a .tex extension, the default effect is to process the file using
 .TP 12
 .BR etex (1)
 (first pass)
@@ -32,6 +35,17 @@ The default effect is to process each file using
 (Postscript to Portable Document Format)
 .TP
 followed by removal of intermediate files.
+.P 
+If a jobname argument has a .aspc extension, the file is first preprocessed using
+.BR autosp (1) 
+and the resulting .tex file is processed as above.
+.P
+If a jobname argument has neither .tex nor .aspc extension, file 
+.IR jobname .aspc
+will be processed as above if it exists; otherwise file
+.IR jobname .tex 
+will
+be processed.
 
 .SH OPTIONS
 .TP 8
@@ -81,6 +95,11 @@ call
 .BR makeindex (1)
 to update index database
 .TP
+.B -a
+force 
+.BR autosp (1)
+preprocessing
+.TP
 .B -f
 default processing 
 .TP 0
@@ -91,6 +110,7 @@ rather than
 .BR -lx .
 
 .SH SEE ALSO
+.BR autosp (1),
 .BR etex (1),
 .BR latex (1),
 .BR pdfetex (1),

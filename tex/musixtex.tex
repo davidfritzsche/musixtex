@@ -25,16 +25,21 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{17}
+\def\mxminorvernumber{18}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2015-05-25}
+\def\mxdate{2015-07-25}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
 
-% T117:
+% version 1.18:
+
+% RDT added definitions of \raggedstoppiece and \slide from musixext.tex
+% RDT increased the length of beam stems (adapted from J.-P. Coulon)
+
+% version 1.17:
 
 % RDT re-defined \txtfont for non-normal staff sizes
 % RDT defined \tinyppff and \ppfftwelve, and re-defined \ppff to be staffsize dependent
@@ -45,7 +50,7 @@
 % RDT introduced \cpause etc. and corrected definitions of \centerpause etc.
 % RDT introduced double-dotted rests \qppp, \dspp, \qspp, etc.
 
-% T116:
+% version 1.16:
 
 % RDT corrected the definitions of \nnotes and \nnnotes
 
@@ -71,7 +76,7 @@
 % meterfonts must be bf, even if titling fonts are rm or sc
 % added dynamic-mark  macros \sfz \sfzp
 
-% T115:
+% version 1.15:
 
 % moved out:
 % - 1/128th beams        -> musixbm
@@ -89,7 +94,7 @@
 %++simick  replaced lines and ++simick...++simick for added blocks
 
 % Hiroaki, May2010, T.115: change register allocation codes into new ones 
-% which enables >12 elements.  Search the string "T115" for details.
+% which enables >12 elements.  Search the string "version 1.15" for details.
 %
 
 % TeXperts may want to change the next
@@ -193,7 +198,7 @@
 
 %%% account registers 
 
-% \let\maxinstruments\si@ % [T115] here disabled to avoid conflict
+% \let\maxinstruments\si@ % [version 1.15] here disabled to avoid conflict
 
 % temporary registers
 
@@ -218,7 +223,7 @@
 \newdimen\y@iv
 \newdimen\y@v
 
-% [T115] moved out to the new register allocation code -- start from here --
+% [version 1.15] moved out to the new register allocation code -- start from here --
 % altitude
 %  \newskip\k@ii
 % InterNote
@@ -248,11 +253,11 @@
 % Height of choir groups
 %  \newskip\g@hi
 
-% [T115] moved out to the new register allocation code -- until here --
-% \let\maxgroups\thr@@ % maximum three groups of instruments or choirs [T115] moved to later, using \setmaxgroups
+% [version 1.15] moved out to the new register allocation code -- until here --
+% \let\maxgroups\thr@@ % maximum three groups of instruments or choirs [version 1.15] moved to later, using \setmaxgroups
 \newcount\group@no
 
-%%% [T115] new register allocation code -- start from here --
+%%% [version 1.15] new register allocation code -- start from here --
 %
 % register allocation for use inside \loop...\if...\repeat
 % (only for plain, but no harm even in case of LaTeX)
@@ -533,7 +538,7 @@
 % actual setup (=register allocation) of the maximum element numbers 
 % should be done after fonts definition.
 %
-%%% [T115] new register allocation code -- until here --
+%%% [version 1.15] new register allocation code -- until here --
 
 
 %%% fonts
@@ -548,7 +553,7 @@
 % Seven point fonts: roman, bold, and italic.
 %%
 
-%\ifx\undefined\sevenrm   % T117 RDT  unconditional font definitions
+%\ifx\undefined\sevenrm   % version 1.17 RDT  unconditional font definitions
   \font\sevenrm=cmr7
   \font\sevenbf=cmbx7
   \font\sevenit=cmti7
@@ -710,19 +715,19 @@
 % Bold italic fonts for dynamic markings.
 %%
 
-\font\ppfftwelve=cmbxti10 at 8pt  % T117 RDT
+\font\ppfftwelve=cmbxti10 at 8pt  % version 1.17 RDT
 \font\ppffsixteen=cmbxti10
 \font\ppfftwenty=cmbxti10 scaled \magstep1
 \font\ppfftwentyfour=cmbxti10 scaled \magstep2
 \font\ppfftwentynine=cmbxti10 scaled \magstep3
 
-\def\ppff{\ifdim\internote<\p@seven6\Internote\tinyppff%   T117  RDT
+\def\ppff{\ifdim\internote<\p@seven6\Internote\tinyppff%   version 1.17  RDT
 \else\ifdim\internote<.95\Internote\smallppff%
 \else\ifdim\internote<1.19\Internote\normppff%
 \else\medppff\fi\fi\fi}% 
 
-\def\tinydyn{\let\ppff\tinyppff}  % T117  RDT
-\def\smalldyn{let\ppff\smallppff}
+\def\tinydyn{\let\ppff\tinyppff}  % version 1.17  RDT
+\def\smalldyn{\let\ppff\smallppff}
 \def\normdyn{\let\ppff\normppff}
 \def\meddyn{\let\ppff\medppff}
 
@@ -827,7 +832,7 @@
 
 \newcount\N@s
 
-% [T115] moved out to the new register allocation code (except for \s@Y)
+% [version 1.15] moved out to the new register allocation code (except for \s@Y)
 % horizontal start position of slur
 %  \newdimen\s@xi
 % sense u,d and x (flag) for pending slurs
@@ -851,18 +856,18 @@
 \def\roman@n@i{\romannumeral\n@i\endcsname}
 
 %
-% [T115] make slurs independent from \maxinstruments
+% [version 1.15] make slurs independent from \maxinstruments
 \def\test@slurnum{%
   \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxslurs \else
     \count@\maxslurs \advance\count@\m@ne
-    \errmessage{Wrong slur reference number \the\n@i! (valid: 0 to \the\count@)}% [T115]
-    \n@i\z@% [T115]
+    \errmessage{Wrong slur reference number \the\n@i! (valid: 0 to \the\count@)}% [version 1.15]
+    \n@i\z@% [version 1.15]
   \fi
   \advance\n@i\@ne}%
 %
 \def\s@l@ctslur#1\relax{%
-  \n@i#1\relax\test@slurnum% [T115] make it independent from beams
+  \n@i#1\relax\test@slurnum% [version 1.15] make it independent from beams
   \edef\s@a{\csname s@a\roman@n@i}%  dimen (altportee)
   \edef\s@x{\csname s@x\roman@n@i}%  dimen (hor start pos)
   \edef\s@y{\csname s@y\roman@n@i}%  count (startnote [internote])
@@ -1560,10 +1565,10 @@
     \let\xgregtinyfont\xgregeleven
     \let\slurd\slurdsixteen \let\sluru\slurusixteen
     \let\hslurd\hslurdsixteen \let\hsluru\hslurusixteen
-    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % T116  RDT
+    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % version 1.16  RDT
     \let\meterbigfont\twelvebf \let\meterlargefont\frtbf
     \let\meterLargefont\svtbf
-    \let\tinyppff\ppfftwelve   % T117  RDT
+    \let\tinyppff\ppfftwelve   % version 1.17  RDT
     \let\smallppff\ppfftwelve
     \let\normppff\ppffsixteen
     \let\medppff\ppfftwenty
@@ -1580,10 +1585,10 @@
     \let\xgregtinyfont\xgregsixteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
-    \let\meternorfont\frtbf \let\metersmallfont\twelvebf % T116  RDT
+    \let\meternorfont\frtbf \let\metersmallfont\twelvebf % version 1.18  RDT
     \let\meterbigfont\svtbf \let\meterlargefont\twtybf
     \let\meterlargefont\twfvbf
-    \let\tinyppff\ppffsixteen  % T117  RDT
+    \let\tinyppff\ppffsixteen  
     \let\smallppff\ppfftwenty
     \let\normppff\ppfftwentyfour
     \let\medppff\ppfftwentynine
@@ -1602,13 +1607,13 @@
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
     \let\slurud\slurutwentyd \let\slurdd\slurdtwentyd %    +ickd
     \let\hslurud\hslurutwentyd \let\hslurdd\hslurdtwentyd %+ickd
-    \let\meternorfont\svtbf \let\metersmallfont\frtbf     % T116  RDT
-    \let\meterbigfont\twtybf \let\meterlargefont\twfvbf
-    \let\meterLargefont\twfvbf
-    \let\tinyppff\ppfftwenty   % T117  RDT
-    \let\smallppff\ppfftwentyfour
-    \let\normppff\ppfftwentynine
-    \let\medppff\ppfftwentynine
+    \let\meternorfont\svtbfg \let\metersmallfont\frtbf     % version 1.18  RDT
+    \let\meterbigfont\twtybfg \let\meterlargefont\twfvbf
+    \let\meterLargefont\twfvbfg
+    \let\tinyppff\ppfftwentyg   
+    \let\smallppff\ppfftwentyfourg
+    \let\normppff\ppfftwentynineg
+    \let\medppff\ppfftwentynineg
 \else
     \ifnum\musicsize=\tw@nty
     \else\ifnum\musicsize=\z@
@@ -1628,10 +1633,10 @@
     \let\xgregtinyfont\xgregthirteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
-    \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % T116  RDT
+    \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % version 1.18  RDT
     \let\meterbigfont\frtbf \let\meterlargefont\svtbf
     \let\meterLargefont\twtybf
-    \let\tinyppff\ppfftwelve  % T117  RDT
+    \let\tinyppff\ppfftwelve  
     \let\smallppff\ppffsixteen
     \let\normppff\ppfftwenty
     \let\medppff\ppfftwentyfour
@@ -1669,7 +1674,7 @@
 \def\setsize#1#2{\n@v#1\relax % select instrument
   \expandafter\edef\csname staffspacing\romannumeral\n@v\endcsname{#2}}
 
-% [T115] moved out to the new register allocation code
+% [version 1.15] moved out to the new register allocation code
 %  \let\staffspacingi\@ne
 
 % number of staffs
@@ -1689,9 +1694,9 @@
 \def\interstaff#1{\def\interfacteur{#1}}
 
 \def\s@l@ctinstr{%
-  \ifnum\noinstrum@nt>\maxinstruments % [T115] -- from here --
+  \ifnum\noinstrum@nt>\maxinstruments % [version 1.15] -- from here --
     \errmessage{Wrong instrument reference number \the\noinstrum@nt, maxinstruments=\the\maxinstruments}
-  \fi % [T115] -- until here --
+  \fi % [version 1.15] -- until here --
   \edef\altitude{\csname k@i\romannumeral\noinstrum@nt\endcsname}%
   \edef\st@ffs{\csname n@p\romannumeral\noinstrum@nt\endcsname}%
   \edef\nblines{\csname n@l\romannumeral\noinstrum@nt\endcsname}%
@@ -1732,7 +1737,7 @@
 \def\songbottom{\groupbottom1}
 \def\songtop{\grouptop1}
 
-% [T115] moved out to the new register allocation code
+% [version 1.15] moved out to the new register allocation code
 %  \let\lowersonginstrumi\maxdimen
 %  \let\uppersonginstrumi\z@
 
@@ -1749,8 +1754,8 @@
   \ifnum\group@no<\z@ \group@no\@c \fi
   \ifnum\group@no<\maxgroups \else
     \count@\maxgroups \advance\count@\m@ne
-    \errmessage{Wrong group reference number \the\group@no! (valid: 0 to \the\count@)}% [T115]
-    \group@no\z@% [T115]
+    \errmessage{Wrong group reference number \the\group@no! (valid: 0 to \the\count@)}% [version 1.15]
+    \group@no\z@% [version 1.15]
   \fi
   \advance\group@no\@ne}
 
@@ -1793,9 +1798,9 @@
 
 %%% distance between instruments (added to \interportee)
 
-% [T115] moved out to the above of the new register allocation code
+% [version 1.15] moved out to the above of the new register allocation code
 % \newdimen\interinstrument
-% [T115] moved out to the new register allocation code
+% [version 1.15] moved out to the new register allocation code
 % \let\interinstrumenti\interinstrument
 
 \def\setinterinstrument#1#2{\n@v#1\relax % select instrument
@@ -2012,7 +2017,7 @@
   \repeat
 % cutslur
   \ifnum\N@s>\z@%     % any pending slurs ?
-    \n@viii\maxslurs % test all possible slur numbers [T115] (Hiroaki)
+    \n@viii\maxslurs % test all possible slur numbers [version 1.15] (Hiroaki)
     \advance\n@viii\m@ne
     \loop\ifnum\n@viii>\m@ne
       \s@l@ctslur\n@viii\relax
@@ -2041,6 +2046,9 @@
 \def\zstoppiec@{\check@nopen\zn@wbar\z@suspend}
 %\def\zstoppiece{\zstoppiec@\@nds@ction}	%-simick
 \def\zstoppiece{\T@bil\fi\zstoppiec@\@nds@ction}%+simick
+% if you need a line which appears ragged
+\def\raggedstoppiece{\ifx\ragg@d\empty \fil@{r}\fi % version 1.18 RDT (from musixext)
+  \check@nopen\n@wbar\hfill\z@suspend\@nds@ction}
 
 \def\Stoppiece{\setdoubleBAR\stoppiece}
 \let\Endpiece\Stoppiece
@@ -2660,12 +2668,12 @@
 \def\treblelowoct{\trebleclef\raise -7\internote\hbox\@to\z@{\smalltype\it\kern -2.3\Interligne 8\hss}}
 \def\basslowoct{\bassclef\raise -6\internote\hbox\@to\z@{\smalltype\it\kern -2.5\Interligne 8\hss}}
 
-% [T115] reqest from Hermann Hinsch
+% [version 1.15] reqest from Hermann Hinsch
 \def\smalltrebleoct{\smalltrebleclef\raise 7.2\internote\hbox\@to\z@{\smalltype\it\kern -1.8\Interligne 8\hss}}
 \def\smalltreblelowoct{\smalltrebleclef\raise-6.8\internote\hbox\@to\z@{\smalltype\it\kern -2.1\Interligne 8\hss}} 
 \def\smallbassoct{\smallbassclef\raise 2\internote\hbox\@to\z@{\smalltype\it\kern -2.0\Interligne 8\hss}}
 \def\smallbasslowoct{\smallbassclef\raise-6.2\internote\hbox\@to\z@{\smalltype\it\kern -2.2\Interligne 8\hss}}
-% [T115] reqest from Hermann Hinsch: end
+% [version 1.15] reqest from Hermann Hinsch: end
 
 
 \newskip\clef@skip
@@ -2788,7 +2796,7 @@
 
 \def\setname#1#2{\n@v#1\relax % select instrument
 %  \let\Writ@names\writ@names
-  \expandafter\def\csname instrument\romannumeral\n@v\endcsname{#2}}% [T115] changed from \edef to \def (Hiroaki)
+  \expandafter\def\csname instrument\romannumeral\n@v\endcsname{#2}}% [version 1.15] changed from \edef to \def (Hiroaki)
 
 \def\writ@names{\n@loop
   \setbox\toks@box\null\relax
@@ -3013,9 +3021,11 @@
   \y@ii\b@p\y@v \divide\y@ii\tw@nty \advance\y@ii\b@z
   \ifdim\y@ii>\st@top % la poutre est au-dessus
     \stem@skip\qd@skip \comp@slope\stem@skip \advance\y@ii\s@lope
+    \advance\y@ii .285\interbeam%  version 1.18  RDT
     \ifnum\b@n>\z@ \advance\y@ii\b@n\interbeam \advance\y@ii-\interbeam \fi
     \st@top\y@ii % a mettre a jour avec la pente ulterieurement
   \else
+    \advance\y@ii-.285\interbeam%  version 1.18  RDT
     \stem@skip\z@
     \ifdim\y@ii<\st@bot
       \ifnum\b@n<\z@ \advance\y@ii\b@n\interbeam \advance\y@ii\interbeam \fi
@@ -3163,7 +3173,7 @@
   \else
     \let\st@m\upst@m
   \fi
-  \check@staff  % T116
+  \check@staff  % version 1.16
     \let\n@fon\@qa \let\n@sym\q@u \y@v\qn@width \writ@note
   \fi}
 
@@ -3223,7 +3233,7 @@
   \else
     \let\st@m\up@flag \advance\n@vii -\fiv@\relax
   \fi
-  \check@staff  % T116
+  \check@staff  % version 1.16
     \let\n@fon\@mca \let\n@sym\q@u  \y@v\qn@width \writ@note
   \fi}
 
@@ -3409,22 +3419,22 @@
 \def\zqbpp{\advancefalse\qbpp}
 
 \def\tqh{\q@symbol\@tqh}
-\def\tqu{\q@symbol\@tqh}  % T116  RDT
+\def\tqu{\q@symbol\@tqh}  % version 1.16  RDT
 \def\tqb{\q@symbol\@tqb}
-\def\tql{\q@symbol\@tqb}  % T116  RDT
-\def\tqqh#1#2{\tbbu{#1}\tqh{#1}{#2}} % T117 RDT
-\def\tqqu#1#2{\tbbu{#1}\tqu{#1}{#2}} % T117 RDT
-\def\tqqb#1#2{\tbbl{#1}\tqb{#1}{#2}} % T117 RDT
-\def\tqql#1#2{\tbbl{#1}\tql{#1}{#2}} % T117 RDT
-\def\tqqqh#1#2{\tbbbu{#1}\tqqh{#1}{#2}} % T117 RDT
-\def\tqqqu#1#2{\tbbbu{#1}\tqqu{#1}{#2}} % T117 RDT
-\def\tqqqb#1#2{\tbbbl{#1}\tqqb{#1}{#2}} % T117 RDT
-\def\tqqql#1#2{\tbbbl{#1}\tqql{#1}{#2}} % T117 RDT
+\def\tql{\q@symbol\@tqb}  % version 1.16  RDT
+\def\tqqh#1#2{\tbbu{#1}\tqh{#1}{#2}} % version 1.17 RDT
+\def\tqqu#1#2{\tbbu{#1}\tqu{#1}{#2}} % version 1.17 RDT
+\def\tqqb#1#2{\tbbl{#1}\tqb{#1}{#2}} % version 1.17 RDT
+\def\tqql#1#2{\tbbl{#1}\tql{#1}{#2}} % version 1.17 RDT
+\def\tqqqh#1#2{\tbbbu{#1}\tqqh{#1}{#2}} % version 1.17 RDT
+\def\tqqqu#1#2{\tbbbu{#1}\tqqu{#1}{#2}} % version 1.17 RDT
+\def\tqqqb#1#2{\tbbbl{#1}\tqqb{#1}{#2}} % version 1.17 RDT
+\def\tqqql#1#2{\tbbbl{#1}\tqql{#1}{#2}} % version 1.17 RDT
 
 \def\ztqh{\advancefalse\q@symbol\@tqh}
-\def\ztqu{\advancefalse\q@symbol\@tqh}  % T116  RDT
+\def\ztqu{\advancefalse\q@symbol\@tqh}  % version 1.16  RDT
 \def\ztqb{\advancefalse\q@symbol\@tqb}
-\def\ztql{\advancefalse\q@symbol\@tqb}  % T116  RDT
+\def\ztql{\advancefalse\q@symbol\@tqb}  % version 1.16  RDT
 
 %%% grace notes
 
@@ -3442,7 +3452,7 @@
 % \b@p slope (-9) - (9)
 % \b@n number of pending beamlines (-4) - (4)
 
-\def\test@beamnum{% [T115] new macro to make it independent from slur
+\def\test@beamnum{% [version 1.15] new macro to make it independent from slur
   \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxinstruments \else
     \count@\maxinstruments \advance\count@\m@ne
@@ -3452,7 +3462,7 @@
   \advance\n@i\@ne}%
 
 \def\s@l@ctbeam#1\relax{%
-  \n@i#1\relax\test@beamnum % [T115] make it independent from slur
+  \n@i#1\relax\test@beamnum % [version 1.15] make it independent from slur
   \edef\b@x{\csname b@x\romannumeral\n@i\endcsname}%
   \edef\b@z{\csname b@z\romannumeral\n@i\endcsname}%
   \edef\b@n{\csname b@n\romannumeral\n@i\endcsname}%
@@ -3811,14 +3821,14 @@
 \def\hs{\adv@restbox{\check@staff\musixchar65\fi}}
 \def\qqs{\adv@restbox{\check@staff\musixchar66\fi}}
 
-% pointed rests  T116  RDT
+% pointed rests  version 1.16  RDT
 \def\qpp{\adv@restbox{\check@staff\pt5\musixchar62\fi}}
 \def\dsp{\adv@restbox{\check@staff\pt5\musixchar63\fi}}
 \def\qsp{\adv@restbox{\check@staff\pt5\musixchar64\fi}}
 \def\hsp{\adv@restbox{\check@staff\pt5\musixchar65\fi}}
 \def\qqsp{\adv@restbox{\check@staff\pt5\musixchar66\fi}}
 
-% double-dotted rests  T117 RDT
+% double-dotted rests  version 1.17 RDT
 
 \def\pausepp{\wholeshift{\ppt5}\pause}
 \def\hpausepp{\wholeshift{\ppt5}\hpause}
@@ -3869,7 +3879,7 @@
 \def\smalldfl{\set@sa \n@iv\si@ \let\@Tii\@dFl \n@v\@ne  \C@acc}
 \def\smalldsh{\set@sa \let\@Tii\@dSh \n@v\thr@@ \C@acc}
 
-\def\cna{\set@ca  \let\@Tii\@Na  \n@v\f@ur \C@acc} % T116 HM
+\def\cna{\set@ca  \let\@Tii\@Na  \n@v\f@ur \C@acc} % version 1.16 HM
 \def\cfl{\set@ca  \let\@Tii\@Fl  \n@v\z@   \C@acc}
 \def\csh{\set@ca  \let\@Tii\@Sh  \n@v\tw@  \C@acc}
 \def\cdfl{\set@ca \n@iv\si@ \let\@Tii\@dFl \n@v\@ne \C@acc}
@@ -3916,7 +3926,7 @@
 % \n@ii positive signature limit, \n@ii-8 negative signature limit
     \advance\n@ii-\a@s \advance\n@ii\si@ \divide\n@ii\s@v@n
     \@Tii
-  \fi \advance\n@v\@l \advance\n@v\n@vi \expandafter\@Ti % [T115] (Hiroaki)
+  \fi \advance\n@v\@l \advance\n@v\n@vi \expandafter\@Ti % [version 1.15] (Hiroaki)
   \fi}
 
 \def\@nod{Can't double }
@@ -4102,7 +4112,7 @@
 \let\maxtrilles\si@ 
 % \maxtrilles and \@itrille[i] are only for obsolete Legacy \trillC 
 % and \TrillC; not related with new register allocation code.  Leave 
-% it as-is. [T115]
+% it as-is. [version 1.15]
 
 \newskip\@itrillei
 \newskip\@itrilleii
@@ -4143,7 +4153,7 @@
 %%%%%%
 
 % \let\maxtrills\si@ % here disabled to avoid conflict with new register allocation code
-% [T115] moved out to the new register allocation code
+% [version 1.15] moved out to the new register allocation code
 %  \newskip\tr@xi \tr@xi\maxdimen\relax % starting horizontal pos
 %  \newtoks\tr@swi % heading of trill
 %  \newskip\tr@yi % height of trill
@@ -4158,8 +4168,8 @@
   \n@i#1\relax  \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxtrills \else
     \count@\maxtrills \advance\count@\m@ne
-    \errmessage{Wrong trill reference number \the\n@i! (valid: 0 to \the\count@)}% [T115]
-    \n@i\z@ % [T115]
+    \errmessage{Wrong trill reference number \the\n@i! (valid: 0 to \the\count@)}% [version 1.15]
+    \n@i\z@ % [version 1.15]
   \fi
   \advance\n@i\@ne
   \xdef\tr@x{\csname tr@x\roman@n@i}%
@@ -4199,7 +4209,7 @@
 %%% octave lines
 
 \def\octnumberup{\octnumberdefault\vrule width 0pt height2ex}
-\def\octnumberdefault{\smallppff8}  % T117 RDT
+\def\octnumberdefault{\smallppff8}  % version 1.17 RDT
 \def\octnumberdown{\octnumberdefault$^a$\txtfont\kern 0.3em bassa\vrule width 0pt depth \Internote}
 
 \def\octfinup{\check@staff
@@ -4229,7 +4239,7 @@
 %%%%%%
 
 % \let\maxoctlines\si@ % here disabled to avoid conflict with new register allocation code, except for \o@swz
-% [T115] moved out to the new register allocation code
+% [version 1.15] moved out to the new register allocation code
 %  \newskip\o@xi \o@xi\maxdimen\relax % starting horizontal pos
 %  \newskip\o@yi % height of octline
 \newtoks\o@swz % sense of octline for \octfin[up][down] without number
@@ -4245,8 +4255,8 @@
   \n@i#1\relax  \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxoctlines \else
     \count@\maxoctlines \advance\count@\m@ne
-    \errmessage{Wrong octaviation line reference number \the\n@i! (valid: 0 to \the\count@)}% [T115]
-    \n@i\z@% [T115]
+    \errmessage{Wrong octaviation line reference number \the\n@i! (valid: 0 to \the\count@)}% [version 1.15]
+    \n@i\z@% [version 1.15]
   \fi
   \advance\n@i\@ne
   \xdef\o@x{\csname o@x\roman@n@i}%
@@ -4301,7 +4311,7 @@
 \def\metronequiv#1#2{{\stemlength\f@ur\noteskip\t@n\p@ #1 1\ = #2 1}}
 
 
-\def\txtfont{%          % T117 RDT
+\def\txtfont{%          % version 1.17 RDT
 \ifdim\internote<.95\Internote \sevenit
 \else\ifdim\internote<1.19\Internote \eightit
 \else\ifdim\internote<1.43\Internote \tenit
@@ -4311,13 +4321,13 @@
 \def\xtuplet#1#2{\n@iv#1\advance\n@iv\m@ne {\sign@skip=\n@iv\noteskip
   \sign@skip=0.5\sign@skip \xdef\half@sign@skip{\the\sign@skip}}%
   \zcharnote{#2}{\kern\h@lf\qn@width\kern \half@sign@skip\lrlap{\txtfont#1\/\/}}}  
-\def\triolet{\xtuplet\txt}    % T117 RDT
+\def\triolet{\xtuplet\txt}    % version 1.17 RDT
 
 %
 %   Following definitions based on tuplet.tex - conventional tuplet brackets for MusiXTeX.
 %   Col. G. L. Sicherman.  Last revised 2003-05-17.
 %
-%   Added to musixtex.tex T116 by RDT.
+%   Added to musixtex.tex version 1.16 by RDT.
 %
 %   Standard MusiXTeX uses \uptrio and \downtrio to print tuplet brackets.
 %   We define \uptuplet and \downtuplet, with the same arguments:
@@ -4485,8 +4495,8 @@
 \def\pp{{\ppff p\p@kern p}}
 \def\ppp{{\ppff p\p@kern p\p@kern p}}
 \def\pppp{{\ppff p\p@kern p\p@kern p\p@kern p}}
-\def\sfz{{\ppff s\p@kern f\f@kern z}}              % T116
-\def\sfzp{{\ppff s\p@kern f\f@kern z\p@kern p}}    % T116
+\def\sfz{{\ppff s\p@kern f\f@kern z}}              % version 1.16
+\def\sfzp{{\ppff s\p@kern f\f@kern z\p@kern p}}    % version 1.16
 
 %%% spacings
 
@@ -4510,7 +4520,7 @@
 %   Otherwise, over/underfull boxes will occur on rescaled (pass 2) material
 %%
 
-\def\qqsk{\off{\qu@rt\@l@mskip}}  % T116  RDT
+\def\qqsk{\off{\qu@rt\@l@mskip}}  % version 1.16  RDT
 \def\hqsk{\off{\h@lf\@l@mskip}}
 \def\qsk{\off\@l@mskip}
 
@@ -4549,8 +4559,8 @@
   \def\NOTES{\vnotes11.32\elemskip}%       1th
 }%
 
-\def\nnotes{\vnotes1.6\elemskip}    % T116  RDT (corrected 2015-03-31)
-\def\nnnotes{\vnotes1.28\elemskip}  % T116  RDT (corrected 2015-03-31)
+\def\nnotes{\vnotes1.6\elemskip}    % version 1.16  RDT (corrected 2015-03-31)
+\def\nnnotes{\vnotes1.28\elemskip}  % version 1.16  RDT (corrected 2015-03-31)
 
 \arithmeticskipscale
 
@@ -4612,7 +4622,7 @@
 \def\hcharnote{\let\@Ti\hard@box \C@ch}
 \def\charnote#1#2{\zcharnote{#1}{#2}\sk}
 
-\def\zcn{\zcharnote}  % T116
+\def\zcn{\zcharnote}  % version 1.16
 \def\ccn{\ccharnote}
 \def\lcn{\lcharnote}
 
@@ -4636,7 +4646,7 @@
 \def\setsongraise#1#2{\n@v#1\relax % select instrument
   \expandafter\def\csname T@R\romannumeral\n@v\endcsname{#2}}
 
-% [T115] moved out to the new register allocation code
+% [version 1.15] moved out to the new register allocation code
 %  \let\T@Ri\z@
 
 \def\qlrlap#1{\rlap{\hbox to \qn@width{\hss#1\hss}}}
@@ -4729,6 +4739,16 @@
 \def\uptrio{\n@vi\z@ \let\@text\@ne \ovbkt}
 \def\downtrio{\n@vi\@ne \let\@text\@ne \unbkt}
 
+%
+% slide #1=height #2=number of elements #3=slope(-8 to 8 [step 10degree])
+%
+\def\slide#1#2#3{\n@ii#3\relax\inhgetn@i#1\relax%
+  \ifnum\n@ii>\m@ne \advance\n@ii\m@ne\let\@Ti\raise
+  \else \n@ii-\n@ii \advance\n@ii\s@v@n\let\@Ti\lower \fi
+  \setbox\toks@box\hbox{\mxsps\char\n@ii}\n@iii\z@
+  \raise\n@i\internote\rlap{\hbox{\loop\ifnum\n@iii<#2%
+    \@Ti\n@iii\ht\toks@box\copy\toks@box\advance\n@iii\@ne\repeat}}}
+
 %%% standard settings
 % [115] make them compatible to >12 instruments
 \def\resetlayout{\let\interfacteur\nin@
@@ -4748,7 +4768,7 @@
   \ifnum\count@<\maxinstruments\repeat
 }
 
-% [T115] setup the default maximum element numbers to the same values of T.114
+% [version 1.15] setup the default maximum element numbers to the same values of T.114
 \setmaxinstruments\si@
 \setmaxcxxviiibeams\si@ % 128th beam
 \setmaxcclvibeams\z@ % 256th beam
@@ -4758,7 +4778,7 @@
 \setmaxoctlines\maxinstruments
 %
 
-% [T115] new register allocation code requires some changes
+% [version 1.15] new register allocation code requires some changes
 %\resetlayout % no need
 %\let\nbinstruments\maxinstruments % no need
 %\normalnotesize % already executed in \setmaxinstruments
@@ -4896,7 +4916,7 @@
 %  This version corrected 07/23/2007 by Rainer Dunker to make it       %
 %  insensitive to changes in \interstaff by PMX                        %
 %                                                                      %
-%  Added to musixtex.tex T116 by RDT                                   %
+%  Added to musixtex.tex version 1.16 by RDT                                   %
 %                                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
