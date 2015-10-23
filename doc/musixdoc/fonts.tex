@@ -1,0 +1,212 @@
+\chapter{Font Selection and Text Placement}
+
+\section{Predefined text fonts}
+While any \TeX\ font can be used by \musixtex, there are certain styles and
+sizes that can be selected using shortcut commands.
+For ordinary text the shortcuts cover fonts of eight different
+sizes and three styles. The sizes in points are $8$, $9$, $10$, $12$, $14$, $17$, $20$, and $25$;
+the styles are from the standard Computer Modern family: Roman, bold and italic. The
+four smallest sizes are each available in all three styles, while the larger
+sizes, which are intended for titles, are available only in bold style.
+The size selection macros from smallest to biggest are \keyindex{smalltype},
+\keyindex{Smalltype},
+\keyindex{normtype}, \keyindex{medtype}, \keyindex{bigtype},
+\keyindex{Bigtype} ,
+\keyindex{BIgtype} and \keyindex{BIGtype}. Following size selection, the
+style may be selected or changed using \keyindex{rm} (Roman), \keyindex{bf}
+(bold) or \keyindex{it} (italic). If no style is explicitly selected, Roman style
+will be used for the sizes \verb|\medtype| or smaller. For the larger sizes,
+only bold style is provided and no style selection is required. Thus, for example,
+eight point italic is selected with \verb|\smalltype\it|, while
+twelve point Roman is selected using \verb|\medtype\rm| or simply
+\verb|\medtype|. To change between styles while maintaining the same size,
+code \verb|\rm|, \verb|\it| or \verb|\bf| as in Plain \TeX.
+When \musixtex\ is started, the default font for ordinary text is
+ten point Roman, equivalent to \verb|\normtype\rm|.
+
+Another group of fonts, in bold extended italic style, is predefined in point sizes
+$10$, $12$, $14$, and $17$ for dynamic markings. The appropriate font for the current
+staff size may be selected simply by using \keyindex{ppff} as a
+font specification. Macros \verb|\smalldyn|, \verb|\normdyn|, or \verb|\meddyn| may be
+used to redefine \verb|\ppff| to represent one of the smallest three.
+
+
+All predefined fonts are summarized in Table~\ref{predefinedfonts}. The second column gives an
+explicit control sequence that can alternatively be used locally as a font specification.
+\font\csmalltype=cmr8
+\font\csmalltypebf=cmbx8
+\font\csmalltypeit=cmti8
+\font\cSmalltype=cmr9
+\font\cSmalltypebf=cmbx9
+\font\cSmalltypeit=cmti9
+\font\cnormtype=cmr10
+\font\cnormtypebf=cmbx10
+\font\cnormtypeit=cmti10
+\font\cmedtype=cmr12
+\font\cmedtypebf=cmbx12
+\font\cmedtypeit=cmti12
+\font\cbigtype=cmbx12 scaled \magstep1
+\font\cBigtype=cmbx12 scaled \magstep2
+\font\cBIgtype=cmbx12 scaled \magstep3
+\font\cBIGtype=cmbx12 scaled \magstep4
+\font\cppffsixteen=cmbxti10
+\font\cppfftwenty=cmbxti10 scaled \magstep1
+\font\cppfftwentyfour=cmbxti10 scaled \magstep2
+\font\cppfftwentynine=cmbxti10 scaled \magstep3
+\font\cbigtype=cmbx12 scaled \magstep1
+\font\cBigtype=cmbx12 scaled \magstep2
+\font\cBIgtype=cmbx12 scaled \magstep3
+\font\cBIGfont=cmbx12 scaled \magstep4
+\begin{table}
+\begin{center}
+  \begin{tabular}{lll}
+    \hline
+    Size and style  &  Font specification & Example \\
+    \hline
+    \verb|\smalltype|    & \verb|\eightrm| & {\csmalltype    small Roman}  \\
+    \verb|\smalltype\bf| & \verb|\eightbf| & {\csmalltypebf small bold}   \\
+    \verb|\smalltype\it| & \verb|\eightit| & {\csmalltypeit small italic} \\
+    \verb|\Smalltype|    & \verb|\ninerm| & {\cSmalltype    Small Roman}  \\
+    \verb|\Smalltype\bf| & \verb|\ninebf| & {\cSmalltypebf Small bold}   \\
+    \verb|\Smalltype\it| & \verb|\nineit| & {\cSmalltypeit Small italic} \\
+    \verb|\normtype|     & \verb|\tenrm| & {\cnormtype     normal Roman} \\
+    \verb|\normtype\bf|  & \verb|\tenbf| & {\cnormtypebf  normal bold}  \\
+    \verb|\normtype\it|  & \verb|\tenit| & {\cnormtypeit  normal italic}\\
+    \verb|\medtype|      & \verb|\twelverm| & {\cmedtype      medium Roman} \\
+    \verb|\medtype\bf|   & \verb|\twelvebf| & {\cmedtypebf   medium bold}  \\
+    \verb|\medtype\it|   & \verb|\twelveit| & {\cmedtypeit   medium italic}\\
+    \verb|\bigtype|      & \verb|\bigfont| & {\cbigtype      big bold}     \\
+    \verb|\Bigtype|      & \verb|\Bigfont| & {\cBigtype      Big bold}     \\
+    \verb|\BIgtype|      & \verb|\BIgfont| & {\cBIgtype      BIg bold}     \\
+    \verb|\BIGtype|      & \verb|\BIGfont| & {\cBIGtype      BIG bold}     \\
+    \verb|\smalldyn|  & \verb|\ppffsixteen| & {\cppffsixteen  pp ff diminuendo}\\
+    \verb|\normdyn|   & \verb|\ppfftwenty| & {\cppfftwenty   pp ff crescendo}\\
+    \verb|\meddyn|   & \verb|\ppfftwentyfour| & {\cppfftwentyfour   pp ff crescendo}\\[.4ex]
+      ~                & \verb|\ppfftwentynine| & {\cppfftwentynine   pp ff diminuendo}\\[.4ex]
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Predefined fonts}
+\label{predefinedfonts}
+\end{table}
+
+\section{User-defined text fonts}
+
+Since \musixtex\ is a superset of \TeX, you are free to use the standard \TeX\
+machinery for defining and using any special font you desire. You must first
+of course ensure that (a) all the necessary font files (e.g., \verb|bla10.tfm|,
+\verb|bla10.pfb|, or equivalents) are installed in the right places in your system, (b) all
+configuration files (e.g., \verb|config.ps| or equivalent) have been updated, and
+(c) the \TeX\ system has been ``rehashed''. Then you can use the font just as
+in any \TeX\ document, e.g., by coding \verb|\font blafont=bla10| and then
+\verb|\zchar{10}{\blafont Text in user-defined font}|.
+
+You might also wish to replace once and for all the typefaces invoked by the
+commands described in the previous section. Again, before doing this, you must
+follow steps (a-c) of the previous paragraph for all fonts in question.
+\label{UserFonts}
+You can use bitmapped fonts, which are converted to
+Postscript by e.g.,~\verb|dvips|, but you also may replace them
+by native Postscript fonts.
+
+The extension library 
+\verb|musixtmr.tex|\footnote{by Hiroaki {\sc Morimoto}} 
+replaces the default Computer Modern text fonts by
+the Times series of fonts; see Section~\ref{times}.
+Other extension libraries, \verb|musixplt.tex| and \verb|musixhv.tex|, replace the default text fonts by
+Palatino and Helvetica fonts, respectively; see Sections~\ref{palatino} and \ref{helvetica}. 
+\font\tnormtype=ptmr7t
+\font\tnormtypebf=ptmb7t
+\font\tnormtypeit=ptmri7t
+\font\tbigtype=ptmr7t scaled \magstep2
+\font\tBigtype=ptmr7t scaled \magstep3
+\font\pnormtype=pplr8r
+\font\pnormtypebf=pplb8r
+\font\pnormtypeit=pplri8r
+\font\pbigtype=pplrc8r at 14pt
+\font\pBigtype=pplrc8r at 17pt
+\font\hnormtype=phvr8r at 10pt
+\font\hnormtypebf=phvb8r at 10pt
+\font\hnormtypeit=phvro8r at 10pt
+\font\hbigtype=phvr8r at 14pt
+\font\hBigtype=phvr8r at 17pt
+Here is a comparison of some Times,
+Palatino and Helvetica fonts:
+\begin{center}
+  \begin{tabular}{lll}
+    \hline
+      {\tnormtype  normal Times Roman} & {\pnormtype  normal Palatino Roman} &{\hnormtype  normal Helvetica Roman} \\ 
+     {\tnormtypebf  normal Times bold} & {\pnormtypebf normal Palatino bold}& {\hnormtypebf normal Helvetica bold} \\
+     {\tnormtypeit  normal Times italic} & {\pnormtypeit normal Palatino italic } & {\hnormtypeit normal Helvetica italic }\\
+     {\tbigtype      Times big} & {\pbigtype Palatino big } & {\hbigtype Helvetica big }  \\
+     {\tBigtype      Times Big } & {\pBigtype Palatino Big } & {\hBigtype Helvetica Big }   \\
+    \hline
+  \end{tabular}
+\end{center}
+
+For users who prefer to stick with the default Computer Modern
+family but want to use the EC variants, the extension library
+\verb|musixec.tex| is available; see Section~\ref{ecfonts}.
+
+\section{Text placement}\label{textplacement}
+Special macros are provided to allow precise placement of any \TeX\ text, vertically
+relative to the staff, and horizontally relative to any note in
+the staff.
+
+The macros in the first group will vertically position the text with the
+baseline at any specified pitch or staff line. They must be used
+inside \verb|\notes...\en|. They will not insert any additional
+horizontal space. They have the forms
+\keyindex{zcharnote}\pitchp\verb|{|\ital{text}\verb|}|, \keyindex{lcharnote}\pitchp\verb|{|\ital{text}\verb|}|,
+and \keyindex{ccharnote}\pitchp\verb|{|\ital{text}\verb|}|,
+where \ital{p} is the pitch. With the first one, text will spill to the right
+from the current insertion point, with the second it will spill to the left, and with the
+third it will be centered horizontally.
+The following abbreviations are available:
+\begin{quote}
+\begin{tabular}{lcl}
+\keyindex{zcn}& for&\verb|\zcharnote| \\
+\keyindex{lcn}& for&\verb|\lcharnote| \\
+\keyindex{ccn}& for&\verb|\ccharnote| \\
+\end{tabular}
+\end{quote}
+
+There are similar macros \keyindex{zchar}\pitchp\verb|{|\ital{text}\verb|}|,
+\keyindex{lchar}\pitchp\verb|{|\ital{text}\verb|}|, and \keyindex{cchar}\pitchp\verb|{|\ital{text}\verb|}|,
+which differ from the previous three in that the pitch \ital{must} be given with
+a number (representing the number of staff positions up from the lowest line),
+and that the number need not be an integer.
+
+To vertically position any text midway between two consecutive staves, use
+\keyindex{zmidstaff}\verb|{|{\it text}\verb|}|, \keyindex{lmidstaff}\verb|{|{\it text}\verb|}|,
+or \keyindex{cmidstaff}\verb|{|{\it text}\verb|}| at the appropriate point in the lower staff.
+
+The macros \keyindex{uptext}\verb|{|\ital{text}\verb|}| and
+\keyindex{Uptext}\verb|{|\ital{text}\verb|}| 
+are simply shorthands for
+\verb|\zchar{10}{|\ital{text}\verb|}| and
+\verb|\zchar{14}{|\ital{text}\verb|}|,
+respectively.
+
+The text items handled by all of the above macros can include any appropriate
+string of \TeX\
+control sequences, including font definitions, \verb|\hbox|'es, etc.
+
+Material posted with any of the macros described in this section will not
+create any additional horizontal or vertical space within the current system,
+and will overwrite anything in the current system that gets in the way. It is
+the typesetter's responsibility to ensure there is adequate white space
+within the current system to accommodate any text placed with
+these macros. On the other hand, if text is placed far above or below a
+system, \musixtex\ will usually insert additional vertical space if needed.
+
+\section{Rehearsal marks}
+
+Rehearsal marks are usually
+boxed or circled uppercase letters or digits. They can be defined using the macros
+\keyindex{boxit}\verb|{|\ital{text}\verb|}| or
+\keyindex{circleit}\verb|{|\ital{text}\verb|}|. For boxed text,
+the margin between the text and box is controlled by the dimension
+register \keyindex{boxitsep}, which can be reset to any \TeX\ dimension if the
+default value of \verb|3pt| is unsatisfactory. To place the mark, use \verb|\Uptext| or
+any of the other macros defined in the previous section.

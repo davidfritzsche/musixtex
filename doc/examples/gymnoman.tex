@@ -1,0 +1,569 @@
+% \input musixtex
+% \input musixcpt
+% \input musixsty
+\title{Gymnomanie}
+\shortauthor{D. Taupin}
+\fullauthor{Daniel TAUPIN}
+%
+\othermention{Compos\'e en 1994}
+\maketitle
+
+\parindent 12mm
+\tracingstats=2\relax
+%
+\nbporteesi=2\relax
+\def\nbinstruments{1}%
+\global\cleftoksi={{6}{0}{0}{0}}%
+%
+\signaturegenerale{0}\relax % un bemol a la clef
+\def\quatretemps{\generalmeter{\meterfrac{4}{4}}}%
+\def\troistemps{\generalmeter{\meterfrac{3}{4}}}%
+\def\deuxtemps{\generalmeter{\meterfrac{2}{4}}}%
+%\check
+\def\instrumenti{Piano}
+%\check
+\troistemps
+\def\fff{{f}\kern -1pt{f}\kern -1pt{f}}%
+\def\ff{{f}\kern -1pt{f}}%
+\def\gluemaxskip{6pt}%
+%
+% formes frequentes
+%
+%\check
+% au moins deux croches basses et hautes
+\def\dqb#1#2{\Ibl0{#1}{#2}1\qb0{#1}\tqb0{#2}}%
+\def\dqh#1#2{\Ibu0{#1}{#2}1\qh0{#1}\tqh0{#2}}%
+%
+% trois doubles croches hautes
+\def\tqbbl#1#2#3{\Ibbl0{#1}{#3}2\qb0{#1}\qb0{#2}\tqb0{#3}}%
+\def\tqbbu#1#2#3{\Ibbu0{#1}{#3}2\qh0{#1}\qh0{#2}\tqh0{#3}}%
+\def\tqbbh{\tqbbu}%
+\def\tqbbb{\tqbbl}%
+% quatre doubles croches
+\def\qqbbh#1#2#3#4{\Ibbu0{#1}{#4}3\qh0{#1}\qh0{#2}\qh0{#3}\tqh0{#4}}\relax
+\def\qqbbu{\qqbbh}\def\qqbbb{\qqbbl}%
+\def\qqbbl#1#2#3#4{\Ibbl0{#1}{#2}3\qb0{#1}\qb0{#2}\qb0{#3}\tqb0{#4}}\relax
+%\check
+% octave basse en blanche
+\def\bohl#1{\zh{!`#1}\hl{!#1}}%
+\def\bohu#1{\zh{!`#1}\hu{!#1}}%
+\def\sohl#1{\zh{!'#1}\hl{!#1}}%
+\def\sohu#1{\zh{!'#1}\hu{!#1}}%
+% octave basse en blanche pointee
+\def\bohlp#1{\zhp{!`#1}\hlp{!#1}}%
+\def\bohup#1{\zhp{!`#1}\hup{!#1}}%
+\def\sohlp#1{\zhp{!'#1}\hlp{!#1}}%
+\def\sohup#1{\zhp{!'#1}\hup{!#1}}%
+%
+\def\bozh#1{\zh{!`#1!#1}}%
+\def\bozq#1{\zq{!`#1!#1}}%
+\def\boql#1{\zq{!`#1}\ql{!#1}}%
+\def\boqu#1{\zq{!`#1}\qu{!#1}}%
+% octave sup. en croches u
+\def\soqh#1{\zq{!'#1}\qh0{!#1}}%
+\def\soqb#1{\zq{!'#1}\qb0{!#1}}%
+\def\soqu#1{\zq{!'#1}\qu{!#1}}%
+\def\soql#1{\zq{!'#1}\ql{!#1}}%
+%\check
+%
+\def\interfacteur{11}%
+\computewidths
+\staffbotmarg=5\Interligne %
+\def\lPED{\zcharnote{-5}{\hbox to 2.4\internote{\hss\Ped\kern -2pt}}}%
+\def\PEDDEP{\PED\sk\sk\sk\DEP\pause}%
+\def\PEDpDEP{\PED\sk\sk\sk\DEP\sk}%
+\def\upsoupir#1{\raise#1\Interligne\rlap{\soupir}}
+%
+\debutmorceau
+% call \autolines with musiCtex, not with musiXtex !!!
+\ifx\mxversion\undefined\autolines {6}55\relax\fi
+\advance\barsinline by 1\relax
+\notes|\Uptext{\moyen\kern -20pt Lento \rm(\metron{\qu}{65})}\enotes
+\vnotes 0.2\elemskip\uptext{\kern -5mm\ppff
+ p}|\zcharnote a{\kern -5mm\ppff mp}\enotes
+ %
+\temps\NOtes \upsoupir2\bohlp K|\hu m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{Maf}\qu d|\qu m\enotes
+ % mesure 2
+\barre\NOtes \upsoupir2\bohlp{^J}|\upsoupir{-2}\hup l\enotes
+\temps\NOtes\zq{LN}\qu{^c}|\qu e\enotes
+\temps\NOtes\zq{LN}\qu{c}|\zq h\qu e\enotes
+ %\check
+ % mesure 3
+\barre\NOtes \upsoupir2\bohlp K|\hu m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{ad}|\zql f\qu m\enotes
+ % mesure 4
+\barre\NOtes \upsoupir2\bohlp{=J}|\upsoupir{-2}\hup n\enotes
+\temps\NOtes\zq{LN}\qu{=c}|\qu e\enotes
+\temps\NOtes\zq{LN}\qu{c}|\zq g\qu e\enotes
+ % mesure 5
+\barre\NOtes \upsoupir2\bohup F|\upsoupir{-2}\hu o\enotes
+\temps\NOtes\zq{Ma}\qu c|\qu f\enotes
+\temps\NOtes\zq{Mac}|\zql f\zq h\qu o\enotes
+ % mesure 6
+\barre\NOtes \upsoupir2\bohlp{H}|\qu q\enotes
+\temps\NOtes\zq{Ma}\qu{c}|\qu o\enotes
+\temps\NOtes\zq{Mad}|\zql f\qu m\enotes
+ % mesure 7
+ %\check
+\barre\NOtes \upsoupir2\bohlp J|\upsoupir{-2}\hu n\enotes 
+\temps\NOtes\zq L\qu N|\zq c\qu e\enotes 
+\temps\NOtes\zq L\qu N|\upsoupir3\zq {ce}\qu g\enotes
+ % mesure 8
+\barre\NOtes \upsoupir2\bohlp K|\hu o\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{Maf}\qu d|\qu o\enotes
+ % mesure 9
+\barre\NOtes \upsoupir2\bohlp{H}|\upsoupir{-2}\hup n\enotes
+\temps\NOtes\zq{LN}\qu{^c}|\qu e\enotes
+\temps\NOtes\zq{L}\qu{c}|\zq g\qu e\enotes
+ % mesure 10
+\barre\NOtes \upsoupir2\bohlp{^J}|\upsoupir{-2}\hu o\enotes
+\temps\NOtes\zq{a^c}\qu e|\qu g\enotes
+\temps\NOtes\zq{ae}\qu g|\zql h\qu o\enotes
+ % mesure 11
+\barre\NOtes \upsoupir2\bohup{D}|\upsoupir{-2}\hup m\enotes
+\temps\NOtes\zq{KMa}\qu{d}|\upsoupir{-2}\enotes
+\temps\NOtes\zq{Ka}\qu{d}|\qu f\enotes
+ %\check
+ % mesure 12
+\barre\NOtes \upsoupir2\bohup F|\hu o\enotes
+\temps\NOtes\zq{Mad}|\zql f\enotes
+\temps\NOtes\zq{ad}|\zq f\zql h\qu o\enotes
+ %\check
+ % mesure 13
+\barre\NOtes \upsoupir2\bohlp{H}|\upsoupir{-2}\hup n\enotes
+\temps\NOtes\zq{LN}\qu{^c}|\qu e\enotes
+\temps\NOtes\zq{L}\qu{c}|\zq h\ql e\enotes
+ %\check
+ % mesure 14
+\barre\NOtes \upsoupir2\bohup{F}|\qu o\enotes
+\temps\NOtes\zq{Mad}|\zql{f}\qu n\enotes
+\temps\NOtes\zq{ad}|\zq f\zql{h}\qu m\enotes
+ %\check
+ % mesure 15
+\barre\NOtes \upsoupir2\bohup{C}|\hu n\enotes
+\temps\NOtes\zq{LNc}\qu{e}|\enotes
+\temps\NOtes\zq{Nce}|\upsoupir2\ql g\enotes
+ %\check
+ % mesure 16
+\barre\NOtes \upsoupir2\bohup D|\hu m\enotes
+\temps\NOtes\zq{KMa}\qu d\enotes
+\temps\NOtes\zq{Mad}\qu f|\qu m\enotes
+ %\check
+ % mesure 17
+\barre\NOtes \upsoupir2\bohlp G|\hup l\enotes
+\temps\NOtes\zq{LN_b}\qu e\enotes
+\temps\NOtes\zq{Nbe}\qu g|\enotes
+ %\check
+ % mesure 18
+\barre\NOtes \upsoupir2\bohup D|\zcharnote b{\CREsc}\hu {^m}\enotes
+\temps\NOtes\zq{K^Ma}\qu d\enotes
+\temps\NOtes\zq{Mad}\qu{^f}|\qu m\enotes
+ %\check
+ % mesure 19
+\barre\NOtes \upsoupir2\bohup E|\hu{^n}\enotes
+\temps\NOtes\zq{L^Nb}\qu e\enotes
+\temps\NOtes\zq{Nbe}|\zql{^g}\qu n\enotes
+ %\check
+ % mesure 20
+\barre\NOtes \upsoupir2\bohup{^F}|\hu{^o}\enotes
+\temps\NOtes\lsh a\zq{^Ma^c}|\ql{^f}\enotes
+\temps\NOtes\zq{ac}|\zq f\zql{^h}\qu o\enotes
+ %\check
+ % mesure 21
+\barre\NOtes \upsoupir2\bohlp{^G}|\hup{^p}\enotes
+\temps\NOtes\lsh b\zq{^Nb^d}|\ql{^g}\enotes
+\temps\NOtes\zq{^Mdb}|\zq g\zql{^i}\enotes
+ %\check
+ % mesure 22
+\barre\NOtes \upsoupir2\bohlp{=H}|\hup{^q}\enotes
+\temps\NOtes\lna a\zq{a^c}|\zq e\ql{=h}\enotes
+\temps\NOtes\zq{Lc}|\zq {eg}\ql{^j}\enotes
+ %\check
+ % mesure 23
+\barre\NOtes \upsoupir2\bohup{^F}|\qu{^q}\enotes
+\temps\NOtes\zq{^Ma^c}|\zql{^f}\qu p\enotes
+\temps\NOtes\zq{ac}|\zq f\zql{h}\qu o\enotes
+ %\check
+ % mesure 24
+\barre\NOtes \upsoupir2\bohup{^C}|\hup{^n}\enotes
+\temps\NOtes\lsh N\zq{^LN^c}|\ql{^e}\enotes
+\temps\NOtes\zq{Nb}|\zq e\ql {^g}\enotes
+ %\check
+ % mesure 25
+\barre\NOtes \upsoupir2\bohlp{K}|\hu{^m}\enotes
+\temps\NOtes\zq{^Mad}|\ql{^f}\enotes
+\temps\NOtes\zq{ad}|\zq f\zql {h}\qu m\enotes
+ %\check
+ % mesure 26
+\barre\NOtes \upsoupir2\bohlp{^J}|\hup{l}\enotes
+\temps\NOtes\lsh N\zq{LN^c}|\ql{e}\enotes
+\temps\NOtes\zq{Nc}|\zq e\ql {^g}\enotes
+ %\check
+ % mesure 27
+\barre\NOtes \upsoupir2\bohlp{K}\zmidtwotext{\DIMin}|\qu k\enotes
+\temps\NOtes\zq{^Ma}\ql d|\qu l\enotes
+\temps\NOtes\zq{ad}|\zql {^f}\qu{^m}\enotes
+ %\check
+ % mesure 28
+\xbarre\NOtes \upsoupir2\bohlp{^J}|\hu{^j}\enotes
+\temps\NOtes\lsh N\zq{^LN^c}|\ql{^e}\enotes
+\temps\NOtes\zq{Nb}|\zq e\zql {^g}\upsoupir2\enotes
+ %\check
+ % mesure 29
+\barre\NOtes \upsoupir2\bohup{^F}|\bohu{o}\enotes
+\temps\NOtes\lna a\zq{^Ma}\ql{^c}|\enotes
+\temps\NOtes\zq{Mac}\ql {^f}|\boqu o\enotes
+ %\check
+ % mesure 30
+\barre\NOtes \upsoupir2\bohlp{^J}|\bohup{^n}\enotes
+\temps\NOtes\lsh N\zq{^LN^c}|\ql{^e}\enotes
+\temps\NOtes\zq{Nb}|\zq e\ql {^g}\enotes
+ %\check
+ % mesure 31
+\barre\NOtes \upsoupir2\bohup{^F}|\bohu{o}\enotes
+\temps\NOtes\lna a\zq{^Ma}\ql{^c}|\enotes
+\temps\NOtes\zq{Mac}\qu {^f}|\boqu o\enotes
+ %\check
+ % mesure 32
+\barre\NOtes \upsoupir2\bohup{E}|\bohup{p}\enotes
+\temps\NOtes\zq{L^Nb}|\ql{e}\enotes
+\temps\NOtes\zq{Nb}|\zq d\ql {g}\enotes
+ %\check
+ % mesure 33
+\barre\NOtes \upsoupir2\bohlp{H}|\bohu{^q}\enotes
+\temps\NOtes\zq{a^ce}|\ql{h}\enotes
+\temps\NOtes\zq{Lc}\ql {e}|\boqu q\enotes
+ %\check
+ % mesure 34
+\barre\NOtes \upsoupir2\bohlp{^J}|\boqu{s}\enotes
+\temps\NOtes\zq{a^c}|\zq{^f}\zql{h}\boqu{^q}\enotes
+\temps\NOtes\zq{^Mac}|\zql f\boqu o\enotes
+ %\check
+ % mesure 35
+\barre\NOtes \upsoupir2\bohlp{^J}|\bohu{^n}\enotes
+\temps\NOtes\lsh e\lsh N\zq{^LN^c}\ql{e}\enotes
+\temps\NOtes\zq{LN}\lq b\zql c|\soupir\enotes
+ %\check
+ % mesure 36
+\barre\NOtes \upsoupir2\bohup{^F}|\bohu{o}\enotes
+\temps\NOtes\lna a\zq{^Ma}\ql{^c}|\enotes
+\temps\NOtes\zq{Mac}\ql {^f}|\boqu o\enotes
+ %\check
+ % mesure 37
+\barre\NOtes \upsoupir2\bohup{H}|\bohu{=n}\enotes
+\temps\NOtes\lna a\zq{=La^c}|\ql{=e}|\enotes
+\temps\NOtes\zq{ac}|\zql e\boqu n\enotes
+ %\check
+ % mesure 38
+\barre\NOtes \upsoupir3\bohup K|\boqu {^m}\enotes
+\temps\NOtes\zq{K^Ma}\qu d|\boqu l\enotes
+\temps\NOtes\zq{Ma}\qu{^f}|\boqu k\enotes
+ %\check
+ % mesure 39
+\barre\NOtes \upsoupir2\bohup{H}|\bohu{^j}\enotes
+\temps\NOtes\zq{La^c}\ql{e}|\enotes
+\temps\NOtes\zq{ace}|\zql h\upsoupir2\enotes
+ %\check
+ % mesure 40
+\barre\NOtes \upsoupir2\bohup{G}|\bohup{p}\enotes
+\temps\NOtes\zq{KNb}\ql{d}|\enotes
+\temps\NOtes\zq{Nbd}|\zql g\enotes
+ %\check
+ % mesure 41
+\barre\NOtes \upsoupir2\bohup{H}|\bohup{^q}\enotes
+\temps\NOtes\zq{La^c}\ql{e}|\enotes
+\temps\NOtes\zq{ace}|\ql h\enotes
+ %\check
+ % mesure 42
+\barre\NOtes \upsoupir2\bohup{I}|\boqu{^r}\enotes
+\temps\NOtes\zq{^Mb^d}|\zql{^f}\boqu{^q}\enotes
+\temps\NOtes\zq{bd}|\zq h\zql {f}\qsk\boqu p\enotes
+ %\check
+ % mesure 43
+\barre\NOtes \upsoupir2\bohup{E}|\bohup{s}\enotes
+\temps\NOtes\zq{LN}\ql{c}|\enotes
+\temps\NOtes\zq{Nc}\ql e\enotes
+ %\check
+ % mesure 44
+\barre\NOtes \upsoupir2\bohup{G}|\boqu{t}\enotes
+\temps\NOtes\zq{KNb}\ql d|\boqu{s}\enotes
+\temps\NOtes\zq{Nbd}\zql {f}|\boqu r\enotes
+ %\check
+ % mesure 45
+\barre\NOtes \upsoupir2\bohup{C}|\bohu{s}\enotes
+\temps\NOtes\zq{LNc}|\ql{e}\enotes
+\temps\NOtes\zq{Nc}|\zq e\zql g\boqu s\enotes
+ %\check
+ % mesure 46
+\barre\NOtes \upsoupir2\bohup{G}|\bohup{r}\enotes
+\temps\NOtes\zq{Nb}\ql e|\enotes
+\temps\NOtes\zq{Nb}\ql d|\enotes
+ %\check
+ % mesure 47
+\barre\NOtes \upsoupir2\bohup{H}|\boqu{q}\enotes
+\temps\NOtes\zq{Lac}\zql{e}|\boqu p\enotes
+\temps\NOtes\zq{Lac}\zql e|\boqu o\enotes
+ %\check
+ % mesure 48
+\barre\NOtes \qsk\upsoupir2\bohup{G}|\qsk\bohup{_p}\enotes
+\temps\NOtes\zq{KN_b}\ql d|\enotes
+\temps\NOtes\zq{Nbd}|\ql g|\enotes
+ %\check
+ % mesure 49
+\barre\NOtes \zmidtwotext{\it rit.}\upsoupir2\bohup{H}|\bohu{o}\enotes
+\temps\NOtes\zq{La^c}\ql e|\enotes
+\temps\NOtes\zq{ac}\ql e|\boqu n\enotes
+ %\check
+ % mesure 50
+\barre\NOtes \zmidtwotext{\it a tempo}\upsoupir2\bohlp K|\bohu m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{Maf}\qu d|\boqu m\enotes
+ % mesure 51
+\barre\NOtes \upsoupir2\bohlp{^J}|\bohup l\enotes
+\temps\NOtes\zq{LN^c}\ql e\enotes
+\temps\NOtes\zq{LNc}|\zq h\ql e\enotes
+ %\check
+ % mesure 52
+\barre\NOtes \upsoupir2\bohlp K|\bohu m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{M_b}\qu d|\boqu m\enotes
+ % mesure 53
+\barre\NOtes \upsoupir2\bohlp{=J}|\bohup n\enotes
+\temps\NOtes\zq{LN=c}|\ql e\enotes
+\temps\NOtes\zq{LNc}|\zq g\ql e\enotes
+ % mesure 54
+\barre\NOtes \upsoupir2\bohup F|\bohu o\enotes
+\temps\NOtes\zq{Mac}|\zql f\enotes
+\temps\NOtes\zq{Mac}|\zql f\boqu o\enotes
+ % mesure 55
+\barre\NOtes \upsoupir2\bohlp{H}|\boqu q\enotes
+\temps\NOtes\zq{Ma}\qu{c}|\boqu o\enotes
+\temps\NOtes\zq{Ma}\zql d|\boqu m\enotes
+ % mesure 56
+ %\check
+\barre\NOtes \upsoupir2\bohlp{^J}|\bohu n\enotes 
+\temps\NOtes\zq {LN}|\zq{^c}\ql e\enotes 
+\temps\NOtes\zq L\zq N|\upsoupir3\zq {ce}\ql g\enotes
+ % mesure 57
+\barre\NOtes \upsoupir2\bohlp K|\bohu o\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{Maf}\qu d|\boqu o\enotes
+ % mesure 58
+\barre\NOtes \upsoupir2\bohlp{G}|\bohup n\enotes
+\temps\NOtes\zq{KN_b}\qu{d}|\enotes
+\temps\NOtes\zq{Nbd}|\ql g\enotes
+ % mesure 59
+ %\check
+\barre\NOtes \upsoupir2\bohlp{H}|\boqu o\enotes 
+\temps\NOtes\zq {KMa}\qu d|\boqu n\enotes 
+\temps\NOtes\zq {Ma}\zql d|\boqu m\enotes
+ % mesure 60
+ %\check
+\barre\NOtes \upsoupir2\bohlp{J}|\bohup {_l}\enotes 
+\temps\NOtes\zq {_LNc}\zql{_e}\enotes 
+\temps\NOtes\zq {Nce}|\ql g\enotes
+ % mesure 61
+ %\check
+\barre\NOtes \upsoupir2\bohlp{K}|\bohu k\enotes 
+\temps\NOtes\zq {K^Ma}\zql d|\enotes 
+\temps\NOtes\zq {Mad}\zql{^f}|\soupir\enotes
+ %\check
+ % mesure 62
+\barre\NOtes \qsk\upsoupir2\bohup{G}|\bohu{n}\enotes
+\temps\NOtes\zq{KN_b}\ql d|\enotes
+\temps\NOtes\zq{Nb}\ql d|\boqu n\enotes
+ % mesure 63
+ %\check
+\barre\NOtes \upsoupir2\bohlp{F}|\bohup {_o}\enotes 
+\temps\NOtes\lfl a\zq {=Mac}\zql{=f}|\enotes 
+\temps\NOtes\zq {acf}|\zql h\enotes
+ % mesure 64
+ %\check
+\barre\NOtes \upsoupir2\bohlp{J}|\boqu n\enotes 
+\temps\NOtes\zq {_LNc}\zql{_e}|\boqu m\enotes 
+\temps\NOtes\zq {Nc}\zql{g}|\boqu{_l}\enotes
+ % mesure 65
+ %\check
+\barre\NOtes \upsoupir2\bohlp{F}|\bohup {_k}\enotes 
+\temps\NOtes\lfl a\zq {Ma_d}\zql{f}|\enotes 
+\temps\NOtes\zq {adf}\zql{_h}|\enotes
+ % mesure 66
+ %\check
+\barre\NOtes \upsoupir2\bohlp{G}|\cna b\cna i\bohu {i}\enotes 
+\temps\NOtes\zq {Nb}\zql{=d}|\enotes 
+\temps\NOtes\zq {bd}\zql{f}|\soupir\enotes
+ % mesure 67
+ %\check
+\barre\NOtes \upsoupir2\bohlp{_H}|\zcharnote a{\ppff mf}\bohup {q}\enotes 
+\temps\NOtes\zq {_ac}|\zq{_e}\zql{_h}\enotes 
+\temps\NOtes|\zq {ceh}\ql{j}|\enotes
+ % mesure 68
+ %\check
+\barre\NOtes \upsoupir2\bohlp{J}|\boqu {_s}\enotes 
+\temps\NOtes\zq {_ac}|\zq{_e}\zql{_h}\boqu q\enotes 
+\temps\NOtes|\zq {ceh}\zql{j}\qsk\fl o\boqu {o}\enotes
+ % mesure 69
+ %\check
+\barre\NOtes \upsoupir3\bohlp{_L}|\bohup {n}\enotes 
+\temps\NOtes\zq {_LN_b}\zql{_e}\enotes 
+\temps\NOtes\zq {Nbe}|\ql{g}\enotes
+ % mesure 70
+ %\check
+\barre\NOtes \upsoupir2\bohlp{_H}|\boqu {q}\enotes 
+\temps\NOtes\zq {_ac}\zql{_e}|\zq{j_l}\boqu {_o}\enotes 
+\temps\NOtes\zq {ce}|\zql h\zq{lo}\boqu {q}\enotes
+ % mesure 71
+ %\check
+\barre\NOtes \qsk\upsoupir3\bohlp{_L}|\qsk\boqu {_p}\enotes 
+\temps\NOtes\zq {N_b}\zql{_e}|\zq{_i_l}\boqu {n}\enotes 
+\temps\NOtes\zq {be}|\zql g\zq{ln}\boqu {p}\enotes
+ % mesure 72
+ %\check
+\barre\NOtes \qsk\upsoupir3\bohlp{M}|\qsk\boqu {_o}\enotes 
+\temps\NOtes\zq {_ac}\zql{f}|\zq{_hj}\boqu {m}\enotes 
+\temps\NOtes\zq {c}\zql f|\zq{jm}\boqu {o}\enotes
+ % mesure 73
+ %\check
+\barre\NOtes \qsk\upsoupir3\bohlp{_L}|\qsk\bohup {_p}\enotes 
+\temps\NOtes\zq {_LN_b}\zql{_e}|\enotes 
+\temps\NOtes\zq {Nbe}|\zql g\enotes
+ % mesure 74
+ %\check
+\barre\NOtes \upsoupir2\bohlp{_H}|\boqu {q}\enotes 
+\temps\NOtes\zq {_ac}\zql{_e}|\zq{j_l}\boqu {_o}\enotes 
+\temps\NOtes\zq {ce}|\zql h\zq{lo}\boqu {q}\enotes
+ % mesure 75
+ %\check
+\barre\NOtes \qsk\upsoupir3\bohlp{_L}|\qsk\boqu {_p}\enotes 
+\temps\NOtes\zq {N_b}\zql{_e}|\zq{_i_l}\boqu {n}\enotes 
+\temps\NOtes\zq {be}|\zql g\zq{ln}\boqu {p}\enotes
+ % mesure 76
+ %\check
+\barre\NOtes \qsk\upsoupir3\bohlp{M}|\qsk\boqu {_o}\enotes 
+\temps\NOtes\zq {_ac}\zql{f}|\zq{_hj}\boqu {m}\enotes 
+\temps\NOtes\zq {c}\zql f|\zq{jm}\boqu {o}\enotes
+ % mesure 77
+ %\check
+\barre\NOtes \upsoupir3\bohlp{J}|\bohup {n}\enotes 
+\temps\NOtes\zq {=LNc}\zql{=e}|\enotes 
+\temps\NOtes\zq {Nce}|\zql g\enotes
+ % mesure 78
+ %\check
+\barre\NOtes \upsoupir3\bohlp{_K}|\bohu {m}\enotes 
+\temps\NOtes\zq {M_a_d}\ql{f}|\enotes 
+\temps\NOtes\zq {KMa}\ql d|\boqu m\enotes
+ % mesure 79
+ %\check
+\barre\NOtes \upsoupir3\bohlp{J}|\qsk\bohup {_l}\enotes 
+\temps\NOtes\zq {_LNc}\ql{_e}|\enotes 
+\temps\NOtes\zq {Nce}|\ql g\enotes
+ % mesure 80
+ %\check
+\barre\NOtes \qsk\upsoupir3\bohlp{_K}|\qsk\zq{f_h}\boqu {_k}\enotes 
+\temps\NOtes\fl N\fl d\zq {KN_b}\ql{d}|\zq{_g_i}\boqu{_l}\enotes 
+\temps\NOtes\zq {KM_a}\ql d|\zq{hk}\boqu m\enotes
+ % mesure 81
+ %\check
+\barre\NOtes \qsk\upsoupir2\bohlp{J}|\qsk\lna g\zh{=eg}\bohu {j}\enotes 
+\temps\NOtes\lna L\zq {L=N}\ql{c}|\enotes 
+\temps\NOtes\zq {Nc}\ql{=e}|\soupir\enotes
+ %\check
+ % mesure 82
+\barre\NOtes \upsoupir2\zmidtwotext{\DIMin}\bohup{G}|\bohu{n}\enotes
+\temps\NOtes\zq{KN_b}\ql d|\enotes
+\temps\NOtes\zq{Nb}\ql d|\boqu n\enotes
+ %\check
+ % mesure 83
+\barre\NOtes \upsoupir3\bohlp K|\bohup m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{Maf}\qu d|\enotes
+ %\check
+ % mesure 84
+\barre\NOtes \upsoupir2\bohlp J|\zq{gj}\boqu{_l}\enotes
+\temps\NOtes\zq{_LN}\ql c|\boqu{k}\enotes
+\temps\NOtes\zq{LN}\qu {_e}|\boqu j\enotes
+ % mesure 85
+ %\check
+\barre\NOtes \upsoupir2\bohlp{K}|\bohu k\enotes 
+\temps\NOtes\zq {K^Ma}\zql d|\enotes 
+\temps\NOtes\zq {Mad}\zql{^f}|\soupir\enotes
+ % mesure 86
+\barre\NOtes\uptext{\kern -\Interligne\ppff
+ p} \upsoupir2\bohlp K|\zcharnote a{\kern -\Interligne\ppff mp}\cna m\hu m\enotes
+\temps\NOtes\zq{=Ma}\qu d\enotes
+\temps\NOtes\zq{Maf}\qu d|\qu m\enotes
+ % mesure 87
+\barre\NOtes \upsoupir2\bohlp{^J}|\upsoupir{-2}\hup l\enotes
+\temps\NOtes\zq{LN}\qu{^c}|\qu e\enotes
+\temps\NOtes\zq{LN}\qu{c}|\zq h\qu e\enotes
+ %\check
+ % mesure 88
+\barre\NOtes \upsoupir2\bohlp K|\hu m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{ad}|\zql f\qu m\enotes
+ % mesure 89
+\barre\NOtes \upsoupir2\bohlp{=J}|\upsoupir{-2}\hup n\enotes
+\temps\NOtes\zq{LN}\qu{=c}|\qu e\enotes
+\temps\NOtes\zq{LN}\qu{c}|\zq g\qu e\enotes
+ % mesure 90
+\barre\NOtes \upsoupir2\bohup F|\upsoupir{-2}\hu o\enotes
+\temps\NOtes\zq{Ma}\qu c|\qu f\enotes
+\temps\NOtes\zq{Mac}|\zql f\zq h\qu o\enotes
+ % mesure 91
+\barre\NOtes \upsoupir2\bohlp{H}|\qu q\enotes
+\temps\NOtes\zq{Ma}\qu{c}|\qu o\enotes
+\temps\NOtes\zq{Mad}|\zql f\qu m\enotes
+ % mesure 92
+ %\check
+\barre\NOtes \upsoupir2\bohlp J|\upsoupir{-2}\hu n\enotes 
+\temps\NOtes\zq L\qu N|\zq c\qu e\enotes 
+\temps\NOtes\zq L\qu N|\upsoupir3\zq {ce}\qu g\enotes
+ % mesure 93
+\ifx\mxversion\undefined\def\atnextline{\autolines665}\fi % only with musiCtex
+\barre\NOtes\upsoupir2\zmidtwotext{\it diminuendo}\bohlp K|\hu m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{Maf}\qu d|\qu m\enotes
+ % mesure 94
+\barre\NOtes \upsoupir2\bohlp{H}|\upsoupir{-2}\hup l\enotes
+\temps\NOtes\zq{LN}\qu{^c}|\qu e\enotes
+\temps\NOtes\zq{LN}\qu{c}|\zq h\qu e\enotes
+ %\check
+ % mesure 95
+\barre\NOtes \upsoupir2\bohlp K|\hu m\enotes
+\temps\NOtes\zq{Ma}\qu d\enotes
+\temps\NOtes\zq{ad}|\zql f\qu m\enotes
+ % mesure 96
+\barre\NOtes \upsoupir2\bohlp{G}|\upsoupir{-2}\hup n\enotes
+\temps\NOtes\zq{KN}\qu{_b}|\zq d\qu g\enotes
+\temps\NOtes\zq{N}\qu{b}|\zq d\zq g\qu{_i}\enotes
+ % mesure 97
+\barre\NOtes \upsoupir2\bohup F|\upsoupir{-2}\hu o\enotes
+\temps\NOtes\zq{Ma}\qu c|\qu f\enotes
+\temps\NOtes\zq{Mac}|\zql f\zq h\qu o\enotes
+ % mesure 98
+\barre\NOtes \upsoupir2\bohlp{H}|\qu q\enotes
+\temps\NOtes\zq{Ma}\qu{c}|\qu o\enotes
+\temps\NOtes\zq{Mad}|\zql f\qu m\enotes
+ % mesure 99
+\barre\NOtes \upsoupir2\bohlp{H}|\hup l\enotes
+\temps\NOtes\zq{Lae}\qu{^c}\enotes
+\temps\NOtes\zq{ace}|\ql g\enotes
+ % mesure 100
+\barre\NOtes \pointdurgue{!`D}\upsoupir2\bohup{D}\zmidtwotext{\it rall.}\relax
+  |\pointdorgue n\hup k\enotes
+\temps\NOtes\zq{Mad}|\ql f\enotes
+\temps\NOtes\pointdorgue d\zq{Ma}\ql d\enotes
+\mulooseness 1\relax
+\finmorceau
+   \rightline{\sl \aujourdhui}\eject
+\bye
+
+
+
+
+
+

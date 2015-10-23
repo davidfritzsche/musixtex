@@ -1,0 +1,124 @@
+\chapter{\musixtex\ Examples}
+
+The file \verb|musixdoc.tex|, the source for this manual, contains many useful
+examples. In the manual, many examples are accompanied by a display of the code
+that produced them, while for a few only an image of the extract is included and you'll
+have to look in the \verb|musixdoc| source files to see the coding.
+
+Other useful examples cannot be embedded in the source, either because they are
+meant to be in \TeX, not \LaTeX, or because they are simply too large. For
+these the source files also are provided separately.
+
+When compiling or viewing any of the examples, you should keep in mind that
+most DVI previewers and laser printers have
+their origin one inch below and one inch to the right of the upper right corner
+of the paper, while the musical examples have their upper left
+corner just one centimeter to the right and below the top left corner of the page.
+Therefore, special parameters may have to be given to the DVI transcription
+programs unless special \keyindex{hoffset} and \keyindex{voffset} \TeX\
+commands have been included within the \TeX\ source.
+
+\section{Small examples}
+
+\begin{itemize}\setlength{\itemsep}{0ex}
+
+\item{\tt ossiaexa.tex}~: This is a stand-alone example of the use of ossia,
+provided by Olivier Vogel (Section~\ref{ossia} on page \pageref{ossia}).
+
+\item{\tt 8bitchar.tex}~: Using 8bit characters. 
+
+\end{itemize}
+
+\section{Full examples}
+The small examples above and the longer ones mentioned below are included in 
+the documentation folder of the \musixtex\ package.
+Some of them require 
+\verb|musixcpt.tex| which makes examples created in
+Music\TeX\ compatible with \musixtex. Here we mention a few of
+special interest.
+
+\subsection{Examples mentioned in the manual}
+
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item{\tt avemaria.tex}~: the ``M\'editation'' (alias ``Ave Maria'') by
+Charles {\sc Gounod} for organ and violin or voice.\index{Gounod, C.@{\sc Gounod, C.}}
+To run this five-page example you'll also need \texttt{avemariax.tex}.
+It demonstrates the use of separated bar rules (Section~\ref{avemaria2})
+and the use of staves of different sizes (Section~\ref{avemaria}).
+Also, an additional instrument is created for lyrics. This was a common
+practice before the \texttt{musixlyr} package was created by Rainer Dunker.
+
+ \item{\tt glorias.tex}~: a local melody for the French version of
+\ital{Gloria in excelsis Deo}, a three-page piece demonstrating the use of the hardlyrics
+commands (Section~\ref{glorias}). {\tt gloriab.tex} is the same piece, but with organ accompaniment.
+
+\end{itemize}
+
+\subsection{Other examples, provided by the authors of \musixtex }
+
+\begin{itemize}\setlength{\itemsep}{0ex}
+
+ \item{\tt traeumer.tex}~: the famous ``Tr\"aumerei'' by
+Robert {\sc Schumann}\index{Schumann, R.@{\sc Schumann, R.}} for piano, in genuine
+\musixtex\ but with some
+additions to perform ascending bitmapped \itxem{crescendos}.
+There are also S-shaped slurs between 2 staves.
+
+ \item{\tt parnasum.tex}~: the first page of ``Doctor gradus ad
+Parnassum'' by Claude {\sc Debussy}\index{Debussy,
+C.@{\sc Debussy, C.}} for piano.
+It contains a rather complex example of a new command \verb+\Special+
+to create staff-jumping doubly beamed notes.
+\end{itemize}
+
+\subsection{Additional documentation}
+
+\begin{itemize}\setlength{\itemsep}{0ex}
+
+ \item{\tt sottieng}~:  Notation mistakes, provided by Jean-Pierre Coulon.
+
+\end{itemize}
+
+\section{Compiling \texttt{musixdoc.tex}}
+
+This manual is an excellent example of a primarily text document with embedded
+musical excerpts. For this reason, it is a \LaTeX\ document and must be compiled
+with \verb|latex| rather than \verb|etex|. Those wishing to combine text and 
+musical excerpts should carefully study how it is done here.
+
+Before compiling or recompiling \verb|musixdoc.tex|, you should remove all the auxiliary 
+files {\tt musixdoc.[mx1\|\allowbreak mx2\|\allowbreak aux\|\allowbreak toc\|\allowbreak ind\|\allowbreak idx\|\allowbreak ilg\|\allowbreak out]} 
+if they are present. Then the following command sequence will produce \verb|musixdoc.ps|:
+\begin{quote}\begin{verbatim}
+latex musixdoc
+musixflx musixdoc
+latex musixdoc
+makeindex musixdoc
+latex musixdoc
+latex musixdoc
+dvips -e0 musixdoc
+\end{verbatim}\end{quote}
+The initial three steps \verb|latex|\allowbreak$\to$\allowbreak\verb|musixflx|\allowbreak$\to$\allowbreak\verb|latex| build up the basic appearance of the document including musical examples.
+The \verb|makeindex| step produces the database for the index.  
+After that, \verb|latex| must be run at least twice to complete cross referencing.  
+Finally, \verb|dvips| converts the \verb|.dvi| file into \verb|.ps|.
+To produce \verb|musixdoc.pdf|, use \verb|ps2pdf| or the Distiller component of Adobe Acrobat, or open \verb|musixdoc.ps| in \texttt{GSview}, go to
+{\tt File\|Convert}, select \verb|pdfwrite| at 600 dpi resolution, and click
+\verb|OK|.  
+Or if you have the \verb|musixtex| script, just run 
+\begin{quote}
+\verb|musixtex -l -x musixdoc|
+\end{quote}
+where the \verb|-l| option is to use \verb|latex| as the processing engine
+and \verb|-x| is to create a new index database.
+
+%If you use an older version of \LaTeX\ which doesn't automatically 
+%invoke $\varepsilon$\hbox{-}\nobreak\TeX, you will encounter the 
+%error ``{\tt !~No room for new \string\count}''. 
+%This is because \verb|musixdoc.tex| invokes \verb|musixtex.tex|, which together with \LaTeX\ 
+%requires more storage registers than available in \TeX.
+%You may be able get around this by using the command 
+%\verb|elatex| instead of \verb|latex|;
+%however, it is strongly recommended to upgrade your \TeX\ system to a more recent 
+%version in which \verb|latex| automatically invokes $\varepsilon$\hbox{-}\nobreak\TeX.   
+

@@ -1,0 +1,792 @@
+\title{Toccata}
+\shortauthor{Ch.-M. Widor}
+\subtitle{(extraite de la cinqui\`eme symphonie pour orgue)}
+\fullauthor{Charles-Marie WIDOR}
+\maketitle
+\parindent 13mm
+%
+
+\tracingstats=2\relax
+%
+\nbporteesi=2\relax
+\def\nbinstruments{1}
+\global\cleftoksi={{0}{0}{0}{0}}%
+%
+\signaturegenerale{-1}\relax
+\def\Mordant{\mordant{10}}%
+%\check
+\def\instrumenti{Manuel}%
+%\check
+\def\gluemaxskip{7pt}%
+%
+\def\bnotes{\barre\notes}\def\bnoteP{\bnotes\Pause}
+\def\tnotes{\temps\notes}
+\def\zbnotes{\zbarre\notes}
+\def\doubler{\multiply\noteskip by 2\relax}%
+\def\Pause{\sk\sk\sk\sk\sk\sk\sk\pause}%
+% formes frequentes
+%
+\def\qbupz#1{\upz{#1}\qb0{#1}}
+\def\qhlpz#1{\lpz{#1}\qh0{#1}}
+%\check
+\def\umotif#1#2#3#4#5#6#7#8#9{\varaccid
+{\advance\transpose by 2\ibbl0{#9}0}\relax
+\ilegu0{#1}\qb0{#1}\tleg0\qb0{#2#3}%
+\qbupz{#1}\qbupz{#4#5}\qbupz{#6#7}\qbupz{#8#9}\qbupz{#7}\tbl0\qbupz{#5}}%
+%\check
+\def\mmotif#1#2#3#4#5#6#7#8#9{\varaccid
+{\advance\transpose by -2\ibbu0{#1}0}\relax
+\ilegl0{#3}\qh0{#1}\tleg0\qh0{#2#3}%
+\qhlpz{#1}\qhlpz{#4#5}\qhlpz{#6#7}\qhlpz{#8#9}\qhlpz{#7}\tbu0\qhlpz{#5}}%
+\def\Mmotif#1#2#3#4#5{\mmotif#1!#2!#3!#4!#5}
+\def\Umotif#1#2#3#4#5{\umotif#1!#2!#3!#4!#5}
+%\check
+%
+\def\culpz#1{\lpz{#1}\cu{#1}}%
+\def\clupz#1{\upz{#1}\cl{#1}}%
+%
+%\check
+% double accord de 4 + soupir
+\def\dbuq#1#2#3#4{\lst{#4}\ibu0{#1}0\zq{#1#2#3}\qh0{#4}\sk
+\lpz{#4}\zq{#1#2#3}\tqh0{#4}\sk\dsoupir\sk}%
+\def\dblq#1#2#3#4{\ust{#1}\ibl0{#4}0\zq{#1#2#3}\qb0{#4}\sk
+\upz{#1}\zq{#1#2#3}\tqb0{#4}\sk\dsoupir\sk}%
+%
+\def\dblql#1#2#3#4{\ust{#1}\ibl0{#4}0\zq{#1#3}\lq{#2}\qb0{#4}\sk
+\upz{#1}\zq{#1#3}\lq{#2}\tqb0{#4}\sk\dsoupir\sk}%
+\def\dbuqr#1#2#3#4{\lst{#4}\ibu0{#1}0\rq{#2}\zq{#1#3}\qh0{#4}\sk
+\lpz{#4}\rq{#2}\zq{#1#3}\tqh0{#4}\sk\dsoupir\sk}%
+%
+%\check
+% double accord de 3 + soupir
+\def\dbut#1#2#3{\lst{#3}\ibu0{#1}0\zq{#1#2}\qh0{#3}\sk
+\lpz{#3}\zq{#1#2}\tqh0{#3}\sk\dsoupir\sk}%
+\def\Dbut#1#2#3{\ibu0{#1}0\zq{#1#2}\bupz0\qh0{#3}\sk
+\zq{#1#2}\bupz0\tqh0{#3}\sk\dsoupir\sk}%
+\def\dblt#1#2#3{\ust{#1}\ibl0{#3}0\zq{#1#2}\qb0{#3}\sk
+\upz{#1}\zq{#1#2}\tqb0{#3}\sk\dsoupir\sk}%
+%
+\def\dbutr#1#2#3{\lst{#3}\ibu0{#1}0\zq{#1}\rq{#2}\qh0{#3}\sk
+\lpz{#3}\rq{#2}\zq{#1}\tqh0{#3}\sk\dsoupir\sk}%
+\def\Dbutr#1#2#3{\ibu0{#1}0\zq{#1}\rq{#2}\bupz0\qh0{#3}\sk
+\rq{#2}\zq{#1}\bupz0\tqh0{#3}\sk\dsoupir\sk}%
+\def\dbltl#1#2#3{\ust{#1}\ibl0{#3}0\zq{#1}\lq{#2}\qb0{#3}\sk
+\upz{#1}\zq{#1}\lq{#2}\tqb0{#3}\sk\dsoupir\sk}%
+%
+%\check
+% double accord de 2 + soupir
+\def\dbud#1#2{\lst{#2}\ibu0{#1}0\zq{#1}\qh0{#2}\sk
+\lpz{#2}\zq{#1}\tqh0{#2}\sk\dsoupir\sk}%
+\def\Dbud#1#2{\ibu0{#1}0\zq{#1}\bupz0\qh0{#2}\sk
+\zq{#1}\bupz0\tqh0{#2}\sk\dsoupir\sk}%
+%
+% double accord de 3 doubles croches
+\def\ddbut#1#2#3{\lpz{#3}\ibbu0{#1}0\zq{#1#2}\qh0{#3}%
+\lpz{#3}\zq{#1#2}\tqh0{#3}}%
+\def\ddblt#1#2#3{\upz{#1}\ibbl0{#3}0\zq{#1#2}\qb0{#3}%
+\upz{#1}\zq{#1#2}\tqb0{#3}}%
+%
+% double accord de 2 doubles croches
+\def\ddbud#1#2{\lpz{#2}\ibbu0{#1}0\zq{#1}\qh0{#2}%
+\lpz{#2}\zq{#1}\tqh0{#2}}%
+\def\ddbld#1#2{\upz{#1}\ibbl0{#2}0\zq{#1}\qb0{#2}%
+\upz{#1}\zq{#1}\tqb0{#2}}%
+%
+% double accord de 3 + soupir
+\def\dbutmr#1#2#3{\lst{#3}\ibu0{#1}0\rq{#2}\zq{#1}\qh0{#3}\sk
+\lpz{#3}\rq{#2}\zq{#1}\tqh0{#3}\sk\dsoupir\sk}%
+%
+% double accord de 2 + soupir
+\def\dbudr#1#2{\lst{#2}\ibu0{#1}0\rq{#1}\qh0{#2}\sk
+\lpz{#2}\rq{#1}\tqh0{#2}\sk\dsoupir\sk}%
+%
+% double accord de 3 doubles croches
+\def\ddbutr#1#2#3{\lpz{#3}\ibbu0{#1}0\rq{#2}\zq{#1}\qh0{#3}%
+\lpz{#3}\rq{#2}\zq{#1}\tqh0{#3}}%
+\def\ddbltl#1#2#3{\upz{#1}\ibbl0{#3}0\lq{#2}\zq{#1}\qb0{#3}%
+\upz{#1}\lq{#2}\zq{#1}\tqb0{#3}}%
+%
+% double accord de 2 doubles croches
+\def\ddbudr#1#2{\lpz{#2}\ibbu0{#1}0\rq{#1}\qh0{#2}\relax
+\lpz{#2}\rq{#1}\tqh0{#2}}%
+%
+% accord de 4, 3 doubles croches inf
+\def\lmotbba#1#2#3#4{\dbuq{#1}{#2}{#3}{#4}%
+\ddbut{#2}{#3}{#4}}%
+%\check
+%
+% accord de 4, 2 doubles croches sup
+\def\lmotbbb#1#2#3#4{\dbuq{#1}{#2}{#3}{#4}%
+\ddbud{#1}{#2}}%
+%\check
+%
+% accord de 4, 2 doubles croches med
+\def\lmotbbc#1#2#3#4{\dbuq{#1}{#2}{#3}{#4}%
+\ddbud{#2}{#3}}%
+%\check
+%
+% accord de 2, 2 doubles croches med
+\def\lmotbbd#1#2#3{\dbud{#1}{#2}%
+\ddbud{#2}{#3}}%
+%\check
+%
+\def\bld#1#2{\zq{#2}\clupz{#1}}%
+\def\blt#1#2#3{\zq{#3#2}\clupz{#1}}%
+\def\bltl#1#2#3{\zq{#3}\lq{#2}\clupz{#1}}%
+\def\blq#1#2#3#4{\zq{#4#3#2}\clupz{#1}}%
+\def\blql#1#2#3#4{\lq{#2}\zq{#3#4}\clupz{#1}}%
+%
+\def\bud#1#2{\zq{#1}\culpz{#2}}%
+\def\budr#1#2{\rq{#1}\culpz{#2}}%
+\def\but#1#2#3{\zq{#1#2}\culpz{#3}}%
+\def\butr#1#2#3{\zq{#1}\rq{#2}\culpz{#3}}%
+\def\buq#1#2#3#4{\zq{#1#3#2}\culpz{#4}}%
+\def\buqr#1#2#3#4{\zq{#1#3}\rq{#2}\culpz{#4}}%
+\def\tblq#1#2#3#4{\dblq{#1}{#2}{#3}{#4}\blq{#1}{#2}{#3}{#4}}%
+\def\tblql#1#2#3#4{\dblql{#1}{#2}{#3}{#4}\blql{#1}{#2}{#3}{#4}}%
+\def\tbuq#1#2#3#4{\dbuq{#1}{#2}{#3}{#4}\buq{#1}{#2}{#3}{#4}}%
+\def\tblt#1#2#3{\dblt{#1}{#2}{#3}\blt{#1}{#2}{#3}}%
+\def\tbltl#1#2#3{\dbltl{#1}{#2}{#3}\bltl{#1}{#2}{#3}}%
+%\check
+%
+\def\tbuqr#1#2#3#4{\dbuqr{#1}{#2}{#3}{#4}\buqr{#1}{#2}{#3}{#4}}%
+%\check
+%
+% accord de 3, final croche
+\def\tbut#1#2#3{\dbut{#1}{#2}{#3}\but{#1}{#2}{#3}}%
+\def\Tbut#1#2#3{\Dbut{#1}{#2}{#3}\but{#1}{#2}{#3}}%
+%\check
+%
+\def\tbutr#1#2#3{\dbutr{#1}{#2}{#3}\butr{#1}{#2}{#3}}%
+\def\Tbutr#1#2#3{\Dbutr{#1}{#2}{#3}\butr{#1}{#2}{#3}}%
+%\check
+%
+% accord de 2, final croche
+\def\tbud#1#2{\dbud{#1}{#2}\bud{#1}{#2}}%
+\def\Tbud#1#2{\Dbud{#1}{#2}\bud{#1}{#2}}%
+%\check
+%
+\def\register#1{\boxit{\hbox{\bf #1}}}
+%
+\generalmeter{\meterfrac 42}%
+%
+\ifnum\musicsize=16\def\bottomfacteur{7}\else\def\bottomfacteur{5}\fi
+\debutmorceau
+%
+\ifnum\musicsize=16\relax
+  \autolines{19}47\else
+  \autolines{19}36\fi
+\ifx\undefined\horizontalscore \else\autolines{19}54\fi
+%\check
+%
+\bigaccid
+\hyphenpenalty -50\relax
+\notes\zmidtwotext{\fff}|\zcharnote{w}{\kern -20mm\moyen Allegro
+\bf(\metron{\qu}{100})}\enotes 
+% 
+%\check 
+% 
+% mesure 1
+\tnotes\lmotbba mjhf|\umotif t!s!q!o!m\enotes
+\tnotes\tbuq ljhf|\umotif s!r!q!o!m\enotes
+\zbnotes\tbuqr kjhf|\umotif r!q!q!o!m\enotes
+\tnotes\tbuq ljhf|\umotif s!r!q!o!m\enotes
+% mesure 2
+\bnotes\lmotbba mjhf|\umotif t!s!q!o!m\enotes
+\tnotes\tbuq ljhf|\umotif s!r!q!o!m\enotes
+\ifnum\musicsize=16\relax
+  \autolines {17}47\else
+  \autolines {17}36\fi
+\ifx\undefined\horizontalscore \else\autolines{17}54\fi
+\zbnotes\tbuqr kjhf|\umotif r!q!q!o!m\enotes
+\tnotes\na i\tbuq lige|\umotif s=p!p!n!m\enotes
+% mesure 3
+\bnotes\lmotbba jgec|\umotif q=p!n!l!j\enotes
+\nspace\tnotes\na i\tbuq igec|\na p\umotif p!o!n!l!j\enotes
+\zbnotes\tbuqr hgec|\umotif o!n!n!l!j\enotes
+\tnotes\tbuq igec|\umotif p!o!n!l!j\enotes
+% mesure 4
+\bnotes\lmotbba jgec|\umotif q=p!n!l!j\enotes
+\nspace\tnotes\na i\tbuq igec|\na p\umotif p!o!n!l!j\enotes
+\zbnotes\tbuqr hgec|\umotif o!n!n!l!j\enotes
+\tnotes\sh f\na i\tbut ifd|\na p\umotif p^m!m!k!j\enotes
+% mesure 5
+\bnotes\na b\lmotbbc gdbN|\umotif n^m!k=i!g\enotes
+\nspace\tnotes\sh c\tbut gec|\umotif o^n!l^j!h\enotes
+\zbnotes\tbutr gfd|\umotif o=m!m!k!h\enotes
+\tnotes\sh c\tbut gec|\umotif o^n!l^j!h\enotes
+% mesure 6
+\bnotes\lmotbbb fd!N|\umotif o!m!m!k!h\enotes
+\qspace
+\tnotes\lsh d\sh f\tbut hfd|\na p\umotif p^o^m^k=i\enotes
+\zbnotes\tbutr hge|\umotif p!n!n!l!i\enotes
+\tnotes\tbut hfd|\umotif p!o!m!k!i\enotes
+% mesure 7
+\bnotes\lmotbbb ge!N|\na p\umotif p!n!n!l=i\enotes
+\nspace\tnotes\fl i\tbut ige|\umotif q!p!n!l!j\enotes
+\zbnotes\tbut ifd|\umotif q!m!m!k!j\enotes
+\tnotes\tbutr ihf|\umotif q!o!o!m!j\enotes
+% mesure 8
+% increase the number of instruments at the next line change
+\def\manuale{}%   nothing until changed
+\def\pedalepause{}%
+\def\atnextline{\nbporteesii=2\relax
+    \nbporteesi=1\relax
+    \def\nbinstruments{2}\relax
+    \global\cleftoksii={{0}{0}{0}{0}}\global\cleftoksi={{6}{0}{0}{0}}\relax
+    \def\pedalepause{\Pause}\def\manuale{&}\relax
+    \signaturegenerale{-1}}\relax
+%    
+\bnotes\pedalepause\manuale\tbut ige|\umotif q!n!n!l!j\enotes
+\tnotes\manuale\sh j\fl e\tbuqr jige|\sh q\umotif q!n!n!l^j\enotes
+%
+\zbnotes\pedalepause\manuale\tbuq kigd|\umotif r^q!p!n!k\enotes
+\tnotes\manuale\na c\na l\tbuq ligc\relax
+   |\ibbl0{p}0\ilegu0{s}\qb0{s}\tleg0\qb0{^r}%
+\qbupz{s}\qbupz{=q}\qbupz{p}\qbupz{n}\qbupz{p}\tbl0\qbupz{q}\enotes
+% mesure 9
+%\check
+%   modification de la liaison initiale en pizz.
+\def\umotif#1#2#3#4#5#6#7#8#9{\varaccid
+{\advance\transpose by 2\ibbl0{#9}0}\qbupz{#1}\qbupz{#2#3}%
+\qbupz{#1}\qbupz{#4#5}\qbupz{#6#7}\qbupz{#8#9}\qbupz{#7}\tbl0\qbupz{#5}}%
+%\check
+\def\mmotif#1#2#3#4#5#6#7#8#9{\varaccid
+{\advance\transpose by -2\ibbu0{#1}0}\qhlpz{#1}\qhlpz{#2#3}%
+\qhlpz{#1}\qhlpz{#4#5}\qhlpz{#6#7}\qhlpz{#8#9}\qhlpz{#7}\tbu0\qhlpz{#5}}%
+%
+%\check
+\bnotes\zcharnote{E}{\llap{\ff}}\relax
+\doubler\qlp f\sk\sk\cu F&\lmotbba mjhf|\umotif t!s!q!o!m\enotes
+\tnotes\doubler\qlp e\sk\sk\cu F&\tbuq ljhf|\umotif s!r!q!o!m\enotes
+\zbnotes\doubler\qlp d\sk\sk\cu F&\tbuqr kjhf|\umotif r!q!q!o!m\enotes
+\tnotes\doubler\qlp e\sk\sk\cu F&\tbuq ljhf|\umotif s!r!q!o!m\enotes
+% mesure 10
+\bnotes\doubler\qlp f\sk\sk\cu F&\lmotbba mjhf|\umotif t!s!q!o!m\enotes
+\tnotes\doubler\qlp e\sk\sk\cu F&\tbuq ljhf|\umotif s!r!q!o!m\enotes
+\zbnotes\doubler\qlp d\sk\sk\cu F&\tbuqr kjhf|\umotif r!q!q!o!m\enotes
+\tnotes\doubler\qlp e\sk\sk\cu G&\na i\tbut lig|\umotif s=p!p!n!m\enotes
+% mesure 11
+\bnotes\itenu1c\wh c&\lmotbba jgec|\umotif q=p!n!l!j\enotes
+\nspace\tnotes&\na i\tbuq igec|\na p\umotif p!o!n!l!j\enotes
+\zbnotes\tten1\hl c&\tbuqr hgec|\umotif o!n!n!l!j\enotes
+\tnotes\hpause&\na i\tbuq igec|\na p\umotif p!o!n!l!j\enotes
+% mesure 12
+\bnotes\doubler\qlp c\sk\sk\cu C&\lmotbba jgec|\umotif q=p!n!l!j\enotes
+\nspace\tnotes\doubler\qlp{=b}\sk\sk\cu C&\na i\tbuq igec|\na p\umotif p!o!n!l!j\enotes
+\zbnotes\doubler\qlp a\sk\sk\cu C&\tbuqr hgec|\umotif o!n!n!l!j\enotes
+\tnotes\doubler\qlp b\sk\sk\cu D&\sh f\na i\tbut ifd|\na p\umotif p^m!m!k!j\enotes
+% mesure 13
+\bnotes\whp N&\na b\lmotbbc gdbN|\umotif n^m!k=i!g\enotes
+\tnotes&\tbut gec|\umotif n!m!l!j!g\enotes
+\zbnotes&\tbut gdb|\umotif n!m!k!i!g\enotes
+\tnotes\hpause&\sh c\tbut gec|\umotif o^n!l^j!h\enotes
+% mesure 14
+\bnotes\doubler\qlp N\sk\sk\cu G&\sh c\tbut hec|\umotif
+o^n!l^j!h\enotes
+\tnotes\doubler\qlp N\sk\sk\cu G&\tbut hec|\umotif o!n!l!j!h\enotes
+\zbnotes\doubler\qlp M\sk\sk\cu F&\tbut hfd|\na p\umotif
+p!m!m!k=i\enotes
+\tnotes\doubler\qlp L\sk\sk\cu E&\tbutr hge|\sh q\umotif
+q!o!o!n^j\enotes
+% mesure 15
+\ifnum\musicsize=16\relax
+  \autolines{17}46\else
+  \autolines{17}35\relax
+\fi
+\ifx\undefined\horizontalscore \else\autolines{17}53\fi
+\bnotes\itenu1K\wh K&\lmotbbd hfd|\umotif r^q!o!m!k\enotes
+\tnotes&\tbud hf|\umotif r!q!o!m!k\enotes
+\zbnotes\tten1\hl K&\na i\tbut ifd|\na p\umotif p!o!o!m!k\enotes
+\tnotes\hpause&\tbut jfd|\na q\umotif q!p!o!m!k\enotes
+% mesure 16
+\bnotes\doubler\qlp a\sk\sk\cu H&\sh d\lsh f\na i\tbut 
+ifd|\na p\umotif p^o^m^k=i\enotes
+\tnotes\doubler\qlp a\sk\sk\cu H&\tbut ifd|\umotif p!o!m!k!i\enotes
+\zbnotes\doubler\qlp N\sk\sk\cu G&\tbut ige|\sh q\umotif
+q!n!n!l^j\enotes
+\tnotes\doubler\qlp{^M}\sk\sk\cu{^F}&\na i\sh f\tbutr ihf|\sh r\umotif
+r!p!p!o^k\enotes
+%\check
+% mesure 17
+\bnotes\itenu1L\wh L&\na i\dbud ig\ddbud ge|\umotif
+s^r=p!n!l\enotes
+\tnotes&\dbud ig\but ige|\umotif s!r!p!n!l\enotes
+\zbnotes\tten1\hl L&\tbut jge|\umotif q=p!p!n!l\enotes
+\tnotes\hpause&\tbut kge|\na r\umotif r=p!p!n!l\enotes
+% mesure 18
+\bnotes\doubler\fl b\qlp b\sk\sk\cu I&\dbut jge\bud ge|\umotif q=p!n!l!j\enotes
+\tnotes\doubler\qlp b\sk\sk\cu I&\dbut jge\bud ge|\umotif q!p!n!m!j\enotes
+\zbnotes\doubler\qlp a\sk\sk\cu H&\dbuqr kjhf\but jhf|\umotif
+r^q!o!m!k\enotes
+\tnotes\doubler\qlp N\sk\sk\cu G&\fl i\tbuqr ljig\relax
+   |\varaccid\ibbl0{p}0\ilegu0{s}\qb0{s}\tleg0\qb0{^r}%
+\qbupz{s}\qbupz{=q}\qbupz{_p}\qbupz{n}\qbupz{p}\tbl0\qbupz{s}\enotes
+% mesure 19
+\bnotes\doubler\qlp M\sk\sk\cu F&\lmotbba mkhf|\umotif t!s!r!n!m\enotes
+\nspace\tnotes\doubler\qlp N\sk\sk\cu G&\sh j\tbuqr lijg|\umotif s^r^q!p!n\enotes
+\nspace\zbnotes\doubler\qlp M\sk\sk\cu F&\tbut khf|\sh q\umotif
+r!q!o!m!l\enotes
+\tnotes\doubler\qlp L\sk\sk\cu E&\na j\tbut jhe|\na q\umotif 
+q!o!o!l!j\enotes
+% mesure 20
+\bnotes\doubler\qlp K\sk\sk\cu D&\fl i\tbutr ihd|\umotif p!o!o!m!i\enotes
+\tnotes\doubler\qlp L\sk\sk\cu E&\tbut ige|\umotif p!n!n!l!i\enotes
+\zbnotes\doubler\qlp{^J}\sk\sk\cu{^C}&\sh c\tbutr hgc|\umotif
+o!n!n!l!h\enotes
+\tnotes\doubler\qlp K\sk\sk\cu D&\tbut hfd|\umotif o!m!m!k!h\enotes
+% mesure 21
+\bnotes\wh I&\mmotif h^f!f!d!b|\sh m\dblt omk\ddblt omk\enotes
+\tnotes&\mmotif i!g!g!d!b|\tblq rpnk\enotes
+\zbnotes\wh J&\mmotif g=f!f!d!c|\lna m\tbltl nmi\enotes
+\tnotes&\mmotif g!e!e!d!c|\tblt nli\enotes
+%\check
+% mesure 22
+\bnotes\hu F&\dbut fca\ddbut fca|\umotif m!l!j!h!f\enotes
+\tnotes\sk\hpause&\tbut eca|\umotif l!k!j!h!f\enotes
+\zbnotes\Pause&\tbutr dca|\umotif k!j!j!h!f\enotes
+\tnotes&\tbut eca|\umotif l!k!j!h!f\enotes
+% mesure 23
+\global\cleftoksii={{6}{0}{0}{0}}\changeclefs
+\bnotes\Pause&\umotif f!e!c!a!M|\dblt mjh\ddblt mjh\enotes
+\tnotes&\umotif e!d!c!a!M|\tblt ljh\enotes
+\zbnotes\hpause&\umotif d!c!c!a!M|\tbltl kjh\enotes
+\tnotes\lpz F\qu F\sk\sk\sk\soupir&\umotif d=b!b!a!M|\na i\dblt
+oki\na p\blt pki\enotes
+% mesure 24
+\bnotes\qu E\sk\sk\sk\soupir&\lsh N\na b\tblt ebN|\mmotif l^k=i^g!e\enotes
+\tnotes\sk\hpause&\sh d\tblt dbN|\mmotif k^j!i!g!e\enotes
+\qspace
+\zbnotes\Pause&\lsh c\tbltl cbN|\mmotif j!i!i!g!e\enotes
+\tnotes&\tblt dbN|\mmotif k!i!i!g!e\enotes
+% mesure 25
+\bnoteP&\umotif e^d=b^N!L|\lsh g\na i\dblt lig\ddblt lig\enotes
+\nspace\tnotes&\umotif d^c!b!N!L|\sh k\tblt kig\enotes
+\zbnotes\sk\hpause&\qsk\sh c\umotif c=b!b^N!L|\sh g\sh j\lna i\qsk\tbltl jig\enotes
+\tnotes\lpz E\qu E\sk\sk\sk\soupir&\umotif c^a!a!N!L|\relax
+   \sh h\sh n\dblt njh\sh o\blt ojh\enotes
+% mesure 26
+\bnotes\fl E\qu E\sk\sk\sk\soupir&\lfl b\na N\fl e\dblt
+ebN\ddbld bN|\fl l\mmotif l!k!i!g_e\enotes
+\tnotes\sk\hpause&\tblt dbN|\mmotif k!i!i!g!e\enotes
+\qspace
+\zbnotes\sk\hpause&\lsh c\tbltl cbN|\sh j\mmotif
+ j!i!i!g!e\enotes
+\global\cleftoksii={{0}{0}{0}{0}}\changeclefs
+\tnotes\ilegl1G\fl L\hl L&\sh c\dbutmr gcb\zq g\rq c\culpz b|\umotif
+ n^m^j!i!g\enotes
+% mesure 27
+\bnotes\tleg1\hu G&\na b\dbut gdb\ddbud db|\umotif n^m!k=i!g\enotes
+\nspace\tnotes\sk\hpause&\sh f\tbut fdb|\umotif m!k!k!i!g\enotes
+\zbnotes\Pause&\sh e\tbutr edb|\bigsh l\umotif l!k!k!i!g\enotes
+\tnotes\ilegl1I\hl N&\na i\tbutr ied|\bigna p\umotif p^o!l!k!i\enotes
+% mesure 28
+%\check
+\bnotes\na I\tleg1\hu I&\na i\lsh f\sh d\dbut ifd\ddbud fd|\na p\umotif
+ p^o^m^k=i\enotes
+\nspace\tnotes\sk\hpause&\sh h\tbut hfd|\sh o\umotif o!m!m!k!i\enotes
+\zbnotes\Pause&\na h\tbut hfd|\na o\umotif o!m!m!k!i\enotes
+\tnotes\na b\ilegu1c\hl b&\sh k\dbut khf\zq{kh}\culpz f|\sh r\umotif
+ r!o!o!m!k\enotes
+% mesure 29
+%\check
+\bnotes\fl b\tleg1\hl b&\na f\lfl i\na k\dbut kif\ddbut ifd|\na r\umotif
+ r^q!p!m!k\enotes
+\nspace\tnotes\doubler\soupir\sk\dsoupir\cu I\relax
+&\fl g\fl l\dbutmr lhg\rq h\lpz g\cu g|\fl s\umotif s!o!o_n_l\enotes
+\zbnotes\hl b&\dbut kif\ddbut ifd|\na r\umotif
+ r^q!o!m!k\enotes
+\nspace\tnotes\doubler\soupir\sk\dsoupir\cu I\relax
+&\fl g\fl l\dbutmr lhg\rq h\lpz g\zq l\cu g|\fl s\umotif
+ s!o!o_n_l\enotes
+% mesure 30
+%\check
+\bnotes\hl b&\dbut kif\ddbut ifd|\umotif r^q!p!m!k\enotes
+\tnotes\sk\hpause
+&\dbut kif\zq{if}\culpz d|\umotif r!q!p!m!k\enotes
+\zbnotes&\dbut kif\zq{if}\culpz d|\umotif r!q!p!m!k\enotes
+\tnotes\pause&\dbut kif\zq{if}\culpz d|\umotif r!q!p!m!k\enotes
+% mesure 31
+%\check
+\bnoteP&\zcharnote N{\llap{\register{II} }}%
+\zmidtwotext{\llap{\mf}}\dbut khf\ddbut hfd|\zcharnote s{\llap{(I)}}%
+\umotif r^q!o!m!k\enotes
+\tnotes&\dbut khf\zq{hf}\culpz d|\umotif r!q!o!m!k\enotes
+\zbnotes\Pause&\dbut khf\zq{hf}\culpz d|\umotif r!q!o!m!k\enotes
+\tnotes&\dbut khf\zq{hf}\culpz d|\umotif r!q!o!m!k\enotes
+% mesure 32
+%\check
+\bnoteP&\qsk\zcharnote a{\llap{(II)}}%
+\bigsh g\dbutr kgf\rq g\culpz f|\qsk\zcharnote r{\llap{\register{II} }}%
+\umotif r^q^n!m!k\enotes
+\tnotes&\dbutr kgf\rq g\culpz f|\umotif r!q!n!m!k\enotes
+\zbnotes\Pause&\dbutr kgf\rq g\culpz f|\umotif r!q!n!m!k\enotes
+\tnotes&\dbutr kgf\rq g\culpz f|\umotif r!q!n!m!k\enotes
+% mesure 33
+%\check
+\signaturegenerale{2}\Changecontext
+\ifnum\musicsize=16\relax
+    \def\atnextline{\nbporteesi=2\relax
+    \def\nbinstruments{1}\relax
+    \global\cleftoksi={{0}{0}{0}{0}}\relax
+    \def\pedalepause{}\def\manuale{}}\fi
+%    
+\znotes\manuale\zmidtwotext{\llap{\register{III} \pp}}\enotes
+\notes\pedalepause\manuale\mmotif k!j!h!f!d|\dblt rom\ddblt rom\enotes
+\tnotes\manuale\mmotif j!i!h!f!d|\tblq qomk\enotes
+\zbnotes\pedalepause\manuale\mmotif i!h!h!f!d|\tblql pomk\enotes
+\tnotes\manuale\mmotif j!h!h!f!d|\tblq qomk\enotes
+%
+% mesure 34
+\bnotes\pedalepause\manuale\mmotif k!j!h!f!d|\dblt rom\ddblt rom\enotes
+\tnotes\manuale\mmotif j!i!h!f!d|\tblq qomk\enotes
+\zbnotes\pedalepause\manuale\mmotif i!h!h!f!e|\tblql pomk\enotes
+\tnotes\manuale\mmotif j^g!g!f!e|\tblql qlnk\enotes
+%
+%\check
+% mesure 35
+\bnotes\pedalepause\manuale\dbut hec\ddbud ec|\umotif o^n!l!j!h\enotes
+\nspace\tnotes\manuale\bigsh g\tbut gec|\umotif n!m!l!j!h\enotes
+\zbnotes\pedalepause\manuale\tbutr fec|\umotif m!l!l!j!h\enotes
+\tnotes\manuale\sh g\tbut gec|\bigsh n\umotif n!l!l!j!h\enotes
+%
+%\check
+% mesure 36
+\ifnum\musicsize=16\advance\linesinpage by -1\relax\fi
+%
+\bnotes\pedalepause\manuale\mmotif h^g!e!c!a|\dblt olj\ddblt olj\enotes
+\nspace\tnotes\manuale\mmotif g!f!e!c!a|\bigsh n\tblq nljh\enotes
+\zbnotes\pedalepause\manuale\mmotif f!e!e!c!a|\tblql mljh\enotes
+\tnotes\manuale\mmotif g^d!d!b!a|\bigsh k\tblql nhki\enotes
+%
+%\check
+% mesure 37
+\bnotes\pedalepause\manuale\bigsh N\dbut ebN\bud bN|\umotif l^k!i^g!e\enotes
+\qspace
+\tnotes\manuale\mmotif e^c!c^a!L|\bigaccid\lsh h\sh j\tblq mjhf\enotes
+\zbnotes\pedalepause\manuale\dbud db\bud db|\umotif m=k!k!i!f\enotes
+\tnotes\manuale\mmotif e!c!c!a!L|\tblq mjhf\enotes
+%
+%\check
+% mesure 38
+\bnotes\pedalepause\manuale\tbud db|\umotif m!k!k!i!f\enotes
+\qspace
+\tnotes\manuale\mmotif f^d!d^b!L|\bigaccid
+   \lsh n\lsh i\sh k\sh g\tblq nkig\enotes
+\zbnotes\pedalepause\manuale\tbud ec|\sh n\umotif n!l!l!j^g\enotes
+\qspace
+\tnotes\manuale\mmotif f^d!d^b!L|\bigaccid\lsh i\sh k\tblq nkig\enotes
+%\check
+% mesure 39
+\bnotes\pedalepause\manuale\dbud ec\bud ec|\sh n\umotif n!l!l!j^g\enotes
+\tnotes\manuale\bigna g\dbut gec\but gec|\umotif o!l!l!j!h\enotes
+\zbnotes\pedalepause\manuale\dbut gdb\but gdb|\umotif o!k!k!i!h\enotes
+\tnotes\manuale\tbutr gfd|\umotif o!m!m!k!h\enotes
+%
+%\check
+% mesure 40
+\bnotes\pedalepause\manuale\tbut gec|\umotif o!l!l!j!h\enotes
+\tnotes\manuale\tbut geb|\umotif p!n!n!l!i\enotes
+\zbnotes\pedalepause\manuale\bigfl b\tbut geb|\bigna q\umotif q!n!n!l=j\enotes
+\tnotes\manuale\tbut gea|\bigsh q\ibbl0{l}0\ilegu0{q}\qb0{q}\tleg0\qb0{n}%
+\qbupz{q}\qbupz{n}\qbupz{l}\qbupz{^j}\qbupz{l}\tbl0\qbupz{j}\enotes
+\ifnum\nbinstruments=1\relax
+  \global\cleftoksi={{6}{0}{0}{0}}\else
+  \global\cleftoksi={{6}{0}{0}{0}}\global\cleftoksii={{6}{0}{0}{0}}\fi
+\changeclefs
+%\check
+% mesure 41
+\bnotes\pedalepause\manuale\qsk\zcharnote f{\llap{\pp}}\lsh N\tbltl cbN|\qsk
+   \mmotif j!i!i^g^e\enotes
+\nspace\tnotes\manuale\tbltl cbM|\bigsh k\mmotif k!i!i!g^d\enotes
+\qspace
+\zbnotes\pedalepause\manuale\bigaccid\lsh a\tbltl cba|\bigna l\mmotif l!j!j!i=e\enotes
+\qspace
+\tnotes\manuale\bigaccid\lsh N\tbltl cbN|\bigsh  l\mmotif l!j!j!i^e\enotes
+\ifnum\nbinstruments=1\relax
+  \global\cleftoksi={{0}{0}{0}{0}}\else
+  \global\cleftoksi={{6}{0}{0}{0}}\global\cleftoksii={{0}{0}{0}{0}}\fi
+\addspace{-2\afterruleskip}\changeclefs\notes\manuale   \zcharnote N{\register{II}}\enotes
+%\check
+% mesure 42
+\bnotes\pedalepause\manuale
+\zcharnote o{\it cresc.}\relax
+   \zwp{^a}\Dbud fc\ddbud fc|\zcharnote r{(III)}\umotif m!j!j^h!f\enotes
+\nspace\tnotes\manuale\bigna f\Tbud fc|\bigna m\umotif m=l!j!h=f\enotes
+\zbnotes\pedalepause\manuale\Tbud ec|\umotif l^k!j!h!e\enotes
+\tnotes\manuale\zhl c\bigsh h\Tbud he|\bigsh o\umotif o!l!l!j!h\enotes
+%
+%\check
+% mesure 43
+\bnotes\pedalepause\manuale\zwp d\bigna f\bigfl i\Dbud if\ddbud if|\bigfl p\umotif p=m!m!k_i\enotes
+\tnotes\manuale\Tbud hf|\umotif o^n!m!k!h\enotes
+\zbnotes\pedalepause\manuale\bigfl h\Tbud hf|\bigfl o\umotif o=n!m!k_h\enotes
+\tnotes\manuale\zhl f\Tbud kh|\umotif r!o!o!m!k\enotes
+%
+% mesure 44
+\barre
+\def\atnextline{\nbporteesii=2\relax
+    \nbporteesi=1\relax
+    \def\nbinstruments{2}\relax
+    \global\cleftoksii={{0}{0}{0}{0}}\global\cleftoksi={{6}{0}{0}{0}}\relax
+    \def\pedalepause{\Pause}\def\manuale{&}\relax
+    \signaturegenerale{2}}\relax
+%    
+\notes\pedalepause\manuale\bigaccid\sh f\qsk\na h\zwp f\Dbud kh\ddbud kh|\qsk
+   \umotif r=o!o^m!k\enotes
+\tnotes\manuale\Tbud jh|\umotif q^p!o!m!j\enotes
+\zbnotes\manuale\bigna h\qsk\na j\Tbud jh|\qsk\bigna q\umotif q=p!o!m=j\enotes
+\tnotes\manuale\zhl h\Tbud mj|\umotif t!q!q!o!m\enotes
+%
+%\check
+% mesure 45
+\bnotes\pedalepause\manuale\bigsh j\qsk\zmidtwotext{\llap{\mf}}\zcharnote a{\llap{(II)}}\relax
+\bigsh g\bigsh l\zhl g\Dbud lj\budr ji|\zcharnote r{\llap{\register{II}}}\qsk
+  \bigsh s\umotif s>r!q!p^l\enotes
+\tnotes\manuale\zhl h\bigna j\Tbud mj|\umotif t=q!q!o!m\enotes
+\zbnotes\pedalepause\manuale\zhl g\bigsh j\Dbud lj\loff{\ddbudr ji}|\umotif s!r^q!p!l\enotes
+\tnotes\manuale\qsk\zhl h\bigna j\Tbud mj|\qsk\umotif t=q!q!o!m\enotes
+%
+%\check
+% mesure 46
+\bnotes\doubler\pt 5\soupir\sk\sk\cl c\manuale\bigaccid
+\lsh j\sh g\sh l\dblt ljg\bud jg|\bigsh s\umotif s>r!q!p^l\enotes
+\tnotes\bigsh e\wh e\manuale\dbut ljg\ddbld jg|\umotif s!r!q!p!l\enotes 
+\zbnotes\manuale\tblt ljg|\umotif s!r!q!p!l\enotes 
+\tnotes\hpause\manuale\dblt ljg\bld jg|\umotif s!r!q!p!l\enotes
+%
+% mesure 47
+\generalsignature{-1}\Changecontext
+\notes\doubler\pt 5\soupir\sk\sk
+  \cl c\manuale\bigfl h\dblt mjh\bud jh|\umotif t!s!q_o!m\enotes
+\tnotes\wh f\manuale\dbut mjh\ddbud jh|\umotif t!s!q!o!m\enotes
+\zbnotes\manuale\dblt mjh\bud jh|\umotif t!s!q_o!m\enotes
+\tnotes\hpause\manuale\dblt mjh\bud jh|\umotif t!s!q!o!m\enotes
+%
+%\check
+% mesure 48
+\bnotes\qsk\qsk\doubler\pt 5\soupir\sk\sk\bigna b\cl
+b&\qsk\lfl h\na i\zcharnote N{\llap{\register{I}}}\qsk
+  \zmidtwotext{\llap{\ff}}\bigaccid
+\dbltl mhi\budr ih|\qsk\qsk
+\zcharnote r{\llap{(II)}}\umotif t!s_r_q!m\enotes
+\tnotes\wh f&\dbltl mhi\ddbudr ih|\umotif t!s!r!q!m\enotes
+\qspace\zbnotes&\dbltl mhi\budr ih|\umotif t!s!r!q!m\enotes
+\tnotes\hpause&\dbltl mhi\budr ih|\umotif t!s!r!q!m\enotes
+%\check
+%
+% mesure 49
+\bnotes\qsk\hpause&\zmidtwotext{\llap{\fff}}\relax
+  \zcharnote a{\llap{(I)}}\bigaccid
+\lfl h\na i\qsk\dbltl mhi\budr ih|\zcharnote r{\llap{\register{I}}}\qsk
+    \umotif t!s_r_q!m\enotes
+\tnotes\doubler\fl K\ql K\sk\soupir&\dbltl mhi\budr ih|\umotif t!s!r!q!m\enotes
+\zbnotes\doubler\na b\ql b\sk\soupir&\dbltl mhi\budr ih|\umotif t!s!r!q!m\enotes
+\tnotes\doubler\ql f\sk\soupir&\tbltl mhi|\umotif t!s!r!q!m\enotes
+%\check
+%
+% mesure 50
+\bnotes\doubler\zh F\hu M&\zhl f\bigna h\Dbut mjh\ddbut mjh|\umotif t=s=q!o!m\enotes
+\tnotes\doubler\zh E\hu L&\zhl e\Tbut ljh|\umotif s!r!q!o!m\enotes
+\zbnotes\doubler\zh D\hu K&\zhl d\Tbutr kjh|\umotif r!q!q!o!m\enotes
+\tnotes\doubler\zh E\hu L&\zhl e\Tbut ljh|\umotif s!r!q!o!m\enotes
+% mesure 51
+\bnotes\doubler\zh F\hu M&\zhl f\Dbut mjh\ddbut mjh|\umotif t!s!q!o!m\enotes
+\tnotes\doubler\zh E\hu L&\zhl e\Tbut ljh|\umotif s!r!q!o!m\enotes
+\zbnotes\doubler\zh D\hu K&\zhl d\Tbutr kjh|\umotif r!q!q!o!m\enotes
+\tnotes\doubler\zh E\hu L&\zhl e\na i\Tbut lig|\umotif s=p!p!n!m\enotes
+% mesure 52
+\bnotes\zbv C\zbv J&\zbv c\Dbut jge\ddbut jge|\umotif q=p!n!l!j\enotes
+\nspace\tnotes&\na i\Tbut ige|\umotif p!o!n!l!j\enotes
+\zbnotes&\Tbutr hge|\umotif o!n!n!l!j\enotes
+\tnotes&\Tbut ige|\umotif p!o!n!l!j\enotes
+% mesure 53
+\bnotes\doubler\zh J\hl c&\dbut jge\ddbud ge|\umotif q=p!n!l!j\enotes
+\nspace\tnotes\doubler\zh{=I}\hl{=b}&\na i\tbut ige|\umotif p!o!n!l!j\enotes
+\zbnotes\doubler\zh H\hl a&\tbutr hge|\umotif o!n!n!l!j\enotes
+\tnotes\doubler\zh I\hl b&\sh f\na i\tbuqr idfc|\umotif p^m!m!k!j\enotes
+% mesure 54
+\bnotes\itenl2G\zw G\itenu1N\wh N&\na b\dbut gdb\ddbud db|\umotif n^m!k=i!g\enotes
+\tnotes&\tbut gec|\umotif n!m!l!j!g\enotes
+\zbnotes\tten1\tten2\zh G\hl N&\tbut gdb|\umotif n!m!k!i!g\enotes
+\tnotes\hpause&\sh c\tbut gec|\umotif o^m!l^j!h\enotes
+% mesure 55
+\bnotes\doubler\zh N\hl G&\sh c\tbut hec|\umotif
+o^n!l^j!h\enotes
+\tnotes\doubler\zh N\hl G&\tbut hec|\umotif o!n!l!j!h\enotes
+\zbnotes\doubler\zh M\hu F&\tbut hfd|\na p\umotif
+p!m!m!k=i\enotes
+\tnotes\doubler\zh L\hu E&\tbutr hge|\sh q\umotif
+q!o!o!n^j\enotes
+% mesure 56
+\bnotes\itenl2D\zw D\itenu1K\wh K&\lmotbbd hfd|\umotif r^q!o!m!k\enotes
+\tnotes&\dbud hf\but hfd|\umotif r!q!o!m!k\enotes
+\zbnotes\tten1\tten2\zh D\hu K&\na i\tbut ifd|\na p\umotif p!o!o!m!k\enotes
+\tnotes\hpause&\tbut jfd|\na q\umotif q!p!o!m!k\enotes
+% mesure 57
+\bnotes\doubler\zh a\hl H&\sh d\lsh f\na i\tbut 
+ifd|\na p\umotif p^o^m^k=i\enotes
+\tnotes\doubler\zh a\hl H&\tbut ifd|\umotif p!o!m!k!i\enotes
+\zbnotes\doubler\zh N\hl G&\tbut ige|\sh q\umotif
+q!n!n!l^j\enotes
+\tnotes\doubler\zh{^M}\hl{^F}&\sh f\tbutr ihf|\sh r\umotif
+r!p!p!o^k\enotes
+%\check
+% mesure 58
+\bnotes\itenl2E\itenu1L\zw E\wh L&\na i\dbud ig\ddbud ge|\umotif
+s^r=p!n!l\enotes
+\tnotes&\dbud ig\but ige|\umotif s!r!p!n!l\enotes
+\zbnotes\tten2\tten1\zh E\hu L&\tbut jge|\umotif q=p!p!n!l\enotes
+\tnotes\hpause&\tbut kge|\na r\umotif r!p!p!n!l\enotes
+% mesure 59
+\bnotes\doubler\fl b\fl I\zh b\hu I&\dbut jge\bud ge|\umotif q=p!n!l!j\enotes
+\tnotes\doubler\zh b\hu I&\dbut jge\bud ge|\umotif q!p!n!l!j\enotes
+\zbnotes\doubler\zh a\hu H&\dbuqr kjhf\but jhf|\umotif
+r^q!o!m!k\enotes
+\tnotes\doubler\zh N\hu G&\tbuqr ljig\relax
+   |\varaccid\ibbl0{p}0\qbupz{s}\qbupz{^r}%
+\qbupz{s}\qbupz{=q}\qbupz{_p}\qbupz{n}\qbupz{p}\tbl0\qbupz{s}\enotes
+% mesure 60
+\bnotes\doubler\zh M\hu F&\lmotbba mkhf|\umotif t!s!r!n!m\enotes
+\nspace\tnotes\doubler\zh N\hu G&\sh j\tbuqr lijg|\umotif s^r^q!p!n\enotes
+\zbnotes\doubler\zh M\hu F&\tbut khf|\umotif
+r^q!o!m!l\enotes
+\tnotes\doubler\zh L\hu E&\na j\tbut jhe|\na q\umotif 
+q!o!o!l!j\enotes
+% mesure 61
+\bnotes\doubler\zh K\hu D&\tbutr ihd|\umotif p!o!o!m!i\enotes
+\tnotes\doubler\zh L\hu E&\tbut ige|\umotif p!n!n!l!i\enotes
+\zbnotes\doubler\zh{^J}\hu{^C}&\sh c\tbutr hgc|\umotif
+o!n!n!l!h\enotes
+\tnotes\doubler\zh K\hu D&\tbut hfd|\umotif o!m!m!k!h\enotes
+% mesure 62
+\bnotes\wh I&\mmotif h^f!f!d!b|\sh m\dblt omk\ddblt omk\enotes
+\tnotes&\mmotif i!g!g!d!b|\tblq rpnk\enotes
+\zbnotes\wh J&\mmotif g=f!f!d!c|\lna m\tbltl nmi\enotes
+\tnotes&\mmotif g!e!e!d!c|\tblt nli\enotes
+%\check
+% mesure 63
+\bnotes\zbv F&\dblql mkjf\ddbutr kjf|\umotif t!r!r!q!m\enotes
+\nspace\tnotes&\dblq mkif\but kif|\umotif t!r!r!p!m\enotes
+\zbnotes&\dblql mijf\bltl jif|\umotif t!q!q!p!m\enotes
+\tnotes&\dblq mjhf\bld jf|\umotif t!q!q!o!m\enotes
+%\check
+% mesure 64
+\bnoteP&\dbltl kjf\ddbld jf|\umotif r!q!q!m!k\enotes
+\tnotes&\dblt kif\bld if|\umotif r!p!p!m!k\enotes
+\zbnotes\pedalepause&\dbltl jif\bld if|\umotif q!p!p!m!j\enotes
+\tnotes&\dblt jhf\bud fM|\umotif q!o!o!m!j\enotes
+%
+% mesure 65
+\bnoteP&\zcharnote N{\llap{\register{II}}}\qsk\zmidtwotext{\it diminuendo}\relax
+   \dblt ifd\ddbud fd|\qsk\zcharnote o{\llap{(I)}}\umotif p!o!o!m!i\enotes
+\tnotes&\dbutr ied\budr ed|\umotif p!n!n!l!i\enotes
+\zbnotes\pedalepause&\dbut hec\bud ec|\umotif o!n!n!l!h\enotes
+\tnotes&\dbutr hdc\budr dc|\umotif o!m!m!k!h\enotes
+%
+% mesure 66
+\bnoteP&\dbut hdb\ddbud hf|\ibbl0m0\qbupz o\qbupz m\qbupz o\qbupz m\relax
+  \qbupz k\qbupz k\qbupz m\tbl0\qbupz o\enotes
+\tnotes&\tblt kig|\umotif r!p!p!n!k\enotes
+\zbnotes\sk\hpause&\dbutr gfc\bud fc|\umotif n!m!m!j!g\enotes
+\tnotes\doubler\pt 5\soupir\sk\sk\cl M&\dbut gec\cl q|\umotif n!l!l!i!g\enotes
+%
+% mesure 67
+\bnotes\hl f&\Ioctfinup0p\dbltl mkj\ddbltl mkj|\mmotif m!k!k!j!f\enotes
+\tnotes\hpause&\tblt mki|\mmotif m!k!k!i!f\enotes
+\zbnotes\hpause&\tbltl mji|\mmotif m!j!j!i!f\enotes
+\tnotes\doubler\pt 5\soupir\sk\sk\cl M&\tblt mjh|\mmotif m!j!j!h!f\enotes
+%
+% mesure 68
+\bnotes\hl f&\dbutr kjf\ddbltl kjf|\mmotif k!j!j!f!d\enotes
+\tnotes\hpause&\tblt kif|\mmotif k!i!i!f!d\enotes
+\zbnotes\hpause&\tbltl jif|\zcharnote L{\kern\noteskip\it sempre
+ diminuendo}\mmotif j!i!i!f!c\enotes
+\tnotes\doubler\pt 5\soupir\sk\sk\cl M&\dblt jhf\bigfl e\rq f\cu e\relax
+   |\mmotif j!h!h!f!c\enotes
+%
+% mesure 69
+\bnotes\doubler\ql f\sk\soupir&\dbut ifd\ddblt ifd|\Mmotif ihhfd\enotes
+\nspace\tnotes\doubler\pt 5\soupir\sk\sk\cl M&\bigna e\tblt ige|\Mmotif igged\enotes
+\zbnotes\doubler\ql f\sk\soupir&\dbut hec\ddbut hec|\Mmotif hggec\enotes
+\tnotes\doubler\pt 5\soupir\sk\sk\cu F&\tbut hfd|\Mmotif hffda\enotes
+%
+% mesure 70
+\bnotes\hl M&\dbut hdb\ddbld hf|\ibbu0g0\relax
+\qhlpz h\qhlpz f\qhlpz h\qhlpz f\qhlpz d\qhlpz d\qhlpz f\tbu0\qhlpz h\enotes
+\tnotes\hpause&\tblt kig|\Mmotif kiigd\enotes
+\zbnotes\hpause&\tbutr gfc|\Mmotif gffcN\enotes
+\tnotes\doubler\ql M\sk\soupir&\tbuqr gceb|\Mmotif geecN\enotes
+%
+% mesure 71
+\bnotes\doubler\lpz F\qu F\sk\soupir&\doubler
+  \zq{hfc}\lpz a\qu a\sk\soupir|\Mmotif fecaM\enotes
+\tnotes\sk\hpause&\mmotif h^g!f!d!a|\doubler
+  \ibu0h0\zq{hf}\qhlpz a\tbu0\zq{hf}\qhlpz a\soupir\enotes
+\zbnotes\doubler\upz M\ql M\sk\soupir&\doubler
+  \zq{hfc}\lpz a\qu a\sk\soupir|\Mmotif fecaM\enotes
+\tnotes\sk\hpause&\Mmotif hgfda|\doubler
+  \ibu0h0\zq{hf}\qhlpz a\tbu0\zq{hf}\qhlpz a\soupir\enotes
+  \ifx\undefined\horizontalscore \else\autolines{17}43\fi
+%
+% mesure 72  
+\bnotes\doubler\upz M\ql M\sk\soupir&\doubler
+  \zq{hfc}\lpz a\qu a\sk\soupir|\Mmotif fecaM\enotes
+\tnotes\hpause&\dbut hfd\ddbut hfd|\mmotif h^g!f!d!a\enotes
+\zbnotes\hpause&\tbut hfc|\Mmotif hgfca\enotes
+\tnotes\doubler\ql M\sk\soupir&\tblt kif|\mmotif k^j!i!f!d\enotes
+%
+% mesure 73
+\bnotes\doubler\qsk\upz f\ql f\sk\soupir
+  &\qsk\tbutr jif|\qsk\bigna j\Mmotif jiifc\enotes
+\tnotes\doubler\upz f\ql f\sk\soupir
+  &\tbutr jif|\zcharnote b{\it cresc.}\Mmotif jiifc\enotes
+\zbnotes\hpause&\tblt jhf|\Mmotif jhhfc\enotes
+\tnotes\doubler\upz f\ql f\sk\soupir&\tbutr jgf|\Mmotif jggfc\enotes
+%
+% mesure 74
+\def\Xmotif#1#2#3#4#5#6#7#8#9{{\advance\transpose by 8\relax
+\advance\transpose by \interfacteur\ibbl0{#7}0}\sk\sk\sk\sk\sk\bigaccid
+\qhlpz{#8#9}\varaccid\qhlpz{#7}\qhlpz{#5}\relax
+|\qbupz{#1}\qbupz{#2#3}\qbupz{#1}\qbupz{#4#5}\qbupz{#6#7}\sk\sk\tbu0}%
+%\check
+\bnotes\doubler\upz f\ql f\sk\soupir&\ibu0i0\doubler
+   \zq{jh}\qhlpz f\tbu0\zq{jh}\qhlpz f\soupir\Toctfin0\relax
+   |\Mmotif jhhfc\enotes
+\tnotes\sk\hpause&\zcharnote N{\register{I}}\zcharnote n{\llap{\it cresc.
+ }}\Xmotif j=i!h!f!c\enotes
+\zbnotes\Pause&\Xmotif m!l!j!h!f\enotes
+\tnotes&\Xmotif o^n!m!j!h\enotes
+%
+% mesure 75
+\bnotes&|\ibbl0j0\qbupz o\qbupz{^n}\qbupz o\qbupz m\qbupz j\enotes
+\notes\sk\sk\pause&\qhlpz c\qhlpz f\tbu0\qhlpz h\enotes
+\tnotes&\Xmotif m!l!j!h!f\enotes
+\zbnotes\Pause&\Xmotif o!n!m!j!h\enotes
+\tnotes&\Xmotif q=p!o!m!j\enotes
+%
+% mesure 76
+\ifnum\musicsize=16\relax
+  \elemskip=0.66\elemskip\advance\barsinline by -1\fi
+\ifx\undefined\horizontalscore\else
+  \elemskip=0.66\elemskip\advance\barsinline by -1\fi
+\barre\NOTes\pause&\pause|\zbv t\itenu1t\pause\sk\enotes
+\tnotes\midtwotext{\fff}&\midtwotext{\fff}\enotes
+\temps\NOTEs\wh F&\fl e\zw e\rw f\zw h\wh j|\zw m\zw o\wh q\sk\enotes
+%
+% mesure 77
+\barre\NOTEs\qsk\wh I&\qsk\fl e\zw e\rw f\zw h\wh j|\qsk
+   \zw m\zw o\tten1\zbv t\itenu1t\wh q\enotes
+\temps\NOtes\wh I&\zw d\zw i\roff{\zq d\ql f}\zhp {=e}\hlp g\sk\sk
+|\zw m\zw p\roff{\ql m\hlp n}\sk\enotes
+% mesure 78
+\barre\ifnum\musicsize=16\NOTes\else\NOtes\fi
+    \tinynotesize\itenl2F\cu F&\tinynotesize
+    \zq c\zq f\cu h|\tinynotesize\tinynotesize\zq m\cl o\enotes
+\NOTES\tten2\pointdurgue E\zbv F\zbv M&\relax
+ \zbv c\zbv f\zbv h\sk|\zbv m\zbv o\tten1\zbv t\pointdorgue t\enotes
+\temps\temps\finmorceau   
+\rightline{\sl\aujourdhui}\vfil\eject
+\varaccid
+
+

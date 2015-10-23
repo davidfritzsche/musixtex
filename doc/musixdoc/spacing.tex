@@ -1,0 +1,101 @@
+\chapter{Skipping Spaces and Shifting Symbols}\label{spacing}
+We've already mentioned that when coding a sequence of notes inside a
+particular pair \verb|\notes...\en|, the command \keyindex{sk} can
+be used to skip horizontally by one \keyindex{noteskip}. This would be
+used for example to align the third note in one staff with the second note
+in another. Skipping in this manner is logically equivalent to inserting
+blank space; as such, the space must be recorded by \musixtex. This command
+and the others discussed here will
+do just that, so that \verb|musixflx| can properly account for
+the added space.
+
+To skip by one \verb|noteskip| while in a collective coding sequence,
+you may simply insert an asterisk (``\verb|*|''\index{*}). This would have
+the same effect as stopping the sequence, entering {\Bslash sk}, then
+restarting. For example,
+
+\begin{music}
+\setstaffs12
+\startextract
+\Notes\hu{e*f*g}|\qu{gghhii}\en
+\zendextract
+\end{music}
+\noindent was coded as
+\verb|\Notes\hu{e*f*g}|{\tt |}\verb|\qu{gghhii}\en|
+
+To skip forward
+by one half of a \verb|\noteskip|, use \keyindex{hsk}.
+To insert spacing of approximately one note head width, you can use
+\keyindex{qsk}, or for half or one-quarter of that, \keyindex{hqsk} 
+or \keyindex{qqsk}, respectively. To skip backward
+by one \verb|\noteskip|, use \keyindex{bsk}. More generally,
+to skip an arbitrary distance, use \keyindex{off}\verb|{|$D$\verb|}|
+where $D$ is any \itxem{scalable dimension}, e.g.,~\verb|\noteskip| or
+\verb|\elemskip|. Indeed, if you look in the
+\musixtex\ source, you will see that \verb|\off| is the basic control
+sequence used to define all the other skip commands.
+
+The foregoing commands only work \ital{inside} a \verb|\notes...\en| group.
+A different set of commands must be used to insert space \ital{outside}
+such a group. \keyindex{nspace} produces an
+additional spacing of half a note head width;
+\keyindex{qspace}, one note head width. These are ``hard'' spacings. To
+insert an arbitrary amount of hard space outside a \verb|\notes...\en|
+group, use \keyindex{hardspace}\verb|{|$d$\verb|}{|\dots\verb|}| where
+$d$ is any fixed dimension\label{hardspace}. The foregoing three commands are the only
+space-generating commands that insert hard space; all the others insert
+scalable spacing: \keyindex{elemskip},
+\keyindex{beforeruleskip}, \keyindex{afterruleskip}, \keyindex{noteskip} and
+their multiples. Finally, to insert
+scalable spacing outside
+a \verb|\notes...\en| group, use
+\keyindex{addspace}\verb|{|$D$\verb|}|. The argument may be negative, in
+which case the normal spacing will be reduced. For example, after
+\keyindex{changecontext}, many users prefer to reduce the space with
+a command like
+\verb|addspace{-|\keyindex{afterruleskip}\verb|}|.
+
+There is yet another set of commands for simply shifting a note, symbol, or sequence
+inside \verb|\notes...\en|
+without adding or subtracting any space. To shift by one note head width,
+you may write \keyindex{roff}\verb|{|\ital{any macro}\verb|}|
+or \keyindex{loff}\verb|{|\dots\verb|}| for a right or left shift respectively.
+ To shift by half of a note head width, use
+\keyindex{hroff}\verb|{|\dots\verb|}| or
+\keyindex{hloff}\verb|{|\dots\verb|}|.
+For example, to get
+ %\check
+
+\begin{music}\nostartrule
+\startextract
+\Notes\roff{\zwh g}\qu g\qu h\qu i\en
+\zendextract
+\end{music}
+\noindent you would code:
+
+ %\check
+
+\begin{quote}\begin{verbatim}
+\Notes\roff{\zwh g}\qu g\qu h\qu i\en
+\end{verbatim}\end{quote}
+
+\noindent To shift notes or symbols by an arbitrary amount, use
+\keyindex{roffset}\verb|{|$N$\verb|}{|\dots\verb|}| or
+\keyindex{loffset}\verb|{|$N$\verb|}{|\dots\verb|}|, where
+$N$ is the distance to be shifted in note head widths. For example
+
+\begin{music}\nostartrule
+\startextract
+\Notes\roffset{1.5}{\zwh g}\qu g\qu h\qu i\en
+\zendextract
+\end{music}
+\noindent was coded as
+
+\begin{quote}\begin{verbatim}
+\Notes\roffset{1.5}{\zwh g}\qu g\qu h\qu i\en
+\end{verbatim}\end{quote}
+
+An important feature of these shift commands is that the offset,
+whether implicit or explicit, is \ital{not} added to
+the total spacing amount, but any spacing due to the included commands is.
+

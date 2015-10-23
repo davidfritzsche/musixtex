@@ -1,0 +1,587 @@
+\chapter{Beams}
+\section{Starting a beam}
+
+Each beam must be declared with a macro issued before the first spacing
+note under the beam is coded. Two distinct kinds of macros are provided
+for this. The first kind initiates a ``fixed-slope'' beam, with an arbitrary
+slope and starting height chosen by the user, while the second kind, a
+``semi-automatic'' beam,
+\ital{computes}~the slope and, in addition, adjusts the starting height in some
+cases.
+
+\def\nps{{\tt\char123}$n${\tt\char125}\pitchp{\tt\char123}$s${\tt\char125}}
+
+The basic form of the macros for starting fixed-slope beams is exemplified
+by the one for a single upper beam, \keyindex{ibu}\nps. Here
+$n$ is the reference number of the beam, $p$ the starting ``pitch'', and
+$s$ the slope. 
+
+The reference number is assigned by the user. 
+It is needed because more than one beam may be open at 
+a time, and it tells \musixtex\ to which beam subsequent beamed notes and 
+other beam specification commands are assigned. 
+By default, the reference number must be in the range [$0,5$], 
+but the range for 8th to 128th beams will be expanded to [$0,8$] or [$0,11$] 
+if \verb|musixadd| or \verb|musixmad| respectively has been \verb|\input|. 
+
+Alternatively, you can specify the number of $8$th to $64$th beams 
+directly\footnote{$8$th to $64$th beams are so basic that the maximum 
+number of these beams is related to the maximum number of instruments 
+by this command. 
+Using $m>12$ may require e-\TeX.}
+with \keyindex{setmaxinstruments}\verb|{|$m$\verb|}| 
+within the range $7<m\leq 100$; the corresponding reference number may then be 
+in the range from 0 to $(m-1)$. 
+\label{musixmad_setmaxinstruments_ccxviiibeams}  
+For $128$th beams, use \keyindex{setmaxcxxviiibeams}\verb|{|$m$\verb|}|.
+For $256$th notes, which can only appear in beams, see Section~\ref{musixbbm}.
+
+The ``pitch'' parameter $p$ is a pitch that is three
+staff spaces \ital{below} the bottom of the heavy connecting bar (\ital{above}
+the bar for a lower beam); in many (but not all)
+cases it should be input as the actual pitch of the first note. The slope $s$
+is an integer in the range [$-9,9$]. When multipled
+by $5$\%~it gives the actual slope of the heavy bar. Typically a slope of $2$ or $3$
+is okay for ascending scales, and $6$ to $9$ for ascending arpeggios.
+
+The full set of fixed-slope beam initiation macros is as follows:
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+
+ \item[\keyindex{ibu}\nps~:]initiates an \ital{upper beam}.
+ \item[\keyindex{ibl}\nps~:]initiates a \ital{lower beam}.
+ \item[\keyindex{ibbu}\nps~:]initiates a \ital{double upper beam}.
+ \item[\keyindex{ibbl}\nps~:]initiates a \ital{double lower beam}.
+ \item[\keyindex{ibbbu}\nps~:]initiates a \ital{triple upper beam}.
+ \item[\keyindex{ibbbl}\nps~:]initiates a \ital{triple lower beam}.
+ \item[\keyindex{ibbbbu}\nps~:]initiates a \ital{quadruple upper beam}.
+ \item[\keyindex{ibbbbl}\nps~:]initiates a \ital{quadruple lower beam}.
+\end{description}\end{quote}
+
+A semi-automatic beam is initiated with a command that has \ital{four}
+parameters, the beam number, the first and last pitches, and the total
+horizontal extent in
+\verb|\noteskip|s, based on the value in effect at the start. For example,
+if you input \verb|\Ibu2gj3|, \musixtex\ will understand that you want to
+build an upper beam (beam number $2$) horizontally extending \verb|3\noteskip|,
+the first note of which is a \verb|g| and the last note a \verb|j|.
+Knowing these parameters it will choose the highest slope number that
+corresponds to a slope not more than $(\hbox{\tt j}-\hbox{\tt
+g})/(3\keyindex{noteskip})$. The nominal height of the heavy bar is offset the same as
+for fixed-slope beams. However, if there is no sufficiently steep beam
+slope available, then \musixtex\ will raise (or lower) the starting point.
+
+ Eight such macros are available: \keyindex{Ibu}, \keyindex{Ibbu},
+\keyindex{Ibbbu}, \keyindex{Ibbbbu}, \keyindex{Ibl}, \keyindex{Ibbl},
+\keyindex{Ibbbl} and \keyindex{Ibbbbl}.
+
+\section{Adding notes to a beam}
+
+Spacing notes belonging to beams are coded with the macro
+\keyindex{qb}\verb|{|$n$\verb|}|\pitchp~where $n$ is
+the beam number and $p$ the pitch of the note. \musixtex\ adjusts the
+length of the note stem to link to the beam.
+
+Chord notes within a beam are entered before the main note with the
+non-spacing macro \keyindex{zqb}\verb|{|$n$\verb|}|\pitchp. Again,
+the stem length will be automatically adjusted as required.
+
+There are also special macros for semi-automatic beams with
+two, three, or four notes:
+\keyindex{Dqbu}, \keyindex{Dqbl}, \keyindex{Dqbbu}, \keyindex{Dqbbl},
+\keyindex{Tqbu}, \keyindex{Tqbl}, \keyindex{Tqbbu}, \keyindex{Tqbbl},
+\keyindex{Qqbu}, \keyindex{Qqbl}, \keyindex{Qqbbu} and \keyindex{Qqbbl}.
+  %\check
+For example \verb|\Dqbu gh| is equivalent to \verb|Iqbu1gh\qb1 g\tbu1\qb1 h|,
+except that the special macros don't require a beam number.
+Their use is illustrated in the following example:
+
+\medskip
+\begin{music}\nostartrule
+\parindent0pt\startpiece
+\Notes\Dqbu gh\Dqbl jh\en
+\notes\Dqbbu fg\Dqbbl hk\en\bar
+\Notes\Tqbu ghi\Tqbl mmj\en
+\notes\Tqbbu fgj\Tqbbl njh\en\bar
+\Notes\Qqbu ghjh\Qqbl jifh\en
+\notes\Qqbbu fgge\Qqbbl jhgi\en\setemptybar\endpiece
+\end{music}
+\noindent This was coded as\footnote{Editor's note: Most music
+typesetting books recommend beam slopes that are \ital{less} than
+the slope between the starting and ending note; these macros cannot
+provide that.}:
+\begin{quote}\begin{verbatim}
+\Notes\Dqbu gh\Dqbl jh\en
+\notes\Dqbbu fg\Dqbbl hk\en\bar
+\Notes\Tqbu ghi\Tqbl mmj\en
+\notes\Tqbbu fgj\Tqbbl njh\en\bar
+\Notes\Qqbu ghjh\Qqbl jifh\en
+\notes\Qqbbu fgge\Qqbbl jhgi\en
+\end{verbatim}\end{quote}
+ %\check
+
+ \section{Ending a beam}
+ The termination of a given
+beam must be declared \ital{before} coding the last spacing note
+connected to that beam. The macros for doing that are
+\keyindex{tbu}\verb|{|$n$\verb|}| for an upper beam and
+\keyindex{tbl}\verb|{|$n$\verb|}| for a lower one. These work for
+beams of any
+multiplicity. So for example an upper triple beam with
+32nd notes is initiated by
+\verb|\ibbbu|\nps\ but terminated by \verb|\tbu{|$n$\verb|}|.
+
+ Since beams usually finish with a \verb|\qb| for the last note, the
+following shortcut macros have been provided:
+
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+ \item \keyindex{tqb}\enpee~is equivalent to \verb|\tbl{|$n$\verb|}\qb|\enpee~.
+ \item \keyindex{tqh}\enpee~is equivalent to \verb|\tbu{|$n$\verb|}\qb|\enpee~.
+ \item \keyindex{ztqb}\enpee~is equivalent to \verb|\tbl{|$n$\verb|}\zqb|\enpee~,
+i.e., no spacing afterwards.
+ \item \keyindex{ztqh}\enpee~is equivalent to \verb|\tbu{|$n$\verb|}\zqb|\enpee~,
+i.e., no spacing afterwards.
+\end{description}\end{quote}
+The following
+synonyms may be used:
+\begin{quote}\begin{tabular}{lcl}
+\keyindex{tql} & for & \keyindex{tqb}\\
+\keyindex{tqu} & for & \keyindex{tqh}\\
+\keyindex{ztql} & for & \keyindex{ztqb}\\
+\keyindex{ztqu} & for & \keyindex{ztqh}\\
+\end{tabular}\end{quote}
+
+
+\section{Changing multiplicity after the beam starts}
+Multiplicity (the number of heavy bars) can be increased at any position after
+the beam starts. The commands are \keyindex{nbbu}\onen~which increases the multiplicity of
+upper beam
+number $n$ to two starting at the current position, \keyindex{nbbbu}\onen~to
+increase it to three, and \keyindex{nbbbbu}\onen~to increase to four. The
+commands \keyindex{nbbl}\onen\dots\keyindex{nbbbbl}\onen~do the same
+for lower beams.
+Thus, the
+sequence
+
+\begin{music}\nostartrule
+\startextract
+\Notes\ibu0h0\qb0e\nbbu0\qb0e\nbbbu0\qb0e\nbbbbu0\qb0e\tbu0\qb0e\en
+\zendextract
+\end{music}
+\noindent has been coded as
+\begin{quote}\begin{verbatim}
+\Notes\ibu0h0\qb0e\nbbu0\qb0e\nbbbu0\qb0e\nbbbbu0\qb0e\tbu0\qb0e\en
+\end{verbatim}\end{quote}
+
+To decrease multiplicity to one, use \keyindex{tbbu}\onen~or
+\keyindex{tbbl}\onen. To decrease to two or three use
+\keyindex{tbbbu}\onen\dots\keyindex{tbbbbl}\onen. For example,
+
+\begin{music}\nostartrule
+\startextract
+\Notes\ibbbu0h0\qb0e\tbbbu0\qb0e\tbbu0\qb0e\tbu0\qb0e\en
+\zendextract
+\end{music}
+\noindent has been coded as
+
+\begin{quote}\begin{verbatim}
+\startextract
+\Notes\ibbbu0h0\qb0e\tbbbu0\qb0e\tbbu0\qb0e\tbu0\qb0e\en
+\zendextract
+\end{verbatim}\end{quote}
+
+Although at first it may seem counterintuitive,
+the macros \keyindex{tbbu} and \keyindex{tbbl} and higher order counterparts
+may also be invoked when the multiplicity is one. In this case
+a second, third, or fourth heavy bar will be opened one note width \ital{before}
+the current stem, and immediately closed \ital{at} the stem.
+Thus the following sequences
+
+\begin{music}\nostartrule
+\let\extractline\hbox
+\hbox to \hsize{%
+\hss
+  \startextract
+  \Notes\ibu0e0\qbp0e\tbbu0\tbu0\qb0e\en
+  \zendextract
+\hss\hss
+  \startextract
+  \Notes\ibu0e0\qbpp0e\tbbbu0\tbbu0\tbu0\qb0e\en
+  \zendextract
+\hss}
+\end{music}
+\noindent are coded
+\hspace*{\fill}\begin{minipage}{.4\textwidth}\begin{verbatim}
+\Notes\ibu0e0\qbp0e%
+  \tbbu0\tbu0\qb0e\en
+\end{verbatim}\end{minipage}\hfill
+\begin{minipage}{.4\textwidth}\begin{verbatim}
+\Notes\ibu0e0\qbpp0e%
+  \tbbbu0\tbbu0\tbu0\qb0e\en
+\end{verbatim}\end{minipage}\hfill
+
+\medskip
+
+
+The symmetrical pattern is also possible. For example:
+
+\begin{music}\nostartrule
+\startextract
+\Notes\ibbl0j0\roff{\tbbl0}\qb0j\tbl0\qbp0j\en
+\zendextract
+\end{music}
+\noindent has been coded as:
+\begin{quote}\begin{verbatim}
+\Notes\ibbl0j0\roff{\tbbl0}\qb0j\tbl0\qbp0j\en
+\end{verbatim}\end{quote}
+
+The constructions in this section illustrate some general
+properties of
+beam initiation and termination commands: To mate properly with the
+expected stems, the starting position of the heavy bar(s) (for initiation commands)
+and the ending position (for terminations) will be at
+different horizontal locations
+depending on whether they are for upper or lower beams: The position for
+upper beam commands is one note head width to the right of those for
+lower beams. In fact this is the \ital{only} difference between upper
+and lower termination commands. Both types will operate on whatever kind of
+beam is open and has the same beam number.
+
+Recognizing this principle, in the example just given it was necessary to
+shift the double termination to the right by one note head width, using the
+command \keyindex{roff}\verb|{|\dots\verb|}|, which does precisely that for
+any \musixtex\ macro.
+
+Here is another, slightly more complicated example which also uses
+\verb|\roff|:
+
+\begin{music}\nostartrule
+\startextract
+\notes\ibbbu0e0\roff{\tbbbu0}\qb0f\en
+\notesp\tbbu0\qbp0f\en
+\Notes\tbu0\qb0f\en
+\notesp\ibbu0f0\roff{\tbbu0}\qbp0f\en
+\Notes\qb0f\en
+\notes\tbbbu0\tbbu0\tbu0\qb0f\en
+\zendextract
+\end{music}
+\noindent has been coded as:
+\begin{quote}\begin{verbatim}
+\notes\ibbbu0e0\roff{\tbbbu0}\qb0f\en
+\notesp\tbbu0\qbp0f\en
+\Notes\tbu0\qb0f\en
+\notesp\ibbu0f0\roff{\tbbu0}\qbp0f\en
+\Notes\qb0f\en
+\notes\tbbbu0\tbbu0\tbu0\qb0f\en
+\end{verbatim}\end{quote}
+
+\noindent Note that the first beam opening command used a pitch one step
+below the note. This makes the stem shorter by one pitch unit, since it is always
+the \ital{closest} heavy bar that is separated from the given pitch by
+three staff spaces.
+
+We close this section with an example showing how to
+open a beam of one sense, increase multiplicity, then terminate with
+opposite sense:
+
+\begin{music}\nostartrule
+\startextract
+\Notes\ibl0p0\qb0p\nbbl0\qb0p\nbbbl0\qb0p\tbu0\qb0e\en
+\zendextract
+\end{music}
+\noindent which has been coded as
+\begin{quote}\begin{verbatim}
+\Notes\ibl0p0\qb0p\nbbl0\qb0p\nbbbl0\qb0p\tbu0\qb0e\en
+\end{verbatim}\end{quote}
+
+One may save some typing by defining personalized
+\TeX\ macros to
+perform any oft-repeated sequence of commands. For example,
+one could define a set of four sixteenths by the macro:
+
+\verb|\def\qqh#1#2#3#4#5{\ibbl0#2#1\qb#2\qb#3\qb#4\tbl0\qb#5}|
+
+\noindent where the first argument is the slope and the other four
+arguments are the pitches of the four successive sixteenths.
+
+ %\check
+ \section{Shorthand beam notations for repeated notes}\index{repeated patterns}
+Sometimes you may want to indicate repeated short notes with open note heads joined
+by a beam. Here's an example of how to do that
+using the \keyindex{hb} macro:
+
+\begin{music}\nostartrule
+\startextract
+\Notes\ibbl0j0\hb0j\tbl0\hb0j\en
+\Notes\ibbu0g0\hb0g\tbu0\hb0g\en
+\zendextract
+\end{music}
+\noindent which has been coded as:
+\begin{quote}\begin{verbatim}
+\Notes\ibbl0j0\hb0j\tbl0\hb0j\en
+\Notes\ibbu0g0\hb0g\tbu0\hb0g\en
+\end{verbatim}\end{quote}
+
+It is also possible to dispense with the stems:
+
+\begin{music}\nostartrule
+\startextract
+\Notes\ibbl0j3\wh j\tbl0\wh l\en
+\Notes\ibbu0g3\wh g\tbu0\wh i\en
+\zendextract
+\end{music}
+\noindent which was coded as
+\begin{quote}\begin{verbatim}
+\Notes\ibbl0j3\wh j\tbl0\wh l\en
+\Notes\ibbu0g3\wh g\tbu0\wh i\en
+\end{verbatim}\end{quote}
+\noindent A different look could be obtained as follows:
+
+\begin{music}\nostartrule
+\startextract
+\Notes\loff{\zw j}\ibbl0j3\sk\tbl0\wh l\en
+\Notes\ibbu0g3\wh g\tbu0\roff{\wh i}\en\qspace
+\zendextract
+\end{music}
+\noindent which was coded as:
+\begin{quote}\begin{verbatim}
+\Notes\loff{\zw j}\ibbl0j3\sk\tbl0\wh l\en
+\Notes\ibbu0g3\wh g\tbu0\roff{\wh i}\en\qspace
+\end{verbatim}\end{quote}
+
+Yet another way to indicate repeated notes is given in the
+following example:
+
+ \begin{music}\nostartrule
+\startextract
+\Notes\ibl0h0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+      \ibu0j0\qb0{jjj}\tbu0\qb0j\en
+\NOTes\loffset{0.5}{\ibl0j9}\roffset{0.5}{\tbl0}\zhl h%
+      \loffset{0.5}{\ibu0g9}\roffset{0.5}{\tbu0}\hu j\en\bar
+\notes\ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+      \ibbu0i0\qb0{jjj}\tbu0\qb0j%
+      \ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+      \ibbu0i0\qb0{jjj}\tbu0\qb0j\en
+\NOTes\loffset{0.5}{\ibbl0k9}\roffset{0.5}{\tbl0}\zhl h%
+      \loffset{0.5}{\ibbu0f9}\roffset{0.5}{\tbu0}\hu j\en
+\zendextract
+ \end{music}
+ \noindent whose coding (due to Werner {\sc Icking}) is
+
+\begin{quote}\begin{verbatim}
+\Notes\ibl0h0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+      \ibu0j0\qb0{jjj}\tbu0\qb0j\en
+\NOTes\loffset{0.5}{\ibl0j9}\roffset{0.5}{\tbl0}\zhl h%
+      \loffset{0.5}{\ibu0g9}\roffset{0.5}{\tbu0}\hu j\en\bar
+\notes\ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+      \ibbu0i0\qb0{jjj}\tbu0\qb0j%
+      \ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+      \ibbu0i0\qb0{jjj}\tbu0\qb0j\en
+\NOTes\loffset{0.5}{\ibbl0k9}\roffset{0.5}{\tbl0}\zhl h%
+      \loffset{0.5}{\ibbu0f9}\roffset{0.5}{\tbu0}\hu j\en
+\end{verbatim}\end{quote}
+
+ \section{Beams that cross line breaks}
+
+Although careful typesetting can usually avoid it, occasionally
+a beam may need to cross a line break. If so, it must be manually terminated at
+the end of one line and continued in the next. This
+can be done by shifting beam terminations and initiations
+using \keyindex{roff} and/or
+\keyindex{loff}, or by inserting a spacing command such as
+\keyindex{hsk}. We give an example from {\sc Grieg}'s ``Hochzeit auf
+Troldhaugen'':\index{Grieg, E.@{\sc Grieg, E.}}\medskip
+
+\begin{music}
+\parindent0pt
+\def\rqs{\lower\Interligne\rlap\qs}
+\def\snotes{\vnotes1\elemskip}
+\setstaffs1{2}
+\generalsignature{2}
+\setclef1{\bass}
+\interstaff{12}
+\startpiece
+%%% bar 1
+\addspace\afterruleskip
+\snotes|\tinynotesize\ibsluru0n\ibbu0m5\qb0{=m}\tqh0n\en
+\qspace
+\Notes\zchar{-7}\sPed\loffset{.3}{\fl E}\zq E\qu{_I}%
+  |\zql g\ibu2l0\busf2\qb2{=m}\en
+\Notes|\tubslur0o\qb2{_l}\en
+\Notes\loffset{.3}{\fl L}\zq L\ibl0L0\qb0{_b}%
+  |\ibl1h0\zqb1g\bupz2\qb2l\en
+\Notes\zq L\tqb0b|\tbl1\zqb1g\bupz2\tqh2l\en
+\NOtes\zq L\ql b|\zql g\qu l\en
+\notes\zchar{-7}\sPed\zchar{-7}{\eightit ~~~sempre}%
+  \zchar{14}{\pp\eightit~sempre}\zq I\ibbu1J0\qb1L|\qs\en
+\notes\qs|\zq N\ibbu3d0\qb3{_d}\en
+\notes\qb1E|\rqs\en
+\notes\qs|\fl e\zq N\rq e\qb3d\en
+%%% bar 2
+\bar
+\notes\loffset{.3}{\fl I}\zq I\qb1{_L}|\rqs\en
+\qspace
+\notes\qs|\lfl d\zq d\zq {=f}\qb3N\en
+\notes\tqh1{_E}|\rqs\en
+\notes\qs|\zq d\zq g\tqh3N\en
+\notes\zq I\ibbu0J0\qb0L|\rqs\en
+\notes\qs|\zq d\ibbu1d0\qb1N\en
+\notes\qb0E|\rqs\en
+\notes\qs|\fl e\rq e\zq d\qb1N\en
+\notes\zq I\qb0L|\rqs\en
+\notes\qs|\zq f\zq d\qb1N\en
+\notes\tqh0E|\rqs\en
+\notes\qs|\zq g\zq d\tqh1N\en
+\notes\zq I\ibbu0J0\qb0L|\rqs\en
+\notes\qs|\zq d\ibbu1d0\qb1N\en
+\notes\qb0E|\rqs\en
+\notes\rlap\qs\hsk\tbu0|\rq e\zq d\zqb1N\hsk\tbu1\en
+\endpiece
+\end{music}
+\noindent The prolongation of the two upper beams at the end is
+illustrated in the code fragment
+\begin{quote}\begin{verbatim}
+\notes\rlap{\qs}\hsk\tbu0|\rq e\zq d\zqb1N\hsk\tbu1\en
+\end{verbatim}\end{quote}
+ %\check
+
+ \section{Beams with notes on several different staves}
+
+Here's a simple example from {\sc Brahms}'s
+Intermezzo Op.~118, provided by
+Miguel {\sc Filgueiras}:\index{Brahms, J.@{\sc Brahms, J.}}\medskip
+
+\begin{music}
+\interstaff{12}
+\setstaffs1{2}
+\setclef1\bass
+\generalmeter\allabreve
+\startextract
+\NOtes\qp\nextstaff\isluru0q\zq{q}\ql{j}\en
+\bar
+\nspace
+\Notes\ibu0L2\qb0{CEJLcL}%
+  \nextstaff\roff{\zw{l}}\pt{p}\zh{_p}\pt{i}\hl{_i}\en
+\Notes\qb0J\itied1a\qb0a\nextstaff\tslur0o\zq{o}\ql{h}\en
+\bar
+\Notes\ttie1\zh{.L.a}\hl{.e}%
+  \nextstaff\qb0{chj}\tbl0\qb0l\cl{q}\ds\en
+\NOtes\qp\nextstaff\zq{q}\ql{j}\en
+\endextract
+\end{music}
+ %\check
+\noindent The coding is
+\begin{verbatim}
+\interstaff{13}
+\instrumentnumber{1}
+\setstaffs1{2}
+\setclef1\bass
+\generalmeter\allabreve
+\startextract
+\NOtes\qp\nextstaff\isluru0q\zq{q}\ql{j}\en
+\bar
+\nspace
+\Notes\ibu0a1\qb0{CEJLcL}%
+  \nextstaff\roff{\zw{l}}\pt{p}\zh{_p}\pt{i}\hl{_i}\en
+\Notes\qb0J\itied1a\qb0a\nextstaff\tslur0o\zq{o}\ql{h}\en
+\bar
+\Notes\ttie1\zh{.L.a}\hl{.e}%
+  \nextstaff\qb0{chj}\tbl0\qb0l\cl{q}\ds\en
+\NOtes\qp\nextstaff\zq{q}\ql{j}\en
+\endextract
+\end{verbatim}
+
+\noindent (This example also shows that there is no problem in extending
+a beam across a bar line.)
+
+The general features that enable this type of coding as well as the
+more complex example to follow are
+ \begin{itemize}\setlength{\itemsep}{0ex}
+%  \item Commands like \Bslash{\tt ibu}, \Bslash{\tt ibl},
+%\Bslash{\tt Ibu}, and \Bslash{\tt Ibl} \rm
+%define beams whose initial vertical position and slope are fixed
+%relative
+%to the staff where they begin, but notes in other staves can still be
+%connected to them using \Bslash{\tt qb}\onen.
+%
+%  \item The commands \keyindex{tbu}\onen\rm~or \keyindex{tbl}\onen\rm~terminate
+%beam $n$ at the specified position, but \musixtex\ remembers the beam
+%parameters until a new beam with the same number is defined.
+%Therefore, even after beam $n$ has been ``finished'' by a \verb|\tbu| or
+%\verb|\tbl| command, commands like \Bslash{\tt qb}\enpee\rm~will still
+%generate notes connected to the phantom extension of this beam,
+%\ital{provided they are issued in a different staff}. If the command
+%\verb|\qb|\enpee\rm~were issued on the same staff as the beam after
+% the beam had ended, an error would result.
+%
+  \item Commands like {\Bslash\texttt{ibu}}, {\Bslash\texttt{ibl}},
+{\Bslash\texttt{Ibu}}, and {\Bslash\texttt{Ibl}}
+define beams whose initial vertical position and slope are fixed
+relative
+to the staff where they begin, but notes in other staves can still be
+connected to them using {\Bslash\texttt{qb}\onen}.
+
+  \item The commands {\keyindex{tbu}\onen}  or {\keyindex{tbl}\onen}
+terminate
+beam $n$ at the specified position, but \musixtex\ remembers the beam
+parameters until a new beam with the same number is defined.
+Therefore, even after beam $n$ has been ``finished'' by a \verb|\tbu| or
+\verb|\tbl| command, commands like {\Bslash{\tt qb}\enpee} will still
+generate notes connected to the phantom extension of this beam,
+\ital{provided they are issued in a different staff}. If the command
+\verb|\qb|\enpee\ were issued on the same staff as the beam after
+ the beam had ended, an error would result.
+
+
+
+
+
+ \item If the beam is initiated on one staff,
+notes in a lower staff can be connected to it, but only \ital{after} the beam
+has been defined. This may require using the command \keyindex{prevstaff}
+to go back one staff, as described in Section~\ref{movingtostaffs}.
+
+ \end{itemize}
+
+ Here is an example:
+
+ \begin{music}
+ \setstaffs13
+ \setclef1{6000}
+ \startextract
+ \notesp
+ \nextstaff\Ibbbu0Af7\prevstaff
+ \qb0{AEH^JLa}\relax\nextstaff
+ \qb0{******^c}\tqh0e\relax
+ |\zq{h^jl}\ql o\en
+ \notesp
+ \nextstaff
+ \Ibbbu0hG6\qb0{hec}\prevstaff
+ \qb0{***aLJ}\tqh0H\relax\nextstaff
+ |\zq{h^jl}\ql o\en \nspace
+ \zendextract
+ \end{music}
+
+ \noindent which is coded as:
+
+ \begin{quote}
+ \begin{verbatim}
+ \setstaffs13
+ \setclef1{6000}
+ \startextract
+ \notesp
+ \nextstaff\Ibbbu0Af7\prevstaff
+ \qb0{AEH^JLa}\relax\nextstaff
+ \qb0{******^c}\tqh0e\relax
+ |\zq{h^jl}\ql o\en
+ \notesp
+ \nextstaff
+ \Ibbbu0hG6\qb0{hec}\prevstaff
+ \qb0{***aLJ}\tqh0H\relax\nextstaff
+ |\zq{h^jl}\ql o\en \nspace
+ \zendextract
+ \end{verbatim}
+ \end{quote}
+In this example we see not only multiple uses of \keyindex{nextstaff} and
+\keyindex{prevstaff}, but also the character \verb|*| to make virtual beam notes
+(see Section~\ref{CollectiveCoding}).
+

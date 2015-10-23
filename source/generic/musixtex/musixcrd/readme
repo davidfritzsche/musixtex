@@ -1,0 +1,54 @@
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%% musixcrd - typsetting chord symbols with                   %%
+#%%                   musixtex                                 %%
+#%% readme                                                     %%
+#%% $Id$       %%   
+#%% copyright 2004 , Robert Hennig                             %%
+#%% this code is licensed in terms of the                      %%
+#%% GNU Public License                                         %%
+#%%                                                            %%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Chord setting for musixtex or pmx.
+
+There exist two distributions, the sources and the compiled on.
+The sources are only necessary for development. Normal usage
+requires only the compiled version.
+
+
+compiled distribution
+---------------------
+  The archive musixcrd.tgz contains the following files:
+
+  o readme           this file
+  o musixcrd.tex     tex macros
+  o doc.pdf          documentation 
+
+  Put the musixcrd.tex file or an link to it into your 
+  musixtex/pmx working directory. For pmx use the lines
+
+  ---
+  \input musixtex                   % These commands are necessary
+  \input pmx                        % because pmx.tex MUST be \input
+  \input musixcrd
+  ---
+
+  as preamble in your pmx source file to include musixcrd.tex.
+  Look at doc.ps for further instructions of how to use musixcrd.
+
+
+source distribution
+-------------------
+  The archive musixcrdsrc.tgz contains the following files:
+
+  o readme          this file
+  o musixcrd.dtx    tex macros and documentation
+  o makefile        makefile
+  o musixcrd.sty    latex stylefile is a link to musixcrd.dtx
+  o doc.tex         latex macros for documentation generation 
+                    using musixcrd.dtx 
+  o strip.tex       tex file for strip documentation from musixcrd.dtx
+
+  Extract the file into an directory. Use make with the arguments
+  doc, strip, srcdist and dist to generate the targets.
+  

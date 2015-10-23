@@ -1,0 +1,366 @@
+\tenpoint
+%
+\catcodesmusic
+\ifnum\orgue=1\relax
+ \def\org#1&#2\\{#1&#2&}\relax
+% \def\cadrage{\vrule width 0pt height 40mm}\relax
+ \def\cadrage{\vrule width 0pt height 1mm}\relax
+\else
+ \def\org#1&#2\\{}\relax
+ \def\cadrage{\vrule width 0pt height 10mm}\relax
+\fi
+%
+\title{Les anges dans nos campagnes}
+\subtitle{No\"el du XIII\umero\ si\`ecle}
+\fullauthor{Harmonisation
+ Fran\c cois-Auguste GEVAERT\\1828 -- 1908\ifnum\orgue>0\\
+ Partition d'orgue Daniel TAUPIN\fi} 
+\shortauthor{F.-A. Gevaert, D. Taupin}
+\maketitle
+%
+\parindent 12mm
+\sepbarrules
+% deux croches hautes
+\def\dql#1#2#3{\ibl0{#2}{#1}\qb0{#2}\tbl0\qb0{#3}}%
+\def\dqu#1#2#3{\ibu0{#2}{#1}\qh0{#2}\tbu0\qh0{#3}}%
+\def\dqh{\dqu}\def\dqb{\dql}%
+%
+% quatre croches
+\def\qqbh#1#2#3#4#5{\ibu0{#2}{#1}\qh0{#2}\qh0{#3}\qh0{#4}\tqh0{#5}}\relax
+\def\qqbH#1#2#3#4#5#6{\ibu0{#2}{#1}\qh0{#3}\qh0{#4}\qh0{#5}\tqh0{#6}}\relax
+\def\qqbl#1#2#3#4#5{\ibl0{#2}{#1}\qb0{#2}\qb0{#3}\qb0{#4}\tqb0{#5}}\relax
+\def\qqbL#1#2#3#4#5#6{\ibl0{#2}{#1}\qb0{#3}\qb0{#4}\qb0{#5}\tqb0{#6}}\relax
+%\check
+%\bigskip
+%
+% soufflets crescendo et decrescendo
+%
+\def\soufflcr#1{\zcharnote{#1}{\kern -1cm\Cresc}}%
+\def\Soufflcr#1{\zcharnote{#1}{\kern -1cm\CREsc}}%
+%
+\def\souffldim#1{\zcharnote{#1}{\kern -1cm\Dimin}}%
+\def\Souffldim#1{\zcharnote{#1}{\kern -1cm\DIMin}}%
+%
+%\check
+\ifnum\orgue=0\relax
+ \def\nbinstruments{4}\global\nbporteesi=1\relax
+ \global\nbporteesii=1\relax
+ \global\nbporteesiii=1\relax
+ \global\nbporteesiv=1\relax
+ \global\cleftoksi={{6}{0}{0}{0}}\relax
+ \global\cleftoksii={{0}{0}{0}{0}}\relax
+ \global\cleftoksiii={{0}{0}{0}{0}}\relax
+ \global\cleftoksiv={{0}{0}{0}{0}}\relax
+ \def\instrumenti{Basses}\relax
+ \def\instrumentii{T\'enors}\relax
+ \def\instrumentiii{Altos}\relax
+ \def\instrumentiv{Sopran.}\relax
+ \interinstrument=30pt
+ \songbottom{1}  % to be used to make heavy bars at staff left
+ \songtop{4}   % to be used to make heavy bars at staff left
+\else
+ \interinstrument=25pt
+ \def\interinstrumenti{0pt}
+ \def\nbinstruments{6}\global\nbporteesi=1\relax
+ \global\nbporteesii=2\relax
+ \global\nbporteesiii=1\relax
+ \global\nbporteesiv=1\relax
+ \global\nbporteesv=1\relax
+ \global\nbporteesvi=1\relax
+ \global\cleftoksi={{6}{0}{0}{0}}\relax
+ \global\cleftoksii={{0}{0}{0}{0}}\relax
+ \global\cleftoksiii={{6}{0}{0}{0}}\relax
+ \global\cleftoksiv={{0}{0}{0}{0}}\relax
+ \global\cleftoksv={{0}{0}{0}{0}}\relax
+ \global\cleftoksvi={{0}{0}{0}{0}}\relax
+ \def\instrumenti{P\'edale}\relax
+ \def\instrumentii{Manuel}\relax
+ \def\instrumentiii{Basses}\relax
+ \def\instrumentiv{T\'enors}\relax
+ \def\instrumentv{Altos}\relax
+ \def\instrumentvi{Sopran.}\relax
+ \def\staffspacingiii{0.7}\relax
+ \def\staffspacingiv{0.7}\relax
+ \def\staffspacingv{0.7}\relax
+ \def\staffspacingvi{0.7}\relax
+ \songbottom{3}  % to be used to make heavy bars at staff left
+ \songtop{6}   % to be used to make heavy bars at staff left
+\fi
+%\check
+%
+\signaturegenerale{\Signature}%
+\relativeaccidentals
+\generalmeter{\meterfrac{4}{4}}
+%\check
+\def\interfacteur{9}%
+%\check
+\def\respire{\notes\org&\\&&&\zbreath\enotes}%
+%
+%\check
+\catcode`\@=13
+%\ifx\ninerm\undefined\font\ninerm=\fontid r9\fi
+
+\def@#1|#2|#3*{\zcharnote{-11}{\vbox to 0pt{\ninerm
+ \vss\lineskiplimit=0pt
+\baselineskip 9.5pt\parindent 0pt\parskip 0pt\rlap{\vphantom{\'EQ}#3}
+\rlap{\vphantom{\'EQ}#2}\rlap{\vphantom{\'EQ}#1}\relax
+\vss}}}%
+%
+\barsinline=0\relax
+\linesinpage=0\relax
+\debutmorceau\def\dmtp{}\def\dmtph{}\def\!{\kern -4pt}%
+\ifnum\orgue=0\relax
+ \autolines {8}42\relax
+\else
+ \autolines {8}42\relax
+ \advance\linesinpage 1\relax
+\fi
+\transpose=\Transpose
+\znotes\org&\zmidtwotext{\moyen III}\\&&&\Uptext{\moyen Allegretto}\enotes
+%
+\dmtp\def\txt{@\!Ber-|\!\!Cher-|\!Les*}\Notes\org&\qu g|\ql i\\\relax
+ &\txt\ql n&\txt\qu g&\txt\ql i\enotes
+\dmtp\def\txt{@gers,|\!chons|an-*}\Notes\org&\qu f|\ql i\\&\txt\ql m\relax
+ &\txt\qu g&\txt\ql i\enotes
+\dmtph\def\txt{@quit-|tous|ges*}\Notes\org\pause&\qu e|\ql i\\\pause
+ &\txt\ql l&\txt\qu g&\txt\ql i\enotes
+\dmtp\def\txt{@tez|l'heu-|dans*}\notes\org&\qu d|\dql3ik\\&\txt\ql k\relax
+ &\txt\dqu3gi&\txt\dql3ik\enotes
+%
+%\check
+% mesure 2
+\barre\def\txt{@vos|reux|nos*}\Notes\org&\qu e|\qlp k\\&\txt\qlp k\relax
+ &\txt\qu i&\txt\qlp k\enotes
+\dmtp\def\txt{@re-|vil-|cam-*}\notes\org&\qu f|\sk\cl j\\\hpause
+ &\sk\txt\cl k\qsk&\txt\qu f&\sk\txt\cl j\qsk\enotes
+\dmtph\def\txt{@trai-|la-|pa-*}\notes\org\pause&\qu g|\ql i\\\qp
+ &\txt\dql{-3}kj&\txt\dqu{-4}ge&\txt\ql i\enotes
+\dmtp\def\txt{@tes|ge|gnes*}\Notes\org&\qu d|\ql g\\@U--|Qui--|Ont--*\itenu0N\ql N\relax
+ &\txt\ql i&\txt\qu d&\txt\ql g\enotes
+%
+%\check
+% mesure 3
+\barre\def\txt{@U-|Qui|Ont*}\Notes\org&\qu g|\ql i\\\tten0\ql N\relax
+ &\txt\ql k&\txt\qu g&\txt\ql i\enotes
+\dmtp\def\txt{@nis-|l'a|en-*}\notes\org&\qu f|\rlap{\dql{-2}ih}\\\txt\cl M\relax
+ &\txt\cl k&\txt\cu g&\txt\cl i\enotes
+\dmtp\def\txt{@sez-|vu|ton-*}\notes\org&|\\\txt\cl M\relax
+ &\txt\cl k&\txt\cu g&\txt\cl h\enotes
+\dmtph\def\txt{@vous|na\^\i-|n\'e*}\notes\org\pause&\qu e|\ql i\\\txt\ql L\relax
+ &\txt\qu g&\txt\dqu{-2}gf&\txt\ql i\enotes
+\dmtp\def\txt{@\`a--|tre--|l'hym--*}\notes\org&\dqu2ef|\dql3ik\\\txt\dql2LM\relax
+ &\txt\dqu2gh&\txt\dqu{-2}ed&\txt\dql3ik\enotes
+%
+%\check
+% mesure 4
+\barre\def\txt{@leurs|sous|ne*}\Notes\org&\qu f|\qlp k\\\txt\ql M\relax
+ &\txt\ql h&\txt\qu d&\txt\qlp k\enotes
+\dmtp\def\txt{@con-|ses|des*}\notes\org&\qu d|\sk\cl j\\\txt\ql K\sk
+ &\txt\dql5hk&\txt\qu f&\sk\rlap{\!\txt}\cl j\enotes
+\dmtph\def\txt{@\!certs,|\!toits;|\!Cieux,*}\notes\org\pause
+ &\qu b|\zqu i\dql{-6}gd\\\txt\ql N\relax
+ &\txt\ql k&\txt\qu g&\txt\ql i\qsk\enotes
+\dmtp\def\txt{@Et|Of-|Et*}\notes\org&\soupir|\rlap{\dql2ef}\soupir\\\soupir\relax
+ &\txt\cl l&\soupir&\soupir\enotes
+\dmtp\def\txta{@que|\!frons|l'\'e*}\notes\org&|\\\relax
+ &\txta\cl m&&\enotes
+%
+%\check
+% mesure 5
+\def\txtb{@vos-|lui|cho*}%
+\ifnum\orgue=0\relax
+ \barre
+\else
+ \global\cleftoksii={{6}{0}{0}{0}}\changeclefs\alapage% barre
+\fi
+\Notes\org&\ql N|\zql g\qu i\\&\txtb\ql n&\txt\qu g&\txt\ql i\enotes
+\dmtp\Notes\org&\ql M|\zql g\qu i\\&\txta\ql m&\txta\qu g&\txta\ql i\enotes
+\dmtph\Notes\org\pause&\ql L|\zql g\qu i\\\pause
+ &\txtb\ql l&\txtb\qu g&\txtb\ql i\enotes
+\dmtp\def\txt{@ten-|le|de*}\notes\org&\ql K|\rlap{\dql3gi}\dqu3ik\\\relax
+ &\txt\ql k&\txt\dqu3gi&\txt\dql3ik\cadrage\enotes
+%
+%\check
+% mesure 6
+\barre
+\def\txt{@dres|\!\!tendre|nos*}\Notes\org&\hl K|\zql i\qup k\\&\txt\qlp k\relax
+ &\txt\qu i&\txt\qlp k\enotes
+\dmtp\def\txt{@mu-|hom-|mon-*}\notes\org&|\ql f\cu j\\\hpause
+ &\sk\txt\cl k\qsk&\txt\qu f&\sk\txt\cl j\qsk\enotes
+\dmtph\def\txt{@set-|ma-|ta-*}\notes\org\pause
+ &\dql{-3}KJ|\zqu i\dql{-4}ge\\\soupir
+ &\txt\dql{-3}kj&\txt\dqu{-4}ge&\txt\ql i\enotes
+\def\txta{@Fas-|Et|Re-*}\relax
+\dmtp\def\txt{@tes|ge|gnes*}\Notes\org&\ql I|\zql d\qu g\\\txta\ql N\relax
+ &\txt\ql i&\txt\qu d&\txt\ql g\enotes
+%
+%\check
+% mesure 7
+\def\txtb{@\!sent|de|dit*}%
+\barre
+ \Notes\org&\ql N|\zql d\qu i\\\txtb\ql N&\txta\qu i\relax
+ &\txta\qu d&\txta\ql i\enotes
+\dmtp\def\txt{@re-|nos|ce*}\notes\org&\ql M|\rlap{\dqu{-2}ih}\qlp{^d}\\\txt\ql M\relax
+ &\txtb\cu h&\txtb\cu{^d}&\txtb\cl i\enotes
+\dmtp\notes\org&|\\\relax
+ &\txt\cu h&\txt\cu d&\txt\cl h\enotes
+\dmtph\def\txt{@ten-|c\oe urs|chant*}\notes\org\pause
+ &\dql{-2}ML|\qu i\cl e\\\relax
+ \txt\dql{-2}ML&\txt\dqu{-2}hg&\txt\dqu2de&\txt\ql i\enotes
+\dmtp\def\txt{@tir--|et--|m\'e--*}\notes
+ \org&\dql{-6}LI|\rlap{\dql{-2}gf}\dqu3ik\\\txt\dql{-6}LI\relax
+ &\txt\dqu4gi&\txt\dqu{-2}gf&\txt\dql3ik\enotes
+%
+%\check
+% mesure 8
+\barre\def\txt{@dans|de|lo-*}\Notes\org&\ql J|\zql e\qup k\\\txt\ql J\relax
+ &\txt\ql i&\txt\qu e&\txt\qlp k\enotes
+\dmtp\def\txt{@les|nos|di-*}\notes\org&\ql K|\ql f\cu j\\\txt\ql K\sk
+ &\txt\qu h&\txt\qu f&\sk\txt\cl j\enotes
+\dmtph\def\txt{@airs:|voix.|eux.*}\Notes\org\pause&\ql N|\zql{=d}\qu i\\\txt\ql N\relax
+ &\txt\ql i&\txt\qu{=d}&\txt\ql i\enotes
+\temps\Notes\org&\soupir|\soupir\\\soupir\relax
+ &\soupir&\soupir&\soupir\enotes
+\ifnum\orgue=0\relax
+\else
+ \global\cleftoksii={{0}{0}{0}{0}}\changeclefs
+\fi
+\suspmorceau
+%\eject
+\catcodesmusic
+%
+%\check
+\def@#1|#2|#3*{\zcharnote{-5}{\vbox to 0pt{\vss\lineskiplimit=0pt
+\baselineskip 10pt\parindent 0pt\parskip 0pt\rlap{\vphantom{\'EQ}#3}
+\rlap{\vphantom{\'EQ}#2}\rlap{\vphantom{\'EQ}#1}\relax
+\vss}}}
+\ifnum\orgue=0\relax
+ \autolines {8}43\relax
+\linesinpage=0\relax
+\barsinline=0\relax
+ \interinstrument=6pt
+\else
+ \interinstrument=5pt
+ \def\interinstrumenti{0pt}
+\fi
+%
+%
+% mesure 9
+\def\xx{@|---|*}%
+\reprmorceau\def\Glo{@|Glo -|*}\Notes\org&\zcharnote{-5}{\moyen II}\hpause
+ |\uptext{\moyen I}\hl k\\&&\sk\hpause&\Glo\hl k\enotes
+\temps\notes\org\pause&\hu g\relax
+ |\qqbl{-2}lkji\\\pause&\pause
+ &\Glo\hu g&\xx\qqbl{-2}lkji\cadrage\enotes
+%
+% mesure 10
+\barre\notes\org&\qqbh{-2}hgfe|\hl j\\&&\xx\qqbh{-2}hgfe&\xx\hl j\enotes
+\temps\notes\org\pause&\hu f|\qqbl{-2}kjih\\\pause&\pause&\xx\hu f&\xx\qqbl{-2}kjih\enotes
+%
+% mesure 11
+\barre\notes\org&\qqbh{-2}gfed|\hl i\\&&\xx\qqbh{-2}gfed&\xx\hl i\enotes
+\temps\def\Ri{@|ri-|*}\notes\org\pause&\hu e|\qqbl{-2}jihg\\\pause&\pause
+ &\xx\qup e\sk\sk\Ri\cu e&\xx\qqbl{-2}jihg\enotes
+%
+% mesure 12
+%\check
+\barre\def\txta{@|a|*}\def\Txta{@|a--|*}%
+\notes\org&\qqbh{-1}fede|\qup h\sk\sk\cu h\\&\soupir\sk\Glo\hl k\relax
+ &\Txta\qqbh{-1}fede&\xx\qup h\sk\sk\Ri\cu h\enotes
+\temps\notes\org\pause&\qu f\sk\soupir|\rlap{\ql d\sk\ql c}\qqbH0gfghf\\\pause
+ &\xx\sk\sk\Ri\cl j\txta\cl j\relax
+ &\xx\qqbH0gfghf&\txta\qu d\sk\soupir\enotes
+\ifnum\orgue=0\relax
+\else
+ \global\cleftoksii={{6}{0}{0}{0}}\changeclefs
+\fi
+%
+% mesure 13
+\barre\def\In{@|in|*}\NOtes\org&\qu K|\zq{bd}\upz g\ql g\\&\In\ql i\relax
+ &\xx\qu d&\In\lpz g\qu g\enotes
+\dmtp\def\Ex{@|ex-|*}\notes\org&\zql J\qu M|\zq{cf}\upz h\ql h\\&\Ex\dql{-4}jh\relax
+ &\In\cu e\Ex\cu f&\Ex\lpz h\qu h\enotes
+\temps\def\txt{@|cel-|*}\notes\org\pause&\zql I\qu N|\zq{eg}\upz i\ql i\\\pause\relax
+ &\txt\dql{-2}lk&\txt\qu g&\txt\upz i\ql i\enotes
+\dmtp\def\txt{@|sis|*}\Notes\org&\zql J\qu L|\zq{eh}\upz j\ql j\\&\txt\ql j&\txt\itenl0h\qu h\relax
+ &\txt\upz j\ql j\enotes
+%
+% mesure 14
+\barre\def\De{@|De-|*}\Notes\org&\hu K|\zw d\zh g\hu i\\\relax
+ &\De\ql k&\tten0\qu h&\De\hl i\enotes
+\dmtp\Notes\org&|\\&@|o!|*\ql k&\De\hu g&\xx\enotes
+\temps\notes\org\pause&\zcharnote{-6}{\moyen I}\qqbl{-2}MLKJ|\zh f\hu h\\\pause&\Glo\qqbl{-2}kjih\relax
+ &\sk\sk@|o!|*\qu f&@|o!|*\hl h\cadrage\enotes
+%
+% mesure 15
+\barre\notes\org\ql N\sk\ql M&\hu I|\zw g\zh i\hu k\\\sk\hpause
+ &\xx\hlp i&\Glo\qqbh{-2}ihgf&\Glo\hl k\enotes
+\temps\notes\org\hl L&\hl N|\qqbh{-2}lkji\\\Glo\hl N&\xx\sk\sk\dql{-2}lk\relax
+ &\xx\itenl0e\hu e&\xx\qqbl{-2}lkji\enotes
+%\check
+% mesure 16
+%
+\barre\notes\org\ql M\sk\ql L&\qqbl{-2}aNML|\zh e\zh h\hu j\relax
+ \\\xx\qqbl{-2}aNML&\xx\dql{-2}ji\hl h\relax
+ &\xx\tten0\qu e\sk\dqu{-2}hg&\xx\qu j\enotes
+\temps\notes\org\hl K&\hl K|\zh f\zhl h\rlap{\qqbh{-2}kjih}\relax
+ \\\xx\hl M&\sk\sk&\xx\dqh{-2}fe\relax
+ &\xx\rlap{\qqbl{-2}kjih}\enotes
+\dmtp\notes\org&|\\&\xx\dql{-2}kj&\itenl0d\qu d&\enotes
+%
+% mesure 17
+\barre
+%\autolines 753
+\notes\org\ql L\sk\ql K&\qqbl{-2}NMLK|\zw e\zw g\hu i\relax
+ \\\xx\qqbl{-2}NMLK&\dqh{-2}ih\xx\hu g\relax
+ &\tten0\qu d\zbreath\sk\dqh{-2}gf&\xx\hl i\enotes
+\temps\notes\org\hl J&\hl J|\rlap{\qqbh{-2}jihg}\relax
+ \\\xx\hl L&\sk\sk&\xx\dqh{-2}ed\relax
+ &\xx\rlap{\qqbh{-2}jihg}\enotes
+\dmtp\notes\org&|\\&\dql{-2}ji&\itenl0c\qu c&\cadrage\enotes
+%
+% mesure 18
+\barre\notes\org\bigaccid\hu{^J}&\qqbl{-1}MLKL\relax
+ |\bigaccid\Sh c\zhl c\zqp f\qup h\relax
+ \sk\sk\zq f\cu h\\\xx\qqbl{-1}MLKL&\xx\dqh{-2}hg\Ri\dqh2fg\relax
+ &\tten0\dqh0c{^c}\Ri\dqh{-2}dc\relax
+ &\xx\qup h\sk\sk\Ri\cu h\enotes
+\def\txt{@|a--|*}%
+\temps\notes\org\hu K&\qqbl0MNaM|\zhu d\hl d\\\xx
+\qqbl0MNaM&\qqbH0ihi{=j}h\relax
+ &\txt\qqbH0edefe&\txt\qu d\sk\soupir\enotes
+%
+%mesure 19
+\barre\def\Ex{@|ex-|*}\relax
+\notes\org\qu I\sk\qu H&\ql N\sk\ql M|\zq b\zq d\upz g\ql g\sk\bigaccid
+\zq{=c}\zq f\upz h\ql h\relax
+ \\\xx\qqbl{-1}bcba&\In\upz k\ql k\sk\Ex\upz j\ql j\relax
+ &\In\lpz d\qu d\sk\Ex\lpz f\qu f\relax
+ &\In\lpz g\qu g\sk\Ex\lpz h\qu h\enotes
+\temps\def\Cel{@|cel-|*}\NOtes\org\qu I&\ql N|\zq d\zq g\upz i\ql i\relax
+ \\\Ri\ql N&\Cel\upz k\ql k\relax
+ &\Cel\lpz g\qu g&\Cel\upz i\ql i\enotes
+\dmtp\def\Sis{@|sis|*}\Notes\org\qu{=J}\relax
+ &\qu L|\zq e\zq h\upz j\ql j\relax
+ \\@|a|*\qu J&\Sis\upz l\ql l\relax
+ &\Sis\itenl0h\qu h&\Sis\upz j\ql j\enotes
+% mesure 20
+\barre\Notes\org\hu K&\qu K|\zh d\zhl i\qsk\qu h\relax
+ \\\De\ql K&\De\itenu1k\hl k&\tten0\qu h&\De\hl i\enotes
+\temps\notes\org&\dqb5Nb|\qu g\\\dqb5Nb&&\De\qu g&\enotes
+\temps\notes\org\hu D&\qqbL{-2}bdcbc|\zh f\hu h\sk\itenl2d\ql d\sk\relax
+ \\\xx\hl d&\tten1\xx\qqbl{-1}kjij&\xx\hu f&\xx\hl h\sk\enotes
+% mesure 21
+\xbarre\def\txt{@|o!|*}\NOTes\org\pointdorgue a\hu G\relax
+ &\pointdorgue b\zh N\hl b|\tten2\pointdorgue n\zh d\hu g\relax
+ \\\txt\pointdorgue a\hl N\relax
+ &\txt\pointdorgue l\hl i&\txt\pointdorgue l\hu d\relax
+ &\txt\pointdorgue m\hu g\enotes
+\temps\Notes\org&|\\\hpause&\hpause&\hpause&\hpause\enotes
+%
+\finmorceau
+\medskip\rightline{\it le \aujourdhui}
+\absoluteaccidentals
+\eject
+ 
+\endinput

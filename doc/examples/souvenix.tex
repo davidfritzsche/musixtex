@@ -1,0 +1,474 @@
+
+\fulltitle{Un souvenir...}
+\shortauthor{Rossi/Capitani}
+\title{Un souvenir}
+\othermention{Paroles d'Oreste ROSSI}
+\fullauthor{Musique de Fernand CAPITANI}%
+\maketitle
+
+\ifx\Transpose\undefined\def\Transpose{0}\fi
+\ifx\Signature\undefined\def\Signature{-3}\fi
+
+\tracingstats=1\relax
+%\check
+%
+%
+% soufflets crescendo et decrescendo
+%
+\def\soufflcr#1{\zcharnote{#1}{\kern -1cm\cresc}}%
+\def\Soufflcr#1{\zcharnote{#1}{\kern -1cm\CResc}}%
+%
+\def\souffldim#1{\zcharnote{#1}{\kern -1cm\dimin}}%
+\def\Souffldim#1{\zcharnote{#1}{\kern -1cm\DImin}}%
+%
+%\check
+\def\nbinstruments{2}
+\setstaffs12\relax
+\setstaffs21\relax
+\setclefs1{6000}%
+\setclefs2{0000}%
+%
+\generalsignature{\Signature}%
+\generalmeter{\meterfrac{4}{4}}
+%\check
+\def\interfacteur{10}%
+\parindent 15mm
+\def\instrumenti{Piano}%
+\def\instrumentii{Chant}%
+\setinterinstrument1{4\Interligne}
+%\check
+\def\respire{\notes\nextinstrument\cbreath\enotes}%
+%
+%\check
+\catcode`\@=13
+%
+\def\doct#1#2{\Ibl0{#1}{#2}1{\zq{'#1}}\qb0{#1}{\zq{'#2}}\tqb0{#2}}%
+\def\doctu#1#2{{\advance\transpose by 7\relax
+\Ibu0{#1}{#2}1\zq{#1}}\qh0{#1}{\zq{'#2}}\tqh0{#2}}%
+%
+\def\nbinstruments{1}\computewidths
+\debutmorceau
+\autolines {10}44\relax
+\transpose=\Transpose
+\notes|\Uptext{\raise 2\Interligne\hbox{\moyen Moderato}}\enotes
+%
+\def\rchone{\lq q\zq{lnp}\ql s}%
+\def\Lchone{\lh c\zh{be}\hl g}%
+\def\lchone{\lq c\zq{be}\ql g}%
+\def\Lchtwo{\zh{bd}\hl g}%
+\def\lchtwo{\zq{bd}\ql g}%
+\def\octs#1{\zw{#1}\advance\transpose by 7\zw{#1}\raise 3\Interligne\soupir}%
+\znotes\zmidtwotext{\kern -3mm\ppff p}\enotes
+\temps\NOtes\octs E|\soupir\enotes
+\temps\NOtes\Lchone|\rchone\enotes
+\temps\NOtes|\rchone\enotes
+\temps\NOtes\lchone|\rchone\enotes
+ %\check
+% mesure 2
+\barre\NOtes\octs G|\itenl1k\itenl2n\itenu3p\itenu4r\zw{knpr}\enotes
+\temps\NOtes\Lchtwo\enotes
+\temps\NOtes\sk\enotes
+\temps\NOtes\lchtwo\enotes
+ %\check
+% mesure 3
+%
+\def\lchthree{\lq f\zq{ce}\ql h}%
+\def\Lchthree{\lh f\zh{ce}\hl h}%
+\xbarre\NOtes\octs H|\tten1\tten2\tten3\tten4\zq{knp}\ql r\enotes
+\temps\notes\Lchthree|\doct jk\enotes
+\temps\NOtes|\zq{lnq}\ql s\enotes
+\temps\notes\lchthree|\doct kj\enotes
+%
+ %\check
+% mesure 4
+\def\lchfour{\zq{be}\ql g}%
+\def\Lchfour{\zh{be}\hl g}%
+\xbarre\NOtes\octs G|\zw{inp}\qsk\zql m\enotes
+\temps\NOtes\Lchfour|\ql l\enotes
+\temps\NOtes|\ql k\enotes
+\temps\NOtes\lchfour|\Fl k\ql k\enotes
+%
+ %\check
+% mesure 5
+%
+\def\lchfive{\lq e\zq c\ql f}%
+\def\Lchfive{\lh e\zh c\hl f}%
+\def\uchfive{\lq m\zq{hl}\ql o}%
+\barre\autolines 854\relax
+\NOtes\octs F|\soupir\enotes
+\temps\NOtes\lFl c\Lchfive|\uchfive\enotes
+\temps\NOtes|\uchfive\enotes
+\temps\notes\lchfive|\lq m\zq l\doct hh\enotes
+%
+ %\check
+% mesure 6
+%
+\def\lchsix{\lq c\zq{Nb}\ql e}%
+\def\Lchsix{\lNa c\lh c\zh{Nb}\hl e}%
+\xbarre\NOtes\octs B|\itenl1g\itenu2n\zw{gn}\qsk\ql m\enotes
+\temps\NOtes\Lchsix|\ql l\enotes
+\temps\NOtes|\ql j\enotes
+\temps\NOtes\lchsix|\ql i\enotes
+%
+ %\check
+% mesure 7
+\def\lchseven{\zq{Ma}\ql c}%
+\def\Lchseven{\Fl c\zh{Mac}\hl e}%
+\xbarre\NOtes\octs B|\tten1\tten2\zq g\qu n\enotes
+\temps\notes\bigaccid\Lchseven|\doctu fg\enotes
+\temps\NOtes|\Fl j\zh h\zhl j\kern 1pt\zq f\zqu m\enotes
+\temps\Notes\lchseven|\doctu ef\enotes
+%
+ %\check
+% mesure 8
+\xbarre\NOTes\itenl1E\itenu2L\zw E\zw L\raise 3\Interligne\hpause
+ |\Na j\rh j\zh{egi}\hu l\enotes
+\temps\NOTes\Fl c\Lchthree|\lh m\zh{il}\hl p\enotes
+%
+ %\check
+% mesure 9
+\xbarre\notes\qsk\enotes
+\NOTEs\llap{\lNa c\kern 1pt}\tten1\tten2\zw{EL}\lw c\zw{be}\wh g\relax
+ |\lw p\zw{lnq}\wh s\enotes
+\setdoublebar\suspmorceau
+%
+ %\check
+% mesure 10
+\def\nbinstruments{2}\generalmeter{}\savemeters
+ %\computewidths
+ %\advance\linesinpage by 1
+ \lreprmorceau
+\llap{\leftrepeatsymbol}%
+\def\txt#1|#2&{\hsong{\vbox to 0pt{\Smalltype\baselineskip 10pt
+\vss\hrule width \noteskip height 0pt
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #2\kern\internote}\smallskip
+\hbox{\vrule height 6pt depth 2pt width 0pt\kern -\internote
+ #1\kern\internote}}}}%
+\znotes\zmidtwotext{\kern -3mm\ppff p}&\enotes
+%
+\def\arpg#1#2{\vnotes 0.2\elemskip\larpeggio{#1}{#2}\enotes}%
+\def\uarpg#1#2{\vnotes 0.2\elemskip|\larpeggio{#1}{#2}\enotes}%
+%
+\vnotes 0.2\elemskip\rlap{\larpeggio E6}\larpeggio c6\enotes
+\notes\zw{EILNb}|\wh g&\ds\enotes
+\temps\notes&\txt Se |De &\cu g\enotes
+\temps\notes&\txt sou-|la &\cu g\enotes
+\temps\notes&\txt ve-|mer-&\cu g\enotes
+\temps\notes&\txt nir |veil-&\cu i\enotes
+\temps\notes&\txt c'est |leuse &\cu i\enotes
+\temps\notes&\txt croire |a-&\cu j\enotes
+\temps\notes&\txt en |ven-&\cu j\enotes
+ %\check
+% mesure 11
+\xbarre\vnotes 0.2\elemskip\larpeggio G5|\larpeggio d4\enotes
+\NOtes\zh{GK}\hu b|\zh{dgi}\hu k&\txt co-|tu-&\hl k\enotes
+\temps\vnotes 0.2\elemskip\larpeggio M8|\larpeggio i4\enotes
+\NOtes\zh{Nd}|\zhl g\zh{knp}\hu r&\txt re |re &\hl k\enotes
+%
+ %\check
+% mesure 12
+\xbarre
+\vnotes 0.2\elemskip\rlap{\larpeggio D8}\larpeggio b4\enotes
+\notes\zw{EILNb}|\zw g\qsk\hl f&\ds\enotes
+\temps\notes&\txt Que |Qui &\cu g\enotes
+\temps\notes&\txt tout |un &\cu g\enotes
+\temps\notes&\txt vient |jour &\cu g\enotes
+\temps\notes|\hl e&\txt de |a &\cu i\enotes
+\temps\notes&\txt re-|pu &\cu i\enotes
+\temps\notes&\txt com-|nous &\cu j\enotes
+\temps\notes&\txt men-|u-&\cu j\enotes
+ %\check
+% mesure 13
+\xbarre\vnotes 0.12\elemskip\larpeggio E6\qsk|\larpeggio c4\enotes
+\NOtes\zw{GKb}|\Sh h\zw{dik}\qsk\zhl h\sk&\txt cer |nir &\wh k\enotes
+\temps\NOtes|\hl g\enotes
+%
+ %\check
+% mesure 14
+\alaligne
+\notes\zh{JN}\hl c|\zh{eg}\hu l&\ds\enotes
+\temps\notes&\txt\kern -\Interligne C'est |Je &\cl l\enotes
+\temps\notes&\txt re-|gar- &\cl k\enotes
+\temps\notes&\txt voir-|de &\cu j\enotes
+\temps\notes\bigaccid\zh H\zh L\Na a\hl a|\zh{cj}\zhu e\qsk\zql i&\txt
+ l'\^e-|mal-&\cu i\enotes
+\temps\notes&\txt tre |gr\'e &\cu i\enotes
+\temps\notes|\bigaccid\Na h\ql h&\txt qu'on |mes &\cu j\enotes
+\temps\notes&\txt a- |bles-&\cu j\enotes
+ %\check
+% mesure 15
+\xbarre\NOTes\zh{F}\zhl J\zh{ac}|\zh{e}\hu g&\txt do-|su-&\hu g\enotes
+\temps\NOTes\zh{M}\hl c|\zh{hjl}\hl n&\txt re |res &\hu g\enotes
+%
+ %\check
+% mesure 16
+\xbarre
+\notes\bigaccid\Sh a\zw{FLac}|\zw e\wh g&\ds\enotes
+\temps\notes&\txt Et |L'in-&\cu g\enotes
+\temps\notes&\txt re-|ef-&\cu g\enotes
+\temps\notes&\txt trou-|fa-&\cu g\enotes
+\temps\notes&\txt ver |\c ca-&\cu f\enotes
+\temps\notes&\txt tout |ble &\cu f\enotes
+\temps\notes&\txt le |sou-&\cu g\enotes
+\temps\notes&\txt pas-|ve-&\cu g\enotes
+ %\check
+% mesure 17
+\xbarre\NOtes\Na a\zw{Ia}|\zh{g}\zhu i\qlp d&\txt s\'e... |nir... &\wh i\enotes
+\temps\notes|\Ibbl0ef2\qb0e\Sh e\qb0e\tqb0f\enotes
+\NOTes|\Sh f\Sh m\zhl f\zh{ikm}\hu p\enotes
+%
+ %\check
+% mesure 18
+\setdoublebar\alaligne
+%
+\autolines {10}44\relax
+\znotes\zmidtwotext{\kern -3mm\ppff p}&\uptext{\rm REFRAIN}\soupir\enotes
+\temps\NOtes\octs E|\soupir\enotes
+\temps\NOtes\Lchone|\rchone&\hsong{Un }\ql l\enotes
+\temps\NOtes|\rchone&\hsong{sou- }\ql l\enotes
+\temps\NOtes\lchone|\rchone&\hsong{ve- }\ql l\enotes
+ %\check
+% mesure 19
+\barre\NOtes\octs G|\itenl1k\itenl2n\itenu3p\itenu4r\zw{knpr}&\hsong{nir }\wh k\enotes
+\temps\NOtes\Lchtwo\enotes
+\temps\NOtes\sk\enotes
+\temps\NOtes\lchtwo\enotes
+ %\check
+% mesure 20
+%
+\xbarre\NOtes\octs H|\tten1\tten2\tten3\tten4\zq{knp}\ql r&\soupir\enotes
+\temps\Notes\Lchthree|\doct jk&\hsong{\kern -2\Interligne C'est l'i-}\cl j\cl k\enotes
+\temps\NOtes|\zq{lnq}\ql s&\hsong{ma- }\ql l\enotes
+\temps\Notes\lchthree|\doct kj&\hsong{ge d'un }\cl k\cl j\enotes
+%
+ %\check
+% mesure 21
+\xbarre\NOtes\octs G|\zh{inl}\hl p&\hsong{r\^e- }\hl i\enotes
+\temps\NOtes\Lchfour|\enotes
+\temps\NOtes|\zh{inl}\hl p&\hsong{be }\hl i\enotes
+\temps\NOtes\lchfour|\enotes
+%
+ %\check
+% mesure 22
+%
+\def\lchttwo{\zq a\zq c\ql e}%
+\def\Lchttwo{\zh a\zh c\hl e}%
+\def\uchttwo{\zq{hjl}\ql o}%
+\barre\NOtes\octs F|\soupir&\soupir\enotes
+\temps\NOtes\Lchttwo|\uchttwo&\hsong{\kern -\internote D'une }\qu h\enotes
+\temps\NOtes|\uchttwo&\hsong{\kern -\internote heu- }\qu h\enotes
+\temps\Notes\lchttwo|\zq j\zq l\doct hh&\hsong{\kern -\internote re trop }\cu h\cu h\enotes
+%
+ %\check
+% mesure 23
+%
+\def\Lchtthree{\lh c\zh{Nb}\hl e}%
+\def\lchtthree{\lq c\zq{Nb}\ql e}%
+\barre\NOtes\octs B|\zh{gjl}\hl n&\hsong{br\`e-}\hu g\enotes
+\temps\NOtes\Lchtthree|\enotes
+\temps\NOtes|\itenl1g\itenl2j\itenu3l\itenu4n\zh{gjl}\hl n&\hsong{be }\hu g\enotes
+\temps\NOtes\lchsix|\enotes
+%
+ %\check
+% mesure 24
+\def\Lchtfour{\zh{Mac}\hl e}%
+\barre\NOtes\octs B|\tten1\tten2\tten3\tten4\zq{gjl}\qu n&\soupir\enotes
+\temps\Notes\Lchtfour|\doctu fg&\hsong{Qui ne }\cu f\cu g\enotes
+\temps\NOtes|\zq f\qu m&\hsong{beut }\qu f\enotes
+\temps\Notes\lchseven|\doctu ef&\hsong{pas fi-}\cu e\cu f\enotes
+%
+ %\check
+% mesure 25
+\barre\NOtes\octs E|\zh{gil}\hu n&\hsong{nir }\hu g\enotes
+\temps\NOtes\lchtthree\enotes
+\temps\NOtes\soupir|\Sh m\zh{ikm}\hu p&\hsong{--}\hu i\enotes
+\temps\NOtes\qu I\enotes
+%
+ %\check
+% mesure 26
+\barre\temps\NOtes\octs E|\soupir&\soupir\enotes
+\temps\NOtes\Lchone|\rchone&\hsong{Un }\ql l\enotes
+\temps\NOtes|\rchone&\hsong{sou-}\ql l\enotes
+\temps\NOtes\lchone|\rchone&\hsong{ve-}\ql l\enotes
+%
+ %\check
+% mesure 27
+\barre\NOtes\octs G|\itenl1k\itenu3p\itenu4r\Sh o\zw{kpr}\qsk\zql o&\hsong{nir }\wh k\enotes
+\temps\NOtes\Lchtwo|\ql n\enotes
+\temps\NOtes\sk|\Sh m\ql m\enotes
+\temps\NOtes\lchtwo|\ql n\enotes
+ %\check
+% mesure 28
+%
+\barre\NOtes\octs H|\tten1\tten3\tten4\zq{kp}\ql r&\soupir\enotes
+\temps\Notes\Lchthree|\doct jk&\hsong{\kern -2\Interligne C'est tou-}\cl {jk}\enotes
+\temps\NOtes|\zq{lnq}\ql s&\hsong{te }\ql l\enotes
+\temps\Notes\lchthree|\doct kj&\hsong{la ten-}\cl{kj}\enotes
+%
+ %\check
+% mesure 29
+\barre\NOtes\octs G|\zh{in}\zhl p\qsk\zqu m&\hsong{dres-}\hu i\enotes
+\temps\NOtes\Lchfour|\qu l\enotes
+\temps\NOtes\sk|\zh{in}\zhl p\qsk\zqu k&\hsong{se }\hu i\enotes
+\temps\NOtes\lchfour|\Fl k\qu k\enotes
+%
+ %\check
+% mesure 30
+%
+\barre\NOtes\octs F|\soupir&\soupir\enotes
+\temps\NOtes\lFl c\Lchfive|\uchfive&\hsong{Des }\qu h\enotes
+\temps\NOtes|\uchfive&\hsong{beaux }\qu h\enotes
+\temps\Notes\lchfive|\lq m\zq l\doct hh&\hsong{jours d'i-}\cu{hh}\enotes
+%
+ %\check
+% mesure 31
+%
+\barre\NOtes\octs B|\zh{g}\zhl n\qsk\qu m&\hsong{bres-}\hu g\enotes
+\temps\NOtes\Lchsix|\qu l\enotes
+\temps\NOtes|\itenl1g\itenu2n\zh{g}\zhl n\qsk\qu j&\hsong{se }\hu g\enotes
+\temps\NOtes\lchsix|\qu i\enotes
+%
+ %\check
+% mesure 32
+\barre\NOtes\octs B|\tten1\tten2\zq g\qu n&\soupir\enotes
+\temps\Notes\Lchseven|\doctu fg&\hsong{Que l'on }\cu f\cu g\enotes
+\temps\NOtes|\Fl j\zh h\zhl j\kern 1pt\zq f\zqu m&\txt voit |croit&\qu f\enotes
+\temps\Notes\lchseven|\doctu ef&\txt re-ve-|re-te-&\cu e\cu f\enotes
+%
+ %\check
+% mesure 33
+\barre\NOtes\octs E|\Na j\rh j\zh{egi}\hu l&\txt nir|nir&\wh e\enotes
+\temps\NOtes\qu N\enotes
+\temps\NOtes\qu a\enotes
+\temps\NOtes\Sh a\qu a\enotes
+%
+ %\check
+% mesure 34
+\barre\notes\zh G\zhl K|\zh b\hu d&\ds\enotes
+\temps\notes&\hsong{Un }\Ibu0eh2\qh0d\enotes
+\notes&\hsong{soir }\qh0g\enotes
+\notes&\hsong{tu }\bigaccid\Sh h\tqh0h\enotes
+\temps\notes\zh I\hu N|\zh k\hl g&\hsong{as }\ibu0j0\qh0i\enotes
+\notes&\hsong{pu }\qh0k\enotes
+\notes&\hsong{te }\qh0j\enotes
+\notes&\hsong{re-}\tqh0i\enotes
+ %\check
+% mesure 35
+\barre\NOTes\Sh H\zw H\wh N|\zw e\zw g\hu k&\hsong{pren-}\hl k\enotes
+\temps\NOTes|\hu j&\hsong{dre }\hl j\enotes
+ %\check
+% mesure 36
+\barre\notes\zw K\bigaccid\Sh a\wh a|\bigaccid\Sh f\zw f\wh j&\ds\enotes
+\temps\notes&\hsong{\kern -\internote Tout }\ibu0j0\qh0j\enotes
+\notes&\hsong{bri-}\qh0j\enotes
+\notes&\hsong{ser, }\tqh0j\enotes
+\notes&\hsong{tout }\Ibu0kh4\qh0k\enotes
+\notes&\hsong{a-}\qh0k\enotes
+\notes&\hsong{n\'e-}\bigaccid\Sh h\qh0h\enotes
+\notes&\hsong{an-}\tqh0h\enotes
+ %\check
+% mesure 37
+\barre\notes\Ibu0Ga3\qh0{GKN}\Sh a\tqh0a|\zw{g}\wh i&\hsong{tir }\wh i\enotes
+\temps\notes|\Ibu0cf3\qh0{bdg}\Sh f\tqh0f\enotes
+ %\check
+% mesure 38
+\barre\notes\zh I\hu M|\zh d\bigaccid\Na f\hu f&\ds\enotes
+\temps\notes&\hsong{\kern -3\internote Mais }\Ibu0gj3\qh0f\enotes
+\notes&\hsong{pour }\qh0i\enotes
+\notes&\hsong{moi }\tqh0j\enotes
+\temps\notes\zh K\hl b|\zh f\hl i&\hsong{qui }\Ibu0ki3\qh0k\enotes
+\notes&\hsong{ne }\qh0k\enotes
+\notes&\hsong{sais }\qh0j\enotes
+\notes&\hsong{com-}\tqh0i\enotes
+ %\check
+% mesure 39
+\barre\NOTes\zw J\wh b|\bigaccid\Fl g\zw e\wh g&\hsong{pren-}\hu k\enotes
+\temps\NOTes&\hsong{dre }\hu j\enotes
+ %\check
+% mesure 40
+\barre\NOtes\zmidtwotext{\it rit.}\zw F\wh M|\zw e\zw j\qsk\zhl i&\soupir\enotes
+\temps\NOtes&\hsong{\kern -\internote Qu'on }\ql j\enotes
+\temps\NOtes|\Sh h\hl h&\hsong{peut }\ql k\enotes
+\temps\NOtes&\hsong{men-}\ql l\enotes
+ %\check
+% mesure 41
+\barre\NOtes\zw I\qu b|\bigaccid\Na h\zw{hm}\qsk\qu k&\hsong{tir }\wh m\enotes
+\temps\NOtes\qu c|\qu j\enotes
+\temps\NOtes\Sh c\qu c|\Sh i\qu i\enotes
+\temps\NOtes\qu d|\Na i\qu i\enotes
+ %\check
+% mesure 42
+\barre\temps\NOtes\zmidtwotext{\it a tempo}\octs E|\soupir&\soupir\enotes
+\temps\NOtes\Lchone|\rchone&\hsong{Un }\ql l\enotes
+\temps\NOtes|\rchone&\hsong{sou-}\ql l\enotes
+\temps\NOtes\lchone|\rchone&\hsong{ve-}\ql l\enotes
+ %\check
+% mesure 43
+\barre\NOtes\octs G|\itenl1k\itenu3p\itenu4r\Sh o\zw{kpr}\qsk\zql o&\hsong{nir }\wh k\enotes
+\temps\NOtes\Lchtwo|\ql n\enotes
+\temps\NOtes\sk|\Sh m\ql m\enotes
+\temps\NOtes\lchtwo|\ql n\enotes
+ %\check
+% mesure 44
+%
+\barre\NOtes\octs H|\tten1\tten3\tten4\zq{kp}\ql r&\soupir\enotes
+\temps\Notes\Lchthree|\doct jk&\hsong{\kern -2\Interligne C'est l'i-}\cl {jk}\enotes
+\temps\NOtes|\zq{lnq}\ql s&\hsong{ma-}\ql l\enotes
+\temps\Notes\lchthree|\doct kj&\hsong{ge d'un}\cl{kj}\enotes
+%
+ %\check
+% mesure 45
+\barre\NOtes\octs G|\zh{in}\zhl p\qsk\zqu m&\hsong{r\^e-}\hu i\enotes
+\temps\NOtes\Lchfour|\qu l\enotes
+\temps\NOtes\sk|\zh{in}\zhl p\qsk\zqu k&\hsong{be }\hu i\enotes
+\temps\NOtes\lchfour|\Fl k\qu k\enotes
+%
+ %\check
+% mesure 46
+%
+\barre\autolines {9}54\relax
+\NOtes\octs F|\soupir&\soupir\enotes
+\temps\NOtes\lFl c\Lchfive|\uchfive&\hsong{\kern -\internote D'une }\qu h\enotes
+\temps\NOtes|\uchfive&\hsong{\kern -\internote heu-}\qu h\enotes
+\temps\Notes\lchfive|\lq m\zq l\doct hh&\hsong{\kern -\internote re trop}\cu{hh}\enotes
+%
+ %\check
+% mesure 47
+%
+\xbarre\NOtes\octs B|\zh{g}\zhl n\qsk\qu m&\hsong{br\`e-}\hu g\enotes
+\temps\NOtes\Lchsix|\qu l\enotes
+\temps\NOtes|\itenl1g\itenu2n\zh{g}\zhl n\qsk\qu j&\hsong{be }\hu g\enotes
+\temps\NOtes\lchsix|\qu i\enotes
+%
+ %\check
+% mesure 48
+\xbarre\NOtes\octs B|\tten1\tten2\zq g\qu n&\soupir\enotes
+\temps\Notes\Lchseven|\doctu fg&\hsong{\kern -\internote Qui ne }\cu f\cu g\enotes
+\temps\NOtes|\Fl j\zh h\zhl j\kern 1pt\zq f\zqu m&\hsong{\kern -\internote veut }\qu f\enotes
+\temps\Notes\lchseven|\doctu ef&\hsong{\kern -\internote pas fi-}\cu e\cu f\enotes
+%
+ %\check
+% mesure 49
+\xbarre\NOTes\itenl1E\itenl2L\octs E\relax
+|\Na j\rh j\zh{egi}\hu l&\hsong{nir...}\wh e\enotes
+\temps\NOTes
+ \ifnum\transpose<-2\relax
+ \Fl c\qsk\lh e\zh c\zh f\hl h\else \sk\fi
+|\ifnum\transpose<-2\else
+ \rlap{\Fl c\qsk\lh e\zh c\zh f\zhl h}\fi
+ \zh{il}\rh m\hu p\relax
+\enotes
+ %\check
+% mesure 50
+\xbarre\NOTes\Na c\qsk\tten1\tten2\zh E\zhl L\rh c\zh b\zh e\hu g|\qsk
+\lh q\zh l\zh n\zh p\hl s\enotes
+\temps\NOtes\qu E|\hpause&\pause\enotes
+\temps\NOtes\soupir\enotes
+\setrightrepeat\finpartition
+\medskip\rightline{\it le \aujourdhui}
+\eject
+ 
+ 
+ 
+ 

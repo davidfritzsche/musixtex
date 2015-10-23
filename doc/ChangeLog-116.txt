@@ -1,0 +1,35 @@
+Changes from MusiXTeX 115 to 116:
+
+ (2015-04-21) RDT corrected the definitions of \nnotes and \nnnotes
+
+ HM corrected the definitions for cautionary small accidentals
+
+ RDT added \check@staff ... \fi to \@qa h, \@mca, \hs, \qqs 
+ so that \qa, \ca, \ha, etc. can be "hidden" using \setstaffs{n}{0}
+
+ RDT incorporated tuplet.tex (approved by George Sicherman)
+ and introduced \txtfont to allow changing size or style
+
+ RDT introduced 
+ \qqsk, a one-quarter notehead skip
+ \tqu and \tql, synonyms for \tqh and \tqb
+ \ztqu and \ztql, synonyms for \ztqh and \ztqb
+ \hpp, \qpp, \dsp, \qsp, \hsp, \qqsp for pointed rests
+ \nnotes, \nnnotes: abbreviations with \multnoteskip\smallvalue 
+    and \multnoteskip\tinyvalue spacing
+
+ RDT incorporated curly.tex (approved by Mthimkhulu Molekwa)
+
+ RDT modernized the treatment of text fonts
+ meterfonts must be bf, even if titling fonts are rm or sc
+ added dynamic-mark  macros \sfz \sfzp
+
+ Added to the extension library: musixppff.tex (HM), musixadf (HM),
+ musixplt (RDT), musixec (RDT), musixhv (RDT)
+
+ RDT extended musixtmr
+
+ Stanislav Kneifl fixed a bug in musixps.
+
+
+

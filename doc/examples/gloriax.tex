@@ -1,0 +1,283 @@
+\input musixtex
+\input musixcpt
+\input musixsty
+\sepbarrules
+\def\tempz{\temps}%
+%
+\vsize=28.2cm
+\hsize=18.5cm
+\parindent 15mm
+%
+\vbox{%
+\centerline{\enorme Gloria}
+\medskip
+\rightline{\cmbx M\'elodie~: Guy BOUSSION}
+}%
+\tracingstats=1\relax
+%
+\bigskip
+\def\nbinstruments{2}
+\global\nbporteesi=0
+%
+\signaturegenerale{-1}\relax % un bemol a la clef
+\generalmeter{\meterfrac{2}{2}}
+%\check
+%\check
+
+%
+\def\eightpoint{\Tenpoint}%
+%
+%\check
+\catcode`\@=11
+\newdimen\lyricskip
+\def\varskip#1{%
+  \setbox\ch@box\hbox{#1}\global\lyricskip\wd\ch@box}
+\catcode`\@=12  
+
+\normal\elemskip=15pt
+\def\gluemaxskip{6pt}%
+\staffbotmarg=1.5\Interligne\stafftopmarg=1.5\Interligne
+\debutmorceau
+%
+\def\respire{\notes&\cbreath\enotes}%
+\temps\znotes&\uptext{\kern -9mm\raise 9pt\hbox{\moyen
+  Majestueux, sans tra\^\i ner \rm(\metron{\hu}{50})}}\enotes
+%
+\def\Varnotes#1&#2\enotes{\vnotes0.05\elemskip &\enotes
+%                          \varskip{#1}\vnotes0.05\elemskip\rlap{#1}&\rlap{#2}\enotes
+                          \varskip{#1}\znotes\rlap{#1}&\rlap{#2}\enotes
+                          \hardspace{\lyricskip}%
+                          \vnotes0.05\elemskip &\enotes
+}%  
+%
+\def\VarNotes#1&#2\enotes{\vnotes0.05\elemskip &\enotes
+                          \varskip{#1}\vnotes1\elemskip\rlap{#1}&\rlap{#2}\enotes
+                          \hardspace{\lyricskip}%
+                          \vnotes0.05\elemskip &\enotes
+}%  
+%
+\def\VarNOtes#1&#2\enotes{\vnotes0.05\elemskip &\enotes
+                          \varskip{#1}\vnotes2\elemskip\rlap{#1}&\rlap{#2}\enotes
+                          \hardspace{\lyricskip}%
+                          \vnotes0.05\elemskip &\enotes
+}%  
+\temps\Varnotes \kern-5pt Gloire &\cu c\enotes
+\temps\Varnotes \`a &\cu c\enotes
+\barre\NOTes Dieu~&\hu f\enotes
+\tempz\Varnotes au&\cu f\enotes
+\temps\Varnotes plus~&\cu f\enotes
+\temps\Varnotes haut~&\cu g\enotes
+\temps\Varnotes des &\cu g\enotes
+\barre\VarNOtes cieux~&\qup h\enotes
+\temps\Varnotes et~&\cu h\enotes
+\tempz\VarNotes paix~&\qu i\enotes
+\temps\Varnotes sur~&\cu h\enotes
+\temps\Varnotes la~&\cu g\enotes
+\barre\VarNotes ter-&\qu f\enotes
+\temps\Varnotes re~&\cu f\enotes
+\temps\Varnotes aux~&\cu f\enotes
+\tempz\VarNotes hom~-&\qu g\enotes
+\temps\Varnotes mes~&\cu h\enotes
+\temps\Varnotes qu'il~&\cu i\enotes
+\alaligne\VarNotes ai-&\hu g\enotes
+\temps\VarNotes &\enotes
+\tempz\VarNotes me.&\hu f\enotes
+%\check
+\temps\respire\VarNotes&\uptext{\bf II }\enotes
+\barre\VarNotes Nous~&\qu h\enotes
+\temps\Varnotes Te~&\cu g\enotes
+\temps\Varnotes lou-&\cu g\enotes
+\tempz\VarNOtes ons,&\hu h\enotes
+%\check
+\barre\Varnotes nous~&\cu h\enotes
+\temps\Varnotes Te~&\cu h\enotes
+\temps\Varnotes b\'e-&\cu j\enotes
+\temps\Varnotes nis-&\cu j\enotes
+%\check
+\tempz\NOTes sons,&\hu h\enotes
+\barre\VarNotes nous~&\qu h\enotes
+%\check
+\temps\VarNotes t'a-&\hu g\enotes
+\tempz\VarNotes&\enotes
+\temps\VarNotes do-&\qu f\enotes
+\alaligne\VarNOtes rons,~&\hu f\enotes
+%\check
+\temps\respire\Varnotes&\uptext{\bf I}\enotes
+\tempz\Varnotes nous~&\cu h\enotes
+\temps\Varnotes Te~&\cu h\enotes
+%\check
+\temps\Varnotes glo-&\cu g\enotes
+\temps\Varnotes ri-&\cu g\enotes
+\barre\NOTEs fions,~&\hu h\enotes
+%\chec
+\tempz\Varnotes \kern -4pt nous~&\cu h\enotes
+\temps\Varnotes Te~&\cu h\enotes
+\temps\Varnotes ren-&\cu h\enotes
+\temps\Varnotes dons~&\cu i\enotes
+\barre\VarNOtes gr\^a~-&\qu g\enotes
+\temps\Varnotes ces&\cu g\enotes
+\temps\Varnotes pour&\cu g\enotes
+\tempz\Varnotes Ton~&\cu h\enotes
+\temps\Varnotes im-&\cu i\enotes
+\temps\Varnotes men&\cu j\enotes
+\temps\Varnotes se~&\cu k\enotes
+%\check
+\alaligne\VarNotes gloi-&\ql j\enotes
+\temps\VarNotes -&\ql i\enotes
+\temps\VarNotes re~!&\qu h\enotes
+\temps\respire\Varnotes&\uptext{\bf II}\enotes
+\temps\Varnotes Sei-&\cu h\enotes
+\temps\Varnotes gneur~&\cu i\enotes
+\barre\VarNotes Dieu,~&\qu j\enotes
+%\check
+\temps\Varnotes Roi~&\cu h\enotes
+\temps\Varnotes du~&\cu g\enotes
+\tempz\VarNotes Ciel,~&\qu h\enotes
+%\check
+\temps\Varnotes Dieu~&\cu h\enotes
+\temps\Varnotes le~&\cu g\enotes
+%\check
+\barre\Varnotes P\`e-~&\cu h\enotes
+\temps\Varnotes re~&\cu i\enotes
+\temps\Varnotes tout-&\cu g\enotes
+\temps\Varnotes puis-&\cu h\enotes
+\tempz\VarNOtes sant~!&\qup h\enotes
+\temps\respire\Varnotes&\uptext{\bf I}\enotes
+\temps\Varnotes Sei-&\cu h\enotes
+%\check
+\barre\VarNotes gneur,~&\qu h\enotes
+\temps\Varnotes Fils~&\cu g\enotes
+\temps\Varnotes u-&\cu g\enotes
+\tempz\Varnotes ni-&\cu f\enotes
+\temps\Varnotes que-&\cu f\enotes
+\temps\Varnotes J\'e-&\cu g\enotes
+\temps\Varnotes sus~&\cu g\enotes
+%\check
+\barre\VarNOtes Christ,&\hu h\enotes
+\temps\respire
+\tempz\VarNotes Sei-&\qu h\enotes
+\temps\VarNotes gneur&\qu g\enotes
+%\check
+\barre\VarNOtes Dieu,&\hu h\enotes
+\tempz\notes &\ds\enotes
+\temps\Varnotes a-&\cu h\enotes
+\temps\Varnotes \kern -4pt gneau~&\cu h\enotes
+\temps\Varnotes de~&\cu i\enotes
+\alaligne
+\temps\VarNOtes Dieu,&\qup g\enotes
+\temps\Varnotes le~&\cu f\enotes
+\tempz\VarNotes Fils~&\qu g\enotes
+\temps\VarNotes du~&\qu g\enotes
+\barre\NOTes P\`e-&\hu h\enotes
+\tempz\VarNotes re~&\qu h\enotes
+\temps\Notes &\rlap{\uptext{\bf II }}\soupir\enotes
+\barre\VarNotes Toi~&\qu f\enotes
+\temps\Varnotes qui~&\cu g\enotes
+\temps\Varnotes en-&\cu g\enotes
+\tempz\Varnotes l\`e-&\cu h\enotes
+\temps\Varnotes ves~&\cu h\enotes
+\temps\Varnotes le~&\cl i\enotes
+\temps\Varnotes p\'e-&\cl i\enotes
+\barre\Varnotes ch\'e~&\cu h\enotes
+\temps\Varnotes du~&\cu g\enotes
+\temps\VarNotes mon-&\qu h\enotes
+\tempz\VarNOtes de,&\qu g\enotes
+\temps\Notes &\soupir\enotes
+\alaligne\VarNOtes prends~&\qup f\enotes
+\temps\Varnotes pi-&\cu g\enotes
+\tempz\VarNOtes ti\'e~&\qup g\enotes
+\temps\Varnotes de~&\cu f\enotes
+\barre\NOTes nous~!&\hup f\uptext{\bf I}\enotes
+\temps\Notes &\soupir\enotes
+%\check
+\barre\VarNotes Toi~&\qu f\enotes
+\temps\Varnotes qui~&\cu g\enotes
+\temps\Varnotes en-&\cu g\enotes
+\tempz\Varnotes l\`e-&\cu h\enotes
+\temps\Varnotes ves~&\cu h\enotes
+\temps\Varnotes le~&\cl i\enotes
+\temps\Varnotes p\'e-&\cl i\enotes
+\barre\Varnotes ch\'e~&\cu h\enotes
+\temps\Varnotes du~&\cu g\enotes
+\temps\VarNotes mon-&\qu h\enotes
+\tempz\VarNOtes de,&\qu g\enotes
+\temps\notes &\ds\enotes
+\temps\Varnotes en-&\cu h\enotes
+\barre\Varnotes tends~&\cu f\enotes
+\temps\Varnotes no-&\cu f\enotes
+\temps\Varnotes tre~&\cu g\enotes
+\temps\Varnotes pri-&\cu g\enotes
+\tempz\VarNotes \`e-&\qu h\enotes
+\temps\VarNotes re~!&\qu g\enotes
+\temps\respire\Varnotes&\uptext{\bf II}\enotes
+\barre\NOTEs Toi~&\hu j\enotes
+\tempz\VarNotes qui~&\qu j\enotes
+\tempz\Varnotes es~&\cu k\enotes
+\tempz\Varnotes as-&\cu k\enotes
+\barre\VarNotes sis~&\ql j\enotes
+\temps\Varnotes  \`a~&\cl i\enotes
+\temps\Varnotes la~&\cl h\enotes
+\tempz\VarNotes droi-&\qu g\enotes
+\tempz\Varnotes te~&\cu f\enotes
+\temps\Varnotes du~&\cu g\enotes
+\alaligne\NOTes P\`e-&\hu h\enotes
+\tempz\VarNotes re~&\qu g\enotes
+\temps\Notes &\soupir\enotes
+%\check
+%\check
+\barre\VarNOtes prends~&\qup h\enotes
+\temps\Varnotes pi-&\cu h\enotes
+\tempz\VarNOtes ti\'e~&\qup g\enotes
+\temps\Varnotes de~&\cu h\enotes
+%\check
+\barre\NOTes nous~!&\hu h\uptext{\bf I }\enotes
+\tempz\notes&\rlap{\uptext{\raise 8pt\hbox{\moyen plus anim\'e\kern 5pt}}}\soupir\enotes
+\temps\Varnotes Car~&\cu c\enotes
+\temps\Varnotes Toi~&\cu c\enotes
+%\check
+\barre\VarNotes seul~&\qu f\enotes
+\temps\VarNotes es~&\qu g\enotes
+\tempz\VarNotes saint~!&\qup h\enotes
+\temps\notes \sk&\qsoupir\enotes
+\temps\Varnotes Toi~&\ccu h\enotes
+\alaligne\VarNotes seul~&\qu h\enotes
+\temps\Varnotes es~&\cup g\enotes
+\temps\Varnotes Sei-&\ccu h\enotes
+\tempz\VarNOtes gneur~!&\qup h\enotes
+\temps\respire\Varnotes&\uptext{\bf II }\enotes
+\temps\Varnotes Toi~&\cu h\enotes
+%\check
+\barre\Varnotes seul~&\cu h\enotes
+\temps\Varnotes es~&\cu g\enotes
+\temps\Varnotes le~&\cu h\enotes
+\temps\Varnotes Tr\`es-&\cu i\enotes
+\tempz\VarNotes haut,&\ql j\enotes
+\temps\Varnotes J\'e-&\cl j\enotes
+\temps\Varnotes sus-&\cl i\enotes
+%\check
+\barre\VarNOtes Christ,&\qlp j\enotes
+\temps\Varnotes a-&\cu h\enotes
+\tempz\Varnotes vec~&\cu f\enotes
+\temps\Varnotes le~&\cu f\enotes
+\temps\Varnotes \kern -4pt Saint-&\cu g\enotes
+\temps\Varnotes Es-&\cu g\enotes
+%\check
+\barre\VarNOtes prit~!&\hu h\enotes
+\tempz\Varnotes&\uptext{\bf I}\enotes
+\temps\VarNotes dans~&\qu f\enotes
+\temps\Varnotes la~&\qu g\enotes
+\barre\VarNotes gloi-&\qu h\enotes
+\temps\Varnotes re~&\cu h\enotes
+\temps\Varnotes de~&\cu g\enotes
+\tempz\VarNotes Dieu~&\qu h\enotes
+\temps\VarNotes le~&\qu i\enotes
+\barre\VarNotes P\`e-&\hu g\enotes
+\tempz\VarNOtes re.&\hu f\enotes
+\temps\respire
+\barre\VarNotes A - - - - - &\wh g\enotes
+\barre\VarNOtes men~!&\hup h\enotes
+\tempz\notes &\soupir\enotes
+%\mulooseness -2\relax
+\finmorceau
+\medskip\rightline{\it le \aujourdhui\ \ \ \ }
+\bye

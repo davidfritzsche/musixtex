@@ -1,0 +1,98 @@
+<<< Changelog of MusiXTeX since T.113 >>>
+
+-------------------------------------------------------------------------
+Version T.114 [official release: 26 Dec 2009]
+(1) \cclp, \zccup, \zcclp are moved from musixpoi.tex to musixtex.tex.
+[14 June 2008, Hiroaki. T114-beta1]
+
+(2) musixpoi.tex does not work since T.111.
+[14 June 2008, Hiroaki. T114-beta1]
+
+(3) musixmad.tex is inessential for typesetting musixdoc.tex, thus excluded from musixdoc.sty (see the next item)
+[14 June 2008, Hiroaki. T114-beta1]
+
+(4) the stem length of \metron (at T.113 manual section 2.17.3: Metronomic indications) is too short when musixadd.tex/musixmad.tex is excluded.
+[14 June 2008, Hiroaki. T114-beta1]
+
+(5) spacing problem when you change the music size.  (\clef@skip\z@)
+[16 June 2008, known bug pointed out by Daniel Taupin on 3 June 2003 before his accident. T114-beta2]
+
+(6) in \ttie and \tleg definition, #1 isn't braced in the expansion which causes a problem at ID>9.
+  * \def\ttie#1{\let\T@i\@c \t@slur{-\p@ne}{#1}\@ne}
+  * \def\tleg#1{\let\T@i\@c \tslur{#1}\@ne}
+[1 Feb 2009, reported by David Allsopp. T114-beta4]
+
+(7) Create readme1st.txt
+[16 Oct 2009, Don Simons and Andre Van Ryckeghem. T114 official]
+
+(8) Create changelog.txt (this file)
+[16 Oct 2009, Hiroaki Morimoto. T114 official]
+
+(9) Updated musixdoc.pdf and its source code.
+[16 Oct 2009, Don Simons and Andre Van Ryckeghem. T114 official]
+
+(10) Included the repository of music-notation mistakes, contributed by Jean-Pierre Coulon.
+[16 Oct 2009, T114 official]
+
+(11) Create an install manual for MiKTeX on Win32: mxinsuse.{pdf|tex}.
+[16 Oct 2009, Andre Van Ryckeghem and Don Simons. T114 official]
+
+(12) Create install batchfiles for MiKTeX on Win32.
+[16 Oct 2009, Don Simons and Andre Van Ryckeghem. T114 official]
+
+(13) Create some MS-Win/DOS batch files for easy use: musixtex.bat, mudvi.bat, mudviall.bat, lapsview.bat, lapdfview.bat.
+[16 Oct 2009, Don Simons and Andre Van Ryckeghem. T114 official]
+
+(14) utility: add flip.exe, flip.txt to musixtexadd folder instead of former utod.exe and dtou.exe (they don't work in XP).  Run flip.exe on musixtex.bat.
+[16 Oct 2009, Don Simons and Andre Van Ryckeghem. T114 official]
+
+(15) Changing directory structure.  Add-in tex files are located in musixtexadd directory.  
+  * musixlyr (by Rainer Dunker)
+  * musixps (by Stanislav Kneifl)
+[16 Oct 2009, Don Simons and Andre Van Ryckeghem. T114 official]
+
+(16) Added some well-known add-ins to musixtexadd directory.
+  * curly.tex (by Mthimkhulu Molekwa,19 May 1999)
+  * musixdbr.tex (by Rainer Dunker, 23 February 2002)
+  * musixtmr.tex & musixesf.tex (by Hiroaki Morimoto, updated 2009-10-15)
+  * tuplet.tex. (by Col. G. L. Sicherman. 2003-05-17)... under GNU GPL
+[16 Oct 2009, Don Simons, Andre Van Ryckeghem. T114 official]
+
+-------------------------------------------------------------------------
+Version T.113 [19-Apr-2006]
+no funtional change from 30 July 2005; just a maintenance of archive file and recompiling musicdoc.
+
+-------------------------------------------------------------------------
+Version T.113 [28 June 2005, (rev.1)17 July 2005, (rev.2)30 July 2005]
+(1) Include the contents of following packages.
+  * PostScript Type1 fonts. (by Uchiyama)... under LPPL.
+  * musixlyr ver.2.1c. (by Rainer Dunker)... under GNU GPL v.2.
+  * musixps  ver.0.92a. (by Stanislav Kneifl)... under a unique license; see the file.
+Note that some of these package have different license than GNU GPL v.2.
+
+(2) \Ioctfin[up | down] do not work when \sepbarrules is assigned.  
+musixtex.tex line 2259, \def\rul@sep#1
+
+(3) Correction of a bug in the definition of choir bracket (l.1688-1698)
+
+(4) Added following macros.
+  * \lwp
+  * \rwp
+  * \lwpp
+  * \rwpp
+  * \lhp
+  * \rhp
+  * \lhpp
+  * \rhpp 
+
+(5) bug: \catcode`\@=11 at external level in case using musixmad.tex without prior specifying of musixadd.tex.  
+[30 July 2005, T113-rev.2]
+
+(6) bug: \immediate\write10{...} in many files are corrected into \immediate\write16{...}.
+[30 July 2005, T113-rev.2]
+
+-------------------------------------------------------------------------
+Version T.112 [dated on 3 Jan. 2003, published on 9 Jan. 2003]
+The final milestone by Daniel Taupin himself.
+
+-------------------------------------------------------------------------

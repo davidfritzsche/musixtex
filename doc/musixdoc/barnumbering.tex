@@ -1,0 +1,127 @@
+\chapter{Bar Numbering}
+The current bar number is stored in a count register call \keyindex{barno}.
+When \verb|\startpiece| is encountered, \verb|\barno| is set equal to
+another count register called \verb|\startbarno|, whose default value is one.
+Therefore, if you want the first bar to have a number $n$ different from~$1$, you
+may either say \verb|\startbarno=|$n$ before \verb|\startpiece|, or say
+\verb|\barno=|$n$ afterwards, but before the first bar line. You may also alter the bar
+number at any time, either by explicitly resetting \verb|\barno|, or by
+incrementing it with a command like \verb|\advance\barno-1|.
+
+\musixtex\ supports two distinct modes for printing bar numbers. In \ital{periodic}
+bar numbering, the bar number is
+placed above the top staff with a user-selectable frequency. In
+\ital{system} bar numbering, the
+number will appear at the beginning of each system.
+
+\section{Periodic bar numbering}
+In a normal piece, periodic bar number printing is turned on by default, with a frequency
+of one. In an extract, the default is to not print bar numbers.
+To turn off bar numbering say \keyindex{nobarnumbers}. To reinstate periodic
+bar numbering, or to initiate it in an extract, say \keyindex{barnumbers}.
+To change to a
+different frequency $n$, say \verb|\def|\keyindex{freqbarno}\verb|{|$n$\verb|}|.
+
+The appearance and positioning of the bar number is controlled by the
+token \keyindex{writethebarno}, which by default is defined as\\
+\verb|\def\writethebarno{\fontbarno\the\barno\kernm\qn@width}|
+where the font is defined as \verb|\def\fontbarno{\it}|. You can change
+either of these as desired, for example
+
+  \medskip
+\begin{music}\barnumbers
+\parindent0pt\startpiece
+\Notes\Dqbu gh\Dqbl jh\en
+\notes\Dqbbu fg\Dqbbl hk\en\bar
+\Notes\Tqbu ghi\Tqbl mmj\en
+\def\fontbarno{\bf}%
+\notes\Tqbbu fgj\Tqbbl njh\en\bar
+\Notes\Qqbu ghjh\Qqbl jifh\en\bar
+\notes\Qqbbu fgge\Qqbbl jhgi\en\endpiece
+\end{music}
+\noindent which was coded as
+\begin{quote}\begin{verbatim}\barnumbers
+\Notes\Dqbu gh\Dqbl jh\en
+\notes\Dqbbu fg\Dqbbl hk\en\bar
+\Notes\Tqbu ghi\Tqbl mmj\en
+\def\fontbarno{\bf}%
+\notes\Tqbbu fgj\Tqbbl njh\en\bar
+\Notes\Qqbu ghjh\Qqbl jifh\en\bar
+\notes\Qqbbu fgge\Qqbbl jhgi\en
+\end{verbatim}\end{quote}
+
+\section{System bar numbering}
+To have a bar number printed just above the beginning of each system, use
+\keyindex{systemnumbers}. The distance above the staff is controlled
+by \verb|\raisebarno|, which by default is \verb|4\internote| (to fit
+above a treble clef). This can be redefined with the command
+\begin{quote}
+\verb|\def|\keyindex{raisebarno}\verb|{|\ital{any \TeX~dimension}\verb|}|
+\end{quote}
+Similarly, the horizontal position is defined by \keyindex{shiftbarno}
+which by default is \verb|0pt|.
+
+The number normally is enclosed in a
+box. If you don't like that, you may redefine the macro \verb|\writebarno|
+which by default is defined as
+\begin{quote}
+\verb|\def|\keyindex{writebarno}\verb|{\boxit{\eightbf\the\barno\barnoadd}}|
+\end{quote}
+This uses the utility \musixtex\ macro \keyindex{boxit} which will enclose
+any text string in a box.
+
+Here are some possible alternate formats for system bar numbers:
+
+\medskip
+\begin{music}\nostartrule
+\def\fontbarno{\it}%
+\let\extractline\hbox
+\startbarno=36
+\hbox to \hsize{%
+\hss
+  \raise20pt\hbox{(a) }%
+  \systemnumbers\startextract
+    \Notes\wh g\en
+  \zendextract
+\hss
+  \def\writebarno{\tenrm\the\barno\barnoadd}%
+  \def\raisebarno{2\internote}%
+  \def\shiftbarno{2.5\Interligne}%
+  \raise20pt\hbox{(b) }%
+  \systemnumbers\startextract
+    \Notes\wh g\en
+  \zendextract
+\hss
+  \def\writebarno{\llap{\tenbf\the\barno\barnoadd}}%
+  \def\raisebarno{2\internote}%
+  \def\shiftbarno{1.3\Interligne}%
+  \raise20pt\hbox{(c) }%
+  \systemnumbers\startextract
+    \Notes\wh g\en
+  \zendextract
+\hss}
+\end{music}
+\noindent These were coded as
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item[(a)] (default)
+ \item[(b)]
+  \begin{verbatim}
+\def\writebarno{\tenrm\the\barno\barnoadd}%
+\def\raisebarno{2\internote}%
+\def\shiftbarno{2.5\Interligne}%
+  \end{verbatim}
+ \item[(c)]
+  \begin{verbatim}
+\def\writebarno{\llap{\tenbf\the\barno\barnoadd}}%
+\def\raisebarno{2\internote}%
+\def\shiftbarno{1.3\Interligne}%
+  \end{verbatim}
+\end{itemize}
+
+If the previous line does not stop with a bar rule, then the next
+printed system bar number will immediately be followed by the contents
+of the token \keyindex{writezbarno}, whose
+default setting is the lower case character `\verb|a|'. You might want to
+change this to `\verb|+|', in which case you should say
+\verb|\def\writezbarno{+}|.
+

@@ -1,0 +1,433 @@
+% partitur.tex  to demonstrate MusiXTeX's capabilities for large scores
+% (c) 1997, Werner Icking
+
+\ifx\mxversion\undefined
+ \input musixtex
+ \fi
+
+% A4-width, letter-length
+\hoffset-15.4mm\voffset-15.4mm
+\hsize210mm\advance\hsize-20mm
+\vsize11in\advance\vsize-20mm\advance\vsize-20pt
+
+\def\myfootline#1{%
+\def\crtextde{Nicht-kommerzielle Vervielf\"altigung erw\"unscht.}%
+\def\crtexten{Non-commercial copying welcome.}%
+\def\cryear{#1}\setfootline}
+
+\def\setfootline{\footline={\ifodd\pageno%
+{\rlap{\sevenrm\copyright~\cryear, Werner Icking, D-53721 Siegburg, Farnweg 28}%
+ \hfill\folio\hfill
+ \llap{\sevenrm\crtextde}}%
+\else
+{\rlap{\sevenrm\copyright~\cryear, Werner.Icking@gmd.de}%
+ \hfill\folio\hfill
+ \llap{\sevenrm\crtexten}}%
+\fi}}
+\myfootline{1997}
+
+\input musixmad
+
+\startmuflex
+
+\arithmeticskipscale
+\let\ni\nextinstrument
+\let\ns\nextstaff
+
+%= Example 1 ============================================================
+
+\centerline{\BIGtype C}\par\medskip
+
+\parindent 90pt
+
+\instrumentnumber{12}
+
+\generalmeter{\allabreve}
+\generalsignature 0
+
+\groupbottom11
+\setstaffs11\setclef1\bass		\setname1{Contrabassi}
+\setstaffs21\setclef2\bass		\setname2{Violoncelli}
+\setstaffs31\setclef3\alto		\setname3{Viole}
+\setstaffs42\setclef4{\treble\treble}	\setname4{\vbox{\hbox{Violini I}%
+				     \vskip 6\Interligne\hbox{Violini II}}}
+\grouptop14
+\setstaffs52\setclef5{\treble\treble}	\setname5{Celesta}
+\groupbottom26
+\setstaffs61\setclef6\treble\setclefsymbol6\empty
+		\setlines61		\setname6{Batteria}
+\setstaffs71\setclef7\treble		\setname7{Silofono}
+\setstaffs81\setclef8\treble		\setname8{3 Timpani}
+\grouptop28
+
+\groupbottom39
+\setstaffs91\setclef9\bass		\setname9{Tuba}
+\setstaffs{10}1\setclef{10}\bass	\setname{10}{3 Tromboni}
+\setstaffs{11}1\setclef{11}\treble	\setname{11}{3 Trombe in Do}
+\setstaffs{12}2\setclef{12}{\treble\treble}
+		\setsign{12}{-1}	\setname{12}{4 Corni in Fa}
+\grouptop3{12}
+
+\systemnumbers\startpiece\addspace\afterruleskip
+\Notes	\qa{CDEF}&\qa{CDEF}&\qa{`cdef}&\qa{cdef}|\qa{cdef}\ni
+	\qa{cdef}|\qa{cdef}\ni
+	\ni\ni\ni
+	\qa{CDEF}&\qa{CDEF}&\qa{cdef}\ni
+	\transpose3\qa{cdef}|\transpose3\qa{cdef}\en
+\def\atnextbar{%
+\znotes&&&&&\lower2\internote\hbox{\centerpause}&\centerpause&\centerpause&\en}%
+\generalmeter{\meterfrac34}\changecontext
+\Notes	\qa{G'AB}&\qa{G'AB}&\qa{`g'ab}&\qa{g'ab}|\qa{g'ab}\ni
+	\qa{g'ab}|\qa{g'ab}\ni
+	\ni\ni\ni
+	\qa{G'AB}&\qa{G'AB}&\qa{g'ab}\ni
+	\transpose3\qa{g'ab}|\transpose3\qa{g'ab}\en
+\def\atnextbar{%
+\znotes&&&&&\lower2\internote\hbox{\centerpause}&\centerpause&\centerpause&\en}%
+\generalmeter{\meterfrac44}\changecontext
+\NOTes	\wh{'C}&\wh{'C}&\wh{c}&\wh{'c}|\wh{'c}\ni
+	\wh{'c}|\wh{'c}\ni
+	\ni\ni\ni
+	\wh{'C}&\wh{'C}&\wh{'c}\ni
+	\transpose3\wh{'c}|\transpose3\wh{'c}\en
+\def\atnextbar{%
+\znotes&&&&&\lower2\internote\hbox{\centerpause}&\centerpause&\centerpause&\en}%
+\setdoubleBAR\stoppiece
+
+\vfill\eject
+
+%= Example 2 ============================================================
+
+\def\namespace{14mm}		% provide space for instrument names
+\advance\hoffset\namespace\advance\hsize-\namespace
+
+\centerline{\BIGtype Sinfonie D-Dur}	\par\medskip
+\centerline{\BIgtype Haffner Sinfonie}	\par\medskip
+\centerline{\Bigtype K.V. 385}		\par\medskip
+\rightline{\medtype Wolfgang Amadeus Mozart (1756--1791)}\par\bigskip
+
+\instrumentnumber{10}\resetlayout
+
+\interinstrument 1\Interligne
+
+\generalmeter{\meterC}
+\generalsignature 2
+
+\parindent 60pt
+
+\groupbottom11
+\setstaffs11\setclef1\bass		\setname1{\vbox{\hbox{Violoncelli e}
+							\hbox{Contrabassi}}}
+\setstaffs21\setclef2\alto		\setname2{Viole}
+\setstaffs32\setclef3{\treble\treble}	\setname3{\vbox{\hbox{Violini I}
+					\vskip 6\Interligne\hbox{Violini II}}}
+\setinterinstrument3{3\Interligne}
+\grouptop13
+
+\setstaffs41\setclef4\bass\setsign40	\setname4{Timpani}
+\setinterinstrument4{3\Interligne}
+
+\groupbottom25
+\setstaffs51\setclef5\treble\setsign50	\setname5{\vbox{\hbox{2 Trombe}\hbox{~~~in Re}}}
+\setstaffs61\setclef6\treble\setsign60	\setname6{\vbox{\hbox{2 Corni}\hbox{~~~in Re}}}
+\setinterinstrument6{3\Interligne}
+\grouptop26
+
+\groupbottom37
+\setstaffs71\setclef7\bass		\setname7{2 Fagotti}
+\setstaffs81\setclef8\treble\setsign8{-1}\setname8{\vbox{\hbox{2 Clarinetti}\hbox{~~~in La}}}
+\setstaffs91\setclef9\treble		\setname9{2 Oboi}
+\setstaffs{10}1\setclef{10}\treble	\setname{10}{2 Flauti}
+\grouptop3{10}
+\stafftopmarg  8\Interligne
+\staffbotmarg  5\Interligne
+
+\def\dsp{\pt 5\ds}
+\def\TR#1{\zcharnote{#1}{\it tr}}
+\def\adue{\zcharnote9{\llap{a}2}}
+\def\dyn#1#2{\lower4\internote\hbox{\zcharnote{-#1}{#2}}}
+\def\sFp{\sF\ppff p}%
+
+\afterruleskip0.8\afterruleskip
+\beforeruleskip0.2\afterruleskip
+
+\nobarnumbers\startpiece\addspace\afterruleskip\systemnumbers
+\makeatletter
+\def\everystaff{\kern-\clef@skip\kern-\namespace\znotes
+	\zcharnote0{\vbox{\hbox{Vlc. e}\hbox{Cb.}}}\ni
+	\zcharnote2{Vle.}\ni
+	\zcharnote2{Vl.II}|\zcharnote4{Vl.I}\ni
+	\zcharnote2{Timp.}\ni
+	\zcharnote0{\vbox{\hbox{2 Tr.}\hbox{(Re)}}}\ni
+	\zcharnote0{\vbox{\hbox{2 Cor.}\hbox{(Re)}}}\ni%
+	\zcharnote2{2 Fg.}\ni
+	\zcharnote0{\vbox{\hbox{2 Cl.}\hbox{(Fa)}}}\ni
+	\zcharnote2{2 Ob.}\ni
+	\zcharnote2{2 Fl.}%
+	\en\kern\clef@skip\kern\namespace}%
+\makeatother
+\NOTEs	\dyn0\f\wh{'D}&\dyn0\f\wh d\ni
+	\dyn2\f\roffset{1.4}{\zwh d}\wh d|\dyn2\f\roffset{1.4}{\zwh d}\zwh d\ni
+	\dyn0\f\Trille9{1.6}\wh{'D}\ni
+	\dyn3\f\adue\transpose-1\wh d&\dyn3\f\adue\transpose-1\wh d\ni
+	\dyn0\f\adue\wh{'D}&\dyn0\f\adue\transpose2\wh d\ni
+	\dyn0\f\adue\wh{'d}\ni
+	\loffset{5}{\zcharnote{'''b}{\medtype\bf Allegro con spirito}}%
+	\dyn0\f\adue\wh{```'d}\en
+\bar\addspace{-.5\afterruleskip}%
+\notes	\ni\ni
+	\multnoteskip{.7}\tinynotesize\ibbbu0{'b}3\islurd0{`d}\qb0d\tslur0{'a}\tbu0\qb0d\ns
+	\multnoteskip{.7}\tinynotesize\ibbbu1{'b}3\islurd0{`d}\qb1d\tslur0{'a}\tbu1\qb1d\en
+	\Notes	\isluru0{''D}\ha D&\isluru1{'d}\ha d\ni
+	\isluru2{''d}\ha d|\isluru3{''d}\ha d\ni
+	\qa{'D}\ni
+	\transpose-1\isluru4{'d}\ha d&\transpose-1\isluru5{'d}\ha d\ni
+	\isluru6{''D}\ha D&\transpose2\isluru7{'d}\ha d\ni
+	\isluru8{''d}\ha d&\isluru9{''d}\ha d\en
+\NOtes	&&&\qp\en
+\NOtes	\tslur0{''D}\ppt D\qa D&\tslur1{'d}\ppt d\qa d\ni
+	\tslur2{''d}\ppt d\qa d|\tslur3{''d}\ppt d\qa d\ni
+	\hpause\ni
+	\transpose-1\tslur4{'d}\qa d&\transpose-1\tslur5{'d}\qa d\ni
+	\tslur6{''D}\ppt D\qa D&\transpose2\tslur7{'d}\ppt d\qa d\ni
+	\tslur8{''d}\ppt d\qa d&\tslur9{''d}\ppt d\qa d\en
+\Notesp	&&&&\qp&\qp\en
+\notes	\cca{'D}&\cca d&\cca d|\cca d\ni
+	\ni
+	\ni\ni
+	\cca{'D}&\transpose2\cca d&\cca{'d}&\cca{'d}\en
+\bar
+\NOtes	\lpz{'C}\qu C\upz{'C}\qa C\qp&\upz c\ql c\upz{'c}\ql c\qp\ni
+	\lpz c\qu c\upz{''c}\ql c\qp|\lpz c\qu c\upz{''c}\ql c\qp\ni
+	\lpz{'A}\qu A\lpz A\qu A\hpause\ni
+	\transpose-1\lpz{'a}\qu a\lpz a\qu a\hpause\ni
+	\transpose-1\lpz{'a}\qu a\lpz a\qu a\hpause\ni
+	\lpz{'C}\qu C\upz{'C}\qa C\qp&\transpose2\lpz c\qu c\upz{'c}\ql c\qp\ni
+	\upz{'c}\ql c\upz{'c}\ql c\qp&\upz{'c}\ql c\upz{'c}\ql c\qp\en
+\Notesp	\dsp&\dsp&\dsp|\dsp\ni
+	\ni
+	\ni\ni
+	\dsp&\dsp&\dsp&\dsp\en
+\notes	\cca{'C}&\cca c&\cca c|\cca c\ni
+	\ni
+	\ni\ni
+	\cca{'C}&\transpose2\cca c&\cca{'c}&\cca{'c}\en
+\bar
+\NOtes	\qa{'B}&\qa b&\qa b|\qa b\ni
+	\qa{'D}\ni
+	\transpose-1\zq d\qu{'d}&\transpose-1\zq d\qu{'d}\ni
+	\qa{'B}&\transpose2\qa b&\qa{'b}&\qa{'b}\en
+\Notesp	\ibu0{'B}0\qbp0B&\ibu1b0\qbp1b&\ibu2b0\qbp2b|\ibu3b0\qbp3b\ni
+	\ibl4{'D}0\qbp4D\ni
+	\transpose-1\zqp d\ibu5{'d}0\qbp5d\ni
+	\transpose-1\zqp d\ibu6{'d}0\qbp6d\ni
+	\ibu7{'B}0\qbp7B&\transpose2\ibu8b0\qbp8b\ni
+	\ibl9{'b}0\qbp9b&\ibl{10}{'b}0\qbp{10}b\en
+\notes	\tbbu0\tbu0\qb0{'B}&\tbbu1\tbu1\qb1b\ni
+	\tbbu2\tbu2\qb2b|\tbbu3\tbu3\qb3b\ni
+	\tbbl4\tbl4\qb4{'D}\ni
+	\transpose-1\zq d\tbbu5\tbu5\qb5{'d}\ni
+	\transpose-1\zq d\tbbu6\tbu6\qb6{'d}\ni
+	\tbbu7\tbu7\qb7{'B}&\transpose2\tbbu8\tbu8\qb8b\ni
+	\tbbl9\tbl9\qb9{'b}&\tbbl{10}\tbl{10}\qb{10}{'b}\en
+\NOtes	\TR{10}\islurd0{'B}\pt B\qa B&\TR{11}\islurd1b\pt b\qa b\ni
+	\TR9\islurd2b\pt b\qa b|\TR9\islurd3b\pt b\qa b\ni
+	\qa{'D}\ni
+	\transpose-1\zq d\qu{'d}&\transpose-1\zq d\qu{'d}\ni
+	\TR{10}\islurd7{'B}\pt B\qa B&\transpose2\TR9\islurd8b\pt b\qa b\ni
+	\TR9\isluru9{'b}\pt b\qa b&\TR9\isluru{10}{'b}\pt b\qa b\en
+\Notes  \ni\ni\ni
+	\qa{'D}\ni
+	\transpose-1\zq d\qu{'d}&\transpose-1\zq d\qu{'d}\en
+\notes	\ibbu0{'A}3\qb0A\tslur0B\tbu0\qb0B\ni
+	\ibbu1a3\qb1a\tslur1b\tbu1\qb1b\ni
+	\ibbu2a3\qb2a\tslur2b\tbu2\qb2b|\ibbu3a3\qb3a\tslur3b\tbu3\qb3b\ni
+	\ni
+	\ni\ni
+	\ibbu7{'A}3\qb7A\tslur7B\tbu7\qb7B\ni
+	\transpose2\ibbu8a3\qb8a\tslur8b\tbu8\qb8b\ni
+	\ibbu9{'a}3\qb9a\tslur9{'b}\tbu9\qb9{`b}\ni
+	\ibbu{10}{'a}3\qb{10}a\tslur{10}{'b}\tbu{10}\qb{10}{`b}\en
+\def\atnextline{%
+	\setinterinstrument3{8\Interligne}%
+	\setinterinstrument4{8\Interligne}%
+	\setinterinstrument6{8\Interligne}%
+	\stafftopmarg 11\Interligne
+	\staffbotmarg  8\Interligne	}%
+\barno200\alaligne
+\NOtes	\ha{'D}&\ha d\ni
+	\loffset{1.8}{\isluru2{'d}}\tslur2d\pt d\qa d\ns
+	\loffset{1.8}{\isluru3{'d}}\tslur3d\pt d\qa d\ni
+	\qa{'D}\ni
+	\transpose-1\adue\ha d&\transpose-1\adue\ha d\ni
+	\adue\ha{'D}&\transpose2\zh{`d}\hu{'d}\ni
+	\adue\ha{'d}&\adue\ha{'d}\en
+\Notes	&&&\qp\en
+\notes	\ni\ni
+	\ibbl2{'d}2\isluru2d\qb2d\tbl2\qb2e\ns
+	\ibbl3{'d}2\isluru3d\qb3d\tbl3\qb3e\en
+\Notes	\qa{'F}&\qa f\ni
+	\ibl2{'d}2\tslur2f\qb2f|\ibl3{'d}2\tslur3f\qb3f\ni
+	\hpause\ni
+	\transpose-1\qa f&\transpose-1\qa f\ni
+	\qa{'F}&\transpose2\zq{`f}\qu{'f}\ni
+	\qa{'f}&\qa{'f}\en
+\notes	\ni\ni
+	\nbbl2\isluru2{'f}\qb2f\tbl2\qb2g\ns
+	\nbbl3\isluru3{'f}\qb3f\tbl3\qb3g\en
+\Notes	\qa{''A}&\qa{'a}\ni
+	\ibl2{'f}2\tslur2{'a}\qb2a|\ibl3{'f}2\tslur3{'a}\qb3a\ni
+	\ni
+	\transpose-1\qa{'a}&\transpose-1\qa{'a}\ni
+	\qa{''A}&\transpose2\zq a\qu{'a}\ni
+	\qa{''a}&\qa{''a}\en
+\notes	\ni\ni
+	\multnoteskip{.707}\nbbl2\triolet d\isluru2{''a}\qb2{ab}\tbl2\qb2c\ns
+	\multnoteskip{.707}\nbbl3\triolet d\isluru3{''a}\qb3{ab}\tbl3\qb3c\en
+\bar
+\NOtes	\qa{''DDA`F}&\qa{'dda`f}\ni
+	\tslur2{''d}\qa d\zq{``d'a}\ql f\zq{`d'a}\ql f\zq{`d'a}\ql f\ns
+	\tslur3{''d}\qa d\zq{``d'd}\ql{'d}\zq{``d'd}\ql{'d}\zq{``d'd}\ql{'d}\ni
+	\qa{'DDDD}\ni
+	\transpose-1\qa{'d}\zq{`f}\qu{'a}\zq{`f}\qu{'a}\zq{`f}\qu{'a}\ni
+	\transpose-1\qa{'d}\zq{`d}\qu{'d}\zq{`d}\qu{'d}\zq{`d}\qu{'d}\ni
+	\qa{''DDA`F}&\transpose2\zq d\qa{'d}\zq{``f}\qu{'a}\zq{`f}\qu{'a}\zq{`f}\qu{'a}\ni
+	\qa{''d}\zq{`d}\ql f\zq d\ql f\zq d\ql f\ni
+	\qa{''d}\zq{`f}\ql{'d}\zq{`f}\ql{'d}\zq{`f}\ql{'d}\en
+\bar
+\NOTes	\ha{'DD}&\ha{dd}\ni
+	\zq{d'a}\hl f\zq{`d'a}\hl f|\zq{d'd}\hl{'d}\zq{``d'd}\hl{'d}\ni
+	\ha{'DD}\ni
+	\transpose-1\zh f\hu{'a}\zh{`f}\hu{'a}\ni
+	\transpose-1\zh d\hu{'d}\zh{`d}\hu{'d}\ni
+	\ha{'DD}&\transpose2\zh{`f}\hu{'a}\zh{`f}\hu{'a}\ni
+	\zh{'d}\hl f\zh d\hl f&\zh{'f}\hl{'d}\zh{`f}\hl{'d}\en
+\bar
+\NOTes	\ha{'D}\hpause&\ha{d}\hpause\ni
+	\zq{d'a}\hl f\hpause|\zq{d'd}\hl{'d}\hpause\ni
+	\ha{'D}\hpause\ni
+	\transpose-1\zh f\hu{'a}\hpause&\transpose-1\zh d\hu{'d}\hpause\ni
+	\ha{'D}\hpause&\transpose2\zh{`f}\ha{'a}\hpause\ni
+	\zh{'d}\ha f\hpause&\zh{'f}\ha{'d}\hpause\en
+\Endpiece\def\everystaff{}
+\vfill\eject
+
+\instrumentnumber{6}\resetlayout
+
+\interinstrument 1\Interligne
+
+\generalmeter{\meterfrac 2 4}
+\generalsignature 1
+
+\parindent 60pt
+
+\groupbottom11
+\setstaffs11\setclef1\bass		\setname1{\vbox{\hbox{Violoncelli e}
+							\hbox{Contrabassi}}}
+\setinterinstrument1{0\Interligne}
+\setstaffs21\setclef2\alto		\setname2{Viole}
+\setinterinstrument2{1\Interligne}
+\setstaffs32\setclef3{\treble\treble}	\setname3{\vbox{\hbox{Violini I}
+					\vskip 6\Interligne\hbox{Violini II}}}
+\setinterinstrument3{2\Interligne}
+\grouptop13
+
+\groupbottom24
+\setstaffs41\setclef4\treble\setsign60	\setname4{\vbox{\hbox{2 Corni}\hbox{~~~in Sol}}}
+\setinterinstrument4{1\Interligne}
+\grouptop24
+
+\groupbottom35
+\setstaffs51\setclef5\bass		\setname5{2 Fagotti}
+\setinterinstrument5{1\Interligne}
+\setstaffs61\setclef6\treble		\setname6{2 Oboi}
+\grouptop36
+
+\nobarnumbers\startpiece\addspace\afterruleskip\systemnumbers
+\makeatletter
+\newif\ifstaffseparator\staffseparatortrue
+\def\everystaff{\kern-\clef@skip\kern-\namespace\znotes
+	\zcharnote0{\vbox{\hbox{Vlc. e}\hbox{Cb.}}}\ni
+	\zcharnote2{Vle.}\ni
+	\zcharnote2{Vl.II}|\zcharnote4{Vl.I}\ni
+	\zcharnote0{\vbox{\hbox{2 Cor.}\hbox{(Sol)}}}\ni
+	\zcharnote2{2 Fg.}\ni
+	\zcharnote2{2 Ob.}%
+	\ifstaffseparator\zcharnote{20}{\vbox{\hbox to 8mm{\leaders\hrule height 3pt\hfill}%
+		   \vskip-7pt\hbox to 8mm{\leaders\hrule height 3pt\hfill}}}%
+	\else\staffseparatortrue\fi
+	\en\kern\clef@skip\kern\namespace}%
+\makeatother
+\notes	\dyn0\p\qa{'G}&\dyn0\p\qa g\ni
+	\loffset{1.5}{\dyn4\p}\ibbu2c0\lpz{`g}\qb2g\lpz{'b}\qb2b\lpz d\qb2d\tbu2\lpz b\qb2b\ns
+	\dyn0\p\roffset{0.5}{\isluru3g}\qa g\ni
+	\dyn2\p\transpose-4\zh g\hu{'g}\ni
+	\dyn0\p\zh{''B}\isluru5D\hl D\ni
+	\loffset{5}{\zcharnote{''b}{\medtype\bf Andante}}%
+	\roffset{0.3}{\dyn1\p}\zhl{``g}\hu g\en
+\notes	\qp&\qp\ni
+	\ibbu2c0\lpz{`g}\qb2g\lpz{'b}\qb2b\lpz d\qb2d\tbu2\lpz b\qb2b\ns
+	\ibl3{'b}2\tslur3b\qbp3{b**}\tbbl3\tbl3\upz d\qb3d\en
+\bar
+\notes	\dyn1\sF\qa{'D}&\dyn0\sF\qa d\ni
+	\dyn6\sF\ibbu2d0\lpz a\qb2a\lpz c\qb2c\lpz f\qb2f\tbu2\lpz c\qb2c\ns
+	\dyn0\sF\pt{'d}\qa d\ni
+	\dyn6\sFp\transpose-4\zh d\hu{'d}\ni
+	\dyn0\sFp\loff{\zh{''C}}\tslur5D\hl D\ni
+	\dyn0\sFp\zh f\hu{'a}\en
+\notes	\qp&\qp\ni
+	\ibbu2d0\lpz a\qb2a\lpz c\qb2c\lpz f\qb2f\tbu2\lpz c\qb2c\ns
+	\sk\sk\dyn2\p\multnoteskip{.667}\ibbl3{'d}{-2}\triolet d\qb3{cb}\tbl3\qb3a\en
+\bar
+\notes	\dyn0\p\ibl0{'G}{-1}\upz G\qb0{G*}\upz{'B}\qb0{B*}\upz D\qb0{D*}\tbl0\upz{`D}\qb0{D*}\ni
+	\dyn1\p\ibl1d0\upz d\qb1{d*}\upz d\qb1{d*}\upz d\qb1{d*}\tbl1\upz f\qb1{f*}\ni
+	\dyn4\p\ibbu2e0\lpz b\qb2b\lpz d\qb2d\lpz g\qb2g\tbu2\lpz d\qb2d%
+	\ibbu2c0\lpz b\qb2b\lpz d\qb2d\lpz c\qb2c\tbu2\lpz a\qb2a\ns
+	\ibu3g1\lpz g\qb3{g*}\lpz g\qb3{g*}\lpz g\qb3{g*}\tbu3\lpz{'a}\qb3{a*}\en
+\def\atnextbar{\znotes&&&\centerpause&\centerpause&\centerpause\en}\alaligne
+\notes	\slur{'G}Bu4\qa{G***}\ca{`G*}\ds\ni
+	\slur fgu4\qa{f***}\ca{g*}\ds\ni
+	\ibbu2c0\lpz a\qb2a\lpz c\qb2c\lpz d\qb2d\tbu2\lpz c\qb2c%
+	\ibbu2b0\lpz{`g}\qb2g\lpz{'b}\qb2b\lpz d\qb2d\tbu2\lpz b\qb2b\ns
+	\ibu3{'a}0\slur aad3\qbp3{a**}\tbbu3\tbu3\qb3{^a}\ca{b*}\ds\en
+\def\atnextbar{\znotes&&&\centerpause&\centerpause&\centerpause\en}\bar
+\notes	\ds\dyn3\f\ibbl0{'F}{-3}\qb0{GE}\tbl0\qb0C\qa{`G}\ni
+	\ds\dyn2\f\ibbl0f{-3}\qb0{ge}\tbl0\qb0c\qa{`g}\ni
+	\dyn5\f\ibbu2e0\lpz c\qb2c\lpz e\qb2e\lpz g\qb2g\tbu2\lpz e\qb2e%
+	\dyn5\p\ibbu2e0\lpz c\qb2c\lpz e\qb2e\lpz g\qb2g\tbu2\lpz e\qb2e\ns
+	\roffset{0.3}{\dyn1\f}\zq g\zq{'c}\ql{e***}\qs\multnoteskip{0.5}%
+	\tinynotesize\slur fgd1\grcu f\normalnotesize\dyn0\p\ibbl3g0\qb3g%
+	\tinynotesize\slur fgd1\grcu f\normalnotesize\qb3g%
+	\tinynotesize\slur fgd1\grcu f\normalnotesize\tbl3\qb3g\ni
+	\dyn4\sFp\transpose-4\islurd4g\zh g\roffset{0.5}{\isluru5{'g}}\hu g\ni
+	\dyn0\sFp\islurd6{''C}\zh C\isluru7E\hl E\ni
+	\dyn0\sFp\islurd8{'c}\zh c\isluru9e\hl e\en
+\bar
+\notes	\ni\ni
+	\ibbu2e0\lpz c\qb2c\lpz e\qb2e\lpz g\qb2g\tbu2\lpz e\qb2e%
+	\ibbu2e0\lpz c\qb2c\lpz e\qb2e\lpz g\qb2g\tbu2\lpz e\qb2e\ns
+	\ibbl3{''b}{-3}\slur cau1\qb3c\tbl3\qb3{`g}\qs\TR{'b}\cca{`g}%
+	\ibbl3{'b}{-3}\slur cau1\qb3c\qb3{`g}\slur geu1\qb3g\tbl3\qb3e\ni
+	\transpose-4\tslur4g\islurd4g\zh g\tslur5{'g}\roffset{0.5}{\isluru5g}\hu g\ni
+	\loffset{0.5}{\tslur6{''C}}\zh C\loffset{0.5}{\tslur7E}\hl E\ni
+	\loffset{0.5}{\tslur8{'c}}\zh c\loffset{0.5}{\tslur9e}\hl e\en
+\def\atnextbar{\znotes\centerpause&\centerpause\en}\bar
+\notes	\ds\dyn3\f\ibbl0{'F}{-3}\qb0{GD}\tbl0\qb0B\qa{`G}\ni
+	\ds\dyn2\f\ibbl0f{-3}\qb0{gd}\tbl0\qb0b\qa{`g}\ni
+	\dyn5\f\ibbu2e0\lpz b\qb2b\lpz d\qb2d\lpz g\qb2g\tbu2\lpz d\qb2d%
+	\dyn5\p\ibbu2e0\lpz b\qb2b\lpz d\qb2d\lpz g\qb2g\tbu2\lpz d\qb2d\ns
+	\dyn6\f\zq{`g}\zq{'d}\qu{'d***}\qs\multnoteskip{0.5}%
+	\tinynotesize\slur fgd1\grcu f\normalnotesize\dyn0\p\ibbl3g0\qb3g%
+	\tinynotesize\slur fgd1\grcu f\normalnotesize\qb3g%
+	\tinynotesize\slur fgd1\grcu f\normalnotesize\tbl3\qb3g\ni
+	\dyn4\sFp\transpose-4\tslur4g\islurd4g\zh g%
+		\tslur5{'g}\roffset{0.5}{\isluru5g}\hu{g*******}%
+		\tslur4{`g}\tslur5{'g}\ni
+	\dyn0\sFp\islurd6{''B}\zh B\isluru7D\hl{D*******}\tslur6B\tslur7D\ni
+	\dyn1\sFp\islurd8{'b}\zh b\isluru9d\hl{d*******}\tslur8b\tslur9d\en
+\endpiece\def\everystaff{}
+
+\vfill\eject
+
+\endmuflex
+\bye

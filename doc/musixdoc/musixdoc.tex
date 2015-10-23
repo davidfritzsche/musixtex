@@ -1,0 +1,103 @@
+%
+%   This file is part of MusiXTeX
+%
+%   MusiXTeX is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2, or (at your option)
+%   any later version.
+%
+%   MusiXTeX is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with MusiXTeX; see the file COPYING.  If not, write to
+%   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+%   Boston, MA 02111-1307, USA.
+%
+%
+%   musixdoc.tex : the document  
+%
+\documentclass[twoside,11pt,notitlepage]{report}
+
+\usepackage{musixdoc}
+
+%\includeonly{extensions}
+
+%\includeonly{   
+%frontmatter,
+%introduction,
+%settingup,
+%preparing,
+%writingnotes,
+%beams,
+%rests,
+%spacing,
+%accidentals,
+%transposition,
+%slurstiesfont,
+%slurstiesTypeK,
+%barlines,
+%barnumbering,
+%layout,
+%changing,
+%repeats,
+%fonts,
+%miscellaneous,
+%smaller,
+%staffsize,
+%parameters,
+%extracting,
+%lyrics,
+%embedding,
+%extensions,
+%examples,
+%summary,
+%index
+%}
+
+\startmuflex
+
+\makeindex
+
+\begin{document}
+
+\include{frontmatter}
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\renewcommand{\thepage}{\arabic{page}}
+
+\include{introduction}
+\include{settingup}
+\include{preparing}
+\include{writingnotes}
+\include{beams}
+\include{rests}
+\include{spacing}
+\include{accidentals}
+\include{transposition}
+\include{slurstiesfont}
+\include{slurstiesTypeK}
+\include{barlines}
+\include{barnumbering}
+\include{layout}
+\include{changing}
+\include{repeats}
+\include{fonts}
+\include{miscellaneous}
+\include{smaller}
+\include{staffsize}
+\include{parameters}
+\include{extracting}
+\include{lyrics}
+\include{embedding}
+\include{extensions}
+\include{examples}
+
+\include{summary}
+
+\include{index}
+
+\end{document}

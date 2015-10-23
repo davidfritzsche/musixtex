@@ -1,0 +1,823 @@
+\chapter{Introduction to \musixtex}
+
+This chapter is not a tutorial on the use of \musixtex, but instead serves as
+an overview of some of its capabilities, quirks, and history.
+
+\musixtex\ is a set of macros and fonts which enables music typesetting 
+within the \TeX\ system. It requires as a prerequisite a working
+installation of \TeX.
+\musixtex\ might be regarded as the digital equivalent of a box of type. It
+contains symbols for staves, notes, chords, beams, slurs and ornaments,
+ready to be arranged to form a sheet of music. But it must be told how to position
+those symbols on the page. This could be done by the typesetter
+himself, if he or she elects to proceed by entering \musixtex\ commands manually
+into an input file. However most users will find it far less taxing to let
+such decisions be made largely by the preprocessor
+\href{http://icking-music-archive.org/software/indexmt6.html#pmx}
+{\underline{\textbf{PMX}}}, which in addition uses a much simpler input
+language than \musixtex.
+
+Lyrics can also be handled by \musixtex. There is a set of primitive
+commands for this which are described later. But there is also a far
+more adaptable set of macros contained in the extension file
+\verb|musixlyr.tex|, and there is the preprocessor
+\href{http://icking-music-archive.org/software/indexmt6.html#mtx}
+{\underline{\mbox{\textbf{M-Tx}}}}\ which provides easy, transparent access to
+these macros.
+
+Most users of \TeX\ are familiar with \LaTeX, a set of \TeX\ macros
+which eases document layout. In fact many may only use \LaTeX.
+Until recently, \LaTeX\ and \musixtex\ coexisted only grudgingly, owing
+primarily to the limited availabily of storage registers. But with modern
+versions of \TeX\ and with the use of e\LaTeX, only a modest increase in
+complexity is incurred with the addition of musical excerpts to a \LaTeX\
+document. Still, fortunately, for typesetting a musical score there is
+rarely if ever any advantage to using \LaTeX. Only if one wanted to create a
+text document with embedded musical examples would there be much use for it.
+Even in that case there is a perfectly fine way to avoid using \musixtex\
+directly in the document file, namely, by using \musixtex\ to create
+\verb|pdf| or \verb|eps| files for
+each of the examples, and then embedding references to those in the file for
+the larger document. But for anyone who still wants to use both together, there is
+no better example than this manual, as generated with the files
+\verb|musixdoc.tex| and \verb|musixdoc.sty|. A few further details about such
+nonstandard applications are given in Section~\ref{excerpts}.
+
+\section{Primary features of \musixtex}
+ \subsection{Music typesetting is two-dimensional} Written music is not
+usually a linear sequence of symbols like a literary text. Rather,
+except for unaccompanied single-note instruments like clarinets,
+trumpets and human voices, it has the form of a two-dimensional matrix.
+ Thus, a logical way of coding music consists
+in horizontally accumulating a set of \ital{vertical combs} with
+\ital{horizontal teeth} as depicted in Table~\ref{readtable}.
+%\def\hboxit#1{\boxit{\rlap{#1}\hphantom{note sequence three}}}
+ \begin{table}
+ \begin{center}
+ \small
+ \renewcommand{\arraystretch}{1.4}
+ \setlength{\arrayrulewidth}{1.5pt}
+ \setlength{\tabcolsep}{2ex}
+ \begin{tabular}{|ll|ll|}\fbox{note sequence one}
+  &\fbox{note seq.\ four}
+  &\fbox{note seq.\ seven}
+  &\fbox{note seq.\ ten}\\\fbox{note sequence two}
+  &\fbox{note seq.\ five}
+  &\fbox{note seq.\ eight}
+  &\fbox{note seq.\ eleven}\\\fbox{note sequence three}
+  &\fbox{note seq.\ six}
+  &\fbox{note seq.\ nine}
+  &\fbox{note seq.\ twelve}\\
+ \end{tabular}
+ \end{center}
+ \caption{A logical way of coding music}\label{readtable}
+ \end{table}
+Accordingly, in \musixtex\ the fundamental macro used to represent
+one of those vertical combs (or one of the columns in Table~\ref{readtable})
+is of the form
+\begin{center}
+\verb|\notes ... & ... & ... \en|\footnote{The command
+\keyindex{en} is an abbreviation for the command \keyindex{enotes}, which may also be used.}
+\end{center}\index{"&@{\tt\char'046}}
+\noindent where the character \verb|&| is used to separate the notes to be
+typeset on respective staves of the various instruments, starting from the
+bottom.
+
+In the case of an instrument whose score has to be written with
+several staves, they are separated by the
+character \|\index{\tt\char'174@{\tt\char'174}}. 
+
+Thus, a score written for a keyboard instrument and
+a single-line instrument (e.g., piano and violin)
+will be coded as follows:
+\begin{center}
+\verb=\notes ... | ... & ...\en=
+\end{center}
+\noindent for each column of simultaneous \ital{groups of notes}.
+Each of those groups, represented by a single box in Table~\ref{readtable}\
+and by a sequence of three dots in the the two example macros above, may contain
+not only chord notes to be played simultaneously, but short sequences of
+consecutive
+notes or chords. As we'll soon see, this implies the need for two fundamentally different
+kinds of basic macros in \musixtex: those whose tokens are automatically followed
+by some amount of space (called \ital{spacing} macros), and those that are not.
+The former type, for example,
+would be used to produce the notes and rests in a single-line score;
+the latter would be used, for example, for chord notes and ornaments.
+
+\subsection{Horizontal spacing}
+Deciding upon the proper horizontal spacing of notes is a very complicated matter
+that we will not address in any detail here. Obviously short-duration notes
+should be closer together than longer ones. Almost as obviously, the spacing
+cannot be linearly proportional to the duration; otherwise  for example a whole
+note would occupy 32 times as much horizontal space as a thirty-second note. And
+in polyphonic scores the spacing in one staff is often influenced by the notes
+in another. This is a decision that the typesetter or preprocessor
+must make. Once the decision is made, \musixtex\ can provide the desired spacing.
+The main mechanism is through a set of macros described in
+Section~\ref{newspacings}. At this point we shall only mention that to control
+spacing, one of those
+macros will be selected to replace the symbol \verb|\notes| in the two examples
+above, and it will imply that whenever a spacing macro in encountered within
+a group of notes, a
+certain specific amount of horizontal space will be inserted.
+
+ \subsection{Music tokens}
+The tokens provided by \musixtex\ include
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item note symbols without stems;
+ \item note symbols with stems, and flags for eighth notes and
+shorter;
+ \item beam beginnings and endings;
+ \item beginnings and endings of ties and slurs;
+ \item accidentals;
+ \item ornaments: arpeggios, trills, mordents, turns, staccatos,
+pizzicatos, fermatas, etc.;
+ \item bar lines;
+ \item meters, key signatures, clefs.
+\end{itemize}
+For example, \verb|\wh a| produces a whole note at nominal frequency 222.5~Hz,
+\verb|\wh h| produces one an octave higher, \verb|\qu c|
+produces an up-stemmed quarter note C (250~Hz), and \verb|\cl J| produces a down-stemmed C
+eighth note an octave lower.
+
+ To generate chords with solid note heads, the non-spacing macro \keyindex{zq}
+can be used. It produces a solid note head at the specified pitch,
+the vertical position of which
+is memorized and recalled whenever the next stemmed note (possibly with a flag) is
+coded. The stem length is automatically adjusted to link all simultaneous notes. Thus, the
+\mbox{C-major} chord
+
+\begin{music}\nostartrule
+\startextract\NOtes\zq{ceg}\qu j\en\zendextract
+\end{music}
+ \noindent is coded \verb|\zq c\zq e\zq g\qu j| or more concisely,
+\verb|\zq{ceg}\qu j|; the \verb|u| in the spacing note macro
+\verb|\qu| is what generates the upstem.
+
+ \subsection{Beams}
+Each beam \index{beams} is generated by a pair of macros. The first defines
+the beginning horizontal position (implicitly the current position), altitude,
+direction (upper or lower), multiplicity (number of lateral bars), slope and
+reference number. This latter feature is needed so independent beams
+can overlap. The second macro of the pair specifies the termination
+location (again implicitly) and the reference number.
+
+ \subsection{Setting anything on the score}
+A general macro (\keyindex{zcharnote}) provides a means of
+putting any sequence of symbols (possibly contained in an \verb|\hbox{...}|) at any
+pitch of any staff of any instrument. This allows any symbol defined in a font
+(letters, math symbols, etc.) to be placed in the score at a position keyed
+to the music both in time (horizontally) and pitch (vertically) on the staff,
+\section{A simple example}
+ Before going into more detail, we give below an example of the two first
+bars of the sonata in \mbox{C-major} KV545 by {\sc Mozart}\index{Mozart, W.A.@{\sc
+Mozart, W.A.}}:
+
+\begin{music}
+\parindent11mm
+\setname1{Piano}
+\setstaffs12
+\generalmeter{\meterfrac44}
+\startextract
+\Notes\ibu0f0\qb0{cge}\tbu0\qb0g|\hl j\en
+\Notes\ibu0f0\qb0{cge}\tbu0\qb0g|\ql l\sk\ql n\en
+\bar
+\Notes\ibu0f0\qb0{dgf}|\qlp i\en
+\notes\tbu0\qb0g|\ibbl1j3\qb1j\tbl1\qb1k\en
+\Notes\ibu0f0\qb0{cge}\tbu0\qb0g|\hl j\en
+\zendextract
+\end{music}
+ The coding is as follows:
+\begin{quote}\begin{verbatim}
+\begin{music}
+  \parindent10mm
+  \instrumentnumber{1}               % a single instrument
+  \setname1{Piano}                   % whose name is Piano
+  \setstaffs1{2}                     % with two staffs
+  \generalmeter{\meterfrac44}        % 4/4 meter chosen
+  \startextract                      % starting real score
+    \Notes\ibu0f0\qb0{cge}\tbu0\qb0g|\hl j\en
+    \Notes\ibu0f0\qb0{cge}\tbu0\qb0g|\ql l\sk\ql n\en
+    \bar
+    \Notes\ibu0f0\qb0{dgf}|\qlp i\en
+    \notes\tbu0\qb0g|\ibbl1j3\qb1j\tbl1\qb1k\en
+    \Notes\ibu0f0\qb0{cge}\tbu0\qb0g|\hl j\en
+  \zendextract                       % terminate excerpt
+\end{music}
+ \end{verbatim}\end{quote}
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item \verb|\ibu0f0| begins an upper beam, aligned on the
+\ital{f}, reference number 0, slope 0
+ \item \verb|\tbu0| terminates this beam before writing
+the second \ital{g} by means of \verb|\qb0g|
+ \item \verb|\qb..| indicates a note belonging to a beam.
+ \item \verb|\sk| sets a space between the two quarters in the right
+hand, so that the second one is aligned with the third eighth in the left hand.
+ \item\verb|\qlp| is a dotted quarter note.
+ \item\verb|\ibbl1j3| begins a double beam, aligned on the \ital{C}
+(\verb|j| at this pitch) with slope 15\%.
+\end{itemize}
+
+\section{The three pass system}\label{threepass}
+\subsection{Introduction}
+\TeX's line-breaking procedure implicitly assumes
+that a normal line of text will contain many words, so that inter-word
+glue need not stretch or shrink too much to justify the line.
+One might at first consider extending this to music, treating each bar like a
+word with no stretchable internal space. But typically this would lead to unsightly
+gaps before each bar rule, simply because the number of bars per line
+is normally many fewer than the number of words in a line of text.
+\musixtex\ needs a more sophisticated horizontal spacing algorithm
+than is used in \TeX.
+
+To understand how \musixtex\ solves this problem, we have to
+recognize two different kinds of horizontal space, \ital{hard}\ and
+\ital{scalable}. Hard space is fixed and always represents the same
+physical distance.
+Examples of hard space are the widths of bar rules, clefs,
+and key signatures. Scalable space can be stretched as needed. It
+is what is normally used for the space after notes or rests. At the
+outset it is only defined in a relative sense. In other words,
+scalable spaces are defined as multiples of \verb|\elemskip|, an
+initially undefined basic spacing unit. For example, in \textbf{PMX}\
+all sixteenth notes
+are typically assigned a scalable width of \verb|1.41\elemskip|.
+One main job of \musixtex\ is to compute the physical value of
+\verb|\elemskip|, often expressed in points (72nds of an inch).
+The correct value is that which makes all the scalable space on
+a line just fill up what's not occupied by hard space. Obviously
+it may vary from line to line.
+
+To this end a three pass system was developed. To start the
+first pass on the file \verb|jobname.tex|, you would enter\footnote{
+In many cases it will suffice to run {\tt tex}, but with \musixtex~1.15,
+it is possible to create a file requiring the enhanced capacity of 
+{\tt etex}. Since {\tt etex} can handle any file {\tt tex} can, it's best
+always to use {\tt etex}.} 
+\verb|etex jobname|.
+Information about each bar is written to
+an external file named \verb|jobname.mx1|.
+This file begins with a header containing parameters
+such as line width and paragraph indentation. Then the hard and
+scalable space is listed for each bar.
+\index{scalable width}\index{hard width}
+
+The second pass, which is started with \verb|musixflx jobname|,
+determines optimal values of the basic spacing unit \verb|\elemskip|
+for each line, so as to properly fill each line, and to spread
+the piece nicely over an integral number of full lines. This routine was originally written
+in \textsc{fortran}  rather than \TeX, the main reason
+being the lack of an array handling capability in \TeX; the current version
+of \verb|musixflx| is a \textsc{lua} script, which may be executed without
+compilation in any standard \TeX\ system.
+
+\verb|musixflx| reads in the file \verb|jobname.mx1|, and writes its
+output to \verb|jobname.mx2|. The latter file contains a single entry for
+each line of music in the reformatted output. The key piece of information
+is the revised value of \keyindex{elemskip} for each line.
+
+Next, the file is \TeX-ed again, by entering \verb|etex jobname|. On this third pass,
+the \verb|jobname.mx2| file is read in, and the information
+is used to physically define the final score and embed the
+page descriptions into a \verb|dvi|\ file.
+
+You may wonder how the same command can
+cause something different to happen the second time it is issued. The explanation
+is that \musixtex\ checks for the presence of \verb|jobname.mx2|. If it's
+not present, the first pass is executed; if it is, the third pass. Obviously if
+you've made some corrections that affect any horizontal spacing, you must remember
+to delete the old \verb|jobname.mx2| and then rerun all three passes, or
+build or use a script that does so.
+
+\subsection{An example}
+
+Here's an example. Here, no value for \verb|\elemskip| is explicitly specified,
+so \musixtex\ assigns a single, default value. After the first pass you might get
+the following output:
+
+\begin{music}
+\hsize=100mm
+\generalmeter{\meterfrac24}%
+\parindent 0pt
+\setsign1{-3}
+\nostartrule
+\startpiece\bigaccid
+\NOtes\qu{ce}\en
+\bar
+\NOtes\qu{gh}\en
+\bar
+\NOtes\qu{=b}\en
+\Notes\ds\cu g\en
+\bar
+\NOtes\qu{^f=f}\en
+\raggedstoppiece\contpiece% this is cheated, the problem was to get
+%                           pass 1 and pass 3 at the same time
+\NOtes\qu{=e}\itied0e\qu{_e}\en
+\bar
+\Notes\ttie0\Qqbu ed{_d}c\en
+\bar
+\Notes\ibu0b{-2}\qb0{=b}\en
+\notes\nbbu0\qb0{=a}\tqh0N\en
+\Notes\Dqbu cf\en
+\raggedstoppiece\contpiece
+\NOtes\uptext{\it tr}\qu e\uptext{\it tr}\qu d\en
+\bar
+\NOtes\qu c\qp\en
+\setdoubleBAR\raggedstoppiece
+\end{music}
+
+\noindent Note that the space after every quarter note is the same, and
+that lines are not justified.
+After running \verb|musixflx| and \TeX-ing the second time you'll
+get:
+
+\begin{music}
+\hsize=100mm
+\generalmeter{\meterfrac24}%
+\parindent 0pt
+\generalsignature{-3}
+\nostartrule
+\startpiece\bigaccid
+\NOtes\qu{ce}\en
+\bar
+\NOtes\qu{gh}\en
+\bar
+\NOtes\qu{=b}\en
+\Notes\ds\cu g\en
+\bar
+\NOtes\qu{^f=f}\en
+\bar
+\NOtes\qu{=e}\itied0e\qu{_e}\en
+\bar
+\Notes\ttie0\Qqbu ed{_d}c\en
+\bar
+\Notes\ibu0b{-2}\qb0{=b}\en
+\notes\nbbu0\qb0{=a}\tqh0N\en
+\Notes\Dqbu cf\en
+\bar
+\NOtes\uptext{\it tr}\qu e\uptext{\it tr}\qu d\en
+\bar
+\NOtes\qu c\qp\en
+\Endpiece
+\end{music}
+
+\noindent Now \musixtex\ has determined a number of lines
+(which is different from the original number), the lines are justified,
+and if you look carefully you
+can see that the space after quarters in the first line
+is smaller than in the second. This example was coded as:
+\begin{verbatim}
+\hsize=100mm
+\generalmeter{\meterfrac24}%
+\parindent 0pt
+\generalsignature{-3}
+\nostartrule
+\startpiece\bigaccid
+\NOtes\qu{ce}\en\bar
+\NOtes\qu{gh}\en\bar
+\NOtes\qu{=b}\en
+\Notes\ds\cu g\en\bar
+\NOtes\qu{^f=f}\en\bar
+\NOtes\qu{=e}\itied0e\qu{_e}\en\bar
+\Notes\ttie0\Qqbu ed{_d}c\en\bar
+\Notes\ibu0b{-2}\qb0{=b}\en
+\notes\nbbu0\qb0{=a}\tqh0N\en
+\Notes\Dqbu cf\en\bar
+\NOtes\uptext{\it tr}\qu e\uptext{\it tr}\qu d\en\bar
+\NOtes\qu c\qp\en\Endpiece
+\end{verbatim}
+
+\subsection{Adjusting the layout}
+
+One benefit of the 3-pass system is the quick and easy
+alteration to the layout which can be achieved
+by changing only one parameter, namely \keyindex{mulooseness}. This value
+acts analogously to \TeX's \verb|\looseness| command. For non-\TeX-perts: if you
+state \verb|\looseness=-1| somewhere inside any paragraph, then
+\TeX\ will try to make the paragraph one line shorter than it normally would.
+With \verb|\mulooseness|, \musixtex\ does the same, but for \ital{systems}
+and \ital{sections} rather than lines and paragraphs. A system is just a group of
+staves treated as a unit, and in this discussion is analogous to a line of text.
+What is a \ital{section}? It's any chunk of coding not containing a
+forced system break, System breaks can be forced with
+\keyindex{stoppiece}, \keyindex{endpiece}, \keyindex{zstoppiece},
+\keyindex{Stoppiece}, \keyindex{Endpiece}, \keyindex{alaligne}
+\keyindex{zalaligne}, \keyindex{alapage} or \keyindex{zalapage}. If none
+of these is present, the section comprises the whole piece.
+Somewhere\footnote{Advisably, at the beginning or
+at the end of the section, for the sake of clarity.}
+before the end of the section, you can change the value of
+\keyindex{mulooseness} to something different from the default of 0, and
+\musixtex\ will typeset that section with a different number of systems.
+
+To give an easy example, changing the last line in the previous example to:
+\begin{verbatim}
+\NOtes\qu c\qp\en\mulooseness=1\Endpiece
+\end{verbatim}
+yields:
+
+\begin{music}
+\hsize=100mm
+\generalmeter{\meterfrac24}%
+\parindent 0pt
+\generalsignature{-3}
+\nostartrule
+\startpiece\bigaccid
+\NOtes\qu{ce}\en
+\bar
+\NOtes\qu{gh}\en
+\bar
+\NOtes\qu{=b}\en
+\Notes\ds\cu g\en
+\bar
+\NOtes\qu{^f=f}\en
+\bar
+\NOtes\qu{=e}\itied0e\qu{_e}\en
+\bar
+\Notes\ttie0\Qqbu ed{_d}c\en
+\bar
+\Notes\ibu0b{-2}\qb0{=b}\en
+\notes\nbbu0\qb0{=a}\tqh0N\en
+\Notes\Dqbu cf\en
+\bar
+\NOtes\uptext{\it tr}\qu e\uptext{\it tr}\qu d\en
+\bar
+\NOtes\qu c\qp\en
+\mulooseness1\Endpiece
+\end{music}
+
+\noindent On the other hand,
+\begin{verbatim}
+\NOtes\qu c\qp\en\mulooseness=-1\Endpiece
+\end{verbatim}
+yields
+
+\begin{music}
+\hsize=100mm
+\generalmeter{\meterfrac24}%
+\parindent 0pt
+\generalsignature{-3}
+\nostartrule
+\startpiece\bigaccid
+\NOtes\qu{ce}\en
+\bar
+\NOtes\qu{gh}\en
+\bar
+\NOtes\qu{=b}\en
+\Notes\ds\cu g\en
+\bar
+\NOtes\qu{^f=f}\en
+\bar
+\NOtes\qu{=e}\itied0e\qu{_e}\en
+\bar
+\Notes\ttie0\Qqbu ed{_d}c\en
+\bar
+\Notes\ibu0b{-2}\qb0{=b}\en
+\notes\nbbu0\qb0{=a}\tqh0N\en
+\Notes\Dqbu cf\en
+\bar
+\NOtes\uptext{\it tr}\qu e\uptext{\it tr}\qu d\en
+\bar
+\NOtes\qu c\qp\en
+\mulooseness-1\Endpiece
+\end{music}
+
+\noindent which is tighter than you would ever want, but serves to further
+demonstrate the use of \keyindex{mulooseness}.
+
+If you want to build up a \musixtex\ input file
+manually (which in fact very few users will ever need to do, considering the
+availability of \textbf{PMX}), here is a roadmap for one way to proceed:
+\begin{enumerate}
+ \item Enter the data one \verb|\notes| group at a time, taking care to select the
+relative horizontal spacing for each group (via the macros discussed in Section~\ref{newspacings})
+so as to maintain a consistent relationship between scalable space and note durations.
+This will be discussed in a great deal more detail in Chapter~\ref{preparing}.
+ \item \TeX~$\Longrightarrow$ {\tt musixflx} $\Longrightarrow$ \TeX.
+ \item Look at the output and decide if you want to have more or fewer
+systems, e.g.,~to fill the page or to get an even number of
+pages.\index{musixflx@{\tt musixflx}}
+ \item If you want to change the number of systems in a section, adjust
+\keyindex{mulooseness} accordingly. Keep in mind that each section cannot have fewer
+systems than bars.
+\item Delete \verb|jobname.mx2| and repeat the process\\
+\TeX~$\Longrightarrow$ \verb|musixflx| $\Longrightarrow$ \TeX.
+
+\end{enumerate}
+
+There is an alternate way to proceed if you know at the outset
+how many systems
+you want in a section. You can specify it directly by assigning a
+positive number to \keyindex{linegoal} somewhere within the
+section (\verb|\linegoal| requires
+version 0.83 or later of \verb|musixflx|).
+\keyindex{mulooseness} must be zero
+for \keyindex{linegoal} to work. Both are automatically reset to
+zero after processing the end of a section e.g., as defined by
+\keyindex{stoppiece}.
+
+Finally, for large scores (more than 4 pages or so), having
+only one section and an overall value of \verb|\mulooseness| becomes
+impractical since one wants not only to have nicely spaced systems, but also
+completely filled pages without empty top and
+bottom margins on the last page. It is then wise to force the total number of
+pages and possibly the line breaks in each page, which can be done using
+\keyindex{alapage} and/or \keyindex{alaligne}\footnote{This is the technique
+always used by \textbf{PMX} in constructing a \musixtex\ input file.}.
+%avrb
+%, or more automatically by
+%means of the \keyindex{autolines} command borrowed from \musictex\ and
+%implemented in the additional {\ttxem{musixcpt.tex}} file
+%avre
+
+There is another advantage to \musixtex's way of using scalable space and
+the three pass system. In
+\TeX nical terms it eliminates the need for \ital{glue}, and enables
+every horizontal position in a line to be computed. This in turn enables certain
+variable length symbols such as slurs to be specified by macros entered at
+their beginning and ending points, rather than having to estimate the
+length of the symbol and enter it at the starting point.
+
+ \subsection{Using \texttt{musixflx}}
+
+On most systems, \verb|musixflx|  can be invoked by typing the name of the program
+and the name of the file to be acted upon; i.e.,
+\begin{quote}
+\verb|musixflx jobname.mx1|
+\end{quote}
+Optionally, you can add a letter to indicate one of the debug modes, which are:
+\begin{quote}
+\verb|d | for debug information to screen\\
+\verb|f | for debug information to file \verb|jobname.mxl|\\
+\verb|s | to get the computed lines immediately on screen
+\end{quote}
+To allow for ease of use with scripts, \verb|musixflx| can be fed
+with either \verb|jobname.mx1|, \verb|jobname.tex| or only
+\verb|jobname|, any one of which will open \verb|jobname.mx1|.
+
+ \subsection{Unrecorded spaces: the novice's bugaboo}
+
+Because of the way \musixtex\ accounts for hard and scalable space and avoids
+using glue, it is absolutely essential that every horizontal space be
+properly entered into the input file. The most common error in this regard
+is including a blank space in the midst \ital{or at the end} of an input line.
+Such a blank space, or for that matter any stray character not entered with
+an appropriate \musixtex\ macro, will not be properly
+recognized and recorded by \musixtex, but it will still be treated like
+ordinary text by \TeX. The symptoms of such a transgression will be an
+{\bf Overfull hbox} warning during the third pass, and the appearance of
+either excessive blank horizontal space or thick black vertical lines in
+the page image.
+
+\medskip
+\centerline{\fbox{Considerable discipline is needed to avoid this problem!}}
+\smallskip
+
+The best technique for avoiding such unpleasantness is to avoid entering
+any nonessential blanks within input lines, and to end every
+input line with either \verb|%|\index{%@{\tt\char37}} or
+\keyindex{relax}, unless it already ends with a control sequence
+ending in a letter.
+
+There are other ways to enter unrecorded space which should be
+avoided. Between \verb|\startpiece| and \verb|\stoppiece| or
+\verb|\endpiece|, never use \verb|\hskip| or \verb|\kern| except
+within \ital{zero}-boxes like \verb|\rlap|, \verb|\llap|,
+\verb|\zcharnote|, \verb|\uptext|, etc., and never assign hard
+values to scalable dimensions like \verb|\noteskip|,
+\verb|\elemskip|, \verb|\afterruleskip| and \verb|\beforeruleskip|\footnote{Note that {\Bslash hardspace} does not fall in this
+category; it is specifically designed to enter hard space in a way
+the \musixtex\ can properly record it}.
+
+Here is a checklist of tips related to spacing issues. Because the
+foregoing several paragraphs are so important, some of their content
+is repeated in the list.
+
+\begin{enumerate}
+ \item
+Between \verb|\startpiece| and \verb|\stoppiece| or \verb|\endpiece|,
+end every input line with a either \verb|%| or a command with no arguments
+(including \verb|\relax| and \verb|\en|).
+ \item \verb|\off| must only be used with scalable values, e.g.,
+\verb|\noteskip|, \verb|\elemskip|, \verb|\afterruleskip|, and
+ \verb|\beforeruleskip|.
+ \item Remember that \verb|\qqsk|, \verb|\qsk| and \verb|\hqsk| are scalable, i.e., \verb|\qsk|
+  doesn't necessarily mean exactly one note head width (it depends on \verb|\elemskip|).
+ \item Lyrics and any other non-\musixtex\ text must be put in zero-width boxes
+such as
+  \verb|\zcharnote|, \verb|\zchar|, \verb|\rlap|, \verb|\lrlap|, \verb|\llap|,
+\verb|\uptext|, or \verb|\zsong|. Additional specific capabilities for entering
+lyrics are provided by
+ \verb|\hardlyrics|, \verb|\hsong|, and---most significantly---the
+text-placement macros defined in \verb|musixlyr.tex| (see Chapter~\ref{lyrics},
+p.~\pageref{lyrics}).
+ \item
+Between \verb|\startpiece| and \verb|\stoppiece| or \verb|\endpiece|,
+don't assign hard values to \verb|\noteskip|, \verb|\beforeruleskip|,
+or \verb|\afterruleskip|.
+\end{enumerate}
+
+
+\section{Further highlights}
+ %\check
+ \subsection{Key signatures}
+\begin{sloppypar}
+A single key signature can be assigned~to~all~instruments,~for~example~by 
+\keyindex{generalsignature}\verb|{-2}|
+which sets two flats on each staff. \keyindex{generalsignature}
+can be overridden for selected instruments, for example by
+\keyindex{setsign}\verb|2{1}| which puts one sharp on each staff
+of instrument number 2. Of course, the current signature as well
+as meters and clefs may change at any time.\end{sloppypar}
+\subsection{Transposition}
+With some extra attention, a score can be input in such a way that it is
+fairly easily transposed. There is an internal register
+called \keyindex{transpose}, the default value of which is zero, but which may be
+set to any reasonable positive or negative value. It defines a number of pitch
+steps (lines or spaces on a staff) by which all pitched symbols with be offset, provided
+they have been entered with letter values to represent their pitch.
+However,
+it will neither change the local accidentals nor the key signature.
+
+For
+example, suppose a piece were originally input in F major, and it contained a
+B natural, and you wanted to transpose it to G. If you simply set
+\verb|\transpose| to 1 with no other special considerations, then
+the key signature would not change, and
+the B~natural would appear as a C~natural, whereas it should be a C~sharp.
+So first you must explicitly change the key signature. Then, to
+solve the problem with accidentals, you should declare
+\verb|\relativeaccid|, which will cause the actual appearance of any
+accidental to depend on the pitch of
+the accidental as well as the current key signature. But the use of this
+facility requires the typesetter to have entered the original set of accidentals
+according to a nonstandard convention wherein an accidental does not
+specifically refer to the black or white keys on a piano, but to the
+amount by which the pitch is altered up or down from what it would naturally
+have been, taking the key signature into account.\index{relative accidentals} This
+is discussed in more detail in Section~\ref{transposeaccids}. Now, finally, you
+can enter \verb|\transpose=1| with more or less the desired effect.
+
+More or less, because there is also an issue with stem
+and beam directions. Normally a typesetter would want full control over them,
+and would exercise that control by entering them with macros that explicitly
+assign the direction. Naturally the assigned directions would persist
+even after changing \verb|\transpose|. With respect to stems of unbeamed notes,
+this matter can also be addressed at
+the input level, by using special macros for notes that leave the
+decision about stem directions up to \musixtex. These macros do the right
+thing in the face of transposition. They are discussed in
+Chapter~\ref{autostemdirections}. Unfortunately there is no corresponding
+such facility for beams, so the typesetter will have to edit the transposed
+score to adjust beam directions as required\footnote{\textbf{PMX}
+will automatically adjust both stem and beam directions when transposing, which
+is yet another reason to use it. However
+if a piece is to be transposed, the typesetter must still explicitly activate relative accidentals
+and enter accidentals according to the relative-accidental convention.}.
+
+ %\check
+ \subsection{Extracting parts from a score} 
+It is possible to extract separate scores for
+each individual instrument of a multi-instrument score.
+If you use \textbf{PMX}, it is very easy;
+see the documentation for \textbf{PMX}.
+If you use \musixtex\ without a preprocessor, 
+see Chapter~\ref{parts}.
+
+%After assigning symbolic numbers to instruments,
+%there are macros (see \ref{instrum-inhibit}) that permit
+% \begin{itemize}\setlength{\itemsep}{0ex}
+% \item choosing which instrument the following source code is attached to,
+% \item choosing which staff of an instrument the following source code is
+%attached to,
+% \item hiding one or several instruments by zeroing out their staff sizes and staff
+%numbers.
+% \end{itemize}
+
+ %\check
+ \subsection{Staff and note sizes}
+ Although the standard staff size is 20pt, \musixtex\ allows scores with
+sizes of 16, 24, or 29pt. Furthermore, any instrument may be assigned its own special staff
+size (usually smaller than the overall staff size), and there are special macros
+(e.g., \verb|\smallnotesize|, \verb|\tinynotesize|) that cause notes, beams, and
+accidentals all to take a different size.
+
+\subsection{Add-in macro libraries}
+During the early stages of \musixtex's development, common versions of \TeX\ itself were
+very limited in capacity, especially in terms of the numbers of registers that could
+be defined for use in macros. For this historical reason, many important enhancements
+to \musixtex\ are available only via add-in libraries. The user can thus pick and choose
+which to include for any particular compilation. Most of these are included in
+a \musixtex\ distribution, and their uses are discussed in this manual. The
+libraries have names like \verb|blabla.tex|, and are activated by including a line
+like \verb|\input blabla|\ within the the input file. The most common such files
+are \ttxem{musixadd.tex} and \ttxem{musixmad.tex} which respectively increase the
+number of instruments from the default 6 to 9 or 12 as well as increasing available numbers
+of other features; \verb|musixps.tex| which enables Type~K Postscript slurs; and
+\verb|musixlyr.tex| which greatly eases typesetting lyrics. In fact the latter two,
+while now included in \musixtex\ distributions, are not documented in this manual but
+in separate files, namely \verb|musixps.tex| itself and
+\verb|mxlyrdoc.pdf| respectively.
+
+
+\section{Installing and Using \musixtex}\label{using}
+
+As stated in the preface, 
+the \href{http://icking-music-archive.org/software/indexmt6.html}
+{\underline{Werner Icking Music Archive}}\ (WIMA) contains excellent and detailed
+instructions for installing \TeX, \musixtex{} and the strongly recommended
+preprocessors \textbf{PMX}
+(for instrumental music) and \mbox{\textbf{M-Tx}} (for vocal music) under
+\href{http://icking-music-archive.org/software/htdocs/Getting_Started_Four_Scenar.html#SECTION00022000000000000000}
+{\underline{Linux/\unix}}, 
+\href{http://icking-music-archive.org/software/htdocs/Getting_Started_Four_Scenar.html#SECTION00021000000000000000}
+{\underline{Windows}} and 
+\href{http://icking-music-archive.org/software/htdocs/Getting_Started_Four_Scenar.html#SECTION00023000000000000000}
+{\underline{Mac OS}}. 
+
+As stated in Section~\ref{threepass}, to compile a \musixtex-formatted score, you must run 
+in sequence \verb|etex|, \verb|musixflx|,
+and \verb|etex| again. This will produce a \verb|.dvi| file. From this point
+forward, this file can be processed like the device-independent output file
+for any \TeX\ document. The most common approach and the only one to 
+be discussed here is to next generate a Postscript file. This is accomplished
+by running \verb|dvips|, which is included in every \TeX\ system. To view the 
+Postscript, most users run {\tt GSview} or {\tt gv}, a front-end to {\tt ghostscript}, which must
+be separately downloaded and installed. Finally, you may produce a PDF file 
+using \verb|ps2pdf| or GSview, and view that with any PDF viewer, such as
+the Adobe Reader or {\tt GSview}. 
+
+You also can view the \verb|.dvi| file directly using a DVI viewer such as Yap or \verb|xdvi|, 
+but, if you are using type K Postscript slurs, some DVI viewers will not display them.
+
+Rather than executing all the foregoing programs separately, most users will 
+find it more convenient to use the \verb|musixtex| script that comes in most
+distributions of \musixtex. For example,
+
+\verb|musixtex jobname|
+
+\noindent will run the three passes described in Section~\ref{threepass},
+convert the result to PDF and delete intermediate files.  
+There are many options available to
+change the behavior; run
+
+\verb|musixtex --help|
+
+\noindent to get a summary.
+
+
+\section{Where to get help using \musixtex}
+
+The home base for all matters related to \musixtex\ is the
+Werner Icking Music Archive, at
+\href{http://icking-music-archive.org}{\underline{http://icking-music-archive.org}}.
+There is a  
+\href{http://tug.org/mailman/listinfo/tex-music}{\underline{mailing list}}, 
+hosted by TUG, the \TeX\ Users Group, where you will always find
+someone willing to answer questions and help solve problems.
+
+  \section{A very brief history of \musixtex}
+The idea of using \TeX\ to typeset music appears to have originated
+around 1987 with the master's thesis of Andrea
+{\sc Steinbach} and Angelika {\sc Schofer}\footnote{Steinbach A. \& Schofer
+A., \ital{Automatisierter Notensatz mit \TeX}, master's thesis,
+Rheinische Friedrich-Wilhelms Universit\"at,
+Bonn, Germany, 1987}. They called their package
+\mutex\index{mutex@\protect\mutex}. It was limited to a single staff.
+It introduced two key concepts: (1) using
+a large number of font characters to construct beams and slurs, and (2) using
+\TeX\ glue to help control horizontal spacing and justification.
+
+The next major step came around 1991 when Daniel {\sc Taupin} created \musictex.
+Its major enhancement was to allow multiple staves. But this came at a
+price: some flexibility was lost in controlling horizontal spacing and
+a great deal of trial and error became necessary to avoid excessive or
+insufficient gaps before and after bar lines.
+
+\musictex\ was a single-pass system. To remedy its shortcomings it became clear
+that a multi-pass system would be required. Around 1997 Dr.~Taupin along with Ross {\sc Mitchell}
+and Andreas {\sc Egler} created the first version of \musixtex. At last a fully
+automatic procedure was coded so as to provide pleasing horizontal spacing in
+multi-staff scores.
+
+Significant enhancements to \musixtex, which have already been mentioned, have been provided
+by Stanislav {\sc Kneifl} (Type~K Postscript slurs) and
+Rainer {\sc Dunker} (Lyrics handling via \verb|musixlyr.tex|).
+
+Since Dr.~Taupin passed away in 2003, \musixtex\ has been maintained by a 
+varying cast including Olivier {\sc Vogel}, Hiroaki {\sc Morimoto}, 
+Bob {\sc Tennent}, Andre {\sc Van Ryckeghem}, 
+Cornelius {\sc Noack}, and Don {\sc Simons}.
+
+No discussion of the history of \musixtex\ would be complete without mentioning
+the contributions of Werner {\sc Icking}. From the early days of \mutex\ until
+his untimely death in 2001, he served this line of software as its most prominent
+proponent, beta tester, web site and mailing list editor, consultant,
+problem solver, and inspiration for
+many third-party enhancements including \textbf{PMX}. In fact he founded the
+mailing list and the archive that now is named in his honor. The web site is
+currently edited by Christian {\sc Mondrup}, the software page by Bob {\sc Tennent},
+and the mailing list by Maurizio {\sc Codogno}.
+
+

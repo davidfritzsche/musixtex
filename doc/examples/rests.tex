@@ -1,0 +1,227 @@
+% format plain musixTex musixtEx musIxtex musiCtex
+% (c) 1996, Werner Icking
+\ifx\mxversion\undefined
+ \input musixtex
+ \fi
+\input musixlit
+\hoffset-15.4mm\voffset-15.4mm
+\hsize210mm\advance\hsize-20mm
+\vsize11in\advance\vsize-20mm\advance\vsize-20pt
+\footline{\smalltype Edited by Werner.Icking@gmd.de using \it Herbert Chlapik,
+ Die Praxis des Notensetzers, Doblinger Wien 1987, ISBN 3-9000~035-96-2 \hfil}
+\parskip 12pt minus 12pt
+\nobarnumbers
+%\smallmusicsize
+\geometricskipscale
+\transpose7
+\settrebleclefsymbol1\empty
+\settrebleclefsymbol2\empty
+\setinterinstrument1{-2\Interligne}
+\def\qpp{\pt 5\qp}
+\newbox\xtrcti\newbox\xtrctii\newbox\xtrctiii
+\def\xtrct#1{
+ \def\writeextract{\extract#1\vskip-6pt}
+ \ifnum#1=3\def\extractline{\setbox\xtrctiii\hbox}\fi
+ \ifnum#1=2\def\extractline{\setbox\xtrctii\hbox}\fi
+ \ifnum#1=1\def\extractline{\setbox\xtrcti\hbox}\fi
+ \ifnum#1=0\def\extractline{\centerline}\def\writeextract{}\fi}
+\def\extract#1{
+	\ifnum#1=1\line{\hfil\unhbox\xtrcti\hfil}\fi
+	\ifnum#1=2\line{\xhfil\unhbox\xtrcti\hfil\unhbox\xtrctii\xhfil}\fi
+	\ifnum#1=3\line{\xhfil\unhbox\xtrcti\hfil\unhbox\xtrctii\hfil
+						\unhbox\xtrctiii\xhfil}\fi}
+\def\centeron{\def\xhfil{\hfil}}\def\centeroff{\def\xhfil{}}\centeron
+\def\wrong{\uPtext{wrong}}
+\def\right{\uPtext{right}}
+\def\better{\uPtext{better}}
+\def\notrec{\uPtext{not recommended}}
+\def\uPtext#1{\uptext{\kern-\afterruleskip\medtype\it #1}}
+\def\Endextract{\setdoubleBAR\endextract}
+\def\Startextract{\startextract\addspace{-0.5\afterruleskip}}
+
+\bigtype
+
+Whole rest as whole rest\par
+
+\xtrct1\generalmeter{\meterfrac21}\Startextract
+\NOTes\wh c\pause\en\endextract
+\xtrct2\generalmeter{\meterfrac42}\Startextract
+\NOtes\wrong\ha c\en\NOTes\pause\en\NOtes\hpause\en\endextract
+\xtrct3\generalmeter{\meterfrac42}\Startextract
+\NOtes\right\ha c\hpause\en\NOTes\pause\en\setdoublebar\bar
+\NOtes\better\ha c\hpause\hpause\hpause\en\endextract
+\writeextract
+
+Whole rest as full bar rest {\medtype --- not used for e.g. 3/16}\par
+
+\def\CP{\def\atnextbar{\znotes\centerpause\en}}
+\def\CPB{\def\atnextbar{\znotes\nextinstrument\centerpause\en}}
+
+\xtrct1\generalmeter{\meterfrac18}\Startextract\notesp\sk\en\CP
+\generalmeter{\meterfrac28}\Changecontext\Notes\sk\en\CP
+\generalmeter{\meterfrac38}\Changecontext\Notesp\sk\en\CP
+\generalmeter{\meterfrac48}\Changecontext\NOtes\sk\en\CP
+\generalmeter{\meterfrac14}\Changecontext\Notesp\sk\en\CP
+\generalmeter{\meterfrac24}\Changecontext\NOtes\sk\en\CP
+\generalmeter{\meterfrac34}\Changecontext\NOtesp\sk\en\CP
+\generalmeter{\meterfrac44}\Changecontext\NOTes\sk\en\CP
+\generalmeter{\meterfrac54}\Changecontext\NOTes\sk\en\CP
+\generalmeter{\meterfrac64}\Changecontext\NOTes\sk\en\CP
+\endextract\writeextract
+
+\xtrct1\generalmeter{\meterfrac12}\Startextract\Notesp\sk\en\CP
+\generalmeter{\meterfrac22}\Changecontext\NOtes\sk\en\CP
+\generalmeter{\meterfrac32}\Changecontext\NOtesp\sk\en\CP
+\generalmeter{\meterfrac42}\Changecontext\NOTes\sk\en\CP
+\generalmeter{\meterfrac62}\Changecontext\NOTes\sk\en\CP
+\generalmeter{\meterfrac21}\Changecontext\NOTES\wrong\sk\en\CP
+\generalmeter{\meterfrac21}\Changecontext\NOTes\right\pause\pause\en
+\endextract\writeextract
+
+\instrumentnumber2
+\xtrct1\generalmeter{\meterfrac24}\Startextract
+\Notes\ca c&\ds\en\bar
+\NOtesp\pt c\qa c\en\Notes\ca c\en\CPB\bar
+\Notes\ca c\en\NOtesp\pt c\qa c\en\CPB\bar
+\NOtesp\pt c\qa c&\wrong\en\CPB\Endextract
+\xtrct2\generalmeter{\meterfrac24}\Startextract
+\Notes\ca c&\ds\en\bar
+\NOtesp\pt c\qa c\en\Notes\ca c\en\CPB\bar
+\Notes\ca c\en\NOtesp\pt c\qa c\en\CPB\bar
+\NOtes\pt c\qa c&\right\qp\en\Notes&\ds\en\Endextract
+\writeextract
+
+\xtrct1\generalmeter{\meterfrac68}\Startextract
+\NOtesp\pt c\qa c&\qpp\en\bar
+\NOtesp\pt c\qa c\en\Notes\ibl0c0\qb0{cc}\tbl0\qb0c\en\CPB\bar
+\NOtesp\pt c\qa c&\wrong\en\CPB\Endextract
+\xtrct2\generalmeter{\meterfrac68}\Startextract
+\Notesp\pt c\qa c&\qpp\en\bar
+\NOtesp\pt c\qa c\en\Notes\ibl0c0\qb0{cc}\tbl0\qb0c\en\CPB\bar
+\NOtesp\pt c\qa c&\right\qpp\en\Endextract
+\writeextract
+\instrumentnumber1
+
+Rests and rhythm\par
+
+\centeroff
+\scale{0.9}
+\xtrct1\generalmeter{\meterfrac38}\Startextract
+\NOtes\wrong\qp\en\Notes\ca c\en\bar
+\Notes\right\ds\ds\ca c\en\setdoublebar\bar
+\Notes\wrong\ca c\en\NOtes\qp\en\bar
+\Notes\right\ca c\ds\ds\en\endextract
+\xtrct2\generalmeter{\meterfrac34}\Startextract
+\NOTes\wrong\hpause\en\NOtes\qa c\en\bar
+\NOtes\right\qp\qp\qa c\en\setdoublebar\bar
+\NOtes\wrong\qa c\en\NOTes\hpause\en\bar
+\NOtes\right\qa c\qp\qp\en\endextract
+\writeextract
+
+\scale{0.75}
+\xtrct1\generalmeter{\meterfrac68}\Startextract
+\Notes\wrong\ca c\en\NOtes\qp\en\Notes\ca c\en\NOtes\qp\en\bar
+\Notes\right\ca c\ds\ds\ca c\ds\ds\en\setdoublebar\bar
+\Notes\wrong\ca c\ds\ds\ds\ds\ca c\en\bar
+\Notes\right\ca c\ds\ds\en\NOtes\qp\en\Notes\ca c\en\endextract
+\xtrct2\generalmeter{\meterfrac44}\Startextract
+\NOtes\wrong\qa c\en\NOTes\hpause\en\NOtes\qa c\en\bar
+\NOtes\right\qa c\qp\qp\qa c\en\endextract
+\writeextract
+
+\scale{0.7}
+\xtrct1\generalmeter{\meterfrac34}\Startextract
+\NOtes\uPtext{3/4 versus 6/8}\qa c\qp\qp\en
+\generalmeter{\meterfrac68}\changecontext
+\NOtes\qa c\en\Notes\ds\en\NOtes\qp\en\Notes\ds\en\endextract
+\xtrct2\generalmeter{\meterfrac34}\Startextract
+\Notes\ca c\ds\en\NOtes\qp\en\Notes\ds\ca c\en
+\generalmeter{\meterfrac68}\changecontext
+\Notes\ca c\ds\ds\en\NOtes\qp\en\Notes\ca c\en\endextract
+\xtrct3\generalmeter{\meterfrac34}\Startextract
+\Notes\ca c\ds\en\NOtes\qp\en\Notes\ibl0c0\qb0c\tbl0\qb0c\en
+\generalmeter{\meterfrac68}\changecontext
+\Notes\ca c\ds\ds\ds\en\Notes\ibl0c0\qb0c\tbl0\qb0c\en\endextract
+\writeextract
+
+\scale{0.7}
+\xtrct1\generalmeter{\meterfrac34}\Startextract
+\NOtes\qp\qp\en\Notes\ibl0c0\qb0c\tbl0\qb0c\en
+\generalmeter{\meterfrac68}\changecontext
+\NOtes\qp\en\Notes\ds\ds\en\Notes\ibl0c0\qb0c\tbl0\qb0c\en\endextract
+\xtrct2\generalmeter{\meterfrac34}\Startextract
+\NOtesp\pt c\qa c\en\Notes\ds\en\NOtes\qp\en
+\generalmeter{\meterfrac68}\changecontext
+\NOtesp\pt c\qa c\en\NOtes\qp\en\Notes\ds\en\endextract
+\xtrct3\generalmeter{\meterfrac32}\Startextract
+\NOTes\uPtext{3/2 versus 6/4}\ha c\hpause\hpause\en
+\generalmeter{\meterfrac64}\changecontext
+\NOTes\ha c\en\NOtes\qp\en\NOTes\hpause\en\NOtes\qp\en\endextract
+\writeextract
+
+\scale{0.8}
+\xtrct1\generalmeter{\meterfrac{12}8}\Startextract
+\NOTesp\wrong\pt c\ha c\hpausep\en\endextract
+\xtrct2\generalmeter{\meterfrac{12}8}\Startextract
+\Notes\notrec\ca c\ds\ds\en\NOtes\qp\en\Notes\ds\en\NOtes\qp\en\Notes\ds\en
+\NOtes\qp\en\Notes\ds\en\endextract
+\xtrct3\generalmeter{\meterfrac{12}8}\Startextract
+\NOTesp\right\pt c\ha c\en\NOtesp\qpp\qpp\en\bar
+\NOTesp\right\pt c\ha c\en\NOtesp\qp\en\Notes\ds\en\NOtesp\qp\en\Notes\ds\en
+\endextract
+\writeextract
+
+\scale{0.6}
+\xtrct1\generalmeter{\meterfrac{12}8}\Startextract
+\Notes\right\ca c\ds\ds\en\NOtesp\qpp\en\NOTesp\hpausep\en\bar
+\Notes\right\ca c\ds\ds\en\NOtes\qp\en\Notes\ds\en\NOTesp\hpausep\en\endextract
+\xtrct2\generalmeter{\meterfrac{15}8}\Startextract
+\Notes\wrong\ca c\ds\ds\en\NOtesp\qpp\qpp\qpp\qpp\en\bar
+\Notes\notrec\ca c\ds\ds\en\Notesp\qp\en\Notes\ds\en
+\Notesp\qp\en\Notes\ds\en\Notesp\qp\en\Notes\ds\en\Notesp\qp\en\Notes\ds\en\bar
+\Notes\right\ca c\ds\ds\en\NOTes\hpausep\hpausep\en\endextract
+\writeextract
+
+\scale{0.8}
+\xtrct1\generalmeter{\meterfrac64}\Startextract
+\NOTesp\notrec\hpausep\en\NOTes\hpause\en\NOtes\qa c\en\endextract
+\xtrct2\generalmeter{\meterfrac64}\Startextract
+\NOTes\right\hpause\en\NOtes\qp\en\NOTes\hpause\en\NOtes\qa c\en\bar
+\NOTesp\right\hpausep\en\NOtes\qp\qp\qa c\en\endextract
+\xtrct3\generalmeter{\meterfrac64}\Startextract
+\NOTesp\right\pt c\ha c\en\NOTes\hpause\en\NOtes\qp\en\bar
+\NOTesp\right\pt c\ha c\hpausep\en\endextract
+\writeextract
+
+%\scale{0.8}
+%\xtrct1\generalmeter{\meterfrac{3\meterplus 2}8}\Startextract
+%\NOTesp\notrec\hpausep\en\NOTes\hpause\en\NOtes\qa c\en\endextract
+%\xtrct2\generalmeter{\meterfrac64}\Startextract
+%\NOTes\right\hpause\en\NOtes\qp\en\NOTes\hpause\en\NOtes\qa c\en\bar
+%\NOTesp\right\hpausep\en\NOtes\qp\qp\qa c\en\endextract
+%\xtrct3\generalmeter{\meterfrac64}\Startextract
+%\NOTesp\right\pt c\ha c\en\NOTes\hpause\en\NOtes\qp\en\bar
+%\NOTesp\right\pt c\ha c\hpausep\en\endextract
+%\writeextract
+
+Multibar rests
+
+\scale{1.1}
+\def\TPF{\off{2.5\elemskip}}
+\def\CB#1{\centerbar{#1}}
+\def\CN#1{\CB{\zcharnote{9}{\meterfont\lrlap{#1}}}}
+\xtrct1\generalmeter{}\Startextract
+\NOtesp\sk\en\def\atnextbar{\znotes\CN2\CB{\PAuse}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN3\CB{\PAuse\TPF\pause}\en}\bar
+\NOtesp\sk\en\def\atnextbar{\znotes\CN4\CB{\PAUSe}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN5\CB{\PAUSe\TPF\pause}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN6\CB{\PAUSe\TPF\PAuse}\en}\bar
+\NOTEs \sk\en\def\atnextbar{\znotes\CN7\CB{\PAUSe\TPF\PAuse\TPF\pause}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN8\CB{\PAUSe\TPF\PAUSe}\en}\bar
+\NOTEs \sk\en\def\atnextbar{\znotes\CN9\CB{\PAUSe\TPF\PAUSe\TPF\pause}\en}\bar
+\NOTEs \Hpause 4{0.83}\en\def\atnextbar{\znotes\CN{10}\en}\bar
+\NOTEsp\Hpause 4{0.83}\en\def\atnextbar{\znotes\CN{11}\en}\endextract
+\writeextract
+\vfill\eject
+
+\bye

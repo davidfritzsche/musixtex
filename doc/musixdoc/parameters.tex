@@ -1,0 +1,130 @@
+\chapter{Layout Parameters}\label{LayoutParameters}
+ Most layout parameters are set by \musixtex\ to reasonable default values.
+However, some projects will require altering one or more of them. In this
+section we discuss the most important parameters and how to change them.
+
+ \section{List of layout parameters}
+ In the following, the indication ``\nochange'' does not mean that this
+parameter cannot be changed at all, but that it should not be modified
+directly, e.g,.~by saying something like \verb|\Interligne=14pt|. In other
+words, changes in these parameters must be accomplished only by more
+comprehensive macros which not only revise them but at the same time perform
+other necessary related changes. Even though you cannot \ital{change} these,
+you may \ital{refer} to them in your coding if that proves useful.
+
+\begin{description}\setlength{\itemsep}{0ex}
+ \item[\keyindex{Interligne} :]vertical distance between the bottoms of
+consecutive staff lines of the current instrument, taking no account of a
+possible alteration by \keyindex{setsize}; \nochange.
+ \item[\keyindex{internote} :]vertical spacing between notes one scale
+step apart in the current instrument, taking account of a possible alteration
+by \keyindex{setsize}; \nochange.
+ \item[\keyindex{Internote} :]vertical spacing between notes one scale
+step apart in any instrument whose \keyindex{setsize} has the default
+value \keyindex{normalvalue} ($1.0$), equal to \verb|0.5\Interligne|; \nochange.
+\item[\keyindex{staffbotmarg} :]margin below the first (lowest) staff of the
+first (lowest) instrument. Changes are recognized at the next system.
+Default is \verb|3\Interligne|.
+ \item[\keyindex{stafftopmarg} :]margin above the last (uppermost) staff of
+last (uppermost) instrument. Changes are recognized at the next system.
+Default is \verb|3\Interligne|.
+ \item[\keyindex{interbeam} :]vertical distance between beams; \nochange.
+\item[\keyindex{interstaff} :]a very important macro with a single numerical
+argument representing the factor that multiplies \verb|2\internote| to give the
+distance between the bottom of one staff and the bottom of the next one. In
+fact the macro redefines the parameter \verb|\interfacteur|.
+\item[\keyindex{interportee} :]distance between the bottom of one staff and
+the bottom of the next one. It is always reset to
+\verb|2|\keyindex{interfacteur}\verb|\internote| at the next system.
+Therefore, trying to change \verb|\interportee| will have no effect. Change
+\verb|\interstaff| instead. Further, note that \verb|\interstaff| applies to all the
+instruments, but each distinct instrument may have a different
+\verb|\internote| (see Chapter~\ref{staffspacing}).
+
+\item[\keyindex{interinstrument} :]additional vertical distance between
+two consecutive instruments. This means that the distance between the lowest
+line of the previous instrument and the lowest line of the top staff of the current
+instrument is \verb|\interportee+\interinstrument|. The
+default value of \verb|\interinstrument| is zero, but sometimes you
+may want additional space between distinct instruments. This is a general
+dimension register. As usual in \TeX, it can be set using a command such as
+\verb|\interinstrument=10pt| or \verb|\interinstrument=6\internote|. Its
+value can be overridden for the space above any particular instrument
+with the macro \keyindex{setinterinstrument}\itbrace{n}\itbrace{s}, where
+$n$ is the instrument and $s$ is the replacement value of the space to
+be added. The \verb|\setinterinstrument| macro may be useful in some vocal
+scores to provide vertical space for lyrics. Note that
+after you have used \keyindex{setinterinstrument},
+you cannot reset the distances for that instrument with
+\keyindex{interinstrument}; you must subsequently use
+\keyindex{setinterinstrument} for that purpose.
+
+ \item[\keyindex{systemheight} :]distance from the bottom of the
+lowest staff to the top of the highest one. This is the length of any
+vertical lines such as repeats that span the full height of a system;
+\nochange.
+\end{description}
+
+ In addition, when handling notes of a given staff of a given instrument, the
+following dimensions are available (note these are not true registers, but
+\ital{equivalenced symbols} through a \verb|\def|):
+
+\begin{description}\setlength{\itemsep}{0ex}
+ \item[\keyindex{altplancher} :]altitude of the lowest line of the lowest
+instrument; \nochange.
+ \item[\keyindex{altitude} :]altitude of the lowest line of the lowest
+staff of the current instrument; \nochange.
+ \item[\keyindex{altportee} :]altitude of the lowest line of the current
+staff; \nochange.
+
+ %??? Next perhaps will change to steps of \verb|\internote|.
+
+ \item[\keyindex{stemfactor} :]parameter defining the length of stems on
+half, quarter, and beamed eighth notes, in units of \verb|\interbeam|.
+Normally a stem has the length of one octave,
+i.e.,~\verb|3.5|\keyindex{Interligne}. However, this is not correct for small or tiny
+note sizes. Therefore, stem length is defined as a multiple of the
+dimension \keyindex{interbeam}, which is chosen because it is automatically
+redefined as a
+different multiple of \keyindex{Interligne} whenever note size is changed. For
+example, with \verb|\normalmusicsize| when \verb|\setsize| is
+\verb|\normalvalue|, \verb|\interbeam| is \verb|0.75|\keyindex{Interligne}. This
+legislates a default value for \keyindex{stemfactor} of $4.66$ ($=3.5/0.75$).
+To change stem length, it is easiest to use e.g.,~\keyindex{stemlength}\verb|{3.5}|, which simply redefines \verb|\stemfactor|.
+Subsequently, \verb|\stemfactor| will not automatically be reset to the default,
+but keep in mind that if it is changed
+inside a notes group, the change will only be effective within that notes group.
+\end{description}
+
+ \section{A convenient macro for changing layout parameters}
+Of the parameters just described that can be changed, many should only be
+changed between the end of one system and the beginning of the next. The
+command sequence \verb|\def\atnextline{|\ital{any control sequence}\verb|}|
+may be useful for this purpose. It will cause \ital{any control sequence} to
+be inserted right before the next new line is begun, provided the line break
+is not initiated by a \verb|\startpiece|. Thus this will work with
+automatically generated line breaks, with those forced by \verb|\alaligne|, and
+with those forced by explicit use of \verb|\endpiece| or \verb|\stoppiece|
+followed by \verb|\contpiece|. (Note, however, that in the latter case it
+would be just as convenient to enter the parameter changes explicitly as well.)
+The control sequence will only be executed once,
+after which \verb|\atnextline| is redefined as \verb|\empty|.
+
+ \section{Changing the number of lines per staff}\label{stafflinenumber}
+Naturally, the default number of lines per staff is five. But you may want a
+different number in some or all staves, for example for gregorian music,
+percussion music, guitar tablature, or early baroque keyboard music. To do so,
+use the command \keyindex{setlines}\itbrace{n}\itbrace{m}~where $n$ is the
+instrument number and $m$ is the number of lines.
+
+ \section{Resetting normal layout parameters}
+The general size can only be changed with one of the commands
+\keyindex{smallmusicsize},
+\keyindex{normalmusicsize}, \keyindex{largemusicsize}, or
+\keyindex{Largemusicsize}. Beyond that, the command
+\keyindex{resetlayout} will reset the following key layout parameters
+to their default values: \keyindex{staffbotmarg} (\verb|3\Interligne|),
+\keyindex{stafftopmarg} (\verb|3\Interligne|), \keyindex{interstaff} ($9$),
+ number of lines per staff for all instruments ($5$); and will reset all clef
+symbols to standard clef symbols.
+

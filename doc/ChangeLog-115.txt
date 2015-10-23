@@ -1,0 +1,270 @@
+Changes from MusiXTeX 114 to 115:
+
+replace the changed tex files to T.115. Includes musixbbm.tex, version from Hiroaki's beta3, dtd 11/19/210 
+
+replace musixper.tex to the fixed one, posted by David Fritzsche on 19 Oct.  (version number may be T.60a, is this ok?) Used file emailed to DAS by J-P Coulon, 1/26/11, 
+
+MusiXTeX T.115 
+Hiroaki MORIMOTO <CQX05646(at)nifty.com>
+
+<<<new features>>>
+(1) all-new registers allocation routines, ready for 
+    12<n<100 instruments
+     6<n<100 128th beams
+     6<n<100 256th beams
+     4<n<100 groups
+    12<n<100 font-based slurs (independent of the number of instruments)
+     6<n<100 octlines
+     6<n<100 trills (MusiXTeX trills only. MusicTeX's legacy "trilles" are 
+     out of scope.)
+with e-TeX.
+Syntax-level 100% compatible with T.111-T.114.
+Original (non e-) TeX can be used in case of partial extension.
+All The default settings are exactly equal to T.111-T.114, with and without 
+musix[add|mad|bm|bbm].tex, individually.  
+
+default (musixtex.tex)
+6 voices/128th beams/slurs(font-based)/trills/octave lines
+3 chor groups
+0 256th beams
+
+(musixadd.tex)
+9 voices/slurs(font-based)
+4 chor groups
+6 128th beams/trills/octave lines
+0 256th beams
+
+(musixmad.tex)
+12 voices/slurs(font-based)
+4 chor groups
+6 128th beams/trills/octave lines
+0 256th beams
+
+(musixbm.tex)
+No function since T.111; just for compatibility with old source files.
+
+(musixbbm.tex)
+6 256th beams
+
+
+(2) \smalltrebleoct, \smalltreclelowoct, \smallbassoct, \smallbasslowoct
+
+
+<<<changed features>>>
+(1) In case of use with M-Tx, users can change the font format of 
+instrument names dinamically by redefining \mtxInstrfont in filename.mod.
+(for example, writing \def\mtxInstrfont{\relax} in foo.mod.)
+
+
+<<<bug fixes>>>
+(1) If you load musixper.tex and musixdia.tex is not yet loaded then 
+the catcode of @ will not be reset correctly, because musixdia will 
+overwrite the definition of \catcodeat.  (reported by David Fritzsche)
+
+(2) Other internal macros.
+
+
+-------------------------------------------------------------------------------
+<<<change lists>>>
+
+<<<changes of public macros>>>
+\maxinstruments
+  Separate from the number of slurs.
+  It is defined with \chardef and now a kind of internal values.
+  Read-accecible anywhere; but it should not be set directly by a user.
+  See below for the number of other items. 
+
+\mxversion
+  The expanded string of version string elements.
+  See also \mxvernumber and \mxversuffix.
+
+\setname
+  Using \def instead of \edef.  This allows users to change the font 
+  format of instrument names dynamically by redefining \mtxInstrfont 
+  in filename.mod in case of use with M-Tx.
+
+\resetlayout
+\resetclefsymbols
+  Let them compatible to >12 instruments.
+
+
+<<<new public macros>>>
+\mxvernumber
+  Major version number of the MusiXTeX kernel. (make it possible to use 
+  \ifnum)
+
+\mxversuffix
+  Suffix of the version.  "-beta1", etc.  Optional; it must be empty 
+  in case of completed version.
+
+\setmaxinstruments#1
+\setmaxcxxviiibeams#1
+\setmaxcclvibeams#1
+\setmaxgroups#1
+\setmaxslurs#1
+\setmaxtrills#1
+\setmaxoctlines#1
+  set the available numbers of the elements to #1 and allocate 
+  corresponding registers required.
+
+\maxcxxviiibeams
+\maxcclvibeams
+\maxgroups
+\maxslurs
+\maxtrilles
+\maxtrills
+\maxoctlines
+  They are now dynamically defined by \chardef and now a kind of internal 
+  values.
+  Read-accecible anywhere; but they should not be set directly by a user.
+
+
+\smalltrebleoct
+\smalltreclelowoct
+\smallbassoct
+\smallbasslowoct
+  Reqested by Hermann Hinsch. (beta4)
+
+
+<<<changes of internal macros>>>
+\test@num@slur
+\test@num@beam
+\s@l@ctslur
+\s@l@ctbeam
+  Let them be independent from each other.
+
+\z@suspend
+  The change in cutslur section; to make the number of slurs independent 
+  from the number of instruments.
+  Note: some other extension packages which overrides this macro will 
+  confuse the internal status of linen-breaking font-based slurs.
+
+
+<<<new internal macros>>>
+\noexpand@newcount
+\noexpand@newdimen
+\noexpand@newskip
+\noexpand@newtoks
+  \new... for usage inside the loop, for plain TeX.
+
+\roman@c@
+  A shortcut.
+
+\@oldmaxinstruments
+\@oldmaxcxxviiibeams
+\@oldmaxcclvibeams
+\@oldmaxgroups
+\@oldmaxslurs
+\@oldmaxtrills
+\@oldmaxoctlines
+  Individual element numbers in previous allocation; set by \chardef.
+
+
+-------------------------------------------------------------------------------
+<<<basic usage>>>
+Completely the same of ver T.114-T.103.  It goes on original TeX.
+\input musixtex
+\input musixmad
+...
+\input musixlyr
+\input musixps    <- this is optional
+...
+
+Note that you can use musixps.tex (by Stanislav Kneifl) at your option, 
+without any problem.  You can get the benefit of the increase of voices, 
+beams, groups, octave lines, trills.
+
+
+<<<advanced usages (sometimes requires e-TeX, dependent on the numbers)>>>
+(a) without using musixadd/musixmad (recommended)
+----
+\input musixtex
+\setmaxinstruments{12}
+\setmaxgroups{4}
+\setmaxslurs{12}
+...
+----
+This example is equivalent to musixmad.tex.
+
+
+(b) with musixadd/musixmad
+----
+\input musixtex
+\input musixmad
+\setmaxgroups{6}
+\setmaxslurs{24}
+...
+----
+From this version T.115, the maximum number of slurs becomes independent 
+of the maximum number of instruments.
+
+
+(c) with musixps.tex by S. Kneifl, efficient usage for TeX's main memory
+----
+\input musixtex
+\setmaxinstruments{12}
+\setmaxgroups{4}
+\input musixlyr
+\input musixps
+...
+----
+Note that there is no need to write \setmaxslurs{12}, because musixps.tex 
+0.92a requires pre-allocated registers for font-based slur ID 0-5 
+(internally i-vi)  only.
+
+
+-------------------------------------------------------------------------------
+<<<History of T.115-beta from T.114>>>
+
+[beta1: 2010/05/05] private test version, not published.
+Drastic change from T.114.  
+  _readme_T115-beta1.txt   : this file
+  musixtex.tex : T.115 kernel
+  musixadd.tex : changed version for T.115
+  musixmad.tex : changed version for T.115
+  musixbm.tex  : changed version for T.115
+  musixbbm.tex : changed version for T.115
+  musixper.tex : changed version for T.115
+
+
+[beta2: 2010/06/24]
+musixtex.tex
+Additions: 
+* error message for n>maxinstruments to \s@l@ctinstr, to avoid 
+  the strange error message invoked at \startpiece.
+* error message for n>100 to \setmax...{n}.
+Fixes:
+* \C@acc: adding \expandafter before \@Ti.  
+  \@Ti (dynamically let to other instances) can't take any arguments 
+  since T.109 due to \check@staff.  
+  This is not a bug, however, it is more appropriate to close 
+  \check@staff-\fi conditional clause before encountering \@Ti.  
+  This fix make it compatible with T.107 and T.108, and MusixExp (need to 
+  modify), without any harm.
+Others:
+  Some old codes are deleted.
+
+_readme_T115-beta2.txt
+Others:
+* Typo corrections.  
+
+
+[beta3: 2010/06/27]
+musixbbm.tex
+Fixes: 
+* musixbbm does not work.
+
+
+[beta4: 2011/01/01]
+musixper.tex
+Fixes:
+* If you load musixper.tex and musixdia.tex is not yet loaded then 
+  the catcode of @ will not be reset correctly, because musixdia will 
+  overwrite the definition of \catcodeat.  (reported by David Fritzsche)
+musixtex.tex
+Additions:
+  \smalltrebleoct, \smalltreblelowoct, \smallbassoct, \smallbasslowoct
+  (requested by Hermann Hinsch)
+
+-------------------------------------------------------------------------------
+[End of File]

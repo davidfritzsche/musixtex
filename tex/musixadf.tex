@@ -1,0 +1,138 @@
+%
+% musixadf.tex - some additional accents for MusiXTeX
+%
+%%   Author:
+%%   Hiroaki MORIMOTO <CQX05646\atmark nifty.com>
+%%     Tokyo, Japan
+%%     URL: http://homepage1.nifty.com/kuuku/pub/musixtex/index-e.html
+%
+\immediate\write16{MusiXTeX Additional Accents <2015-02-15> )}%
+%
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+%
+\font\musixadfeleven=xadf11
+\font\musixadfthirteen=xadf13
+\font\musixadfsixteen=xadf16
+\font\musixadftwenty=xadf20
+\font\musixadftwentyfour=xadf24
+\font\musixadftwentynine=xadf29
+%
+\let\comput@fonts@org=\comput@fonts\relax
+\def\comput@fonts{%
+  \comput@fonts@org
+  \ifnum\musicsize=\sixt@@n
+    \let\musixadfLargefont\musixadftwentyfour
+    \let\musixadflargefont\musixadftwenty
+    \let\musixadfnorfont\musixadfsixteen
+    \let\musixadfsmallfont\musixadfthirteen
+    \let\musixadftinyfont\musixadfeleven
+  \else\ifnum\musicsize=\@xxiv
+    \let\musixadfLargefont\musixadftwentynine
+    \let\musixadflargefont\musixadftwentynine
+    \let\musixadfnorfont\musixadftwentyfour
+    \let\musixadfsmallfont\musixadftwenty
+    \let\musixadftinyfont\musixadfsixteen
+  \else\ifnum\musicsize=\@xxix
+    \let\musixadfLargefont\musixadftwentynine
+    \let\musixadflargefont\musixadftwentynine
+    \let\musixadfnorfont\musixadftwentynine
+    \let\musixadfsmallfont\musixadftwentyfour
+    \let\musixadftinyfont\musixadftwenty
+  \else
+    \musicsize\tw@nty
+    \let\musixadfLargefont\musixadftwentynine
+    \let\musixadflargefont\musixadftwentyfour
+    \let\musixadfnorfont\musixadftwenty
+    \let\musixadfsmallfont\musixadfsixteen
+    \let\musixadftinyfont\musixadfthirteen
+  \fi\fi\fi
+}%
+%
+\let\set@Largenotesize@org=\set@Largenotesize\relax
+\let\set@largenotesize@org=\set@largenotesize\relax
+\let\set@normalnotesize@org=\set@normalnotesize\relax
+\let\set@smallnotesize@org=\set@smallnotesize\relax
+\let\set@tinynotesize@org=\set@tinynotesize\relax
+%
+\def\set@Largenotesize{%
+  \set@Largenotesize@org\let\musixadfont\musixadfLargefont}%
+\def\set@largenotesize{%
+  \set@largenotesize@org\let\musixadfont\musixadflargefont}%
+\def\set@normalnotesize{%
+  \set@normalnotesize@org\let\musixadfont\musixadfnorfont}%
+\def\set@smallnotesize{%
+  \set@smallnotesize@org\let\musixadfont\musixadfsmallfont}%
+\def\set@tinynotesize{%
+  \set@tinynotesize@org\let\musixadfont\musixadftinyfont}%
+%
+\def\musixadfchar{\musixadfont\char}%
+%
+\def\uacc@Char@adf#1{\check@staff
+  \inhgetn@i#1\relax \relax
+  \ifnum\n@i<\@ight \ifodd\n@i \else\advance\n@i\@ne \fi \fi
+  \zchar\n@i\C@ChaR@adf
+  \fi}%
+%
+\def\lacc@Char@adf#1{\check@staff
+  \inhgetn@i#1\relax \relax
+  \ifnum\n@i>\@ne \ifodd\n@i \else\advance\n@i\m@ne \fi \fi
+  \zchar\n@i\C@ChaR@adf
+  \fi}%
+\def\C@ChaR@adf{\musixadfont\char\n@iv}%
+%
+\def\@Char@adf#1{\zcharnote{#1}\C@ChaR@adf}%
+%
+% coda sign with serif
+%
+%     ___
+%      |
+%    /~|~\
+% |-+--+--+-|
+%    \_|_/
+%      |
+%     ~~~
+%
+%\def\scoda{\musixadfchar85\relax}%
+\def\adfC@coda#1{\llap{\@Char@adf{#1}\kern\afterruleskip}}%
+\def\scoda{\n@iv85\adfC@coda}%
+\def\replacecoda{\let\coda=\scoda}%
+%
+%
+%
+% upright segno
+%
+%\def\upsegno{\musixadfchar86\relax}%
+\def\upsegno{\n@iv86\@Char@adf}%
+\def\replacesegno{\let\segno=\upsegno}%
+%
+%
+% little swell ...something like <>
+%
+% lower
+\def\llsw{\n@iv31\lacc@Char@adf}
+% upper
+\def\ulsw{\n@iv30\uacc@Char@adf}%
+%
+%
+% a little larger sforzato
+%
+\def\uSfz{\n@iv\tw@nty \uacc@Char@adf}
+\def\lSfz{\n@iv21\lacc@Char@adf}
+\def\dSfz{\lSfz}
+\def\replacesforzato{%
+  \let\usfz=\uSfz\relax
+  \let\lsfz=\lSfz\relax
+}%
+%
+%
+% v-breath
+%
+\def\zuBreath{\check@staff\raise\@ight\internote\rlap{\n@iv33\C@ChaR@adf}\fi}%
+\def\cuBreath{\check@staff\adv@box{\raise\@ight\internote
+   \hbox\@to\noteskip{\hss\n@iv33\C@ChaR@adf\hss}}\fi}%
+\def\zlBreath{\check@staff\raise0\internote\rlap{\n@iv34\C@ChaR@adf}\fi}%
+\def\clBreath{\check@staff\adv@box{\raise0\internote
+   \hbox\@to\noteskip{\hss\n@iv34\C@ChaR@adf\hss}}\fi}%
+%
+\catcode`\@=\catcodeat
+\endinput

@@ -1,0 +1,614 @@
+\ifx\mxversion\undefined
+ \input musixtex
+ \input musixcpt
+ \input musixsty
+\fi
+ \input musixadd
+ \title{Adagio (Albinoni)}
+\csname titremorceautoc\endcsname
+\fulltitle{Adagio per archi ed organo}
+\title{Adagio per archi ed organo}
+ \author{Tomaso Albinoni\\Transcription orgue et clarinette Daniel
+Taupin}
+ \shortauthor{Albinoni}
+ \subtitle{\relax}
+ \othermention{G.O. (I): Montre 8'+4'\\Positif (II): 8'+4'+quinte
+ \\R\'ecit (III): fl\^utes
+8'+4'\\P\'edale : 16'\\Tirasse positif, claviers accoupl‚s.\\Gif :
+2-4/9-11-13/19-22/33-37/46-47-48-49-54}
+ \maketitle
+
+
+\parindent 13mm
+\musicsize=20
+\normal
+\relativeaccidentals
+\bigaccid
+\def\nbinstruments{4}
+\def\instrumenti{P\'edale}
+\def\instrumentii{Positif}
+\def\instrumentiii{Positif}
+\def\instrumentiv{Clarinette}
+\def\staffspacingiv{0.64}
+\generalmeter{\meterfrac34}%
+\cleftoksi{6000}
+\cleftoksii{6000}
+\cleftoksiii{0000}
+\cleftoksiv{0000}
+\generalsignature{-2}
+ %
+ \def\pto#1#2#3{\Ibbbu0{#1}{#3}2\qh0{#1}\tbbu0\qh0{#2}\tbu0\itenu0{#3}\multnoteskip{1.42}\qhp0{#3}}%
+ \def\ptb#1#2#3{\Ibbbl0{#1}{#3}2\qb0{#1}\tbbl0\qb0{#2}\tbl0\itenu0{#3}\multnoteskip{1.42}\qbp0{#3}}%
+ \def\qpqu#1#2{\Ibu0{#1}{#2}2\qhp0{#1}\sk\tbbu0\tqh0{#2}}
+ \def\qpql#1#2{\Ibl0{#1}{#2}2\qbp0{#1}\sk\tbbl0\tqb0{#2}}
+ \def\Qpqu#1#2{\Ibu1{#1}{#2}2\qhp1{#1}\sk\tbbu1\tqh1{#2}}
+ \def\Qpql#1#2{\Ibl1{#1}{#2}2\qbp1{#1}\sk\tbbl1\tqb1{#2}}
+ \def\Qpqlt#1#2#3{\Ibl1{#1}{#2}2\qbp1{#1}\sk\tbbl1\tslur3{#3}\tqb1{#2}}
+ %
+ \def\grnotes{\vnotes0.7\elemskip}%       16th
+ \def\ggrnotes{\vnotes0.5\elemskip}%       16th
+ %
+ \def\qqb#1#2{\Ibl0{#1}{#2}1\qb0{#1}\tqb0{#2}}
+ \def\qqh#1#2{\Ibu0{#1}{#2}1\qh0{#1}\tqh0{#2}}
+ \def\qqqb#1#2#3{{\advance\transpose -13\relax\triolet #2}\Ibl0{#1}{#3}2\qb0{#1}\qb0{#2}\tqb0{#3}}
+ \def\qqqh#1#2#3{{\advance\transpose 8\relax\triolet #1}\Ibu0{#1}{#3}2\qh0{#1}\qh0{#2}\tqh0{#3}}
+ %
+\debutmorceau
+\NOtes\sk\pause&\lpz G\qu G\upz N\ql N\lpz G\qu G
+  &\roff{\itenl1b\itenl2d\itenu3g}\zhp b\zhp d\hlp g&\Uptext{\bf\kern -5mm(\metron{\qu}60)}\sk\pause\enotes
+ \barre %2
+\NOtes\sk\pause&\zcharnote {-7}{\it il basso staccato}\lpz F\qu F\upz M\ql
+M\lpz F\qu F&\tten1\tten2\tten3\zhp b\zhp d\hlp g&\sk\pause\enotes
+ \barre %3
+\notes&\qu E&\roff{\itenl1b\itenl2e}\zhp b\zhlp e\pto ghi&\enotes
+\NOtes\pause&\ql L&\tten0\qup i&\pause\enotes
+\Notes&\qu E&\sk\cu g\enotes
+ \barre %4
+\NOtes&\qu D\ql K\qu D&\tten1\tten2\zhp b\zhlp e\hup g&\sk\pause\enotes
+ \barre %5
+\notes&\qu C&\roff{\zhp e\zhlp h}\pto hij\enotes
+\NOtes\pause&\qu J\qu C&\tten0\hu j&\pause\enotes
+ \barre %6
+\notes&\qu {^C}&\zhp {^e}\zhlp g\pto ihi\enotes
+\NOtes\pause&\qu {^J}\qu C&\tten0\hu i&\pause\enotes
+ \barre %7
+\notes&\qu D&\lh d\itenl1d\zhl d\pto hgh\enotes
+\NOtes\pause&\ql K&\tten0\itenu0h\qu h&\pause\enotes
+\Notes&\qu D&\tten1\lq{=c}\zql d\tten0\triolet p\Ibu0hf2\qh0{hg}\tqh0{^f}\enotes
+ \barre %8
+\NOtes\sk\pause&\qu G\ql N\qu G&\zhp b\zhlp d\hup g&\sk\pause\enotes
+ \setclef2\treble \changeclefs
+ \barre %9
+ \NOtes\lpz G\qu G\upz N\ql N&\zcharnote n{{\bf III} -- fl–tes}\zhp b\hup d&\zcharnote n{{\bf II} -- quinte}\ppt5\soupir&\isluru3m\ql k\Ibl1ji1\qbp 1j\enotes
+ \notes&&\ccu N&\tbbl1\tqb1i\enotes
+ \notes\lpz G\qu G&&\Ibu0ab1\qhp0a\sk\tbbu0\tqh0b&\Ibl1hg2\qbp1h\sk\tbbl1\tslur3m\tqb1g\enotes
+ %\check
+ \barre %10
+ \notes\qu H&\hup c&\qpqu cd&\isluru3m\hu g\enotes
+ \notes\ql a&&\qpqu ed\enotes
+ \notes\qu H&&\qpqu ec&\tslur3l\qu{^f}\enotes
+ \barre %11
+ \NOtes\qu H&\qup c&\qup{^f}&\isluru3l\ql l\enotes
+ \notes\ql a&\sk\dsoupir&\sk\sk\ccu a&\Qpql kj\enotes
+ \notes\qu H&\soupir&\qpqu bc&\Qpqlt ihk\enotes
+ \barre %12
+ \notes\qu I&\hlp d&\qpqu d{^e}&\isluru3l\hl h\enotes
+ \notes\ql b&&\qpqu {^f}d\enotes
+ \NOtes\qu I&&\qu g&\tslur3k\qu g\enotes
+ \barre %13
+ \NOtes\qu I&\zhp d\zhlp g\hu k&\hu g&\isluru3o\ql n\enotes
+ \Notes\ql b&&&\Ibl1mn2\qb1m\tqb1n\enotes
+ \Notes\qu I&&\qu d&\triolet o\Ibl0lk2\qb0{lm}\tqb0k\enotes
+ \barre %14
+ \NOtes\qu J&\zh e\hu g&\qu d&\tslur3n\hlp l\enotes
+ \Notes\ql c&&\Ibu0cd1\qh0c\tqh0d\enotes
+ \Notes\qu J&\soupir&\triolet M\Ibu0ba2\qh0{bc}\tqh0a\enotes
+ \barre %15
+ \NOtes\qu H&\zh c\hu j&\hu f&\isluru3n\ql m\enotes
+ \Notes\ql a&&&\Ibl0lm1\qb0l\tqb0m\enotes
+ \Notes\qu H&\zq c\qu f&\qu c&\triolet n\Ibl0kj2\qb0{kl}\tqb0j\enotes
+ \barre %16
+ \NOtes\qu I&\zh d\hu f&\qu c&\tslur3l\hlp k\enotes
+ \Notes\ql b&&\qqh bc\enotes
+ \Notes\qu I&\soupir&\qqqh abN\enotes
+ \barre %17
+ \NOtes\qu G&\zh b\hu i&\hu e&\isluru3m\ql l\enotes
+ \Notes\ql N&&&\qqb kl\enotes
+ \Notes\qu G&\zq b\qu e&\qu b&\qqqb jki\enotes
+ \barre %18
+ \NOtes\qu H&\zhp c\hup e&\qu b&\tslur3k\hl j\enotes
+ \Notes\ql a&&\qqh ab\enotes
+ \Notes\qu H&&\qqqh cba&\isluru3k\ql j\enotes
+ \barre %19
+ \NOtes\qu I&\hu d&\zq a\qu d&\hl k\enotes
+ \Notes\ql b&&\Ibl1NM1\Ibu0gf1\zqb1N\qh0g\tbl1\zqb1{^M}\tqh0{^f}\enotes
+ \Notes\qu J&\qu e&\Ibl1Na1\Ibu0gh1\zqb1N\zql e\qh0g\tbl1\zqb1a\tqh0h&\ql l\enotes
+ \barre %20
+ \NOTEs\pointdurgue F\hu K&\hu d&\pointdorgue n\zh {bdg}\hu i&\pointdorgue
+ m\tslur3l\hl k\enotes
+ \Notes\soupir&\soupir&\uptext{\kern -5mm\it a tempo}\soupir&\Uptext{\kern -5mm\it a tempo}\ds\cl n\enotes
+ \barre %21
+ \Notes\sk\sk\sk\pause&\sk\sk\sk\pause&\sk\sk\sk\pause&\qqb op\qqb on\qqb {^m}n\enotes
+ \barre %22
+ \NOTes\qu{^I}\ql{^b}&&\zh{df}\hu{_h}&\hlp{=m}\enotes
+ \notes\qu I&&\ibbbu0g0\zq d\qh0f\tbbu0\zq e\qh0g\zq f\qh0h\sk\nbbbu0\zq
+e\qh0g\zq d\tqh0f\enotes
+ \barre %23
+ \NOtes\qu J&&\zhp c\zhlp e\raise 2\Interligne\soupir&\isluru3m\qlp l\enotes
+ \Notes\ql c&&\hu g&\sk\cl j\enotes
+ \notes\qu J&&&\qpql ln\enotes
+ \barre %24
+ \NOtes\qu {=I}&&\zhp N\zhlp d\raise 2\Interligne\soupir&\tslur3l\qlp k\enotes
+ \Notes\ql {=b}&&\hu g&\sk\isluru3l\cl i\enotes
+ \notes\qu I&&&\qpql kn\enotes
+ \barre %25
+ \NOtes\qu {_H}\ql{_a}&&\zh {_a}\zhl c&\tslur3l\hl j\enotes
+ \notes\qu H&\zcharnote a{(III -- fl–tes)}\qu e&\ibbbu0j0\zq {_h}\qh0j\tbbu0\zq i\qh0k\zq j\qh0l\sk\nbbbu0\zq
+i\qh0k\zq h\tqh0j&\isluru4k\ql j\enotes
+ \barre %26
+ \NOtes\qu K\ql d&\hup d&\zh g\zhu i&\hlp i\enotes
+ \notes\qu K&&\ibbbu0i0\zq g\qh0i\tbbu0\zq {=h}\qh0j\zq i\qh0k\sk\nbbbu0\zq
+h\qh0j\zq g\tqh0i\enotes
+ \barre %27
+ \NOtes\qu K\ql d&\hup c&\zh {^f}\zhu h&\hlp h\enotes
+ \notes\qu K&&\ibbbu0h0\zq f\qh0h\tbbu0\zq g\qh0i\zq h\qh0j\sk\nbbbu0\zq
+g\qh0i\zq f\tqh0h\enotes
+ \barre %28
+ \NOtes\qu G\ql N\qu G&\itenl1b\hup b&\itenl2d\itenu3g\zhp d\hup g&\tslur4l\hup g\enotes
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \barno 1\relax
+ \barre %2
+\NOtes\zcharnote {-7}{\it il basso staccato}\lpz F\qu F\upz M\ql
+M\lpz F\qu F&\tten1\hup b&\tten2\tten3\zhp d\hup g&\sk\pause\enotes
+ \barre %3
+\notes\qu E&&\roff{\itenl1b\itenl2e}\zhp b\zhlp e\pto ghi&\enotes
+\NOtes\ql L&&\tten0\qup i&\pause\enotes
+\Notes\qu E&&\sk\cu g\enotes
+ \barre %4
+\NOtes\qu D\ql K\qu D&&\tten1\tten2\zhp b\zhlp e\hup g\enotes
+ \barre %5
+\notes\qu C&&\roff{\zhp e\zhlp h}\pto hij\enotes
+\NOtes\qu J\qu C&&\tten0\hu j&\pause\enotes
+ \barre %6
+\notes\qu {^C}&&\zhp {^e}\zhlp g\pto ihi\enotes
+\NOtes\qu {^J}\qu C&&\tten0\hu i&\pause\enotes
+ \barre %7
+\notes\qu D&&\lh d\itenl1d\zhl d\pto hgh\enotes
+\NOtes\ql K&&\tten0\itenu0h\qu h&\pause\enotes
+\Notes\qu D&&\tten1\lq{=c}\zql d\tten0\triolet p\Ibu0hf2\qh0{hg}\tqh0{^f}\enotes
+ \barre %8
+\NOtes\qu G\ql N\qu G&&\zhp b\zhlp d\hup g\enotes
+ \barre %9
+ \NOtes\lpz G\qu G\upz N\ql N&\zhp b\hup d\zcharnote a{(III --
+fl–tes)}&\ppt5\soupir\zcharnote n{(II -- quinte)}&\isluru3m\ql
+k\Ibl1ji1\qbp 1j\enotes
+ \notes&&\ccu N&\tbbl1\tqb1i\enotes
+ \notes\lpz G\qu G&&\Ibu0ab1\qhp0a\sk\tbbu0\tqh0b&\Ibl1hg2\qbp1h\sk\tbbl1\tslur3m\tqb1g\enotes
+ %\check
+ \barre %10
+ \notes\qu H&\hup c&\qpqu cd&\isluru3m\hu g\enotes
+ \notes\ql a&&\qpqu ed\enotes
+ \notes\qu H&&\qpqu ec&\tslur3l\qu{^f}\enotes
+ \barre %11
+ \NOtes\qu H&\qup c&\qup{^f}&\isluru3l\ql l\enotes
+ \notes\ql a&\sk\dsoupir&\sk\sk\ccu a&\Qpql kj\enotes
+ \notes\qu H&\soupir&\qpqu bc&\Qpqlt ihk\enotes
+ \barre %12
+ \notes\qu I&\hlp d&\qpqu d{^e}&\isluru3l\hl h\enotes
+ \notes\ql b&&\qpqu {^f}d\enotes
+ \NOtes\qu I&&\qu g&\tslur3k\qu g\enotes
+ \barre %13
+ \NOtes\qu I&\zhp d\zhlp g\hu k&\hu g&\isluru3o\ql n\enotes
+ \Notes\ql b&&&\Ibl1mn2\qb1m\tqb1n\enotes
+ \Notes\qu I&&\qu d&\triolet o\Ibl0lk2\qb0{lm}\tqb0k\enotes
+ \barre %14
+ \NOtes\qu J&\zh e\hu g&\qu d&\tslur3n\hlp l\enotes
+ \Notes\ql c&&\Ibu0cd1\qh0c\tqh0d\enotes
+ \Notes\qu J&\soupir&\triolet M\Ibu0ba2\qh0{bc}\tqh0a\enotes
+ \barre %15
+ \NOtes\qu H&\zh c\hu j&\hu f&\isluru3n\ql m\enotes
+ \Notes\ql a&&&\Ibl0lm1\qb0l\tqb0m\enotes
+ \Notes\qu H&\zq c\qu f&\qu c&\triolet n\Ibl0kj2\qb0{kl}\tqb0j\enotes
+ \barre %16
+ \NOtes\qu I&\zh d\hu f&\qu c&\tslur3l\hlp k\enotes
+ \Notes\ql b&&\qqh bc\enotes
+ \Notes\qu I&\soupir&\qqqh abN\enotes
+ \barre %17
+ \NOtes\qu G&\zh b\hu i&\hu e&\isluru3m\ql l\enotes
+ \Notes\ql N&&&\qqb kl\enotes
+ \Notes\qu G&\zq b\qu e&\qu b&\qqqb jki\enotes
+ \barre %18
+ \NOtes\qu H&\zhp c\hup e&\qu b&\tslur3k\hl j\enotes
+ \Notes\ql a&&\qqh ab\enotes
+ \Notes\qu H&&\qqqh cba&\isluru3k\ql j\enotes
+ \barre %19
+ \NOtes\qu I&\hu d&\zq a\qu d&\hl k\enotes
+ \Notes\ql b&&\Ibl1NM1\Ibu0gf1\zqb1N\qh0g\tbl1\zqb1{^M}\tqh0{^f}\enotes
+ \Notes\qu J&\qu e&\Ibl1Na1\Ibu0gh1\zqb1N\zql e\qh0g\tbl1\zqb1a\tqh0h&\ql l\enotes
+ \barre %20
+ \NOTEs\pointdurgue F\hu K&\hu d&\pointdorgue n\zh {bdg}\hu i&\pointdorgue
+ m\tslur3l\hl k\enotes
+ \Notes\soupir&\soupir&\uptext{\kern -5mm\it a tempo}\soupir&\Uptext{\it a tempo}\ds\cl n\enotes
+ \barre %21
+ \Notes\sk\sk\sk\pause&\sk\sk\sk\pause&\sk\sk\sk\pause&\qqb op\qqb on\qqb {^m}n\enotes
+ \barre %22
+ \NOTes\qu{^I}\ql{^b}&&\zh{df}\hu{_h}&\hlp{=m}\enotes
+ \notes\qu I&&\ibbbu0g0\zq d\qh0f\tbbu0\zq e\qh0g\zq f\qh0h\sk\nbbbu0\zq
+e\qh0g\zq d\tqh0f\enotes
+ \barre %23
+ \NOtes\qu J&&\zhp c\zhlp e\raise 2\Interligne\soupir&\isluru3m\qlp l\enotes
+ \Notes\ql c&&\hu g&\sk\cl j\enotes
+ \notes\qu J&&&\qpql ln\enotes
+ \barre %24
+ \NOtes\qu {=I}&&\zhp N\zhlp d\raise 2\Interligne\soupir&\tslur3l\qlp k\enotes
+ \Notes\ql {=b}&&\hu g&\sk\isluru3l\cl i\enotes
+ \notes\qu I&&&\qpql kn\enotes
+ \barre %25
+ \NOtes\qu {_H}\ql{_a}&&\zh {_a}\zhl c&\tslur3l\hl j\enotes
+ \notes\qu H&\zcharnote a{(III --
+fl–tes)}\qu e&\ibbbu0j0\zq {_h}\qh0j\tbbu0\zq i\qh0k\zq j\qh0l\sk\nbbbu0\zq
+i\qh0k\zq h\tqh0j&\isluru3k\ql j\enotes
+ \barre %26
+ \NOtes\qu K\ql d&\hup d&\zh g\zhu i&\hlp i\enotes
+ \notes\qu K&&\ibbbu0i0\zq g\qh0i\tbbu0\zq {=h}\qh0j\zq i\qh0k\sk\nbbbu0\zq
+h\qh0j\zq g\tqh0i\enotes
+ \barre %27
+ \NOtes\qu K\ql d&\hup c&\zh {^f}\zhu h&\hlp h\enotes
+ \notes\qu K&&\ibbbu0h0\zq f\qh0h\tbbu0\zq g\qh0i\zq h\qh0j\sk\nbbbu0\zq
+g\qh0i\zq f\tqh0h\enotes
+ \barno 29\relax
+ \barre %30
+ \znotes&&&\tslur3l\enotes
+ \NOTEs\itenl0G\hup G&\itenl1b\itenu2f\zhp{=f}\hup{^b}&\itenl3b\itenu4g\itenl5d\zhp{^b}\zhp d\hup g&\itenu6g\hup g\enotes
+ \barre %31
+ \znotes\tten0&\tten1\tten2&\tten3\tten4\tten5&\tten6\enotes
+ \NOTes\itenl0G\hup G&\zq f\qu{^b}&\itenl1b\itenl2d\itenu3g\zhp{^b}\zhp d\hup g&\qu g\enotes
+ \zalapage
+ \def\qqqq#1#2#3#4{\Ibbu0{#1}{#4}3\qh0{#1#2#3}\tqh0{#4}}%
+ \def\qqqqh{\qqqq}%
+ \def\qqqqb#1#2#3#4{\Ibbl0{#1}{#4}3\qb0{#1#2#3}\tqb0{#4}}%
+ \notes&&\zcharnote n{\kern -4mm{\bf III} -- fl–tes}&\ds\cu g\qqqq{_h}g{^f}g\enotes
+ \barre %32
+ \znotes&&\tten1\tten2\tten3\zcharnote r{\kern -2mm
+\it reprendre au III}\zcharnote n{\kern -2mm
+\it l'accord du II accoupl‚}\enotes
+ \notes\tten0\itenl0G\hup G&&\itenl1d\itenl2b\itenu3g\zhp d\zhp
+g\hup{^b}&\qqqq{=f}ede\qqqq fede\qqqq dc{^b}c\enotes
+ \barre %33
+ \NOTes\tten0\hu G&&\tten1\tten2\tten3\zh d\zh g\hu{^b}&\hu d\enotes
+ \cleftoksii{6000}\zchangeclefs
+ \notes\pt5\ds\ccu G&\uptext{\bf II}\pt5\ds\ccl M&\uptext{\bf II}\pt5\ds\zq {^b}\zq d\ccu g&\soupir\enotes
+ \barre %34
+ \NOtes\itenl0G\hup G&\ql L&\itenl1c\itenl2e\itenu3g\zhp c\zhp e\hup g&\soupir\enotes
+ \Notes&&\uptext{{\bf III} - fl–tes}&\ds\cu g\enotes
+ \notes&\hpause&&\qqqq{_h}g{^f}g\enotes
+ \barre %35
+ \notes\tten0\itenl0G\hup G&&\tten1\tten2\tten3\itenl1c\itenl2e\zhp{ce}\hup
+g&\qqqq{=f}ede\qqqq fede\qqqq edc{^b}\enotes
+ \barre %36
+ \NOTes\pointdorgue b\tten0\itenl0G\hup G&&\pointdorgue m\tten1\tten2\itenl1c\itenl2e\zhp c\hup
+e&\pointdorgue m\qu c\enotes
+ \Notes&&&\ds\cu N\qqh ce\enotes
+ \barre %37
+ \notes\tten0\itenl0G\hup G&&\tten1\tten2\itenl1c\itenl2e\zhp c\hup e&\qqqq
+gecN\qqqq cegj\qqqq ljge\enotes
+ \barre %38
+ \notes\tten0\itenl0G\hup G&&\tten1\tten2\itenl1c\itenl2e\zhp c\hup e&\qqqq
+gjln\qqqq qnlj\qqqq lnqs\enotes
+ \barre %39
+ \NOTes\tten0\hu G&&\tten1\tten2\zh c\hu e&\pointdurgue c\qlp {!'n}\enotes
+ \notes\pt5\ds\ccu G&\uptext{\kern -5mm\bf I -- \ppff ff}\pt5\ds\ccl N&\uptext{\kern -5mm\bf I --
+\ppff ff}\pt5\ds\zq c\ccu e&\soupir\enotes
+ \barre %40
+ \NOtes\itenl0G\hup G&\ql N&\itenl1b\roff{\itenl2c}\itenu3e\zhp b\roff{\zhp c}\hup {^e}&\soupir\enotes
+ \Notes&\soupir&\uptext{{\bf III} - fl–tes}&\ds\cl j\enotes
+ \notes&&&\qqqq{_k}j{^i}j\enotes
+ \barre %41
+ \notes\tten0\itenl0G\hup G&&\tten1\tten2\tten3\itenl1b\roff{\itenl2c}\itenu3e\zhp b\roff{\zhp c}\hup {^e}%
+ &\qqqq {=i}{_h}gh\qqqq ihgh\qqqq gf{^e}f\enotes
+ \barre %42
+ \NOTes\tten0\hu G&&\tten1\tten2\tten3\zh b\rh c\hu {^e}&\hu g\enotes
+ \notes\pt5\ds\ccu G&\uptext{\bf II}\pt5\ds\ccl N&\uptext{\bf II}\pt5\ds\zq
+b\rq c\ccu {^e}&\soupir\enotes
+ \barre %43
+ \NOtes\itenl0F\hup F&\ql M&\itenl1a\itenl2c\itenu3f\zhp {_a}\zhp c\hup f&\soupir\enotes
+ \Notes&&\uptext{{\bf III} - fl–tes}&\ds\cu j\enotes
+ \notes&\hpause&&\qqqq{_k}j{^i}j\enotes
+ \barre %44
+ \notes\tten0\itenl0F\hup F&&\tten1\tten2\tten3\itenl1a\itenl2c\zhp{_a}\zhp c\hup
+f&\qqqq{=i}{_h}gh\qqqq ihgh\qqqq hgf{^e}\enotes
+ \barre %45
+ \NOTes\pointdorgue b\tten0\itenl0F\hup F&&\pointdorgue m\tten1\tten2\itenl1a\itenl2c\zhp {_a}\hup
+c&\pointdorgue m\qu f\enotes
+ \Notes&&&\ds\cu {_a}\qqh cf\enotes
+ \barre %46
+ \notes\tten0\itenl0F\hup F&&\tten1\tten2\itenl1a\itenl2c\zhp {_a}\hup c&\qqqq
+{_h}fc{_a}\qqqq cfhj\qqqq mjhf\enotes
+ \barre %47
+ \notes\tten0\itenl0F\hup F&&\tten1\tten2\itenl1a\itenl2c\zhp {_a}\hup c&\qqqq
+{_h}jm{_o}\qqqq qomj\qqqq moqt\enotes
+ \barre %48
+ \NOTes\tten0\hu F&&\tten1\tten2\zh {_a}\hu c&\pointdurgue e\qlp {!'_o}\enotes
+ \notes\pt5\ds\ccu F&\uptext{\kern -5mm\bf I -- \ppff ff}\pt5\ds\ccl
+M&\uptext{\kern -5mm\bf I --
+\ppff ff}\pt5\ds\zq {ac}\ccu f&\soupir\enotes
+ \barre %49
+ \NOtes\itenl0D\hup D&\qu K&\itenl1a\itenl2c\itenu3f\zhp {=a}\zhp c\hup {^f}&\soupir\enotes
+ \Notes&\soupir&\uptext{{\bf III} - fl–tes}&\ds\cl j\enotes
+ \Notes&&&\qqb kl\enotes
+ \barre %50
+ \notes\tten0\hup D&&\tten1\tten2\tten3\zhp a\zhp c\hup {^f}%
+ &\qqqq lk{=m}l\qqqq lkkj\qqqq j{^i}ij\enotes
+ \barre %51
+ \notes\lpz G\qu G&&\zhp N\zhp{^b}\itenu1f\hup{=f}&\ptb {^i}jk\enotes
+ \NOtes\upz N\ql N&&&\tten0\qlp k\enotes
+ \Notes\lpz N\qu G&&\tten1\qqh fe&\sk\cl j\enotes
+ \barre %52
+ \NOtes\lpz J\qu J\upz c\ql c\upz J\qu J&&\itenl1N\itenl2c\itenu3e\zhp N\zhp
+c\hup e&\hlp j\enotes
+ \barre %53
+ \NOtes\qu{=I}\ql{=b}\qu I&\sk\uptext{\bf II}&\tten1\tten2\tten3\zhp N\zhp
+c\hup e\uptext{\bf II}&\sk\pause\enotes
+ \barre %54
+\notes\qu {_H}&&\itenl1e\itenl2h\zhp e\zhlp {_h}\pto jkl&\enotes
+\NOtes\ql {_a}&&\tten0\qup l&\pause\enotes
+\Notes\qu H&&\sk\cu j\enotes
+ \barre %55
+\NOtes\qu G\ql N\qu G&&\tten1\tten2\zhp e\zhlp {_h}\hup j\enotes
+ \barre %56
+\notes\qu F&&\roff{\zhp {_h}\zhlp k}\pto klm\enotes
+\NOtes\qu M\qu F&&\tten0\hu m&\pause\enotes
+ \barre %57
+\notes\qu {^F}&&\zhp {=h}\zhlp j\pto lkl\enotes
+\NOtes\qu {^M}\qu F&\hpause\ql c&\tten0\hu l&\pause\enotes
+ \barre %58
+\notes\qu G&\hl c&\zhlp g\pto kjk\enotes
+\NOtes\ql N&&\tten0\itenu0k\qu k&\pause\enotes
+\Notes\qu G&\uptrio e2{10}\ql{^b}\sk\cl{=f}&\tten0\triolet t\Ibu0ki2\qh0{kj}\tqh0{^i}\enotes
+ \barre %59
+\NOtes\qu J\ql c\qu J&\hlp e\uptext{ \bf I -- \ff}&\zhlp g\hup j\uptext{ \bf I -- \ff}&\sk\pause\enotes
+ \barre %60
+ \NOTes\qu C&&\zq g\zq j\ql l&\isluru3m\ql n\enotes
+ \Notes\qu J&\sk\sk\ccl N&\pt5\ds\sk\ccu c&\qpql ml\enotes
+ \Notes\qu C&\qpql {^b}c&\qpqu de&\qpql kj\enotes
+ \barre %61
+ \Notes\qu D&\hl c&\qpqu fg&\hl k\enotes
+ \Notes\qu K&&\qpqu {_h}g\enotes
+ \Notes\qu D&\ql{^b}&\rlap{\sk\sk\itenl0f}\qpqu hf&\tslur3j\ql{^i}\enotes
+ \barre %62
+ \NOTes\qu D&&\tten0\Sh i\lFl h\rq i\zq h\qu f&\isluru3p\ql {_o}\enotes
+ \Notes\qu K&\sk\sk\ccl {^b}&\pt5\ds\sk\ccu d&\qpql nm\enotes
+ \Notes\qu D&\qpql cd&\qpqu ef&\qpql lk\enotes
+ \barre %63
+ \Notes\qu E&\hl d&\qpqu g{=h}&\hl k\enotes
+ \Notes\qu L&&\rlap{\sk\sk\itenl1g}\qpqu {^i}g\enotes
+ \Notes\qu E&\ql c&\tten1\zq g\qu j&\tslur3j\ql j\enotes
+ \barre %64
+ \NOTes\qu E&\ql c&\zq g\qu j&\ust q\ql q\enotes
+ \Notes\ql L&\zhl N\Ibu1dc1\qh1d\itenu0c\tqh1c&\qqh{=i}j&\qqb{=p}q\enotes
+ \Notes\qu E&\tten0\itenu0c\qu c&\Fl h\rlap{\sk\sk\itenl2g}\qqqh hig&\isluru3p\Fl o\qqqb opn\enotes
+ \barre %65
+ \NOTes\qu F&\tten0\hup c&\roff{\tten2\zql g}\hup{_h}&\tslur3p\hlp{_o}\enotes
+ \Notes\ql M&\qqb fg&\enotes
+ \Notes\qu F&\qqqb efd\enotes
+ \barre %66
+ \NOTes\qu D&\ql b&\zq f\qu i&\ust p\ql p\enotes
+ \Notes\ql K&\zhl M\Ibu1cb1\qh1c\itenu0b\tqh1b&\qqh{_h}i&\qqb{_o}p\enotes
+ \Notes\qu D&\tten0\itenu0b\qu b&\rlap{\sk\sk\itenl2f}\qqqh ghf&\isluru3o\qqqb {n}om\enotes
+ \barre %67
+ \NOTes\qu E&\tten0\hup b&\roff{\tten2\zql f}\hup g&\tslur3o\hlp n\enotes
+ \Notes\ql L&\qqb ef\enotes
+ \Notes\qu E&\qqqb dec\enotes
+ \barre %68
+ \NOtes\qu C&\lh e\itenu1f\hlp f&\qu{=h}&\itenu3m\hlp m\enotes
+ \Notes\qu J&&\sk\cu h\enotes
+ \Notes\qu C&&\qpqu ij\enotes
+ \barre %69
+ \NOtes\qu D&\zhp b\tten1\zhlp f&\hup i&\tten3\ql m\enotes
+ \Notes\qu K&&\uptext{\bf II}&\ds\isluru3n\cl m\enotes
+ \Notes\qu D&&&\qpql ki\enotes
+ \barre %70
+ \NOtes\qu E&\hlp b&\zh e\hu g&\tslur3j\ql i\enotes
+ \Notes\qu L&&&\ds\isluru3j\cl {=h}\enotes
+ \Notes\qu E&&\qqh ge&\qpql ij\enotes
+ \barre %71
+ \NOtes\qu D&\ql b&\qu f&\tslur3k\qlp i\enotes
+ \Notes\qu K&\soupir&\ds\cu f&\sk\ds\enotes
+ \Notes\qu D&\ql M&\qpqu db&\soupir\enotes
+ \barre %72
+ \NOtes\qu E&\hl N&\qup b\enotes
+ \Notes\qu L&&\ds\cu a&\pause\enotes
+ \Notes\qu E&\ql N&\qpqu bc\enotes
+ \barre %73
+ \NOtes\pointdorgue a\hup D&\hlp M\uptext{\bf III}&\pointdorgue l\hup
+b\uptext{\bf III}&\sk\pointdorgue l\pause\sk\enotes
+ \barre %74
+ \NOtes\hup D&\hlp M&\zq b\qu f&\itenu3p\ql p\enotes
+ \notes&&\zhl f\qu k&\tten3\qqqqb ponm\enotes
+ \notes&&\qu i&\qqqqb lkji\enotes
+ \barre %75
+ \Notes\hup E&\hlp L&\zql e\zh g\hu j&\cu g\itenu3n\qlp n\enotes
+ \NOtes&&\zhl c&\enotes
+ \notes&&\zq b\qu g&\tten3\qqqb nlj\enotes
+ \barre %76
+ \NOtes\lpz F\qu F\upz M\ql M\lpz F\qu F&\hl b\sk\ql{_a}&\zhp c\hup f&\hl i\sk\ql{_h}\enotes
+ \barre %77
+ \NOtes\lpz D\qu D&\ql f&\hu i&\itenu3m\hl m\enotes
+ \NOtes\upz K\ql K&\hl b&&\enotes
+ \notes\lpz D\qu D&\ql {_a}&\qu f&\tten3\qqqb mki\enotes
+ \barre %78
+ \NOtes\qu E&\roff{\zql a}\Fl a\zhp e\hlp b&\uptext{{\bf II} -- quinte}\soupir&\qu{_h}\enotes
+ \Notes\ql L&\hl N&\ds\cu e&\hu g\enotes
+ \notes\qu E&&\qpqu bN\enotes
+ \barre %79
+ \NOtes\qu D&\hl M&\hup{^b}&\qu f\enotes
+ \Notes\qu K&&&\ds\cu {^b}\enotes
+ \notes\qu D&\ql M&&\qpqu cd\enotes
+ \barre %80
+ \NOtes\qu E&\zhp N\hlp c&\soupir&\hup c\enotes
+ \Notes\ql L&&\ds\cl q\enotes
+ \notes\qu E&\zqp N\qlp c&\qpqu nl\enotes
+% \def\grace{\catcodesmusic\grnotes&&&\grcu}%
+ \def\grace{\catcodesmusic\hardnotes 1.5\Interligne\notes&&&\grcu}%
+ \barre %81
+ \grace{_a}\enotes
+ \NOtes\qu F&\hlp {_a}&\qup j&\hup f\enotes
+ \Notes\ql M&&\ds\cu {^i}\enotes
+ \notes\qu F&&\qpqu jk\enotes
+ \barre %82
+ \grace{N}\enotes
+ \NOtes\qu E&\hlp N&\hlp j&\qup e\enotes
+ \Notes\ql L&&&\sk\cl j\enotes
+ \notes\qu E&&&\qpqu ge\enotes
+ \barre %83
+ \NOtes\qu F&\itenu2c\zhp c\hlp {_a}&&\qup c\enotes
+ \Notes\ql M&&&\sk\cu {^b}\enotes
+ \notes\qu F&&&\qpqu cd\enotes
+ \barre %84
+ \NOTes\qup E&\tten2\zqp c\qlp g&&\qup c\enotes
+ \Notes\soupir\sk\cu
+E&&\ibl0c0\ibu1j0\zqb0c\qh1j\zqb0{^b}\qh1{^i}\tbl0\tbu1\zqb0c\zq g\qh1j&\ds\soupir\enotes
+ \barre %85
+ \NOtes\qu F\ql M&&\zhl {_d}\zh {_h}\hu {_k}\enotes
+ \notes\qu F&&\ibbbl0f0\ibbbu1k0\zqb0d\qh1k\tbbl0\tbbu1\zqb0e\qh1l\zqb0f\qh1m\sk
+ \nbbbl0\nbbbu1\zqb0e\qh1l\tbl0\tbu1\zqb0d\qh1k&\pause\enotes
+ %\check
+ \barre %86
+ \NOtes\pointdorgue a\hu G&&\pointdorgue m\zhl c\zh e\zh g\hu
+j&\sk\pointdorgue l\hpause\enotes
+ \Notes\soupir&&\ds\zcl c\cu j&\ds\cl q\enotes
+ \barre %87
+ \Notes\sk\sk\pause&&\ibl0d0\ibu1j0\rlap{\qb0{=dedc^b}\tqb0c}\qh1{=klkj^i}\tqh1j&\ibl0p0\qb0{=rsrq^p}\tqb0q\enotes
+ \barre %88
+ \NOtes\qu{^E}\ql{^L}&&\zhl{=b}\zh{_d}\zh g\hu{=i}&\hl{=p}\enotes
+ \notesp\qu E&&\ibbbl0i0\zq g\qb0i\tbbl0\zq {_h}\qb0j\zq i\qb0{_k}\sk\nbbbl0\zq
+h\qb0j\zq g\tqb0i&\advance\transpose 7\ibbbl0i0\qh0i\tbbl0\qh0j\qh0{_k}\sk\nbbbl0\qh0j\tqb0i\enotes
+ \barre %89
+ \NOtes\qu F&&\zqp f\qup{_h}&\qlp{_o}\enotes
+ \Notes\ql M&\sk\cl {_a}&\sk\cu f&\sk\cl m\enotes
+ \notes\qu F&\ql c&\qpqu hj&\qpql oq\enotes
+ \barre %90
+ \NOtes\qu {=E}&\qlp c&\qup g&\qlp n\enotes
+ \Notes\ql {=L}&\sk\cl N&\sk\cu e&\sk\cl l\enotes
+ \notes\qu E&\ql c&\qpqu gj&\qpql nq\enotes
+ \barre %91
+ \NOtes\qu{_D}\ql{_K}&\hl{_d}&\hu f&\hl m\enotes
+ \notes\qu D&&\ibbbu0j0\zq {f}\zql{_h}\qh0{_k}\tbbu0\qh0l\qh0m\sk\nbbbu0\qh0l\tqh0k&\ibbbl0n0\qb0m\tbbl0\qb0n\qb0{_o}\sk\nbbbl0\qb0n\tqb0m\enotes
+ \barre %92
+ \NOtes\qu{G}\ql{N}&&\zh {e}\zhl{g}\hu j&\hl l\enotes
+ \notesp\qu G&&\ibbbu0i0\zq {e}\zql{g}\qh0{j}\tbbu0&\ibbbu1m0\qh1l\tbbu1\enotes
+ \notes&&\qh0{=k}\qh0l\sk\nbbbu0\qh0k\tqh0j&\qh1m\qh1n\sk\nbbbu1\qh1m\tqh1l\enotes
+ \barre %93
+ \NOtes\qu{G}\ql{N}&&\zh {d}\zhl{f}\hu {^i}&\hl k\enotes
+ \notes\qu G&&\ibbbu0h0\zq {d}\zql{f}\qh0i\tbbu0\qh0{j}\qh0k\sk\nbbbu0\qh0j\tqh0i&\ibbbu0l0\qh0k\tbbu0\qh0l\qh0m\sk\nbbbu0\qh0l\tqh0k\enotes
+ \barre %94
+ \NOtes\qu{_H}\ql{_a}\qu{_H}&\zhp e\hlp c&\hup j&\itenu3j\hlp j\enotes
+ \barre %95
+ \notes\qu G&\ptb cde&\hup j&\tten3\hlp j\enotes
+ \NOtes\ql N&\tten0\hl e\enotes
+ \NOtes\qu G\enotes
+ \barre %96
+ \def\alldsp{\notes\pt5\ds&\pt5\ds&\pt5\ds&\pt5\ds\enotes}%
+ \grace e\enotes
+ \notesp\pointdurgue E\hu
+{^F}&\Ibbl3ce2\roff{\tbbl3}\qb3c\sk\itenu0e\tbl3\qbp3e\sk&\zq{=h}\Ibbbu0jl2\qh0j\tbbu0\zq{^i}\qh0
+k\itenu1j\zqp j\itenu2l\tbu0\qhp0l\sk&\pointdorgue l\hl j\enotes
+ \NOTes\pointdorgue c\qu {^M}&\tten0\pointdorgue e\zq L\lSh M\lq M\zq a\ql
+e&\pointdorgue s\tten1\tten2\zq j\qu l\enotes
+ \advance\mulooseness -1\relax
+ \zalapage
+ \alldsp\grace{j}\enotes
+ \notes\ccu {^F}&\ccl c\zmidtwotext{\llap{\bf I -- \ff\space\space}}&\zq e\ccu h&\ccl l\Uptext{\llap{\ppff
+Solenne }}\enotes
+ \barre %97
+ \grace j\enotes
+ \NOtes\hup G&\zql c&\zhp d\hup g&\ql k\enotes
+ \grace{^i}\enotes
+ \NOTes&\hl{^b}&&\hl k\enotes
+ \barre %98
+ \grace k\enotes
+ \NOTes\hu{^I}&\hl{_a}&\zh d\hu f&\hl m\enotes
+ \alldsp\grace{k}\enotes
+ \notes\cu I&\ccl d&\zq f\ccu{_h}&\ccl m\enotes
+ \barre %99
+ \grace k\enotes
+ \NOtes\hup J&\ql d&\zhp e\hup g&\ql l\enotes
+ \grace j\enotes
+ \NOTes&\hl c&&\hl l\enotes
+ \barre %100
+ \grace{^l}\enotes
+ \NOTes\hu{^J}&\hl{=b}&\zh{^e}\hu g&\hl n\enotes
+ \alldsp\grace{l}\enotes
+ \notes\ccu J&\zq {^e}\ccl g&\ccu i&\ccl n\enotes
+ \barre %101
+ \grace{^l}\enotes
+ \NOtes\hup K&\zq {^e}\ql g&\hup h&\ql n\enotes
+ \grace k\enotes
+ \NOTes&\zh f\hl d&&\hl m\enotes
+ \barre %102
+ \grace{i}\enotes
+ \NOTes\hu G&\zh{b}\hl{=e}&\hu i&\hl {=l}\enotes
+ \alldsp\grace i\enotes
+ \notes\ccu G&\zq{b}\ccl{e}&\ccu i&\ccl l\enotes
+ \barre %103
+ \grace i\enotes
+ \NOtes\hup H&\zq b\ql e&\hu i&\ql l\enotes
+ \notes&&&\enotes
+ \NOtes&\lSh c\zh{c}\hl{^e}&&\ql {^j}\enotes
+ \grace h\enotes
+ \Notes&&\qu h&\ibl0j0\qb0j\enotes
+ \grace g\enotes
+ \Notes&&&\tqb0j\enotes
+ \barre %104
+ \grace f\enotes
+ \NOTEs\pointdurgue F\hup I&\pointdorgue d\hl d&\pointdorgue l\hup f&\pointdorgue m\hlp k\enotes
+ \barre %105
+ \ggrnotes&&&\tinynotesize\Ibbu0ej1\qh0e\tqh0j\enotes
+ \NOTes\hu{^F}&\hl{=e}&\zh{hj}\hu l&\hl o\enotes
+ \notes\pt5\ds&\soupir&\pt5\ds&\pt5\ds\enotes
+ \grace j\enotes
+ \notes\ccu F&&\zq{hj}\ccu l&\ccl o\enotes
+ \barre %106
+ \grace j\enotes
+ \NOtes\hup G&\soupir\soupir\ql b&\roff{\zql h}\zhp i\hup k\hlp g&\ql o\hl n\enotes
+ \barre %107
+ \grnotes&&&\tinynotesize\Ibbu0dh1\qh0d\tqh0{_h}\enotes
+ \NOTes\hu{^I}&\hl{^b}&\zh{f_h}\hu k&\hl m\enotes
+ \notes\pt5\ds&\soupir&\pt5\ds&\pt5\ds\enotes
+ \grace h\enotes
+ \notes\ccu I&&\zq{fh}\ccu k&\ccl m\enotes
+ \barre %108
+ \grace g\enotes
+ \NOtes\hup J&\soupir\soupir\ql c&\roff{\zhlp g}\zq f\qu k\zh e\hu j&\ql m\hl l\enotes
+ \barre %109
+ \grace{g}\enotes
+ \NOTes\hu{^J}&\hl{^c}&\zh{^eg}\hu i&\hl i\enotes
+ \notes\pt5\ds&\soupir&\pt5\ds&\pt5\ds\enotes
+ \grace {=e}\enotes
+ \notes\ccu {^C}&&\ccl g&\ccl i\enotes
+ \barre %110
+ \ggrnotes&&&\tinynotesize\Ibbu0Nd1\qh0N\tqh0{d}\enotes
+ \NOtes\qu D\qu K\qu D&&\zhp {bd}\hup g&\hlp i\enotes
+ \barre %111
+ \notes\qu{=C}&&\pt L\zh N\roff{\zhp a}\hup e&\ptb hij\enotes
+ \NOtes\qu{=J}\qu C&&&\tten0\hl j\enotes
+ \barre %112
+ \notes\qu{^C}&&\zhp b\zhp N\hup {^e}&\ptb ihi\enotes
+ \NOtes\qu{^J}\qu C&&&\tten0\hl i\enotes
+ \barre %113
+ \notes\qu D&\hl N&\zh a\hup d&\pto hgh\enotes
+ \NOtes\qu K&&&\tten0\itenu0h\ql h\enotes
+ \Notes\qu D&\zql K\triolet d\ibu0L0\qh0{^MN}\tqh0M&\triolet l\Ibu0ca2\qh0c\qh0b\tqh0a&\tten0\qqqh hg{^f}\enotes
+ \barre %114
+ \NOTes\itenl0G\hup G&\itenl1K\hlp K&\itenl2N\itenl3b\zhp N\hup b&\qup g\enotes
+ \notes&&&\cu N\islurd5c\qqqq bdgi\enotes
+ \barre %115
+ \notes\tten0\hup G&\tten1\hlp K&\tten2\tten3\itenl2N\itenl3b\zhp N\hup
+b&\rlap{\sk\sk\sk\tslur5c}\qqqqh gdbd\islurd5f\qqqqh gikn\tslur5n\rlap{\sk\isluru5n}\qqqqb pnpr\enotes
+ \barre %116
+ \NOtes\pointdorgue a\hup G&\sk\pause&\pointdorgue l\tten2\tten3\zhp b\zhp d\hup
+g&\pointdurgue e\tslur5u\hlp u\enotes
+\mulooseness 1\relax
+\finmorceau
+\bigskip\rightline{\sl\aujourdhui}
+\bye

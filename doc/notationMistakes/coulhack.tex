@@ -1,0 +1,70 @@
+% thicker ledger lines
+\def\myhlthick{1.5\lthick}
+\makeatletter
+\def\h@linei{%
+  \y@ii\n@v\internote
+  \y@iii\y@ii
+  \advance\y@ii\myhlthick
+  \advance\y@iii-\myhlthick
+  \y@vi\noteskip			% noteskip
+%-\ifnum\y@vi=\z@ \y@vi\maxdimen\fi	% (or maxdimen if noteskip = 0)
+  \advance\y@vi-\y@v			% - notewidth
+  \y@vi0.7\y@vi				% this may be eaten =: additional length
+  \y@iv\h@lf\qn@width\ifnum\y@vi>\y@iv \y@vi\y@iv\fi % not more than 0.5 qn@width
+  \y@iv0.2\qn@width  \ifnum\y@vi<\y@iv \y@vi\y@iv\fi % not less than 0.2 qn@width
+  \y@iv\y@v				% notewidth
+  \advance\y@iv\y@vi			% + additional length =: total length
+  \kernm\h@lf\y@vi			% center the ledger line
+%-\message{noteskip = \the\noteskip, length = \the\y@iv, notewidth = \the\y@v}%
+  \vrule\@height\y@ii\@depth-\y@iii\@width\y@iv
+  \kernm\y@iv\kern\h@lf\y@vi}
+
+% same adapted from MUSIXFLL.TEX
+
+\ifx\undefined\longledgerlines \else \endinput \fi
+
+\immediate\write10{MusiXFormerLedgerLines T.74\space<06 April 1997>}%
+
+%\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+
+\let\h@lineick\h@linei
+\def\h@lineidt{%
+  \y@ii\n@v\internote
+  \y@iii\y@ii
+  \advance\y@ii\myhlthick
+  \advance\y@iii-\myhlthick
+  \y@iv\y@v
+  \advance\y@iv\h@lf\qn@width
+  \kernm.25\qn@width
+  \vrule\@height\y@ii\@depth-\y@iii\@width\y@iv
+  \kernm\y@iv\kern.25\qn@width}
+\def\longledgerlines{\global\let\h@linei\h@lineidt}
+\def\autoledgerlines{\global\let\h@linei\h@lineick}
+\longledgerlines
+%\catcode`\@=\catcodeat
+
+% space between signatures and first note at each system:
+
+\def\contpiece{\noindent \piece@conta \writ@staffs \piece@beginc
+%  \Writ@meters \wbarno@x \hardspace{10pt}\addspace\afterruleskip
+  \Writ@meters \wbarno@x \hardspace{.3\elemskip}\addspace\afterruleskip}
+%                        ^^^^^^^^^^^^^^^^^^^^^^^
+
+% missing pixels at some beam ends:
+\def\beamst@m{% queue de note vers une poutre
+  \getcurpos \advance\y@v-\b@x
+  \y@ii\b@p\y@v \divide\y@ii\tw@nty \advance\y@ii\b@z
+  \ifdim\y@ii>\st@top % la poutre est au-dessus
+    \stem@skip\qd@skip \comp@slope\stem@skip \advance\y@ii\s@lope
+    \advance\y@ii .25\interbeam% hack
+    \ifnum\b@n>\z@ \advance\y@ii\b@n\interbeam \advance\y@ii-\interbeam \fi
+    \st@top\y@ii % a mettre a jour avec la pente ulterieurement
+  \else
+    \advance\y@ii-.25\interbeam% hack
+    \stem@skip\z@
+    \ifdim\y@ii<\st@bot
+      \ifnum\b@n<\z@ \advance\y@ii\b@n\interbeam \advance\y@ii\interbeam \fi
+      \st@bot\y@ii \fi \fi
+  \C@stem}
+
+\makeatother

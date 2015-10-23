@@ -1,0 +1,216 @@
+% musixec.tex : EC font definitions for MusiXTeX
+%
+% usage: 
+%
+%    \input musixtex
+%    \input musixec
+%    ...
+%
+%   MusiXec.tex is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2, or (at your option)
+%   any later version.
+%
+%   MusiXppl.tex is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with MusiXTeX; see the file COPYING.  If not, write to
+%   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+%   Boston, MA 02111-1307, USA.
+%
+%   Copyright 2015  Bob Tennent rdt@cs.queensu.ca
+%
+\immediate\write16{MusiXec\space<2015/02/11>}
+%
+
+\newif\iflongDCfontnames
+\newif\iflongECfontnames
+\longDCfontnamesfalse  % obsolete
+\longECfontnamestrue
+\def\fontid{ec}
+
+% 7pt 
+\font\sevenrm=ecrm0700
+\font\sevenbf=ecbx0700
+\font\sevenit=ecti0800 at 7pt
+\font\sevenbi=ecbi0700
+\font\sevensc=ecsc0700
+\font\sevensl=ecsl0700
+%
+% 8pt 
+\font\eightrm=ecrm0800
+\font\eightbf=ecbx0800
+\font\eightit=ecti0800
+\font\eightbi=ecbi0800
+\font\eightsc=ecsc0800
+\font\eightsl=ecsl0800 
+\font\eighttt=ectt0800
+%
+% 9pt
+\font\ninerm=ecrm0900
+\font\ninebf=ecbx0900
+\font\nineit=ecti0900
+\font\ninebi=ecbi0900
+\font\ninesc=ecsc0900
+\font\ninesl=ecsl0900
+\font\ninett=ectt0900
+%
+% 10pt
+\font\tenrm=ecrm1000
+\font\tenbf=ecbx1000
+\font\tenit=ecti1000
+\font\tenbi=ecbi1000
+\font\tensc=ecsc1000
+\font\tensl=ecsl1000
+\font\tentt=ectt1000
+%
+% 11pt
+\font\elevenrm=ecrm1095
+\font\elevenbf=ecbx1095
+\font\elevenit=ecti1095
+\font\elevenbi=ecbi1095
+\font\elevensc=ecsc1095
+\font\elevensl=ecsl1095
+\font\eleventt=ectt1095
+%
+% 12pt
+\font\twelverm=ecrm1200
+\font\twelvebf=ecbx1200
+\font\twelveit=ecti1200
+\font\twelvebi=ecbi1200
+\font\twelvesc=ecsc1200
+\font\twelvesl=ecsl1200
+\font\twelvett=ectt1200
+%
+% 14pt
+\font\frtrm=ecrm1440
+\font\frtbf=ecbx1440
+\font\frtit=ecti1440
+\font\frtbi=ecbi1440
+\font\frtsc=ecsc1440
+\font\frtsl=ecsl1440
+\font\frttt=ectt1440
+%
+% 17pt
+\font\svtrm=ecrm1728
+\font\svtbf=ecbx1728
+\font\svtit=ecti1728
+\font\svtbi=ecbi1728
+\font\svtsc=ecsc1728
+\font\svtsl=ecsl1728
+\font\svttt=ectt1728
+%
+% 20pt
+\font\twtyrm=ecrm2074
+\font\twtybf=ecbx2074
+\font\twtyit=ecti2074
+\font\twtybi=ecbi2074
+\font\twtysc=ecsc2074
+\font\twtysl=ecsl2074
+\font\twtytt=ectt2074
+%
+% 25pt
+\font\twfvrm=ecrm2488
+\font\twfvbf=ecbx2488
+\font\twfvit=ecti2488
+\font\twfvbi=ecbi2488
+\font\twfvsc=ecsc2488
+\font\twfvsl=ecsl2488
+\font\twfvtt=ectt2488
+%
+% Large fonts for titles
+\let\bigfont=\frtbf
+\let\Bigfont=\svtbf
+\let\BIgfont=\twtybf
+\let\BIGfont=\twfvbf
+%
+%
+\font\ppffsixteen=ecbi1000
+\font\ppfftwenty=ecbi1200
+\font\ppfftwentyfour=ecbi1440
+\font\ppfftwentynine=ecbi1728
+\font\tinyppff=ecbi0800
+\font\smallppff=ecbi1000
+\font\normppff=ecbi1200
+\font\medppff=ecbi1440
+%
+\def\smalltype{%
+  \let\rm\eightrm
+  \let\bf\eightbf
+  \let\it\eightit
+  \let\bi\eightbi
+  \let\sc\eightsc
+  \let\sl\eightsl
+  \rm}
+\def\Smalltype{%
+  \let\rm\ninerm
+  \let\bf\ninebf
+  \let\it\nineit
+  \let\bi\ninebi
+  \let\sc\ninesc
+  \let\sl\ninesl
+  \rm}
+\def\normtype{%
+  \let\rm\tenrm
+  \let\bf\tenbf
+  \let\it\tenit
+  \let\bi\tenbi
+  \let\sc\tensc
+  \let\sl\tensl
+  \rm}
+\def\medtype{%
+  \let\rm\twelverm
+  \let\bf\twelvebf
+  \let\it\twelveit
+  \let\bi\twelvebi
+  \let\sc\twelvesc
+  \let\sl\twelvesl
+  \rm}
+\def\bigtype{%
+  \let\rm\bigfont
+  \let\bf\bigfont
+  \let\it\bigfont
+  \let\bi\bigfont
+  \let\sc\bigfont
+  \let\sl\bigfont
+  \bf}
+\def\Bigtype{%
+  \let\rm\Bigfont
+  \let\bf\Bigfont
+  \let\it\Bigfont
+  \let\bi\Bigfont
+  \let\sc\Bigfont
+  \let\sl\Bigfont
+  \bf}
+\def\BIgtype{%
+  \let\rm\BIgfont
+  \let\bf\BIgfont
+  \let\it\BIgfont
+  \let\bi\Bigfont
+  \let\sc\Bigfont
+  \let\sl\Bigfont
+  \bf}
+\def\BIGtype{%
+  \let\rm\BIGfont
+  \let\bf\BIGfont
+  \let\it\BIGfont
+  \let\bi\BIGfont
+  \let\sc\BIGfont
+  \let\sl\BIGfont
+  \bf}
+%
+\def\txtfont{\eightit}
+\def\txt{\txtfont3}
+\def\tuplettxt{\txtfont3}
+
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+\def\xtuplet#1#2{\n@iv#1\advance\n@iv\m@ne {\sign@skip=\n@iv\noteskip
+  \sign@skip=0.5\sign@skip \xdef\half@sign@skip{\the\sign@skip}}%
+  \zcharnote{#2}{\kern\h@lf\qn@width\kern \half@sign@skip\lrlap{\txtfont#1}}}  
+\catcode`\@=\catcodeat
+
+\normtype
+\endinput

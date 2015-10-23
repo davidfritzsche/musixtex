@@ -1,0 +1,376 @@
+\ifx\mxversion\undefined
+  \input musixtex
+  \input musixcpt
+  \input musixsty
+\fi
+\title{Tierce en taille}
+\fulltitle{III. \titremorceau}
+\csname titremorceautoc\endcsname
+%
+\parindent 18mm
+
+\subtitle{\sl (pour orgue)}
+\othermention{Compos\'e en 1990}
+\author{Daniel TAUPIN}
+\maketitle
+
+\tracingstats=2\relax
+%
+\nbporteesii=2\relax
+\def\nbinstruments{2}
+\global\cleftoksii={{0}{3}{0}{0}}%
+\global\cleftoksi={{6}{0}{0}{0}}%
+%
+\signaturegenerale{1}\relax % un dieze a la clef
+\def\quatretemps{\generalmeter{\allabreve}}%
+\def\troistemps{\generalmeter{\meterfrac{3}{2}}}%
+\def\deuxtemps{\generalmeter{\meterfrac{2}{2}}}%
+\def\Mordant{\mordant{10}}%
+\def\tenPince{\pince{10}}%
+%\check
+\def\instrumenti{P\'edale 16'}%
+\def\instrumentii{\vbox{\hsize=\parindent\centerline{R\'ecit}\vskip 33pt
+ \centerline{G.O.}}}%
+%\check
+\def\gluemaxskip{7pt}%
+%
+% formes frequentes
+%
+% deux croches hautes
+\def\dql#1#2#3{\ibl0{#2}{#1}\qb0{#2}\tbl0\qb0{#3}}%
+\def\dqu#1#2#3{\ibu0{#2}{#1}\qh0{#2}\tbu0\qh0{#3}}%
+\def\dqh{\dqu}\def\dqb{\dql}%
+%
+% deux doubles croches hautes
+\def\dqbbu#1#2#3{\ibbl0{#2}{#1}\qb0{#2}\tbl0\qb0{#3}}%
+\def\dqbbl#1#2#3{\ibbu0{#2}{#1}\qh0{#2}\tbu0\qh0{#3}}%
+%
+% croche pointee et double croche meme hauteur
+\def\cpdcl#1{\trioskip\ibl0{#1}0\qbp0{#1}\sk\tbbl0\tqb0{#1}}%
+\def\cpdcu#1{\trioskip\ibu0{#1}0\qhp0{#1}\sk\tbbu0\tqh0{#1}}%
+%
+\medskip\noindent{\rm G.O.: fonds 8' ou 8'+4' doux}%
+\par\noindent{\rm R\'ec.: cornet ou cromorne}%
+\par\noindent{\rm P\'ed.: 16', tirasse G.O.}%
+\smallskip
+%
+\quatretemps
+%
+\def\trioskip{\multiply\noteskip by 2\relax\divide\noteskip by 3\relax}%
+\debutmorceau
+\noautolines
+\advancebottom{4\internote}%
+%\autolines {8}44\relax
+\def\resp{\vnotes 0.2\elemskip&|\cbreath\enotes}%
+%\check
+%
+\hyphenpenalty -50\relax
+\notes&|\Uptext{ \hbox{\kern -16mm\moyen Adagio \bf(\metron{\qu}{60})}}\enotes
+\def\qqbbh#1#2#3#4#5{\ibbu0{#2}{#1}\qh0{#2}\qh0{#3}\qh0{#4}\tqh0{#5}}\relax
+\def\qqbbH#1#2#3#4#5{\ibbu0{#3}{#1}\qh0{#2}\qh0{#3}\qh0{#4}\tqh0{#5}}\relax
+\def\qqbbu{\qqbbh}\def\qqbbb{\qqbbl}%
+\def\qqbbl#1#2#3#4#5{\ibbl0{#2}{#1}\qb0{#2}\qb0{#3}\qb0{#4}\tqb0{#5}}\relax
+\def\dqbbh#1#2#3{\ibbu0{#2}{#1}\qh0{#2}\tqh0{#3}}\relax
+\def\dqbbu{\dqbbh}\def\dqbbb{\dqbbl}%
+\def\dqbbl#1#2#3{\ibbl0{#2}{#1}\qb0{#2}\tqb0{#3}}\relax
+%\check
+\def\qqbh#1#2#3#4#5{\ibu0{#2}{#1}\qh0{#2}\qh0{#3}\qh0{#4}\tqh0{#5}}\relax
+\def\qqbH#1#2#3#4#5{\ibu0{#3}{#1}\qh0{#2}\qh0{#3}\qh0{#4}\tqh0{#5}}\relax
+\def\qqbl#1#2#3#4#5{\ibl0{#2}{#1}\qb0{#2}\qb0{#3}\qb0{#4}\tqb0{#5}}\relax
+%\check
+%
+% mesure 1
+\notes\hup G&\itenu1g\itenu2i\zw i\zw  g\hlp d|\cpdcl g\enotes
+\temps\NOTEs&|\hu d\enotes
+\temps\notes\qu J&\ql           e|\trioskip\tenPince\qqbbl{-5}edeb\enotes
+% mesure 2
+\barre\NOTEs\hu I&\tten1\tten2\zh d\zhl g\hup i|\hu d\enotes
+\temps\notes\qu L&\itenl1e\ql       e|\cpdcu N\enotes
+\temps\notes\qu H&\tten1\itenu0h\zq c\zql e\qu h|\dqu3ab\enotes
+% mesure 3
+\barre\NOTes\hu K&\tten0\zw d\zh f\hu h|\xTrille i{1.0\noteskip}\qup a\enotes
+\temps\notes&|\ibbu0N3\trioskip\qh0N\tqh0a\enotes
+\temps\NOtes\hu G&\zh g\hu i|\itenl0b\qu b\enotes
+\temps\notes&|\trioskip\tten0\qqbbh3bbcd\enotes
+% mesure 4%\autolines{9}44\relax
+\barre\NOTes\hu H&\zh f\zh h\hu j|\xTrille i{1.2\noteskip}\qup c\enotes
+\temps\notes&|\sk\trioskip\ibbu0b3\qh0b\tqh0c\enotes
+\temps\NOtes\hu I&\itenl1d\zh d\zh g\hu i|\itenl0d\qu d\enotes
+\temps\notes&|\trioskip\tten0\qqbbh3defg\enotes
+% mesure 5
+\barre\NOtes\hu K&\tten1\zql d\zh f\hu h|\tenPince\ql f\enotes
+\temps\notes&\zql c|\dql{-2}ed\enotes
+\temps\notes\hu I&\zh b\zh d\hu g|\dql6dg\enotes
+\temps\notes&|\dql{-8}dN\enotes
+% mesure 6
+\barre\NOTes\hu H&\zh c\zhl e\hup h|\qup c\enotes
+\temps\notes&|\cu c\enotes
+\temps\NOtes\hu D&\itenl1d\zh d\zhl f|\xTrille i{1.5\noteskip}\qup c\enotes
+\temps\notes&\qu j|\sk\cu b\enotes
+% mesure 7
+\barre\NOTEs\hup G&\tten1\zhp d\zhp g\hup i|\hup b\enotes
+\resp
+\temps\notes\soupir&\soupir|\cpdcu N\enotes
+% mesure 8
+\barre\NOTes\hu H&\zh c\zhl e\wh h|\qup a\enotes
+\temps\notes&|\cu b\enotes
+\temps\NOTes\hu K&\itenl1d\zh d\hl f|\xTrille i{1.0\noteskip}\qup a\enotes
+\temps\notes&|\trioskip\dqbbh3Na\enotes
+% mesure 9
+\barre\NOtes\hu G&\tten1\zh d\zh g\hu i|\itenl1b\qu b\enotes
+\temps\notes&|\tten1\qqbbh3bb{^c}d\enotes
+\temps\NOTes\hu H&\itenu1h\zh{^ce}\hu h|\xTrille i{\noteskip}\qup{c}\enotes
+\temps\notes&|\trioskip\ibbu1b3\qh1b\tqh1c\enotes
+% mesure 10
+\barre\NOTes\hup K&\tten1\zhp {df}\hup h|\hup d\enotes
+\resp
+\temps\notes\soupir&\soupir|\cpdcu a\enotes
+% mesure 11
+\barre\NOTes\wh H&\zh{=c}\zhl e\wh h|\qup{=c}\enotes
+\temps\notes&|\cu c\enotes
+\temps\notes\hu K&\itenl2d\zh d\zhl f|\ibu0c3\qh0c\trioskip\nbbu0\qh0d\tqh0e\enotes
+\temps\notes&|\tenPince\dql{-3}dc\enotes
+% mesure 12
+\troistemps
+\changecontext\NOTes\hu G&\tten2\itenl2d\zh d\zh g\hu i|\xTrille i{\noteskip}\qup b\enotes
+\temps\notes&|\cu a\enotes
+\temps\NOTEs\wh K&\zw d\tten2\zw f\wh h|\Mordant \wh a\enotes
+\resp
+% mesure 13
+\deuxtemps\changecontext\notes\wh{=J}&\zw{=cf}\wh h|\cpdcl h\enotes
+\temps\NOTes&|\hu f\enotes
+\temps\notes&|\trioskip\pince j\qqbbl{-3}hghd\enotes
+% mesure 14
+\barre\NOtes\hu I&\zh{bd}\hu g|\qu g\enotes
+\temps\NOtes&|\qu N\enotes
+\temps\NOtes\hu H&\itenu2h\zh{ce}\hu h|\itenl1a\qu a\enotes
+\temps\notes&|\trioskip\tten1\qqbbu3aabc\enotes
+% mesure 15
+\barre\NOtes\hu K&\tten2\itenl2d\zh{df}\hu h|\itenl1d\qu d\enotes
+\temps\notes&|\trioskip\tten1\qqbbu3ddef\enotes
+\temps\notes\qu I&\tten2\zq d\zq b\qu g|\ibu0e{-9}\qh0g\tqh0N\enotes
+\temps\notes\qu J&\zq{ch}\qu e|\dql{-3}cb\enotes
+%\check
+% mesure 16
+\troistemps
+\changecontext\temps\NOtes\qu K&\zql d\zh f\hu h|\xTrille i{1.5\noteskip}\qup a\enotes
+\temps\notes\qu D&\zql c|\sk\cu N\enotes
+\temps\NOTes\wh G&\zw{bd}\zw g|\wh N\enotes
+\resp
+% mesure 17
+\deuxtemps
+\changecontext\notes\hup I&\zw{gi}\hlp  d|\cpdcl g\enotes
+\temps\NOTes&|\hl d\enotes
+\temps\notes\qu J&\ql           e|\trioskip\tenPince\qqbbl{-5}edeb\enotes
+% mesure 18
+\barre\NOTEs\hup H&\itenl1e\itenu2h\zhp{^c}\zhp e\hup h|\hup{^c}\enotes
+\temps\notes\qu {^J}&\tten1\tten2\zq e\rq g\qu h|\cpdcu a\enotes
+% mesure 19
+\barre\NOtes\qu K&\zhl d\zq f\qu h|\ql h\enotes
+\temps\notes\qu I&\zq g\qu i|\dql{-3}gf\enotes
+\temps\NOtes\hu H&\zh{^c}\zhl e\qu h|\xTrille l{1.5\noteskip}\qlp e\enotes
+\temps\notes&\qu g|\sk\cl d\enotes
+% mesure 20
+\barre\NOTEs\hup D&\zhp d\zhp f\hup h|\hlp d\enotes
+\resp
+\temps\notes\qu J&\itenl1c\itenu2h\zq{=ce}\qu h|\cpdcu a\enotes
+% mesure 21
+\barre\NOTes\hu H&\tten1\tten2\zw f\zw h\hl c|\hu c\enotes
+\temps\notes&|\cu c\enotes
+\temps\notes\hu K&|\ibl1c3\qb1c\trioskip\nbbl 1\qb1d\tqb1e\enotes
+\temps\notes&\itenl1d\ql  d|\tenPince\dql{-2}dc\enotes
+% mesure 22
+\barre\NOtes\hu G&\tten1\zh g\zh i\hu d|\itenu1 b\qu b\enotes
+\notes&|\tten1\trioskip\qqbbl3bbcd\enotes
+\temps\notes\hu J&\zh c\zh e\hu g|\cpdcl e\enotes
+\temps\notes&|\dql{-6}ea\enotes
+% mesure 23
+\barre\NOtes\hu I&\zh d\zh g\hu i|\itenu0d\qu d\enotes
+\temps\notes&|\tten0\trioskip\qqbbh{-1}dNab\enotes
+\temps\NOTes\hu H&\itenu2h\zh e\zh h\hu c|\qup c\enotes
+\temps\notes&|\cu c\enotes
+% mesure 24
+\troistemps\changecontext\NOTes\hu F&\tten2\itenl2f\zh f\zh h\hu c|\xTrille i{1.2\noteskip}\qup c\enotes
+\temps\notes&|\cu b\enotes
+\temps\NOTEs\wh I&\tten2\zw{^d}\zw f\wh i|\Mordant \wh b\enotes
+\resp
+% mesure 25
+\barre\notes\wh H&\zw{^df}\hup i|\cpdcl f\enotes
+\temps\NOTes&|\hu{^d}\enotes
+\temps\notes&\qu h|\trioskip\tenPince\qqbbl{-3}fefb\enotes
+% mesure 26
+\barre\notes\hu G&\zh b\zh  e\hu g|\cpdcl e\enotes
+\temps\NOtes&|\hu e\enotes
+\temps\notes\hu H&\zh {cf}\hu h|\enotes
+\temps\notes&|\trioskip\ibl0f3\qb0f\sk\nbbl0\qb0g\tqb0h\enotes
+% mesure 27
+\barre\NOTes\hu I&\itenl1b\itenu2g\zh {bd}\hu g|\hu d\enotes
+\temps\NOTes\hl L&\tten1\tten2\zh b\zh e\hu g|\hl g\enotes
+% mesure 28
+\barre\temps\notes\hu H&\zh c\zh f\hu h|\qqbl{-2}fedc\enotes
+\temps\NOTEs\hu I&\itenl1d\zh d\zh g\hu i|\hu b\enotes
+% mesure 29
+\troistemps\changecontext\NOTes\hu K&\tten1\itenl1d\zh d\zh f\hu h|\xTrille i{\noteskip}\qup a\enotes
+\temps\notes&|\cu N\enotes
+\temps\NOTEs\hup G&\tten1\zhp d\zhp g\hup i|\hup N\enotes
+\temps\Notes\soupir&\soupir|\soupir\enotes
+%\check
+% mesure 31
+\deuxtemps\changecontext\notes\hup G&\itenu1g\itenu2i\zw i\zw  g\hlp d|\cpdcl g\enotes
+\temps\NOTEs&|\hu d\enotes
+\temps\notes\qu J&\ql           e|\trioskip\tenPince\qqbbl{-5}edeb\enotes
+% mesure 31
+\barre\NOTEs\hu I&\tten1\tten2\zhl d\zhp  g\hup i|\hu d\enotes
+\temps\notes\qu L&\itenl1e\zql      e|\cpdcu N\enotes
+\temps\notes\qu H&\tten1\itenu1h\zq c\zql e\qu h|\dqu3ab\enotes
+% mesure 32
+\barre\NOTes\hu K&\tten1\zw d\zh  f\hu h|\xTrille i{1.0\noteskip}\qup a\enotes
+\temps\notes&|\ibbu0N3\trioskip\qh0N\tqh0a\enotes
+\temps\NOtes\hu G&\zh g\hu i|\itenl0b\qu b\enotes
+\temps\notes&|\trioskip\tten0\qqbbh3bbcd\enotes
+% mesure 33
+\barre\NOtes\hu J&\zw g\zh c\hl e|\itenu0e\ql e\enotes
+\temps\notes&|\trioskip\tten0\qqbbl3eefg\enotes
+\temps\notes\hu I&\zh b\hl      d|\dql6dg\enotes
+\temps\notes&|\dql{-8}dN\enotes
+% mesure 34
+\barre\NOtes\hu H&\zh c\zhl e\wh h|\itenl0a\qu a\enotes
+\temps\notes&|\tten0\trioskip\qqbbh3aabc\enotes
+\temps\NOtes\hu K&\zh d\hl f|\itenl0d\qu d\enotes
+\temps\notes&|\tten0\trioskip\qqbbh3ddef\enotes
+%\check
+% mesure 35
+\cleftoksii={{0}{0}{0}{0}}\changeclefs
+\barre\NOTes\hu I&\zhl d\zhp g\hup i|\qup  g\enotes
+\temps\notes&|\cu h\enotes
+\temps\notes\qu L&\hl e|\dqu{-4}ge\enotes
+\temps\notes\qu H&\zq h\qu j|\dqu{-3}ji\enotes
+% mesure 36
+\troistemps\changecontext\NOtes\qu K&\zw d\zh f\hu h|\xTrille o{\noteskip}\qup h\enotes
+\temps\notes\qu D&|\sk\cu         g\enotes
+\temps\NOtes\hup G&\zhp{dg}\hup i|\hup g\enotes
+\resp
+\temps\notes\soupir&\soupir|\cpdcu b\enotes
+% mesure 37
+\deuxtemps\changecontext\notes\hu I&\zh{^d}\zhl f\wh i|\dqu3ij\enotes
+\temps\notes&|\dqu{-3}ih\enotes
+\temps\notes\hu L&\zh g\hl e|\pince o\dqu{-3}gf\enotes
+\temps\notes&|\dqu{-5}ge\enotes
+% mesure 38
+\barre\notes\hu{^J}&\zh{^c}\zhl e\wh h|\dqu3hi\enotes
+\temps\notes&|\dqu{-3}hg\enotes
+\temps\notes\hu K&\zh d\hl f|\pince o\dqu{-3}fe\enotes
+\temps\NOtes&|\qu d\enotes
+% mesure 39
+\barre\notes\hu   I&\zh  b\zhl d\wh g|\dqu3gh\enotes
+\temps\notes&|\dqu{-8}gd\enotes
+\temps\notes\hu J&\zh c\hl e|\dqu3ef\enotes
+\temps\NOtes&|\pince o\qu e\enotes
+% mesure 40
+\barre\notes\hu   H&\zh{^c}\zhl e\wh h|\dqu3hi\enotes
+\temps\notes&|\dqu{-8}he\enotes
+\temps\notes\hu J&\zh d\hl f|\dqu3fg\enotes
+\temps\NOtes&|\pince o\qu f\enotes
+%\check
+% mesure 41
+\barre\notes\hu G&\zhl d\zw g\wh i|\dqu3ij\enotes
+\temps\notes&|\dqu{-3}ih\enotes
+\temps\notes\hu L&\hl e|\dqu{-3}gf\enotes
+\temps\notes&|\dqu{-5}ge\enotes
+%\check
+% mesure 42
+\barre\notes\hu H&\itenu1h\zh c\zhl e\wh h|\dqu3jk\enotes
+\temps\notes&|\dqu{-3}ji\enotes
+\temps\notes\hu{^J}&\hl{^c}|\dqu{-3}hg\enotes
+\temps\notes&|\dqu{-3}fe\enotes
+% mesure 43
+\barre\notes\qu K&\tten1\zql d\zh f\hu h|\dqu3fg\enotes
+\temps\notes\qu{=J}&\ql{=c}|\pince o\dqu{-6}fd\enotes
+\temps\NOTes\hu I&\zh{bd}\hu g|\qup g\enotes
+\temps\notes&|\cu h\enotes
+% mesure 44
+\troistemps\changecontext\NOtes\qu K&\itenl0d\zh d\zh f\hu h|\xTrille o{1.5\noteskip}\qup h\enotes
+\temps\notes\qu D&|\sk\cu g\enotes
+\temps\NOTEs\wh G&\tten0\zw b\zw d\wh g|\Mordant\wh g\enotes
+\resp
+% mesure 45
+\cleftoksii={{0}{3}{0}{0}}\changeclefs
+\barre\notes\hup G&\itenu1g\itenu2i\zw i\zw  g\hlp d|\cpdcl g\enotes
+\temps\NOTEs&|\hu d\enotes
+\temps\notes\qu J&\ql           e|\trioskip\tenPince\qqbbl{-5}edeb\enotes
+% mesure 46
+\barre\NOTEs\hu I&\tten1\tten2\zh d\zhl g\hup i|\hu d\enotes
+\temps\notes\qu L&\itenl1e\ql       e|\cpdcu N\enotes
+\temps\notes\qu H&\tten1\itenu0h\zq c\zql e\qu h|\dqu3ab\enotes
+% mesure 47
+\barre\NOTes\hu K&\tten0\zw d\zh f\hu h|\xTrille i{1.0\noteskip}\qup a\enotes
+\temps\notes&|\ibbl0N3\trioskip\qb0N\tqb0a\enotes
+\temps\NOtes\hu G&\zh g\hu i|\itenl0b\qu b\enotes
+\temps\notes&|\trioskip\tten0\qqbbh3bbcd\enotes
+% mesure 48
+\barre\NOTes\hu H&\zh f\zh h\hu j|\xTrille i{1.2\noteskip}\qup c\enotes
+\temps\notes&|\sk\trioskip\ibbl0b3\qb0b\tqb0c\enotes
+\temps\NOtes\hu I&\itenl1d\zh d\zh g\hu i|\itenl0d\qu d\enotes
+\temps\notes&|\trioskip\tten0\qqbbh3defg\enotes
+% mesure 49
+\barre\NOtes\hu K&\tten1\zql d\zh f\hu h|\tenPince\ql f\enotes
+\temps\notes&\zql c|\dql{-2}ed\enotes
+\temps\notes\hu I&\zh b\zh d\hu g|\dql6dg\enotes
+\temps\notes&|\dql{-8}dN\enotes
+% mesure 50
+\troistemps\changecontext\NOTes\hu H&\zh c\zhl e\hup h|\xTrille i{\noteskip}\qup a\enotes
+\temps\notes&|\cu b\enotes
+\temps\NOTEs\wh I&\zw{^d}\zw f\wh i|\Mordant\wh b\enotes
+\resp
+% mesure 51
+\deuxtemps\changecontext\notes\wh H&\zw{^df}\hup i|\cpdcl f\enotes
+\temps\NOTes&|\hu{^d}\enotes
+\temps\notes&\qu h|\trioskip\tenPince\qqbbl{-3}fefb\enotes
+% mesure 52
+\barre\notes\hu G&\zh b\zh  e\hu g|\cpdcl e\enotes
+\temps\NOtes&|\hu e\enotes
+\temps\notes\hu H&\zh {cf}\hu h|\enotes
+\temps\notes&|\trioskip\ibl0f3\qb0f\sk\nbbl0\qb0g\tqb0h\enotes
+% mesure 53
+\barre\NOTes\hu I&\itenl1b\itenu2g\zh {bd}\hu g|\hu d\enotes
+\temps\NOTes\hl L&\tten1\tten2\zh b\zh e\hu g|\hl g\enotes
+% mesure 54
+\barre\temps\notes\hu H&\zh c\zh f\hu h|\qqbl{-2}fedc\enotes
+\temps\NOTes\hu I&\itenl1d\zw d\zh g\hu i|\xTrille i{1.5\noteskip}\qup b\enotes
+\temps\notes&|\cu a\enotes
+% mesure 55
+\barre\NOTes\wh K&\tten1\zw d\zw f\wh h|\Mordant \wh a\enotes
+\resp
+% mesure 56
+\barre\notes\wh{=J}&\zw{=cf}\wh h|\cpdcl h\enotes
+\temps\NOTes&|\hu f\enotes
+\temps\notes&|\trioskip\pince{11}\qqbbl{-3}hghd\enotes
+% mesure 57
+\barre\NOtes\hu I&\zh{bd}\hu g|\qu g\enotes
+\temps\NOtes&|\qu N\enotes
+\temps\NOtes\hu H&\itenu2h\zh{ce}\hu h|\itenl1a\qu a\enotes
+\temps\notes&|\trioskip\tten1\qqbbu3aabc\enotes
+% mesure 58
+\barre\NOtes\hu K&\tten2\itenl2d\zh{df}\hu h|\itenl1d\qu d\enotes
+\temps\notes&|\trioskip\tten1\qqbbu3ddef\enotes
+\temps\notes\qu I&\tten2\zq d\zq b\qu g|\ibu0e{-9}\qh0g\tqh0N\enotes
+\temps\notes\qu J&\zq{hc}\qu e|\dql{-3}cb\enotes
+%\check
+% mesure 59
+\barre\NOTes\hu K&\itenl1d\zw d\zh g\hu i|\hu b\enotes
+\temps\NOTes\hu D&\zh f\hu h|\xTrille i{\noteskip}\qup a\enotes
+\temps\notes&|\cu N\enotes
+% mesure 60
+\barre\NOTEs\wh G&\tten1\zw{bd}\zw g|\wh N\enotes
+\mulooseness 3\relax
+\finmorceau
+\rightline{\sl\aujourdhui}\vfil\eject
+
+\ifx\toc\undefined
+ \let\finishpiece \end
+\else
+ \let\finishpiece\relax
+\fi
+\finishpiece
+\endinput
+

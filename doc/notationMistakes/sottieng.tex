@@ -1,0 +1,1075 @@
+\documentclass[12pt,twoside]{article}
+\usepackage{a4}
+\usepackage{musixtex}
+\usepackage[english]{babel}
+\usepackage{randtext}
+\input coulhack
+\raggedbottom
+\setlength{\textwidth}{18cm} \setlength{\textheight}{26cm}
+\setlength{\oddsidemargin}{0pt}\setlength{\evensidemargin}{0pt}
+\setlength{\parindent}{0cm}\setlength{\parskip}{.5cm}
+\setlength{\marginparwidth}{1in} \setlength{\marginparsep}{0pt}
+\setlength{\hoffset}{-1cm}
+\setlength{\voffset}{-2.5cm}
+%\setlength{\headsep}{2cm}
+\setlength{\itemsep}{0cm}
+
+\newcommand{\milieu}[1]{\begin{center}{#1}\end{center}}
+\newcommand{\pruneau}{$\bullet$~}
+\newcommand{\subsec}{\vspace{-1cm}\subsection{~}\vspace{-.5cm}}
+% \today should work the same in theory
+\def\mytoday{\ifcase\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi
+  \space\number\day, \number\year}
+
+\def\notess{\vnotes2.4\elemskip}
+\def\notesss{\vnotes1.7\elemskip}
+\def\notesm{\vnotes1.5\elemskip}
+\def\appog{\multnoteskip\tinyvalue\tinynotesize}
+\newcommand{\zcn}[2]{\zcharnote{#1}{#2}}
+\newcommand{\lcn}[2]{\lcharnote{#1}{#2}}
+\newcommand{\ccn}[2]{\ccharnote{#1}{#2}}
+\newcommand{\nxst}{\nextstaff}
+\def\hhqsk{\off{.7\elemskip}}
+
+\newcommand{\twoextr}[2]
+%{\begin{music}\let\extractline\hbox
+{\let\extractline\hbox
+\hbox to \hsize{
+\hfill
+\startextract #1
+\zendextract\hfill
+\startextract #2
+\zendextract
+\hfill}
+
+%\let\extractline\centerline\end{music}}
+\let\extractline\centerline}
+
+\accshift=0mm
+\geometricskipscale
+\nostartrule
+\nobarmessages\nobarnumbers
+\let\extractline\centerline
+
+\begin{document}
+\milieu{\ppfftwentynine Repository of music-notation mistakes}
+\milieu{\medtype or}
+\milieu{\ppfftwentyfour Essay on the true art of music engraving}
+\milieu{\Huge Jean-Pierre Coulon}
+%\centerline{\tt
+%\kern3.5em{obs-nice}\kern-4.5em{@}\kern-3.5em{coulon}\kern4.5em{.fr}}
+
+\centerline{\tt \randomize{coulon@obs-nice.fr}}
+
+
+\milieu{\mytoday}
+%\milieu{\today}
+
+\milieu{\large intended for:}
+\begin{itemize}
+\item users of music-typesetting software packages,
+\item developers of such packages,
+\item traditional music-engravers,
+\item sheet-music collectors,
+\item those keen on  problems of \textit{semantics}, \textit{semiology},
+\textit{philology} , etc. 
+\end{itemize}
+
+{\footnotesize NB: These examples are certainly musically worthless:
+do not read them with your instrument :-)\\
+To limit myself to the essential, and lacking sufficient expertise,
+I do not deal with any of these neighboring, exciting topics:
+
+\pruneau music theory, harmony, composition, etc.\\
+\pruneau comparative test of various typesetting packages,\\
+\pruneau how to interpret the quoted symbols according to epochs,\\
+\pruneau copyright issues,\\
+\pruneau percussion notation, and plucked-string instrument tablatures,\\
+\pruneau very-early-music notation, and avant-garde music
+notation.\\
+\textit{ I apologize to readers of some countries for having adhered
+to the U.S. terminology}
+
+}
+
+
+\section{General issues}
+\subsec
+When simultaneous notes are present on the same staff, two notations
+are posssible: chord notation, or multiple-voice, a.k.a. \textit{polyphonic}
+notation.
+
+\twoextr
+{\NOtes\qu c\zq c\qu e\en
+\Notes\ibu0e2\zq c\qb0e\zq d\tqh0f\en}
+{\NOtes\zql c\qp\zql c\qu e\en
+\Notes\ibl0c2\ibu1e2\zqb0c\qb1e\tbl0\zqb0d\tqh1f\en}
+
+Of course, if parts have distinct rythms, the polyphonic notation is
+required.
+
+\eject\milieu{\ppfftwenty from here:}
+{\ppfftwentyfour This side: incorrect. \hfill This side: correct. }
+
+\subsec
+Do your best to place \textit{page-turns} at places
+acceptable for the musician, otherwise he will either
+require a ``page-turner'', or labor to arrange 
+chunks of photocopies. Since modern musical scores are smaller 
+than before, this demands more efforts from the music engraver.
+
+{\footnotesize The actual print size, i.e. omitting margins,
+of most scores from former epochs, almost matched the usual format
+of most of modern scores including the margins.
+
+}
+
+An easy solution consists in using a small engraving size.
+It is better to use a bigger size, at the price of more effort
+to manage the spacing rationally.
+These two excerpts require the same horizontal space, but that on the
+right is easier to read:
+
+\bigaccid
+\begin{music}\let\extractline\hbox
+\hbox to \hsize{
+\hfill
+\smallmusicsize
+\setclef1{\treble}
+\startextract%
+\notess\ibbu0c1\qb0c\qb0{^c}\qb0d\tqh0{^d}\en
+\notess\ibbu0f{-1}\qb0{g}\qb0{_g}\qb0f\tqh0e\en
+\bar%
+\notess\ibbu0c0\qb0{^cc}\qb0{=c}\tqh0c\en
+\zendextract\hfill
+\normalmusicsize
+\startextract%
+\notesss\ibbu0c1\qb0c\hqsk\qb0{^c}\qb0d\hqsk\tqh0{^d}\en
+\notesss\ibbu0f{-1}\qb0{g}\hqsk\qb0{_g}\qb0f\tqh0e\en
+\bar%
+\notesss\ibbu0c0\qb0{^cc}\hqsk\qb0{=c}\tqh0c\en
+\zendextract
+\hfill}
+\let\extractline\centerline\end{music}
+
+Moreover, you also have to vary the distances between the staves
+of systems, to avoid wasting some vertical space
+(see my edition of Dussek's piano Sonata op.35-3).
+
+
+
+
+\subsec
+Choose horizontal spacings that increase according to note durations,
+but not proportional to these durations. Personally I am happy with a
+spacing ratio
+of \hbox{$\sqrt{2}\approx 1.414$} to represent a duration-ratio of 2,
+but this is not an absolute rule, especially if thirty-second or
+sixty-fourth notes are present, because this would bring them 
+too close to each other.
+Do not change the spacing of a specific duration within a line without
+a good reason.
+
+\nostartrule
+\setclef1\treble
+\hsize82.1mm
+\startpiece
+\NOTEs\hu c\sk\en
+\NOTEs\qu c\en
+\NOtes\cu c\en
+\notes\ibbu0c0\qb0c\en
+\notes\qb0{cc}\tqh0c\en
+\setemptybar
+\endpiece
+
+\hsize18cm
+
+\setclef1\treble
+\twoextr
+{\notes\hu c\en
+\NOtes\qu c\en
+\NOTes\cu c\en
+\notes\ibbu0c0\qb0c\en
+\Notes\qb0{cc}\tqh0c\en}
+{\NOTes\hu c\en
+\NOtes\qu c\en
+\Notes\cu c\en
+\notes\ibbu0c0\qb0{cc}\en
+\notes\qb0c\tqh0c\en}
+
+{\footnotesize If a system has several staves, the part
+with the \textbf{shortest} durations governs the overall spacing.
+Lyrics, if any, may demand still wider spacings.
+
+}
+
+\subsec
+Here is a good reason to modify tight note spacing: avoiding clashes:
+
+\twoextr
+{\notesss\ccu c\ibbl0k2\qb0{jklm}\tqb0{^n}\en}
+{\notesss\ccu c\hqsk\ibbl0k2\qb0{jklm}\hqsk\tqb0{^n}\en}k
+
+\subsec
+If no other simultaneous part prevents it, note stems should also be
+taken into account for the spacing:
+
+\largemusicsize
+\twoextr
+{\notes\ibbu0d0\qb0{ded}\tqh0e\ibbl0k0\qb0{jkj}\tqb0k\en}
+{\notes\ibbu0d0\qb0{ded}\tqh0e\hqsk\ibbl0k0\qb0{jkj}\tqb0k\en}
+
+
+\subsec
+Never displace the vertical alignment to accommodate accidentals:
+
+\setstaffs1{2}\setclef1\bass\startrule\bigaccid
+\twoextr{
+\notesm\ibbu0I2\qb0{IJK}\tqh0L\nxst\ibbu0d2\qb0{de}\hhqsk\qb0{^f}\tqh0g\en
+\bar%
+\NOtes\ql M\nxst\hhqsk\qu{^h}\en}
+{\notesm\ibbu0I2\qb0{IJ}\hhqsk\qb0K\tqh0L\nxst\ibbu0d2\qb0{de}\hhqsk\qb0{^f}\tqh0g\en
+\bar%
+\NOtes\hqsk\ql M\nxst\hqsk\qu{^h}\en}
+
+\nostartrule
+
+
+
+\subsec
+Write an interval of a \textit{second} in a chord with the lower note
+\textbf{left}. On the other hand, in polyphonic writing,
+it should be put \textbf{right}.
+
+\largemusicsize\setstaffs1{1}\setclef1{\treble}
+\twoextr
+{\NOtes\rq b\zq{ce}\qu g\en
+\NOtes\rq b\zq{^ce}\qu g\en
+\NOtes\rq c\rq e\rq g\qu b\en
+\doublebar%
+\NOtes\zql b\roffset{.9}{\qu c}\en
+\notes\ibbu0c0\loff{\ibl1b{-1}\zqb1b}\qb0{cd}\en
+\notes\tbl1\zqb1a\qb0c\tqh0d\en}
+{\NOtes\rq c\zq{be}\qu g\en
+\NOtes\sh c\rq c\zq{be}\qu g\en
+\NOtes\rq c\zq{be}\qu g\en
+\doublebar%
+\NOtes\zqu c\roffset{.9}{\ql b}\en
+\notes\ibbu0c0\roff{\ibl1b{-1}\zqb1b}\qb0c\hqsk\qb0d\en
+\notes\tbl1\zqb1a\qb0c\tqh0d\en}
+
+{\footnotesize
+I omit cases of voice crossing. 
+Do not be perturbed by an accidental associated with the
+upper note. Do not perturb notes aside this second.
+
+}
+
+
+\subsec
+In polyphonic writing, notes should be shifted just enough to
+distinguish them, anyway less than the spacing for a second:
+
+\Largemusicsize\generalmeter{\empty}\setstaffs1{1}\setclef1\treble
+\twoextr
+{\NOtes\zql c\roff{\zqu e}\qu g\en
+\NOtes\zql c\zqu e\qu g\en
+\NOtes\zql c\roffset{.2}{\zqu f}\qu g\en
+\NOtes\zqlp c\roff{\zqup f}\qup h\en}
+{\NOtes\zql c\loffset{.2}{\zqu g}\qu e\en
+\NOtes\zql c\loffset{.2}{\zqu g}\qu e\en
+\NOtes\zql c\roff{\zqu f}\qu g\en
+\NOtes\loffset{.2}{\zqu h}\pt c\pt f\pt h\zql c\qu f\en}
+
+{\footnotesize Note the case of dotted notes: the augmentation dots
+must be aligned vertically.}
+
+\subsec
+Sometimes augmentations dots must be placed so as to avoid any
+ambiguity:
+
+\twoextr
+{\NOtes\ibu0h0\roffset{.9}{\zql g\pt h}\qb0h\en
+\notes\tbbu0\tqh0h\en
+\NOtes\zqlp g\qu i\en
+\Notes\qu j\cl f\en
+\Notes\zql e\qu k\en}
+{\Notesp\loffset{.3}{\ibu0h0\zqb0h}%
+\loffset{.5}{\raise.15\Interligne\hbox{\pt h}}\roffset{.8}{\zql g}\sk\en
+%\NOtes\ibu0h0\loffset{.2}{\pt h}\roffset{1.4}{\zql g}\qb0h\en
+\notes\tbbu0\tqh0h\en
+\NOtes\pt f\zql g\qu i\en
+\Notes\qu j\cl f\en
+\Notes\zql e\qu k\en}
+
+
+
+
+\subsec
+In a two-part polyphonic notation, upper-part note stems should be
+upwards, even if the other part has a rest:
+
+\normalmusicsize\setclef1{\bass}
+\twoextr
+{\NOTesp\zw H\hup a\en
+\Notes\qu N\hroff{\liftpause{-2}}\ql{MKLM}\en}
+{\NOTesp\zw H\hup a\en
+\Notes\qu N\liftpause{-2}\qu{MKLM}\en}
+
+{\footnotesize(same for the lower part.)}
+
+
+\subsec
+Some linkings of notes or rests may be correct
+according to music theory,
+but impede sight reading:
+
+\normalmusicsize
+\generalmeter{\meterfrac44}\setclef1\treble
+\twoextr
+{\notes\cu c\en
+\bar%
+\notes\cu d\en
+\Notes\qp\en
+\notes\ibu0f2\qb0{efgh}\tqh0i\en
+\bar
+\znotes\en}
+%\notes\cl j\en}
+{\notes\cu c\en
+\bar%
+\notes\cu d\ds\ds\cu e\en
+\notes\ibu0g2\qb0{fgh}\tqh0i\en
+\bar
+\znotes\en}
+
+In other words, rests should not act as syncopated notes. In a ternary
+beat, separate a rest that affects the second and third time values.
+Beams do not demand so much care.
+
+{\footnotesize Some will argue that in early music, flag/beam notation
+expresses some degree of articulation. But the rule above almost always
+coincides with some \textit{reasonable} articulation.
+
+}
+
+
+\section{Beaming}
+\subsec
+Beams should have an appropriate slope. In the past, one would avoid 
+too weak a slope, because the printing ink would maliciously attempt
+to fill the tiny angle between these beams and the staff lines.
+For a scale or an arpeggio, this slope cannot be steeper than that
+formed by the notes, nor horizontal. A compromise must be found.
+Here is an example, with its solution, by two distinguished publishers:
+
+\generalmeter{\empty}
+\setstaffs1{1}\setclef1{\treble}
+\twoextr{
+\notes\ibbu0a6\qb0{cdefg}\tqh0h\en
+\notes\ibbu0g0\qb0{cdefg}\tqh0h\en}
+{\notes\zcn q{\smalltype Peters end 19$^{th}$C.}\ibbu0a4\qb0{cdefg}\tqh0h\en
+\notes\zcn q{\smalltype Henle end 20$^{th}$C.}\ibbu0e1\qb0{cdefg}\tqh0h\en
+\notes\zcn q{recommended}\ibbu0d2\qb0{cdefg}\tqh0h\en}
+
+\footnotesize{If you want to imitate some French publishers :}
+
+\startextract%
+\notes\ibu0d2\ibbu1d2\qb1c\qb0{defg}\tbu0\tqh1h\en
+\notesss\ibu0i0\ibbbu1i0\qb1j\qb0{eg}\tbu0\tqh1j\en
+\zendextract
+
+\subsec
+Beam placement should be adapted to the context. This placement varies
+depending on whether this group of notes is isolated or in a series:
+
+\startextract
+\NOTes\hu c\hu d\en
+\bar
+\NOtes\qu f\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\NOtes\qu{cd}\en
+\bar%
+\NOtes\qp\en
+\NOTes\hu f\en
+\zendextract
+
+\twoextr
+{\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en}
+{\notes\ibbu0h1\qb0{ceg}\tqh0j\en
+\notes\ibbu0h1\qb0{ceg}\tqh0j\en
+\notes\ibbu0h1\qb0{ceg}\tqh0j\en
+\notes\ibbu0h1\qb0{ceg}\tqh0j\en}
+
+\subsec
+Avoid Z-like beams, as found in former editions:
+
+\normalmusicsize
+\setclef1\bass
+\twoextr
+{\Notes\ibu0E{-4}\qb0G\zq{Nc}\qb0e\en
+\Notes\zq{Nc}\qb0e\zq{Nc}\tqb0e\en}
+{\Notes\ibl0H2\qb0G\en
+\Notes\zq{Nc}\qb0e\zq{Nc}\qb0e\zq{Nc}\tqb0e\en
+\doublebar%
+\Notes\cu G\en
+\Notes\ibl0a0\zq{Nc}\qb0e\zq{Nc}\qb0e\zq{Nc}\tqb0e\en}
+
+
+\subsec
+Beams should never cross ledger lines:
+
+\setclef1{\treble}
+\twoextr
+{\notes\ibbl0q3\qb0{qrstuvw}\tqb0x\en}
+{\notes\ibbl0o1\qb0{qrstuvw}\tqb0x\en}
+
+\subsec
+Do not affect beam placement to place rests at their usual height.
+Rather move the rests:
+
+\twoextr
+{\Notes\ibl0k1\qb0n\ds\tqb0o\en
+\Notes\ibl0l0\qb0o\ds\tqb0o\en}
+{\Notes\ibl0n1\qb0n\raise2\Interligne\ds\tqb0o\en
+\Notes\ibl0o0\qb0o\raise2\Interligne\ds\tqb0o\en}
+
+
+\section{Ties and slurs}
+\subsec
+When \textbf{slurred} notes are intended, the slur takes off and lands
+above or below the \textbf{centers} of note heads. But for \textbf{tied}
+notes,
+the same sign takes off and lands vertically aligned with the boundary
+of the note head, and not higher than this head.
+One breaks from the first rule to
+avoid colliding the note stems.
+
+
+\largemusicsize
+\twoextr
+{\NOtes\isslurd0c\isluru1c\qu c\tsslur1 d\qu d\tsslur0e\qu e\islurd0f\qu f\en
+\bar%
+\NOtesp\tslur0f\roff{\itied0f}\qup f\en
+\NOtes\ttie0\qu f\en}
+{\NOtes\islurd0c\hroff{\isluru1c}\qu c\tslur1d\qu d\tslur0e\qu e\itied0f\qu f\en
+\bar%
+\NOtesp\ttie0\itied0f\qup f\en
+\NOtes\ttie0\qu f\en}
+
+{\footnotesize Note that the tie becomes ``quieter''.}
+
+
+\subsec
+Meanwhile avoid ``acrobatics'' to strictly abide these rules:
+
+\largemusicsize
+\twoextr
+{\NOtes\islurd0c\qu c\tsslur0j\ql j\en
+\NOtes\isluru0j\ql j\ql o\midslur5\tslur0k\ql k\en}
+{\NOtes\isslurd0c\qu c\tsslur0j\ql j\en
+\NOtes\isluru0l\ql j\ql o\tslur0m\ql k\en}
+
+
+\subsec
+During some epochs a single tie was supposed to refer to \textbf{all}
+notes of a particular chord. Particular cases have become so frequent,
+that it is better to note all ties explicitly.
+
+\largemusicsize
+\twoextr
+{\NOtes\itieu0g\zq{ce}\qu g\en
+\bar%
+\NOtes\ttie0\zq{ce}\qu g\en}
+{\NOtes\itied0c\itenl1e\itieu2g\zq{ce}\qu g\en
+\bar%
+\NOtes\ttie0\tten1\ttie2\zq{ce}\qu g\en}
+
+\subsec
+Associations of ties and slurs with dots and ornaments:
+
+\twoextr
+{\NOtes\isluru0j\upz k\ql j\tslur0k\upz l\ql k\en
+\NOtes\isluru0n\ql n\shake o\tslur0o\ql m\en}
+{\NOtes\isluru0l\upz j\ql j\tslur0m\upz k\ql k\en
+\NOtes\isluru0n\ql n\shake q\tslur0m\ql m\en}
+
+\newpage
+\subsec
+Associations of ties and slurs:
+
+\twoextr
+{\NOtes\itied0d\qu d\en
+\bar
+\NOtes\ttie0\islurd1d\qu d\tslur1c\qu c\en
+\NOtes\islurd1e\qu e\tslur1f\itied0f\qu f\en
+\bar
+\NOtes\ttie0\qu f\en}
+{\NOtes\islurd1d\itied0d\qu d\en
+\bar
+\NOtes\ttie0\qu d\tslur1c\qu c\en
+\NOtes\islurd1e\qu e\itied0f\qu f\en
+\bar
+\NOtes\tslur1f\ttie0\qu f\en}
+
+{\footnotesize Bowed-instruments players will find this obvious.}
+
+
+
+\subsec
+The dotted slur is the best way to emphasize an \textit{editorial slur}:
+
+\setclef1{\treble}
+\twoextr
+{\NOtes\islurd0c\qu c\tslur0d\qu d\en
+\NOtes\zcn a{\smalltype\bf (}\islurd0d\qu e%
+\zcn b{\smalltype\bf ~)}\tslur0e\qu f\en
+\NOtes\islurd0g\zqu g\hsk\zcn c{\bf /}\hsk\tslur0h\qu h\en}
+{\NOtes\islurd0c\qu c\tslur0d\qu d\en
+\NOtes\dotted\islurd0e\qu e\tslur0f\qu f\en
+\NOtes\dotted\islurd0g\qu g\tslur0h\qu h\en}
+
+
+\section{Accidentals}
+\subsec
+When a note with an accidental expands over several measure,
+do not repeat the accidental on the next measures, except if there is
+a line-break or a page-break:
+
+\twoextr
+{\NOTEs\itied0b\itieu1j\zwh{^c}\wh{_i}\en
+\bar%
+\NOTes\ttie0\ttie1\zwh{^c}\hu{_i}\hu i\en}
+{\NOTEs\itied0c\itieu1i\zwh{^c}\wh{_i}\en
+\bar%
+\NOTes\ttie0\ttie1\zwh c\hu i\hu{_i}\en}
+
+\subsec
+
+When an accidental affects \textit{small notes}, and is desired
+to also affect subsequent notes, it must be repeated.
+
+\twoextr
+{\notes\appog\ibbu0c2\qb0{^c}\tqh0d\en
+\NOTes\wh c\en}
+{\notes\appog\ibbu0c2\qb0{^c}\tqh0d\en
+\NOTes\qsk\wh{^c}\en}
+
+\subsec
+When a note with a single sharp comes after the same note with a
+double sharp, you no longer put a natural sign before the single
+sharp, unless you want to mimic 19th engraving style. Same for flats:
+
+\twoextr
+{\NOtes\qu{>c}\lna c\qu{^c}\qu{<d}\lna d\qu{_d}\en}
+{\NOtes\qu{>c}\qu{^c}\qu{<d}\qu{_d}\en}
+
+
+
+\subsec
+In polyphonic writing, accidentals of either part are not
+supposed to affect other parts. If such accidentals are to
+affect other parts, they should be written explicitly:
+
+
+\normalmusicsize
+\setstaffs1{1}\setclef1\treble
+\twoextr
+{\Notes\zql d\qu f\en
+\bar%
+\NOtes\zql c\qu{_e}\zql d\qu f\zql e\qu g\zql f\qu h\en
+\bar\
+\znotes\en}
+{\Notes\zql d\qu f\en
+\bar%
+\NOtes\zql c\qu{_e}\zql d\qu f\zql{_e}\qu g\zql f\qu h\en
+\bar
+\znotes\en}
+
+{\footnotesize Remember, around 1600 a Fugue for organ or harpsichord
+would have been written on \textbf{four} staves. Then accidentals where
+not dependent between staves.
+
+}
+
+\newpage
+\subsec
+In the old days, an accidental would also affect corresponding notes
+at other octaves:
+
+\startextract
+\Notes\ibu0e4\qb0{^ceg}\tqh0j\en
+\NOtes\zq{_b}\qu i\en
+\zendextract
+
+
+
+Nowadays, such accidentals should be explicitly written:
+
+\twoextr
+{\Notes\ibu0e4\qb0{^ceg}\uppersh c\tqh0j\en
+\NOtes\zq{_b}\upperfl i\qu i\en}
+{\Notes\ibu0e4\qb0{^ceg}\tqh0{^j}\en
+\NOtes\zq{_b}\qu{_i}\en}
+
+
+{\footnotesize Note that some software packages, able to convert
+between a MIDI file and a score, have kept this former convention. Then
+a MIDI file may contradict its source score for some accidentals.
+
+}
+
+\subsec
+
+When changing the key signature to decrease the number
+of accidentals, the natural signs should be written \textbf{before} the
+remaining accidentals:
+
+\generalsignature5
+\twoextr{%
+\notes\qu{cde}\en
+\doublebar
+\notes\sh m\qsk\sh j\qsk\na n\qsk\na k\qsk\na h\qsk\en
+\notes\qu{fg}\en}
+{\notes\qu{cde}\en
+\generalsignature{2}\Changecontext
+\notes\qu{fg}\en}
+\generalsignature0
+
+\subsec
+When such a change comes at a line- or page break, it must be shown
+\textbf{before} this break:
+
+\generalsignature2
+\twoextr
+{\Notes\qu{cdef}\en
+\afterruleskip=-4pt\bar}
+{\afterruleskip=8pt
+\Notes\qu{cdef}\en
+\generalsignature{-2}\Changecontext}
+
+\generalsignature0
+\twoextr
+{\notes\na m\hsk\na j\hsk\en
+\doublebar%
+\notes\fl i\hsk\fl l\hsk\en
+\Notes\qu{ghij}\en}
+{\notes\fl i\hsk\fl l\sk\en
+\Notes\qu{ghij}\en}
+
+
+\subsec
+When there is a need to shift some accidentals to avoid collisions,
+the upper is left at its normal position, and the lower is shifted
+to the left, either in chord- or in polyphonic-writing:
+
+\twoextr
+{\NOtes\qsk\lsh f\zq{^d}\qu f\en
+\bar%
+\NOtes\qsk\lsh f\zql{^d}\qu f\en}
+{\NOtes\qsk\lsh d\zq d\qu{^f}\en
+\bar%
+\NOtes\qsk\lsh d\zql d\qu{^f}\en}
+
+
+\subsec
+Accidentals other than well defined ones, get classified in three sets:
+
+\begin{itemize}
+\item editorial accidentals \textbf(e),
+\item cautionary accidentals \textbf(y),
+\item ``courtesy'' accidentals \textbf(c).
+\end{itemize}
+
+Put an editorial accidental when you think the source is wrong.
+Note it with a small-size accidental above or below the note.
+If this note is within a chord, place it left of the note.
+
+{\footnotesize \textit{Thorough bass} also uses such small accidentals above
+notes. But the misunderstanding is unlikely most of the time.
+
+}
+
+Put a cautionary accidental when music-theory rules demand its effect,
+but you fear the musician misses it, e.g. at the end of a ``crowded'' measure.
+It must be parenthesized.
+
+A courtesy accidental is a theoretically redundant accidental, which
+confirms the cancelling effect of a barline on previous accidentals. 
+The usage is to write it normally.
+
+\twoextr
+{\NOtes\qu{^c}\qu d\cfl e\qu e\qu{^c}\en
+\bar%
+\NOtes\cna c\qu c\en}
+{\NOtes\qu{^c}\qu d\ccn q{(e)}\upperfl L\qu e\ccn q{(y)}\csh c\qu c\en
+\bar%
+\NOtes\ccn q{(c)}\qu{=c}\en}
+
+{\footnotesize It is better to notate \textbf{all} accidentals in
+some modern, complex works.
+
+}
+
+\subsec In ancient times some copists thought that when the
+first note of a measure is the same as that, with an accidental, of the
+previous measure, the accidental was implicit:
+
+\setstaffs12\setclef1{\bass\treble}
+\startrule
+\interstaff{11}
+
+\startextract
+\NOtesp\zhl K\hu a|\zh{^f}\zhl d\qup j\en
+\notesp|\triolet r\ibbu3i{-1}\qb3j\en
+\notes|\qb3{_i}\tqh3h\en
+\NOtesp\pt F\zql G\qu N|\zqp g\zqlp d\qup i\en
+\notes\ibbl0H1\triolet C\zcu N\qb0G|\zq g\zcl d\cu i\en
+\notesp\qb0H\en
+\notes\tqb0{_I}\en
+\bar
+\NOtes\zhl J\qu N|\pt b\zql c\loffset{.25}{\zql e}\qu i\en
+\Notes\qu M|\zhl f\ibu3h{-1}\qbp3h\en
+\notes|\cl c\en
+\notes|\tbbu3\tqh3g\en
+\NOtes\zhl C\qu N|\pt b\zql c\qu g\en
+\zendextract
+
+The correction is then obvious, and does not require an editorial
+accidental:
+
+\smallmusicsize
+\twoextr
+{\NOtesp\zhl K\hu a\nextstaff\zh{^f}\zhl d\qup j\en
+\notesp\nextstaff\triolet r\ibbu3i{-1}\qb3j\en
+\notes\nextstaff\qb3{_i}\tqh3h\en
+\NOtesp\pt F\zql G\qu N\nextstaff\zqp g\zqlp d\qup i\en
+\notes\ibbl0H1\triolet C\zcu N\qb0G\nextstaff\zq g\zcl d\cu i\en
+\notesp\qb0H\en
+\notes\tqb0{_I}\en
+\bar%
+\NOtes\zhl J\qu N\nextstaff\pt b\zql c\loffset{.25}{\zql e}\upperfl n\qu i\en
+\Notes\qu M\nextstaff\zhl f\ibu3h{-1}\qbp3h\en
+\notes\nextstaff\cl c\en
+\notes\nextstaff\tbbu3\tqh3g\en
+\NOtes\zhl C\qu N\nextstaff\pt b\zql c\qu g\en}
+{\NOtesp\zhl K\hu a\nextstaff\zh{^f}\zhl d\qup j\en
+\notesp\nextstaff\triolet r\ibbu3i{-1}\qb3j\en
+\notes\nextstaff\qb3{_i}\tqh3h\en
+\NOtesp\pt F\zql G\qu N\nextstaff\zqp g\zqlp d\qup i\en
+\notes\ibbl0H1\triolet C\zcu N\qb0G\nextstaff\zq g\zcl d\cu i\en
+\notesp\qb0H\en
+\notes\tqb0{_I}\en
+\bar%
+\nspace%
+\NOtes\zhl J\qu N\nextstaff\pt b\zql c\loffset{.25}{\zql e}\qu{_i}\en
+\Notes\qu M\nextstaff\zhl f\ibu3h{-1}\qbp3h\en
+\notes\nextstaff\cl c\en
+\notes\nextstaff\tbbu3\tqh3g\en
+\NOtes\zhl C\qu N\nextstaff\pt b\zql c\qu g\en}
+
+{\footnotesize (a fortiori a cautionary accidental. Your musicologist's
+abilities are recognized at this stage!)}
+
+
+\subsec
+Some accidentals in ancient editions may seem redundant according to
+our modern rules, like the C sharp at the end of this bar:
+
+\nostartrule
+\setstaffs11
+\largemusicsize
+\setclef1{\bass}
+\startextract
+\bar%
+\NOtes\zw N\zq b\qu d\lsh a\zq a\qu{^c}\en
+\NOtes\zq b\qu d\zq{^c}\qu e\en
+\bar%
+\zendextract
+
+
+Therefore the following theory must be banned:
+\textit{if this accidental is present in my source,
+there must be a good reason for this,
+but a wrong accidental has been written here. Indeed, if the composer
+had wanted a C-sharp at the end of this bar, he wouldn't have
+written any sign there. So let me correct this mistake!}
+
+\twoextr{
+\bar%
+\NOtes\zw N\zq b\qu d\lsh a\zq a\qu{^c}\en
+\NOtes\zq b\qu d\zq{=c}\qu e\en
+\bar%
+}
+{\bar%
+\NOtes\zw N\zq b\qu d\lsh a\zq a\qu{^c}\en
+\NOtes\zq b\qu d\zq c\qu e\en
+\bar%
+}
+
+{\footnotesize If these thirds of fourth-notes had been written
+as polyphonic notes, the explanation would be obvious.
+I could also quote similar misunderstandings about accidentals
+an octave away, as seen before.
+
+}
+
+\section{Measure numbers}
+
+\subsec
+Initial rests, common to all parts, are never notated, especially if
+there is a repeat from the first note:
+
+\normalmusicsize\nostartrule\setclef1\treble
+\generalmeter{\meterfrac34}
+
+\twoextr
+{\NOtes\hpause\en
+\Notes\qu c\en
+\bar%
+\Notes\qu{def}\en
+\bar%
+\Notes\qu{hi}\en
+\rightrepeat
+\Notes\ql j\en
+\bar
+\Notes\ql k\en}
+{\Notes\qu c\en
+\bar%
+\Notes\qu{def}\en
+\bar%
+\Notes\qu{hi}\en
+\rightrepeat
+\Notes\ql j\en
+\bar
+\Notes\ql k\en}
+
+
+
+\subsec
+The number of the very first measure of a piece is never written.
+If this measure is an upbeat, this number is \textbf{zero}.
+
+\normalmusicsize\nostartrule\setclef1\treble
+\generalmeter{\meterfrac34}
+
+\twoextr
+{\Notes\loffset{8}{\zcharnote o{\eightbf 1}}\qu c\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{def}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 3}}\qu{hi}\ql j\en}
+{\Notes\qu c\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 1}}\qu{def}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{hi}\ql j\en}
+
+{\footnotesize Measure numbers at system left-tops are enough in practice.
+
+}
+
+\subsec
+If there is a double bar within a measure it does not act on measure
+numbering.
+
+\twoextr
+{\Notes\qu{cde}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{de}\en
+\leftrightrepeat%
+\Notes\qu f\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 4}}\qu{hi}\ql j\en
+\bar}
+{\Notes\qu{cde}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{de}\en
+\leftrightrepeat%
+\Notes\qu f\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 3}}\qu{hi}\ql j\en
+\bar}
+
+
+
+\subsec
+
+When  \textit{first ending-second ending} measures are present, measure
+numbers of only the \textit{first ending} measure act on the numbering.
+If necessary, corresponding measure numbers have the subscripts
+\textit{a} and \textit{b}.
+
+\generalmeter{\null}
+\twoextr
+{\Notes\loffset{5}{\zcharnote o{\eightbf 30}}\hu c\en\bar
+\Notes\loffset{2}{\zcharnote o{\eightbf 31}}\hu d\en
+\Setvolta1\bar
+\Notes\hu e\en
+\bar
+\Notes\loffset{2}{\zcharnote o{\eightbf 33}}\hu f\en
+\setvolta2\endvoltabox\rightrepeat
+\Notes\hu g\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 35}}\hu h\en
+\bar%
+\Notes\hu i\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 37}}\hl j\en}
+{\Notes\loffset{5}{\zcharnote o{\eightbf 30}}\hu c\en
+\bar
+\Notes\loffset{2}{\zcharnote o{\eightbf 31}}\hu d\en
+\Setvolta1\bar%
+\Notes\hu e\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 33a}}\hu f\en
+\setvolta2\endvoltabox\rightrepeat
+\Notes\hu g\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 33b}}\hu h\en
+\bar%
+\Notes\hu i\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 35}}\hl j\en}
+
+{\footnotesize
+Indeed many fast movements have repeats bars amid a measure (like the
+Allegretto of the \textit{Moonloght sonata}). This repeat could as well had
+been noted under the \textit{first ending-second ending} form for this
+measure. Hence both notations must yield the same measure numbering.
+
+
+}
+
+
+\section{Miscellaneous}
+
+\subsec
+No barline should be written at the beginning of an instrument part
+involving a single staff, unlike a conductor score.
+
+\setclef1\alto
+\startrule\largemusicsize
+\begin{music}\let\extractline\hbox
+\hbox to \hsize{
+\hfill
+\startextract
+\NOtes\qu{abc}\en
+\zendextract\hfill\nostartrule
+\startextract 
+\NOtes\qu{abc}\en
+\zendextract
+\hfill}
+
+\let\extractline\centerline\end{music}
+
+
+\subsec
+
+In ancient times, some staccato notes had a small wedge instead of
+the modern dot. If \textbf{both} symbols show up in a piece, they also
+represent two degrees of staccato. This notation must then be faithfully
+reproduced. On the other hand, if only wedges exist, they must be
+replaced with dots.:
+
+\largemusicsize\setstaffs1{1}\setclef1{\treble}\nostartrule
+\twoextr{
+\Notes\ibu0d1\lppz c\qb0c\lppz d\qb0d\lppz e\qb0e\lppz f\tqh0f\en}
+{\Notes\ibu0d1\lpz c\qb0c\lpz d\qb0d\lpz e\qb0e\lpz f\tqh0f\en}
+
+\subsec
+Such signs are always located above the note heads, rather than above the
+note stems, even if polyphony requires a stem-side location:
+
+\twoextr
+{\NOtes\zhl c\hroff{\upz l}\qu e\hroff{\uppz k}\qu f\en
+\Notes\zql b\ibu0g0\hroff{\upz m}\qb0g\hroff{\upz m}\tqh0g\en}
+{\NOtes\zhl c\upz l\qu e\uppz k\qu f\en
+\Notes\zql b\ibu0g0\upz m\qb0g\upz m\tqh0g\en}
+
+
+
+\subsec
+Appoggiature, or \textit{small notes}, are written \textbf{after}
+the bar, regardless of their rythmic interpretation:
+
+
+\twoextr
+{\NOtes\qu N\en
+\notes\multnoteskip\tinyvalue\tinynotesize\ibbu0e4\qb0c\tqh0e\en
+\bar
+\NOtes\hu g\en}
+{\NOtes\qu N\en
+\bar
+\notes\multnoteskip\tinyvalue\tinynotesize\ibbu0e4\qb0c\tqh0e\en
+\NOtes\hu g\en}
+
+
+\subsec
+The tempo indication should be written in roman characters, and other marks
+should in italic:
+
+\setclef1\treble
+\twoextr
+{\NOtes\zcn o{\medtype\it allegro}\qu{de}\zcn N{Cres}\qu{fg}\en}
+{\NOtes\zcn o{\medtype Allegro}\qu{de}\zcn N{\medtype\it cresc.}\qu{fg}\en}
+
+{\footnotesize Also note the capitalization, and the abbreviation dot.}
+
+
+\subsec
+In the old days one would write \textbf{loco} (from Latin \textit{at
+the place})
+to emphasize the end
+of an octave sign (\textit{8}\raisebox{2mm}{- - - - -}).
+Now such signs have become common,
+and this \textbf{loco} is well redundant.
+
+\newpage
+
+\section{Some moral advice if you make engrave a score}
+
+\subsec
+If you elect to using a specific notation practice, keep up with it 
+along the entire piece, instead of toggling between two practices
+according to your whim, even if we have seen that this first
+practice is questionable.
+
+\subsec
+Pitch errors of a third are much more frequent than those of
+a second, for obvious visual-perception reasons. Be tolerant
+with the authors of your source.
+
+\subsec
+What to do when you think you've done with your edition? Of course,
+you rush to your instrument, and you play the piece with this edition.
+
+But since you are familiar with the piece, you will very likely
+miss quite a few misprints, overwhelmed by your enthusiasm.
+Quit your instrument, put your edition and its source on a desk,
+and take a pencil. Compare measures one at a time, and if there are
+multiple staves, one staff at a time. End up with the miscellaneous
+signs (tempo, interpretation, piano pedalling, etc.) common to these
+several staves.
+
+But this is not enough yet. Indeed a good musician like you has the ability
+to correct some misprints (like accidentals) when playing, without noticing.
+The previous test will not detect such misprints, because they are the
+same in both versions.
+
+If your typesetting software is able to convert your piece into
+MIDI format, the obtained file will be helpful. Otherwise you will
+have to submit your edition to a musician less experienced than you,
+who would not yet be prone to such automatic corrections. 
+
+
+\subsec
+\textbf{Remember: Noting music correctly is as difficult as playing
+an instrument correctly.}
+
+\end{document}
+

@@ -1,0 +1,188 @@
+\chapter{Smaller Notes in Normal-Sized Staves}
+Here we describe how to reduce the size of note symbols without changing the
+size of the staff itself. Changing overall staff size will be treated in
+Chapter~\ref{staffspacing}.
+
+\section{Arbitrary sequences of notes}
+Written-out ornaments and \itxem{cadenzas} are usually typeset with
+smaller notes and spacing than normal. The smaller \ital{size} can be
+initiated anywhere inside a \verb|\notes| group by stating
+\keyindex{smallnotesize} or \keyindex{tinynotesize}. Normal note size is then
+restored by \keyindex{normalnotesize} or simply by terminating the
+\verb|notes| group and starting another. Smaller \ital{spacing} must also be
+explicitly indicated, usually by redefining \verb|\noteskip| in some way.
+
+As an example, this excerpt, from the beginning
+of the Aria of the ``Creation'' by Joseph {\sc Haydn})\index{Haydn, J.@{\sc
+Haydn, J.}},
+
+\begin{music}
+\instrumentnumber{2}
+\generalmeter{\meterfrac44}
+\def\qbl#1#2#3{\ibl{#1}{#2}{#3}\qb{#1}{#2}}
+\setstaffs2{2}
+\setclef1\bass
+\setclef2\bass
+\startbarno0
+\startextract
+\NOtes\qp&\zmidstaff{\bf II}\qp|\qu g\en
+% mesure 1
+\bar
+\Notes\itieu2J\wh J&\zw N\ibl0c0\qb0e|\qu j\en
+\notes&\qbl0c0|\multnoteskip\tinyvalue\tinynotesize
+  \Ibbu1ki2\qb1{kj}\tqh1i\hqsk\en
+\Notes&\qb0e\tbl0\qb0c|\qu j\en
+\Notes&\ibl0c0\qb0{ece}\tbl0\qb0c|\ql l\sk\ql j\en
+% mesure 2
+\bar
+\Notes\ttie2\wh J&\ql J\sk\ql L|\zqupp g\qbl1e0%
+  \zq c\qb1e\zq c\qb1e\zq c\tbl1\zqb1e\en
+\notes&|\sk\ccu h\en
+\Notes&\ql N\sk\ibl0L{-4}\qbp0L|\ibl1e0\zq c\zqb1e\cu g%
+  \zq c\zqb1e\raise\Interligne\ds\zqu g\qb1g\en
+\notes&\sk\tbbl0\tbl0\qb0J|\tbl1\zq c\qb1e\en
+\endextract
+\end{music}
+\noindent can be coded as
+\begin{quote}\begin{verbatim}
+\instrumentnumber{2}
+\generalmeter{\meterfrac44}
+\setstaffs2{2}
+\setclef2{\bass}
+\setclef1{\bass}
+\startbarno=0
+\startextract
+\NOtes\qp&\zmidstaff{\bf II}\qp|\qu g\en
+% mesure 1
+\bar
+\Notes\itieu2J\wh J&\zw N\ibl0c0\qb0e|\qu j\en
+\notes&\ibl0c0\qb0c|\multnoteskip\tinyvalue\tinynotesize
+  \Ibbu1ki2\qb1{kj}\tqh1i\en
+\Notes&\qb0e\tbl0\qb0c|\qu j\en
+\Notes&\ibl0c0\qb0{ece}\tbl0\qb0c|\ql l\sk\ql j\en
+% mesure 2
+\bar\Notes\ttie2\wh J&\ql J\sk\ql L|\zqupp g\qbl1e0%
+  \zq c\qb1e\zq c\qb1e\zq c\tbl1\zqb1e\en
+\notes&|\sk\ccu h\en
+\Notes&\ql N\sk\ibl0L{-4}\qbp0L|\ibl1e0\zq c\zqb1e\cu g%
+  \zq c\zqb1e\raise\Interligne\ds\zqu g\qb1g\en
+\notes&\sk\tbbl0\tbl0\qb0J|\tbl1\zq c\qb1e\en
+\endextract
+\end{verbatim}\end{quote}
+
+ \section{Grace notes}
+Grace notes are a special case of small and tiny notes, namely single-stemmed
+eighth notes with a diagonal slash through the flag. To enable this, there
+are the macros \keyindex{grcu}\pitchp\ and \keyindex{grcl}\pitchp, which by
+themselves would
+produce normal-sized eighth notes with a slash. They should be used along
+with the note size reduction macros and spacing reduction macros just
+discussed. In addition, chordal grace notes can be built as in the following
+example:
+
+\begin{music}\nostartrule
+\startextract
+\NOTes\hu h\en
+\notes\multnoteskip\smallvalue\smallnotesize\grcu j\en
+\NOTes\hu i\en
+\bar
+\notes\multnoteskip\tinyvalue\tinynotesize\zq h\grcl j\en
+\NOTEs\wh i\en
+\zendextract
+\end{music}
+\noindent which was coded as
+\begin{quote}\begin{verbatim}
+\startextract
+\NOTes\hu h\en
+\notes\multnoteskip\smallvalue\smallnotesize\grcu j\en
+\NOTes\hu i\en
+\bar
+\notes\multnoteskip\tinyvalue\tinynotesize\zq h\grcl j\en
+\NOTEs\wh i\en
+\zendextract
+\end{verbatim}\end{quote}
+
+ \section[Ossia]{Ossia\texorpdfstring{\protect\footnote{Italian \textit{o sia} (or else)}}{}}
+This clever example had been provided by Olivier Vogel:\label{ossia}
+
+%\begin{center}
+%\includegraphics[scale=1]{./mxdexamples/ossiavogel.eps}
+%\end{center}
+
+\begin{music}
+%\startextract
+%\hsize70mm
+\let\extractline\hbox
+\hbox to \hsize{\hss
+\def\xnum#1#2#3{\off{#1\elemskip}\zcharnote{#2}{\smalltype\it #3}%
+\off{-#1\elemskip}}%
+\newbox\ornamentbox
+\setbox\ornamentbox=\hbox to 0pt{\kern-4pt\vbox{\hsize=2.6cm%
+\makeatletter
+\nostartrule\smallmusicsize\setsize1{\smallvalue}\setclefsymbol1\empty\global\clef@skip0pt%
+\makeatother
+%\smallmusicsize\setsize1{\smallvalue}\setclefsymbol1\empty%
+%\startpiece
+%\addspace{2pt}%
+\startextract
+\addspace{-2pt}%
+\let\notest\notes\def\notes{\vnotes2.1\elemskip}%
+\notes\ibbbl2{'c}0\qb2b\qb2c\qb2d\tbbbl2\qb2c\en%
+\notes\xnum{1.15}{'e}3\qb2d\qb2c\tbl2\qb2d\en%
+\notes\ibl2{'c}1\usf e\qb2c\en%
+\notes\tbl2\qb2{'d}\en
+\let\notes\notest%
+%\zstoppiece%
+\endextract
+}\hss}
+%\setbox\ornamentbox=\hbox to 0pt{Hello}
+%
+%
+%\normalmusicsize\nopagenumbers
+%\def\nbinstruments{1}%
+\setstaffs12\setclef1{60}%
+\generalsignature{-2}\generalmeter{\meterfrac{3}{4}}%
+%\parindent 0pt%
+%\stafftopmarg0pt\staffbotmarg5\Interligne\interstaff{10}\relax
+%\startpiece\addspace\afterruleskip%
+\startextract\addspace\afterruleskip%
+\NOtes\ibl1{'G}{-1}\qb1G\sk\bigna F\tbl1\qb1F|%
+\ibbl2{'b}0\qb2b\qb2a\qb2b\tbl2\qb2c\en%
+\NOtes\hl{'E}\bsk\raise6\internote\ds\ibu3{G}1\bigsh F%
+\qb3F\qb3G\tbu3\qb3{'A}|\zcharnote{10}{\copy\ornamentbox}\qlp{'c}\sk\sk%
+\cl d\en%
+%\endpiece
+\endextract
+\hss}
+%\vfill\eject\endmuflex
+\end{music}
+
+
+The code is:
+\begin{quote}\begin{verbatim}
+\hsize70mm%
+\def\xnum#1#2#3{\off{#1\elemskip}\zcharnote{#2}{\smalltype\it #3}%
+\off{-#1\elemskip}}%
+\newbox\ornamentbox
+\setbox\ornamentbox=\hbox to 0pt{\kern-4pt\vbox{\hsize=2.6cm%
+\nostartrule\smallmusicsize\setsize1{\smallvalue}\setclefsymbol1\empty%
+\startpiece\addspace{2pt}%
+\notes\ibbbl2{'c}0\qb2b\qb2c\qb2d\tbbbl2\qb2c\en%
+\notes\xnum{1.15}{'e}3\qb2d\qb2c\tbl2\qb2d\en%
+\notes\ibl2{'c}1\usf e\qb2c\en%
+\notes\tbl2\qb2{'d}\en%
+\zstoppiece%
+}\hss}
+\normalmusicsize\nopagenumbers
+\def\nbinstruments{1}%
+\setstaffs12\setclef1{60}%
+\generalsignature{-2}\generalmeter{\meterfrac{3}{4}}%
+\parindent 0pt%
+\stafftopmarg0pt\staffbotmarg5\Interligne\interstaff{10}\relax
+\startpiece\addspace\afterruleskip%
+\notes\ibl1{'G}{-1}\qb1G\sk\bigna F\tbl1\qb1F|%
+\ibbl2{'b}0\qb2b\qb2a\qb2b\tbl2\qb2c\en%
+\notes\hl{'E}\bsk\raise6\internote\ds\ibu3{G}1\bigsh F%
+\qb3F\qb3G\tbu3\qb3{'A}|\zcharnote{10}{\copy\ornamentbox}\qlp{'c}\sk\sk%
+\cl d\en%
+\end{verbatim}\end{quote}

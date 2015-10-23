@@ -1,0 +1,10 @@
+\makeatletter
+\renewenvironment{theindex}
+ {\pagestyle{plain}\parindent\z@
+  \parskip\z@ \@plus .3\p@\relax
+  \let\item\@idxitem}
+ {\thispagestyle{plain}}
+\makeatother
+\begin{multicols}{3}[\chapter*{Index}\addcontentsline{toc}{chapter}{Index}]
+  \printindex
+\end{multicols}

@@ -1,0 +1,426 @@
+\chapter{Changing Clefs, Keys and Meters}
+
+\section{Introduction}\label{contextintro}
+
+To define clefs, key signatures, or meters at the start of a piece,
+or to change one or more of these attributes\footnote{In this section,
+\ital{attribute} will refer to any clef, key signature, or meter.}~anywhere
+else in a score,
+\musixtex\ requires two steps. The first step is to \ital{set} the new values of
+the attributes.
+Most of the commands for this have the form \verb|\set|...~. They will be
+described in the following subsections.
+
+But this alone will
+not cause anything to be changed or printed. The second step is to activate the
+change. This is done by issuing one of the
+following commands (outside \verb|\notes|$\dots$\verb|\en|):
+\verb|\startpiece|, \verb|\startextract|, \verb|\contpiece|,
+\verb|\Contpiece|,
+\verb|\alaligne|, \verb|\alapage|, \verb|\zalaligne|, \verb|\zalapage|,
+\verb|\changecontext|,
+\verb|\Changecontext|, \verb|\zchangecontext|, \verb|\changesignature|,
+\verb|\changeclefs|, or \verb|\zchangeclefs|. Most of these perform
+other functions as well, and some may be used even when no attributes
+change. Features unrelated to changing attributes are detailed elsewhere.
+The first eleven will activate all pending new attributes.
+If more than one type is activated by a single command in this manner,
+then regardless of the order
+they were set, they will always appear in the following order: clef, key signature,
+meter.
+The last three commands in the above list obviously activate only
+the specific type of attribute referred to in the name of the command.
+
+The macros \verb|\changecontext|, \verb|\Changecontext|, \verb|\zchangecontext|
+will respectively insert a single, double, or invisible bar
+line before printing the attributes.
+
+\section{Key Signatures}
+
+We've already seen in Section~\ref{whatspecify} how to set key
+signatures for all instruments with \keyindex{generalsignature}, or for
+specific instruments with \keyindex{setsign}. As just noted, these commands only
+prepare for the insertion of the signatures into the score; it is
+really \verb|\startpiece| that puts them in place at the beginning of the
+score.
+
+The commands \verb|\generalsignature| and \verb|\setsign| also serve to set
+new key signature(s) anywhere in score. The change can then be activated with one of
+the eleven general commands listed above, or with \keyindex{changesignature} if
+in the middle of a bar.
+While neither \verb|\changesignature| nor \verb|\zchangecontext| prints a bar
+line, the differences are that the latter increments the bar number counter and
+inserts a horizontal space of \verb|\afterruleskip| after the new signature(s).
+All of these options will repost signatures that have not been changed.
+
+Normally, changing a signature from flats to sharps or vice-versa, or
+reducing the number of sharps or flats, will produce the appropriate set of
+naturals to indicate what has been suppressed. This standard feature can be
+temporarily inhibited by the command \keyindex{ignorenats} issued right before
+the change-activating command.
+
+Here is an example showing various possibilities for changing key signatures.
+Note the comments between the code lines.
+
+\begin{quote}\begin{verbatim}
+\instrumentnumber2\setstaffs22%
+\setclef1{\bass}\generalsignature2%
+\startextract
+\Notes\qu K&\qu d|\qu e\en
+% Signature change in a single instrument with two staves.
+% Naturals appear by default, indicating cancelled sharps.
+\setsign20\changesignature
+\Notes\qu J&\qu d|\qu e\en
+% When changing signature in the middle of a bar and no naturals
+% are posted, the new signature can be confused with a simple accidental.
+\setsign11\ignorenats\changesignature
+\Notes\qu M&\qu d|\qu e\en
+% New signatures after a double bar line
+\generalsignature{-2}\Changecontext%
+\Notes\qu K&\qu d|\qu e\en%
+\Notes\qu K&\qu d|\qu e\en%
+% New signatures after an invisible bar line. Note the
+% difference in spacing compared with beat 3 of the prior measure
+\generalsignature{1}\zchangecontext%
+\Notes\qu K&\qu d|\qu e\en%
+\end{verbatim}\end{quote}
+
+\begin{music}
+\instrumentnumber2\setstaffs22%
+\setclef1{\bass}\generalsignature2%
+\startextract
+\Notes\qu K&\qu d|\qu e\en
+% Signature changing in a single instrument with 2 staves
+% Naturals are allowed to shown there are no more sharps
+\setsign20\changesignature
+\Notes\qu J&\qu d|\qu e\en
+% Signature changing in a single staff without naturals
+% if there is no bar line, the signatures are confusing:
+% it is not clear if they are for a single note or not
+\setsign11\ignorenats\changesignature
+\Notes\qu M&\qu d|\qu e\en
+% New signatures after a double bar line
+\generalsignature{-2}\Changecontext%
+\Notes\qu K&\qu d|\qu e\en%
+\Notes\qu K&\qu d|\qu e\en%
+% New signatures after an invisible bar line
+% see the difference in space comparing beat 2
+\generalsignature{1}\zchangecontext%
+\Notes\qu K&\qu d|\qu e\en%
+\endextract
+\end{music}
+
+
+\section{Clefs}\label{treblelowoct}
+
+Macros that define clefs have already been discussed in Section~\ref{whatspecify}. By way of review, here are all of the possible clefs
+(applied to the lowest staff):
+%avrb
+\newcommand{\musicintextsign}[1]{\musicintext#1{\notes\en}}
+
+\begin{center}\vskip-1ex\footnotesize%\small
+\begin{tabular}{||c|c|c|c|c||}\hline\hline
+&&&&\\
+\verb+\setclef1\treble+&&&\verb+\setclef1\alto+&\\
+\verb+\setclef10+&\verb+\setclef11+&\verb+\setclef12+
+&\verb+\setclef13+&\verb+\setclef14+\\[-2ex]%\hline
+\musicintextsign{\treble}&\musicintextsign1&\musicintextsign2
+&\musicintextsign{\alto}&\musicintextsign4\\[3ex]\hline
+%\end{tabular}
+&&&&\\
+%\begin{tabular}{ccccc}
+&\verb+\setclef1\bass+&&\verb+\setclefsymbol1\empty+\footnotemark&\\
+\verb+\setclef15+&\verb+\setclef16+&\verb+\setclef17+
+&\verb+\setclef18+&\verb+\setclef19+\\[-2ex]%\hline
+\musicintextsign5&\musicintextsign{\bass}&\musicintextsign7
+&\musicintextsign8&\musicintextsign9\\[3ex]\hline\hline
+%This one uses \setclefsymbol1\empty :
+%&\musicintextnoclef{\notes\qu h\en}&\musicintextsign9\\[3ex]\hline\hline
+\end{tabular}
+\footnotetext{Details of the macro {\tt\Bslash setclefsymbol} will be discussed later}
+\end{center}
+%avre
+
+Just as with key signatures, these commands only \ital{prepare} for clef changes.
+To \ital{activate} them, any of the first eleven  commands listed in Section~\ref{contextintro} could be used. However, one should keep in mind that
+according to modern conventions, a clef change at a bar line is posted
+before the bar line, while for example \verb|\changecontext| would post it
+after the bar line. In part for this reason, we have the special command
+\keyindex{changeclefs}. It can be used anywhere outside
+\verb+\notes...\en+ to activate a clef change and insert an amount of
+horizontal space to accommodate the new clef symbol(s), without printing a
+bar line. Sometimes no added
+space is required, in which case \keyindex{zchangeclefs} should be used.
+
+Here are some examples of clef changes:
+
+\begin{quote}\begin{verbatim}
+\instrumentnumber2\setstaffs22%
+\setclef1{\bass}\generalsignature2%
+\startextract
+% Change in one staff only, with added space
+\setclef1\treble\changeclefs%
+\Notes\qu k&\qu e|\cu{.d}\ccu{e}\en%
+% Combined with signature change, also no extra space needed
+% twice the same clef in staff 2 - with the help of a blank clef
+\setclef28\zchangeclefs\setclef2\treble%
+\setclef1\bass\zchangeclefs\setsign1{-2}\setsign2{-2}%
+\ignorenats\changesignature%
+\Notes\qu K&\cu{de}|\qu e\en%
+% clef change before barline
+\setclef1\treble\zchangeclefs\bar%
+\Notes\qu k&\cu{de}|\qu e\en%
+% clef change after barline
+\setclef1\bass\bar\changeclefs%
+\Notes\qu K&\cu{de}|\qu e\en%
+% clef change after barline with changecontext
+\setclef1\treble\changecontext%
+\Notes\cu k&\cu d|\qu e\en%
+% twice the same clef
+\setclef18\zchangeclefs\setclef1\treble\changeclefs%
+\Notes\cu k&\cu e |\en%
+\zendextract
+\end{verbatim}\end{quote}
+\begin{music}
+\instrumentnumber2\setstaffs22%
+\setclef1{\bass}\generalsignature2%
+\startextract
+% Change in one staff only, with added space
+\setclef1\treble\changeclefs%
+\Notes\qu k&\qu e|\cu{.d}\ccu{e}\en%
+% Combined with signature change, also no extra space needed
+% twice the same clef in staff 2 - with the help of a blank clef
+\setclef28\zchangeclefs\setclef2\treble%
+\setclef1\bass\zchangeclefs\setsign1{-2}\setsign2{-2}%
+\ignorenats\changesignature%
+\Notes\qu K&\cu{de}|\qu e\en%
+% clef change before barline
+\setclef1\treble\zchangeclefs\bar%
+\Notes\qu k&\cu{de}|\qu e\en%
+% clef change after barline
+\setclef1\bass\bar\changeclefs%
+\Notes\qu K&\cu{de}|\qu e\en%
+% clef change after barline with changecontext
+\setclef1\treble\changecontext%
+\Notes\cu k&\cu d|\qu e\en%
+% twice the same clef
+\setclef18\zchangeclefs\setclef1\treble\changeclefs%
+\Notes\cu k&\cu e |\en%
+\endextract
+\end{music}
+
+\noindent Of course the examples in the last two bars are contrary
+to accepted practice.
+
+Clef changes initiated with the \verb|\setclef| command have several features
+in common. When activated after the beginning of the piece, the printed symbol
+is smaller than the normal one used at the beginning of the piece. Also,
+\musixtex\ automatically adjusts vertical positions of noteheads consistent
+with the new clef.
+
+There is an additional group of macros for setting new clefs which does not share
+either of these features. In other words, they will always print full sized symbols, and they
+won't change the vertical positions of noteheads from what they would have been
+before the new symbol was printed. We could call this process ``clef symbol substitution'',
+because all it does is print a different symbol (or no symbol at all) in place of
+the underlying clef which was set in the normal way.
+
+You'll need to use clef symbol substitution if you want to have a so-called
+\index{octave clefs}\label{octclef}octave treble clef or octave bass
+clef, i.e., one containing a numeral 8 above or
+below the normal symbol. The syntax for setting upper
+octaviation
+is \keyindex{setbassclefsymbol}\onen\keyindex{bassoct}\\
+or \keyindex{settrebleclefsymbol}\onen\keyindex{trebleoct}; for lower octaviation
+it is\\ \keyindex{setbassclefsymbol}\onen\keyindex{basslowoct} or
+\keyindex{settrebleclefsymbol}\onen\keyindex{treblelowoct}. Because these sequences act to
+\ital{replace} normal bass or treble clefs with a different symbol, they
+require that the normal clefs be set first. For example
+
+\noindent\begin{minipage}{80mm}
+\begin{music}\nostartrule
+ \parindent 19mm
+ \instrumentnumber{4}
+ \generalmeter{\empty}
+ \setclef1\bass \setclef2\bass \setclef3\treble \setclef4\treble
+ \setbassclefsymbol1\basslowoct
+ \setbassclefsymbol2\bassoct
+ \settrebleclefsymbol3\treblelowoct
+ \settrebleclefsymbol4\trebleoct
+\startextract
+\Notes\qu{`abcdefghi}&\qu{`abcdefghi}&\qu{abcdefghi}&\qu{abcdefghi}&\en
+\zendextract
+\end{music}
+\end{minipage}
+\begin{minipage}{50mm}
+\begin{verbatim}
+\parindent 19mm
+\instrumentnumber{4}
+\generalmeter{\empty}
+\setclef1\bass \setclef2\bass
+\setclef3\treble \setclef4\treble
+\setbassclefsymbol1\basslowoct
+\setbassclefsymbol2\bassoct
+\settrebleclefsymbol3\treblelowoct
+\settrebleclefsymbol4\trebleoct
+\startextract
+\Notes\qu{`abcdefghi}&\qu{`abcdefghi}%
+&\qu{abcdefghi}&\qu{abcdefghi}&\en
+\zendextract
+\end{verbatim}
+\end{minipage}
+
+\index{clefs (empty)}
+Another application of clef symbol substitution is to cause no clef to be
+printed, as for example might be desired in percussion music, This
+can be accomplished with \keyindex{setclefsymbol}\onen\verb|\empty|, which
+once activated would replace \ital{all} clef symbols in the first (lowest)
+staff of instrument $n$ with blanks.
+
+Normal symbols for those clefs that have been substituted can be restored by
+\keyindex{resetclefsymbols}.
+
+Four other small clef symbols are available: \verb|\smalltrebleoct|, 
+\verb|\smalltreblelowoct|, \verb|\smallbassoct|, and \verb|\smallbasslowoct|. 
+They look just like the corresponding normal-sized symbols, and are useful by
+clef symbol substitution for clef changes after the beginning of a piece, as
+demonstrated in the following example.
+
+The various clef symbol substitution commands can only be used to substitute for
+\texttt{treble}, \texttt{alto}, or \texttt{bass} clefs.
+
+In the following example, (1) is two normal clef changes. At (2) the clef is first changed
+back to treble and then the \verb|\treblelowoct| symbol is substituted by using
+\verb|\settrebleclefsymbol|.
+When changing the clef away from treble and then back as at (3), the substitution
+symbol is still in force. At (4), \verb|\resetclefsymbols| cancels the symbol substitution.
+If using \verb|\setclefsymbol| all available clefs are changed to the same symbol, as you can see
+in the three clefs after (5) in comparison with (2). These also illustrate the use of the small
+octave clef symbol. Obviously the second clef after (5) is
+nonsense; \verb|\resetclefsymbols| puts matters in order at (6) and (7).
+
+\begin{music}
+\instrumentnumber1\setclef1\bass
+\startpiece
+\notes\zchar{-5}{1}\qu H\en\setclef1\treble\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{2}\qu J\en
+\setclef1\treble\settrebleclefsymbol1\treblelowoct\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{3}\qu I\en\setclef1\treble\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{4}\qu J\en\resetclefsymbols\setclef1\treble\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\doublebar
+\notes\zchar{-5}{5}\qu J\en
+\setclef1\treble\setclefsymbol1\smalltreblelowoct\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\qu I\en\setclef1\treble\changeclefs
+\notes\zchar{-5}{6}\qu i\en\resetclefsymbols\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{7}\qu J\en\setclef1\treble\changeclefs
+\notes\qu i\en
+\endpiece
+\end{music}
+
+\noindent This is the code:
+
+\begin{quote}\begin{verbatim}
+\begin{music}\nostartrule
+\instrumentnumber1\setclef1\bass
+\startpiece
+\notes\zchar{-5}{1}\qu H\en\setclef1\treble\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{2}\qu J\en
+\setclef1\treble\settrebleclefsymbol1\treblelowoct\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{3}\qu I\en\setclef1\treble\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{4}\qu J\en\resetclefsymbols\setclef1\treble\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\doublebar
+\notes\zchar{-5}{5}\qu J\en
+\setclef1\treble\setclefsymbol1\smalltreblelowoct\changeclefs
+\notes\qu i\en\setclef1\bass\changeclefs\bar
+\notes\qu I\en\setclef1\treble\changeclefs
+\notes\zchar{-5}{6}\qu i\en\resetclefsymbols\setclef1\bass\changeclefs\bar
+\notes\zchar{-5}{7}\qu J\en\setclef1\treble\changeclefs
+\notes\qu i\en
+\endpiece
+\end{verbatim}\end{quote}
+
+\section{Meter changes}
+
+As mentioned in Section~\ref{generalmeter}, a common \itxem{meter} for all
+staves can be specified by \keyindex{generalmeter}\verb|{|$m$\verb|}|,
+where $m$ denotes the meter. On the other hand, meter changes in specific
+staves are implemented with
+\keyindex{setmeter}\onen\verb|{{|$m1$\verb|}{|$m2$\verb|}{|$m3$\verb|}{|$m4$\verb|}}|,
+where $n$ is the number of the instrument, $m1$ specifies the meter
+of the first (lowest) staff, $m2$ the second staff, and so forth. (Only enter
+as many $m$'s as necessary.)
+
+Since meter changes are meaningful only across bars, there is no special command to
+activate a new meter; rather, they are activated with the general commands
+\keyindex{changecontext}, etc., listed in Section~\ref{contextintro}.
+
+The next example shows a few methods to get a meter change, in all staves or
+in a single staff.
+
+\begin{small}
+\begin{quote}\begin{verbatim}
+\instrumentnumber2\setstaffs22%
+\generalmeter{\meterfrac{4}{4}\meterfrac{2}{4}\meterfrac{1}{4}}%
+\setclef1{\bass}\generalsignature2%
+\startextract
+\setmeter1{{\meterfrac{2}{4}}}%
+\setmeter2{{\lower2pt\hbox{\meterfrac{\meterlargefont 2}{}}}%
+{\meterfrac{3}{4}}}\changecontext
+\Notes\qu K&\cu{de}|\qu e\en
+% bar 11
+% Meters, clefs, and key signatures.
+% All 3 clefs after bar (probably bad form) if no changeclefs
+\setmeter1{{\meterfrac{2}{8}}}%
+\setmeter2{{\meterfrac{3}{6}}{\meterfrac{3}{8}}}%
+\setsign2{-1}%
+% How to force showing the bass clef?
+\setclef1\bass\setclef2{23}%
+\Changecontext
+\Notes\qu K&\cu{de}|\qu e\en
+% bar 12
+% Meters, clefs, and key signatures, with clef before the bar.
+% Maybe not best form if signatures are involved
+\setmeter1{{\meterfrac{2}{4}}}%
+\setmeter2{{\meterfrac{3}{8}}{\meterfrac{3}{6}}}%
+\setsign2{-1}%
+\setclef1\treble\zchangeclefs\changecontext
+\Notes\qu k&\cu{de}|\qu e\en
+\end{verbatim}\end{quote}
+\end{small}
+\begin{music}
+\instrumentnumber2\setstaffs22%
+\generalmeter{\meterfrac{4}{4}\meterfrac{2}{4}\meterfrac{1}{4}}%
+\setclef1{\bass}\generalsignature2%
+\startextract
+\setmeter1{{\meterfrac{2}{4}}}%
+% How big the '2' must be?
+\setmeter2{{\lower2pt\hbox{\meterfrac{\meterlargefont 2}{}}}%
+{\meterfrac{3}{4}}}\changecontext
+\Notes\qu K&\cu{de}|\qu e\en
+% bar 11
+% Meter Clefs and Key Signatures
+% all 3 clefs after bar if no changeclefs
+\setmeter1{{\meterfrac{2}{8}}}%
+\setmeter2{{\meterfrac{3}{6}}{\meterfrac{3}{8}}}%
+\setsign2{-1}%
+% How to force showing the bass clef?
+\setclef1\bass\setclef2{23}%
+\Changecontext
+\Notes\qu K&\cu{de}|\qu e\en
+% bar 12
+% Meter Clefs Keys Signatures all 3 with clef before the bar
+% probably not if signatures are involved
+\setmeter1{{\meterfrac{2}{4}}}%
+\setmeter2{{\meterfrac{3}{8}}{\meterfrac{3}{6}}}%
+\setsign2{-1}%
+\setclef1\treble\zchangeclefs\changecontext
+\Notes\qu k&\cu{de}|\qu e\en
+\endextract
+\end{music}

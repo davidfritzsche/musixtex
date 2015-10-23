@@ -1,0 +1,250 @@
+\ifx\indivbarrules\undefined\else\endinput\fi
+
+\immediate\write10{MusiXDashed and Dotted BaRlines 1.0\space<23 February 2002>}%
+% by Rainer Dunker
+% Ideas and code based on musixbar.tex
+% by Mthimkhulu Molekwa <MMolekwa@rrs.co.za>
+
+\makeatletter
+
+\newdimen\barline@depth
+
+\def\barlinedash#1{\vskip.5\Internote
+		   \hrule\@width#1\@height\Internote
+		   \vskip.5\Internote}
+\def\barlinedots#1{\vskip.5\Internote
+		   \hbox to #1{\hss\tenrm.\hss}
+		   \vskip.5\Internote}
+  
+\def\rul@indiv#1{%
+  \n@loop
+    \Comp@High
+    \multiply\barline@depth -1\relax
+    \advance\barline@depth\altitude
+    \expandafter\ifx\csname s@b\romannumeral\noinstrum@nt\endcsname\relax
+      % normal barline below instrument
+      \raise\altitude\rlap{\vrule\@depth\barline@depth\@width#1\@height0pt }%
+    \else
+      \expandafter\ifx\csname s@b\romannumeral\noinstrum@nt\endcsname 2%
+	% dashed barline below instrument
+	\raise\altitude\hbox{%
+	  \lower\barline@depth\rlap{%
+	    \vbox to \barline@depth{%
+	      \xleaders\vbox{\barlinedash{#1}}\vfill}}}%
+      \else
+	\expandafter\ifx\csname s@b\romannumeral\noinstrum@nt\endcsname 3%
+	  % dotted barline below instrument
+	  \raise\altitude\hbox{%
+	    \lower\barline@depth\rlap{%
+	      \vbox to \barline@depth{%
+		\xleaders\vbox{\barlinedots{#1}}\vfill}}}%
+	\fi
+      \fi
+    \fi
+    \ifnum\st@ffs>1 % multi-staff instrument
+      \multi@instrum@bars{#1}%
+    \else           % single-staff instrument
+      \expandafter\ifx\csname h@bl\romannumeral\noinstrum@nt\endcsname\relax
+	% normal barline through instrument
+	\raise\altitude\rlap{\vrule\@depth0pt \@width#1\@height\y@v}%
+      \else
+	\expandafter\ifx\csname h@bl\romannumeral\noinstrum@nt\endcsname 2%
+	  % dashed barline through instrument
+	  \raise\altitude\rlap{%
+	    \vbox to \y@v{%
+	      \cleaders\vbox to 2\internote{\vss
+					    \hrule\@width#1\@height\internote
+					    \vss}%
+		       \vfill}}%
+	\else
+	  \expandafter\ifx\csname h@bl\romannumeral\noinstrum@nt\endcsname 3%
+	    % dotted barline through instrument
+	    \raise\altitude\rlap{%
+	      \vbox to \y@v{%
+		\cleaders\vbox to 2\internote{\vss
+					      \hbox to #1{\hss\tenrm.\hss}%
+					      \vss}%
+			 \vfill}}%
+	  \fi
+	\fi
+      \fi
+    \fi
+    \barline@depth\altitude
+    \advance\barline@depth\y@v
+  \repeat
+  \addspace#1}
+
+\def\multi@instrum@bars#1{%
+  \begingroup
+    % retrieve staff height
+    \count@=\nblines \advance\count@ -1 \multiply\count@ 2
+    \dimen@=\count@\internote
+    \p@loop
+      % barline within staff
+      \expandafter\ifx\csname h@bl\romannumeral\noinstrum@nt\endcsname\relax
+	% normal barline through staff
+	\raise\altportee\rlap{\vrule\@depth0pt \@width#1\@height\dimen@}%
+      \else
+	\expandafter\ifx\csname h@bl\romannumeral\noinstrum@nt\endcsname 2%
+	  % dashed barline through staff
+	  \raise\altportee\rlap{%
+	    \vbox to \dimen@{%
+	      \cleaders\vbox to 2\internote{\vss
+					    \hrule\@width#1\@height\internote
+					    \vss}%
+		       \vfill}}%
+	\else
+	  \expandafter\ifx\csname h@bl\romannumeral\noinstrum@nt\endcsname 3%
+	    % dotted barline through staff
+	    \raise\altportee\rlap{%
+	      \vbox to \dimen@{%
+		\cleaders\vbox to 2\internote{\vss
+					      \hbox to #1{\hss\tenrm.\hss}%
+					      \vss}%
+			 \vfill}}%
+	  \fi
+	\fi
+      \fi
+      \count@portee
+      % barline above staff
+      \ifnum\noport@@<\st@ffs % not for topmost staff
+	\barline@depth\interportee
+	\advance\barline@depth -\dimen@
+	\raise\altportee\hbox{\raise\dimen@\rlap{%
+	  \expandafter\ifx\csname s@mb\romannumeral\noinstrum@nt\endcsname
+			  \relax
+	    % normal barline
+	    \vrule\@height\barline@depth\@width#1\relax
+	  \else
+	    \expandafter\ifx\csname s@mb\romannumeral\noinstrum@nt\endcsname 2%
+	      % dashed barline
+	      \vbox to \barline@depth{%
+		\xleaders\vbox{\barlinedash{#1}}\vfill}%
+	    \else
+	      \expandafter\ifx\csname s@mb\romannumeral\noinstrum@nt\endcsname
+			      3% dotted barline
+		\vbox to \barline@depth{%
+		  \xleaders\vbox{\barlinedots{#1}}\vfill}%
+	      \fi
+	    \fi
+	  \fi}}%
+      \fi
+    \repeat
+  \endgroup}
+
+
+% Activate individual barline processing
+\def\indivbarrules{%
+  \let\writ@rule\rul@indiv
+  \sepbarrule 1}
+
+%== separates bar line of specified instrument from one of previous instrument
+\def\sepbarrule#1{\expandafter\let\csname s@b\romannumeral#1\endcsname 1}
+
+%== connects bar line of specified instrument to one of previous instrument
+%   with dashed line
+\def\condashbarrule#1{%
+  \ifnum#1>1 \expandafter\let\csname s@b\romannumeral#1\endcsname 2\fi}
+
+%== connects bar line of specified instrument to one of previous instrument
+%   with dotted line
+\def\condotbarrule#1{%
+  \ifnum#1>1 \expandafter\let\csname s@b\romannumeral#1\endcsname 3\fi}
+
+%== connects bar line of specified instrument to one of previous instrument
+\def\conbarrule#1{%
+  \ifnum#1>1 \expandafter\let\csname s@b\romannumeral#1\endcsname\relax\fi}
+  
+%== hides bar line for specified instrument
+\def\hidebarrule#1{\expandafter\let\csname h@bl\romannumeral#1\endcsname 1}
+  
+%== dashes bar line for specified instrument
+\def\showdashbarrule#1{\expandafter\let\csname h@bl\romannumeral#1\endcsname 2}
+  
+%== dots bar line for specified instrument
+\def\showdotbarrule#1{\expandafter\let\csname h@bl\romannumeral#1\endcsname 3}
+  
+%== shows bar line for specified instrument
+\def\showbarrule#1{\expandafter\let\csname h@bl\romannumeral#1\endcsname\relax}
+  
+%== separates bar line within multistaff instrument
+\def\sepmultibarrule#1{\expandafter\let\csname s@mb\romannumeral#1\endcsname 1}
+  
+%== dashes bar line between staves of multistaff instrument
+\def\condashmultibarrule#1{%
+  \expandafter\let\csname s@mb\romannumeral#1\endcsname 2}
+  
+%== dots bar line between staves of multistaff instrument
+\def\condotmultibarrule#1{%
+  \expandafter\let\csname s@mb\romannumeral#1\endcsname 3}
+  
+%== shows bar line between staves of multistaff instrument
+\def\conmultibarrule#1{%
+  \expandafter\let\csname s@mb\romannumeral#1\endcsname\relax}
+
+% set barlines for all instruments together
+\def\allbarrules#1{\n@loop#1\noinstrum@nt\repeat}
+
+
+\makeatother
+\endinput
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Here comes an example of how to use these macros
+
+\input musixtex
+\input musixdbr
+
+\instrumentnumber4
+\setstaffs23
+\setstaffs32
+\setlines14
+\setsize2\tinyvalue
+
+\indivbarrules
+
+\startpiece
+  % normal barlines
+  \bar
+  % barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showbarrule
+  \bar
+  % barlines between staves
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+  \allbarrules\hidebarrule
+  \bar
+  % dashed barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdashbarrule
+  \bar
+  % dashed barlines between staves
+  \allbarrules\condashbarrule
+  \allbarrules\condashmultibarrule
+  \allbarrules\hidebarrule
+  \bar
+  % dotted barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdotbarrule
+  \bar
+  % dotted barlines between staves
+  \allbarrules\condotbarrule
+  \allbarrules\condotmultibarrule
+  \allbarrules\hidebarrule
+  \bar
+  % a wild mixture of all
+  \showdotbarrule1\hidebarrule2\showdashbarrule3\showbarrule4%
+  \condashbarrule2\conbarrule3\condotbarrule4%
+  \condashmultibarrule2\sepmultibarrule3%
+  \bar
+  % conventional ending
+  \allbarrules\showbarrule
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+\Endpiece
+\bye

@@ -1,0 +1,67 @@
+\voffset-15.4mm\vsize=259mm
+\hoffset-10.4mm\hsize=185mm
+\nobarnumbers\nopagenumbers
+\smallmusicsize\relativeaccid
+\parindent45pt
+\def\scale#1#2{\setname1{\vbox{\hbox{#1}\hbox{#2}}\hfill}%
+	\startpiece\addspace\afterruleskip
+	\notesp\qa{cdefg'abcba`gfedc}\en\setdoublebar\bar
+	\notesp\qa{abcde^f^g'a`=g=fedcba}\en\endpiece}
+\def\german{\parindent45pt\def\Dur{Dur}\def\Moll{Moll}
+	\def\C{C}\def\Cis{Cis}\def\Des{Des}\def\D{D}\def\Es{Es}\def\E{E}
+	\def\F{F}\def\Fis{Fis}\def\Ges{Ges}\def\G{G}\def\As{As}\def\A{A}
+	\def\B{B}\def\H{H}\def\Ces{Ces}
+	\def\a{a}\def\ais{ais}\def\b{b}\def\h{h}\def\c{c}\def\cis{cis}
+	\def\d{d}\def\dis{dis}\def\es{es}\def\e{e}\def\f{f}\def\fis{fis}
+	\def\g{g}\def\gis{gis}\def\as{as}}
+
+\def\flat{\raise 0.5\Interligne\hbox{\musicsixteen 2}}
+\def\sharp{\raise1.0\Interligne\hbox{\hskip1pt\musicsixteen 4}}
+\def\english{\parindent45pt\def\Dur{major}\def\Moll{minor}
+	\def\C{C}\def\Cis{C\sharp}\def\Des{D\flat}\def\D{D}\def\Es{E\flat}\def\E{E}
+	\def\F{F}\def\Fis{F\sharp}\def\Ges{G\flat}\def\G{G}\def\As{A\flat}\def\A{A}
+	\def\B{B\flat}\def\H{B}\def\Ces{C\flat}
+	\def\a{a}\def\ais{a\sharp}\def\b{b\flat}\def\h{b}\def\c{c}\def\cis{c\sharp}
+	\def\d{d}\def\dis{d\sharp}\def\es{e\flat}\def\e{e}\def\f{f}\def\fis{f\sharp}
+	\def\g{g}\def\gis{g\sharp}\def\as{a\flat}}
+
+%--\german
+\english
+
+\startmuflex
+\transpose0	\generalsignature{-7}	\scale{\Ces-\Dur}{\as-\Moll}
+\vfil\hrule\vfil
+\transpose4	\generalsignature{-6}	\scale{\Ges-\Dur}{\es-\Moll}
+\transpose1	\generalsignature{-5}	\scale{\Des-\Dur}{\b-\Moll}
+\transpose5	\generalsignature{-4}	\scale{\As-\Dur}{\f-\Moll}
+\transpose2	\generalsignature{-3}	\scale{\Es-\Dur}{\c-\Moll}
+\transpose6	\generalsignature{-2}	\scale{\B-\Dur}{\g-\Moll}
+\transpose3	\generalsignature{-1}	\scale{\F-\Dur}{\d-\Moll}
+\transpose0	\generalsignature0	\scale{\C-\Dur}{\a-\Moll}
+\transpose4	\generalsignature1	\scale{\G-\Dur}{\e-\Moll}
+\transpose1	\generalsignature2	\scale{\D-\Dur}{\h-\Moll}
+\transpose5	\generalsignature3	\scale{\A-\Dur}{\fis-\Moll}
+\transpose2	\generalsignature4	\scale{\E-\Dur}{\cis-\Moll}
+\transpose6	\generalsignature5	\scale{\H-\Dur}{\gis-\Moll}
+\transpose3	\generalsignature6	\scale{\Fis-\Dur}{\dis-\Moll}
+\vfil\hrule\vfil
+\transpose0	\generalsignature7	\scale{\Cis-\Dur}{\ais-\Moll}
+\eject\musicparskip
+\transpose0	\generalsignature0	\scale{\C-\Dur}{\a-\Moll}
+\transpose0	\generalsignature7	\scale{\Cis-\Dur}{\ais-\Moll}
+\transpose1	\generalsignature{-5}	\scale{\Des-\Dur}{\b-\Moll}
+\transpose1	\generalsignature2	\scale{\D-\Dur}{\h-\Moll}
+\transpose2	\generalsignature{-3}	\scale{\Es-\Dur}{\c-\Moll}
+\transpose2	\generalsignature4	\scale{\E-\Dur}{\cis-\Moll}
+\transpose3	\generalsignature{-1}	\scale{\F-\Dur}{\d-\Moll}
+\transpose3	\generalsignature6	\scale{\Fis-\Dur}{\dis-\Moll}
+\transpose4	\generalsignature{-6}	\scale{\Ges-\Dur}{\es-\Moll}
+\transpose4	\generalsignature1	\scale{\G-\Dur}{\e-\Moll}
+\transpose5	\generalsignature{-4}	\scale{\As-\Dur}{\f-\Moll}
+\transpose5	\generalsignature3	\scale{\A-\Dur}{\fis-\Moll}
+\transpose6	\generalsignature{-2}	\scale{\B-\Dur}{\g-\Moll}
+\transpose6	\generalsignature5	\scale{\H-\Dur}{\gis-\Moll}
+\transpose7	\generalsignature{-7}	\scale{\Ces-\Dur}{\as-\Moll}
+\transpose7	\generalsignature0	\scale{\C-\Dur}{\a-\Moll}
+\endmuflex
+\eject\bye

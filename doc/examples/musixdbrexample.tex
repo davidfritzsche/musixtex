@@ -1,0 +1,52 @@
+\input musixtex
+\input musixdbr
+
+\instrumentnumber4 \setstaffs23 \setstaffs32 \setlines14
+\setsize2\tinyvalue
+\indivbarrules
+
+\startpiece
+  % normal barlines
+  \bar
+  % separate instrument 2 from 1
+  \sepbarrule2\bar
+  % barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showbarrule
+  \bar
+  % barlines between staves
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+  \allbarrules\hidebarrule
+  \bar
+  % dashed barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdashbarrule
+  \bar
+  % dashed barlines between staves
+  \allbarrules\condashbarrule
+  \allbarrules\condashmultibarrule
+  \allbarrules\hidebarrule
+  \bar
+  % dotted barlines on staves
+  \allbarrules\sepbarrule
+  \allbarrules\sepmultibarrule
+  \allbarrules\showdotbarrule
+  \bar
+  % dotted barlines between staves
+  \allbarrules\condotbarrule
+  \allbarrules\condotmultibarrule
+  \allbarrules\hidebarrule
+  \bar
+  % a wild mixture of all
+  \showdotbarrule1\hidebarrule2\showdashbarrule3\showbarrule4%
+  \condashbarrule2\conbarrule3\condotbarrule4%
+  \condashmultibarrule2\sepmultibarrule3%
+  \bar
+  % conventional ending
+  \allbarrules\showbarrule
+  \allbarrules\conbarrule
+  \allbarrules\conmultibarrule
+\Endpiece \bye

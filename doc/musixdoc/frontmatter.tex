@@ -1,0 +1,136 @@
+\title{\Huge\bfseries\musixtex\\[\bigskipamount]
+\LARGE\bfseries Using \TeX{} to write polyphonic\\or
+instrumental music\\\Large\itshape Version 1.16}
+
+
+%\author{\Large\rm Daniel \sc Taupin\\\large\sl
+% Laboratoire de Physique des Solides\\\normalsize\sl
+% (associ\'e au CNRS)\\\normalsize\sl
+% b\^atiment 510, Centre Universitaire, F-91405 ORSAY Cedex\\\medskip
+% \\\Large\rm Ross \sc Mitchell\\\large\sl
+% CSIRO Division of Atmospheric Research,\\\normalsize\sl
+% Private Bag No.1, Mordialloc, Victoria 3195,\\ Australia \\\medskip
+%   \\\Large\rm Andreas \sc Egler\\\large\sl
+%   (Ruhr--Uni--Bochum)\\ Ursulastr. 32\\ D-44793 Bochum}
+\date{Revised \today}
+\maketitle
+\vfill
+\thispagestyle{empty}
+\begin{flushright}\it
+If you are not familiar with \TeX{} at all, I would recommend\\
+to find another software package to do musical typesetting.\\
+Setting up \TeX{} and \musixtex\ on your machine and mastering it is\\
+an awesome job which gobbles up a lot of your time and disk space.\\[\medskipamount]
+But, once you master it\ldots\\[\smallskipamount]
+Hans {\sc Kuykens} (ca.~1995)
+
+\vspace*{4ex}
+In my humble opinion, that whole statement is obsolete.\\[\smallskipamount]
+Christof\/ {\sc Biericher} (2006) 
+\end{flushright}
+
+\clearpage
+
+\pagenumbering{roman}\setcounter{page}{2}
+
+
+\vspace*{20ex}
+\begin{quote}
+\musixtex{} may be freely copied, duplicated and used in conformance to
+the GNU General Public License (Version 2, 1991, see included file {\tt
+copying})\footnote{Thanks to the Free Software Foundation for advice. See
+\href{http://www.gnu.org}{\underline{\tt http://www.gnu.org}}}.
+
+You may take it or parts of it to include in other packages, but no packages
+called \musixtex{} without specific suffix may be distributed under the name
+\musixtex{} if different from the original distribution (except obvious bug
+corrections).
+
+ Adaptations for specific implementations (e.g., fonts) should be provided as
+separate additional \TeX\ or \LaTeX\ files which override original definitions.
+ \end{quote}
+
+\clearpage
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\musixtex\ was developed by Daniel Taupin, Ross Mitchell and Andreas
+Egler,
+building
+on earlier work by Andrea Steinbach and Angelika Schofer.
+Unfortunately, Daniel Taupin, the main developer, died all too early in a 2003
+climbing accident. The \musixtex\ community was shocked by this tragic and unexpected
+event. You may read tributes to Daniel Taupin that are archived at the
+\href{http://icking-music-archive.org}{\underline{Werner Icking Music Archive}}.
+
+Since then, the only significant update to \musixtex\ has been in version 1.15 (April 2011) which
+takes advantage of the greater capacity of the e\TeX\ version of \TeX. 
+The current version~1.16 (February~2015) incorporates some minor
+corrections in cautionary accidentals and ``hiding'' staffs, and a major correction
+to a deep bug in the package for Postscript fonts. The \musixtex\ package
+includes
+new extension libraries for use of Palatino and Helvetica text fonts, the EC variants
+of Computer Modern fonts, additional accents and improved dynamic marks.   
+This manual is the definitive reference to all features of
+\musixtex\ version~1.16.
+
+Novice users should not start here.
+Most 
+music typesetting tasks can be accomplished entirely by using the \textbf{PMX}
+(for instrumental music) or \mbox{\textbf{M-Tx}} (for vocal music)
+preprocessors to generate the \musixtex\ input file, relieving the user of
+learning any of the commands or syntax of \musixtex\ itself. It is only
+for out-of-the-ordinary constructions that one must learn these details in order
+to insert the necessary \musixtex\ commands into the preprocessor's input file
+as so-called inline \TeX.
+
+The \href{http://icking-music-archive.org/software/indexmt6.html}
+{\underline{Werner Icking Music Archive}}\ (WIMA) contains excellent and detailed
+instructions for installing \TeX, \musixtex{} and the strongly recommended
+preprocessors \textbf{PMX}
+and \mbox{\textbf{M-Tx}} on
+\href{http://icking-music-archive.org/software/htdocs/Getting_Started_Four_Scenar.html#SECTION00022000000000000000}
+{\underline{Linux/\unix}}, 
+\href{http://icking-music-archive.org/software/htdocs/Getting_Started_Four_Scenar.html#SECTION00021000000000000000}
+{\underline{Windows}} and 
+\href{http://icking-music-archive.org/software/htdocs/Getting_Started_Four_Scenar.html#SECTION00023000000000000000}
+{\underline{Mac OS}}. 
+See
+\href{http://icking-music-archive.org/software/htdocs/Introduction.html#SECTION00012000000000000000}
+{\underline{this}}
+page at WIMA for documentation of 
+\textbf{PMX} and \mbox{\textbf{M-Tx}}.
+
+\begin{flushright}
+Oliver Vogel\\ Don Simons\\ Andre van Ryckeghem\\ Cornelius Noack\\
+Hiroaki Morimoto\\ 
+Bob Tennent\\ \today
+\end{flushright}
+
+\clearpage
+
+\makeatletter
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\contentsname
+        \@mkboth{%
+           \contentsname}{\contentsname}}%
+    \addcontentsline{toc}{chapter}{Contents}  %  added by RDT
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+\makeatother
+
+
+%\begin{small}
+\tableofcontents 
+%\end{small}
+
+\clearpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\renewcommand{\thepage}{\arabic{page}}

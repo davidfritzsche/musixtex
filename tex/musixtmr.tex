@@ -1,0 +1,232 @@
+%%
+%% musixtmr.tex : Times-series fonts definition for MusiXTeX
+%%
+%% usage: 
+%%    \input musixtex
+%%    \input musixtmr
+%%    ...
+%%
+%% This file is public domain.
+%%
+%% Author: 
+%%   Hiroaki MORIMOTO <CQX05646 at nifty dot com>
+%%     Tokyo, Japan
+%%     URL(en): http://homepage1.nifty.com/kuuku/pub/musixtex/index-e.html
+%%        (jp): http://homepage1.nifty.com/kuuku/pub/musixtex/index.html
+%%   Extensions: Bob Tennent (rdt@cs.queensu.ca) 2015-02-06
+%%
+%% reference: musixtex.tex (T.99) 268-508
+%% MusiXTeX: (c) Daniel Taupin, et al.
+%%
+%% History: see trailer.
+%
+\immediate\write16{MusiXTimesFonts\space<2015/02/23>}
+%
+% 8pt roman, bold, italic, bold italic, slanted and small-cap
+\font\eightrm=ptmr8r at 8pt
+\font\eightbf=ptmb8r at 8pt
+\font\eightit=ptmri8r at 8pt
+\font\eightbi=ptmbi8r at 8pt
+\font\eightsc=ptmrc8t at 8pt  % artificial small-caps
+\font\eightsl=ptmro8r at 8pt
+%
+% 9pt
+\font\ninerm=ptmr8r at 9pt
+\font\ninebf=ptmb8r at 9pt
+\font\nineit=ptmri8r at 9pt
+\font\ninebi=ptmbi8r at 9pt
+\font\ninesc=ptmrc8t at 9pt
+\font\ninesl=ptmro8r at 9pt
+%
+% 10pt
+\font\tenrm=ptmr8r at 10pt
+\font\tenbf=ptmb8r at 10pt
+\font\tenit=ptmri8r at 10pt
+\font\tenbi=ptmbi8r at 10pt
+\font\tensc=ptmrc8t at 10pt
+\font\tensl=ptmro8r at 10pt
+%
+%
+% 11pt
+\font\elevenrm=ptmr8r at 11pt
+\font\elevenbf=ptmb8r at 11pt
+\font\elevenit=ptmri8r at 11pt
+\font\elevenbi=ptmbi8r at 11pt
+\font\elevensc=ptmrc8t at 11pt
+\font\elevensl=ptmro8r at 11pt
+%
+% 12pt
+\font\twelverm=ptmr8r scaled \magstep 1
+\font\twelvebf=ptmb8r scaled \magstep 1
+\font\twelveit=ptmri8r scaled \magstep 1
+\font\twelvebi=ptmbi8r scaled \magstep 1
+\font\twelvesc=ptmrc8t scaled \magstep 1
+\font\twelvesl=ptmro8r scaled \magstep 1
+%
+% 14pt
+\font\frtrm=ptmr8r scaled \magstep2
+\font\frtbf=ptmb8r scaled \magstep2
+\font\frtit=ptmri8r scaled \magstep2
+\font\frtbi=ptmbi8r scaled \magstep2
+\font\frtsc=ptmrc8t scaled \magstep2
+\font\frtsl=ptmro8r scaled \magstep2
+%
+% 17pt
+\font\svtrm=ptmr8r scaled \magstep3
+\font\svtbf=ptmb8r scaled \magstep3
+\font\svtit=ptmri8r scaled \magstep3
+\font\svtbi=ptmbi8r scaled \magstep3
+\font\svtsc=ptmrc8t scaled \magstep3
+\font\svtsl=ptmro8r scaled \magstep3
+%
+% 20pt
+\font\twtyrm=ptmr8r scaled \magstep4
+\font\twtybf=ptmb8r scaled \magstep4
+\font\twtyit=ptmri8r scaled \magstep4
+\font\twtybi=ptmbi8r scaled \magstep4
+\font\twtysc=ptmrc8t scaled \magstep4
+\font\twtysl=ptmro8r scaled \magstep4
+%
+% 25pt
+\font\twfvrm=ptmr8r scaled \magstep5
+\font\twfvbf=ptmb8r scaled \magstep5
+\font\twfvit=ptmri8r scaled \magstep5
+\font\twfvbi=ptmbi8r scaled \magstep5
+\font\twfvsc=ptmrc8t scaled \magstep5
+\font\twfvsl=ptmro8r scaled \magstep5
+%
+% Large fonts for titles
+% (If you prefer Times-bold, use ..bf instead of ..rm)
+% (If you prefer small-caps, use ..sc instead of ..rm)
+\let\bigfont=\frtrm
+\let\Bigfont=\svtrm
+\let\BIgfont=\twtyrm
+\let\BIGfont=\twfvrm
+%
+%
+\font\ppffsixteen=ptmbi8r at 10pt
+\font\ppfftwenty=ptmbi8r scaled \magstep 1
+\font\ppfftwentyfour=ptmbi8r scaled \magstep2
+\font\ppfftwentynine=ptmbi8r scaled \magstep3
+\font\tinyppff=ptmbi8r at 8pt
+\font\smallppff=ptmbi8r at 10pt
+\font\normppff=ptmbi8r scaled \magstep 1
+\font\medppff=ptmbi8r scaled \magstep2
+%
+\def\f{{\ppff f}}
+\def\ff{{\ppff ff}}
+\def\fp{{\ppff fp}}
+\def\fff{{\ppff fff}}
+\def\ffff{{\ppff ffff}}
+\def\mf{{\ppff mf}}
+\def\p{{\ppff p}}
+\def\pp{{\ppff pp}}
+\def\ppp{{\ppff ppp}}
+\def\pppp{{\ppff pppp}}
+
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+%
+\def\smalldyn{\let\ppff\smallppff \let\p@@f\ppff}%
+\def\normdyn{\let\ppff\normppff \let\p@@f\ppff}%
+\def\meddyn{\let\ppff\medppff \let\p@@f\ppff}%
+%
+\def\sF{{\ppff s\p@kern f}}
+\def\sfz{{\ppff s\p@kern f\f@kern z}}
+\def\sfzp{{\ppff s\p@kern f\f@kern z\p@kern p}}
+
+\def\mp@{{\ppff mp}}
+\let\mezzopiano\mp@
+\catcode`\@=\catcodeat
+
+\def\smalltype{%
+  \let\rm\eightrm
+  \let\bf\eightbf
+  \let\it\eightit
+  \let\bi\eightbi
+  \let\sc\eightsc
+  \let\sl\eightsl
+  \rm}
+\def\Smalltype{%
+  \let\rm\ninerm
+  \let\bf\ninebf
+  \let\it\nineit
+  \let\bi\ninebi
+  \let\sc\ninesc
+  \let\sl\ninesl
+  \rm}
+\def\normtype{%
+  \let\rm\tenrm
+  \let\bf\tenbf
+  \let\it\tenit
+  \let\bi\tenbi
+  \let\sc\tensc
+  \let\sl\tensl
+  \rm}
+\def\medtype{%
+  \let\rm\twelverm
+  \let\bf\twelvebf
+  \let\it\twelveit
+  \let\bi\twelvebi
+  \let\sc\twelvesc
+  \let\sl\twelvesl
+  \rm}
+\def\bigtype{%
+  \let\rm\bigfont
+  \let\bf\bigfont
+  \let\it\bigfont
+  \let\bi\bigfont
+  \let\sc\bigfont
+  \let\sl\bigfont
+  \rm}
+\def\Bigtype{%
+  \let\rm\Bigfont
+  \let\bf\Bigfont
+  \let\it\Bigfont
+  \let\bi\Bigfont
+  \let\sc\Bigfont
+  \let\sl\Bigfont
+  \rm}
+\def\BIgtype{%
+  \let\rm\BIgfont
+  \let\bf\BIgfont
+  \let\it\BIgfont
+  \let\bi\Bigfont
+  \let\sc\Bigfont
+  \let\sl\Bigfont
+  \rm}
+\def\BIGtype{%
+  \let\rm\BIGfont
+  \let\bf\BIGfont
+  \let\it\BIGfont
+  \let\bi\BIGfont
+  \let\sc\BIGfont
+  \let\sl\BIGfont
+  \rm}
+
+%
+% PMX changes font assignment in pmx.tex
+%   \BIGfont=\fontid bx10 scaled\magstep4
+%   \Bigfont=\fontid bx10 scaled\magstep2
+%\ifx\pmxversion\undefined\relax\else
+%  \font\Bigfont=ptmr8r scaled \magstep2
+% \font\BIGfont=ptmr8r scaled \magstep4
+%\fi
+%
+
+\normtype
+\endinput
+%%
+%% History
+%%
+%% 2001/08/21
+%%   first publish
+%% 2004/12/24
+%%   no functional change. (email & real address change)
+%% 2007/06/11
+%%   no functional change. (email protection, real address change, URL change)
+%% 2008/08/01
+%%   Font assignment change on PMX.
+%% 2009/10/15
+%%   small update for MusiXTeX T.114 final release.
+%% 2015/02/06
+%%  8-bit encoding and extensions, similar to musixplt.tex
