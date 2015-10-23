@@ -1,0 +1,314 @@
+\input musixtex
+\input musixcpt
+\input musixsty
+\ifx\qh\undefined\let\qh\qb\fi %
+\ifx\qhp\undefined\let\qhp\qbp\fi %
+\ifx\qhpp\undefined\let\qhpp\qbpp\fi %
+\parindent 15mm
+ %
+\title{Gloria}
+\fullauthor{M\'elodie~: Guy BOUSSION\\Harmonisation~: Daniel TAUPIN}
+\shortauthor{G. Boussion}
+\maketitle
+
+\tracingstats=1\relax
+ %
+
+\def\nbinstruments{3}
+\setsize3{\tinyvalue}
+\setstaffs22\relax
+\setclef2{6000}%
+\setclef1{6000}%
+\setclef3{0000}%
+ %
+\generalsignature{-1}\relax % un bemol a la clef
+\generalmeter{\meterfrac{2}{2}}
+ %\check
+\def\instrumenti{P\'edale}
+\def\instrumentii{\vbox{\hsize=\parindent\centerline{Orgue$^{\tenbf *}$}\centerline{(manuel)}}}
+\def\instrumentiii{}\def\instrumentiv{Chant}
+ %\check
+\elemskip=7pt\relax
+\setinterinstrument2{3\Interligne}
+ %
+ \footnote{}{\noindent\bf{*} \rm Si, pour une raison ou une autre, il n'est
+pas possible de jouer la partie basse au p\'edalier, celle-ci devra \^etre
+jou\'ee \`a la main gauche sur un clavier manuel, de pr\'ef\'erence avec un
+jeu de 16 pieds. Dans ce cas, on pourra sacrifier la partie manuelle en clef
+de Fa. Les indications {\bf I} et {\bf II} indiquent des changements de plan
+sonore (ou de clavier) dans le cas o\`u l'on alterne le chant par
+l'assembl\'ee (I) et par une chorale (II).
+}%
+ %
+ %\check
+\geometricskipscale
+\eightrm
+\sepbarrules
+\startpiece
+\def\respire{\notes&&\cbreath\enotes}%
+\znotes&\zmidstaff{\bf \kern -6pt I \ppff(mf)}&\uptext{\kern -9mm\raise 9pt\hbox{\bigfont
+ Majestueux, sans tra\^\i ner \rm(\metron{\hu}{50})}}\enotes
+\hardlyrics{\kern-9pt Gloire }\notes\qp&\qp|\qu c&\hsong\thelyrics\cu c\enotes
+\notes &| &\hsong{\`a }\cu c\enotes
+\barre
+\NOtes\hup F&\hup M|\zhp a\zhp c\hup f&\hsong{Dieu~}\hu f\enotes
+\notes &|&\hsong{au~}\cu f\enotes
+\hardlyrics{plus~}\notes &|&\hsong\thelyrics\cu f\enotes
+\hardlyrics{haut~}\notes \qu J&\qu L|\zq{ce}\qu g&\hsong\thelyrics\cu g\enotes
+\notes&&\zsong{des~}\cu g\enotes
+\barre
+\NOtes\hl M&\hl M|\zh{cf}\hu h&\hsong{cieux~}\qup h\enotes
+\notes&&\hsong{et~}\cu h\enotes
+\Notes\qu K&\hl b|\zq{df}\qu i&\hsong{paix~}\qu i\enotes
+\notes\qu L&|\ibu0h{-3}\rlap{\zq c\ql e}\qh0h&\hsong{sur~}\cu h\enotes
+\notes&|\tbu0\qh0g&\hsong{la~}\cu g\enotes
+\barre
+\Notes\hl M&\wh M|\zh{ac}\hu f&\hsong{ter-~}\qu f\enotes
+\notes&&\hsong{re~}\cu f\enotes
+\hardlyrics{aux~}\notes&&\hsong\thelyrics\cu f\enotes
+\hardlyrics{hom-~}\notes\qu I&|\rlap{\zh b\hl d}\qu g&\hsong\thelyrics\qu g\enotes
+\hardlyrics{mes~}\notes\qu G&|\ibu0h3\qh0h&\hsong\thelyrics\cu h\enotes
+\notes &|\tbu0\qh0i&\zsong{qu'il~}\cu i\enotes
+\barre
+\Notes\qu J&\hl N|\rlap{\ql c}\zh e\hu g&\hsong{ai-~}\hu g\enotes
+\Notes\qu C&|\ql b&\enotes
+\Notes\hu F&\hl M|\zh a\zh c\hu f&\hsong{me. }\hu f\enotes
+ %\check
+\respire\Notes&\cmidstaff{\kern -15pt\bf II \ppff(mf)}\enotes
+\barre
+\hardlyrics{Nous~}\notes\ql M&\ql a|\rlap{\hl c}\zq f\qu h&\hsong\thelyrics\qu h\enotes
+\notes\qu J&\ql N|\zq e\qu g&\hsong{Te~}\cu g\enotes
+\hardlyrics{lou-~}\notes&&\hsong\thelyrics\cu g\enotes
+\NOtes\hl M&\hl a|\zh{cf}\hu h&\hsong{ons,~}\hu h\enotes
+ %\check
+\barre
+\hardlyrics{nous~}\notes\qu K&\ql M|\zq{df}\qu h&\hsong\thelyrics\cu h\enotes
+\notes&&\hsong{Te~}\cu h\enotes
+\notes\qu L&\ql N|\zq{eg}\qu j&\hsong{b\'e-~}\cu j\enotes
+\hardlyrics{nis-~}\notes&&\hsong\thelyrics\cu j\enotes
+ %\check
+\NOTes \hl M&\hl a|\zh{cf}\hu h&\hsong{sons,~}\hu h\enotes
+\barre
+\hardlyrics{nous~}\notes \qu M&\ql a|\zq{cf}\qu h&\hsong\thelyrics\qu h\enotes
+ %\check
+\Notes\hup J&\hlp N|\rlap{\ql c}\zh e\hu g&\hsong{T'a-~}\hu g\enotes
+\Notes&|\hl b&\enotes
+\Notes&|\zq c\qu f&\hsong{do-~}\qu f\enotes
+\barre
+\NOtes \hu F&\hl M|\zh{ac}\hu f&\hsong{rons,~}\hu f\enotes
+ %\check
+\znotes&\cmidstaff{\bf I}\enotes
+\respire
+\hardlyrics{nous~}\notes\ql M&\ql a|\rlap{\hl c}\istied0c\zq f\qu h&\hsong\thelyrics\cu h\enotes
+\notes&&\hsong{Te~}\cu h\enotes
+ %\check
+\hardlyrics{glo-~}\notes\ql J&\ql N|\zq e\qu g&\hsong\thelyrics\cu g\enotes
+\notes&&\hsong{ri-~}\cu g\enotes
+\barre
+\NOTes\hl M&\hl a|\tten0\rlap{\hl c}\zh f\hu h&\hsong{fions,~}\hu h\enotes
+ %\chec
+\hardlyrics{\kern -4pt nous~}\notes\qlp K&\qlp a|\rlap{\hl d}\zqp f\qup h&\hsong\thelyrics\cu h\enotes
+\notes&&\hsong{Te~}\cu h\enotes
+\hardlyrics{ren-~}\notes&&\hsong\thelyrics\cu h\enotes
+\notes\cu I&\cl N|\zq g\cu i&\zsong{dons~}\cu i\enotes
+\barre
+\NOtes\qup J&\qlp L|\zqp c\zqp e\qup g&\hsong{gr\^a-~}\qu g\enotes
+\notes&&\hsong{ces }\cu g\enotes
+\hardlyrics{pour~}\notes\cu J&\cl L|\zq e\cu g&\hsong\thelyrics\cu g\enotes
+\hardlyrics{Ton~}\notes\ibl0L0\qb0M&\ibl1M3\qb1M|\ibu2h3\zq f\qh2h&\hsong\thelyrics\cu h\enotes
+\hardlyrics{im-~}\notes\qb0L&\qb1N|\zq g\qh2i&\hsong\thelyrics\cu i\enotes
+\hardlyrics{men-~}\notes\qb0M&\qb1a|\zq h\qh2j&\hsong\thelyrics\cu j\enotes
+\notes\tbl0\qb0K&\tbl1\qb1b|\tbu2\zq i\qh2k&\hsong{se~}\cu k\enotes
+ %\check
+\barre
+\Notes\qu L&\ql c|\rlap{\zh e\hl g}\qu j&\isluru1k\hsong{gloi-~}\ql j\enotes
+\Notes\qu J&\ql L|\qu i&\hsong{--~}\ql i\enotes
+\notes\ql M&\ql a|\zq f\qu h&\tslur1j\hsong{re~!~}\ql h\enotes
+\rlap{\respire}\notes&\cmidstaff{\bf II}\enotes
+\notes\ibl2M3\qb2M&\ibl0a3\qb0a|\ibu1h3\zq{cf}\qh1h&\hsong{\kern -4pt Sei-~}\cu h\enotes
+\hardlyrics{gneur~}\notes\tbl2\qb2N&\tbl0\qb0b|\tbu1\zq{dg}\qh1i&\hsong\thelyrics\cu i\enotes
+\barre
+\hardlyrics{Dieu,~}\notes\ql a&\zql c\roff{\zhup c}|\zq{fh}\qu j&\hsong\thelyrics\qu j\enotes
+ %\check
+\hardlyrics{Roi~}\notes\ibl2M{-3}\qb2M&\ibl0a{-3}\qb0a|\ibu1h{-3}\zq f\qh1h&\hsong\thelyrics\cu h\enotes
+\notes\tbl2\qb2L&\tbl0\qb0N|\tbu1\zq e\qh1g&\hsong{du~}\cu g\enotes
+\Notes\ql M&\ql a|\zq f\qu h&\hsong{Ciel,~}\qu h\enotes
+ %\check
+\hardlyrics{Dieu~}\notes\ibl2K{-3}\qb2K&\ibl0a{-3}\qb0a|\ibu1h{-3}\zq{df}\qh1h&\hsong\thelyrics\cu h\enotes
+\notes\tbl2\qb2J&\tbl0\qb0N|\tbu1\zq{ce}\qh1g&\hsong{le~}\cu g\enotes
+ %\check
+\barre
+\notes\ibl2I{-4}\qb2I&\ibl0M{-4}\qb0M|\ibu1h0\rlap{\ql c}\zq
+f\qh1h&\hsong{\kern -4pt P\`e-~}\cu h\enotes
+\notes\tbl2\qb2G&\tbl0\qb0K|\zq g\qh1i&\hsong{re~}\cu i\enotes
+\hardlyrics{\kern -4pt tout-~}\notes\ql J&\ql L|\rlap{\ql e}\qh1g&\hsong\thelyrics\cu g\enotes
+\hardlyrics{puis-~}\notes&|\tbu1\zq c\qh1h&\hsong\thelyrics\cu h\enotes
+\NOtes\qup F&\hl M|\zqp c\zqp f\qup h&\hsong{sant~!~}\qup h\enotes
+\notes&\cmidstaff{\bf I}\enotes
+\respire
+\hardlyrics{Sei-~}\notes\ds&|\cu h&\hsong\thelyrics\cu h\enotes
+ %\check
+\barre
+\hardlyrics{gneur,~}\notes \ql M&\ql a|\rlap{\hl c}\zq f\qu h&\hsong\thelyrics\qu h\enotes
+\notes \qu J&\ql L|\zq e\qu g&\hsong{Fils~}\cu g\enotes
+\notes&&\hsong{u-~}\cu g\enotes
+\notes \qu K&\ql M|\zq {ad}\qu f&\hsong{ni-~}\cu f\enotes
+\notes&&\hsong{que~}\cu f\enotes
+\notes \qu J&\ql N|\zq{ce}\qu g&\hsong{J\'e-~}\cu g\enotes
+\notes&&\hsong{sus~}\cu g\enotes
+ %\check
+\barre
+\NOtes \hl M&\hl a|\zh{cf}\hu h&\hsong{Christ,~}\hu h\enotes
+\respire
+\Notes \ql M&\ql a|\rlap{\hl c}\zq f\qu h&\hsong{Sei-~}\qu h\enotes
+\Notes \qu J&\ql N|\zq e\qu g&\zsong{gneur~}\qu g\enotes
+ %\check
+\barre
+\NOtes \hl M&\hl a|\zh c\zh f\hu h&\hsong{Dieu,~}\hu h\enotes
+\notes\soupir&\soupir|\ds&\ds\enotes
+\notes&|\cu h&\hsong{a-~}\cu h\enotes
+\hardlyrics{\kern -4pt gneau~}\notes \Ibu0KI1\qh0K&\ql a|\rlap{\zq d\ql f}\ibu1h3\qh1h&\hsong\thelyrics\cu h\enotes
+\notes \tbu0\qh0I&|\tbu1\qh1i&\hsong{de~}\cu i\enotes
+\barre
+\NOtes \qup J&\qlp N|\zqp c\zqp e\qup g&\hsong{Dieu,~}\qup g\enotes
+\notes \cu K&\cl a|\zq d\cu f&\hsong{le~}\cu f\enotes
+\Notes \hu J&\ql N|\rlap{\zh c\hl e}\qu g&\hsong{Fils~}\qu g\enotes
+\Notes&|\qu g&\hsong{du~}\qu g\enotes
+\barre
+\NOTes \hup F&\hlp a|\rlap{\zhp c\hlp f}\hu h&\isluru1n\hsong{P\`e-~}\hu h\enotes
+\Notes&|\qu h&\tslur1m\hsong{re~}\qu h\enotes
+\Notes\soupir &\rlap{\soupir}\cmidstaff{\kern -8pt \bf II \ppff(mp)\kern 17pt}|\soupir&\soupir\enotes
+\barre
+\Notes\qu K&\ql a|\zq d\qu f&\hsong{Toi~}\qu f\enotes
+\notes\qu J&\ql N|\rlap{\hl c}\zq e\qu g&\hsong{qui~}\cu g\enotes
+\notes&&\hsong{en-~}\cu g\enotes
+\notes\ql M&\ql a|\zq f\qu h&\hsong{l\`e-~}\cu h\enotes
+\notes&&\hsong{ves~}\cu h\enotes
+\notes\ql K&\ql b|\zq d\zq f\qu i&\hsong{le~}\cl i\enotes
+\notes&&\hsong{p\'e-~}\cl i\enotes
+\barre
+\notes\hup J&\ibl0M3\qb0M|\istied0c\rlap{\hl c}\ibu1h{-3}\zq f\qh1h&\hsong{ch\'e~}\cu h\enotes
+\notes&\tbl0\qb0N|\tbu1\zq e\qh1g&\hsong{du~}\cu g\enotes
+\hardlyrics{mon-~}\notes&\ql M|\zq f\qu h&\hsong\thelyrics\qu h\enotes
+\Notes&\ql L|\tten0\zq{ce}\qu g&\hsong{de,~}\qu g\enotes
+\Notes\soupir&\soupir|\soupir&\soupir\enotes
+\barre
+\NOtes\qup K&\qlp a|\zqp d\qup f&\hsong{prends~}\qup f\enotes
+\notes\cu G&\cl N|\zq{bd}\cu g&\hsong{pi-~}\cu g\enotes
+\NOtes\hu J&\hl N|\itenu0c\rlap{\hl c}\zq e\qup g&\hsong{ti\'e~}\qup g\enotes
+\notes&|\zq b\cu f&\hsong{de~}\cu f\enotes
+\barre
+\NOTes\hup F&\hlp M|\tten0\zhp a\zhp c\hup f&\hsong{nous~!~}\hup f\enotes
+\Notes\soupir&\zmidstaff{\bf\kern -20pt I \ppff(mp)}\soupir|\soupir&\soupir\enotes
+ %\check
+\barre
+\Notes\qu K&\ql a|\zq d\qu f&\hsong{Toi~}\qu f\enotes
+\notes\qu J&\ql N|\rlap{\hl c}\zq e\qu g&\hsong{qui~}\cu g\enotes
+\notes&&\hsong{en-~}\cu g\enotes
+\notes\ql M&\ql a|\zq f\qu h&\hsong{l\`e-~}\cu h\enotes
+\notes&&\hsong{ves~}\cu h\enotes
+\notes\ql K&\ql b|\zq d\zq f\qu i&\hsong{le~}\cl i\enotes
+\notes&&\hsong{p\'e-~}\cl i\enotes
+\barre
+\notes\hup J&\ibl0M3\qb0M|\istied0c\rlap{\hl c}\ibu1h{-3}\zq f\qh1h&\hsong{ch\'e~}\cu h\enotes
+\notes&\tbl0\qb0N|\tbu1\zq e\qh1g&\hsong{du~}\cu g\enotes
+\Notes&\ql M|\zq f\qu h&\hsong{mon-~}\qu h\enotes
+\Notes&\ql L|\tten0\zq{ce}\qu g&\hsong{de,~}\qu g\enotes
+\notes\soupir&\soupir|\ds&\ds\enotes
+\notes&|\cu h&\hsong{en-~}\cu h\enotes
+\barre
+\hardlyrics{tends~}\notes\qu K&\ql a|\zq d\qu f&\hsong\thelyrics\cu f\enotes
+\notes&&\hsong{no-~}\cu f\enotes
+\notes\qu J&\ql N|\rlap{\hlp c}\zq e\qu g&\hsong{tre~}\cu g\enotes
+\hardlyrics{pri-~}\notes&&\hsong\thelyrics\cu g\enotes
+\Notes\ql M&\ql M|\zq f\qu h&\hsong{\`e-~}\qu h\enotes
+\Notes\qu J&\ql L|\zq e\qu g&\hsong{re~! }\qu g\enotes
+\rlap{\respire}\notes&\cmidstaff{\bf II}\enotes
+\barre
+\NOTEs \hu L&\istied0c\wh c|\zh{eg}\hu j&\hsong{Toi~}\hu j\enotes
+\Notes \ql M&|\rlap{\hl f}\zq h\qu j&\hsong{qui~}\qu j\enotes
+\notes \qu I&|\zq i\qu k&\hsong{es~}\cu k\enotes
+\notes&&\hsong{as-~}\cu k\enotes
+\barre
+\Notes \qu H&\tten0\hl c|\zq f\zq h\qu j&\hsong{sis~}\ql j\enotes
+\notes \ibu1G{-3}\qh1G&|\zq g\ibu0i{-3}\qh0i&\hsong{\`a~}\cl i\enotes
+\notes \tbu1\qh1F&|\zq f\tbu0\qh0h&\hsong{la~}\cl h\enotes
+\Notes \qu J&\ql L|\zq c\zq e\qu g&\hsong{droi-~}\qu g\enotes
+\notes \ibl1K3\qb1K&\ibl2M3\qb2M|\zq d\ibu0f3\qh0f&\hsong{te~}\cu f\enotes
+\notes \tbl1\qb1L&\tbl2\qb2N|\zq e\tbu0\qh0g&\hsong{du~}\cu g\enotes
+\barre
+\NOTes \hl M&\hl a|\rlap{\hlp c}\zh f\hu h&\isluru1n\hsong{P\`e-~}\hu h\enotes
+\Notes \qu J&\ql N|\zq e\qu g&\tslur1m\hsong{re~}\qu g\enotes
+\Notes\soupir&\soupir|\soupir&\soupir\enotes
+ %\check
+ %\check
+\barre
+\NOtes \hu K&\hl a|\rlap{\zh d\hl f}\qup h&\hsong{prends~}\qup h\enotes
+\notes&|\cu h&\hsong{pi-~}\cu h\enotes
+\NOtes \hu G&\hl N|\rlap{\zh b\hl d}\qup g&\hsong{ti\'e~}\qup g\enotes
+\notes&|\cu h&\hsong{de~}\cu h\enotes
+ %\check
+\barre
+\NOTes \hu H&\hl a|\zh{^ce}\hu h&\hsong{nous~!~}\hu h\enotes
+\notes&\zmidstaff{\kern -12pt\bf I \ppff(f)}|\soupir
+  &\Uptext{\bigfont plus anim\'e}\soupir\enotes
+\notes\hpause&\hpause|\qu{=c}&\hsong{\kern -4pt Car~}\cu c\enotes
+\notes&&\hsong{Toi~}\cu c\enotes
+ %\check
+\barre
+\Notes\qu K&\ql M|\zq{ad}\qu f&\hsong{seul~}\qu f\enotes
+\Notes\qu J&\ql N|\zq{ce}\qu g&\hsong{es~}\qu g\enotes
+\Notes\hu F&\hl M|\zqp c\zqp f\qup h&\zsong{saint~!~}\qup h\enotes
+\notes&|\qs&\qs\enotes
+\notes&|\zq{cf}\ccu h&\zsong{Toi~}\ccu h\enotes
+\barre
+\Notes\qu F&\ql M|\zq {cf}\qu h&\hsong{seul~}\qu h\enotes
+\notes\Ibu0CF1\qhp0C&\ibl1L3\qbp1L|\zql c\Ibu2gh1\zqp e\qhp2g&\hsong{es~}\cup g\enotes
+\hardlyrics{Sei-~}\notes\tbbu0\tbu0\qh0 F&\tbbl1\tbl1\qb1M|\zq {f}\tbbu2\tbu2\qh2h&\hsong\thelyrics\ccu h\enotes
+\NOtes\qup F&\qlp M|\zqp c\zqp f\qup h&\hsong{gneur~!~}\qup h\enotes
+\notes&\cmidstaff{\bf II \ppff(f)\kern 12pt}\enotes
+\respire
+\notes\ds&\cl M|\zq {cf}\cu h&\hsong{Toi~}\cu h\enotes
+ %\check
+\barre
+\notes\ibu0M0\qh0M&\ibl2a0\qb2a|\ibu1h0\rlap{\hl c}\zq f\qh1h&\hsong{\kern
+  -4pt seul~}\cu h\enotes
+\notes\qh0J&\qb2N|\zq e\qh1g&\hsong{es~}\cu g\enotes
+\notes\qh0M&\qb2a|\zq f\qh1h&\hsong{le~}\cu h\enotes
+\hardlyrics{Tr\`es-~}\notes\tbu0\qh0N&\tbl2\qb2b|\zq g\tbu1\qh1i&\hsong\thelyrics\cu i\enotes
+\hardlyrics{haut,~}\notes\ql a&\ql c|\zq {fh}\qu j&\hsong\thelyrics\ql j\enotes
+\notes\ibl0a{-3}\qb0a&\ibl2c{-3}\qb2c|\zq {h}\ibl1j{-3}\qb1j&\hsong{J\'e-~}\cl j\enotes
+\notes\tbl0\qb0N&\tbl2\qb2b|\zq g\tbl1\qb1i&\zsong{sus-~}\cl i\enotes
+ %\check
+\barre
+\NOtes\hl M&\hl a|\zhl f\zq h\qup j&\hsong{Christ,~}\qlp j\enotes
+\notes&|\cu h&\hsong{a-}\cu h\enotes
+\notes \qu K&\ql M|\zq{ad}\qu f&\hsong{vec~}\cu f\enotes
+\notes&&\hsong{le~}\cu f\enotes
+\hardlyrics{\kern -4pt Saint-~}\notes \qu J&\ql N|\zq{ce}\qu g&\hsong\thelyrics\cu g\enotes
+\notes&&\hsong{Es-~}\cu g\enotes
+ %\check
+\barre
+\NOtes \hl M&\hl a|\zh{cf}\hu h&\hsong{prit~! }\hu h\enotes
+\notes&\cmidstaff{\bf I}\enotes
+\Notes\qu K&\ql M|\zq{ad}\qu f&\hsong{dans~}\qu f\enotes
+\notes\qu J&\ql N|\zq{ce}\qu g&\hsong{la~}\qu g\enotes
+\barre
+\Notes\qup F&\qlp a|\rlap{\hl c}\zqp f\qu h&\hsong{gloi-~}\qu h\enotes
+\notes&|&\hsong{re~}\cu h\enotes
+\notes\cu C&\cl N|\zq e\cu g&\hsong{de~}\cu g\enotes
+\Notes\qu F&\ql M|\zq{cf}\qu h&\hsong{Dieu~}\qu h\enotes
+\Notes\qu I&\ql b|\zq{df}\qu i&\hsong{le~}\qu i\enotes
+\barre
+\Notes\qu J\qu C&\hl N|\rlap{\ql c}\zh e\hu g\ql b&\isluru1m\hsong{P\`e-~}\hu g\enotes
+\NOtes\hu F&\hl M|\zh{ac}\hu f&\tslur1l\hsong{re. }\hu f\enotes
+\rlap{\respire}\Notes&\cmidstaff{\kern -12pt\ppff $<$ ff}\enotes
+\barre
+\Notes\qu J\qu I\qu H\qu G&\wh L|\zw c\zw e\wh g&\islurd1e\zsong{A - - - - - }\wh g\enotes\barre
+\NOtes\zhp F\hup M&\hlp a|\zhp c\zhp f\hup h&\tslur1f\hsong{men~!~}\hup h\enotes
+\notes\soupir&\soupir|\soupir&\soupir\enotes
+\mulooseness 2
+\Stoppiece
+\medskip\rightline{\it le \aujourdhui}
+\eject
+\bye

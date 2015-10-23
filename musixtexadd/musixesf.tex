@@ -1,0 +1,79 @@
+%%
+%% musixesf.tex : efont-serif series fonts definition for MusiXTeX
+%%
+%% usage: 
+%%    \input musixtex
+%%    \input musixesf
+%%    ...
+%%
+%% This file is public domain.
+%%
+%% Author: 
+%%   Hiroaki MORIMOTO <CQX05646 at nifty dot com>
+%%     Tokyo, Japan
+%%     URL(en): http://homepage1.nifty.com/kuuku/pub/musixtex/index-e.html
+%%        (jp): http://homepage1.nifty.com/kuuku/pub/musixtex/index.html
+%%
+%% reference: musixtex.tex (T.99) 268-508
+%% MusiXTeX: (c) Daniel Taupin, et al.
+%%
+%% efont-serif:
+%%   (c) /efont/ <efont\atmark ring.gr.jp>
+%%   The Electronic Font Open Laboratory
+%%   http://openlab.ring.gr.jp/efont/dist/serif/efont-serif-tex-20010312-p3.tar.gz
+%%   http://openlab.ring.gr.jp/efont/serif/index.html.en
+%%   http://openlab.ring.gr.jp/efont/index.html.en
+%%
+%% History: see trailer.
+%
+\immediate\write16{MusiXTeX efont-serif\space<2009/10/15>}
+%
+% 8pt roman, bold, and italic
+\font\eightrm=esfr7t at 8pt
+\font\eightbf=esfb7t at 8pt
+\font\eightit=esfri7t at 8pt
+%
+% 9pt
+\font\ninerm=esfr7t at 9pt
+\font\ninebf=esfb7t at 9pt
+\font\nineit=esfri7t at 9pt
+%
+% 10pt
+\font\tenrm=esfr7t
+\font\tenbf=esfb7t
+\font\tenit=esfri7t
+%
+% 12pt
+\font\twelverm=esfr7t scaled \magstep 1
+\font\twelvebf=esfb7t scaled \magstep 1
+\font\twelveit=esfri7t scaled \magstep 1
+%
+% Large fonts for titles
+% (If you prefer efont-serif-bold, use esfb7t instead of esfr7t)
+\font\bigfont=esfr7t scaled \magstep2 % 14pt
+\font\Bigfont=esfr7t scaled \magstep3 % 17pt
+\font\BIgfont=esfr7t scaled \magstep4 % 20pt
+\font\BIGfont=esfr7t scaled \magstep5 % 25pt
+%
+% PMX changes font assignment in pmx.tex
+%   \BIGfont=\fontid bx10 scaled\magstep4
+%   \Bigfont=\fontid bx10 scaled\magstep2
+\ifx\pmxversion\undefined\relax\else
+  \font\Bigfont=esfr7t scaled \magstep2 % 14pt
+  \font\BIGfont=esfr7t scaled \magstep4 % 20pt
+\fi
+%
+\normtype
+\endinput
+%%
+%% History
+%%
+%% 2006/05/13
+%%   first publish
+%% 2007/06/11
+%%   no functional change. (email protection, real address change, URL change)
+%% 2008/08/01
+%%   Font assignment change on PMX.
+%% 2009/10/15
+%%   small update for MusiXTeX T.114 final release.
+%% 

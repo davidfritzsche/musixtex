@@ -1,0 +1,144 @@
+%%
+%% mxlyrdoc.tex:  Manual for the MusiXTeX lyrics package musixlyr
+%%
+%% Copyright (C) 1996-2003  Rainer Dunker
+%%
+%% This document is free software; you can redistribute it and/or modify
+%% it under the terms of the GNU General Public License as published by
+%% the Free Software Foundation; either version 2 of the License, or
+%% any later version.
+%%
+%% This document is distributed in the hope that it will be useful,
+%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%% GNU General Public License for more details.
+%%
+%% You should have received a copy of the GNU General Public License
+%% along with this document; if not, write to the Free Software
+%% Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+%%
+%% Author:
+%%  Rainer Dunker
+%%  Wachtelweg 31
+%%  85591 Vaterstetten
+%%  Germany
+%%
+%%  E-mail:  rainer.dunker@web.de
+%%
+\documentclass[twoside]{article}
+\usepackage{musixtex,multicol,makeidx}
+
+\input musixlyr
+
+\textwidth210mm \advance\textwidth-2in               % These format settings
+\textheight297mm \advance\textheight-2in \voffset-1in            % can be freely changed!
+%\advance\textheight-\headheight \advance\textheight-\headsep
+%\footskip0pt \topmargin0pt \evensidemargin0pt \oddsidemargin0pt
+
+%\pagestyle{headings}
+\parskip0.5ex plus 0.25ex minus 0.25ex
+\parindent0pt
+\sloppy
+
+\nobarnumbers
+\smallmusicsize
+
+%
+% command index
+%
+\makeatletter
+\renewenvironment{theindex}
+  {\let\item\@idxitem
+   \begin{multicols}{2}
+   \parskip0pt}
+  {\end{multicols}}
+\def\printcmd#1{{\tt\char92 #1}}
+\def\ci#1{\printcmd{#1}\bci{#1}}
+\def\bci#1{\index{#1@\printcmd{#1}}} % "blind" command index entry
+\makeindex
+
+\let\myqnwidth\qn@width
+\makeatother
+
+\def\musixlyr{{\tt musixlyr}}
+\def\PMX{{\bf PMX}}
+\def\var#1{\hbox{$\langle$#1$\rangle$}}
+\def\oneversespace{\par\vspace*{2mm}}
+\def\twoversesspace{\par\vspace*{7mm}}
+
+
+
+
+\begin{document}
+
+
+\centering{\LARGE\bf \musixlyr\ --- commands}\\[1ex]
+
+\thispagestyle{empty}
+
+
+%\def\keyexample#1{\keyindex{#1}, \Bslash#1}
+\def\keyexample#1{#1}
+
+\noindent\begin{tabbing}
+\verb|\NOtes|\keyexample{assignlyricshere}\verb|{alto}\qa c\en|\quad\= assigning without staff number\kill
+{\bf Example}\> {\bf Explanation}
+\end{tabbing}
+\vspace{-1ex}
+\hrule
+\vspace{-2ex}
+\begin{tabbing}
+\verb|\NOtes|\keyexample{assignlyricshere}\verb|{alto}\qa c\en|\quad\= assigning without staff number\kill
+\keyexample{setlyrics}\verb|{sopr}{the ly_-ric words_}|\> defining the lyrics text\\
+\keyexample{copylyrics}\verb|{sopr}{alto}|\> alto has same lyrics as soprano\\
+\keyexample{appendlyrics}\verb|{alto}{more words}|\> alto lyrics is longer\\
+\keyexample{assignlyrics}\verb|2{sopr,alto}|\>soprano and alto lyrics at staff 2\\
+\keyexample{assignlyricsmulti}\verb|{1}{2}{alto}|\>assign alto lyrics to staff 2 of instrument 1\\
+\verb|\NOtes|\keyexample{assignlyricshere}\verb|{alto}\qa c\en|\>assigning without staff number\\
+\keyexample{auxlyr}\verb|\assignlyrics{2}{sopr}|\> assign soprano above staff 2\\[.8ex]
+\keyexample{lyrrule}\verb|\qu c|...\keyexample{lyrruleend}\verb|\qu c|\>make a melisma by hand\\
+\keyexample{beginmel}\verb|\qu c|...\keyexample{endmel}\verb|\qu c|\>melisma, same as word extension underline\\[.8ex]
+\keyexample{lyr}\verb|\qu c|\>force a syllable from lyrics text at this note or rest\\
+\keyexample{lyric}\verb|{word}\qu c|\>insert syllable 'word' at this note\\
+\verb|\loffset{2}{|\keyexample{lyric*}\verb|{1.}}\qu c|\>combine '1.' with regular syllable\\
+\keyexample{lyrich}\verb|{syl}\qu c|\>same as \verb|\lyric|, but with hyphenation\\
+\keyexample{lyrich*}\verb|{}\qu c|\>same as \verb|\lyric*|, but with hyphenation\\
+\keyexample{lyricsoff}...\keyexample{lyricson}\>stop lyrics, then start again\\
+\keyexample{nolyr}\verb|\qu c|\>no syllable at this note\\[.8ex]
+\keyexample{llabel}\verb|{labelname}name|\>labelling a ``go to'' target in text\\
+\keyexample{golyr}\verb|{labelname}\qu c|\>perform a jump, in music code\\[.8ex]
+\keyexample{lyrpt}\verb|,\qu c|\>add a comma to the syllable under this note\\
+\keyexample{lyrnop}\verb|\qu c|\>remove last character in syllable\\
+\keyexample{lclyr}\verb|\qu c|\>make first character lower case\\
+\keyexample{llyr}\verb|\qu c|\>left justified syllable\\
+\keyexample{leftlyrtrue}\verb|\qu c|...\keyexample{leftlyrfalse}\verb|\qu c|\>start and stop left justification as the default\\
+\keyexample{lyroffset}\verb|{-4}\qu c|\>shift syllable 1 notehead to the left\\[.8ex]
+\keyexample{minlyrspace}\verb|{3pt}\qu c|\>define minimum space between the words\\
+\keyexample{forcelyrhyphenstrue}\verb|\qu c|\>always use a hyphen from now on\\
+\keyexample{forcelyrhyphensfalse}\verb|\qu c|\>remove hyphen and make one word if necessary \\
+\keyexample{showlyrshifttrue}\verb|\qu c|\>show the lyric shift\\[.8ex]
+\keyexample{lyrraise}\verb|{1}{a 2\Interligne}|\>raise lyrics below staff 1 by \verb|2\Interligne|\\
+\keyexample{lyrraisemulti}\verb|{1}{2}{a 2\Interligne}|\>raise alto lyrics above staff 2 of instrument 1\\
+\keyexample{lyrraisehere}\verb|{b 2\Interligne}\qu c|\>raise lyrics below this staff by \verb|2\Interligne|\\[.8ex]
+\keyexample{minlyrrulelength}\verb|{2mm}|\>melismas shorter than 2mm are not shown \\
+\keyexample{minmulthyphens}\verb|{15mm}|\>distance between hyphens in 'hyphen melisma'\\
+\verb|\def|\keyexample{lyrhyphenchar}\verb|{-}|\>chose a hyphen character\\
+\verb|\setlyrics{|\keyexample{lyrlayout}\verb|{\it}..}|\>apply italics to all lyrics lines\\
+\keyexample{verses}\verb|{,\beginmel}\qu c|\>initiate melisma at second verse\\[.8ex]
+\verb|\small|\keyexample{setlyrstrut}\>adapt the vertical distance between lyrics lines\\
+\keyexample{lyrstrutbox}\verb|{10pt}|\> (re)define the distance between the lyrics lines\\[.8ex]
+\keyexample{lyrmodealter}\verb|2|\>attach lyrics of staff 2 to the upper voice\\
+\keyexample{lyrmodealtermulti}\verb|{1}{2}|\>attach lyrics of instr.\ 1 staff 2 to the upper voice\\
+\keyexample{lyrmodealterhere}\verb|\qu c|\>attach lyrics of this staff to the upper voice\\
+\keyexample{lyrmodenormal}\verb|2|\>restore the default behaviour\\
+\keyexample{lyrmodenormalmulti}\verb|{1}{2}|\>restore the default behaviour at staff 2 of instr.\ 1\\
+\keyexample{lyrmodenormalhere}\verb|\qu c|\>restore the default behaviour of this staff\\[.8ex]
+\keyexample{lyrlink}\>linking 2 words with a '$_{_\smile}$'\\
+\keyexample{lowlyrlink}\>same as \verb|\lyrlink| but a little bit lower\\[.8ex]
+\keyexample{resetlyrics}\>set word pointer to the first word in all lyrics lines\\[.8ex]
+\keyexample{enableauxlyrics}\>don't use this anymore\\
+\keyexample{setsongraise}\verb|{1}{2\Interligne}|\>same as \verb|{\lyrraise}{1}{b 2\Interligne}|\\
+\keyexample{auxsetsongraise}\verb|{1}{2\Interligne}|\>same as \verb|{\lyrraisemulti}{1}{b 2\Interligne}|\\
+\keyexample{oldlyrlinestart}\>don't let the lyrics extent to the left margin\\
+\end{tabbing}
+\end{document}
