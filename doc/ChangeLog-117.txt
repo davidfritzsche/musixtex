@@ -1,0 +1,12 @@
+Changes from MusiXTeX 116 to 117:
+
+2015-05-25  
+  re-defined \txtfont for non-normal staff sizes
+  defined \tinyppff and \ppfftwelve, and re-defined \ppff to be staffsize dependent
+  introduced abbreviations \tqqb \tqqh \tqqqb \tqqqh 
+	      and synonyms \tqql \tqqu \tqqql \tqqqu 
+  introduced ornaments \tr, \trt
+  re-defined \triolet to be consistent with musixdoc (prints \txt, not nec. 3)
+  introduced \cpause etc. and corrected definitions of \centerpause etc.
+  introduced double-dotted rests \qppp, \dspp, \qspp, etc.
+

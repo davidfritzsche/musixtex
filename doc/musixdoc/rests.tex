@@ -10,8 +10,14 @@ eighth rest \keyindex{ds}, sixteenth rest \keyindex{qs},
 $32$nd~rest \keyindex{hs}, and $64$th rest \keyindex{qqs}.
 Dotted rests may be obtained by 
 using 
+\keyindex{pausep}, 
 \keyindex{hpausep} or \keyindex{hpp}, \keyindex{qpp}, \keyindex{dsp}, \keyindex{qsp},
-\keyindex{hsp} and \keyindex{qqsp}.
+\keyindex{hsp} and \keyindex{qqsp}, 
+and double-dotted rests by
+\keyindex{pausepp}, 
+\keyindex{hpausepp} or \keyindex{hppp}, \keyindex{qppp}, \keyindex{dspp}, \keyindex{qspp},
+\keyindex{hspp} and \keyindex{qqspp},.
+
 
  Longer rests, normally interpreted as lasting
 two or four bars respectively, can be coded as \keyindex{PAuse}
@@ -66,15 +72,15 @@ as non-spacing is not obvious}, are
  \end{itemize}
  %\check
 
- \section{Bar centered rests}\label{barcentered}
-Sometimes it is necessary to place a rest (or any other symbol) exactly in the middle
-of a bar. This can be done with combinations of the commands
+ \section{Bar-centered rests}\label{barcentered}
+Sometimes it is necessary to place a rest (or some other symbols) exactly in the middle
+of a bar. This can usually be done with combinations of the commands
 \keyindex{atnextbar},
 \keyindex{centerbar},
-\keyindex{centerPAUSe},
-\keyindex{centerPAuse},
-\keyindex{centerpause},
-\keyindex{centerhpause},
+\keyindex{cPAUSe},
+\keyindex{cPAuse},
+\keyindex{cpause},
+\keyindex{chpause},
 as demonstrated in the following example:
 
 \begin{music}
@@ -82,17 +88,14 @@ as demonstrated in the following example:
 \setclef1\bass
 \setstaffs1{2}
 \parindent0pt
-\startpiece\addspace\afterruleskip
+\startextract
 \NOtes|\qa{cegj}\en
-\def\atnextbar{\znotes\centerpause\en}\bar
-\NOtes|\qa{jgec}\en
-\def\atnextbar{\znotes\centerpause\en}\bar
-\Notes\ca{`jihgfedc}\en
-\def\atnextbar{\znotes|\centerpause\en}\bar
-\NOTes\ha{Nc}\en
-\def\atnextbar{\znotes|\centerpause\en}\bar
-\addspace{10\elemskip}%
-\def\atnextbar{\znotes\centerbar\duevolte|\centerbar\duevolte\en}\endpiece
+\def\atnextbar{\znotes\centerbar{\cpause}|\en}\bar
+\NOTes\ha{Nc}|\en
+\def\atnextbar{\znotes|\centerbar{\cpause}\en}\bar
+\NOTEs|\en
+\def\atnextbar{\znotes\centerbar{\cPAuse}|\centerbar{\cPAuse}\en}%
+\endextract
 \end{music}
 \noindent with the coding
 \begin{verbatim}
@@ -100,15 +103,59 @@ as demonstrated in the following example:
 \setclef1\bass
 \setstaffs1{2}
 \parindent0pt
-\startpiece\addspace\afterruleskip
+\startextract
 \NOtes|\qa{cegj}\en
-\def\atnextbar{\znotes\centerpause\en}\bar
-\NOtes|\qa{jgec}\en
-\def\atnextbar{\znotes\centerpause\en}\bar
-\Notes\ca{`jihgfedc}\en
-\def\atnextbar{\znotes|\centerpause\en}\bar
-\NOTes\ha{Nc}\en
-\def\atnextbar{\znotes|\centerpause\en}\bar
-\addspace{10\elemskip}%
-\def\atnextbar{\znotes\centerbar{\duevolte}|\centerbar{\duevolte}\en}\endpiece
+\def\atnextbar{\znotes\centerbar{\cpause}|\en}\bar
+\NOTes\ha{Nc}|\en
+\def\atnextbar{\znotes|\centerbar{\cpause}\en}\bar
+\NOTEs|\en
+\def\atnextbar{\znotes\centerbar{\cPAuse}|\centerbar{\cPAuse}\en}%
+\endextract
 \end{verbatim}
+The following abbreviations are provided:
+\begin{quote}
+\begin{tabular}{lcl}
+\keyindex{centerpause}& for & \verb|\centerbar{\cpause}|\\
+\keyindex{centerhpause}& for & \verb|\centerbar{\chpause}|\\
+\keyindex{centerPAuse}& for & \verb|\centerbar{\cPAuse}|\\
+\keyindex{centerPAUSe}& for & \verb|\centerbar{\cPAUSe}|
+\end{tabular}
+\end{quote}
+Material other than these rests may be used as arguments to
+\verb|\centerbar|, as in:\\ 
+\begin{music}
+\generalmeter\meterC
+\parindent0pt
+\startextract
+\NOtes\ql{ghij}\en
+\def\atnextbar{\znotes\centerbar{\liftpause2}\en}\bar
+\NOTes\en
+\def\atnextbar{\znotes\centerbar{\duevolte}\en}\bar
+\NOTes\en
+\def\atnextbar{\znotes\loffset{0.6}{\centerbar{\Fermataup l\wh j}}\en}\bar
+\NOTEs\en\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont7}}%
+\centerbar{\cPAUSe\off{2.5\elemskip}\cPAuse\off{2.5\elemskip}\cpause}\en}\bar
+\NOTEs\Hpause4{0.83}\en
+\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont10}}\en}\endextract
+\end{music}
+\noindent for which the coding is:
+\pagebreak%
+\begin{verbatim}
+\generalmeter\meterC
+\parindent0pt
+\startextract
+\NOtes\ql{ghij}\en
+\def\atnextbar{\znotes\centerbar{\liftpause2}\en}\bar
+\NOTes\en
+\def\atnextbar{\znotes\centerbar{\duevolte}\en}\bar
+\NOTes\en
+\def\atnextbar{\znotes\loffset{0.6}{\centerbar{\Fermataup l\wh j}}\en}\bar
+\NOTEs\en\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont7}}%
+\centerbar{\cPAUSe\off{2.5\elemskip}\cPAuse\off{2.5\elemskip}\cpause}\en}\bar
+\NOTEs\Hpause4{0.83}\en
+\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont10}}\en}\endextract
+\end{verbatim}
+Note that, for the off-center command
+\verb|\wh|\ldots,
+it has been necessary to use \keyindex{loffset} to correct the centering. 
+

@@ -1,14 +1,14 @@
 % This file can be used instead of psslurs.pro, it is only commented
 % and indented.
 %
-% VERSION: 1.0
+% VERSION: 1.01
 %
 % WARNING! This is a heavy magic! If you want something more understandable,
 %   you will have to write it yourself (if it is possible in a stack-oriented
 %   language that PostScript is). There are some constants you can
 %   change and see what happens, but I think the slurs should be almost
 %   always satisfiable. When not, let me know at:
-%   standa@hiero.cz
+%   stanislav@kneifl.net
 %   Also any bug reports and comments are welcomed.
 %
 %         Stanislav Kneifl.
@@ -25,18 +25,18 @@ end
 
 TeXDict begin
 % get dimen from TeX's string ("125pt" -> 125 PS points)
-/GD { dup length 2 sub 0 exch getinterval cvr 1.045 mul} def
+/psxGD { dup length 2 sub 0 exch getinterval cvr 1.045 mul} def
 % get dimen adjusted to Resolution
-/GDAR { dup length 2 sub 0 exch getinterval cvr 4 AR mul 1.045 mul} def
+/psxGDAR { dup length 2 sub 0 exch getinterval cvr 4 psxAR mul 1.045 mul} def
 % Adjust to Resolution
-/AR { Resolution mul 300 div } def
+/psxAR { Resolution mul 300 div } def
 %  the distances in dvips's PostScript are resolution dependant!
 end
 
 slur@Dict begin
 /CP /currentpoint load def
 /ED { exch def } bind def
-/AR { Resolution mul 300 div } def  % stands for Adjust to Resolution,
+/psxAR { Resolution mul 300 div } def  % stands for Adjust to Resolution,
 /VS { dup /ay1 exch ay1 exch linew mul 4 mul add def /ay2 exch ay2 exch linew mul 4 mul add def } def
 /y { 3 2 roll ax1 ay1 rmoveto show moveto } def
 /M { mul } def
@@ -55,10 +55,10 @@ slur@Dict begin
 		x2 0 curveto } def
 
 /DS {
-	AR /maxe ED
+	psxAR /maxe ED
 	/ifadjust ED
 	/ifdash ED
-	AR /m ED         % max height of the slur
+	psxAR /m ED         % max height of the slur
 	/e ED            % "angularity" of the slur; 0.1 = very angular,
                           %   0.3 = very round
 	/aa exch neg def       % what to multiply the height with
@@ -73,8 +73,8 @@ slur@Dict begin
 	/x2 x2 x1 sub def						% x2=x2-x1
 	/y2 y2 y1 sub def						% y2=y2-y1
 	/sx y2 x2 div def
-	/b x2 300 mul Resolution div abs sqrt AR 2 mul def	% b=2*sqrt(x2)
-	b 3 AR lt {/b 3 AR def} if			% b=max(b,3)
+	/b x2 300 mul Resolution div abs sqrt psxAR 2 mul def	% b=2*sqrt(x2)
+	b 3 psxAR lt {/b 3 psxAR def} if			% b=max(b,3)
 	b m gt {/b m def} if					% b=min(b,m)
 	/aa b aa mul def						% aa=aa*b
 	/s 90 x2 y2 atan sub def			% s=90-arctan(x2,y2)   slope of the slur
@@ -154,18 +154,18 @@ slur@Dict begin
 
 	grestore
 	gsave
-	/linew internote 0.06 mul AR def
+	/linew internote 0.06 mul psxAR def
 	linew 4 mul setlinewidth
 	1 setlinecap
 	0 setlinejoin
 	ifdash 1 eq
-		{ [internote 8 mul AR internote 5 mul AR] 0 setdash } if
-	x1 y1 shift neg 2 mul internote mul 4 AR mul add translate
+		{ [internote 8 mul psxAR internote 5 mul psxAR] 0 setdash } if
+	x1 y1 shift neg 2 mul internote mul 4 psxAR mul add translate
 	s rotate
 %	[1 sx 0 1 0 0] concat
 
 % uncomment this to see the control points
-%  5 AR setlinewidth ax1 ay1 moveto	0.1 0 rlineto stroke
+%  5 psxAR setlinewidth ax1 ay1 moveto	0.1 0 rlineto stroke
 %  ax2 ay2 moveto 0.1 0 rlineto stroke linew setlinewidth
 
 	drawseg
@@ -173,15 +173,15 @@ slur@Dict begin
 	drawseg
 	-2 VS
 	drawseg
-	x2 20 AR gt {
+	x2 20 psxAR gt {
 		3 VS
 		drawseg
 	} if
-	x2 50 AR gt {
+	x2 50 psxAR gt {
 		-4 VS
 		drawseg
 	} if
-	x2 80 AR gt {
+	x2 80 psxAR gt {
 		5 VS
 		drawseg
 	} if
@@ -219,12 +219,12 @@ slur@Dict begin
 	/y1 ED
 	/x1 ED
 	gsave
-	1 AR ceiling setlinewidth         % line thickness: this results
+	1 psxAR ceiling setlinewidth         % line thickness: this results
 	1 setlinecap                      % to exactly 2 pixels in 300 dpi
 	1 setlinejoin
-	x2 y2 10 AR add moveto            % the 10's specify wideness of the
+	x2 y2 10 psxAR add moveto            % the 10's specify wideness of the
 	x1 y1 lineto                      % open end of the crescendo,
-	x2 y2 10 AR sub lineto            % similarly the 11's below
+	x2 y2 10 psxAR sub lineto            % similarly the 11's below
 	stroke
 	grestore
 } def
@@ -236,13 +236,13 @@ slur@Dict begin
 	/y1 ED
 	/x1 ED
 	gsave
-	1 AR ceiling setlinewidth
+	1 psxAR ceiling setlinewidth
 	1 setlinecap
 	1 setlinejoin
-	x2 y2 11 AR add moveto
-	x1 y1 4 AR add lineto stroke
-	x1 y1 4 AR sub moveto
-	x2 y2 11 AR sub lineto
+	x2 y2 11 psxAR add moveto
+	x1 y1 4 psxAR add lineto stroke
+	x1 y1 4 psxAR sub moveto
+	x2 y2 11 psxAR sub lineto
 	stroke
 	grestore
 } def
@@ -251,8 +251,8 @@ slur@Dict begin
 
 /DLN {
 	gsave
-	GDAR ceiling setlinewidth
-	GDAR exch GDAR neg rlineto
+	psxGDAR ceiling setlinewidth
+	psxGDAR exch psxGDAR neg rlineto
 	stroke
 	grestore
 } def
@@ -261,8 +261,8 @@ slur@Dict begin
 
 /DSLN {
 	gsave
-	GDAR ceiling setlinewidth
-	GDAR exch 1.125 mul neg rotate 0 rlineto
+	psxGDAR ceiling setlinewidth
+	psxGDAR exch 1.125 mul neg rotate 0 rlineto
 	stroke
 	grestore
 } def
@@ -271,7 +271,7 @@ slur@Dict begin
 
 /DFLN {
 	gsave
-	GDAR ceiling setlinewidth
+	psxGDAR ceiling setlinewidth
 	CP moveto
 	lineto
 	stroke

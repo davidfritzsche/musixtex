@@ -1,5 +1,7 @@
 % format plain musixTex musixtEx musIxtex musiCtex
 % (c) 1996, Werner Icking
+% Multibar rests section revised 2015 for T1.17 by Bob Tennent.
+%
 \ifx\mxversion\undefined
  \input musixtex
  \fi
@@ -7,8 +9,8 @@
 \hoffset-15.4mm\voffset-15.4mm
 \hsize210mm\advance\hsize-20mm
 \vsize11in\advance\vsize-20mm\advance\vsize-20pt
-\footline{\smalltype Edited by Werner.Icking@gmd.de using \it Herbert Chlapik,
- Die Praxis des Notensetzers, Doblinger Wien 1987, ISBN 3-9000~035-96-2 \hfil}
+\footline{\smalltype Edited by Werner.Icking@gmd.de using {\it Herbert Chlapik,
+ Die Praxis des Notensetzers, Doblinger Wien 1987, ISBN 3-9000~035-96-2}.\hfil}
 \parskip 12pt minus 12pt
 \nobarnumbers
 %\smallmusicsize
@@ -209,18 +211,18 @@ Multibar rests
 \scale{1.1}
 \def\TPF{\off{2.5\elemskip}}
 \def\CB#1{\centerbar{#1}}
-\def\CN#1{\CB{\zcharnote{9}{\meterfont\lrlap{#1}}}}
+\def\CN#1{\CB{\ccn{9}{\meterfont{#1}}}}
 \xtrct1\generalmeter{}\Startextract
-\NOtesp\sk\en\def\atnextbar{\znotes\CN2\CB{\PAuse}\en}\bar
-\NOTes \sk\en\def\atnextbar{\znotes\CN3\CB{\PAuse\TPF\pause}\en}\bar
-\NOtesp\sk\en\def\atnextbar{\znotes\CN4\CB{\PAUSe}\en}\bar
-\NOTes \sk\en\def\atnextbar{\znotes\CN5\CB{\PAUSe\TPF\pause}\en}\bar
-\NOTes \sk\en\def\atnextbar{\znotes\CN6\CB{\PAUSe\TPF\PAuse}\en}\bar
-\NOTEs \sk\en\def\atnextbar{\znotes\CN7\CB{\PAUSe\TPF\PAuse\TPF\pause}\en}\bar
-\NOTes \sk\en\def\atnextbar{\znotes\CN8\CB{\PAUSe\TPF\PAUSe}\en}\bar
-\NOTEs \sk\en\def\atnextbar{\znotes\CN9\CB{\PAUSe\TPF\PAUSe\TPF\pause}\en}\bar
-\NOTEs \Hpause 4{0.83}\en\def\atnextbar{\znotes\CN{10}\en}\bar
-\NOTEsp\Hpause 4{0.83}\en\def\atnextbar{\znotes\CN{11}\en}\endextract
+\NOtesp\sk\en\def\atnextbar{\znotes\CN2\CB{\cPAuse}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN3\CB{\cPAuse\TPF\cpause}\en}\bar
+\NOtesp\sk\en\def\atnextbar{\znotes\CN4\CB{\cPAUSe}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN5\CB{\cPAUSe\TPF\cpause}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN6\CB{\cPAUSe\TPF\cPAuse}\en}\bar
+\NOTEs \sk\en\def\atnextbar{\znotes\CN7\CB{\cPAUSe\TPF\cPAuse\TPF\cpause}\en}\bar
+\NOTes \sk\en\def\atnextbar{\znotes\CN8\CB{\cPAUSe\TPF\cPAUSe}\en}\bar
+\NOTEs \sk\en\def\atnextbar{\znotes\CN9\CB{\cPAUSe\TPF\cPAUSe\TPF\cpause}\en}\bar
+\NOTEs \Hpause4{0.83}\en\def\atnextbar{\znotes\CN{10}\en}\bar
+\NOTEsp\Hpause4{0.83}\en\def\atnextbar{\znotes\CN{11}\en}\endextract
 \writeextract
 \vfill\eject
 

@@ -138,7 +138,7 @@ and is initially defined as \verb|\def\txt{3}|.
 The macro
 \verb|\tuplettxt| serves the same role for the last two macros. 
 The font used is
-\verb|\txtfont| which is by default \verb|\eightit| but may be re-defined. 
+\verb|\txtfont| which is by default \verb|\eightit| (in normal music size) but may be re-defined. 
 The first four
 are to be used with beamed xtuplets. As indicated in the
 last column, the last four produce a sloping bracket and are to be used with
@@ -253,6 +253,64 @@ use the macros without gaps.
 \end{verbatim}\end{quote}
 
  \section{Ornaments}
+
+
+ \subsection{Simple ornaments}\index{ornaments}
+
+The argument $p$ in the following macros for ordinary ornaments is the
+pitch at which the ornament itself appears. They are all nonspacing macros.
+You may use
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{mordent}\pitchp\ for \hbox to .75em{\mordent 0\hss}
+ \item \keyindex{Mordent}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Mordent 0\hss}
+ \item \keyindex{shake}\pitchp\ for \hbox to .75em{\shake 0\hss}
+ \item \keyindex{Shake}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shake 0\hss}
+ \item \keyindex{Shakel}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakel 0\hss}
+ \item \keyindex{Shakesw}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakesw 0\hss}
+ \item \keyindex{Shakene}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakene 0\hss}
+ \item \keyindex{Shakenw}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakenw 0\hss}
+ \item \keyindex{turn}\pitchp\ for \hbox to 1.5em{\kern 0.6em\turn 0\hss}
+ \item \keyindex{backturn}\pitchp\ for \hbox to 1.5em{\kern 0.6em\backturn 0\hss}
+ \item \keyindex{tr}\pitchp\ for \hbox to 1.5em{\kern 0.6em\tr 0\hss}
+ \item \keyindex{trt}\pitchp\ for \hbox to 1.5em{\kern 0.6em\trt 0\hss}\quad (J. S.~Bach's \textit{trillo und mordant})
+ \end{itemize}
+
+In the following macros for fermatas, the argument $p$ is the pitch of the
+notehead on which the fermata rests, assuming no additional vertical
+adjustments are needed for stems or intervening staff lines. They are all
+nonspacing macros. You may use
+\begin{itemize}\setlength{\itemsep}{0ex}
+ \item \keyindex{fermataup}\pitchp\ for
+\raisebox{0ex}[0ex][0ex]{\notesintext{\notes\fermataup1\en}},
+\end{itemize}
+\begin{itemize}\setlength{\itemsep}{3ex}
+ \item \keyindex{fermatadown}\pitchp\ for
+\raisebox{0ex}[0ex][0ex]{\notesintext{\notes\fermatadown2\en}},
+ \item \keyindex{Fermataup}\pitchp\ for
+\raisebox{-1ex}[-1ex][0ex]{\musicintextnoclef{\notes\Fermataup 7\zwh{'c}\en}}~,
+centered over a whole note,
+ \item \keyindex{Fermatadown}\pitchp\ for
+\raisebox{-1ex}[0ex][0ex]{\musicintextnoclef{\notes\Fermatadown1\zwh{'c}\en}}~,
+centered under a whole note.
+ \end{itemize}
+\bigskip
+
+A \itxem{breath} mark
+\raisebox{-5ex}[0ex][0ex]{\notesintext{\notes\zbreath\en}}
+can be put just above the staff with \keyindex{zbreath}. This is a nonspacing
+macro. On the other hand, \keyindex{cbreath} will cause a space of one
+\verb|\noteskip| and place the comma midway through the space.
+
+The \keyindex{caesura} command inserts a slash \verb|0.5\noteskip| before
+the place it is entered, while adding no space:
+
+\begin{music}\nostartrule
+\startextract
+\NOTes\zhu j\hl{^e}\caesura\en
+\Notes\zcu j\cl e\en
+\zendextract
+\end{music}
+
 
  \subsection{Arpeggios}
 \ital{Arpeggios} (i.e.~~~\arpeggio{-2}3) can be coded with the macro
@@ -370,60 +428,6 @@ in combination with \keyindex{zchar} or \keyindex{zcharnote}.
 Since the \hbox to .7cm{ \Ped\hss} symbol is rather wide, it might collide
 with adjacent bass notes. To shift it horizontally, you could use \verb|\loff{\PED}|.
 
- \subsection{Other ornaments}\index{ornaments}
-
-The argument $p$ in the following macros for ordinary ornaments is the
-pitch at which the ornament itself appears. They are all nonspacing macros.
-You may use
-\begin{itemize}\setlength{\itemsep}{0ex}
- \item \keyindex{mordent}\pitchp\ for \hbox to .75em{\mordent 0\hss},
- \item \keyindex{Mordent}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Mordent 0\hss},
- \item \keyindex{shake}\pitchp\ for \hbox to .75em{\shake 0\hss},
- \item \keyindex{Shake}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shake 0\hss},
- \item \keyindex{Shakel}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakel 0\hss},
- \item \keyindex{Shakesw}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakesw 0\hss},
- \item \keyindex{Shakene}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakene 0\hss},
- \item \keyindex{Shakenw}\pitchp\ for \hbox to 1.5em{\kern 0.6em\Shakenw 0\hss},
- \item \keyindex{turn}\pitchp\ for \hbox to 1.5em{\kern 0.6em\turn 0\hss},
- \item \keyindex{backturn}\pitchp\ for \hbox to 1.5em{\kern 0.6em\backturn 0\hss}.
- \end{itemize}
-
-In the following macros for fermatas, the argument $p$ is the pitch of the
-notehead on which the fermata rests, assuming no additional vertical
-adjustments are needed for stems or intervening staff lines. They are all
-nonspacing macros. You may use
-\begin{itemize}\setlength{\itemsep}{0ex}
- \item \keyindex{fermataup}\pitchp\ for
-\raisebox{0ex}[0ex][0ex]{\notesintext{\notes\fermataup1\en}},
-\end{itemize}
-\begin{itemize}\setlength{\itemsep}{3ex}
- \item \keyindex{fermatadown}\pitchp\ for
-\raisebox{0ex}[0ex][0ex]{\notesintext{\notes\fermatadown2\en}},
- \item \keyindex{Fermataup}\pitchp\ for
-\raisebox{-1ex}[-1ex][0ex]{\musicintextnoclef{\notes\Fermataup 7\zwh{'c}\en}}~,
-centered over a whole note,
- \item \keyindex{Fermatadown}\pitchp\ for
-\raisebox{-1ex}[0ex][0ex]{\musicintextnoclef{\notes\Fermatadown1\zwh{'c}\en}}~,
-centered under a whole note.
- \end{itemize}
-\bigskip
-
-A \itxem{breath} mark
-\raisebox{-5ex}[0ex][0ex]{\notesintext{\notes\zbreath\en}}
-can be put just above the staff with \keyindex{zbreath}. This is a nonspacing
-macro. On the other hand, \keyindex{cbreath} will cause a space of one
-\verb|\noteskip| and place the comma midway through the space.
-
-The \keyindex{caesura} command inserts a slash \verb|0.5\noteskip| before
-the place it is entered, while adding no space:
-
-\begin{music}\nostartrule
-\startextract
-\NOTes\zhu j\hl{^e}\caesura\en
-\Notes\zcu j\cl e\en
-\zendextract
-\end{music}
-
 \section{Alphabetic dynamic marks}
  Conventional dynamic symbols
 \pppp, \ppp, \pp,
@@ -451,8 +455,8 @@ the place it is entered, while adding no space:
 \keyindex{fff},
 \keyindex{ffff},
 \keyindex{sfz} and
-\keyindex{sfzp},  respectively, as the second argument of \verb|\zcharnote| or
-\verb|\ccharnote|.
+\keyindex{sfzp},  respectively, as the second argument of \verb|\zcn| (\verb|\zcharnote|) or
+\verb|\ccn| (\verb|\ccharnote|).
 See also Section~\ref{musixppff} for an alternative set of dynamic marks.
 
 

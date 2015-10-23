@@ -134,12 +134,10 @@ multiplicity. So for example an upper triple beam with
 following shortcut macros have been provided:
 
 \begin{quote}\begin{description}\setlength{\itemsep}{0ex}
- \item \keyindex{tqb}\enpee~is equivalent to \verb|\tbl{|$n$\verb|}\qb|\enpee~.
- \item \keyindex{tqh}\enpee~is equivalent to \verb|\tbu{|$n$\verb|}\qb|\enpee~.
- \item \keyindex{ztqb}\enpee~is equivalent to \verb|\tbl{|$n$\verb|}\zqb|\enpee~,
-i.e., no spacing afterwards.
- \item \keyindex{ztqh}\enpee~is equivalent to \verb|\tbu{|$n$\verb|}\zqb|\enpee~,
-i.e., no spacing afterwards.
+ \item \keyindex{tqb}\enpee~is equivalent to \verb|\tbl{|$n$\verb|}\qb|\enpee
+ \item \keyindex{tqh}\enpee~is equivalent to \verb|\tbu{|$n$\verb|}\qb|\enpee
+ \item \keyindex{ztqb}\enpee~is equivalent to \verb|\tbl{|$n$\verb|}\zqb|\enpee~i.e., no spacing afterwards
+ \item \keyindex{ztqh}\enpee~is equivalent to \verb|\tbu{|$n$\verb|}\zqb|\enpee~i.e., no spacing afterwards
 \end{description}\end{quote}
 The following
 synonyms may be used:
@@ -201,26 +199,40 @@ Thus the following sequences
 \hbox to \hsize{%
 \hss
   \startextract
-  \Notes\ibu0e0\qbp0e\tbbu0\tbu0\qb0e\en
+  \Notes\ibu0e0\qbp0e\roff{\tbbu0\tqh0e}\en
   \zendextract
 \hss\hss
   \startextract
-  \Notes\ibu0e0\qbpp0e\tbbbu0\tbbu0\tbu0\qb0e\en
+  \Notes\ibu0e0\qbpp0e\roff{\tbbbu0\tbbu0\tqh0e}\en
   \zendextract
 \hss}
 \end{music}
 \noindent are coded
 \hspace*{\fill}\begin{minipage}{.4\textwidth}\begin{verbatim}
 \Notes\ibu0e0\qbp0e%
-  \tbbu0\tbu0\qb0e\en
+  \roff{\tbbu0\tqh0e}\en
 \end{verbatim}\end{minipage}\hfill
 \begin{minipage}{.4\textwidth}\begin{verbatim}
 \Notes\ibu0e0\qbpp0e%
-  \tbbbu0\tbbu0\tbu0\qb0e\en
-\end{verbatim}\end{minipage}\hfill
+  \roff{\tbbbu0\tbbu0\tqh0e}\en
+\end{verbatim}\end{minipage}\hfill\\[4ex]
+The following abbreviations have been provided:
+\begin{quote}\begin{description}\setlength{\itemsep}{0ex}
+ \item \keyindex{tqqb}\enpee~is equivalent to \verb|\tbbl{|$n$\verb|}\tqb|\enpee
+ \item \keyindex{tqqh}\enpee~is equivalent to \verb|\tbbu{|$n$\verb|}\tqh|\enpee
+ \item \keyindex{tqqqh}\enpee~is equivalent to \verb|\tbbbu{|$n$\verb|}\tqqh|\enpee
+ \item \keyindex{tqqqb}\enpee~is equivalent to \verb|\tbbbl{|$n$\verb|}\tqqb|\enpee
+\end{description}\end{quote}
+and the following
+synonyms may be used:
+\begin{quote}\begin{tabular}{lcl}
+\keyindex{tqql} & for & \keyindex{tqqb}\\
+\keyindex{tqqu} & for & \keyindex{tqqh}\\
+\keyindex{tqqql} & for & \keyindex{tqqqb}\\
+\keyindex{tqqqu} & for & \keyindex{tqqqh}\\
+\end{tabular}\end{quote}
 
 \medskip
-
 
 The symmetrical pattern is also possible. For example:
 

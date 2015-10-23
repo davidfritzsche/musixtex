@@ -11,7 +11,7 @@ sizes, which are intended for titles, are available only in bold style.
 The size selection macros from smallest to biggest are \keyindex{smalltype},
 \keyindex{Smalltype},
 \keyindex{normtype}, \keyindex{medtype}, \keyindex{bigtype},
-\keyindex{Bigtype} ,
+\keyindex{Bigtype},
 \keyindex{BIgtype} and \keyindex{BIGtype}. Following size selection, the
 style may be selected or changed using \keyindex{rm} (Roman), \keyindex{bf}
 (bold) or \keyindex{it} (italic). If no style is explicitly selected, Roman style
@@ -25,10 +25,10 @@ When \musixtex\ is started, the default font for ordinary text is
 ten point Roman, equivalent to \verb|\normtype\rm|.
 
 Another group of fonts, in bold extended italic style, is predefined in point sizes
-$10$, $12$, $14$, and $17$ for dynamic markings. The appropriate font for the current
+$8$, $10$, $12$, $14$, and $17$ for dynamic markings. The appropriate font for the current
 staff size may be selected simply by using \keyindex{ppff} as a
-font specification. Macros \verb|\smalldyn|, \verb|\normdyn|, or \verb|\meddyn| may be
-used to redefine \verb|\ppff| to represent one of the smallest three.
+font specification. Macros \keyindex{tinydyn}, \keyindex{smalldyn}, \keyindex{normdyn}, or \keyindex{meddyn} may be
+used to redefine \verb|\ppff| to represent one of the smallest four.
 
 
 All predefined fonts are summarized in Table~\ref{predefinedfonts}. The second column gives an
@@ -49,6 +49,7 @@ explicit control sequence that can alternatively be used locally as a font speci
 \font\cBigtype=cmbx12 scaled \magstep2
 \font\cBIgtype=cmbx12 scaled \magstep3
 \font\cBIGtype=cmbx12 scaled \magstep4
+\font\cppfftwelve=cmbxti10 at 8pt
 \font\cppffsixteen=cmbxti10
 \font\cppfftwenty=cmbxti10 scaled \magstep1
 \font\cppfftwentyfour=cmbxti10 scaled \magstep2
@@ -79,6 +80,7 @@ explicit control sequence that can alternatively be used locally as a font speci
     \verb|\Bigtype|      & \verb|\Bigfont| & {\cBigtype      Big bold}     \\
     \verb|\BIgtype|      & \verb|\BIgfont| & {\cBIgtype      BIg bold}     \\
     \verb|\BIGtype|      & \verb|\BIGfont| & {\cBIGtype      BIG bold}     \\
+    \verb|\tinydyn|  & \verb|\ppfftwelve| & {\cppfftwelve  pp ff diminuendo}\\
     \verb|\smalldyn|  & \verb|\ppffsixteen| & {\cppffsixteen  pp ff diminuendo}\\
     \verb|\normdyn|   & \verb|\ppfftwenty| & {\cppfftwenty   pp ff crescendo}\\
     \verb|\meddyn|   & \verb|\ppfftwentyfour| & {\cppfftwentyfour   pp ff crescendo}\\[.4ex]
