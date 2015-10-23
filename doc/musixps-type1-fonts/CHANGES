@@ -1,0 +1,31 @@
+		    PostScript (Type 1) Fonts for MusiXTeX
+			       Ver 1.13
+
+			     19-February-2003
+
+	      Takanori Uchiyama, uchiyama@appi.keio.ac.jp
+
+19-February-2003
+  + Fix a problem that xslz20 disappears with Acrobat 5.
+
+15-July-2002
+  + Fix broken fonts, xslhd11, xslhd11d, xslhd13, xslhd13d, xslhd16d,
+    xslhd24, xslhd29d.
+
+28-August-2001
+  + Fix wrong width of musix13.pfb.
+  + Fix wrong width of xslhu11-29 and xslhu11d-29d.
+
+30-July-2001
+  + Reducing control points.
+  + Hinted automatically with Fontographer.
+  + Upgrade from T101 to T102 (musix11 - 29, xslhz20, xslhz20d)
+  + PostScript names were changed.
+      Ex. TeX-musix20 --> TeXMUSIX20-Regular
+  + typo correction.  
+      musix.tex --> musix.map
+
+13-July-2001
+  + First release.
+
+[End of CHANGES]

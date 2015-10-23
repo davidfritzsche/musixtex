@@ -1,0 +1,114 @@
+		    PostScript (Type 1) Fonts for MusiXTeX
+			       Ver 1.13
+
+			     19-February-2003
+
+	      Takanori Uchiyama, uchiyama@appi.keio.ac.jp
+
+1. DESCRIPTION
+
+This package provides PostScript (type 1) fonts (PFB format), and dvips and
+dvipdfm map files for MusiXTeX. The fonts are based on the original METAFONT
+sources, such as musix20.mf, which are distributed with MusiXTeX. The fonts
+provided here may be used to produce printer-independent Postscript files. PDF
+files generated using type 1 fonts are well displayed by the Acrobat Reader and
+xpdf.
+
+The fonts were generated from the METAFONT sources in the TeX Live CD 2000 July
+using TeXtrace 0.45 or mftrace 1.0.12 but musix11-20, xslhz20 and xslhz20d 
+were upgraded to those in musixtex-T102.tar.gz.
+
+Here is a list of the 71 generated fonts.
+
+musix11.pfb  xgreg24.pfb  xsld29.pfb   xslhd24.pfb  xslhu24.pfb  xslu20.pfb
+musix13.pfb  xgreg29.pfb  xsld29d.pfb  xslhd24d.pfb xslhu24d.pfb xslu20d.pfb
+musix16.pfb  xsld11.pfb   xsldd20.pfb  xslhd29.pfb  xslhu29.pfb  xslu24.pfb
+musix20.pfb  xsld11d.pfb  xsldu20.pfb  xslhd29d.pfb xslhu29d.pfb xslu24d.pfb
+musix24.pfb  xsld13.pfb   xslhd11.pfb  xslhu11.pfb  xslhz20.pfb  xslu29.pfb
+musix29.pfb  xsld13d.pfb  xslhd11d.pfb xslhu11d.pfb xslhz20d.pfb xslu29d.pfb
+musixsps.pfb xsld16.pfb   xslhd13.pfb  xslhu13.pfb  xslu11.pfb   xslud20.pfb
+musixspx.pfb xsld16d.pfb  xslhd13d.pfb xslhu13d.pfb xslu11d.pfb  xslup20.pfb
+xgreg11.pfb  xsld20.pfb   xslhd16.pfb  xslhu16.pfb  xslu13.pfb   xslz20.pfb
+xgreg13.pfb  xsld20d.pfb  xslhd16d.pfb xslhu16d.pfb xslu13d.pfb  xslz20d.pfb
+xgreg16.pfb  xsld24.pfb   xslhd20.pfb  xslhu20.pfb  xslu16.pfb   xtie20.pfb
+xgreg20.pfb  xsld24d.pfb  xslhd20d.pfb xslhu20d.pfb xslu16d.pfb
+
+Note: musix25 and xgreg25 were not generated because they are not used in 
+      musixgre.tex or musixtex.tex.
+
+
+The control points were reduced with Fontographer.
+The fonts were hinted automatically with Fontographer.  musix11 - 29 were
+hand tuned by Takanori Uchiyama.
+
+2. METHOD
+
+Most of fonts were generated using TeXtrace 0.45 running on Mac OS X 10.0.4.
+xslz20 was generated using mftrace 1.0.12 running on Mac OS X 10.2.3.
+Thirty-two fonts were generated with the original traceall.sh script. Others
+were generated with traceall.sh modified by Takanori Uchiyama. The modification
+involved reducing resolution, corresponding to enlargement of "1 thou" in
+traceall.sh. The following are lists of fonts that were generated with N-fold
+thou scripts.
+
+twofold
+  musix11, musix13, xsld11, xsld11d, xsld13, xsld13d, xsld16, xsld16d,
+  xslhd13, xslhd13d, xslhd16, xslhd16d, xslhd20, xslhd20d, xslhd24d,
+  xslhu13, xslhu13d, xslhu16, xslhu16d, xslhu20, xslhu20d, xslhu24d,
+  xslu13, xslu13d, xslu16, xslu16d, xslud20
+
+threefold
+  musixsps, musixspx, xslhd11, xslhd11d, xslhu11, xslhu11d, xslz20, xslz20d
+
+fivefold
+  xslhz20, xslhz20d, xtie20
+
+The reason for reducing resolution is that METAFONT supports only limited
+values of real numbers and so cannot generate very high resolution MusiXTeX
+fonts.
+
+3. INSTALLATION
+
+  1) Make a directory such as $TEXMF/fonts/type1/musixtex, for PFBs.  
+  2) Copy all PFBs to the above directory; they should be readable by all users.
+  3) Copy the map file ./dvips/musix.map to the appropriate directory, such as
+     $TEXMF/dvips/config
+  4) Add a line 
+
+      p +musix.map
+
+     to a suitable config.xxx file or, in a tetex-based distribution, add 
+     musix.map to the list of map files for Type1 fonts with Metafont 
+     equivalents in the updmap script, which should then be executed 
+     by doing "./updmap".
+  5) Copy the map file ./dvipdfm/musix.map to the appropriate directory, such as
+     $TEXMF/dvipdfm/config
+  6) Add a line
+
+      f musix.map
+
+     to the config file.
+  7) Do mktexlsr or texhash or whatever is necessary on your system to
+     re-generate the TeX database.
+
+When these fonts are used, type 1 fonts should also be used for non-music text;
+for example, type 1 versions of the Computer Modern fonts are available.
+
+4. TODO
+
+  + Hinting 
+  + Modifying METAFONT sources to get high resolution outputs
+
+5. LICENSE
+
+  The license of this package is LPPL.
+
+6. ACKNOWLEDGEMENTS
+
+  Thanks to Dr. Daniel Taupin, Ross Mitchell and Andreas Egler for their
+MusiXTeX package, to Dr. Peter Szabo for his excellent TeXtrace tool, 
+and to Dr. Han-Wen Nienhuys for his smart mftrace tool.
+And thanks to Dr. Bob Tennent for his helpful comments, and to Mr. David 
+Fritzsche for his suggestions.
+
+[End of README]
