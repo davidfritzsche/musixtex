@@ -1,4 +1,4 @@
-This is MusiXTeX, version 1.19-2015-11-29.
+This is MusiXTeX, version 1.20-2015-12-13.
 MusiXTeX is a TeX-based system for typesetting music.
 
 The main author was Daniel Taupin, who died in a climbing
@@ -25,10 +25,11 @@ The package includes
 
    + a script musixflx.lua for the 2nd-pass processing
 
-   + a script musixtex.lua that automates the 3-pass 
-     etex -> musixflx -> [pdf]etex process, 
-     possibly followed by calls to dvips and ps2pdf (or dvipdfm) 
-     to convert the output to Portable Document Format (PDF)
+   + a script musixtex.lua that uses pre-processors prepmx,
+     pmxab or autosp, as necessary, and automates the 3-pass
+     etex -> musixflx -> [pdf]etex process, possibly
+     followed by calls to dvips and ps2pdf (or dvipdfm) to
+     convert the output to Portable Document Format (PDF)
 
    + wrapper scripts musixflx.bat and musixtex.bat for use on Windows
 
@@ -42,7 +43,7 @@ following instructions:
 
 To install (on TDS-compliant TeX systems):
 
- +  unzip tex-archive/install/macros/musixtex.tds.zip at the root of a
+ +  unzip mirror.ctan.org/install/macros/musixtex.tds.zip at the root of a
     texmf tree and, if necessary, update the filename database; 
     e.g., texhash texmf.
 
