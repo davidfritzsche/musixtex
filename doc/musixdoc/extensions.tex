@@ -1910,7 +1910,7 @@ their meanings are as follows:
 
 
  %\check
- \section{musixsty}\index{musixsty@{\tt musixsty.tex}}
+ \section{musixsty}\index{musixsty@{\tt musixsty.tex}}\label{musixsty}
 
  Provides certain text-handling facilities for titles, footnotes, and other
 items not related to lyrics. It should not be used with \LaTeX. It includes
@@ -1918,6 +1918,8 @@ items not related to lyrics. It should not be used with \LaTeX. It includes
  \item definitions of \keyindex{hsize}, \keyindex{vsize},
 \keyindex{hoffset}, \keyindex{voffset} suitable for A$4$ paper; those using
 other sizes may wish to modify it once and for all;
+ \item a \keyindex{rectoverso}\verb|{|\emph{dimension}\verb|}| command to set up even/odd-page
+       asymmetric margins;
  \item a set of text size commands:
 
  \begin{description}\setlength{\itemsep}{0ex}
@@ -1931,7 +1933,7 @@ other sizes may wish to modify it once and for all;
   \item[\keyindex{twtypoint}] to get $20.74$ point font size;
   \item[\keyindex{twfvpoint}] to get $24.88$ point font size;
  \end{description}
- \item commands for creating titles:
+ \item commands for creating title-page headings:
   \begin{itemize}\setlength{\itemsep}{0ex} \item \keyindex{author} or
 \keyindex{fullauthor} to be put at the right of the first page, below the
 title of the piece; the calling sequence is, for example
@@ -1949,6 +1951,9 @@ two lines;
   \item \keyindex{othermention} which is displayed on the left of the page,
 vertically aligned with author's name. It may contain \verb|\\| to display it on
 several lines;
+  \item \keyindex{headline} which displays the argument at the top of the title page (use
+   \verb|\hss| after or before the argument text or both to left-align or 
+    right-align or center the text);
   \item \keyindex{maketitle}  which displays all the previous stuff;
   \end{itemize}
 

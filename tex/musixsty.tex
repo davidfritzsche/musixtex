@@ -18,9 +18,10 @@
 %
 \ifx\undefined\Tenpoint \else \endinput\fi
 
-\immediate\write16{MusiXtextSTYle T.116\space<27 February 2015>}%
+\immediate\write16{MusiXtextSTYle T.123\space<04 March 2016>}%
 
 %  modified by RDT to be independent of Computer Modern (other than Math fonts)
+%  RDT: added \headline{..} in \maketitle
 
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 \edef\catcode@gt{\the\catcode`\>}\catcode`\>=12
@@ -292,6 +293,9 @@
 \let\othert@itremorceau\empty
 \def\othermention#1{\def\othert@itremorceau{#1}}
 
+\let\headl@ne\undefined  
+\def\headline#1{\def\headl@ne{#1}}
+
 \let\s@hortauthor\empty
 \def\shortauthor#1{\def\s@hortauthor{(#1)}}
 
@@ -310,7 +314,9 @@
 
 \output{\outmorceau}
 
-\def\maketitle{\centerline{\BIGfont \ifx\headt@itremorceau\undefined
+\def\maketitle{%
+\ifx\headl@ne\undefined\else\line{\headl@ne}\bigskip\fi%  for version 123 RDT
+\centerline{\BIGfont \ifx\headt@itremorceau\undefined
   \titremorceau\else\headt@itremorceau\fi}
 \medskip
 \ifx\subt@itremorceau\undefined\else
@@ -353,16 +359,30 @@
 \catcode`\<=\catcode@lt
 \catcode`\@=\catcodeat
 
-\hsize=185mm
-\vsize=275mm
-\hoffset=210mm
-\advance\hoffset -\hsize
-\divide\hoffset 2\relax
-\advance\hoffset -2.54cm
+%%% A4 (210mm x 297mm):
+\hsize=190mm  %%% adjust to increase/decrease printer margins
+\vsize=270mm  %%% adjust to increase/decrease printer margins
+\hoffset=210mm\advance\hoffset-\hsize\divide\hoffset2
+\advance\hoffset-1.0in % TeX convention
+\voffset=297mm\advance\voffset-\vsize\divide\voffset2
+\advance\voffset-1.0in % TeX convention
+
+%%% letter-size (8.5in x 11.0in):
+%\hsize=7.5in  %%% adjust to increase/decrease printer margins
+%\vsize=10.0in  %%% adjust to increase/decrease printer margins
+%\hoffset=8.5in\advance\hoffset-\hsize\divide\hoffset2
+%\advance\hoffset-1.0in % TeX convention
+%\voffset=11.0in\advance\voffset-\vsize\divide\voffset2
+%\advance\voffset-1.0in % TeX convention
+
+%%% To determine the *minimal* margins supported by your
+%%% printer and check for printer mis-alignment, process
+%%% testpage.tex with LaTeX and print the result.
+
 \tenpoint
-%%%%%%%%%%%%%%%%%%%%%%%%% local adjust to be tuned %%%%%%%%%%%%%%%%%%%%%%%%%%
-\advance\hoffset -5mm
-\voffset=-1.54cm
-%%%%%%%%%%%%%%%%%%%%%%%%% local adjust to be tuned %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% adjust here for a non-centering printer %%%%%%%%
+%\advance\hoffset 0mm
+%\advance\voffset 0mm
 
 \endinput
