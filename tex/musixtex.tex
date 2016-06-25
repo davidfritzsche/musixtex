@@ -25,14 +25,19 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{19}
+\def\mxminorvernumber{20}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2015-11-29}
+\def\mxdate{2015-12-13}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.20
+
+% RDT re-defined tremolo commands to allow for numerical pitches; 
+%  use of \raise and \hbox suggested by Jean-Pierre Colon
 
 % version 1.19:
 
@@ -4213,21 +4218,22 @@
 
 %%% tremolos  version 1.19 RDT 
 %%% based on code by Werner Icking and Andre van Ryckeghem
+%%% version 1.20 RDT re-defined using \raise, suggested by JPC
 
-\def\trml#1{\advance\transpose2\loffset{0.5}{\ibl0{#1}9}\roffset{0.5}{\tbl0}\advance\transpose-2}%
-\def\trmu#1{\advance\transpose-3\loffset{0.5}{\ibu0{#1}9}\roffset{0.5}{\tbu0}\advance\transpose3}%
-\def\trrml#1{\advance\transpose2\loffset{0.5}{\ibbl0{#1}9}\roffset{0.5}{\tbl0}\advance\transpose-2}%
-\def\trrmu#1{\advance\transpose-3\loffset{0.5}{\ibbu0{#1}9}\roffset{0.5}{\tbu0}\advance\transpose3}%
-\def\trrrml#1{\advance\transpose2\loffset{0.5}{\ibbbl0{#1}9}\roffset{0.5}{\tbl0}\advance\transpose-2}%
-\def\trrrmu#1{\advance\transpose-3\loffset{0.5}{\ibbbu0{#1}9}\roffset{0.5}{\tbu0}\advance\transpose3}%
+\def\trml#1{\raise2\internote\hbox{\loffset{0.5}{\ibl0{#1}9}\roffset{0.5}{\tbl0}}}%
+\def\trmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibu0{#1}9}\roffset{0.5}{\tbu0}}}%
+\def\trrml#1{\raise2\internote\hbox{\loffset{0.5}{\ibbl0{#1}9}\roffset{0.5}{\tbl0}}}%
+\def\trrmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibbu0{#1}9}\roffset{0.5}{\tbu0}}}%
+\def\trrrml#1{\raise2\internote\hbox{\loffset{0.5}{\ibbbl0{#1}9}\roffset{0.5}{\tbl0}}}%
+\def\trrrmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibbbu0{#1}9}\roffset{0.5}{\tbu0}}}%
 
 % whole notes are wider than quarter/half notes:
-\def\Trml#1{\advance\transpose2\loffset0{\ibl0{#1}9}\roffset{1.125}{\tbl0}\advance\transpose-2}%
-\def\Trmu#1{\advance\transpose-3\loffset{1.125}{\ibu0{#1}9}\roffset0{\tbu0}\advance\transpose3}%
-\def\Trrml#1{\advance\transpose2\loffset0{\ibbl0{#1}9}\roffset{1.125}{\tbl0}\advance\transpose-2}%
-\def\Trrmu#1{\advance\transpose-3\loffset{1.125}{\ibbu0{#1}9}\roffset0{\tbu0}\advance\transpose3}%
-\def\Trrrml#1{\advance\transpose2\loffset0{\ibbbl0{#1}9}\roffset{1.125}{\tbl0}\advance\transpose-2}%
-\def\Trrrmu#1{\advance\transpose-3\loffset{1.125}{\ibbbu0{#1}9}\roffset0{\tbu0}\advance\transpose3}%
+\def\Trml#1{\raise2\internote\hbox{\loffset0{\ibl0{#1}9}\roffset{1.125}{\tbl0}}}%
+\def\Trmu#1{\raise-3\internote\hbox{\loffset{1.125}{\ibu0{#1}9}\roffset0{\tbu0}}}%
+\def\Trrml#1{\raise2\internote\hbox{\loffset0{\ibbl0{#1}9}\roffset{1.125}{\tbl0}}}%
+\def\Trrmu#1{\raise-3\internote\hbox{\loffset{1.125}{\ibbu0{#1}9}\roffset0{\tbu0}}}%
+\def\Trrrml#1{\raise2\internote\hbox{\loffset0{\ibbbl0{#1}9}\roffset{1.125}{\tbl0}}}%
+\def\Trrrmu#1{\raise-3\internote\hbox{\loffset{1.125}{\ibbbu0{#1}9}\roffset0{\tbu0}}}%
 
 %%% octave lines
 

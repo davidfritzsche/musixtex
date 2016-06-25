@@ -1,24 +1,19 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2015-11-28  "musixtex version 0.12" ""
+.TH MUSIXTEX 1 2015-12-12  "musixtex version 0.15" ""
 
 .SH NAME
-musixtex \- processes MusiXTeX files, deleting intermediate files
-
+musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
+and then deletes intermediate and log files (unless 
+.B -i 
+is used)
 .SH SYNOPSIS
 [ texlua ]
 .B musixtex[.lua]
 {
-.IR option
-|
-.IR jobname 
-[ .tex ] 
-|
-.IR jobname 
-[ .aspc ] 
-|
-.IR jobname
-[ .ltx ]
-} ...
+.I option 
+| 
+.I jobname 
+[ .mtx  | .pmx  | .aspc | .tex | .ltx ] } ...
 .TP 
 If a jobname argument has a .tex extension, the default effect is to process the file using
 .TP 12
@@ -37,26 +32,36 @@ If a jobname argument has a .tex extension, the default effect is to process the
 .BR ps2pdf (1)
 (Postscript to Portable Document Format)
 .TP
-followed by removal of intermediate files.
+normally followed by removal of intermediate and log files.  A log musixtex.log is generated, even if other log files are removed.
 .P 
+If a jobname argument has a .pmx extension, the file is first preprocessed using
+.BR pmxab (1) 
+and the resulting .tex file is processed as above.
+.P
+If a jobname argument has a .mtx extension, the file is first preprocessed using
+.BR prepmx (1)
+and the resulting .pmx file is processed as above.
+.P
 If a jobname argument has a .aspc extension, the file is first preprocessed using
 .BR autosp (1) 
 and the resulting .tex file is processed as above.
 .P
 If a jobname argument has a .ltx extension, the file is processed using
 .BR latex (1)
-or 
-.BR pdflatex (1).
+(or
+.BR pdflatex (1)).
 .P
-If a jobname argument has neither .tex nor .aspc nor .ltx extension, file 
+If a jobname argument has no extension, the script will look for a file 
+.IR jobname .mtx
+or
+.IR jobname .pmx
+or
 .IR jobname .aspc
 or
-.IR jobname .ltx
-will be processed as above if it exists; otherwise file
-.IR jobname .tex 
-will
-be processed, if it exists.
-
+.IR jobname .tex
+or
+.IR jobname .ltx ,
+in that order, and process it as above.
 .SH OPTIONS
 .TP 8
 .B -v 
@@ -66,10 +71,7 @@ output program name and version number, and quit
 output usage summary and quit
 .TP
 .B -l 
-changes the TeX processor to
-.BR latex (1)
-or
-.BR pdflatex (1); 
+assumes LaTeX source;
 implied if the file has .ltx extension
 .TP
 .B -p 
@@ -85,9 +87,24 @@ or
 .BR dvipdfm (1)
 )
 .TP
+.B -c
+preprocess pmx file using 
+.BR pmxchords (1)
+.TP
 .B -d 
 changes the dvi processor to
 .BR dvipdfm (1)
+.TP 
+.B -F fmt
+uses 
+.B fmt
+as the TeX processor
+.TP
+.B -m
+stops processing at the pmx file
+.TP
+.B -t
+stops processing at the tex/mid files
 .TP
 .B -s 
 stops processing at the dvi file
@@ -96,30 +113,36 @@ stops processing at the dvi file
 stops processing at the ps file
 .TP 
 .B -i
-retain intermediate files
+retain intermediate and log files
 .TP
 .B -1
-one-pass [pdf][la]tex processing
+one-pass [pdf][la]tex processing; i.e., without calling 
+.B musixflx
 .TP
 .B -x
 call 
 .BR makeindex (1)
 to update index database
 .TP
-.B -a
-force 
-.BR autosp (1)
-preprocessing; implied if the file has .aspc extension.
-.TP
 .B -f
-default processing 
-.TP 0
-Options affect processing of all succeeding MusiXTeX files unless changed by another option.
-Option flags cannot be combined; e.g., use 
-.B -l -x 
-rather than 
-.BR -lx .
+restore default processing 
+.TP
+.B -q
+quiet mode (only musixtex's own messages); other messages are diverted to a temporary file.
+If an error occurs at the TeX stage, processing halts immediately and the tail of the log file is sent to stderr.
 
+
+.TP 0
+Options affect processing of all succeeding MusiXTeX files unless changed by another option.  Option flags cannot be combined; e.g., use \fB -l -x \fP rather than \fB -lx\fP.
+
+Note that four TeX engines are available via the -l and -p options:
+.TP
+    etex      default
+    latex     -l
+    pdfetex   -p
+    pdflatex  -l -p
+.TP 0
+The -F option allows any engine to be named. In that case, an attempt is made to deduce implied -l and -p settings from the presence or absence of the strings 'latex' and 'pdf' in the name of the engine. If this is not correct, the user should explicitly specify the appropriate option.
 .SH SEE ALSO
 .BR autosp (1),
 .BR etex (1),
@@ -130,9 +153,10 @@ rather than
 .BR musixflx (1),
 .BR dvipdfm (1),
 .BR dvips (1),
-.BR ps2pdf (1).
-.br
-musixdoc.pdf
-
+.BR pmxab (1),
+.BR pmxchords (1)
+.BR prepmx (1),
+.BR ps2pdf (1)
+and musixdoc.pdf.
 .SH AUTHOR 
 This manual page was written by Bob Tennent <rdt@cs.queensu.ca>.

@@ -1,0 +1,6 @@
+Changes from MusiXTeX 119 to 120:
+
+2015-12-13
+
+  re-defined tremolo commands \trml, \trmu, etc. to allow for numerical
+  pitches 
