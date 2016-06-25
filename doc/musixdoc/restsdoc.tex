@@ -33,12 +33,24 @@ and \keyindex{PAUSe}, which yield:
 \endextract
 \end{music}
  %\check
+\noindent
+The command \keyindex{Hpause} $p$ $n$ provides an arbitrary length pause at pitch
+$p$ and of length $n$ \keyindex{noteskip}.  For example,
+\verb|\NOTes\Hpause4{0.83}\en|
+produces
+
+\begin{music}
+\nostartrule
+\startextract
+\NOTes\Hpause4{0.83}\en
+\endextract
+\end{music}
 
 
  \section{Raising rests and non-spacing rests}\index{raising rests}
 All the
-previous rests except \keyindex{pausep} and
-\keyindex{hpausep} are \ital{hboxes}, which means that
+previous rests (except \keyindex{pausep},
+\keyindex{hpausep} and \keyindex{Hpause})  are \ital{hboxes}, which means that
 they can be vertically offset if needed using the
 standard \TeX\ command \keyindex{raise}. For example:
 
@@ -65,8 +77,8 @@ for which the coding is
 \notes\raise-4\Interligne\rlap\ds\qb0f\tqu0g\en
 \end{verbatim}
 
-In addition, two macros are available to put a whole or
-half rest above or below the staff. The ordinary \verb|\pause| or
+In addition, four special macros are available to raise or lower a whole or
+half rest. The ordinary \verb|\pause| or
 \verb|\hpause| cannot be used outside the staff because a short horizontal line
 must be added to distinguish between the whole and the half rest. The commands,
 which are non-spacing\footnote{Editor's note: The reason for having defined these
@@ -84,91 +96,136 @@ as non-spacing is not obvious}, are
   \hbox to10pt{\lifthpausep{-1}\hss} raised the same way.
  \end{itemize}
  %\check
-
  \section{Bar-centered rests}\label{barcentered}
 Sometimes it is necessary to place a rest (or some other symbols) exactly in the middle
-of a bar. This can usually be done with combinations of the commands
+of the notes region of a bar
+(i.e., excluding any initial clef and key or time signatures).
+This can usually be done with combinations of the commands
 \keyindex{atnextbar},
 \keyindex{centerbar},
 \keyindex{cPAUSe},
 \keyindex{cPAuse},
 \keyindex{cpause},
 \keyindex{chpause},
+\keyindex{cHpause} $n$,
 as demonstrated in the following example:
 
 \begin{music}
 \generalmeter\meterC
+\generalsignature{3}
 \setclef1\bass
 \setstaffs1{2}
 \parindent0pt
 \startextract
 \NOtes|\qa{cegj}\en
-\def\atnextbar{\znotes\centerbar{\cpause}|\en}\bar
+\def\atnextbar{\znotes\centerbar{\cpause}|\en}%
+\generalsignature{-3}\changecontext
 \NOTes\ha{Nc}|\en
-\def\atnextbar{\znotes|\centerbar{\cpause}\en}\bar
+\def\atnextbar{\znotes|\centerbar{\cpause}\en}%
+\setclef1\alto\changeclefs%
+\generalmeter{\meterfrac21}\changecontext%
+\NOTEs\wh d\pause|\en
+\def\atnextbar{\znotes|\centerbar{\cPAuse}\en}%
+\bar
 \NOTEs|\en
-\def\atnextbar{\znotes\centerbar{\cPAuse}|\centerbar{\cPAuse}\en}%
+\def\atnextbar{\znotes\centerbar{\cHpause{12}}|\centerbar{\cHpause{12}}\en}%
 \endextract
 \end{music}
 \noindent with the coding
 \begin{verbatim}
 \generalmeter\meterC
+\generalsignature{3}
 \setclef1\bass
 \setstaffs1{2}
 \parindent0pt
 \startextract
 \NOtes|\qa{cegj}\en
-\def\atnextbar{\znotes\centerbar{\cpause}|\en}\bar
+\def\atnextbar{\znotes\centerbar{\cpause}|\en}%
+\generalsignature{-3}\changecontext
 \NOTes\ha{Nc}|\en
-\def\atnextbar{\znotes|\centerbar{\cpause}\en}\bar
+\def\atnextbar{\znotes|\centerbar{\cpause}\en}%
+\setclef1\alto\changeclefs%
+\generalmeter{\meterfrac21}\changecontext%
+\NOTEs\wh d\pause|\en
+\def\atnextbar{\znotes|\centerbar{\cPAuse}\en}%
+\bar
 \NOTEs|\en
-\def\atnextbar{\znotes\centerbar{\cPAuse}|\centerbar{\cPAuse}\en}%
+\def\atnextbar{\znotes\centerbar{\cHpause{12}}|\centerbar{\cHpause{12}}\en}%
 \endextract
-\end{verbatim}
+\end{verbatim}\noindent
+
 The following abbreviations are provided:
 \begin{quote}
 \begin{tabular}{lcl}
 \keyindex{centerpause}& for & \verb|\centerbar{\cpause}|\\
 \keyindex{centerhpause}& for & \verb|\centerbar{\chpause}|\\
 \keyindex{centerPAuse}& for & \verb|\centerbar{\cPAuse}|\\
-\keyindex{centerPAUSe}& for & \verb|\centerbar{\cPAUSe}|
+\keyindex{centerPAUSe}& for & \verb|\centerbar{\cPAUSe}|\\
+\keyindex{centerHpause} $n$ & for & \verb|\centerbar{\cHpause| $n$\verb|}|
 \end{tabular}
 \end{quote}
 Material other than these rests may be used as arguments to
 \verb|\centerbar|, as in:\\ 
 \begin{music}
+\nostartrule
 \generalmeter\meterC
 \parindent0pt
 \startextract
+\NOTEs\sk\hqsk\en\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont7}}%
+\centerbar{\cPAUSe\off{2\elemskip}\cPAuse\off{2\elemskip}\cpause}\en}\bar
 \NOtes\ql{ghij}\en
 \def\atnextbar{\znotes\centerbar{\liftpause2}\en}\bar
 \NOTes\en
 \def\atnextbar{\znotes\centerbar{\duevolte}\en}\bar
 \NOTes\en
-\def\atnextbar{\znotes\loffset{0.6}{\centerbar{\Fermataup l\wh j}}\en}\bar
-\NOTEs\en\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont7}}%
-\centerbar{\cPAUSe\off{2.5\elemskip}\cPAuse\off{2.5\elemskip}\cpause}\en}\bar
-\NOTEs\Hpause4{0.83}\en
-\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont10}}\en}\endextract
+\def\atnextbar{\znotes\loffset{0.7}{\centerbar{\Fermataup l\wh j}}\en}
+\endextract
 \end{music}
 \noindent for which the coding is:
-\pagebreak%
 \begin{verbatim}
 \generalmeter\meterC
 \parindent0pt
 \startextract
+\NOTEs\en\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont7}}%
+\centerbar{\cPAUSe\off{2\elemskip}\cPAuse\off{2\elemskip}\cpause}\en}\bar
 \NOtes\ql{ghij}\en
 \def\atnextbar{\znotes\centerbar{\liftpause2}\en}\bar
 \NOTes\en
 \def\atnextbar{\znotes\centerbar{\duevolte}\en}\bar
 \NOTes\en
-\def\atnextbar{\znotes\loffset{0.6}{\centerbar{\Fermataup l\wh j}}\en}\bar
-\NOTEs\en\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont7}}%
-\centerbar{\cPAUSe\off{2.5\elemskip}\cPAuse\off{2.5\elemskip}\cpause}\en}\bar
-\NOTEs\Hpause4{0.83}\en
-\def\atnextbar{\znotes\centerbar{\ccn{9}{\meterfont10}}\en}\endextract
+\def\atnextbar{\znotes\loffset{0.7}{\centerbar{\Fermataup l\wh j}}\en}
+\endextract
 \end{verbatim}
-Note that, for the off-center command
-\verb|\wh|\ldots,
-it has been necessary to use \keyindex{loffset} to correct the centering. 
+In the last measure, 
+it has been necessary to use \keyindex{loffset} to correct the centering of 
+the off-center command
+\verb|\wh|\ldots.
 
+%To get proper positioning of \keyindex{centerbar} material before
+%a clef change, you may use an invisible bar line as in
+%\begin{quote}
+%\begin{verbatim}
+%\setclef1\bass
+%\startextract%
+%\NOTEs\Hpause4{0.83}\en
+%\def\atnextbar{\znotes\centerbar{\ccn9{\meterfont{4}}}\en}%
+%\qspace\setemptybar\bar%  invisible bar line
+%\setclef1\alto\zchangeclefs\bar%
+%\NOtes\qa{abcd}\en
+%\endextract
+%\end{verbatim}
+%\end{quote}
+%which produces
+%
+%\begin{music}
+%\nostartrule
+%\nobarnumbers
+%\setclef1\bass
+%\startextract%
+%\NOTEs\Hpause4{0.83}\en
+%\def\atnextbar{\znotes\centerbar{\ccn9{\meterfont{4}}}\en}%
+%%\qspace\setemptybar\bar%  invisible bar line
+%\setclef1\alto\changeclefs\bar%
+%\NOtes\qa{abcd}\en
+%\endextract
+%\end{music}

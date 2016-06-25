@@ -111,7 +111,7 @@ Note the comments between the code lines.
 \end{music}
 
 
-\section{Clefs}\label{treblelowoct}
+\section{Clefs}\label{treblelowoct}\label{ClefChanges}
 
 Macros that define clefs have already been discussed in Section~\ref{whatspecify}. By way of review, here are all of the possible clefs
 (applied to the lowest staff):
@@ -142,10 +142,10 @@ Macros that define clefs have already been discussed in Section~\ref{whatspecify
 %avre
 
 Just as with key signatures, these commands only \ital{prepare} for clef changes.
-To \ital{activate} them, any of the first eleven  commands listed in Section~\ref{contextintro} could be used. However, one should keep in mind that
+To \ital{activate} them, any of the first eleven  commands listed in Section~\ref{contextintro} could be used. However, one should keep in mind that,
 according to modern conventions, a clef change at a bar line is posted
-before the bar line, while for example \verb|\changecontext| would post it
-after the bar line. In part for this reason, we have the special command
+\emph{before} the bar line, whereas, for example, \verb|\changecontext|, would post it
+\emph{after} the bar line. In part for this reason, we have the special command
 \keyindex{changeclefs}. It can be used anywhere outside
 \verb+\notes...\en+ to activate a clef change and insert an amount of
 horizontal space to accommodate the new clef symbol(s), without printing a
@@ -211,6 +211,51 @@ Here are some examples of clef changes:
 
 \noindent Of course the examples in the last two bars are contrary
 to accepted practice.
+
+If \keyindex{atnextbar} is being used to center material and new clefs before
+the bar line should be 
+excluded from the ``notes'' region within which material is centered,
+you may use the command \keyindex{Changeclefs}, as in the following:
+
+\begin{music}
+\nobarnumbers
+\nostartrule
+\generalmeter{\meterC}
+\startextract%
+\NOTEs\en
+\def\atnextbar{\znotes\centerHpause{11}\en}%
+\setclef1\bass\Changeclefs%
+\setleftrepeat%
+\generalmeter{\allabreve}%
+\changecontext%
+\NOTEs\en
+\def\atnextbar{\znotes\centerHpause{12}\en}%
+\setclef1\treble\Changeclefs%
+\setrightrepeat\bar%
+\NOTEs\en
+\def\atnextbar{\znotes\centerHpause{13}\en}%
+\endextract
+\end{music}\noindent
+which was coded as
+\begin{quote}
+\begin{verbatim}
+\generalmeter{\meterC}
+\startextract%
+\NOTEs\en
+\def\atnextbar{\znotes\centerHpause{11}\en}%
+\setclef1\bass\Changeclefs%
+\setleftrepeat%
+\generalmeter{\allabreve}%
+\changecontext%
+\NOTEs\en
+\def\atnextbar{\znotes\centerHpause{12}\en}%
+\setclef1\treble\Changeclefs%
+\setrightrepeat\bar%
+\NOTEs\en
+\def\atnextbar{\znotes\centerHpause{13}\en}%
+\endextract
+\end{verbatim}
+\end{quote}
 
 Clef changes initiated with the \verb|\setclef| command have several features
 in common. When activated after the beginning of the piece, the printed symbol
@@ -324,7 +369,6 @@ nonsense; \verb|\resetclefsymbols| puts matters in order at (6) and (7).
 \noindent This is the code:
 
 \begin{quote}\begin{verbatim}
-\begin{music}\nostartrule
 \instrumentnumber1\setclef1\bass
 \startpiece
 \notes\zchar{-5}{1}\qu H\en\setclef1\treble\changeclefs
@@ -423,4 +467,32 @@ in a single staff.
 \setclef1\treble\zchangeclefs\changecontext
 \Notes\qu k&\cu{de}|\qu e\en
 \endextract
+\end{music}
+
+\section{Changes at the end of a system}
+It is conventional music-typesetting practice to indicate changes of clef, time signature,
+and key signature that apply to the start of a \emph{new} system
+also at the end of the previous system, as in the following:
+
+\begin{music}
+\nobarnumbers
+\setstaffs12
+\setclef{1}{\bass}
+\generalmeter{\meterfrac44}
+\generalsignature{+2}
+\startextract%
+\Notes\wh K|\qa{fghi}\en
+\setclef{1}{66}\changeclefs%
+\generalmeter{\meterfrac34}%
+\generalsignature{-1}%
+\Changecontext%
+\zendextract%
+\generalsignature{-1}
+\setclef{1}{66}
+\generalmeter{\meterfrac34}
+\startextract%
+\NOtes\ha{.K}|\qa{Mad}\en%
+\bar%
+\Notes\ha{.K}|\qa{Mad}\en%
+\endextract%
 \end{music}

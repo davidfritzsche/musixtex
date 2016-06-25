@@ -241,11 +241,11 @@ generally, to switch to an arbitrary instrument $n$, use
 of the current instrument, use \keyindex{selectstaff}\verb|{|$n$\verb|}|. In the
 latter case if $n$ exceeds the number of staves defined for the instrument, you
 will receive an error message. You can enter part of a successive voice on
-\ital{same} staff by using \verb|\selectstaff{|$n$\verb|}| with $n$ for
+the \ital{same} staff by using \verb|\selectstaff{|$n$\verb|}| with $n$ for
 the \ital{current} staff.
 
 
-\section{Automatic Note Spacing}
+\section{Automatic note spacing}
 \label{autosp}
 
 A preprocessor called \texttt{autosp} automates the generation 
@@ -264,6 +264,11 @@ For example, from the input
 \begin{verbatim}
   \Notes\qa J\sk\qa K\sk&\ca l\qa m\sk\ca n\en
 \end{verbatim}
+As an option, \emph{all} note-spacing commands (except \verb|\znotes|
+and \verb|\vnotes|) will be processed similarly; this is useful for correcting
+the spacing in single-instrument parts extracted from a multi-instrument score;
+see Section~\ref{musixtnt}.
+
 The \texttt{autosp} package can be found at 
 the \href{http://icking-music-archive.org/software/autosp/autosp.zip}
 {\underline{Werner Icking Music Archive}}

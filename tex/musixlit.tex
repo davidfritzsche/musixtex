@@ -17,7 +17,7 @@
 %   Boston, MA 02111-1307, USA.
 %
 
-\immediate\write16{MusiXLITurgical 0.36\space<1 March 1995>}%
+\immediate\write16{MusiXLITurgical 0.37\space<23 Dec 2015>}%
 
 \ifx\undefined\oldGclef \else \endinput \fi
 
@@ -35,11 +35,14 @@
 \def\cnhu{\def\q@u{\musixchar101}\@nq}
 \def\cnhl{\def\q@u{\musixchar102}\@nq}
 
-\def\Hpause#1#2{\zcharnote{#1}{\def\s@r{%
-  \vrule\@width.6\p@\@height1\h@lf\internote\@depth1\h@lf\internote}%
-  \s@r
-  \vrule\@width#2\noteskip\@height\h@lf\internote\@depth\h@lf\internote
-  \s@r}}
+
+% Moved to musixtex.tex.  RDT 2015-12-23
+%\def\Hpause#1#2{\zcharnote{#1}{\def\s@r{%
+%  \vrule\@width.6\p@\@height1\h@lf\internote\@depth1\h@lf\internote}%
+%  \s@r
+%  \vrule\@width#2\noteskip\@height\h@lf\internote\@depth\h@lf\internote
+%  \s@r}}
+
 \def\Hlonga#1#2{\zcharnote{#1}{\def\s@r{%
   \vrule\@width.6\p@\@height1\h@lf\internote\@depth1\h@lf\internote}%
   \s@r

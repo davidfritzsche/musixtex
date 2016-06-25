@@ -103,7 +103,7 @@ stems or beams above or below.
  \section{Font-based slur termination}
 Font-based slurs that are not forced to be simple must be terminated by an explicit
 command right before the last note under the slur. There are termination
-commands analogous to each of the initiation commands alread presented. They
+commands analogous to each of the initiation commands already presented. They
 are summarized in the following table:
 \begin{center}
   \begin{tabular}{ll}
@@ -118,12 +118,29 @@ are summarized in the following table:
 
 \noindent All of these command have two parameters, $n$ and $p$.
 
-These specific termination macros are not restricted to being used with their
-initiation counterpart. A slur
-started in one sense can be terminated in another. For example, a slur beginning
-as a ``beam'' slur may be terminated as a normal slur. This would be achieved
-using the macro pair \verb|\ibslur...\tslur|.
+These specific termination macros are not restricted to
+being used with their initiation counterpart. A slur started
+in one sense can be terminated in another. For example, a
+slur beginning as a ``beam'' slur may be terminated as a
+normal slur, or \emph{vice versa}. These would be achieved using macro pairs
+\verb|\ibslur...\tslur...| or \verb|\islur...\tbslur...|, respectively; however, it may be necessary
+to adjust the vertical position of the slur termination. For example, 
 
+\begin{music}
+\startextract
+\Notes\ibsluru1g\qa g\ha l\sk\tslur1e\zq g\zq i\qu k\en
+\Notes\islurd1h\qu h\ha f\sk\tbslurd1c\zq h\zq j\ql l\en
+\endextract
+\end{music}\noindent
+has been coded as follows:
+\begin{quote}
+\begin{verbatim}
+\startextract
+\Notes\ibsluru1g\qa g\ha l\sk\tslur1e\zq g\zq i\qu k\en
+\Notes\islurd1h\qu h\ha f\sk\tbslurd1c\zq h\zq j\ql l\en
+\endextract
+\end{verbatim}
+\end{quote}
  \section{Font-based ties} Font-based ties will have the same shapes as
 ordinary font-based slurs of the same length between notes of equal pitch,
 but there are two important distinctions:

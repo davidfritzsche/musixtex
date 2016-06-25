@@ -47,6 +47,13 @@ virtual note at pitch level {\tt i}.
 Both types of commands are non-spacing and must precede the first or last
 note under the slur.
 
+Termination macros are not restricted to being used
+with their initiation counterpart. For example, a slur
+beginning as a ``beam'' slur may be terminated as a
+normal slur, or \emph{vice versa}. These would be achieved by using macro pairs
+\verb|\ibslur...\tslur...| or \verb|\islur...\tbslur...|, respectively.
+Unlike font-based slurs, adjusting the vertical positioning of the slur termination should not be necessary.
+
 You can shift the starting or ending point slightly to the left
 or right by substituting one of the commands \keyindex{ilsluru},
 \keyindex{ilslurd}, \keyindex{irsluru},
