@@ -467,8 +467,8 @@ if it is necessary to raise or lower the tremolo indication.
 %must be alphabetic and not numeric,
 %because transposition is used to adjust the vertical position of the mini-beams.
 
- \subsection{Piano pedal commands}
-The macro \keyindex{PED} inserts a piano pedal command below the staff;
+ \section{Piano pedal commands}
+The macro \keyindex{PED} inserts a piano-pedal command below the staff;
 \keyindex{DEP}, a pedal release. Alternate symbols, the first of which
 occupies less space, are invoked with \keyindex{sPED} and \keyindex{sDEP}.
 For example,
@@ -498,8 +498,7 @@ For example,
  \NOtes|\hu k\en
  \Notes\sDEP\en
  \end{verbatim}\end{quote}
-
- The vertical position of
+The vertical position of
 \keyindex{PED}, \keyindex{sPED}, \keyindex{DEP} and \keyindex{sDEP} can be
 globally changed by redefining its elevation, which has the default
 definition \verb|\def|\keyindex{raiseped}\verb|{-5}|.
@@ -509,6 +508,112 @@ macros \keyindex{Ped}, \keyindex{sPed}, \keyindex{Dep} and \keyindex{sDep}
 in combination with \keyindex{zchar} or \keyindex{zcharnote}.
 Since the \hbox to .7cm{ \Ped\hss} symbol is rather wide, it might collide
 with adjacent bass notes. To shift it horizontally, you could use \verb|\loff{\PED}|.
+\vfill
+
+The following excerpt from \textit{Liebestr\"aume} by Franz Liszt illustrates
+a more modern approach to specifying piano-pedal usage:
+
+\begin{music}
+\smallmusicsize
+\relativeaccid
+\parindent=0pt
+\generalmeter{\meterfrac64}\generalsignature{-4}
+\nobarnumbers
+\setstaffs12\setclef1{\bass}
+\def\raiseped{-11}
+\def\qpl{\raise-2\Interligne\qp}
+\def\qpu{\raise2\Interligne\qp}
+\def\hppl{\lifthpausep{-2}}
+\startpiece\addspace\afterruleskip%
+\NOtes\zqu L\qpl|\qp\en
+\bar%
+\Notes\loff{\pdld}\ql H\sk\qpl\sk\qpl|%
+  \zhl{.c}\ds\ibu1i0\qb1{ehjh}\tqu1e\en
+\Notes\zhu{.c}\hppl|%
+  \ds\ibu1i0\qb1{ehjh}\tqu1e\en
+\bar%
+\Notes\pdlud\ql G\sk\qpl\sk\qpl|%
+  \itied1c\zhl{.c}\ds\ibu1i0\qb1{^eiji}\tqu1e\en
+\Notes\hppl\sk\sk\sk\qu c|%
+  \ttie1\zhl{c}\ds\ibu1i0\qb1{eiji}\tqu1e\en
+\stoppiece%
+\def\raiseped{-15}
+\contpiece%%
+\Notes\pdlud\ql F\sk\qpl\sk\zqu c\qpl|%
+  \zhl{c}\ds\ibu1i0\qb1{=e^hjh}\tqu1e\en
+\Notes\hppl\sk\sk\sk\qu c|%
+  \zhl{d}\ds\ibu1i0\qb1{ehjh}\tqu1e\en
+\bar%
+\Notes\pdlud\ql B\sk\qpl\sk\qpl|%
+  \zhl{.c}\ds\ibu1i0\qb1{^d^hjh}\tqu1d\en
+\Notes\zqu{M}\hppl\sk\qpu\sk\qu M|%
+  \ds\ibu1i0\qb1{dhjh}\tqu1d\en
+\bar%
+\Notes\zmidstaff{$\cdots$}\sk\pdlu\sk|\en
+\endpiece%
+\end{music}
+\pagebreak
+This has been coded using the following commands:
+\begin{quote}
+\begin{tabular}{lll}
+\keyindex{pdld}& pedal down & \huge$\llcorner$\\
+\keyindex{pdlu}& pedal up & \huge$\lrcorner$\\
+\keyindex{pdlud} & pedal up and immediately down & \_\raisebox{2pt}{$\!\bigwedge\!$}\_ 
+\end{tabular}
+\end{quote}
+The elevation is determined by the value of \keyindex{raiseped}. 
+Here is how the excerpt may be coded:
+\begin{quote}
+\begin{footnotesize}
+\begin{verbatim}
+\smallmusicsize\relativeaccid\nobarnumbers
+\generalmeter{\meterfrac64}
+\generalsignature{-4}
+\setstaffs12\setclef1{\bass}
+\def\raiseped{-11}
+\def\qpl{\raise-2\Interligne\qp}
+\def\qpu{\raise2\Interligne\qp}
+\def\hppl{\lifthpausep{-2}}
+\startpiece\addspace\afterruleskip%
+\NOtes\zqu L\qpl|\qp\en
+\bar%
+\Notes\loff{\pdld}\ql H\sk\qpl\sk\qpl|%
+  \zhl{.c}\ds\ibu1i0\qb1{ehjh}\tqu1e\en
+\Notes\zhu{.c}\hppl|%
+  \ds\ibu1i0\qb1{ehjh}\tqu1e\en
+\bar%
+\Notes\pdlud\ql G\sk\qpl\sk\qpl|%
+  \itied1c\zhl{.c}\ds\ibu1i0\qb1{^eiji}\tqu1e\en
+\Notes\hppl\sk\sk\sk\qu c|%
+  \tltie1\zhl{c}\ds\ibu1i0\qb1{eiji}\tqu1e\en
+\stoppiece%
+\def\raiseped{-15}
+\contpiece%
+\Notes\pdlud\ql F\sk\qpl\sk\zqu c\qpl|%
+  \zhl{.c}\ds\ibu1i0\qb1{=e^hjh}\tqu1e\en
+\Notes\hppl\sk\sk\sk\qu c|%
+  \zhl{d}\ds\ibu1i0\qb1{ehjh}\tqu1e\en
+\bar%
+\Notes\pdlud\ql B\sk\qpl\sk\qpl|%
+  \zhl{c}\ds\ibu1i0\qb1{^d^hjh}\tqu1d\en
+\Notes\zqu{M}\hppl\sk\qpu\sk\qu M|%
+  \ds\ibu1i0\qb1{dhjh}\tqu1d\en
+\bar%
+\Notes\zmidstaff{$\cdots$}\sk\pdlu\sk|\en
+\endpiece
+\end{verbatim}
+\end{footnotesize}
+\end{quote}
+
+\noindent
+The following ``mixed'' patterns are also supported:
+\begin{quote}
+\begin{verbatim}
+\PED ... [\pdlud].. ... \pdlu
+
+\sPED ... [\pdlud].. ... \pdlu
+\end{verbatim}
+\end{quote}
 
 \section{Alphabetic dynamic marks}
  Conventional dynamic symbols

@@ -25,14 +25,25 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{20}
+\def\mxminorvernumber{21}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2015-12-13}
+\def\mxdate{2016-01-30}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.21
+
+% RDT adjusted the offsets and/or vertical positions for some tremolos
+% RDT moved \lastbarpos\lin@pos after calls to \Writ@meters 
+%   to correct \centerbar positioning
+% RDT copied the definition of \Hpause from musixlit.tex
+% RDT introduced \Changeclefs, \cHpause and \centerHpause
+% RDT replaced \smalltype\it by \txtfont in octave clef commands 
+% RDT moved definitions of \txtfont into \comput@fonts
+% RDT added support for piano-pedal bracket notation
 
 % version 1.20
 
@@ -41,8 +52,10 @@
 
 % version 1.19:
 
-% RDT corrected typos in the definition of \comput@fonts affecting ppff fonts for \Largemusicsize
+% RDT corrected typos in the definition of \comput@fonts 
+%   affecting ppff fonts for \Largemusicsize
 % RDT introduced definitions for tremolo commands \trml, \trmu, etc. 
+% RDT turned off lyrics for \metron and \metronequiv notes
 
 % version 1.18:
 
@@ -1355,6 +1368,9 @@
 % terminate slur #1 reference number #2 end note
 % the various types only influence the horizontal offset, if you want to
 % terminate a \ibslur with a \tslur it becomes a little bit tricky
+%%
+%% RDT:  the "trick", whatever it is, doesn't seem to be working !!!!!
+%% e.g. \Notes\ibsluru1g\qa g\ha l\sk\zq g\zq i\tslur1k\qu k\en
 
 \def\tslur{\t@slur\h@lf}
 \def\tsslur{\t@slur{-\p@ne}}
@@ -1582,6 +1598,10 @@
     \let\smallppff\ppfftwelve
     \let\normppff\ppffsixteen
     \let\medppff\ppfftwenty
+    \def\txtfont{\ifdim\internote<.95\Internote \sevenit
+    \else\ifdim\internote<1.19\Internote \eightit
+    \else\ifdim\internote<1.43\Internote \tenit
+    \else\twelveit\fi\fi\fi}%
   \else\ifnum\musicsize=\@xxiv
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -1602,6 +1622,10 @@
     \let\smallppff\ppfftwenty
     \let\normppff\ppfftwentyfour
     \let\medppff\ppfftwentynine
+    \def\txtfont{\ifdim\internote<.95\Internote \eightit
+    \else\ifdim\internote<1.19\Internote \tenit
+    \else\ifdim\internote<1.43\Internote \twelveit
+    \else\frtit\fi\fi\fi}%
   \else\ifnum\musicsize=\@xxix
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -1624,6 +1648,10 @@
     \let\smallppff\ppfftwentyfour
     \let\normppff\ppfftwentynine
     \let\medppff\ppfftwentynine
+    \def\txtfont{\ifdim\internote<.95\Internote \tenit
+    \else\ifdim\internote<1.19\Internote \twelveit
+    \else\ifdim\internote<1.43\Internote \frtit
+    \else\svtit\fi\fi\fi}%
 \else
     \ifnum\musicsize=\tw@nty
     \else\ifnum\musicsize=\z@
@@ -1650,6 +1678,10 @@
     \let\smallppff\ppffsixteen
     \let\normppff\ppfftwenty
     \let\medppff\ppfftwentyfour
+    \def\txtfont{\ifdim\internote<.95\Internote \sevenit
+    \else\ifdim\internote<1.19\Internote \eightit
+    \else\ifdim\internote<1.43\Internote \tenit
+    \else\twelveit\fi\fi\fi}%
 \fi\fi\fi}%
 
 \def\comput@specifics{\comput@fonts\comput@sizes}
@@ -1976,11 +2008,12 @@
                   \noexpand\startpiece }%
                 \fi
   \barsinpi@c@\z@ \piece@begina \leavevmode \piece@beginb
-  \piece@beginc \fil@begin \Writ@meters
+  \piece@beginc \fil@begin \Writ@meters\lastbarpos\lin@pos %%% 1.21: added \lastbarno setting
   \let\volta@set\empty  % tells the kind of volta setting at next bar
   \let\volta@cut\empty  % flag to tell that a volta has been cut at line end
   \let\volta@type\empty % the current volta setting (same defs as \volta@set)
   \let\endvolta@set\empty  % tells the kind of volta closing at next bar
+  \let\pdl@cut\empty % flag to signal a pedal rule has been cut at the end of a line % 1.21 RDT
 }
 
 \let\everystaff\empty
@@ -1994,7 +2027,7 @@
   \comp@internote \leavevmode \barsinlin@\z@ }
 
 \def\contpiece{\noindent \piece@conta \writ@staffs \piece@beginc
-  \Writ@meters \wbarno@x \addspace\afterruleskip
+  \Writ@meters \wbarno@x\lastbarpos\lin@pos\addspace\afterruleskip %%% 1.21: added \lastbarno setting
 }
 
 % like contpiece but with indentation (parindent) and instrument names
@@ -2002,7 +2035,8 @@
 
 \let\fil@indent\empty
 \def\Contpiece{\piece@conta \piece@beginb \fil@indent \piece@beginc
-  \Writ@meters}
+  \Writ@meters\lastbarpos\lin@pos}  %%% 1.21: added \lastbarno setting
+
 
 %%% end score
 
@@ -2011,6 +2045,12 @@
 
 \def\z@suspend{%
   \z@suspend@autoflag % used in musixcpt only
+% cut pedal rule  1.21 RDT
+   \ifdim\pdl@pos=\z@\else%
+     \noport@@\z@
+     \znotes\selectinstrument{\pdl@instr}\selectstaff{\pdl@staff}\pdlc@\en%   
+     \global\def\pdl@cut{\@one}%
+   \fi
 % cutvolta
   \write@volta@hrule
   \ifx\volta@type\tw@\let\volta@set\tw@ \let\volta@type\empty
@@ -2073,7 +2113,8 @@
   \let\T@bil\iftrue \let\everyst@ff\everystaff \let\fil@spc\empty
   \let\fil@termskip\empty \let\fil@signs\empty \let\fil@barno\empty
   \let\leftrepeat\leftrepeat@II \let\leftrightrepeat\leftrightrepeat@II
-  \piece@beginc\Writ@meters\addspace\afterruleskip}
+  \piece@beginc\Writ@meters\lastbarpos\lin@pos\let\pdl@cut\empty\addspace\afterruleskip}
+                            %%% 1.21: added \lastbarno and \pdl@cut settings 
 
 % enable left and right extracts (e.g. for footnotes)
 
@@ -2126,7 +2167,7 @@
 \def\writethebarno{\fontbarno\the\barno\kernm\qn@width}
 \def\fontbarno{\it}
 
-\def\wbarno@x{\lastbarpos\lin@pos
+\def\wbarno@x{%%%% version 1.21: RDT moved \lastbarpos\lin@pos after calls to \Writ@meters
   \ifx\volta@set\empty
     \n@iii\barno \divide\n@iii\freqbarno\relax
     \ifnum\n@iii=\lastbarno
@@ -2141,6 +2182,10 @@
         \raise\y@\llap{\writethebarno}\fi
     \fi
     \write@volta
+  \fi
+  \ifx\pdl@cut\empty    % 1.21 RDT
+  \else% pedal rule was cut at the end of the previous line
+     \global\pdl@pos\lin@pos\let\pdl@cut\empty  % reset \ped@pos
   \fi
   \b@rrul@		%+simick
   \n@iii\barno \divide\n@iii\freqbarno\relax \lastbarno\n@iii }
@@ -2303,7 +2348,8 @@
 \let\Writ@newsigns\empty
 
 \def\updat@context{\writ@newclefs
-  \T@bil \wbarno@x\Writ@newsigns\Writ@meters\addspace\afterruleskip
+  \T@bil \wbarno@x\Writ@newsigns\Writ@meters\lastbarpos\lin@pos\addspace\afterruleskip
+%%% 1.21: added \lastbarno setting
   \else\Writ@newsigns\z@suspend\contpiece \fi}
 
 \def\changecontext{\showallbarrules\n@wbar\updat@context}
@@ -2345,7 +2391,7 @@
 % \write@volta@hrule									%-simick
 }%
 
-\def\@bar{\n@wbar\wbarno@x\addspace\afterruleskip}
+\def\@bar{\n@wbar\wbarno@x\lastbarpos\lin@pos\addspace\afterruleskip}
 
 \def\zn@wbar{\t@rmskip\advance\barsinpi@c@\@ne \let\z@sw\@ne}
 
@@ -2673,24 +2719,30 @@
 \def\smallbassclef{\keychar74}
 \def\smallaltoclef{\keychar76}
 
-\def\trebleoct{\trebleclef\raise 9\internote\hbox\@to\z@{\smalltype\it\kern -1.8\Interligne 8\hss}}
-\def\bassoct{\bassclef\raise 2\internote\hbox\@to\z@{\smalltype\it\kern -2.3\Interligne 8\hss}}
-\def\treblelowoct{\trebleclef\raise -7\internote\hbox\@to\z@{\smalltype\it\kern -2.3\Interligne 8\hss}}
-\def\basslowoct{\bassclef\raise -6\internote\hbox\@to\z@{\smalltype\it\kern -2.5\Interligne 8\hss}}
+%% version 1.21: replaced \smalltype\it by \txtfont (size-dependent) 
+%%   and adjusted the kerns  RDT
+%%
+
+\def\trebleoct{\trebleclef\raise 9\internote\hbox\@to\z@{\txtfont\kern -3.6\internote 8\hss}}
+\def\bassoct{\bassclef\raise 2\internote\hbox\@to\z@{\txtfont\kern -4.6\internote 8\hss}}
+\def\treblelowoct{\trebleclef\raise -7.5\internote\hbox\@to\z@{\txtfont\kern -4.6\internote 8\hss}}
+\def\basslowoct{\bassclef\raise -6\internote\hbox\@to\z@{\txtfont\kern -5.0\internote 8\hss}}
 
 % [version 1.15] reqest from Hermann Hinsch
-\def\smalltrebleoct{\smalltrebleclef\raise 7.2\internote\hbox\@to\z@{\smalltype\it\kern -1.8\Interligne 8\hss}}
-\def\smalltreblelowoct{\smalltrebleclef\raise-6.8\internote\hbox\@to\z@{\smalltype\it\kern -2.1\Interligne 8\hss}} 
-\def\smallbassoct{\smallbassclef\raise 2\internote\hbox\@to\z@{\smalltype\it\kern -2.0\Interligne 8\hss}}
-\def\smallbasslowoct{\smallbassclef\raise-6.2\internote\hbox\@to\z@{\smalltype\it\kern -2.2\Interligne 8\hss}}
+\def\smalltrebleoct{\smalltrebleclef\raise 7.2\internote\hbox\@to\z@{\txtfont\kern -3.6\internote 8\hss}}
+\def\smalltreblelowoct{\smalltrebleclef\raise-6.8\internote\hbox\@to\z@{\txtfont\kern -4.2\internote 8\hss}} 
+\def\smallbassoct{\smallbassclef\raise 2\internote\hbox\@to\z@{\txtfont\kern -4.0\internote 8\hss}}
+\def\smallbasslowoct{\smallbassclef\raise-6.5\internote\hbox\@to\z@{\txtfont\kern -4.4\internote 8\hss}}
 % [version 1.15] reqest from Hermann Hinsch: end
 
 
 \newskip\clef@skip
 
 \def\changeclefs{\t@rmskip\writ@newclefs}
-
 \def\zchangeclefs{\t@rmskip\zwrit@newclefs}
+
+%%% version 1.21:  new command to call and reset \atnextbar before outputting new clefs  RDT
+\def\Changeclefs{\t@rmskip\atnextbar\let\atnextbar\empty\writ@newclefs} 
 
 % since the characters are shifted by default(Metafont) they looked
 % a little bit strange when you mix several staffstaffsizes (flushleft)
@@ -3787,10 +3839,17 @@
 \def\cPAuse{\hbox{\ccn{0}{\musixchar58}}}
 \def\cPAUSe{\hbox{\ccn{0}{\musixchar59}}}
 
+\def\cHpause#1{%  1.21 RDT
+\y@ii\lin@pos \advance\y@ii-\lastbarpos%
+\def\v@rtpart{\hbox{\vrule width.6pt height1.5\internote depth1.5\internote}}%
+\def\h@rizpart{\hbox{\vrule width0.35\y@ii height.5\internote depth.5\internote}}%
+\raise4\internote\hbox{\v@rtpart\h@rizpart\ccn5{\meterfont{#1}}\h@rizpart\v@rtpart}}%
+
 \def\centerpause{\centerbar{\cpause}}
 \def\centerhpause{\centerbar{\chpause}}
 \def\centerPAuse{\centerbar{\cPAuse}}
 \def\centerPAUSe{\centerbar{\cPAUSe}}
+\def\centerHpause#1{\centerbar{\cHpause{#1}}}
 
 \def\C@ps#1#2#3{\n@viii#3\multiply\n@viii\tw@
   \advance\n@viii#2\raise\n@viii\internote \hbox{\musixchar#1}}
@@ -3849,6 +3908,11 @@
 \def\hspp{\adv@restbox{\check@staff\ppt5\musixchar65\fi}}
 \def\qqspp{\adv@restbox{\check@staff\ppt5\musixchar66\fi}}
 
+% copied from musixlit.tex:  version 1.21 RDT
+
+\def\Hpause#1#2{\zcharnote{#1}{\def\s@r{%
+\vrule\@width.6\p@\@height1\h@lf\internote\@depth1\h@lf\internote}\s@r%
+\vrule\@width#2\noteskip\@height\h@lf\internote\@depth\h@lf\internote\s@r}}
 
 %%% accidentals
 
@@ -4095,13 +4159,74 @@
 \def\raiseped{-5}
 
 \def\sPed{\musixchar34}
-\def\sPED{\zchar\raiseped\sPed}
+\def\sPED{%
+\zchar\raiseped\sPed%
+\getcurpos\advance\y@v1.6ex\global\pdl@pos\y@v%
+\xdef\pdl@instr{\the\noinstrum@nt}\xdef\pdl@staff{\the\noport@@}%   save current instrument and staff
+}
+
 \def\Ped{\musixchar35}
-\def\PED{\zchar\raiseped\Ped}
+\def\PED{%
+\zchar\raiseped\Ped%
+\getcurpos\advance\y@v2.8ex\global\pdl@pos\y@v%
+\xdef\pdl@instr{\the\noinstrum@nt}\xdef\pdl@staff{\the\noport@@}%   save current instrument and staff
+}
 \def\Dep{\musixchar33}
-\def\DEP{\zchar\raiseped\Dep}
+\def\DEP{%
+\zchar\raiseped\Dep%
+\global\pdl@pos\z@%
+}
 \def\sDep{\musixchar104}
-\def\sDEP{\zchar\raiseped\sDep}
+\def\sDEP{%
+\zchar\raiseped\sDep%
+\global\pdl@pos\z@%
+}
+
+%%% pedal brackets  version 1.21 RDT
+%%
+%% \pdld    pedal down
+%% \pdlu    pedal up
+%% \pdlud   pedal up and immediately down
+
+\newdimen\pdl@pos % cursor position for pedal down
+\global\pdl@pos\z@
+
+\def\pdld{\hbox{\hroff{%
+\raise\raiseped\internote\hbox{\vrule height10pt depth0.5pt width0.5pt}%
+\getcurpos\global\pdl@pos\y@v%
+% save current instrument and staff
+\xdef\pdl@instr{\the\noinstrum@nt}\xdef\pdl@staff{\the\noport@@}% 
+}}}%
+
+\def\pdlu{\hbox{\hroff{\getcurpos\advance\y@v-\pdl@pos%%  compute length of horizontal rule
+\kern-\y@v%
+\raise\raiseped\internote\hbox{%
+\vrule height-0.5pt depth1pt width\y@v%
+\vrule height10pt depth0.5pt width0.5pt %% pedal up
+}}}%
+\global\pdl@pos\z@}%
+
+\def\halfwidthbigwedge{4.16666pt}%
+
+\def\pdlud{\hbox{\hroff{\getcurpos\advance\y@v-\pdl@pos%% compute length of horizontal rule
+\kern-\y@v%
+\advance\y@v-\halfwidthbigwedge
+\raise\raiseped\internote%
+\hbox{%
+\vrule height-0.5pt depth1pt width\y@v% draw horizontal rule
+\kern\halfwidthbigwedge%
+\raise1.5pt\lrlap{$\bigwedge$}%   pedal up and down
+}%
+\getcurpos\advance\y@v\halfwidthbigwedge\global\pdl@pos\y@v%
+}}}%
+
+%% cut pedal rule at line end
+%%
+%  compute length of horizontal rule
+\def\pdlc@{\getcurpos\advance\y@v-\pdl@pos%
+\kern-\y@v\raise\raiseped\internote\hbox{%
+\vrule height-0.5pt depth1pt width\y@v %% draw horizontal rule
+}}%
 
 %%% fermata
 
@@ -4219,21 +4344,26 @@
 %%% tremolos  version 1.19 RDT 
 %%% based on code by Werner Icking and Andre van Ryckeghem
 %%% version 1.20 RDT re-defined using \raise, suggested by JPC
+%%% version 1.21 
+%%%  RDT changed beam numbers to 5, suggested by JPC
+%%%  RDT adjusted the vertical positions for 16th and 32nd tremolos
 
-\def\trml#1{\raise2\internote\hbox{\loffset{0.5}{\ibl0{#1}9}\roffset{0.5}{\tbl0}}}%
-\def\trmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibu0{#1}9}\roffset{0.5}{\tbu0}}}%
-\def\trrml#1{\raise2\internote\hbox{\loffset{0.5}{\ibbl0{#1}9}\roffset{0.5}{\tbl0}}}%
-\def\trrmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibbu0{#1}9}\roffset{0.5}{\tbu0}}}%
-\def\trrrml#1{\raise2\internote\hbox{\loffset{0.5}{\ibbbl0{#1}9}\roffset{0.5}{\tbl0}}}%
-\def\trrrmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibbbu0{#1}9}\roffset{0.5}{\tbu0}}}%
+\def\trml#1{\raise2\internote\hbox{\loffset{0.5}{\ibl5{#1}9}\roffset{0.5}{\tbl5}}}%
+\def\trmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibu5{#1}9}\roffset{0.5}{\tbu5}}}%
+\def\trrml#1{\raise3\internote\hbox{\loffset{0.5}{\ibbl5{#1}9}\roffset{0.5}{\tbl5}}}%
+\def\trrmu#1{\raise-4\internote\hbox{\loffset{0.5}{\ibbu5{#1}9}\roffset{0.5}{\tbu5}}}%
+\def\trrrml#1{\raise3\internote\hbox{\loffset{0.5}{\ibbbl5{#1}9}\roffset{0.5}{\tbl5}}}%
+\def\trrrmu#1{\raise-4\internote\hbox{\loffset{0.5}{\ibbbu5{#1}9}\roffset{0.5}{\tbu5}}}%
 
 % whole notes are wider than quarter/half notes:
-\def\Trml#1{\raise2\internote\hbox{\loffset0{\ibl0{#1}9}\roffset{1.125}{\tbl0}}}%
-\def\Trmu#1{\raise-3\internote\hbox{\loffset{1.125}{\ibu0{#1}9}\roffset0{\tbu0}}}%
-\def\Trrml#1{\raise2\internote\hbox{\loffset0{\ibbl0{#1}9}\roffset{1.125}{\tbl0}}}%
-\def\Trrmu#1{\raise-3\internote\hbox{\loffset{1.125}{\ibbu0{#1}9}\roffset0{\tbu0}}}%
-\def\Trrrml#1{\raise2\internote\hbox{\loffset0{\ibbbl0{#1}9}\roffset{1.125}{\tbl0}}}%
-\def\Trrrmu#1{\raise-3\internote\hbox{\loffset{1.125}{\ibbbu0{#1}9}\roffset0{\tbu0}}}%
+% version 1.21 RDT adjusted the offsets and vertical positions 
+
+\def\Trml#1{\raise3\internote\hbox{\ibl5{#1}9\roffset{1.25}{\tbl5}}}%
+\def\Trmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibu5{#1}9}\roffset{0.15}{\tbu5}}}%
+\def\Trrml#1{\raise3\internote\hbox{\ibbl5{#1}9\roffset{1.25}{\tbl5}}}%
+\def\Trrmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibbu5{#1}9}\roffset{0.15}{\tbu5}}}%
+\def\Trrrml#1{\raise3\internote\hbox{\ibbbl5{#1}9\roffset{1.25}{\tbl5}}}%
+\def\Trrrmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibbbu5{#1}9}\roffset{0.15}{\tbu5}}}%
 
 %%% octave lines
 
@@ -4341,14 +4471,8 @@
 \let\lyricson\relax
 \let\lyricsoff\relax
 \def\metron#1#2{{\lyricsoff\stemlength\f@ur\noteskip\t@n\p@ #1 1\ = #2\lyricson}}
-\def\metronequiv#1#2{{\stemlength\f@ur\noteskip\t@n\p@ #1 1\ = #2 1}}
+\def\metronequiv#1#2{{\lyricsoff\stemlength\f@ur\noteskip\t@n\p@ #1 1\ = #2 1\lyricson}}
 
-
-\def\txtfont{%          % version 1.17 RDT
-\ifdim\internote<.95\Internote \sevenit
-\else\ifdim\internote<1.19\Internote \eightit
-\else\ifdim\internote<1.43\Internote \tenit
-\else\twelveit\fi\fi\fi}
 
 \def\txt{3}
 \def\xtuplet#1#2{\n@iv#1\advance\n@iv\m@ne {\sign@skip=\n@iv\noteskip

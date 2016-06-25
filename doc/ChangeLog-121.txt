@@ -1,0 +1,16 @@
+Changes from MusiXTeX 120 to 121:
+
+  + adjusted the offsets and/or vertical positions for some tremolos
+
+  + moved \lastbarpos\lin@pos after calls to \Writ@meters 
+    to correct \centerbar positioning
+
+  + copied the definition of \Hpause from musixlit.tex
+
+  + introduced \Changeclefs, \cHpause and \centerHpause
+
+  + replaced \smalltype\it by \txtfont in octave clef commands 
+
+  + moved definitions of \txtfont into \comput@fonts
+
+  + added support for piano-pedal bracket notation

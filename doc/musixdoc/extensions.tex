@@ -1474,21 +1474,24 @@ quarter note at pitch $p$.
  \item\keyindex{cnhu} $p$ and \keyindex{cnhl} $p$ provide a stemless square
 headed half note at pitch $p$.
 
- \item\keyindex{Hpause} $p$ $n$ provides an arbitrary length pause at pitch
-$p$ and of length $n$ \keyindex{noteskip}. However, in the first of the above
-example, this feature has been used to denote an arbitrary length note rather
-than a rest!
+%\item\keyindex{Hpause} $p$ $n$ provides an arbitrary length pause at pitch
+%$p$ and of length $n$ \keyindex{noteskip}. However, in the first of the above
+%example, this feature has been used to denote an arbitrary length note rather
+%than a rest!
 
  \item\keyindex{Hlonga} $p$ $n$ provides an arbitrary length note at pitch
 $p$ and of length $n$ \keyindex{noteskip}.
 This feature has been used to denote an arbitrary length note in the second of
-the above examples.
+the above examples;
+in the first example, \keyindex{Hpause} 
+was used to denote an arbitrary length note rather
+than a rest.
 
  \item\keyindex{shortbarrules} has been used to provide bar rules shorter than
 the staff vertical width.
 
  \item\keyindex{interbarrules} has been used to provide bars between the
-staffs, rather that over them. This is an arbitrary question of taste...
+staffs, rather that over them. This is an arbitrary question of taste\ldots
  \end{itemize}
 
  \section{musixlyr} \ixtt{musixlyr.tex}
@@ -2084,8 +2087,9 @@ Caveats:
 \item
 Some additional revisions to the source for the part might be necessary:
 \begin{itemize}
-\item  adjusting \verb|\setname1|, \verb|\setclef1|, \verb|\setsign1|, 
-\verb|\setmeter1| and \verb|\setstaffs1|  commands, as necessary;
+\item  adjusting \verb|\setname|, \verb|\setclef|, \verb|\setsign|, 
+\verb|\setmeter| and \verb|\setstaffs|  commands, as necessary; see
+Section~\ref{CodingRules} for coding techniques that will make this easier.
 
 \item  ensuring  that  tempo and roadmap markings (\textbf{D.C.}, \textbf{Fine}, etc.) are in
   the appropriate instrument segment;
@@ -2094,8 +2098,8 @@ Some additional revisions to the source for the part might be necessary:
 When the extracted part score is compiled and viewed, it  may be seen
 that horizontal-spacing commands designed for \emph{multiple} instruments can produce bad
 spacing when used for a \emph{single} instrument.  Bad spacing can be corrected  manually  but
-this is very tedious; an auxiliary program called \verb\fixmsxpart\
-automates this process (for single-staff instruments only).
+this is very tedious; an auxiliary program called \verb\autosp\
+can be used to automate this process; see Section~\ref{autosp}.
 \end{itemize}
 
 \subsection{Other applications}
