@@ -1,26 +1,28 @@
 \chapter{Font Selection and Text Placement}
 
 \section{Predefined text fonts}
-While any \TeX\ font can be used by \musixtex, there are certain styles and
-sizes that can be selected using shortcut commands.
-For ordinary text the shortcuts cover fonts of eight different
-sizes and three styles. The sizes in points are $8$, $9$, $10$, $12$, $14$, $17$, $20$, and $25$;
-the styles are from the standard Computer Modern family: Roman, bold and italic. The
-four smallest sizes are each available in all three styles, while the larger
-sizes, which are intended for titles, are available only in bold style.
-The size selection macros from smallest to biggest are \keyindex{smalltype},
+While any font with support for \TeX\ can be used by \musixtex, certain styles and
+sizes can be selected using shortcut commands.
+For ordinary text, the shortcuts cover fonts of nine different
+sizes and six styles. The sizes in points are $7$, $8$, $9$, $10$, $12$, $14$, $17$, $20$, and $25$;
+the styles are from the standard Computer Modern family: Roman, bold, italic, bold italic
+and small capitals. 
+The size selection macros from smallest to biggest are 
+\keyindex{tinytype},
+\keyindex{smalltype},
 \keyindex{Smalltype},
 \keyindex{normtype}, \keyindex{medtype}, \keyindex{bigtype},
 \keyindex{Bigtype},
-\keyindex{BIgtype} and \keyindex{BIGtype}. Following size selection, the
-style may be selected or changed using \keyindex{rm} (Roman), \keyindex{bf}
-(bold) or \keyindex{it} (italic). If no style is explicitly selected, Roman style
-will be used for the sizes \verb|\medtype| or smaller. For the larger sizes,
-only bold style is provided and no style selection is required. Thus, for example,
+\keyindex{BIgtype} and \keyindex{BIGtype}. 
+The style may be selected or changed using \keyindex{rm} (Roman), \keyindex{bf}
+(bold), \keyindex{it} (italic), \keyindex{bi} (bold italic) or 
+\keyindex{sc} (small-capitals). If no style is explicitly selected, Roman style
+will be used for the sizes \verb|\medtype| or smaller; for the larger sizes,
+bold style is the default. Thus, for example,
 eight point italic is selected with \verb|\smalltype\it|, while
 twelve point Roman is selected using \verb|\medtype\rm| or simply
 \verb|\medtype|. To change between styles while maintaining the same size,
-code \verb|\rm|, \verb|\it| or \verb|\bf| as in Plain \TeX.
+code \verb|\rm|, \verb|\it|, \verb|\bf|, \verb|\bi| or \verb|\sc|,  as in Plain \TeX.
 When \musixtex\ is started, the default font for ordinary text is
 ten point Roman, equivalent to \verb|\normtype\rm|.
 
@@ -31,8 +33,11 @@ font specification. Macros \keyindex{tinydyn}, \keyindex{smalldyn}, \keyindex{no
 used to redefine \verb|\ppff| to represent one of the smallest four.
 
 
-All predefined fonts are summarized in Table~\ref{predefinedfonts}. The second column gives an
+A selection of predefined fonts is summarized in Table~\ref{predefinedfonts}. The second column gives an
 explicit control sequence that can alternatively be used locally as a font specification.
+\font\ctinytype=cmr7
+\font\ctinytypebf=cmbx7
+\font\ctinytypeit=cmti7
 \font\csmalltype=cmr8
 \font\csmalltypebf=cmbx8
 \font\csmalltypeit=cmti8
@@ -42,9 +47,13 @@ explicit control sequence that can alternatively be used locally as a font speci
 \font\cnormtype=cmr10
 \font\cnormtypebf=cmbx10
 \font\cnormtypeit=cmti10
+\font\cnormtypebi=cmbxti10
+\font\cnormtypesc=cmcsc10
 \font\cmedtype=cmr12
 \font\cmedtypebf=cmbx12
 \font\cmedtypeit=cmti12
+\font\cmedtypebi=cmbxti10 scaled \magstep1
+\font\cmedtypesc=cmcsc10 scaled \magstep1
 \font\cbigtype=cmbx12 scaled \magstep1
 \font\cBigtype=cmbx12 scaled \magstep2
 \font\cBIgtype=cmbx12 scaled \magstep3
@@ -60,10 +69,14 @@ explicit control sequence that can alternatively be used locally as a font speci
 \font\cBIGfont=cmbx12 scaled \magstep4
 \begin{table}
 \begin{center}
+\renewcommand{\arraystretch}{1.15}
   \begin{tabular}{lll}
     \hline
     Size and style  &  Font specification & Example \\
     \hline
+    \verb|\tinytype|    & \verb|\sevenrm| & {\ctinytype    tiny Roman}  \\
+    \verb|\tinytype\bf| & \verb|\sevenbf| & {\ctinytypebf tiny bold}   \\
+    \verb|\tinytype\it| & \verb|\sevenit| & {\ctinytypeit tiny italic} \\
     \verb|\smalltype|    & \verb|\eightrm| & {\csmalltype    small Roman}  \\
     \verb|\smalltype\bf| & \verb|\eightbf| & {\csmalltypebf small bold}   \\
     \verb|\smalltype\it| & \verb|\eightit| & {\csmalltypeit small italic} \\
@@ -73,22 +86,26 @@ explicit control sequence that can alternatively be used locally as a font speci
     \verb|\normtype|     & \verb|\tenrm| & {\cnormtype     normal Roman} \\
     \verb|\normtype\bf|  & \verb|\tenbf| & {\cnormtypebf  normal bold}  \\
     \verb|\normtype\it|  & \verb|\tenit| & {\cnormtypeit  normal italic}\\
+    \verb|\normtype\bi|  & \verb|\tenbi| & {\cnormtypebi  normal bold italic}\\
+    \verb|\normtype\sc|  & \verb|\tensc| & {\cnormtypesc  normal small capitals}\\
     \verb|\medtype|      & \verb|\twelverm| & {\cmedtype      medium Roman} \\
     \verb|\medtype\bf|   & \verb|\twelvebf| & {\cmedtypebf   medium bold}  \\
     \verb|\medtype\it|   & \verb|\twelveit| & {\cmedtypeit   medium italic}\\
-    \verb|\bigtype|      & \verb|\bigfont| & {\cbigtype      big bold}     \\
-    \verb|\Bigtype|      & \verb|\Bigfont| & {\cBigtype      Big bold}     \\
-    \verb|\BIgtype|      & \verb|\BIgfont| & {\cBIgtype      BIg bold}     \\
-    \verb|\BIGtype|      & \verb|\BIGfont| & {\cBIGtype      BIG bold}     \\
-    \verb|\tinydyn|  & \verb|\ppfftwelve| & {\cppfftwelve  pp ff diminuendo}\\
-    \verb|\smalldyn|  & \verb|\ppffsixteen| & {\cppffsixteen  pp ff diminuendo}\\
-    \verb|\normdyn|   & \verb|\ppfftwenty| & {\cppfftwenty   pp ff crescendo}\\
-    \verb|\meddyn|   & \verb|\ppfftwentyfour| & {\cppfftwentyfour   pp ff crescendo}\\[.4ex]
-      ~                & \verb|\ppfftwentynine| & {\cppfftwentynine   pp ff diminuendo}\\[.4ex]
+    \verb|\medtype\bi|  & \verb|\twelvebi| & {\cmedtypebi  medium bold italic}\\
+    \verb|\medtype\sc|  & \verb|\twelvesc| & {\cmedtypesc  medium small capitals}\\
+    \verb|\bigtype|      & \verb|\frtbf| & {\cbigtype      big bold}     \\[.4ex]
+    \verb|\Bigtype|      & \verb|\svtbf| & {\cBigtype      Big bold}     \\[.4ex]
+    \verb|\BIgtype|      & \verb|\twtybf| & {\cBIgtype      BIg bold}     \\[.4ex]
+    \verb|\BIGtype|      & \verb|\twfvbf| & {\cBIGtype      BIG bold}     \\
+    ~                   & \verb|\ppfftwelve| & {\cppfftwelve  pp ff diminuendo}\\
+    ~                   & \verb|\ppffsixteen| & {\cppffsixteen  pp ff diminuendo}\\
+    ~                   & \verb|\ppfftwenty| & {\cppfftwenty   pp ff diminuendo}\\
+    ~                   & \verb|\ppfftwentyfour| & {\cppfftwentyfour   pp ff diminuendo}\\[.4ex]
+    ~                   & \verb|\ppfftwentynine| & {\cppfftwentynine   pp ff diminuendo}\\[.4ex]
     \hline
   \end{tabular}
 \end{center}
-\caption{Predefined fonts}
+\caption{Various predefined fonts}
 \label{predefinedfonts}
 \end{table}
 
@@ -96,10 +113,10 @@ explicit control sequence that can alternatively be used locally as a font speci
 
 Since \musixtex\ is a superset of \TeX, you are free to use the standard \TeX\
 machinery for defining and using any special font you desire. You must first
-of course ensure that (a) all the necessary font files (e.g., \verb|bla10.tfm|,
-\verb|bla10.pfb|, or equivalents) are installed in the right places in your system, (b) all
+of course ensure that (a)~all the necessary font files (e.g., \verb|bla10.tfm|,
+\verb|bla10.pfb|, or equivalents) are installed in the right places in your system, (b)~all
 configuration files (e.g., \verb|config.ps| or equivalent) have been updated, and
-(c) the \TeX\ system has been ``rehashed''. Then you can use the font just as
+(c)~the \TeX\ file-name database has been updated, as required by your \TeX\ system. Then you can use the font just as
 in any \TeX\ document, e.g., by coding \verb|\font blafont=bla10| and then
 \verb|\zchar{10}{\blafont Text in user-defined font}|.
 
@@ -139,16 +156,16 @@ Palatino and Helvetica fonts:
     \hline
       {\tnormtype  normal Times Roman} & {\pnormtype  normal Palatino Roman} &{\hnormtype  normal Helvetica Roman} \\ 
      {\tnormtypebf  normal Times bold} & {\pnormtypebf normal Palatino bold}& {\hnormtypebf normal Helvetica bold} \\
-     {\tnormtypeit  normal Times italic} & {\pnormtypeit normal Palatino italic } & {\hnormtypeit normal Helvetica italic }\\
-     {\tbigtype      Times big} & {\pbigtype Palatino big } & {\hbigtype Helvetica big }  \\
+     {\tnormtypeit  normal Times italic} & {\pnormtypeit normal Palatino italic } & {\hnormtypeit normal Helvetica italic }\\[.4ex]
+     {\tbigtype      Times big} & {\pbigtype Palatino big } & {\hbigtype Helvetica big }  \\[.4ex]
      {\tBigtype      Times Big } & {\pBigtype Palatino Big } & {\hBigtype Helvetica Big }   \\
     \hline
   \end{tabular}
 \end{center}
 
 For users who prefer to stick with the default Computer Modern
-family but want to use the EC variants, the extension library
-\verb|musixec.tex| is available; see Section~\ref{ecfonts}.
+family but want to use the T$1$-encoded EC variants, the extension library
+\verb|musixec.tex| is available; see Section~\ref{ecfonts}\@.
 
 \section{Text placement}\label{textplacement}
 Special macros are provided to allow precise placement of any \TeX\ text, vertically

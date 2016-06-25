@@ -283,8 +283,22 @@ Use as follows:
 \begin{quote}\begin{verbatim}
 \input musixtex
 \input musixec
+[\input musixsty]
 ...
 \end{verbatim}\end{quote}
+For example, 
+
+\begin{music}
+\input musixec
+é è â ç ü ñ\\
+\end{music}
+ \noindent may be coded as
+\begin{quote}
+\begin{verbatim}
+\input musixec
+é è â ç ü ñ\\
+\end{verbatim}
+\end{quote}
 
 
  \section{musixeng}
@@ -1323,6 +1337,7 @@ Use as follows:
 The usual ``small'' type commands are supported:
 \begin{quote}
 \begin{tabular}{lr}
+\keyindex{tinytype} & 7pt \\
 \keyindex{smalltype} & 8pt \\
 \keyindex{Smalltype} & 9pt \\
 \keyindex{normtype}& 10pt \\
@@ -1334,8 +1349,8 @@ For all of these, the following variants are supported:
 \begin{tabular}{ll}
 \verb|\rm| & ``Roman'' (sans serif) \\
 \verb|\bf| & bold \\
-\verb|\it| & ``italic'' (oblique) \\
-\verb|\bi| & ``bold-italic'' (bold-oblique) \\
+\verb|\it| & ``italic'' (actually oblique) \\
+\verb|\bi| & ``bold-italic'' (actually bold-oblique) \\
 \verb|\sc| & small capitals\\
 \end{tabular}
 \end{quote}
@@ -1363,10 +1378,6 @@ The following bold-oblique fonts for dynamic marks are defined:
 \keyindex{ppfftwentyfour} & 14pt \\
 \keyindex{ppfftwentynine} & 17pt \\
 \end{tabular}\end{quote}
-
-The default font for typesetting \keyindex{txt} and \keyindex{tuplettxt}
-arguments 
-is \keyindex{eightit} (\verb\8pt\~oblique).  
 
  \section{musixlit}\label{litu}\label{otherbars}
  Provides a notation style intermediate between gregorian and baroque, for
@@ -1769,6 +1780,7 @@ Use as follows:
 The usual ``small'' type commands are supported:
 \begin{quote}
 \begin{tabular}{lr}
+\keyindex{tinytype} & 7pt \\
 \keyindex{smalltype} & 8pt \\
 \keyindex{Smalltype} & 9pt \\
 \keyindex{normtype}& 10pt \\
@@ -1783,7 +1795,6 @@ For all of these, the following variants are supported:
 \verb|\it| & italic \\
 \verb|\bi| & bold italic \\
 \verb|\sc| & small capitals (and old-style figures)\\
-\verb|\sl| & oblique \\
 \end{tabular}
 \end{quote}
 The ``big'' type commands are as follows:
@@ -1795,7 +1806,8 @@ The ``big'' type commands are as follows:
 \keyindex{BIGtype} & 25pt\\
 \end{tabular}
 \end{quote}
-The default variant for all of these is small-caps;
+The default variant for the ``small'' types is Roman and for
+the ``big'' ones, small-caps;
 however, \keyindex{font} commands are defined
 for all the usual variants at all of these sizes.
 To letter-space a title, use the \verb|\so|
@@ -1810,10 +1822,6 @@ The following bold-italic fonts for dynamic marks are defined:
 \keyindex{ppfftwentyfour} & 14pt \\
 \keyindex{ppfftwentynine} & 17pt \\
 \end{tabular}\end{quote}
-
-The default font for typesetting \keyindex{txt} and \keyindex{tuplettxt}
-arguments 
-is \keyindex{eightit} (\verb\8pt\~italic).  
 
  \section{musixpoi}
  Adds definitions of less common singly and doubly dotted notes.
@@ -1986,6 +1994,7 @@ Use as follows:
 The usual ``small'' type commands are supported:
 \begin{quote}
 \begin{tabular}{lr}
+\keyindex{tinytype} & $7$pt \\
 \keyindex{smalltype} & $8$pt \\
 \keyindex{Smalltype} & $9$pt \\
 \keyindex{normtype}& $10$pt \\
@@ -2000,7 +2009,6 @@ For all of these, the following variants are supported:
 \verb|\it| & italic \\
 \verb|\bi| & bold italic \\
 \verb|\sc| & small capitals \\
-\verb|\sl| & oblique \\
 \end{tabular}
 \end{quote}
 The ``big'' type commands are as follows:
@@ -2027,10 +2035,6 @@ The following bold-italic fonts for dynamic marks are defined:
 \keyindex{ppfftwentyfour} & 14pt \\
 \keyindex{ppfftwentynine} & 17pt \\
 \end{tabular}\end{quote}
-
-The default font for typesetting \keyindex{txt} and \keyindex{tuplettxt}
-arguments 
-is \keyindex{eightit} (\verb|8pt| italic).  
 
 \section{musixtnt}\label{musixtnt}
 This package (tnt = Transform Notes) provides a macro \keyindex{TransformNotes} which makes 

@@ -21,14 +21,11 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-%   Copyright 2015  Bob Tennent rdt@cs.queensu.ca
+%   Copyright 2015-2016  Bob Tennent rdt@cs.queensu.ca
 %
-\immediate\write16{MusiXec\space<2015/07/28>}
+\immediate\write16{MusiXec\space<2016/02/22>}
 %
 
-\newif\iflongDCfontnames
-\newif\iflongECfontnames
-\longDCfontnamesfalse  % obsolete
 \longECfontnamestrue
 \def\fontid{ec}
 
@@ -38,7 +35,6 @@
 \font\sevenit=ecti0800 at 7pt
 \font\sevenbi=ecbi0700
 \font\sevensc=ecsc0700
-\font\sevensl=ecsl0700
 %
 % 8pt 
 \font\eightrm=ecrm0800
@@ -46,8 +42,6 @@
 \font\eightit=ecti0800
 \font\eightbi=ecbi0800
 \font\eightsc=ecsc0800
-\font\eightsl=ecsl0800 
-\font\eighttt=ectt0800
 %
 % 9pt
 \font\ninerm=ecrm0900
@@ -55,8 +49,6 @@
 \font\nineit=ecti0900
 \font\ninebi=ecbi0900
 \font\ninesc=ecsc0900
-\font\ninesl=ecsl0900
-\font\ninett=ectt0900
 %
 % 10pt
 \font\tenrm=ecrm1000
@@ -64,8 +56,6 @@
 \font\tenit=ecti1000
 \font\tenbi=ecbi1000
 \font\tensc=ecsc1000
-\font\tensl=ecsl1000
-\font\tentt=ectt1000
 %
 % 11pt
 \font\elevenrm=ecrm1095
@@ -73,8 +63,6 @@
 \font\elevenit=ecti1095
 \font\elevenbi=ecbi1095
 \font\elevensc=ecsc1095
-\font\elevensl=ecsl1095
-\font\eleventt=ectt1095
 %
 % 12pt
 \font\twelverm=ecrm1200
@@ -82,8 +70,6 @@
 \font\twelveit=ecti1200
 \font\twelvebi=ecbi1200
 \font\twelvesc=ecsc1200
-\font\twelvesl=ecsl1200
-\font\twelvett=ectt1200
 %
 % 14pt
 \font\frtrm=ecrm1440
@@ -91,8 +77,6 @@
 \font\frtit=ecti1440
 \font\frtbi=ecbi1440
 \font\frtsc=ecsc1440
-\font\frtsl=ecsl1440
-\font\frttt=ectt1440
 %
 % 17pt
 \font\svtrm=ecrm1728
@@ -100,8 +84,6 @@
 \font\svtit=ecti1728
 \font\svtbi=ecbi1728
 \font\svtsc=ecsc1728
-\font\svtsl=ecsl1728
-\font\svttt=ectt1728
 %
 % 20pt
 \font\twtyrm=ecrm2074
@@ -109,8 +91,6 @@
 \font\twtyit=ecti2074
 \font\twtybi=ecbi2074
 \font\twtysc=ecsc2074
-\font\twtysl=ecsl2074
-\font\twtytt=ectt2074
 %
 % 25pt
 \font\twfvrm=ecrm2488
@@ -118,103 +98,43 @@
 \font\twfvit=ecti2488
 \font\twfvbi=ecbi2488
 \font\twfvsc=ecsc2488
-\font\twfvsl=ecsl2488
-\font\twfvtt=ectt2488
-%
-% Large fonts for titles
-\let\bigfont=\frtbf
-\let\Bigfont=\svtbf
-\let\BIgfont=\twtybf
-\let\BIGfont=\twfvbf
 %
 %
+%
+\font\ppfftwelve=ecbi0800
 \font\ppffsixteen=ecbi1000
 \font\ppfftwenty=ecbi1200
 \font\ppfftwentyfour=ecbi1440
 \font\ppfftwentynine=ecbi1728
-\font\tinyppff=ecbi0800
-\font\smallppff=ecbi1000
-\font\normppff=ecbi1200
-\font\medppff=ecbi1440
 %
-\def\smalltype{%
-  \let\rm\eightrm
-  \let\bf\eightbf
-  \let\it\eightit
-  \let\bi\eightbi
-  \let\sc\eightsc
-  \let\sl\eightsl
-  \rm}
-\def\Smalltype{%
-  \let\rm\ninerm
-  \let\bf\ninebf
-  \let\it\nineit
-  \let\bi\ninebi
-  \let\sc\ninesc
-  \let\sl\ninesl
-  \rm}
-\def\normtype{%
-  \let\rm\tenrm
-  \let\bf\tenbf
-  \let\it\tenit
-  \let\bi\tenbi
-  \let\sc\tensc
-  \let\sl\tensl
-  \rm}
-\def\medtype{%
-  \let\rm\twelverm
-  \let\bf\twelvebf
-  \let\it\twelveit
-  \let\bi\twelvebi
-  \let\sc\twelvesc
-  \let\sl\twelvesl
-  \rm}
-\def\bigtype{%
-  \let\rm\bigfont
-  \let\bf\bigfont
-  \let\it\bigfont
-  \let\bi\bigfont
-  \let\sc\bigfont
-  \let\sl\bigfont
-  \bf}
-\def\Bigtype{%
-  \let\rm\Bigfont
-  \let\bf\Bigfont
-  \let\it\Bigfont
-  \let\bi\Bigfont
-  \let\sc\Bigfont
-  \let\sl\Bigfont
-  \bf}
-\def\BIgtype{%
-  \let\rm\BIgfont
-  \let\bf\BIgfont
-  \let\it\BIgfont
-  \let\bi\Bigfont
-  \let\sc\Bigfont
-  \let\sl\Bigfont
-  \bf}
-\def\BIGtype{%
-  \let\rm\BIGfont
-  \let\bf\BIGfont
-  \let\it\BIGfont
-  \let\bi\BIGfont
-  \let\sc\BIGfont
-  \let\sl\BIGfont
-  \bf}
 %
-\def\txtfont{\eightit}
-\def\txt{\txtfont3}
-\def\tuplettxt{\txtfont3}
+%  tt fonts needed by musixsty
+%
+\font\eighttt=ectt0800
+\font\ninett=ectt0900
+\font\tentt=ectt1000
+\font\twelvett=ectt1200
+\font\frttt=ectt1440
+\font\svttt=ectt1728
+\font\twtytt=ectt2074
+\font\twfvtt=ectt2488
+%
+%  sl fonts needed by musixsty
+%
+\font\eightsl=ecsl0800
+\font\ninesl=ecsl0900
+\font\tensl=ecsl1000
+\font\twelvesl=ecsl1200
+\font\frtsl=ecsl1440
+\font\svtsl=ecsl1728
+\font\twtysl=ecsl2074
+\font\twfvsl=ecsl2488
 
+%
+% Redefine accented characters for etex
+%
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
-\def\xtuplet#1#2{\n@iv#1\advance\n@iv\m@ne {\sign@skip=\n@iv\noteskip
-  \sign@skip=0.5\sign@skip \xdef\half@sign@skip{\the\sign@skip}}%
-  \zcharnote{#2}{\kern\h@lf\qn@width\kern \half@sign@skip\lrlap{\txtfont#1}}}  
-\catcode`\@=\catcodeat
 
-%
-% Redefine accented characters for etex, suggested by David Carlisle:
-%
 \ifx\documentclass\undefined
 \def\ProvidesFile#1[#2]{}
 \def\DeclareFontEncoding#1#2#3{}
@@ -235,7 +155,14 @@
 \expandafter\def\csname T1\string#1-\string#3\endcsname{\char#4\relax}}
 
 \input t1enc.def 
+
+% \c requires special treatment
+\def\c#1{\leavevmode\ifx c#1\char231 \else\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent11 #1%
+     \else{\ooalign{\unhbox\z@\crcr
+        \hidewidth\char11\hidewidth}}\fi\fi}
 \fi
+
+\catcode`\@=\catcodeat
 
 \normtype
 \endinput

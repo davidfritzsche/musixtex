@@ -1,12 +1,12 @@
 #!/usr/bin/env texlua  
 
-VERSION = "0.16a"
+VERSION = "0.16c"
 
 --[[
      musixtex.lua: processes MusiXTeX files using prepmx and/or pmxab and/or 
      autosp as pre-processors (and deletes intermediate files)
 
-     (c) Copyright 2011-2015 Bob Tennent rdt@cs.queensu.ca
+     (c) Copyright 2011-2016 Bob Tennent rdt@cs.queensu.ca
                              and Dirk Laurie dirk.laurie@gmail.com
 
      This program is free software; you can redistribute it and/or modify it
@@ -28,6 +28,13 @@ VERSION = "0.16a"
 --[[
 
   ChangeLog:
+
+     version 0.16c  2016-02-24 RDT
+       -interaction batchmode for -q
+       report_error reports only the first error
+
+     version 0.16b  2016-02-20 DL
+       Improved help message as suggested by Bob Tennent.
 
      version 0.16a  2015-12-30 DL
        Corrects bug in -g option reported by Christian Mondrup.
@@ -124,10 +131,14 @@ Four TeX engines are available via the -l and -p options.
     latex     -l
     pdfetex   -p
     pdflatex  -l -p
-The -F option allows any engine to be named. In that case, an attempt is made
-to deduce implied -l and -p settings from the presence or absence of the 
-strings `latex` and `pdf` in the name of the engine. If this is not correct,
-the user should explicitly specify the appropriate option.]]
+If the -F option is used, options -l and -p need to be set if the engine 
+name does not contain "latex" and "pdf" respectively. For example, the 
+above four engines can be replaced by:
+  -F "luatex --output-format=dvi" 
+  -F "lualatex --output-format=dvi"
+  -F "luatex" -p
+  -F "lualatex" -p
+]]
 end
 
 function whoami ()
@@ -237,6 +248,10 @@ function report_error(filename)
   end
   local trigger = false
   for line in log:lines() do
+    if trigger and line:match"^!" then 
+      -- report just the first error   
+      break
+    end
     trigger = trigger or line:match"^!"
     if trigger then
       io.stderr:write("!  "..line,"\n")
@@ -392,7 +407,7 @@ function tex_process(tex,basename,extension)
     latex = true
   end
   if quiet ~= "" then
-    tex = tex .. " -halt-on-error"
+    tex = tex .. " -interaction batchmode"
   end
   local OK = (execute(tex .. " " .. filename) == 0)
   if passes ~= 1 then 
