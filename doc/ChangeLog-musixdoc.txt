@@ -1,3 +1,7 @@
+2016-06-06  RDT
+
+   Revised the material on page layout.
+
 2015-02-20  RDT
 
    Clean up title page and preface(s).

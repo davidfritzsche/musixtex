@@ -48,27 +48,75 @@ behavior, in which vertical space between the systems is distributed
 so that the first staff
 on the page is all the way at the top and the last staff all the way at
 the bottom.
-
 The macro \keyindex{musicparskip} will allow the existing space between
 systems to increase by up to \verb|5\Interligne|.
 
-The following values of page layout parameters will allow the maximum material
-to fit on each page, provided the printer allows the margins that are implied.
+The following values of page-layout parameters will allow as much material
+as possible 
+on a page, provided the printer supports these dimensions, which
+imply approximately half-inch margins:
 
 \begin{center}
-\begin{tabular}{|l|l|l|}\hline
-\multicolumn{1}{|c|}{A4}&\multicolumn{1}{|c|}{letter}&\multicolumn{1}{|c|}{A4 or letter}\\\hline
-\multicolumn{3}{|c|}{\tt\Bslash parindent= 0pt}\\\hline
-\multicolumn{3}{|c|}{\tt\Bslash hoffset= -15.4mm}\\\hline
-\multicolumn{3}{|c|}{\tt\Bslash voffset= -10mm}\\\hline
-\verb+\hsize= 190mm+&\verb+\hsize= 196mm+&\verb+\hsize= 190mm+\\\hline
-\verb+\vsize= 260mm+&\verb+\vsize= 247mm+&\verb+\vsize= 247mm+\\\hline
+\begin{tabular}{|l|l|}\hline
+\multicolumn{1}{|c|}{A$4$}&\multicolumn{1}{|c|}{letter}\\\hline
+\verb+\hsize=190mm+&\verb+\hsize=7.5in+\\\hline
+\verb+\vsize=270mm+&\verb+\vsize=10in+\\\hline
 \end{tabular}
 \end{center}
-%avre
 \zkeyindex{parindent}\zkeyindex{hoffset}\zkeyindex{voffset}
 \zkeyindex{hsize}\zkeyindex{vsize}
+You may have to be more conservative if you have headlines or footlines
+or want
+even/odd-page asymmetry, such as with the \keyindex{rectoverso}
+command in \verb|musixsty.tex| (Section~\ref{musixsty}).
+If a score is going to be ``published'' at a public repository (such as
+\mbox{\textsc{imslp}}), you may want to allow for \emph{either}
+A$4$ \emph{or} letter paper, for example  by setting the \verb|\hsize| to~190~mm
+and the \verb|\vsize| to~10~in.
 
+To determine the maximal dimensions that \emph{your} printer is capable of, 
+process the standard file \verb|testpage.tex| with \LaTeX\ and
+print the result. The ``rulers'' on four sides will indicate
+how much of the one-inch ``margin'' material outside the frame can actually be printed.
+Your \verb|\hsize| and \verb|\vsize| parameters can be increased, or, if necessary, decreased
+accordingly.  If your score is going to be printed by a publisher or a colleague, you can send
+\verb|testpage.pdf| to them to determine what margins are necessary for their
+printer.
+
+
+For \emph{any} values of 
+\verb|\hsize| and \verb|\vsize|,
+material will normally be centered on the page by using one of the following 
+command sequences, which simply split the difference between the page size and the text size, 
+and then subtract one inch because of \TeX\ conventions:
+\begin{enumerate}
+\item[For A$4$ paper (210~mm $\times$ 297~mm):]\quad\\[-2ex]
+\begin{verbatim}
+\hoffset=210mm\advance\hoffset-\hsize\divide\hoffset2
+\advance\hoffset-1.0in
+\voffset=297mm\advance\voffset-\vsize\divide\voffset2
+\advance\voffset-1.0in
+\end{verbatim}
+\item[For letter-size paper (8.5~in $\times$ 11~in):] \quad\\[-2ex]
+\begin{verbatim}
+\hoffset=8.5in\advance\hoffset-\hsize\divide\hoffset2
+\advance\hoffset-1.0in
+\voffset=11in\advance\voffset-\vsize\divide\voffset2
+\advance\voffset-1.0in
+\end{verbatim}
+\end{enumerate}
+However, if the margins on the \verb|testpage| output are \emph{not} 
+symmetric, 
+the printer is mis-aligned.
+If this can't be corrected, the margin offsets will 
+have to be adjusted. Ideally, this should be done in the \TeX\ configuration
+so all \TeX\ output will be corrected, but offsets can be adjusted
+for just \verb|musixtex| output using
+\verb|\advance\hoffset ...| and/or
+\verb|\advance\voffset ...|
+after the ``normal'' settings given above.
+
+\pagebreak
 
 \section{Page numbering, headers and footers}\index{page
 number}\index{footnote}

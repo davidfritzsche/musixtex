@@ -1,0 +1,6 @@
+
+Changes from MusiXTeX 122 to 123:
+
+  +  added \xtr and \ptr ornaments
+  +  adjusted spacing of \tr
+  +  corrected definition of \C@Inter for \nblines > 6

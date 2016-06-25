@@ -79,7 +79,8 @@ dot and a hyphen below a note head at pitch $p$,
  \item \keyindex{flageolett}\pitchp~to put a
 small circle above a note head at pitch $p$.
 \end{itemize}
-These marks are horizontally centered relative to solid note heads. To
+These marks are horizontally centered relative to solid note heads. 
+To
 compensate for the fact that whole notes are wider, you should use
 \keyindex{wholeshift}\verb|{|\ital{Any nonspacing macro}\verb|}| to center accents
 and other items (e.g.,~\verb|\Fermataup|) above a whole note.
@@ -272,7 +273,17 @@ You may use
  \item \keyindex{backturn}\pitchp\ for \hbox to 1.5em{\kern 0.6em\backturn 0\hss}
  \item \keyindex{tr}\pitchp\ for \hbox to 1.5em{\kern 0.6em\tr 0\hss}
  \item \keyindex{trt}\pitchp\ for \hbox to 1.5em{\kern 0.6em\trt 0\hss}\quad (J. S.~Bach's \textit{trillo und mordant})
+ \item \keyindex{xtr}\pitchp\ for \hbox to 1.5em{\kern 0.5em\xtr 0\hss}
+ \item \keyindex{ptr}\pitchp\ for \hbox to 1.5em{\kern 0.5em\ptr 0\hss}
  \end{itemize}
+To
+compensate for the fact that whole notes are wider, you may use
+\begin{quote}
+\keyindex{wholeshift}\verb|{|\mbox{\ital{Any nonspacing macro}}\verb|}| 
+\end{quote}
+to center any of these ornaments
+above a whole note.
+
 
 In the following macros for fermatas, the argument $p$ is the pitch of the
 notehead on which the fermata rests, assuming no additional vertical
@@ -508,7 +519,6 @@ macros \keyindex{Ped}, \keyindex{sPed}, \keyindex{Dep} and \keyindex{sDep}
 in combination with \keyindex{zchar} or \keyindex{zcharnote}.
 Since the \hbox to .7cm{ \Ped\hss} symbol is rather wide, it might collide
 with adjacent bass notes. To shift it horizontally, you could use \verb|\loff{\PED}|.
-\vfill
 
 The following excerpt from \textit{Liebestr\"aume} by Franz Liszt illustrates
 a more modern approach to specifying piano-pedal usage:
@@ -546,13 +556,13 @@ a more modern approach to specifying piano-pedal usage:
 \bar%
 \Notes\pdlud\ql B\sk\qpl\sk\qpl|%
   \zhl{.c}\ds\ibu1i0\qb1{^d^hjh}\tqu1d\en
-\Notes\zqu{M}\hppl\sk\qpu\sk\qu M|%
+\Notes\zqu{M}\hppl\sk\sk\qpu\sk\qu M|%
   \ds\ibu1i0\qb1{dhjh}\tqu1d\en
 \bar%
 \Notes\zmidstaff{$\cdots$}\sk\pdlu\sk|\en
 \endpiece%
 \end{music}
-\pagebreak
+\vspace*{2ex}\par\noindent
 This has been coded using the following commands:
 \begin{quote}
 \begin{tabular}{lll}
@@ -596,7 +606,7 @@ Here is how the excerpt may be coded:
 \bar%
 \Notes\pdlud\ql B\sk\qpl\sk\qpl|%
   \zhl{c}\ds\ibu1i0\qb1{^d^hjh}\tqu1d\en
-\Notes\zqu{M}\hppl\sk\qpu\sk\qu M|%
+\Notes\zqu{M}\hppl\sk\sk\qpu\sk\qu M|%
   \ds\ibu1i0\qb1{dhjh}\tqu1d\en
 \bar%
 \Notes\zmidstaff{$\cdots$}\sk\pdlu\sk|\en
@@ -605,6 +615,7 @@ Here is how the excerpt may be coded:
 \end{footnotesize}
 \end{quote}
 
+\pagebreak
 \noindent
 The following ``mixed'' patterns are also supported:
 \begin{quote}
@@ -665,7 +676,7 @@ suppress this behavior.
 
  \section{Brackets, parentheses, oblique lines and slides}\label{brapar}
 
-Several varieties of brackets, parentheses and oblique lines are provided for
+Several varieties of brackets\index{brackets}, parentheses\index{parentheses} and oblique lines\index{oblique lines} are provided for
 use within a score.
  \begin{itemize}\setlength{\itemsep}{0ex}
  \item \keyindex{lpar}\verb|{|$p$\verb|}| and

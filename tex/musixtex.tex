@@ -25,14 +25,20 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{22}
+\def\mxminorvernumber{23}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2016-02-24}
+\def\mxdate{2016-06-06}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.23
+
+% added \xtr and \ptr ornaments
+% adjusted spacing of \tr
+% corrected definition of \C@Inter for \nblines > 6 
 
 % version 1.22
 
@@ -1784,9 +1790,15 @@
   \edef\internote{\csname i@n\romannumeral\noinstrum@nt\endcsname}%
   \interportee\interfacteur\internote \interportee\tw@\interportee}
 
-\def\C@Inter{\stem@skip\interportee \advance\stem@skip-\@ight\internote
-  \ifnum\nblines=\f@ur \advance\stem@skip\tw@\internote \fi
-  \ifnum\nblines>\fiv@  \advance\stem@skip-\tw@\internote \fi}
+\def\C@Inter{%  RDT: corrected to work if \nblines > 6   (version 1.23)
+  \stem@skip\interportee
+  \ifnum\nblines=\thr@@
+    \advance\stem@skip-\@ight\internote
+  \else
+    \advance\stem@skip-\nblines\internote
+    \advance\stem@skip-\nblines\internote
+    \advance\stem@skip\tw@\internote
+  \fi}
 
 %%% loop over instruments and staffs
 
@@ -4090,8 +4102,13 @@
 \def\mordent{\n@iv89\@Char}
 \def\Mordent{\n@iv119\@Char}
 \def\doublethumb{\n@iv121\@Char}
-\def\tr#1{\zcn{#1}{\ppff tr}}
 \def\trt#1{\loffset{0.65}{\shake{#1}}\roffset{0.65}{\mordent{#1}}}
+
+
+\def\tr#1{\loffset{0.15}{\zcn{#1}{\ppff tr}}} % \loffset added version 1.23  RDT
+\def\xtr#1{\raise1.25\internote\hbox{\n@iv111\zcn{#1}\C@ChaR}}  % added version 1.23  RDT
+\def\ptr#1{\raise1.25\internote\hbox{\n@iv117\zcn{#1}\C@ChaR}}  % added version 1.23  RDT
+%\def\Xtr#1{\wholeshift{\xtr{#1}}}  % unnecessary?
 
 %%% accents
 
