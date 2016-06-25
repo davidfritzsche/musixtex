@@ -1,0 +1,7 @@
+Changes from MusiXTeX 118 to 119:
+
+2015-11-29
+
+  definitions for tremolo commands \trml, \trmu, etc. 
+  corrected typos in the definition of \comput@fonts affecting ppff fonts for
+    \Largemusicsize
