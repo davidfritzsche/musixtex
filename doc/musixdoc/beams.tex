@@ -316,81 +316,92 @@ one could define a set of four sixteenths by the macro:
 arguments are the pitches of the four successive sixteenths.
 
  %\check
- \section{Shorthand beam notations for repeated notes}\index{repeated patterns}
-Sometimes you may want to indicate repeated short notes with open note heads joined
-by a beam. Here's an example of how to do that
+ \section{Shorthand beam notations for repeated or alternated notes}\index{repeated patterns}
+Sometimes you may want to indicate repeated or alternated short notes with open note heads joined
+by a beam. Here are examples of how to do that
 using the \keyindex{hb} macro:
 
 \begin{music}\nostartrule
 \startextract
 \Notes\ibbl0j0\hb0j\tbl0\hb0j\en
-\Notes\ibbu0g0\hb0g\tbu0\hb0g\en
+\Notes\ibbl0h4\hb0h\tbl0\hb0j\en
 \zendextract
 \end{music}
 \noindent which has been coded as:
 \begin{quote}\begin{verbatim}
 \Notes\ibbl0j0\hb0j\tbl0\hb0j\en
-\Notes\ibbu0g0\hb0g\tbu0\hb0g\en
-\end{verbatim}\end{quote}
-
-It is also possible to dispense with the stems:
-
-\begin{music}\nostartrule
-\startextract
-\Notes\ibbl0j3\wh j\tbl0\wh l\en
-\Notes\ibbu0g3\wh g\tbu0\wh i\en
-\zendextract
-\end{music}
-\noindent which was coded as
-\begin{quote}\begin{verbatim}
-\Notes\ibbl0j3\wh j\tbl0\wh l\en
-\Notes\ibbu0g3\wh g\tbu0\wh i\en
-\end{verbatim}\end{quote}
-\noindent A different look could be obtained as follows:
+\Notes\ibbl0h4\hb0h\tbl0\hb0j\en
+\end{verbatim}\end{quote}\noindent
+A different look could be obtained as follows:
 
 \begin{music}\nostartrule
 \startextract
-\Notes\loff{\zw j}\ibbl0j3\sk\tbl0\wh l\en
-\Notes\ibbu0g3\wh g\tbu0\roff{\wh i}\en\qspace
+\notes\ha j\loffset{0.5}{\ibbl1n3}\qsk\tbl1\qsk\ha l\sk\en
 \zendextract
 \end{music}
-\noindent which was coded as:
+\noindent which has been coded as:
 \begin{quote}\begin{verbatim}
-\Notes\loff{\zw j}\ibbl0j3\sk\tbl0\wh l\en
-\Notes\ibbu0g3\wh g\tbu0\roff{\wh i}\en\qspace
+\notes\ha j\loffset{0.5}{\ibbl1n4}\qsk\tbl1\qsk\ha l\sk\en
 \end{verbatim}\end{quote}
+It is possible to combine this notation
+with a conventional beam, as in
 
-Yet another way to indicate repeated notes is given in the
-following example:
-
- \begin{music}\nostartrule
+\begin{music}\nostartrule
 \startextract
-\Notes\ibl0h0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
-      \ibu0j0\qb0{jjj}\tbu0\qb0j\en
-\NOTes\loffset{0.5}{\ibl0j9}\roffset{0.5}{\tbl0}\zhl h%
-      \loffset{0.5}{\ibu0g9}\roffset{0.5}{\tbu0}\hu j\en\bar
-\notes\ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
-      \ibbu0i0\qb0{jjj}\tbu0\qb0j%
-      \ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
-      \ibbu0i0\qb0{jjj}\tbu0\qb0j\en
-\NOTes\loffset{0.5}{\ibbl0k9}\roffset{0.5}{\tbl0}\zhl h%
-      \loffset{0.5}{\ibbu0f9}\roffset{0.5}{\tbu0}\hu j\en
+\notes\ibl0h3\qb0j\loffset1{\ibbbl1m3}\qsk\tbl1\qsk\tql0l\en
 \zendextract
- \end{music}
- \noindent whose coding (due to Werner {\sc Icking}) is
-
+\end{music}
+\noindent which has been coded as:
 \begin{quote}\begin{verbatim}
-\Notes\ibl0h0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
-      \ibu0j0\qb0{jjj}\tbu0\qb0j\en
-\NOTes\loffset{0.5}{\ibl0j9}\roffset{0.5}{\tbl0}\zhl h%
-      \loffset{0.5}{\ibu0g9}\roffset{0.5}{\tbu0}\hu j\en\bar
-\notes\ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
-      \ibbu0i0\qb0{jjj}\tbu0\qb0j%
-      \ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
-      \ibbu0i0\qb0{jjj}\tbu0\qb0j\en
-\NOTes\loffset{0.5}{\ibbl0k9}\roffset{0.5}{\tbl0}\zhl h%
-      \loffset{0.5}{\ibbu0f9}\roffset{0.5}{\tbu0}\hu j\en
+\notes\ibl0h3\qb0j\loffset1{\ibbbl1m3}\qsk\tbl1\qsk\tql0l\en
+\end{verbatim}\end{quote}\noindent
+or, for whole notes, to dispense with stems:
+
+\begin{music}\nostartrule
+\startextract
+\Notes\loff{\zw j}\ibbl0l4\sk\tbl0\wh l\en
+\Notes\ibbu0e4\wh g\tbu0\roff{\wh i}\en
+\zendextract
+\end{music}
+\noindent which has been coded as:
+\begin{quote}\begin{verbatim}
+\Notes\loff{\zw j}\ibbl0l4\sk\tbl0\wh l\en
+\Notes\ibbu0e4\wh g\tbu0\roff{\wh i}\en
 \end{verbatim}\end{quote}
+
+Short ``beams'' centered on note stems (or directly over
+or under whole notes)
+indicate \emph{tremolos}. Commands that generate tremolo indications are described in Section~\ref{tremolos}.
+
+
+% \begin{music}\nostartrule
+%\startextract
+%\Notes\ibl0h0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+%      \ibu0j0\qb0{jjj}\tbu0\qb0j\en
+%\NOTes\loffset{0.5}{\ibl0j9}\roffset{0.5}{\tbl0}\zhl h%
+%      \loffset{0.5}{\ibu0g9}\roffset{0.5}{\tbu0}\hu j\en\bar
+%\notes\ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+%      \ibbu0i0\qb0{jjj}\tbu0\qb0j%
+%      \ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+%      \ibbu0i0\qb0{jjj}\tbu0\qb0j\en
+%\NOTes\loffset{0.5}{\ibbl0k9}\roffset{0.5}{\tbl0}\zhl h%
+%      \loffset{0.5}{\ibbu0f9}\roffset{0.5}{\tbu0}\hu j\en
+%\zendextract
+% \end{music}
+% \noindent whose coding (due to Werner {\sc Icking}) is
+%
+%\begin{quote}\begin{verbatim}
+%\Notes\ibl0h0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+%      \ibu0j0\qb0{jjj}\tbu0\qb0j\en
+%\NOTes\loffset{0.5}{\ibl0j9}\roffset{0.5}{\tbl0}\zhl h%
+%      \loffset{0.5}{\ibu0g9}\roffset{0.5}{\tbu0}\hu j\en\bar
+%\notes\ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+%      \ibbu0i0\qb0{jjj}\tbu0\qb0j%
+%      \ibbl0i0\qb0{hhh}\tbl0\qb0h\bsk\bsk\bsk\bsk
+%      \ibbu0i0\qb0{jjj}\tbu0\qb0j\en
+%\NOTes\loffset{0.5}{\ibbl0k9}\roffset{0.5}{\tbl0}\zhl h%
+%      \loffset{0.5}{\ibbu0f9}\roffset{0.5}{\tbu0}\hu j\en
+%\end{verbatim}\end{quote}
 
  \section{Beams that cross line breaks}
 
