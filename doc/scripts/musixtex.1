@@ -1,5 +1,5 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2015-12-21  "musixtex version 0.16" ""
+.TH MUSIXTEX 1 2016-02-20  "musixtex version 0.16" ""
 
 .SH NAME
 musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
@@ -98,7 +98,7 @@ changes the dvi processor to
 .B -F fmt
 uses 
 .B fmt
-as the TeX processor
+as the TeX processor; e.g., -F "luatex --output-format=dvi"
 .TP
 .B -m
 stops processing at the pmx file
@@ -143,7 +143,12 @@ Note that four TeX engines are available via the -l and -p options:
     pdfetex   -p
     pdflatex  -l -p
 .TP 0
-The -F option allows any engine to be named. In that case, an attempt is made to deduce implied -l and -p settings from the presence or absence of the strings 'latex' and 'pdf' in the name of the engine. If this is not correct, the user should explicitly specify the appropriate option.
+If the -F option is used, options -l and -p need to be set if the engine name does not contain "latex" and "pdf" respectively. For example, the above four engines can be replaced by:
+  -F "luatex --output-format=dvi" 
+  -F "lualatex --output-format=dvi"
+  -F "luatex" -p
+  -F "lualatex" -p
+
 .SH SEE ALSO
 .BR autosp (1),
 .BR etex (1),

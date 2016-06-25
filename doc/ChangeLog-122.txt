@@ -1,0 +1,8 @@
+
+Changes from MusiXTeX 121 to 122:
+
+  +  bi and sc font definitions added; sl and tt definitions for musixsty moved 
+  +  explicit font choices for \txtfont replaced by generic commands
+     \smalltype\it etc.
+  +  \pdlud \halfwidthbigwedge and \raise height font-dependent
+  +  \zbreath and \cbreath use BIGtype rather than BIGfont

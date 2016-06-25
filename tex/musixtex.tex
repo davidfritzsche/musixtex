@@ -25,14 +25,22 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{21}
+\def\mxminorvernumber{22}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2016-01-30}
+\def\mxdate{2016-02-24}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.22
+
+% bi and sc font definitions added; sl and tt definitions for musixsty moved 
+% explicit font choices for \txtfont replaced by generic commands \smalltype\it etc.
+% \pdlud \halfwidthbigwedge and \raise-height font-dependent
+% \cbreath and \zbreath use \BIGtype rather than \BIGfont
+
 
 % version 1.21
 
@@ -573,168 +581,173 @@
 \def\fontid{cm}        % deprecated but used in pmx.tex
 
 %%
-% Seven point fonts: roman, bold, and italic.
+% Seven point fonts
 %%
 
-%\ifx\undefined\sevenrm   % version 1.17 RDT  unconditional font definitions
-  \font\sevenrm=cmr7
-  \font\sevenbf=cmbx7
-  \font\sevenit=cmti7
-%\fi
+\font\sevenrm=cmr7
+\font\sevenbf=cmbx7
+\font\sevenit=cmti7
+\font\sevenbi=cmbxti10 at 7pt   % version 1.22  RDT
+\font\sevensc=cmcsc10 at 7pt
 
 %%
-% Eight point fonts: roman, bold, and italic; tt and sl needed for musixsty
+% Eight point fonts
 %%
 
-%\ifx\undefined\eightrm
-  \font\eightrm=cmr8
-  \font\eightbf=cmbx8
-  \font\eightit=cmti8
-  \font\eighttt=cmtt8
-  \font\eightsl=cmsl8
-%\fi
+\font\eightrm=cmr8
+\font\eightbf=cmbx8
+\font\eightit=cmti8
+\font\eightbi=cmbxti10 at 8pt    % version 1.22 RDT
+\font\eightsc=cmcsc10 at 8pt
 
 %%
 % Nine point fonts
 %%
 
-%\ifx\undefined\ninerm
-  \font\ninerm=cmr9
-  \font\ninebf=cmbx9
-  \font\nineit=cmti9
-  \font\ninett=cmtt9
-  \font\ninesl=cmsl9
-%\fi
+\font\ninerm=cmr9
+\font\ninebf=cmbx9
+\font\nineit=cmti9
+\font\ninebi=cmbxti10 at 9pt     % version 1.22  RDT
+\font\ninesc=cmcsc10 at 9pt
 
 %%
 % Ten point fonts
 %%
 
-%\ifx\undefined\tenrm
-  \font\tenrm=cmr10
-  \font\tenbf=cmbx10
-  \font\tenit=cmti10
-  \font\tentt=cmtt10
-  \font\tensl=cmsl10
-%\fi
-
+\font\tenrm=cmr10
+\font\tenbf=cmbx10
+\font\tenit=cmti10
+\font\tenbi=cmbxti10        % version 1.22  RDT
+\font\tensc=cmcsc10
 
 %%
 % Eleven point fonts
 %%
-%\ifx\undefined\elevenrm
-  \font\elevenrm=cmr9 scaled \magstephalf
-  \font\elevenbf=cmbx9 scaled \magstephalf
-  \font\elevenit=cmti9 scaled \magstephalf
-  \font\eleventt=cmtt9 scaled \magstephalf
-  \font\elevensl=cmsl9 scaled \magstephalf
-%\fi
+\font\elevenrm=cmr9 scaled \magstephalf
+\font\elevenbf=cmbx9 scaled \magstephalf
+\font\elevenit=cmti9 scaled \magstephalf
+\font\elevenbi=cmbxti10 at 11pt     % version 1.22  RDT
+\font\elevensc=cmcsc10 at 11pt
 
 %%
 % Twelve point fonts
 %%
-%\ifx\undefined\twelverm
-  \font\twelverm=cmr12
-  \font\twelvebf=cmbx12
-  \font\twelveit=cmti12
-  \font\twelvett=cmtt12
-  \font\twelvesl=cmsl12
-%\fi
+\font\twelverm=cmr12
+\font\twelvebf=cmbx12
+\font\twelveit=cmti12
+\font\twelvebi=cmbxti10 scaled \magstep1   % version 1.22 RDT
+\font\twelvesc=cmcsc10 scaled \magstep1
 
-% 14pt:  roman, bold, italic and small caps; tt and sl needed for musixsty
-%\ifx\undefined\frtrm
-  \font\frtrm=cmr12 scaled \magstep1
-  \font\frtbf=cmbx12 scaled \magstep1
-  \font\frtit=cmti12 scaled \magstep1
-  \font\frtsc=cmcsc10 scaled \magstep2
-  \font\frttt=cmtt12 scaled \magstep1
-  \font\frtsl=cmsl12 scaled \magstep1
-%\fi
+% 14pt fonts
+\font\frtrm=cmr12 scaled \magstep1
+\font\frtbf=cmbx12 scaled \magstep1
+\font\frtit=cmti12 scaled \magstep1
+\font\frtsc=cmcsc10 scaled \magstep2
+\font\frtbi=cmbxti10 scaled \magstep2    % version 1.22  RDT
 %
 % 17pt
-%\ifx\undefined\svtrm
-  \font\svtrm=cmr12 scaled \magstep2
-  \font\svtbf=cmbx12 scaled \magstep2
-  \font\svtit=cmti12 scaled \magstep2
-  \font\svtsc=cmcsc10 scaled \magstep3
-  \font\svttt=cmtt12 scaled \magstep2
-%\fi
+\font\svtrm=cmr12 scaled \magstep2
+\font\svtbf=cmbx12 scaled \magstep2
+\font\svtit=cmti12 scaled \magstep2
+\font\svtsc=cmcsc10 scaled \magstep3
+\font\svtbi=cmbxti10 scaled \magstep3
 %
 % 20pt
-%\ifx\undefined\twtyrm
-  \font\twtyrm=cmr12 scaled \magstep3
-  \font\twtybf=cmbx12 scaled \magstep3
-  \font\twtyit=cmti12 scaled \magstep3
-  \font\twtysc=cmcsc10 scaled \magstep4
-  \font\twtytt=cmtt12 scaled \magstep3
-  \font\twtysl=cmsl12 scaled \magstep3
-%\fi
+\font\twtyrm=cmr12 scaled \magstep3
+\font\twtybf=cmbx12 scaled \magstep3
+\font\twtyit=cmti12 scaled \magstep3
+\font\twtysc=cmcsc10 scaled \magstep4
+\font\twtybi=cmbxti10 scaled \magstep4    % version 1.22  RDT
 %
 % 25pt
-%\ifx\undefined\twfvrm
-  \font\twfvrm=cmr12 scaled \magstep4
-  \font\twfvbf=cmbx12 scaled \magstep4
-  \font\twfvit=cmti12 scaled \magstep4
-  \font\twfvsc=cmcsc10 scaled \magstep5
-  \font\twfvtt=cmtt12 scaled \magstep4
-  \font\twfvsl=cmsl12 scaled \magstep4
-%\fi
-%
-% Large fonts for titles
-% (If you prefer Roman, use ..rm instead of ..bf)
-% (If you prefer small-caps, use ..sc instead of ..bf)
-\let\bigfont=\frtbf
-\let\Bigfont=\svtbf
-\let\BIgfont=\twtybf
-\let\BIGfont=\twfvbf
+\font\twfvrm=cmr12 scaled \magstep4
+\font\twfvbf=cmbx12 scaled \magstep4
+\font\twfvit=cmti12 scaled \magstep4
+\font\twfvsc=cmcsc10 scaled \magstep5
+\font\twfvbi=cmbxti10 scaled \magstep5    % version 1.22  RDT
 %
 %%
 %%
-% Define six font families.
+% Define five font families 
 %%
-
+\def\tinytype{%  
+  \let\rm\sevenrm
+  \let\bf\sevenbf
+  \let\it\sevenit
+  \let\bi\sevenbi
+  \let\sc\sevensc
+   \rm}
 \def\smalltype{%
   \let\rm\eightrm
   \let\bf\eightbf
   \let\it\eightit
+  \let\bi\eightbi
+  \let\sc\eightsc
   \rm}
 \def\Smalltype{%
   \let\rm\ninerm
   \let\bf\ninebf
   \let\it\nineit
+  \let\bi\ninebi
+  \let\sc\ninesc
   \rm}
 \def\normtype{%
   \let\rm\tenrm
   \let\bf\tenbf
   \let\it\tenit
+  \let\bi\tenbi
+  \let\sc\tensc
   \rm}
 \def\medtype{%
   \let\rm\twelverm
   \let\bf\twelvebf
   \let\it\twelveit
+  \let\bi\twelvebi
+  \let\sc\twelvesc
   \rm}
-\def\bigtype{%
-  \let\rm\bigfont
-  \let\bf\bigfont
-  \let\it\bigfont
-  \bf}
-\def\Bigtype{%
-  \let\rm\Bigfont
-  \let\bf\Bigfont
-  \let\it\Bigfont
-  \bf}
-\def\BIgtype{%
-  \let\rm\BIgfont
-  \let\bf\BIgfont
-  \let\it\BIgfont
-  \bf}
-\def\BIGtype{%
-  \let\rm\BIGfont
-  \let\bf\BIGfont
-  \let\it\BIGfont
-  \bf}
 %
+% four font families at big/Big/BIg/BIG sizes
+% default is \bf here and in musixec, but \sc in musixplt, \rm in musixtmr 
+%
+\def\bigfont{%  
+  \let\rm\frtrm
+  \let\bf\frtbf
+  \let\it\frtit
+  \let\sc\frtsc
+  \let\bi\frtbi
+  \bf}
+\def\Bigfont{%
+  \let\rm\svtrm
+  \let\bf\svtbf
+  \let\it\svtit
+  \let\sc\svtsc
+  \let\bi\svtbi
+  \bf}
+\def\BIgfont{%
+  \let\rm\twtyrm
+  \let\bf\twtybf
+  \let\it\twtyit
+  \let\sc\twtysc
+  \let\bi\twtybi
+  \bf}
+\def\BIGfont{%
+  \let\rm\twfvrm
+  \let\bf\twfvbf
+  \let\it\twfvit
+  \let\sc\twfvsc
+  \let\bi\twfvbi
+  \bf}
 %%
+% large fonts for titles
+% (If you prefer Roman, use \rm)
+% (If you prefer small-caps, use \sc)
+%
+\def\bigtype{\bigfont\bf}  % default for "big" fonts is \bf
+\def\Bigtype{\Bigfont\bf}
+\def\BIgtype{\BIgfont\bf}
+\def\BIGtype{\BIGfont\bf}
+%
+%
 % Bold italic fonts for dynamic markings.
 %%
 
@@ -749,10 +762,11 @@
 \else\ifdim\internote<1.19\Internote\normppff%
 \else\medppff\fi\fi\fi}% 
 
-\def\tinydyn{\let\ppff\tinyppff}  % version 1.17  RDT
-\def\smalldyn{\let\ppff\smallppff}
-\def\normdyn{\let\ppff\normppff}
-\def\meddyn{\let\ppff\medppff}
+
+\def\tinydyn{\let\ppff\ppfftwelve}  % version 1.18  RDT
+\def\smalldyn{\let\ppff\ppffsixteen}
+\def\normdyn{\let\ppff\ppfftwenty}
+\def\meddyn{\let\ppff\ppfftwentyfour}
 
 
 \font\musiceleven=musix11
@@ -761,6 +775,31 @@
 \font\musictwenty=musix20
 \font\musictwentyfour=musix24
 \font\musictwentynine=musix29
+
+
+%
+% tt fonts needed by musixsty   % version 1.22  RDT
+%
+\font\eighttt=cmtt8
+\font\ninett=cmtt9
+\font\tentt=cmtt10
+\font\twelvett=cmtt12
+\font\frttt=cmtt12 scaled \magstep1
+\font\svttt=cmtt12 scaled \magstep2
+\font\twtytt=cmtt12 scaled \magstep3
+\font\twfvtt=cmtt12 scaled \magstep4
+%
+%
+% sl fonts needed by musixsty    % version 1.22  RDT
+%
+\font\eightsl=cmsl8
+\font\ninesl=cmsl9
+\font\tensl=cmsl10
+\font\twelvesl=cmsl12
+\font\frtsl=cmsl12 scaled \magstep1
+\font\svtsl=cmsl12 scaled \magstep2
+\font\twtysl=cmsl12 scaled \magstep3
+\font\twfvsl=cmsl12 scaled \magstep4
 
 % piano brackets, slides, guitar chords, lines, (de)crescendi, circles
 
@@ -1598,10 +1637,10 @@
     \let\smallppff\ppfftwelve
     \let\normppff\ppffsixteen
     \let\medppff\ppfftwenty
-    \def\txtfont{\ifdim\internote<.95\Internote \sevenit
-    \else\ifdim\internote<1.19\Internote \eightit
-    \else\ifdim\internote<1.43\Internote \tenit
-    \else\twelveit\fi\fi\fi}%
+    \def\txtfont{\ifdim\internote<.95\Internote \tinytype\it  % version 1.22 RDT
+    \else\ifdim\internote<1.19\Internote \smalltype\it
+    \else\ifdim\internote<1.43\Internote \Smalltype\it
+    \else\normtype\it\fi\fi\fi}%
   \else\ifnum\musicsize=\@xxiv
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -1622,10 +1661,10 @@
     \let\smallppff\ppfftwenty
     \let\normppff\ppfftwentyfour
     \let\medppff\ppfftwentynine
-    \def\txtfont{\ifdim\internote<.95\Internote \eightit
-    \else\ifdim\internote<1.19\Internote \tenit
-    \else\ifdim\internote<1.43\Internote \twelveit
-    \else\frtit\fi\fi\fi}%
+    \def\txtfont{\ifdim\internote<.95\Internote \smalltype\it % version 1.22 RDT
+    \else\ifdim\internote<1.19\Internote \Smalltype\it
+    \else\ifdim\internote<1.43\Internote \normtype\it
+    \else\medtype\it\fi\fi\fi}%
   \else\ifnum\musicsize=\@xxix
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -1648,10 +1687,10 @@
     \let\smallppff\ppfftwentyfour
     \let\normppff\ppfftwentynine
     \let\medppff\ppfftwentynine
-    \def\txtfont{\ifdim\internote<.95\Internote \tenit
-    \else\ifdim\internote<1.19\Internote \twelveit
-    \else\ifdim\internote<1.43\Internote \frtit
-    \else\svtit\fi\fi\fi}%
+    \def\txtfont{\ifdim\internote<.95\Internote \normtype\it  % version 1.22 RDT
+    \else\ifdim\internote<1.19\Internote \medtype\it
+    \else\ifdim\internote<1.43\Internote \bigfont\it
+    \else\Bigfont\it\fi\fi\fi}%
 \else
     \ifnum\musicsize=\tw@nty
     \else\ifnum\musicsize=\z@
@@ -1678,10 +1717,10 @@
     \let\smallppff\ppffsixteen
     \let\normppff\ppfftwenty
     \let\medppff\ppfftwentyfour
-    \def\txtfont{\ifdim\internote<.95\Internote \sevenit
-    \else\ifdim\internote<1.19\Internote \eightit
-    \else\ifdim\internote<1.43\Internote \tenit
-    \else\twelveit\fi\fi\fi}%
+    \def\txtfont{\ifdim\internote<.95\Internote \smalltype\it
+    \else\ifdim\internote<1.19\Internote \Smalltype\it
+    \else\ifdim\internote<1.43\Internote \normtype\it
+    \else\medtype\it\fi\fi\fi}%
 \fi\fi\fi}%
 
 \def\comput@specifics{\comput@fonts\comput@sizes}
@@ -4192,7 +4231,7 @@
 \global\pdl@pos\z@
 
 \def\pdld{\hbox{\hroff{%
-\raise\raiseped\internote\hbox{\vrule height10pt depth0.5pt width0.5pt}%
+\raise\raiseped\internote\hbox{\vrule height2ex depth0.5pt width0.5pt}%
 \getcurpos\global\pdl@pos\y@v%
 % save current instrument and staff
 \xdef\pdl@instr{\the\noinstrum@nt}\xdef\pdl@staff{\the\noport@@}% 
@@ -4202,20 +4241,22 @@
 \kern-\y@v%
 \raise\raiseped\internote\hbox{%
 \vrule height-0.5pt depth1pt width\y@v%
-\vrule height10pt depth0.5pt width0.5pt %% pedal up
+\vrule height2ex depth0.5pt width0.5pt %% pedal up
 }}}%
 \global\pdl@pos\z@}%
 
-\def\halfwidthbigwedge{4.16666pt}%
-
+\newbox\bigwedgebox     % 1.22 RDT
 \def\pdlud{\hbox{\hroff{\getcurpos\advance\y@v-\pdl@pos%% compute length of horizontal rule
 \kern-\y@v%
-\advance\y@v-\halfwidthbigwedge
+\thinmuskip=2mu%
+\setbox\bigwedgebox=\hbox{$\!\bigwedge\!$}%
+\def\halfwidthbigwedge{0.5\wd\bigwedgebox}%
+\advance\y@v-\halfwidthbigwedge%
 \raise\raiseped\internote%
 \hbox{%
 \vrule height-0.5pt depth1pt width\y@v% draw horizontal rule
 \kern\halfwidthbigwedge%
-\raise1.5pt\lrlap{$\bigwedge$}%   pedal up and down
+\raise0.33ex\lrlap{$\bigwedge$}%   pedal up and down
 }%
 \getcurpos\advance\y@v\halfwidthbigwedge\global\pdl@pos\y@v%
 }}}%
@@ -4616,9 +4657,9 @@
 
 %\check
 
-\def\zbreath{\check@staff\raise\si@\internote\rlap{\BIGfont'}\fi}
+\def\zbreath{\check@staff\raise\si@\internote\rlap{\BIGtype'}\fi}
 \def\cbreath{\check@staff\adv@box{\raise\si@\internote
-   \hbox\@to\noteskip{\hss\BIGfont'\hss}}\fi}
+   \hbox\@to\noteskip{\hss\BIGtype'\hss}}\fi}
 
 % The following macros can be used to surround a note by parentheses
 % \l[r]par p produces a left[right] parenthesis at pitch p (Ian Collier)

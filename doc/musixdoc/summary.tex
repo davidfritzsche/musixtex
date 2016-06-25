@@ -246,7 +246,7 @@ number instead of the pitch}%
 % again
 %
 \contpiece
-\NOtes\zchar9{\bs metron}\zchar{13}{\metron\qu{99}}\sk\en
+\NOtes\zchar9{\bs metron}\zchar{13}{\small\metron\qu{99}}\sk\en
 \setvoltabox1\bar
 \NOtes\loffset2{\zchar{17}{\bs setvoltabox}}\en
 \setvolta2\setendvolta\rightrepeat
@@ -257,13 +257,15 @@ number instead of the pitch}%
 \NOtes
   \zchar{17}{\bs segno}\segno n\sk
   \zchar{17}{\kern-2\afterruleskip\bs Segno}\Segno\hsk
-  \zchar{-4}{\bs caesura}\sk\qsk\caesura
-  \zchar{-4}{\bs cbreath}\cbreath\sk
-  \zchar{9}{\bs PED}\PED\sk
-  \zchar{9}{\bs sPED}\sPED\sk
-  \zchar{9}{\bs pdlu}\sk\pdlu
-  \zchar{9}{\bs DEP}\DEP\sk
-  \zchar{9}{\bs sDEP}\sDEP\sk\en
+  \zchar{-4}{\bs caesura}\sk\caesura
+  \zchar{-4}{\bs cbreath}\cbreath\qsk
+  \zchar{9}{\bs PED}\PED\hsk
+  \zchar{9}{\bs sPED}\sPED\hsk\qqsk
+  \zchar{9}{\bs pdld}\pdld\hsk\qsk
+  \zchar{9}{\bs pdlud}\pdlud\hsk\qsk
+  \zchar{9}{\bs pdlu}\pdlu\hsk\qqsk
+  \zchar{9}{\bs DEP}\DEP\hsk
+  \zchar{9}{\bs sDEP}\sDEP\hsk\en
 \stoppiece
 %
 % and again ...

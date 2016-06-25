@@ -13,14 +13,21 @@
 %%     Tokyo, Japan
 %%     URL(en): http://homepage1.nifty.com/kuuku/pub/musixtex/index-e.html
 %%        (jp): http://homepage1.nifty.com/kuuku/pub/musixtex/index.html
-%%   Extensions: Bob Tennent (rdt@cs.queensu.ca) 2015-02-06
+%%   Extensions: Bob Tennent (rdt@cs.queensu.ca) 2016-02-22
 %%
 %% reference: musixtex.tex (0.99) 268-508
 %% MusiXTeX: (c) Daniel Taupin, et al.
 %%
 %% History: see trailer.
 %
-\immediate\write16{MusiXTimesFonts\space<2015/07/25>}
+\immediate\write16{MusiXTimesFonts\space<2016/02/22>}
+%
+% 7pt roman, bold, italic, bold italic, slanted and small-cap
+\font\sevenrm=ptmr8t at 7pt
+\font\sevenbf=ptmb8t at 7pt
+\font\sevenit=ptmri8t at 7pt
+\font\sevenbi=ptmbi8t at 7pt
+\font\sevensc=ptmrc8t at 7pt  % artificial small-caps
 %
 % 8pt roman, bold, italic, bold italic, slanted and small-cap
 \font\eightrm=ptmr8t at 8pt
@@ -28,7 +35,6 @@
 \font\eightit=ptmri8t at 8pt
 \font\eightbi=ptmbi8t at 8pt
 \font\eightsc=ptmrc8t at 8pt  % artificial small-caps
-\font\eightsl=ptmro8t at 8pt
 %
 % 9pt
 \font\ninerm=ptmr8t at 9pt
@@ -36,7 +42,6 @@
 \font\nineit=ptmri8t at 9pt
 \font\ninebi=ptmbi8t at 9pt
 \font\ninesc=ptmrc8t at 9pt
-\font\ninesl=ptmro8t at 9pt
 %
 % 10pt
 \font\tenrm=ptmr8t at 10pt
@@ -44,16 +49,14 @@
 \font\tenit=ptmri8t at 10pt
 \font\tenbi=ptmbi8t at 10pt
 \font\tensc=ptmrc8t at 10pt
-\font\tensl=ptmro8t at 10pt
 %
 %
 % 11pt
-\font\elevenrm=ptmr8t at 11pt
-\font\elevenbf=ptmb8t at 11pt
-\font\elevenit=ptmri8t at 11pt
-\font\elevenbi=ptmbi8t at 11pt
-\font\elevensc=ptmrc8t at 11pt
-\font\elevensl=ptmro8t at 11pt
+\font\elevenrm=ptmr8t scaled \magstephalf
+\font\elevenbf=ptmb8t scaled \magstephalf
+\font\elevenit=ptmri8t scaled \magstephalf
+\font\elevenbi=ptmbi8t scaled \magstephalf
+\font\elevensc=ptmrc8t scaled \magstephalf
 %
 % 12pt
 \font\twelverm=ptmr8t scaled \magstep 1
@@ -61,7 +64,6 @@
 \font\twelveit=ptmri8t scaled \magstep 1
 \font\twelvebi=ptmbi8t scaled \magstep 1
 \font\twelvesc=ptmrc8t scaled \magstep 1
-\font\twelvesl=ptmro8t scaled \magstep 1
 %
 % 14pt
 \font\frtrm=ptmr8t scaled \magstep2
@@ -69,7 +71,6 @@
 \font\frtit=ptmri8t scaled \magstep2
 \font\frtbi=ptmbi8t scaled \magstep2
 \font\frtsc=ptmrc8t scaled \magstep2
-\font\frtsl=ptmro8t scaled \magstep2
 %
 % 17pt
 \font\svtrm=ptmr8t scaled \magstep3
@@ -77,7 +78,6 @@
 \font\svtit=ptmri8t scaled \magstep3
 \font\svtbi=ptmbi8t scaled \magstep3
 \font\svtsc=ptmrc8t scaled \magstep3
-\font\svtsl=ptmro8t scaled \magstep3
 %
 % 20pt
 \font\twtyrm=ptmr8t scaled \magstep4
@@ -85,7 +85,6 @@
 \font\twtyit=ptmri8t scaled \magstep4
 \font\twtybi=ptmbi8t scaled \magstep4
 \font\twtysc=ptmrc8t scaled \magstep4
-\font\twtysl=ptmro8t scaled \magstep4
 %
 % 25pt
 \font\twfvrm=ptmr8t scaled \magstep5
@@ -93,15 +92,15 @@
 \font\twfvit=ptmri8t scaled \magstep5
 \font\twfvbi=ptmbi8t scaled \magstep5
 \font\twfvsc=ptmrc8t scaled \magstep5
-\font\twfvsl=ptmro8t scaled \magstep5
 %
-% Large fonts for titles
-% (If you prefer Times-bold, use ..bf instead of ..rm)
-% (If you prefer small-caps, use ..sc instead of ..rm)
-\let\bigfont=\frtrm
-\let\Bigfont=\svtrm
-\let\BIgfont=\twtyrm
-\let\BIGfont=\twfvrm
+% large fonts for titles
+% (If you prefer Times-bold, use \bf)
+% (If you prefer small-caps, use \sc)
+%
+\def\bigtype{\bigfont\rm}
+\def\Bigtype{\Bigfont\rm}
+\def\BIgtype{\BIgfont\rm}
+\def\BIGtype{\BIGfont\rm}
 %
 %
 \font\ppfftwelve=ptmbi8t at 8pt
@@ -110,10 +109,6 @@
 \font\ppfftwentyfour=ptmbi8t scaled \magstep2
 \font\ppfftwentynine=ptmbi8t scaled \magstep3
 %
-\def\tinydyn{\let\ppff\ppfftwelve}  % version 1.18  RDT
-\def\smalldyn{\let\ppff\ppffsixteen}
-\def\normdyn{\let\ppff\ppfftwenty}
-\def\meddyn{\let\ppff\ppfftwentyfour}
 %
 \def\f{{\ppff f}}
 \def\ff{{\ppff ff}}
@@ -126,6 +121,21 @@
 \def\ppp{{\ppff ppp}}
 \def\pppp{{\ppff pppp}}
 
+
+%
+% sl fonts needed by musixsty
+%
+\font\eightsl=ptmro8t at 8pt
+\font\ninesl=ptmro8t at 9pt
+\font\tensl=ptmro8t at 10pt
+\font\twelvesl=ptmro8t scaled \magstep1
+\font\frtsl=ptmro8t scaled \magstep2
+\font\svtsl=ptmro8t scaled \magstep3
+\font\twtysl=ptmro8t scaled \magstep4
+\font\twfvsl=ptmro8t scaled \magstep5
+%
+%
+
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 %
 \def\sF{{\ppff s\p@kern f}}
@@ -134,82 +144,6 @@
 
 \def\mp@{{\ppff mp}}
 \let\mezzopiano\mp@
-\catcode`\@=\catcodeat
-
-\def\smalltype{%
-  \let\rm\eightrm
-  \let\bf\eightbf
-  \let\it\eightit
-  \let\bi\eightbi
-  \let\sc\eightsc
-  \let\sl\eightsl
-  \rm}
-\def\Smalltype{%
-  \let\rm\ninerm
-  \let\bf\ninebf
-  \let\it\nineit
-  \let\bi\ninebi
-  \let\sc\ninesc
-  \let\sl\ninesl
-  \rm}
-\def\normtype{%
-  \let\rm\tenrm
-  \let\bf\tenbf
-  \let\it\tenit
-  \let\bi\tenbi
-  \let\sc\tensc
-  \let\sl\tensl
-  \rm}
-\def\medtype{%
-  \let\rm\twelverm
-  \let\bf\twelvebf
-  \let\it\twelveit
-  \let\bi\twelvebi
-  \let\sc\twelvesc
-  \let\sl\twelvesl
-  \rm}
-\def\bigtype{%
-  \let\rm\bigfont
-  \let\bf\bigfont
-  \let\it\bigfont
-  \let\bi\bigfont
-  \let\sc\bigfont
-  \let\sl\bigfont
-  \rm}
-\def\Bigtype{%
-  \let\rm\Bigfont
-  \let\bf\Bigfont
-  \let\it\Bigfont
-  \let\bi\Bigfont
-  \let\sc\Bigfont
-  \let\sl\Bigfont
-  \rm}
-\def\BIgtype{%
-  \let\rm\BIgfont
-  \let\bf\BIgfont
-  \let\it\BIgfont
-  \let\bi\Bigfont
-  \let\sc\Bigfont
-  \let\sl\Bigfont
-  \rm}
-\def\BIGtype{%
-  \let\rm\BIGfont
-  \let\bf\BIGfont
-  \let\it\BIGfont
-  \let\bi\BIGfont
-  \let\sc\BIGfont
-  \let\sl\BIGfont
-  \rm}
-%
-%
-% PMX changes font assignment in pmx.tex
-%   \BIGfont=\fontid bx10 scaled\magstep4
-%   \Bigfont=\fontid bx10 scaled\magstep2
-%\ifx\pmxversion\undefined\relax\else
-%  \font\Bigfont=ptmr7t scaled \magstep2
-% \font\BIGfont=ptmr7t scaled \magstep4
-%\fi
-%
 
 %
 % Redefine accented characters for etex, suggested by David Carlisle:
@@ -234,6 +168,13 @@
 \expandafter\def\csname T1\string#1-\string#3\endcsname{\char#4\relax}}
 
 \input t1enc.def 
+
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+% \c needs special treatment
+\def\c#1{\leavevmode\ifx c#1\char231 \else\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent11 #1%
+     \else{\ooalign{\unhbox\z@\crcr
+        \hidewidth\char11\hidewidth}}\fi\fi}
+\catcode`\@=\catcodeat
 \fi
 
 \normtype
