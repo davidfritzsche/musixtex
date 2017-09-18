@@ -681,24 +681,26 @@ use within a score.
  \begin{itemize}\setlength{\itemsep}{0ex}
  \item \keyindex{lpar}\verb|{|$p$\verb|}| and
 \keyindex{rpar}\verb|{|$p$\verb|}| yield left and right
-parentheses at pitch $p$. They could be used to enclose notes or to build
-\ital{cautionary} accidentals, although the latter are more easily
-obtained with predefined macros (see Chapter~\ref{cautionary}).
-
-%avrb
-For example,
-
+parentheses at pitch $p$. They can be used to enclose notes or to build
+``big'' cautionary\index{cautionary accidental} accidentals.  For example,
+\\
+\begin{center}
 \begin{tabular}{ll}
-\raisebox{-1.5ex}[0ex][0ex]{\musicintextnoclefn{\notes\bsk\lpar{g}\rpar{g}\hu{g}\sk%
-\loffset{1.5}{\lpar{g}}\loffset{1.5}{\rpar{g}}\loffset{.4}{\sh g}\hu{g}\en}}
-&\begin{tabular}{ll}
-&\verb+\notes\lpar{g}\rpar{g}\hu{g}\sk%+\\
-is coded as&\verb+\loffset{1.5}{\lpar{g}}\loffset{1.5}{\rpar{g}}%+\\
-&\verb+\loffset{.4}{\sh g}\hu{g}\en}+
+\raisebox{-1.5ex}[0ex][0ex]{\musicintextnoclefn{\NOtes\qsk\lpar g\rpar g\hu g\sk%
+\loffset{1.5}{\lpar g\rpar g}\loffset{.4}{\sh g}\hu g\sk%
+\loffset{2.1}{\lpar g}\loffset{1.5}{\rpar g}\loffset{.4}{\dfl g}\hu g\en}}
 \end{tabular}
+\end{center}
+is coded as
+\end{itemize}
+\begin{center}\small
+\begin{tabular}{l}
+\verb+\NOtes\lpar g\rpar g\hu g\sk%+\\
+\verb+\loffset{1.5}{\lpar g\rpar g}\loffset{.4}{\sh g}\hu g\sk%+\\
+\verb+\loffset{2.1}{\lpar g}\loffset{1.5}{\rpar g}\loffset{.4}{\dfl g}\hu g\en+
 \end{tabular}
-%avre
-
+\end{center}
+\begin{itemize}
  \item \keyindex{bracket}\verb|{|$p$\verb|}{|$n$\verb|}| posts a
 square bracket to the left of a chord, vertically spanning $n$
 \verb|internote|s.
@@ -742,7 +744,7 @@ For example,
 \endextract
 \end{music}
 \noindent is coded as
-\begin{quote}\begin{verbatim}
+\begin{quote}\small\begin{verbatim}
 \begin{music}
 \setstaffs1{2}
 \setclef1{\bass}

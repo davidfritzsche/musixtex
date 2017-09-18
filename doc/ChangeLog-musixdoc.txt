@@ -1,3 +1,7 @@
+2016-11-12 RDT
+
+   Expanded treatment of big cautionary accidentals
+
 2016-06-06  RDT
 
    Revised the material on page layout.

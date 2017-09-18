@@ -9,43 +9,39 @@ not otherwise alter the appearance of the score, which we'll call
 \section{Logical transposition and octaviation}
 
 Logical transposition is controlled by an integer-valued \TeX\ register
-\keyindex{transpose}. Its default value is 0. If you enter
-\verb|\transpose=|$n$, then all subsequent pitches specified by
+\keyindex{transpose}. Its default value is $0$. If you enter
+\verb|\transpose=|$n$ outside of notes commands, then all subsequent pitches specified by
 letters will be transposed by $n$ positions. Normally this method would be
 used to transpose an entire piece. Pitches specified with
 numbers will not be affected, so if you think you will ever want to
 transpose a piece, you should enter all note pitches with letters.
 
-One way to transpose up or down by one octave would be to set
-\keyindex{transpose} to $7$ or $-7$. For example, to make a quarter note
-octave as a chord, you could define a macro as
-\verb|\def\soqu#1{\zq{#1}{\transpose=7 \qu{#1}}}|.
-Note that because \verb|\transpose| is altered inside a pair of braces, the
-effect of the alteration is only local and does not reach outside the braces.
-
- Another more convenient way to transpose locally up or down by one octave
+One way to transpose up or down by one octave would be to increase or decrease
+\keyindex{transpose} by $7$.
+A more convenient way to transpose locally up or down by one octave
 makes use respectively of the characters
 \verb|'| (close-quote, interpreted as an \itxem{acute accent}) and \verb|`| (open-quote, interpreted as
 a \itxem{grave accent}),
 placed immediately before the letter specifying the pitch. So
 for example \verb|\qu{'ab}| is equivalent to \verb|\qu{hi}| and
 \verb|\qu{`kl}| is equivalent to \verb|\qu{de}|. These characters have
-cumulative effects but in a somewhat restricted sense. They will alter the value of
-\verb|\transpose|, but only until changing to a different staff or
-instrument or encountering \verb|\en|, at which time it will be reset to the
+cumulative effects; thus,
+for example, \verb|\qu{''A'A}| and \verb|\qu{''A}\qu{'A}| are both equivalent to \verb|\qu{ah}|.
+Alterations to the value of
+\verb|\transpose| in notes commands are \emph{local}: when changing to a different staff or
+instrument or encountering \verb|\en|, \verb|\transpose|  will be reset to the
 value it had before the accents were used. (That value is stored in
-another register called \keyindex{normaltranspose}). Thus for example
-\verb|\qu{''A'A}| and \verb|\qu{''A}\qu{'A}|
-are both equivalent to \verb|\qu{ah}|.
+another register called \keyindex{normaltranspose}). Another way to localize
+changes to \verb|\transpose| is to create an explicit \TeX\  ''group'' by enclosing commands in \verb|{...}| braces.
 
 At any point it is possible to reset the \verb|\transpose| register
-explicitly to the value it had
-when entering \verb|\notes|, by prefacing a pitch indication with
+explicitly to the \verb|\normaltranspose| value 
+by prefacing a pitch indication with
 ``\verb|!|''. Thus \verb|\qu{!a'a}| always
 gives the note \verb|a| and its upper octave \verb|h|, shifted by the
-value of {\Bslash transpose} at the beginning of the current
-\verb|\notes...\en| group, regardless of the number of grave and
-acute accents occurring previously within that group.
+value of {\Bslash normaltranspose}, 
+regardless of the number of grave and
+acute accents earlier in that group.
 
  \section{Behavior of accidentals under logical transposition}\label{transposeaccids}
  The above processes indeed change the vertical position of the note heads

@@ -19,6 +19,8 @@ possible alteration by \keyindex{setsize}; \nochange.
  \item[\keyindex{internote} :]vertical spacing between notes one scale
 step apart in the current instrument, taking account of a possible alteration
 by \keyindex{setsize}; \nochange.
+Note that each distinct instrument may have a different
+\verb|\internote| (see Chapter~\ref{staffspacing}).
  \item[\keyindex{Internote} :]vertical spacing between notes one scale
 step apart in any instrument whose \keyindex{setsize} has the default
 value \keyindex{normalvalue} ($1.0$), equal to \verb|0.5\Interligne|; \nochange.
@@ -32,15 +34,22 @@ Default is \verb|3\Interligne|.
 \item[\keyindex{interstaff} :]a very important macro with a single numerical
 argument representing the factor that multiplies \verb|2\internote| to give the
 distance between the bottom of one staff and the bottom of the next one. In
-fact the macro redefines the parameter \verb|\interfacteur|.
+fact the macro redefines the parameter \verb|\interfacteur|. Default is 9.
+\verb|\interstaff| applies to all the
+instruments; to set the inter-staff spacing for a single instrument,
+use \keyindex{setinterstaff}\itbrace{n}\itbrace{m},
+$n$ is the instrument and $m$ is the replacement factor for that instrument.
+Note that
+after you have used \keyindex{setinterstaff},
+you cannot reset the distances for that instrument with
+\keyindex{interstaff}; you must subsequently use
+\keyindex{setinterstaff} for that purpose.
 \item[\keyindex{interportee} :]distance between the bottom of one staff and
 the bottom of the next one. It is always reset to
-\verb|2|\keyindex{interfacteur}\verb|\internote| at the next system.
+2 times \keyindex{internote} times the \keyindex{interfacteur} for the current
+instrument at the next system.
 Therefore, trying to change \verb|\interportee| will have no effect. Change
-\verb|\interstaff| instead. Further, note that \verb|\interstaff| applies to all the
-instruments, but each distinct instrument may have a different
-\verb|\internote| (see Chapter~\ref{staffspacing}).
-
+\verb|\interstaff| or use \keyindex{setinterstaff} instead. 
 \item[\keyindex{interinstrument} :]additional vertical distance between
 two consecutive instruments. This means that the distance between the lowest
 line of the previous instrument and the lowest line of the top staff of the current
@@ -53,7 +62,8 @@ value can be overridden for the space above any particular instrument
 with the macro \keyindex{setinterinstrument}\itbrace{n}\itbrace{s}, where
 $n$ is the instrument and $s$ is the replacement value of the space to
 be added. The \verb|\setinterinstrument| macro may be useful in some vocal
-scores to provide vertical space for lyrics. Note that
+scores to provide vertical space for lyrics. 
+Note that
 after you have used \keyindex{setinterinstrument},
 you cannot reset the distances for that instrument with
 \keyindex{interinstrument}; you must subsequently use

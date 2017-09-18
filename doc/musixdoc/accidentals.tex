@@ -49,10 +49,9 @@ heads. This is done using \keyindex{uppersh}\pitchp, \keyindex{upperna}\pitchp, 
 
 \vspace*{-2ex}
 It also possible to introduce \ital{\ixem{cautionary accidental}s},
-i.e.,~small accidentals enclosed in parentheses. This done by preceding
-the name of the accidental keyword with ``\verb|c|'',\label{cautionary}
-e.g.,~\keyindex{cfl}\pitchp~for a cautionary flat.
- Available cautionary accidentals are \keyindex{csh}, \keyindex{cfl},
+i.e.,~small accidentals enclosed in parentheses. This is done by preceding
+the name of the accidental keyword with ``\verb|c|''\label{cautionary}.
+Available cautionary accidentals are \keyindex{csh}, \keyindex{cfl},
 \keyindex{cna},
 \keyindex{cdfl} and \keyindex{cdsh}, which give
 
@@ -71,3 +70,5 @@ e.g.,~\keyindex{cfl}\pitchp~for a cautionary flat.
 \keyindex{accshift}\verb|=|\ital{any \TeX\ dimension}, where
 positive values shift to the left and negative to right, with a
 default of~\verb|0pt|.
+For ``big'' cautionary accidentals, use, for example, 
+\verb|{|\keyindex{largenotesize}\verb|\csh|\pitchp\verb|}|  or see Section~\ref{brapar}.

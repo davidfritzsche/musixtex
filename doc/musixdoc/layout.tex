@@ -53,7 +53,7 @@ systems to increase by up to \verb|5\Interligne|.
 
 The following values of page-layout parameters will allow as much material
 as possible 
-on a page, provided the printer supports these dimensions, which
+on a page, provided the printer supports these dimensions which
 imply approximately half-inch margins:
 
 \begin{center}
@@ -74,6 +74,34 @@ If a score is going to be ``published'' at a public repository (such as
 A$4$ \emph{or} letter paper, for example  by setting the \verb|\hsize| to~190~mm
 and the \verb|\vsize| to~10~in.
 
+To generate a score in ``landscape''\index{landscape mode} mode, adjust the 
+text-size parameters above accordingly (e.g., \verb+\hsize=10in+ and \verb+\vsize=7.5in+)
+and add a suitable \verb\papersize\ ``special'' to the \TeX\ output, as in 
+\verb+\special{papersize=11in,8.5in}+.
+
+
+For \emph{any} values of 
+\verb|\hsize| and \verb|\vsize|,
+material will normally be centered on the page by using 
+command sequences such as the following, which simply split the difference between the page size and the text size, 
+and then subtract one inch because of \TeX\ conventions:
+\begin{enumerate}
+\item[For A$4$ paper, portrait mode (210~mm $\times$ 297~mm):]\quad\\[-2ex]
+\begin{verbatim}
+\hoffset=210mm\advance\hoffset-\hsize\divide\hoffset2
+\advance\hoffset-1.0in
+\voffset=297mm\advance\voffset-\vsize\divide\voffset2
+\advance\voffset-1.0in
+\end{verbatim}
+\item[For letter-size paper, portrait mode (8.5~in $\times$ 11~in):] \quad\\[-2ex]
+\begin{verbatim}
+\hoffset=8.5in\advance\hoffset-\hsize\divide\hoffset2
+\advance\hoffset-1.0in
+\voffset=11in\advance\voffset-\vsize\divide\voffset2
+\advance\voffset-1.0in
+\end{verbatim}
+\end{enumerate}
+
 To determine the maximal dimensions that \emph{your} printer is capable of, 
 process the standard file \verb|testpage.tex| with \LaTeX\ and
 print the result. The ``rulers'' on four sides will indicate
@@ -83,28 +111,6 @@ accordingly.  If your score is going to be printed by a publisher or a colleague
 \verb|testpage.pdf| to them to determine what margins are necessary for their
 printer.
 
-
-For \emph{any} values of 
-\verb|\hsize| and \verb|\vsize|,
-material will normally be centered on the page by using one of the following 
-command sequences, which simply split the difference between the page size and the text size, 
-and then subtract one inch because of \TeX\ conventions:
-\begin{enumerate}
-\item[For A$4$ paper (210~mm $\times$ 297~mm):]\quad\\[-2ex]
-\begin{verbatim}
-\hoffset=210mm\advance\hoffset-\hsize\divide\hoffset2
-\advance\hoffset-1.0in
-\voffset=297mm\advance\voffset-\vsize\divide\voffset2
-\advance\voffset-1.0in
-\end{verbatim}
-\item[For letter-size paper (8.5~in $\times$ 11~in):] \quad\\[-2ex]
-\begin{verbatim}
-\hoffset=8.5in\advance\hoffset-\hsize\divide\hoffset2
-\advance\hoffset-1.0in
-\voffset=11in\advance\voffset-\vsize\divide\voffset2
-\advance\voffset-1.0in
-\end{verbatim}
-\end{enumerate}
 However, if the margins on the \verb|testpage| output are \emph{not} 
 symmetric, 
 the printer is mis-aligned.
@@ -116,7 +122,8 @@ for just \verb|musixtex| output using
 \verb|\advance\voffset ...|
 after the ``normal'' settings given above.
 
-\pagebreak
+
+
 
 \section{Page numbering, headers and footers}\index{page
 number}\index{footnote}

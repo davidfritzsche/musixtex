@@ -1,0 +1,10 @@
+
+Changes from MusiXTeX 123 to 124:
+
+  + preserve changes to \transpose in an hboxed tremolo command
+  + test that musixtex.tex has already been loaded in some extensions: 
+  +   musixps, musixec, musixhv, musixplt, musixtmr, musixppff 
+  + changed from \it to \ppff in several places
+  + support new command \setinterstaff{n}{m}
+  + define \largenotesize, \Largenotesize
+  + corrected typos \twtybf[g] \svtbf[g] 
