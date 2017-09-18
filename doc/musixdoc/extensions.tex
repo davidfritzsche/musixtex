@@ -2059,7 +2059,7 @@ This package (tnt = Transform Notes) provides a macro \keyindex{TransformNotes} 
 possible several ``transformations'' of the effect of notes commands such as \keyindex{notes}.
 The \verb\musixtnt\ package is distributed separately from \verb\musixtex\.
 
-In general the effect of \verb|\TransformNotes(|\textit{input}\verb|}{|\textit{output}\verb|}|
+In general the effect of \verb|\TransformNotes{|\textit{input}\verb|}{|\textit{output}\verb|}|
 is that subsequent notes commands in the source will expect their arguments 
 to match the \textit{input} pattern but
 the notes will be typeset according to the \textit{output} pattern.
@@ -2145,10 +2145,13 @@ will switch the order of the two instruments.
 will restore normal two-instrument processing.
 
 
-The \keyindex{TransformNotes} macro is currently not compatible with the 
+The \texttt{musixtnt} implementation of \keyindex{TransformNotes} is not compatible with the 
 \texttt{musixlyr} extension
 package for lyrics described in Section~\ref{musixlyr}.  For extracting or omitting parts
-in scores with lyrics, use the techniques described in Chapter~\ref{parts}. 
+in scores with lyrics, one may either use the
+\texttt{autosp}\index{autosp@{\tt autosp}} preprocessor discussed in Section~\ref{autosp}, which provides
+an alternative implementation of \keyindex{TransformNotes},  
+or the techniques described in Chapter~\ref{parts}. 
 
  \section{musixtri}\index{musixtri@{\tt musixtri.tex}}
 Provides triply dotted note symbols.
@@ -2173,3 +2176,17 @@ Available are:
 \keyindex{qbppp} and
 \keyindex{zqbppp}.
 
+
+\section{tuplet}
+
+This file does nothing; it is provided for compatibility with 
+\musixtex{} version 1.20 or earlier and legacy scores. 
+Since version 1.21, \verb|musixtex.tex| itself contains all the functions 
+of the older \texttt{tuplet.tex}, namely 
+definitions of 
+\begin{itemize}
+\item \keyindex{tuplettxt}
+\item \keyindex{uptuplet}
+\item \keyindex{downtuplet}
+\end{itemize}
+See Section~\ref{tuplet}.

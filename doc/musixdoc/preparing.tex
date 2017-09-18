@@ -248,7 +248,7 @@ the \ital{current} staff.
 \section{Automatic note spacing}
 \label{autosp}
 
-A preprocessor called \texttt{autosp} automates the generation 
+A preprocessor called \texttt{autosp}\index{autosp@{\tt autosp}} automates the generation 
 of note-spacing commands by converting (non-standard) commands
 of the form \verb|\anotes ... \en| into one or more conventional
 note-spacing commands, as determined by the note values
@@ -264,13 +264,16 @@ For example, from the input
 \begin{verbatim}
   \Notes\qa J\sk\qa K\sk&\ca l\qa m\sk\ca n\en
 \end{verbatim}
+\texttt{autosp} also supports non-standard commands for adding ``global''
+skips (i.e., in every staff) and centered-bar rests.
+
 As an option, \emph{all} note-spacing commands (except \verb|\znotes|
 and \verb|\vnotes|) will be processed similarly; this is useful for correcting
 the spacing in single-instrument parts extracted from a multi-instrument score;
 see Section~\ref{musixtnt}.
 
 The \texttt{autosp} package is available in 
-\href{https://www.tug.org/texlive/}{\underline{TeXLive}} (from 2016) and
+\href{https://www.tug.org/texlive/}{\underline{TeXLive}} and
 can also be found at 
 the \href{http://icking-music-archive.org/software/autosp/autosp.zip}
 {\underline{Werner Icking Music Archive}}

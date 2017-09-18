@@ -1,0 +1,6 @@
+
+Changes from MusiXTeX 124 to 125:
+
+* included a "dummy" tuplet.tex in the distribution
+* added \ignorespaces in musixltx.tex
+* defined \qap, \qapp, \tqsk

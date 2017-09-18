@@ -25,14 +25,20 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{24}
+\def\mxminorvernumber{25}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2017-02-28}
+\def\mxdate{2017-07-25}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.25
+
+% included a "dummy" tuplet.tex in the distribution
+% added \ignorespaces in musixltx.tex
+% defined \qap, \qapp, \tqsk
 
 % version 1.24
 
@@ -3437,6 +3443,9 @@
 
 \def\qa{\q@symbol\@qa}
 
+\def\qap#1{\pt{#1}\qa{#1}}    % 1.25  RDT
+\def\qapp#1{\ppt{#1}\qa{#1}}  % 1.25  RDT
+
 \def\qu{\q@symbol\@qu}
 \def\qup{\q@symbol\@qup}
 \def\qupp{\q@symbol\@qupp}
@@ -4759,6 +4768,7 @@
 
 \def\qqsk{\off{\qu@rt\@l@mskip}}  % version 1.16  RDT
 \def\hqsk{\off{\h@lf\@l@mskip}}
+\def\tqsk{\off{\p@seven\@l@mskip}}  % version 1.25 RDT
 \def\qsk{\off\@l@mskip}
 
 \def\nspace{\hardspace{\h@lf\qn@width}}

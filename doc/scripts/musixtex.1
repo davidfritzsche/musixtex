@@ -1,5 +1,5 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2017-01-08  "musixtex version 0.17" ""
+.TH MUSIXTEX 1 2017-06-13  "musixtex version 0.18" ""
 
 .SH NAME
 musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
@@ -42,14 +42,16 @@ If a jobname argument has a .mtx extension, the file is first preprocessed using
 .BR prepmx (1)
 and the resulting .pmx file is processed as above.
 .P
-If a jobname argument has a .aspc extension, the file is first preprocessed using
-.BR autosp (1) 
-and the resulting .tex file is processed as above.
-.P
 If a jobname argument has a .ltx extension, the file is processed using
 .BR latex (1)
 (or
-.BR pdflatex (1)).
+.BR pdflatex (1)) 
+in place of 
+.BR etex .
+.P
+If a jobname argument has a .aspc extension, the file is first preprocessed using
+.BR autosp (1) 
+and the resulting .tex or .ltx file is processed as above.
 .P
 If a jobname argument has no extension, the script will look for a file 
 .IR jobname .mtx
