@@ -25,14 +25,24 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{23}
+\def\mxminorvernumber{24}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2016-06-06}
+\def\mxdate{2017-02-28}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.24
+
+% preserve changes to \transpose in an hboxed tremolo command
+% test that musixtex.tex has already been loaded in some extensions: 
+%   musixps, musixec, musixhv, musixplt, musixtmr, musixppff 
+% changed from \it to \ppff in several places
+% support new command \setinterstaff{n}{m}
+% define \largenotesize, \Largenotesize
+% correct typos \twtybf[g] \svtbf[g] 
 
 % version 1.23
 
@@ -247,7 +257,7 @@
 \newcount\n@vi
 \newcount\n@vii
 \newcount\n@viii
-%\newcount\count@ %=\count255 def'd in plain
+\newcount\count@ 
 
 \newbox\toks@box
 \newbox\w@rkbox
@@ -342,6 +352,7 @@
       \advance\count@ by\@ne
       %
       \expandafter \let \csname interinstrument\roman@c@\endcsname \interinstrument
+      \expandafter\def\csname interfacteur\roman@c@\endcsname{\interfacteur}  %  RDT 1.24
       %
       % altitude
       \expandafter \noexpand@newskip  \csname k@i\roman@c@\endcsname
@@ -1568,6 +1579,10 @@
   \let\curr@ntsiz@\smallnotesize}
 \def\tinynotesize{\set@tinynotesize\comput@specifics
   \let\curr@ntsiz@\tinynotesize}
+\def\largenotesize{\set@largenotesize\comput@specifics  % v.124  RDT
+  \let\curr@ntsiz@\largenotesize}
+\def\Largenotesize{\set@Largenotesize\comput@specifics  % v.124  RDT
+  \let\curr@ntsiz@\Largenotesize}
 
 \def\musickeyfont{%
   \ifdim\internote<\p@seven6\Internote \musictinyfont
@@ -1686,8 +1701,8 @@
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
     \let\slurud\slurutwentyd \let\slurdd\slurdtwentyd %    +ickd
     \let\hslurud\hslurutwentyd \let\hslurdd\hslurdtwentyd %+ickd
-    \let\meternorfont\svtbfg \let\metersmallfont\frtbf     % version 1.18  RDT
-    \let\meterbigfont\twtybfg \let\meterlargefont\twfvbf
+    \let\meternorfont\svtbf \let\metersmallfont\frtbf     % version 1.18  RDT
+    \let\meterbigfont\twtybf \let\meterlargefont\twfvbf   % version 1.24 typos corrected
     \let\meterLargefont\twfvbf
     \let\tinyppff\ppfftwenty   
     \let\smallppff\ppfftwentyfour
@@ -1788,7 +1803,8 @@
   \edef\st@ffs{\csname n@p\romannumeral\noinstrum@nt\endcsname}%
   \edef\nblines{\csname n@l\romannumeral\noinstrum@nt\endcsname}%
   \edef\internote{\csname i@n\romannumeral\noinstrum@nt\endcsname}%
-  \interportee\interfacteur\internote \interportee\tw@\interportee}
+  \edef\int@rf{\csname interfacteur\romannumeral\noinstrum@nt\endcsname}%    RDT 1.24
+  \interportee\int@rf\internote \interportee\tw@\interportee}           %    RDT 1.24
 
 \def\C@Inter{%  RDT: corrected to work if \nblines > 6   (version 1.23)
   \stem@skip\interportee
@@ -1898,6 +1914,9 @@
 
 \def\setinterinstrument#1#2{\n@v#1\relax % select instrument
   \expandafter\def\csname interinstrument\romannumeral\n@v\endcsname{#2}}
+
+\def\setinterstaff#1#2{\n@v#1\relax % select instrument  % RDT 1.24
+  \expandafter\def\csname interfacteur\romannumeral\n@v\endcsname{#2}}
 
 %%% portees
 
@@ -2977,7 +2996,7 @@
   \let\rq\rq@ \let\lq\lq@ \let\ds\ds@oup \let\mp\mp@
   \locx@skip\x@skip}
 
-\def\@ndstaff{\egroup
+\def\@ndstaff{\egroup  % this where \transpose gets reset 
   \ifdim\n@skip<\wd\n@otebox \n@skip\wd\n@otebox \fi
   \raise\altportee\rlap{\unhbox\n@otebox}}
 
@@ -3030,8 +3049,8 @@
       \if .\t@ruc \let\@TI\pt   \C@GET \fi
       \if >\t@ruc \let\@TI\dsh \C@GET \fi
       \if <\t@ruc \let\@TI\dfl \C@GET \fi
-      \if !\t@ruc \transpose\normaltranspose \C@Get \fi
-      \if '\t@ruc \advance\transpose\s@v@n   \C@Get \fi
+      \if !\t@ruc \transpose\normaltranspose \C@Get \fi  
+      \if '\t@ruc \advance\transpose\s@v@n   \C@Get \fi  
       \if `\t@ruc \advance\transpose-\s@v@n  \C@Get \fi
       \ifnum\n@viii<\maxdimen \n@i#1\fi
     \else
@@ -4298,7 +4317,7 @@
 
 \def\trilleX{\let\T@i\empty \C@trille}
 \let\trille\trilleX
-\def\TrilleX{\def\T@i{\it tr }\C@trille}
+\def\TrilleX{\def\T@i{\ppff tr }\C@trille}  % 1.24  changed from \it    RDT
 \let\Trille\TrilleX
 \def\C@trille#1#2{\zcharnote{#1}{\y@v#2\noteskip \trill@}}
 
@@ -4337,7 +4356,7 @@
 \def\tTrill@old#1{\s@l@cttrill#1\relax
   \message{\noexpand\tr@x=\the\tr@x, No. #1}%
   \ifdim\tr@x < \maxdimen\else\errmessage{\@mis \noexpand\Itrille \number #1}\fi
-  \def\T@i{\it tr }\C@tri}
+  \def\T@i{\ppff tr }\C@tri}   % 1.24  changed from \it  RDT
 
 \def\C@tri#1{\getcurpos\advance\y@v-\tr@y \kernm\y@v
   \zcharnote{#1}\trill@\kern\y@v\let\T@i\empty\let\@itrille\undefined}
@@ -4379,7 +4398,7 @@
   \C@T}
 \def\ITrille#1{\s@l@cttrill#1\relax
   \ifdim\tr@x < \maxdimen\errmessage{\@mis \noexpand\Ttrille \number #1}\fi
-  \global\tr@sw={{\it tr }}%
+  \global\tr@sw={{\ppff tr }}%  1.24  changed from \it  RDT
   \C@T}
 
 \def\C@T#1{%
@@ -4405,23 +4424,26 @@
 %%% version 1.21 
 %%%  RDT changed beam numbers to 5, suggested by JPC
 %%%  RDT adjusted the vertical positions for 16th and 32nd tremolos
+%%% version 1.24
+%%%  RDT use new counter \tr@nspose to preserve changes to \transpose in an \hbox
 
-\def\trml#1{\raise2\internote\hbox{\loffset{0.5}{\ibl5{#1}9}\roffset{0.5}{\tbl5}}}%
-\def\trmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibu5{#1}9}\roffset{0.5}{\tbu5}}}%
-\def\trrml#1{\raise3\internote\hbox{\loffset{0.5}{\ibbl5{#1}9}\roffset{0.5}{\tbl5}}}%
-\def\trrmu#1{\raise-4\internote\hbox{\loffset{0.5}{\ibbu5{#1}9}\roffset{0.5}{\tbu5}}}%
-\def\trrrml#1{\raise3\internote\hbox{\loffset{0.5}{\ibbbl5{#1}9}\roffset{0.5}{\tbl5}}}%
-\def\trrrmu#1{\raise-4\internote\hbox{\loffset{0.5}{\ibbbu5{#1}9}\roffset{0.5}{\tbu5}}}%
+\newcount\tr@nspose % used to restore value of \transpose after closing an \hbox
+\def\trml#1{\raise2\internote\hbox{\loffset{0.5}{\ibl5{#1}9}\roffset{0.5}{\tbl5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\trmu#1{\raise-3\internote\hbox{\loffset{0.5}{\ibu5{#1}9}\roffset{0.5}{\tbu5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\trrml#1{\raise3\internote\hbox{\loffset{0.5}{\ibbl5{#1}9}\roffset{0.5}{\tbl5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\trrmu#1{\raise-4\internote\hbox{\loffset{0.5}{\ibbu5{#1}9}\roffset{0.5}{\tbu5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\trrrml#1{\raise3\internote\hbox{\loffset{0.5}{\ibbbl5{#1}9}\roffset{0.5}{\tbl5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\trrrmu#1{\raise-4\internote\hbox{\loffset{0.5}{\ibbbu5{#1}9}\roffset{0.5}{\tbu5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
 
 % whole notes are wider than quarter/half notes:
 % version 1.21 RDT adjusted the offsets and vertical positions 
 
-\def\Trml#1{\raise3\internote\hbox{\ibl5{#1}9\roffset{1.25}{\tbl5}}}%
-\def\Trmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibu5{#1}9}\roffset{0.15}{\tbu5}}}%
-\def\Trrml#1{\raise3\internote\hbox{\ibbl5{#1}9\roffset{1.25}{\tbl5}}}%
-\def\Trrmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibbu5{#1}9}\roffset{0.15}{\tbu5}}}%
-\def\Trrrml#1{\raise3\internote\hbox{\ibbbl5{#1}9\roffset{1.25}{\tbl5}}}%
-\def\Trrrmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibbbu5{#1}9}\roffset{0.15}{\tbu5}}}%
+\def\Trml#1{\raise3\internote\hbox{\ibl5{#1}9\roffset{1.25}{\tbl5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\Trmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibu5{#1}9}\roffset{0.15}{\tbu5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\Trrml#1{\raise3\internote\hbox{\ibbl5{#1}9\roffset{1.25}{\tbl5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\Trrmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibbu5{#1}9}\roffset{0.15}{\tbu5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\Trrrml#1{\raise3\internote\hbox{\ibbbl5{#1}9\roffset{1.25}{\tbl5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
+\def\Trrrmu#1{\raise-4\internote\hbox{\loffset{1.1}{\ibbbu5{#1}9}\roffset{0.15}{\tbu5}\global\tr@nspose\transpose}\transpose\tr@nspose}%
 
 %%% octave lines
 
@@ -4700,7 +4722,7 @@
 \def\f{{\ppff f}}
 \def\ff{{\ppff f\f@kern f}}
 \def\fp{{\ppff f\f@kern p}}
-\def\sF{{\it s\ppff \p@kern f}}
+\def\sF{{\ppff s\ppff \p@kern f}}  % changed \it to \ppff  1.24 RDT
 \def\fff{{\ppff f\f@kern f\f@kern f}}
 \def\ffff{{\ppff f\f@kern f\f@kern f\f@kern f}}
 \def\mf{{\ppff m\p@kern\f@kern f}}
@@ -4966,11 +4988,12 @@
 
 %%% standard settings
 % [115] make them compatible to >12 instruments
-\def\resetlayout{\let\interfacteur\nin@
+\def\resetlayout{\def\interfacteur{9}%
   \stafftopmarg\thr@@\Interligne \staffbotmarg\thr@@\Interligne
   \count@\z@ \loop
     \advance\count@ by\@ne
     \expandafter \let\csname n@l\roman@c@\endcsname \fiv@
+    \expandafter\def\csname interfacteur\roman@c@\endcsname{\interfacteur}    % RDT 1.24
   \ifnum\count@<\maxinstruments\repeat
   \resetclefsymbols}
 

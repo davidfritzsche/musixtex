@@ -20,7 +20,8 @@
 %%
 %% History: see trailer.
 %
-\immediate\write16{MusiXTimesFonts\space<2016/02/22>}
+\immediate\write16{MusiXTimesFonts\space<2017/02/10>}
+\ifx\undefined\startpiece\errmessage{Input musixtex.tex before musixtmr.tex}\fi
 %
 % 7pt roman, bold, italic, bold italic, slanted and small-cap
 \font\sevenrm=ptmr8t at 7pt
@@ -146,7 +147,7 @@
 \let\mezzopiano\mp@
 
 %
-% Redefine accented characters for etex, suggested by David Carlisle:
+% Redefine accented characters for 8-bit font, suggested by David Carlisle:
 %
 \ifx\documentclass\undefined
 \def\ProvidesFile#1[#2]{}
@@ -166,10 +167,10 @@
 \def#1{\char#3\relax}}
 \def\DeclareTextComposite#1#2#3#4{%
 \expandafter\def\csname T1\string#1-\string#3\endcsname{\char#4\relax}}
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 
 \input t1enc.def 
 
-\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 % \c needs special treatment
 \def\c#1{\leavevmode\ifx c#1\char231 \else\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent11 #1%
      \else{\ooalign{\unhbox\z@\crcr
@@ -196,4 +197,5 @@
 %%  8-bit encoding and extensions, similar to musixplt.tex
 %% 2015-07-25
 %% change to ptmr8t fonts and use t1enc.def to re-defined accented characters
-
+%% 2016-07-11 RDT
+%% \catcode`\@=11 before inputting t1enc.def

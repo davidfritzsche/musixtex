@@ -219,6 +219,13 @@ To set an \itxem{instrument name}, use
 This will place the name in the space to the left of the
 first staff or group of staves for instrument $n$. To specify the amount of space
 available, use \verb|\parindent|$d$ where $d$ is any hard \TeX\ dimension.
+For multi-line instrument names, use \TeX\ commands as in the following:
+\begin{verbatim}
+  \setname1{\vbox{%
+    \hbox to\parindent{\hss Bass\hss}%
+    \hbox to\parindent{\hss Recorder\hss}}}
+\end{verbatim}
+
  \section{Groupings of instruments}\label{curlybrackets}
 By default, all staves in a system will be joined
 at the left by a thin, vertical rule. In addition, if an instrument has more than

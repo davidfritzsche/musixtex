@@ -21,9 +21,10 @@
 %   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 %   Boston, MA 02111-1307, USA.
 %
-%   Copyright 2015-2016  Bob Tennent rdt@cs.queensu.ca
+%   Copyright 2015-2017  Bob Tennent rdt@cs.queensu.ca
 %
-\immediate\write16{MusiXplt\space<2016/02/22>}
+\immediate\write16{MusiXplt\space<2017/02/10>}
+\ifx\undefined\startpiece\errmessage{Input musixtex.tex before musixplt.tex}\fi
 %
 % 7pt roman, bold, italic, bold italic, slanted and small-cap
 \font\sevenrm=pplr8t at 7pt
@@ -147,9 +148,11 @@
 \catcode`\@=\catcodeat
 
 %
-% Redefine accented characters for etex, suggested by David Carlisle:
+% Redefine accented characters for 8-bit font, suggested by David Carlisle:
 %
+
 \ifx\documentclass\undefined
+\catcode`\@=11
 \def\ProvidesFile#1[#2]{}
 \def\DeclareFontEncoding#1#2#3{}
 \def\DeclareTextAccent#1#2#3{%
@@ -170,7 +173,6 @@
 
 \input t1enc.def 
 
-\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 % \c needs special treatment
 \def\c#1{\leavevmode\ifx c#1\char231 \else\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent11 #1%
      \else{\ooalign{\unhbox\z@\crcr

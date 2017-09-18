@@ -1,7 +1,10 @@
 \chapter{Extension Library}
-All of the following files are invoked by saying \keyindex{input} \ital{filename}\ .
-Most of them are fully compatible with \musixtex\ in that they do not redefine
-any existing macros but rather provide additional functionality. In future
+All of the following files are invoked by saying \keyindex{input} \ital{filename}.
+In some cases, 
+\verb\musixtex\ must be input \emph{before} the extension,
+but most of them are fully compatible with \verb\musixtex.tex\ in that they do not redefine
+any existing macros and just provide additional functionality. 
+In future
 versions of \musixtex\ we may very well incorporate many of them directly into
 \verb|musixtex.tex|, but for now we leave them separate.
 
@@ -1466,17 +1469,21 @@ example
 using (for instrument 2 as an example):
  \verb|\settrebleclefsymbol2\oldGclef|
 
- \item\keyindex{cqu} $p$ provides a square headed quarter note with stem up at
+ \item\keyindex{cqu} $p$ provides a square-headed quarter note with stem up at
 pitch $p$.
 
- \item\keyindex{cql} $p$ provides a square headed quarter note with stem down at
+ \item\keyindex{cql} $p$ provides a square-headed quarter note with stem down at
 pitch $p$.
 
- \item\keyindex{chu} $p$ provides a square headed half note with stem up at
+ \item\keyindex{chu} $p$ provides a square-headed half note with stem up at
 pitch $p$.
 
- \item\keyindex{chl} $p$ provides a square headed half note with stem down at
+ \item\keyindex{chl} $p$ provides a square-headed half note with stem down at
 pitch $p$.
+
+ \item\keyindex{cqb} $n$ $p$ provides a square-headed beam note for beam $n$ at pitch $p$.
+
+ \item\keyindex{zcqb} $n$ $p$ provides a non-spacing square-headed beam note for beam $n$ at pitch $p$.
 
  \item\keyindex{cnqu} $p$ and \keyindex{cnql} $p$ provide a stemless square
 headed
@@ -1873,6 +1880,12 @@ for other bold-italic text in music.
 
  \section{musixps}\label{musixps}\index{musixps@{\tt musixps.tex}}
  Activates type K Postscript slurs, ties,  and hairpins; see Chapter~\ref{PostscriptSlurs}.
+Use as follows:
+\begin{quote}\begin{verbatim}
+\input musixtex
+\input musixps
+...
+\end{verbatim}\end{quote}
 
  \section{musixstr}\label{musixstr}\index{musixstr@{\tt musixstr.tex}}
  Provides bowing and other symbols for \itxem{string instruments}\footnote{provided

@@ -1,5 +1,5 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2016-06-06  "musixtex version 0.16" ""
+.TH MUSIXTEX 1 2017-01-08  "musixtex version 0.17" ""
 
 .SH NAME
 musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
@@ -71,46 +71,48 @@ output program name and version number, and quit
 output usage summary and quit
 .TP
 .B -l 
-assumes LaTeX source;
+assume LaTeX source;
 implied if the file has .ltx extension
 .TP
 .B -p 
-changes the TeX processor to 
+change the TeX processor to 
 .BR pdfetex (1) 
 or
 .BR pdflatex (1)
-(and doesn't run 
-.BR dvips (1)
-and 
-.BR ps2pdf (1)
-or
-.BR dvipdfm (1)
-)
+(and doesn't run a dvi processor)
 .TP
 .B -c
 preprocess pmx file using 
 .BR pmxchords (1)
 .TP
 .B -d 
-changes the dvi processor to
+don't generate a .ps file and change the dvi processor to
 .BR dvipdfm (1)
+.TP
+.B -D dvix
+use
+.B dvix 
+as the dvi processor; e.g., -D "dvipdfm -m 0.9". 
+Use -d
+.I before 
+-D to suppress .ps generation.
 .TP 
 .B -F fmt
-uses 
+use 
 .B fmt
 as the TeX processor; e.g., -F "luatex --output-format=dvi"
 .TP
 .B -m
-stops processing at the pmx file
+stop processing at the pmx file
 .TP
 .B -t
-stops processing at the tex/mid files
+stop processing at the tex/mid files
 .TP
 .B -s 
-stops processing at the dvi file
+stop processing at the dvi file
 .TP
 .B -g
-stops processing at the ps file
+stop processing at the ps file
 .TP 
 .B -i
 retain intermediate and log files
