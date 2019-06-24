@@ -25,14 +25,25 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{26}
+\def\mxminorvernumber{27}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2017-11-15}
+\def\mxdate{2017-12-26}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.27
+
+% introduced \meterN 
+% eliminated \ds@oup 
+% introduced \nqqb \nqqh \nqqqb \nqqqh abbreviations and
+%   synonyms \nqql \nqqu \nqqql \nqqqu 
+% introduced \hap, \happ analogous to \qap, \qapp
+% introduced \hbsk analogous to \hsk
+% introduced \bqsk, \bhsk, \btsk analogous to \qsk, \hqsk, \tqsk
+% introduced \xxtuplet 
 
 % version 1.26
 
@@ -2804,16 +2815,16 @@
 %%   and adjusted the kerns  RDT
 %%
 
-\def\trebleoct{\trebleclef\raise 9\internote\hbox\@to\z@{\txtfont\kern -3.6\internote 8\hss}}
-\def\bassoct{\bassclef\raise 2\internote\hbox\@to\z@{\txtfont\kern -4.6\internote 8\hss}}
-\def\treblelowoct{\trebleclef\raise -7.5\internote\hbox\@to\z@{\txtfont\kern -4.6\internote 8\hss}}
-\def\basslowoct{\bassclef\raise -6\internote\hbox\@to\z@{\txtfont\kern -5.0\internote 8\hss}}
+\def\trebleoct{\trebleclef\raise 9\internote\hbox\@to\z@{\txtfont{\kern -3.6\internote 8}\hss}}
+\def\bassoct{\bassclef\raise 2\internote\hbox\@to\z@{\txtfont{\kern -4.6\internote 8}\hss}}
+\def\treblelowoct{\trebleclef\raise -7.5\internote\hbox\@to\z@{\txtfont{\kern -4.6\internote 8}\hss}}
+\def\basslowoct{\bassclef\raise -6\internote\hbox\@to\z@{\txtfont{\kern -5.0\internote 8}\hss}}
 
 % [version 1.15] reqest from Hermann Hinsch
-\def\smalltrebleoct{\smalltrebleclef\raise 7.2\internote\hbox\@to\z@{\txtfont\kern -3.6\internote 8\hss}}
-\def\smalltreblelowoct{\smalltrebleclef\raise-6.8\internote\hbox\@to\z@{\txtfont\kern -4.2\internote 8\hss}} 
-\def\smallbassoct{\smallbassclef\raise 2\internote\hbox\@to\z@{\txtfont\kern -4.0\internote 8\hss}}
-\def\smallbasslowoct{\smallbassclef\raise-6.5\internote\hbox\@to\z@{\txtfont\kern -4.4\internote 8\hss}}
+\def\smalltrebleoct{\smalltrebleclef\raise 7.2\internote\hbox\@to\z@{\txtfont{\kern -3.6\internote 8}\hss}}
+\def\smalltreblelowoct{\smalltrebleclef\raise-6.8\internote\hbox\@to\z@{\txtfont{\kern -4.2\internote 8}\hss}} 
+\def\smallbassoct{\smallbassclef\raise 2\internote\hbox\@to\z@{\txtfont{\kern -4.0\internote 8}\hss}}
+\def\smallbasslowoct{\smallbassclef\raise-6.5\internote\hbox\@to\z@{\txtfont{\kern -4.4\internote 8}\hss}}
 % [version 1.15] reqest from Hermann Hinsch: end
 
 
@@ -3004,7 +3015,7 @@
   \altportee\altitude \advance\altportee\noport@@\interportee
   \count@portee \s@l@ctclefs \expandafter\get@refs\the\a@c
   \setbox\n@otebox\hbox\bgroup
-  \let\rq\rq@ \let\lq\lq@ \let\ds\ds@oup \let\mp\mp@
+  \let\rq\rq@ \let\lq\lq@ \let\mp\mp@ % \let\ds\ds@oup   RDT 1.27
   \locx@skip\x@skip}
 
 \def\@ndstaff{\egroup  % this where \transpose gets reset 
@@ -3406,6 +3417,8 @@
 \def\h@symbol{\def\q@u{\musixfont\@ight}}
 
 \def\ha{\h@symbol\@qa}
+\def\hap#1{\pt{#1}\ha{#1}}      % 1.27  RDT
+\def\happ#1{\ppt{#1}\ha{#1}}    % 1.27  RDT
 \def\hu{\h@symbol\@qu}
 \def\hup{\h@symbol\@qup}
 \def\hupp{\h@symbol\@qupp}
@@ -3568,14 +3581,24 @@
 \def\tqu{\q@symbol\@tqh}  % version 1.16  RDT
 \def\tqb{\q@symbol\@tqb}
 \def\tql{\q@symbol\@tqb}  % version 1.16  RDT
+
 \def\tqqh#1#2{\tbbu{#1}\tqh{#1}{#2}} % version 1.17 RDT
-\def\tqqu#1#2{\tbbu{#1}\tqu{#1}{#2}} % version 1.17 RDT
+\def\tqqu{\tqqh}                     % version 1.17 RDT
 \def\tqqb#1#2{\tbbl{#1}\tqb{#1}{#2}} % version 1.17 RDT
-\def\tqql#1#2{\tbbl{#1}\tql{#1}{#2}} % version 1.17 RDT
+\def\tqql{\tqqb}                     % version 1.17 RDT
 \def\tqqqh#1#2{\tbbbu{#1}\tqqh{#1}{#2}} % version 1.17 RDT
-\def\tqqqu#1#2{\tbbbu{#1}\tqqu{#1}{#2}} % version 1.17 RDT
+\def\tqqqu{\tqqqh}                      % version 1.17 RDT
 \def\tqqqb#1#2{\tbbbl{#1}\tqqb{#1}{#2}} % version 1.17 RDT
-\def\tqqql#1#2{\tbbbl{#1}\tqql{#1}{#2}} % version 1.17 RDT
+\def\tqqql{\tqqqb}                      % version 1.17 RDT
+
+\def\nqqh#1#2{\tbbu{#1}\qb{#1}{#2}}     % version 1.27 RDT
+\def\nqqb#1#2{\tbbl{#1}\qb{#1}{#2}}     % version 1.27 RDT
+\def\nqqqh#1#2{\tbbbu{#1}\qb{#1}{#2}}   % version 1.27 RDT
+\def\nqqqb#1#2{\tbbbl{#1}\qb{#1}{#2}}   % version 1.27 RDT
+\def\nqqu{\nqqh}                        % version 1.27 RDT
+\def\nqql{\nqqb}                        % version 1.27 RDT
+\def\nqqqu{\nqqqh}                      % version 1.27 RDT
+\def\nqqql{\nqqqb}                      % version 1.27 RDT
 
 \def\ztqh{\advancefalse\q@symbol\@tqh}
 \def\ztqu{\advancefalse\q@symbol\@tqh}  % version 1.16  RDT
@@ -3969,7 +3992,8 @@
 \def\qp{\adv@restbox{\check@staff\musixchar62\fi}}
 \let\soupir\qp
 
-\def\ds@oup{\adv@restbox{\check@staff\musixchar63\fi}}
+%\def\ds@oup{\adv@restbox{\check@staff\musixchar63\fi}}  % why?  RDT 1.27
+\def\ds{\adv@restbox{\check@staff\musixchar63\fi}}
 \def\qs{\adv@restbox{\check@staff\musixchar64\fi}}
 \def\hs{\adv@restbox{\check@staff\musixchar65\fi}}
 \def\qqs{\adv@restbox{\check@staff\musixchar66\fi}}
@@ -4106,6 +4130,7 @@
 \def\meterC{\raise4\internote\hbox{\musickeyfont\@lxxxiii}} %-> 4/4
 \def\reverseC{\raise4\internote\hbox{\keychar84}}           %-> 4/2
 \def\meterplus{{\keychar57}}
+\def\meterN#1{\raise2\internote\hbox{\meterfont#1}}         % RDT 1.27 
 
 %%% arpeggio
 
@@ -4573,6 +4598,9 @@
   \sign@skip=0.5\sign@skip \xdef\half@sign@skip{\the\sign@skip}}%
   \zcharnote{#2}{\kern\h@lf\qn@width\kern \half@sign@skip\lrlap{\txtfont#1\/\/}}}  
 \def\triolet{\xtuplet\txt}    % version 1.17 RDT
+\def\xxtuplet#1:#2#3{\n@iv#1\advance\n@iv\m@ne {\sign@skip=\n@iv\noteskip
+  \sign@skip=0.5\sign@skip \xdef\half@sign@skip{\the\sign@skip}}%
+  \zcharnote{#3}{\kern\h@lf\qn@width\kern \half@sign@skip\lrlap{\txtfont{#1:#2\/\/}}}}
 
 %
 %   Following definitions based on tuplet.tex - conventional tuplet brackets for MusiXTeX.
@@ -4764,7 +4792,8 @@
 \def\off#1{\advance\locx@skip#1\kern#1}
 \def\sk{\off\noteskip}
 \def\hsk{\off{\h@lf\noteskip}}
-\def\bsk{\off{-\noteskip}}
+\def\bsk{\off{-\noteskip}}            
+\def\hbsk{\off{-\h@lf\noteskip}}      % version 1.27  RDT
 
 %%
 %   Redefine \qsk to be scaleable softwidth rather than a fixed kern
@@ -4775,6 +4804,9 @@
 \def\hqsk{\off{\h@lf\@l@mskip}}
 \def\tqsk{\off{\p@seven\@l@mskip}}  % version 1.25 RDT
 \def\qsk{\off\@l@mskip}
+\def\bhsk{\off{-\h@lf\@l@mskip}}      % version 1.27  RDT
+\def\btsk{\off{-\p@seven\@l@mskip}}   % version 1.27  RDT
+\def\bqsk{\off-\@l@mskip}             % version 1.27  RDT
 
 \def\nspace{\hardspace{\h@lf\qn@width}}
 \def\qspace{\hardspace\qn@width}

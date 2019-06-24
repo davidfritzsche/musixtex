@@ -1,5 +1,5 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2017-06-13  "musixtex version 0.18" ""
+.TH MUSIXTEX 1 2017-12-10  "musixtex version 0.19" ""
 
 .SH NAME
 musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
@@ -53,7 +53,7 @@ If a jobname argument has a .aspc extension, the file is first preprocessed usin
 .BR autosp (1) 
 and the resulting .tex or .ltx file is processed as above.
 .P
-If a jobname argument has no extension, the script will look for a file 
+If a jobname argument has none of these extensions, the script will look for a file 
 .IR jobname .mtx
 or
 .IR jobname .pmx
@@ -65,7 +65,7 @@ or
 .IR jobname .ltx ,
 in that order, and process it as above.
 .SH OPTIONS
-.TP 8
+.TP 10
 .B -v 
 output program name and version number, and quit
 .TP
@@ -106,6 +106,17 @@ as the TeX processor; e.g., -F "luatex --output-format=dvi"
 .TP
 .B -m
 stop processing at the pmx file
+.TP
+.B -M mtxx
+use
+.B mtxx
+as the mtx preprocessor; e.g., -M "prepmx -i".
+.TP
+.B -A aspcx
+use
+.B aspcx
+as the aspc preprocessor; e.g., -A "autosp -l".
+.TP
 .TP
 .B -t
 stop processing at the tex/mid files

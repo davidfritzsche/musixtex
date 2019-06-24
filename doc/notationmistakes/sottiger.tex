@@ -1,0 +1,1103 @@
+\documentclass[12pt,twoside]{article}
+\usepackage{a4}
+\usepackage{musixtex}
+\usepackage[german]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{randtext}
+\input coulhack
+\raggedbottom
+\setlength{\textwidth}{18cm} \setlength{\textheight}{26cm}
+\setlength{\oddsidemargin}{0pt}\setlength{\evensidemargin}{0pt}
+\setlength{\parindent}{0cm}\setlength{\parskip}{.5cm}
+\setlength{\marginparwidth}{1in} \setlength{\marginparsep}{0pt}
+\setlength{\hoffset}{-1cm}
+\setlength{\voffset}{-2.5cm}
+%\setlength{\headsep}{2cm}
+\setlength{\itemsep}{0cm}
+
+\newcommand{\milieu}[1]{\begin{center}{#1}\end{center}}
+\newcommand{\pruneau}{$\bullet$~}
+\newcommand{\subsec}{\vspace{-1cm}\subsection{~}\vspace{-.5cm}}
+% \today should work the same in theory
+%\def\mytoday{\ifcase\month\or
+%  January\or February\or March\or April\or May\or June\or
+%  July\or August\or September\or October\or November\or December\fi
+%  \space\number\day, \number\year}
+
+\def\notess{\vnotes2.4\elemskip}
+\def\notesss{\vnotes1.7\elemskip}
+\def\notesm{\vnotes1.5\elemskip}
+\def\appog{\multnoteskip\tinyvalue\tinynotesize}
+\newcommand{\zcn}[2]{\zcharnote{#1}{#2}}
+\newcommand{\lcn}[2]{\lcharnote{#1}{#2}}
+\newcommand{\ccn}[2]{\ccharnote{#1}{#2}}
+\newcommand{\nxst}{\nextstaff}
+\def\hhqsk{\off{.7\elemskip}}
+
+\newcommand{\twoextr}[2]
+%{\begin{music}\let\extractline\hbox
+{\let\extractline\hbox
+\hbox to \hsize{
+\hfill
+\startextract #1
+\zendextract\hfill
+\startextract #2
+\zendextract
+\hfill}
+
+%\let\extractline\centerline\end{music}}
+\let\extractline\centerline}
+
+\accshift=0mm
+\geometricskipscale
+\nostartrule
+\nobarmessages\nobarnumbers
+\let\extractline\centerline
+
+\begin{document}
+\milieu{\ppfftwentynine Sammlung der Irrtümer beim Notensatz}
+\milieu{\medtype oder}
+\milieu{\ppfftwentyfour Essay über die Kunst des guten Notensatzes}
+\milieu{\Huge Jean-Pierre Coulon}
+%\centerline{\tt
+%\kern3.5em{obs-nice}\kern-4.5em{@}\kern-3.5em{coulon}\kern4.5em{.fr}}
+
+\centerline{\tt \randomize{coulon@obs-nice.fr}}
+
+
+%\milieu{\mytoday}
+\milieu{\today}
+
+\milieu{\large gedacht f"ur:}
+\begin{itemize}
+\item Anwender von Notensatz-Software,
+\item Entwickler solcher Software,
+\item konventionelle Notenstecher,
+\item Notensammler,
+\item jene mit geschärftem Blick für Fragen der \textit{Semantik},
+\textit{Semiologie},
+\textit{Philologie} , u. a. 
+\end{itemize}
+
+{\footnotesize NB: Die verwendeten Beispiele sind selbstverständlich
+musikalisch wertlos; spielen Sie diese also nicht auf ihrem
+Instrument nach :-)\\
+Um mich auf das wesentliche zu beschränken und mangels
+ausreichender Fachkompetenz, behandle ich keine der benachbarten,
+aufregenden Sachgebiete:
+
+\pruneau Musiktheorie, Harmonielehre, Komposition u. a.\\
+\pruneau Vergleichstests verschiedener Notensatzprogramme ,\\
+\pruneau wie die zitierten Symbole in den einzelnen Epochen zu
+interpretieren sind,\\
+\pruneau Fragen des Copyrights,\\
+\pruneau Schlagzeug-Notation und Zupfinstrument-Tabulaturen,\\
+\pruneau sehr frühe und avantgardistische Musiknotation.\\
+
+}
+
+\section{Grundsätzliches}
+\subsec
+Wenn Noten zur gleichen Zeit in der gleichen Notenzeile
+auftreten, sind zwei Schreibweisen möglich: als Akkord oder
+mehrstimmig (\textit{polyphon}):
+
+\twoextr
+{\NOtes\qu c\zq c\qu e\en
+\Notes\ibu0e2\zq c\qb0e\zq d\tqh0f\en}
+{\NOtes\zql c\qp\zql c\qu e\en
+\Notes\ibl0c2\ibu1e2\zqb0c\qb1e\tbl0\zqb0d\tqh1f\en}
+
+Natürlich erfordert ein unterschiedlicher Rhythmus der
+Einzelstimmen die polyphone Schreibweise.
+
+\eject\milieu{\ppfftwenty Ab hier gilt:}
+{\ppfftwentyfour Linke Seite: fehlerhaft. \hfill Rechte Seite:
+richtig. }
+
+\subsec
+Bemühe Dich, die Stellen, an denen die \textit{Seiten gewendet}
+werden müssen, für den Musiker annehmbar zu setzen; anderenfalls
+wird er entweder jemanden zum Blättern benötigen oder mit
+aneinandergeklebten Photokopien herumexperimentieren. Seitdem
+moderne Notenausgaben kleiner als früher sind, verlangt diese
+Forderung einen höheren Aufwand vom Notensetzer.
+
+{\footnotesize Die tatsächliche Druckgröße (d.\,h. weggelassene
+Ränder) der meisten Noten aus früheren Epochen entspricht nahezu dem
+üblichen Format der meisten moderner Ausgaben einschließlich der
+Ränder.
+}
+
+Eine einfache Lösung bietet sich durch Verwendung einer kleinen
+Stichgröße. Es ist aber besser, auf Kosten von mehr Aufwand eine
+größere zu verwenden, um den Platz vernünftig auszunutzen.
+Die folgenden Beispiele nehmen den gleichen horizontalen
+Raum ein, jedoch ist das rechte leichter zu lesen:
+
+\bigaccid
+\begin{music}\let\extractline\hbox
+\hbox to \hsize{
+\hfill
+\smallmusicsize
+\setclef1{\treble}
+\startextract%
+\notess\ibbu0c1\qb0c\qb0{^c}\qb0d\tqh0{^d}\en
+\notess\ibbu0f{-1}\qb0{g}\qb0{_g}\qb0f\tqh0e\en
+\bar%
+\notess\ibbu0c0\qb0{^cc}\qb0{=c}\tqh0c\en
+\zendextract\hfill
+\normalmusicsize
+\startextract%
+\notesss\ibbu0c1\qb0c\hqsk\qb0{^c}\qb0d\hqsk\tqh0{^d}\en
+\notesss\ibbu0f{-1}\qb0{g}\hqsk\qb0{_g}\qb0f\tqh0e\en
+\bar%
+\notesss\ibbu0c0\qb0{^cc}\hqsk\qb0{=c}\tqh0c\en
+\zendextract
+\hfill}
+\let\extractline\centerline\end{music}
+
+Außerdem mußt Du auch die Abstände zwischen den Zeilen des Systems
+verändern, um keinen vertikalen Raum zu verschwenden
+(s. meine Ausgabe von Dusseks Klaviersonate Op. 35-3).
+
+\subsec
+Wähle horizontale Zwischenräume, die sich entsprechend der
+Notenlänge vergrößern, nicht linear dazu. Ich persönlich bin
+glücklich mit
+1 : \hbox{$\sqrt{2}\approx 1.414$},
+um ein Längenverhältnis von 1 : 2 darzustellen, jedoch ist das keine
+absolute Regel, besonders wenn Zweiunddreißgstel oder
+Vierundsechzigstel vorkommen, weil diese dabei zu dicht
+zusammengedrängt würden. Ändere den Abstand einer absoluten
+Notenlänge innerhalb einer Zeile nie ohne guten Grund.
+
+\nostartrule
+\setclef1\treble
+\hsize82.1mm
+\startpiece
+\NOTEs\hu c\sk\en
+\NOTEs\qu c\en
+\NOtes\cu c\en
+\notes\ibbu0c0\qb0c\en
+\notes\qb0{cc}\tqh0c\en
+\setemptybar
+\endpiece
+
+\hsize18cm
+
+\setclef1\treble
+\twoextr
+{\notes\hu c\en
+\NOtes\qu c\en
+\NOTes\cu c\en
+\notes\ibbu0c0\qb0c\en
+\Notes\qb0{cc}\tqh0c\en}
+{\NOTes\hu c\en
+\NOtes\qu c\en
+\Notes\cu c\en
+\notes\ibbu0c0\qb0{cc}\en
+\notes\qb0c\tqh0c\en}
+
+{\footnotesize Wenn ein System mehrere Zeilen hat, bestimmt die
+Stimme mit den \textbf{kürzesten} Notenwerten die alle anderen Abstände.
+Liedtext, soweit vorhanden, kann noch größere Abstände fordern.
+}
+
+\subsec
+Hier ein guter Grund, engen Notenabstand zu verändern:
+die Vermeidung von Kollisionen:
+
+\twoextr
+{\notesss\ccu c\ibbl0k2\qb0{jklm}\tqb0{^n}\en}
+{\notesss\ccu c\hqsk\ibbl0k2\qb0{jklm}\hqsk\tqb0{^n}\en}
+
+\subsec
+Wenn keine andere Stimme es verlangt, sollen Notenhälse
+ebenfalls in die Abstandsberechnungen einbezogen werden:
+
+\largemusicsize
+\twoextr
+{\notes\ibbu0d0\qb0{ded}\tqh0e\ibbl0k0\qb0{jkj}\tqb0k\en}
+{\notes\ibbu0d0\qb0{ded}\tqh0e\hqsk\ibbl0k0\qb0{jkj}\tqb0k\en}
+
+
+\subsec
+Verschiebe die vertikale Ausrichtung nicht unter dem Vorwand, genug
+Platz für die Vorzeichen zu lassen:
+
+\setstaffs1{2}\setclef1\bass\startrule\bigaccid
+\twoextr{
+\notesm\ibbu0I2\qb0{IJK}\tqh0L\nxst\ibbu0d2\qb0{de}\hhqsk\qb0{^f}\tqh0g\en
+\bar%
+\NOtes\ql M\nxst\hhqsk\qu{^h}\en}
+{\notesm\ibbu0I2\qb0{IJ}\hhqsk\qb0K\tqh0L\nxst\ibbu0d2\qb0{de}\hhqsk\qb0{^f}\tqh0g\en
+\bar%
+\NOtes\hqsk\ql M\nxst\hqsk\qu{^h}\en}
+
+\nostartrule
+
+\subsec
+Schreibe die tiefere Note eines \textit{Sekundenintervalls} in
+einem Akkord \textbf{links}. Im polyphonen Satz hingegen sollte sie
+\textbf{rechts} stehen.
+
+\largemusicsize\setstaffs1{1}\setclef1{\treble}
+\twoextr
+{\NOtes\rq b\zq{ce}\qu g\en
+\NOtes\rq b\zq{^ce}\qu g\en
+\NOtes\rq c\rq e\rq g\qu b\en
+\doublebar%
+\NOtes\zql b\roffset{.9}{\qu c}\en
+\notes\ibbu0c0\loff{\ibl1b{-1}\zqb1b}\qb0{cd}\en
+\notes\tbl1\zqb1a\qb0c\tqh0d\en}
+{\NOtes\rq c\zq{be}\qu g\en
+\NOtes\sh c\rq c\zq{be}\qu g\en
+\NOtes\rq c\zq{be}\qu g\en
+\doublebar%
+\NOtes\zqu c\roffset{.9}{\ql b}\en
+\notes\ibbu0c0\roff{\ibl1b{-1}\zqb1b}\qb0c\hqsk\qb0d\en
+\notes\tbl1\zqb1a\qb0c\tqh0d\en}
+
+{\footnotesize Ich lasse Fälle von Stimmkreuzung aus. Störe Dich
+nicht an dem Vorzeichen, das zur oberen Note gehört, auch nicht an
+Noten außerhalb dieser Sekunde.
+}
+
+
+\subsec
+Im polyphonen Satz sollen Noten gerade soweit verschoben sein, um sie
+zu unterscheiden, jedenfalls weniger als der Abstand für eine
+Sekunde:
+
+\Largemusicsize\generalmeter{\empty}\setstaffs1{1}\setclef1\treble
+\twoextr
+{\NOtes\zql c\roff{\zqu e}\qu g\en
+\NOtes\zql c\zqu e\qu g\en
+\NOtes\zql c\roffset{.2}{\zqu f}\qu g\en
+\NOtes\zqlp c\roff{\zqup f}\qup h\en}
+{\NOtes\zql c\loffset{.2}{\zqu g}\qu e\en
+\NOtes\zql c\loffset{.2}{\zqu g}\qu e\en
+\NOtes\zql c\roff{\zqu f}\qu g\en
+\NOtes\loffset{.2}{\zqu h}\pt c\pt f\pt h\zql c\qu f\en}
+
+{\footnotesize Merke für den Fall punktierter Noten: die
+Punkte müssen vertikal ausgerichtet werden.}
+
+\subsec
+Manchmal müssen die Punkte so plaziert werden, damit jede
+Zweideutigkeit vermieden wird:
+
+\twoextr
+{\NOtes\ibu0h0\roffset{.9}{\zql g\pt h}\qb0h\en
+\notes\tbbu0\tqh0h\en
+\NOtes\zqlp g\qu i\en
+\Notes\qu j\cl f\en
+\Notes\zql e\qu k\en}
+{\Notesp\loffset{.3}{\ibu0h0\zqb0h}%
+\loffset{.5}{\raise.15\Interligne\hbox{\pt h}}\roffset{.8}{\zql g}\sk\en
+%\NOtes\ibu0h0\loffset{.2}{\pt h}\roffset{1.4}{\zql g}\qb0h\en
+\notes\tbbu0\tqh0h\en
+\NOtes\pt f\zql g\qu i\en
+\Notes\qu j\cl f\en
+\Notes\zql e\qu k\en}
+
+\subsec
+Im zweitimmigen polyphonen Satz sollen die Notenhälse der Oberstimme
+nach oben zeigen, auch wenn die anderen Stimme eine Pause hat:
+
+\normalmusicsize\setclef1{\bass}
+\twoextr
+{\NOTesp\zw H\hup a\en
+\Notes\qu N\hroff{\liftpause{-2}}\ql{MKLM}\en}
+{\NOTesp\zw H\hup a\en
+\Notes\qu N\liftpause{-2}\qu{MKLM}\en}
+
+{\footnotesize(Das gleiche gilt für die untere Stimme.)}
+
+
+\subsec
+Einige Verbindungen von Noten oder Pausen können musiktheoretisch
+korrekt, jedoch der Lesbarkeit hinderlich sein:
+
+\normalmusicsize
+\generalmeter{\meterfrac44}\setclef1\treble
+\twoextr
+{\notes\cu c\en
+\bar%
+\notes\cu d\en
+\Notes\qp\en
+\notes\ibu0f2\qb0{efgh}\tqh0i\en
+\bar
+\znotes\en}
+%\notes\cl j\en}
+{\notes\cu c\en
+\bar%
+\notes\cu d\ds\ds\cu e\en
+\notes\ibu0g2\qb0{fgh}\tqh0i\en
+\bar
+\znotes\en}
+
+Mit anderen Worten: Pausen sollen nicht wie synkopierte Noten
+fungieren.
+Teile in einem 3-er-Schlag eine Pause auf, die auf den zweiten und
+dritten Schlag fällt. Verbalkte Noten bedürfen weniger Sorgfalt.
+
+{\footnotesize Jemand könnte vorbringen, daß in der alten
+Musik die Fähnchen-/Balkenschreibung etwas über den Grad der
+Artikulation ausdrückt. Doch deren Regel stimmt fast immer mit
+einer \textit{vernüftigen} Artikulation überein.
+}
+
+
+\section{Verbalkung}
+\subsec
+Balken sollten eine angemessene Schräge haben. Früher hätte man
+eine zu geringe Steigung vermieden, weil die Druckerschwärze
+boshafterweise versucht, den winzigen Winkel zwischen diesen Balken
+und den Notenlinien auszufüllen. Für eine Tonleiter oder ein
+Arpeggio kann diese Steigung weder steiler sein, als sie durch durch
+die Noten gebildet wird, noch flach. Es muß ein Kompromiß
+gefunden werden. Hier ein Beispiel mit einer Lösung zweier
+unterschiedlicher Herausgeber:
+
+\generalmeter{\empty}
+\setstaffs1{1}\setclef1{\treble}
+\twoextr{
+\notes\ibbu0a6\qb0{cdefg}\tqh0h\en
+\notes\ibbu0g0\qb0{cdefg}\tqh0h\en}
+{\notes\zcn q{\scriptsize Peters, 19. Jht.}\ibbu0a4\qb0{cdefg}\tqh0h\en
+\notes\zcn q{\scriptsize Henle, 20. Jht}\ibbu0e1\qb0{cdefg}\tqh0h\en
+\notes\zcn q{empfohlen}\ibbu0d2\qb0{cdefg}\tqh0h\en}
+
+%\footnotesize{If you want to imitate some French publishers :}
+\footnotesize{Wenn Du manche französische Herausgeber nachahmen willst:}
+
+\startextract%
+\notes\ibu0d2\ibbu1d2\qb1c\qb0{defg}\tbu0\tqh1h\en
+\notesss\ibu0i0\ibbbu1i0\qb1j\qb0{eg}\tbu0\tqh1j\en
+\zendextract
+
+\newpage
+
+\subsec
+Die Balkensetzung soll an den Kontext angepaßt werden. Die
+Plazierung variiert abhängig davon, ob diese Notengruppe einzeln
+steht oder in Folge:
+
+\startextract
+\NOTes\hu c\hu d\en
+\bar
+\NOtes\qu f\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\NOtes\qu{cd}\en
+\bar%
+\NOtes\qp\en
+\NOTes\hu f\en
+\zendextract
+
+\twoextr
+{\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en
+\notes\ibbu0f4\qb0{ceg}\tqh0j\en}
+{\notes\ibbu0h1\qb0{ceg}\tqh0j\en
+\notes\ibbu0h1\qb0{ceg}\tqh0j\en
+\notes\ibbu0h1\qb0{ceg}\tqh0j\en
+\notes\ibbu0h1\qb0{ceg}\tqh0j\en}
+
+\subsec
+Vermeide Z-förmige Balken, wie sie in früheren Ausgaben zu finden
+sind:
+
+\vspace{10pt}
+
+\normalmusicsize
+\setclef1\bass
+\twoextr
+{\Notes\ibu0E{-4}\qb0G\zq{Nc}\qb0e\en
+\Notes\zq{Nc}\qb0e\zq{Nc}\tqb0e\en}
+{\Notes\ibl0H2\qb0G\en
+\Notes\zq{Nc}\qb0e\zq{Nc}\qb0e\zq{Nc}\tqb0e\en
+\doublebar%
+\Notes\cu G\en
+\Notes\ibl0a0\zq{Nc}\qb0e\zq{Nc}\qb0e\zq{Nc}\tqb0e\en}
+
+
+\subsec
+Balken sollten Hilfslinien niemals kreuzen:
+
+\vspace{10pt}
+
+\setclef1{\treble}
+\twoextr
+{\notes\ibbl0q3\qb0{qrstuvw}\tqb0x\en}
+{\notes\ibbl0o1\qb0{qrstuvw}\tqb0x\en}
+
+\subsec
+Beeinflusse die Balkensetzung nicht, um Pausen in ihrer üblichen
+Höhe zu setzen. Versetze lieber die Pausen.
+
+\twoextr
+{\Notes\ibl0k1\qb0n\ds\tqb0o\en
+\Notes\ibl0l0\qb0o\ds\tqb0o\en}
+{\Notes\ibl0n1\qb0n\raise2\Interligne\ds\tqb0o\en
+\Notes\ibl0o0\qb0o\raise2\Interligne\ds\tqb0o\en}
+
+
+\section{Halte- und Bindebögen}
+\subsec
+Bei \textbf{gebundenen} Noten beginnt und endet der Bogen über oder
+unter der \textbf{Mitte} des Notenkopfes.  \textbf{Haltebögen}
+jedoch beginnen und enden vertikal ausgerichtet am Rand des
+Notenkopfes und nicht höher als dieser. Um Zusammenstöße mit
+Notenhälsen zu vermeiden, kann die erste Regel verletzt werden.
+
+\vspace{10pt}
+
+\largemusicsize
+\twoextr
+{\NOtes\isslurd0c\isluru1c\qu c\tsslur1 d\qu d\tsslur0e\qu e\islurd0f\qu f\en
+\bar%
+\NOtesp\tslur0f\roff{\itied0f}\qup f\en
+\NOtes\ttie0\qu f\en}
+{\NOtes\islurd0c\hroff{\isluru1c}\qu c\tslur1d\qu d\tslur0e\qu e\itied0f\qu f\en
+\bar%
+\NOtesp\ttie0\itied0f\qup f\en
+\NOtes\ttie0\qu f\en}
+
+{\footnotesize Merke, daß der Haltebogen "`ruhiger"' wird.}
+
+\newpage
+
+\subsec
+Vermeide indessen "`Akrobatik"', um diese Regeln strikt einzuhalten:
+
+%\vspace{10pt}
+
+\largemusicsize
+\twoextr
+{\NOtes\islurd0c\qu c\tsslur0j\ql j\en
+\NOtes\isluru0j\ql j\ql o\midslur5\tslur0k\ql k\en}
+{\NOtes\isslurd0c\qu c\tsslur0j\ql j\en
+\NOtes\isluru0l\ql j\ql o\tslur0m\ql k\en}
+
+\vspace{-6pt}
+
+\subsec
+In manchen Epochen wurde ein einzelner Haltebogen auf \textbf{alle}
+Noten eines einzelnen Akkords bezogen. Sonderfälle sind so häufig
+geworden, daß es besser ist, alle Haltebögen explizit zu setzen.
+
+\largemusicsize
+\twoextr
+{\NOtes\itieu0g\zq{ce}\qu g\en
+\bar%
+\NOtes\ttie0\zq{ce}\qu g\en}
+{\NOtes\itied0c\itenl1e\itieu2g\zq{ce}\qu g\en
+\bar%
+\NOtes\ttie0\tten1\ttie2\zq{ce}\qu g\en}
+
+\vspace{-10pt}
+
+\subsec
+Verbindungen von Halte- und Bindebögen mit Punkten und Verzierungen:
+
+\twoextr
+{\NOtes\isluru0j\upz k\ql j\tslur0k\upz l\ql k\en
+\NOtes\isluru0n\ql n\shake o\tslur0o\ql m\en}
+{\NOtes\isluru0l\upz j\ql j\tslur0m\upz k\ql k\en
+\NOtes\isluru0n\ql n\shake q\tslur0m\ql m\en}
+
+\vspace{-10pt}
+
+\subsec
+Verbindungen von Halte- und Bindebögen:
+
+\twoextr
+{\NOtes\itied0d\qu d\en
+\bar
+\NOtes\ttie0\islurd1d\qu d\tslur1c\qu c\en
+\NOtes\islurd1e\qu e\tslur1f\itied0f\qu f\en
+\bar
+\NOtes\ttie0\qu f\en}
+{\NOtes\islurd1d\itied0d\qu d\en
+\bar
+\NOtes\ttie0\qu d\tslur1c\qu c\en
+\NOtes\islurd1e\qu e\itied0f\qu f\en
+\bar
+\NOtes\tslur1f\ttie0\qu f\en}
+
+\vspace{-6pt}
+
+{\footnotesize Streicher werden das als offensichtlich empfinden.}
+
+\subsec
+Der gepunktete Bogen ist die beste Weise, einen \textit{Bogen des
+Herausgebers} hervorzuheben:
+
+\setclef1{\treble}
+\twoextr
+{\NOtes\islurd0c\qu c\tslur0d\qu d\en
+\NOtes\zcn a{\smalltype\bf (}\islurd0d\qu e%
+\zcn b{\smalltype\bf ~)}\tslur0e\qu f\en
+\NOtes\islurd0g\zqu g\hsk\zcn c{\bf /}\hsk\tslur0h\qu h\en}
+{\NOtes\islurd0c\qu c\tslur0d\qu d\en
+\NOtes\dotted\islurd0e\qu e\tslur0f\qu f\en
+\NOtes\dotted\islurd0g\qu g\tslur0h\qu h\en}
+
+
+\section{Vorzeichen}
+\subsec
+Wenn sich eine Note mit Vorzeichen über mehrere Takte erstreckt,
+wiederhole das Vorzeichen in den nächsten Takten nicht, außer
+wenn dort ein Zeilen- und Seitenumbruch ist.
+
+\twoextr
+{\NOTEs\itied0b\itieu1j\zwh{^c}\wh{_i}\en
+\bar%
+\NOTes\ttie0\ttie1\zwh{^c}\hu{_i}\hu i\en}
+{\NOTEs\itied0c\itieu1i\zwh{^c}\wh{_i}\en
+\bar%
+\NOTes\ttie0\ttie1\zwh c\hu i\hu{_i}\en}
+
+\subsec
+Wenn ein Vorzeichen auf \textit{Hilfsnoten} wirkt und es auch für
+nachfolgende Noten gelten soll, muß es wiederholt werden.
+
+\twoextr
+{\notes\appog\ibbu0c2\qb0{^c}\tqh0d\en
+\NOTes\wh c\en}
+{\notes\appog\ibbu0c2\qb0{^c}\tqh0d\en
+\NOTes\qsk\wh{^c}\en}
+
+\subsec
+Wenn eine Note mit einfachem einer mit doppeltem Vorzeichen folgt,
+schreibe kein Auflösungszeichen vor dem einfachen Vorzeichen, es sei
+denn, Du willst den Stil des 19. Jhts. nachahmen:
+
+\vspace{-3pt}
+
+\twoextr
+{\NOtes\qu{>c}\lna c\qu{^c}\qu{<d}\lna d\qu{_d}\en}
+{\NOtes\qu{>c}\qu{^c}\qu{<d}\qu{_d}\en}
+
+\vspace{-3pt}
+
+\subsec
+Im polyphonen Satz beeinflussen Vorzeichen der einen Stimme die
+andere nicht. Wenn dieses Vorzeichen auf die andere Stimme wirken
+soll, ist es explizit zu schreiben.
+
+\vspace{-3pt}
+
+\normalmusicsize
+\setstaffs1{1}\setclef1\treble
+\twoextr
+{\Notes\zql d\qu f\en
+\bar%
+\NOtes\zql c\qu{_e}\zql d\qu f\zql e\qu g\zql f\qu h\en
+\bar\
+\znotes\en}
+{\Notes\zql d\qu f\en
+\bar%
+\NOtes\zql c\qu{_e}\zql d\qu f\zql{_e}\qu g\zql f\qu h\en
+\bar
+\znotes\en}
+
+\vspace{-3pt}
+
+{\footnotesize Zur Erinnerung: um 1600 wurde eine Fuge für Orgel
+oder Cembalo in \textbf{vier} Zeilen geschrieben. Damit waren die
+Vorzeichen zwischen den Zeilen unanhängig.
+}
+
+\vspace{-3pt}
+
+\subsec
+Früher hätte ein Vorzeichen auch für die entsprechenden Noten in
+anderen Oktaven gegolten:
+
+\startextract
+\Notes\ibu0e4\qb0{^ceg}\tqh0j\en
+\NOtes\zq{_b}\qu i\en
+\zendextract
+
+\vspace{-6pt}
+
+Heutzutage müssen solche Vorzeichen klar ausgeschrieben werden:
+
+\twoextr
+{\Notes\ibu0e4\qb0{^ceg}\uppersh c\tqh0j\en
+\NOtes\zq{_b}\upperfl i\qu i\en}
+{\Notes\ibu0e4\qb0{^ceg}\tqh0{^j}\en
+\NOtes\zq{_b}\qu{_i}\en}
+
+\vspace{-6pt}
+
+{\footnotesize Merke, daß Softwarepakete, die MIDI-Dateien in
+Notenschrift konvertieren können, diese alte Übereinkunft
+beibehalten haben. Dann kann eine MIDI-Datei in einigen Vorzeichen
+den Noten widersprechen.
+}
+
+\subsec
+
+Bei Tonartwechsel mit weniger Vorzeichen werden die
+Auflösungszeichen \textbf{vor} den verbleibenden Vorzeichen
+geschrieben:
+
+\generalsignature5
+\twoextr{%
+\notes\qu{cde}\en
+\doublebar
+\notes\sh m\qsk\sh j\qsk\na n\qsk\na k\qsk\na h\qsk\en
+\notes\qu{fg}\en}
+{\notes\qu{cde}\en
+\generalsignature{2}\Changecontext
+\notes\qu{fg}\en}
+\generalsignature0
+
+\subsec
+Bei einem Zeilen- oder Seitenumbruch muß ein solcher Wechsel 
+\textbf{vor} dem Umbruch erscheinen:
+
+\generalsignature2
+\twoextr
+{\Notes\qu{cdef}\en
+\afterruleskip=-4pt\bar}
+{\afterruleskip=8pt
+\Notes\qu{cdef}\en
+\generalsignature{-2}\Changecontext}
+
+\generalsignature0
+\twoextr
+{\notes\na m\hsk\na j\hsk\en
+\doublebar%
+\notes\fl i\hsk\fl l\hsk\en
+\Notes\qu{ghij}\en}
+{\notes\fl i\hsk\fl l\sk\en
+\Notes\qu{ghij}\en}
+
+\newpage
+
+\subsec
+Wenn es notwendig ist, einige Vorzeichen zu versetzen, um
+Kollisionen zu vermeiden, ist das obere rechts zu lassen und das
+untere nach links zu verschieben, sowohl in Akkord- als auch in
+polyphoner Schreibweise:
+
+\twoextr
+{\NOtes\qsk\lsh f\zq{^d}\qu f\en
+\bar%
+\NOtes\qsk\lsh f\zql{^d}\qu f\en}
+{\NOtes\qsk\lsh d\zq d\qu{^f}\en
+\bar%
+\NOtes\qsk\lsh d\zql d\qu{^f}\en}
+
+
+\subsec
+Andere Vorzeichen als die regulären werden in drei Gruppen
+eingeteilt:
+
+\begin{itemize}
+\item Redaktionelle Vorzeichen \textbf{(r)},
+\item Vorsorgliche Vorzeichen \textbf{(v)},
+\item "`Aufmerksamkeits"'-Vorzeichen \textbf{(a)}.
+\end{itemize}
+
+Setze ein redaktionelles Vorzeichen, wenn Du denkst, die Quelle ist
+falsch. Vermerke es durch ein kleines Vorzeichen über oder unter
+der Note. In einem Akkord plaziere es links der Note.
+
+{\footnotesize Der \textit{Generalbaß} verwendet ebenfalls solche
+kleinen Vorzeichen über den Noten, aber ein Mißverständnis ist
+unwahrscheinlich.
+}
+
+Setze ein vorsorgliches Vorzeichen, wenn es aus dem Kontext heraus
+bereits wirkt, Du aber fürchtest, der Musiker übersieht es, z.\,B. am
+Ende eines "`überfüllten"' Taktes. Es ist in Klammern zu setzen.
+
+Ein Aufmerksamkeits-Vorzeichen ist ein theoretisch überflüssiges, das
+die Löschung eines vorhergehenden Vorzeichens durch den Taktstrich
+bestätigt. Üblicherweise ist es normal zu schreiben.
+
+\twoextr
+{\NOtes\qu{^c}\qu d\cfl e\qu e\qu{^c}\en
+\bar%
+\NOtes\cna c\qu c\en}
+{\NOtes\qu{^c}\qu d\ccn q{(r)}\upperfl L\qu e\ccn q{(v)}\csh c\qu c\en
+\bar%
+\NOtes\ccn q{(a)}\qu{=c}\en}
+
+{\footnotesize In manchen modernen, komplizierten Werken ist es
+besser, \textbf{alle} Vorzeichen zu schreiben.
+}
+
+%-------------------------------------------------------------------\\
+\subsec Früher dachten manche Kopisten, daß das Vorzeichen
+selbstverständlich sei, wenn die erste Note in einem Takt dieselbe
+ist wie diejenige -- mit Vorzeichen -- im vorausgegangenen Takt:
+
+\setstaffs12\setclef1{\bass\treble}
+\startrule
+\interstaff{11}
+
+\startextract
+\NOtesp\zhl K\hu a|\zh{^f}\zhl d\qup j\en
+\notesp|\triolet r\ibbu3i{-1}\qb3j\en
+\notes|\qb3{_i}\tqh3h\en
+\NOtesp\pt F\zql G\qu N|\zqp g\zqlp d\qup i\en
+\notes\ibbl0H1\triolet C\zcu N\qb0G|\zq g\zcl d\cu i\en
+\notesp\qb0H\en
+\notes\tqb0{_I}\en
+\bar
+\NOtes\zhl J\qu N|\pt b\zql c\loffset{.25}{\zql e}\qu i\en
+\Notes\qu M|\zhl f\ibu3h{-1}\qbp3h\en
+\notess|\cl c\en
+\notess|\tbbu3\tqh3g\en
+\NOtes\zhl C\qu N|\pt b\zql c\qu g\en
+\zendextract
+
+\newpage
+
+Die Korrektur ist dann offensichtlich und bedarf keines
+redaktionellen Vorzeichens:
+
+\vspace{6pt}
+
+\smallmusicsize
+\twoextr
+{\NOtesp\zhl K\hu a\nextstaff\zh{^f}\zhl d\qup j\en
+\notesp\nextstaff\triolet r\ibbu3i{-1}\qb3j\en
+\notes\nextstaff\qb3{_i}\tqh3h\en
+\NOtesp\pt F\zql G\qu N\nextstaff\zqp g\zqlp d\qup i\en
+\notes\ibbl0H1\triolet C\zcu N\qb0G\nextstaff\zq g\zcl d\cu i\en
+\notesp\qb0H\en
+\notes\tqb0{_I}\en
+\bar%
+\NOtes\zhl J\qu N\nextstaff\pt b\zql c\loffset{.25}{\zql e}\upperfl n\qu i\en
+\Notes\qu M\nextstaff\zhl f\ibu3h{-1}\qbp3h\en
+\notess\nextstaff\cl c\en
+\notess\nextstaff\tbbu3\tqh3g\en
+\NOtes\zhl C\qu N\nextstaff\pt b\zql c\qu g\en}
+{\NOtesp\zhl K\hu a\nextstaff\zh{^f}\zhl d\qup j\en
+\notesp\nextstaff\triolet r\ibbu3i{-1}\qb3j\en
+\notes\nextstaff\qb3{_i}\tqh3h\en
+\NOtesp\pt F\zql G\qu N\nextstaff\zqp g\zqlp d\qup i\en
+\notes\ibbl0H1\triolet C\zcu N\qb0G\nextstaff\zq g\zcl d\cu i\en
+\notesp\qb0H\en
+\notes\tqb0{_I}\en
+\bar%
+\nspace%
+\NOtes\zhl J\qu N\nextstaff\pt b\zql c\loffset{.25}{\zql e}\qu{_i}\en
+\Notes\qu M\nextstaff\zhl f\ibu3h{-1}\qbp3h\en
+\notess\nextstaff\cl c\en
+\notess\nextstaff\tbbu3\tqh3g\en
+\NOtes\zhl C\qu N\nextstaff\pt b\zql c\qu g\en}
+
+\vspace{-6pt}
+
+{\footnotesize (Ein vorsorgliches Vorzeichen wäre zwar ein Beleg für deine
+musiktheoretischen Kenntnisse, aber es wäre überflüssig.)}
+%-----------------------------------------------------------------------//
+
+\subsec
+Einige Vorzeichen in alten Ausgaben scheinen entsprechend unserer
+modernen Regeln überflüssig zu sein wie das Cis am Ende dieses
+Taktes:
+
+\nostartrule
+\setstaffs11
+\largemusicsize
+\setclef1{\bass}
+\startextract
+\bar%
+\NOtes\zw N\zq b\qu d\lsh a\zq a\qu{^c}\en
+\NOtes\zq b\qu d\zq{^c}\qu e\en
+\bar%
+\zendextract
+
+\vspace{-6pt}
+
+Deswegen ist die folgende Theorie abzulehnen: \textit{
+Wenn dieses Vorzeichen in meiner Quelle vorhanden ist, muß es dafür
+einen guten Grund geben, hier aber wurde ein falsches Vorzeichen
+geschrieben. Wenn jedoch der Komponist ein Cis am Ende des Taktes
+gewollt hätte, hätte er dort irgendein Zeichen geschrieben. Also laß
+mich den Fehler korrigieren!}
+
+\vspace{6pt}
+
+\twoextr{
+\bar%
+\NOtes\zw N\zq b\qu d\lsh a\zq a\qu{^c}\en
+\NOtes\zq b\qu d\zq{=c}\qu e\en
+\bar%
+}
+{\bar%
+\NOtes\zw N\zq b\qu d\lsh a\zq a\qu{^c}\en
+\NOtes\zq b\qu d\zq c\qu e\en
+\bar%
+}
+
+\vspace{-16pt}
+
+{\footnotesize Wenn diese drei Viertelnoten polyphon geschrieben
+worden wären, wäre die Erklärung offensichtlich. Ich könnte auch
+ähnliche Mißverständnisse über oktavenübergreifende Vorzeichen
+anführen, wie vorher gezeigt.}
+
+\section{Taktnummern}
+
+\subsec
+Pausen am Anfang, die allen Stimmen gemeinsam sind, werden nicht
+geschrieben, besonders wenn es eine Wiederholung von der ersten Note
+an gibt:
+
+\normalmusicsize\nostartrule\setclef1\treble
+\generalmeter{\meterfrac34}
+
+\twoextr
+{\NOtes\hpause\en
+\Notes\qu c\en
+\bar%
+\Notes\qu{def}\en
+\bar%
+\Notes\qu{hi}\en
+\rightrepeat
+\Notes\ql j\en
+\bar
+\Notes\ql k\en}
+{\Notes\qu c\en
+\bar%
+\Notes\qu{def}\en
+\bar%
+\Notes\qu{hi}\en
+\rightrepeat
+\Notes\ql j\en
+\bar
+\Notes\ql k\en}
+
+\subsec
+Die Nummer des allerersten Taktes eines Stückes wird niemals
+geschrieben.  Ist dieser Takt ein Auftakt, ist seine Nummer
+\textbf{Null}.
+
+\normalmusicsize\nostartrule\setclef1\treble
+\generalmeter{\meterfrac34}
+
+\twoextr
+{\Notes\loffset{8}{\zcharnote o{\eightbf 1}}\qu c\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{def}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 3}}\qu{hi}\ql j\en}
+{\Notes\qu c\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 1}}\qu{def}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{hi}\ql j\en}
+
+\vspace{-9pt}
+
+{\footnotesize Taktnummern am System links oben gibt es in der
+Praxis genug.}
+
+\newpage
+\subsec
+Wenn ein Doppelstrich innerhalb eines Taktes steht, hat er keinen
+Einfluß auf die Taktnumerierung.
+
+\twoextr
+{\Notes\qu{cde}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{de}\en
+\leftrightrepeat%
+\Notes\qu f\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 4}}\qu{hi}\ql j\en
+\bar}
+{\Notes\qu{cde}\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 2}}\qu{de}\en
+\leftrightrepeat%
+\Notes\qu f\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 3}}\qu{hi}\ql j\en
+\bar}
+
+
+\subsec
+Wenn \textit{Erstes-Ende-Zweites-Ende}-Takte vorkommen, wird nur die
+Taktnummer des \textit{ersten Endes} in die Zählung einbezogen. Wenn
+notwendig, bekommen entsprechende Taktnummern Indices \textit{a}
+und \textit{b}.
+
+\vspace{12pt}
+
+\generalmeter{\null}
+\twoextr
+{\Notes\loffset{5}{\zcharnote o{\eightbf 30}}\hu c\en\bar
+\Notes\loffset{2}{\zcharnote o{\eightbf 31}}\hu d\en
+\Setvolta1\bar
+\Notes\hu e\en
+\bar
+\Notes\loffset{2}{\zcharnote o{\eightbf 33}}\hu f\en
+\setvolta2\endvoltabox\rightrepeat
+\Notes\hu g\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 35}}\hu h\en
+\bar%
+\Notes\hu i\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 37}}\hl j\en}
+{\Notes\loffset{5}{\zcharnote o{\eightbf 30}}\hu c\en
+\bar
+\Notes\loffset{2}{\zcharnote o{\eightbf 31}}\hu d\en
+\Setvolta1\bar%
+\Notes\hu e\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 33a}}\hu f\en
+\setvolta2\endvoltabox\rightrepeat
+\Notes\hu g\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 33b}}\hu h\en
+\bar%
+\Notes\hu i\en
+\bar%
+\Notes\loffset{2}{\zcharnote o{\eightbf 35}}\hl j\en}
+
+{\footnotesize
+Allerdings haben viele schnelle Sätze Wiederholungsbalken
+inmitten eines Taktes (wie das Allegretto der
+\textit{Mondscheinsonate}). Diese Wiederholung könnte genauso gut
+in der \textit{Erstes-Ende-Zweites-Ende}-Form für diesen Takt
+notiert werden. Deshalb müssen beide Schreibweisen die gleiche
+Taktnummer ergeben.
+}
+
+\section{Verschiedenes}
+
+\subsec
+Am Anfang einer einzeiligen Instrumentenstimme sollte kein
+Taktstrich gesetzt werden, anders als in der Orchesterpartitur.
+
+\setclef1\alto
+\startrule\largemusicsize
+\begin{music}\let\extractline\hbox
+\hbox to \hsize{
+\hfill
+\startextract
+\NOtes\qu{abc}\en
+\zendextract\hfill\nostartrule
+\startextract 
+\NOtes\qu{abc}\en
+\zendextract
+\hfill}
+
+\let\extractline\centerline\end{music}
+
+\subsec
+Früher hatten manche Staccato-Noten einen kleinen Keil anstatt des
+modernen Punktes. Wenn \textbf{beide} Symbole in einem Stück
+vorkommen, bezeichnen sie zwei Arten des Staccato. Diese Schreibweise
+ist dann originalgetreu zu kopieren. Andererseits sind nur Punkte zu
+setzen, wenn ausschließlich Keile vorkommen:
+
+\largemusicsize\setstaffs1{1}\setclef1{\treble}\nostartrule
+\twoextr{
+\Notes\ibu0d1\lppz c\qb0c\lppz d\qb0d\lppz e\qb0e\lppz f\tqh0f\en}
+{\Notes\ibu0d1\lpz c\qb0c\lpz d\qb0d\lpz e\qb0e\lpz f\tqh0f\en}
+
+\subsec
+Solche Zeichen stehen in vertikaler Ausrichtung stets über den
+Notenköpfen statt den Notenhälsen, sogar wenn Polyphonie
+eine halsseitige Stellung verlangt:
+
+\twoextr
+{\NOtes\zhl c\hroff{\upz l}\qu e\hroff{\uppz k}\qu f\en
+\Notes\zql b\ibu0g0\hroff{\upz m}\qb0g\hroff{\upz m}\tqh0g\en}
+{\NOtes\zhl c\upz l\qu e\uppz k\qu f\en
+\Notes\zql b\ibu0g0\upz m\qb0g\upz m\tqh0g\en}
+
+\subsec
+Vorschläge werden \textbf{nach} dem Taktstrich geschrieben,
+ungeachtet ihrer rhythmischen Interpretation:
+
+\twoextr
+{\NOtes\qu N\en
+\notes\multnoteskip\tinyvalue\tinynotesize\ibbu0e4\qb0c\tqh0e\en
+\bar
+\NOtes\hu g\en}
+{\NOtes\qu N\en
+\bar
+\notes\multnoteskip\tinyvalue\tinynotesize\ibbu0e4\qb0c\tqh0e\en
+\NOtes\hu g\en}
+
+\newpage
+
+\subsec
+Die Tempobezeichnung sollte in Antiqua geschrieben werden, andere
+Zeichen in Kursiv:
+
+\vspace{6pt}
+
+\setclef1\treble
+\twoextr
+{\NOtes\zcn o{\medtype\it allegro}\qu{de}\zcn N{Cres}\qu{fg}\en}
+{\NOtes\zcn o{\medtype Allegro}\qu{de}\zcn N{\medtype\it cresc.}\qu{fg}\en}
+
+\vspace{-6pt}
+
+{\footnotesize Merke auch die Großschreibung und den Abkürzungspunkt.}
+
+\subsec
+Früher schrieb man \textbf{loco} (lat. \textit{zum Ort}), um
+das Ende eines Oktavenzeichens (\textit{8}\raisebox{2mm}{- - - - -})
+zu kennzeichnen. Jetzt sind solche Zeichen üblich geworden, so daß
+\textbf{loco} überflüssig ist.
+
+\section{Einige moralische Ratschläge zum Notensatz}
+
+\subsec
+Wenn Du Dich für eine bestimmte Schreibweise entschieden hast, mache
+damit im ganzen Stück so weiter, anstatt nach Deiner Laune zwischen
+zwei Praktiken zu wechseln, selbst wenn wir gesehen haben, daß die
+erste fragwürdig ist.
+
+\subsec
+Fehler bei einer Terz sind aus offensichtlichen Gründen der
+optischen Wahrnehmung viel häufiger als bei einer Sekunde. Sei
+tolerant mit den Autoren Deiner Quelle.
+
+\subsec
+Was machst Du, wenn Du denkst, Deine Noten sind fertig? Klar,
+Du stürzt an Dein Instrument und spielst das Stück aus diesen
+Noten.
+
+Aber wenn Dir das Stück geläufig ist, wirst Du, überwältigt von
+Deiner Begeisterung, sehr wahrscheinlich ziemlich viele Fehler
+übersehen. Laß Dein Instrument beiseite, lege Deine Noten und die
+Vorlage auf den Tisch und nimm einen Stift. Vergleiche Takt für Takt
+und -- wenn es mehrere Zeilen gibt -- Stimme für Stimme. Schließe ab
+mit den Sonderzeichen (Tempo, Interpretation, Pianopedal usw.)
+jeweils für mehrere Stimmen.
+
+Doch das ist noch nicht genug. Tatsächlich hat ein guter Musiker wie
+Du die Fähigkeit, unwillkürlich einige Fehler bei Spielen zu korrigieren
+(z.\,B. Vorzeichen). Der vorhergehende Test wird solche Fehler nicht
+aufdecken, weil sie in beiden Versionen die gleichen sind.
+
+Wenn Deine Notensatzsoftware Dein Stück ins MIDI-Format konvertieren
+kann, wird die dabei erhaltene Datei hilfreich sein. Anderenfalls wirst
+Du Deine Noten einem weniger erfahrenen Musiker geben, der noch nicht
+gegenüber einer solchen automatischen Korrektur anfällig ist.
+
+\subsec
+\textbf{Merke Dir: Noten richtig zu setzen, ist ebenso schwierig wie
+ein Instrument richtig zu spielen.}
+
+\end{document}
+

@@ -137,11 +137,12 @@ which will be placed by the first and third through sixth macros,
 and is initially defined as \verb|\def\txt{3}|. 
 The macro
 \verb|\tuplettxt| serves the same role for the last two macros. 
-The font used is
-\verb|\txtfont| which is by default \verb|\eightit| (in normal music size) but may be re-defined. 
-The first four
-are to be used with beamed xtuplets. As indicated in the
-last column, the last four produce a sloping bracket and are to be used with
+The font used is defined by
+\verb|\txtfont| and is, by default, \verb|\eightit| (in normal music size) but may be re-defined. 
+
+The first four commands in the table  
+are normally used with beamed xtuplets. As indicated in the
+last column, the last four produce a sloping bracket and may be used with
 unbeamed xtuplets. 
 
 
@@ -250,6 +251,25 @@ use the macros without gaps.
 \Notesp\downtuplet O16\qu e\en\notesp\cu g\en\bar
 \notesp\uptuplet o16\ccl l\en\notesp\cccl n\en
 \notesp\downtuplet O16\ccu e\en\notesp\cccu g\en
+\end{verbatim}\end{quote}
+
+A modern notation uses a \emph{ratio} to specify the intended duration
+of an x-tuplet.  This is supported in \musixtex\ by the command
+\keyindex{xxtuplet}, as in
+
+\begin{music}
+\nostartrule
+\startextract\addspace\afterruleskip
+\notes\xxtuplet5:6o\ibl0j3\qb0{jklm}\tql0n\en
+\endextract
+\end{music}
+
+\noindent with coding \verb|\xxtuplet5:6o\ibl0j3\qb0{jklm}\tql0n|.  For the
+other x-tuplet commands (apart from \verb|\triolet|, which is defined in terms of \verb|\xtuplet|), 
+it is possible to define \verb|\txt| or
+\verb|\tupletxt| as a ratio, as in
+\begin{quote}\begin{verbatim}
+\def\txt{5:6}
 \end{verbatim}\end{quote}
 
  \section{Ornaments}

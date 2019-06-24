@@ -1,0 +1,15 @@
+
+Changes from MusiXTeX 126 to 127:
+
+* introduced \meterN, \xxtuplet 
+
+* introduced \nqqb \nqqh \nqqqb \nqqqh abbreviations and
+    synonyms \nqql \nqqu \nqqql \nqqqu
+
+* introduced \hap, \happ analogous to \qap, \qapp
+
+* introduced \hbsk analogous to \hsk
+
+* introduced \bqsk, \bhsk, \btsk analogous to \qsk, \hqsk, \tqsk
+
+* eliminated \ds@oup

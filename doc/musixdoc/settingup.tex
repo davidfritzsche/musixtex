@@ -160,8 +160,18 @@ where $m$ describes the appearance of the meter indication, and can take several
 different forms. If the meter is a \ital{fraction} (e.g.,~$3/4$) the command is
  \verb|\generalmeter{|\keyindex{meterfrac}\verb|{3}{4}}|.
 Other possible tokens~$m$ are \keyindex{meterC},
-\keyindex{allabreve}, \keyindex{reverseC}, \keyindex{reverseallabreve} and
-\keyindex{meterplus}. These are illustrated in the following example:
+\keyindex{allabreve}, \keyindex{reverseC}, \keyindex{reverseallabreve}, \keyindex{meterN} and
+\keyindex{meterplus}. 
+To insert extra space before the meter is
+written, use \keyindex{meterskip}$d$ where $d$ is any hard \TeX\
+%dimension\footnote{{\Bslash\tt meterskip} is not a macro but a
+dimension\footnote{{\tt\Bslash meterskip} is not a macro but a
+dimension register. Whatever follows it
+must be a \TeX\ dimension and {\it it must not be enclosed in braces}.}.
+The assignment must occur outside \verb|\startpiece...\endpiece| and will be
+reset to zero after first meter is posted.
+
+These are illustrated in the following example:
 
  %\check
 \begin{music}
@@ -176,7 +186,9 @@ Other possible tokens~$m$ are \keyindex{meterC},
 \generalmeter\reverseallabreve\changecontext
 \NOTEs\zwq g\en
 \generalmeter{\meterfrac{3\meterplus2\meterplus3}8}\changecontext
-\Notes\Tqbu ceg\Dqbl jg\Tqbu gec\en\setemptybar
+\notesp\Tqbu ceg\Dqbl jg\Tqbu gec\en
+\generalmeter{\meterN3}\meterskip4pt\changecontext
+\Notes\qa{ceg}\en\setemptybar
 \endpiece
 \end{music}
 \noindent which was coded as:
@@ -192,7 +204,9 @@ Other possible tokens~$m$ are \keyindex{meterC},
 \generalmeter\reverseallabreve\changecontext
 \NOTEs\zwq g\en
 \generalmeter{\meterfrac{3\meterplus2\meterplus3}8}\changecontext
-\Notes\Tqbu ceg\Dqbl jg\Tqbu gec\en\setemptybar
+\notesp\Tqbu ceg\Dqbl jg\Tqbu gec\en
+\generalmeter{\meterN3}\meterskip4pt\changecontext
+\Notes\qa{ceg}\en\setemptybar
 \endpiece
 \end{verbatim}\end{quote}
 
@@ -203,14 +217,6 @@ This works just like \verb|\setclef|. For example,
 sets the meter to 12/8 for the first staff of the third instrument, and
 \ital{alla breve} for the second staff.
 
-To insert extra space before the meter is
-written, use \keyindex{meterskip}$d$ where $d$ is any hard \TeX\
-%dimension\footnote{{\Bslash\tt meterskip} is not a macro but a
-dimension\footnote{{\tt\Bslash meterskip} is not a macro but a
-dimension register. Whatever follows it
-must be a \TeX\ dimension and {\it it must not be enclosed in braces}.}.
-The assignment must occur outside \verb|\startpiece...\endpiece| and will be
-reset to zero after first meter is posted.
 
 \subsection{Instrument names}
 
