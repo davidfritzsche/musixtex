@@ -1,0 +1,5 @@
+
+Changes from MusiXTeX 125 to 126:
+
+* Corrected minor bugs in the implementation of
+  \setinterstaff that were causing Overfull hboxes.

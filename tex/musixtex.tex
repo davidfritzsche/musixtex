@@ -25,14 +25,19 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{25}
+\def\mxminorvernumber{26}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2017-07-25}
+\def\mxdate{2017-11-15}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.26
+
+% deleted spurious definition in \resetlayout and 
+%  spurious space in definition of \interfacteur...
 
 % version 1.25
 
@@ -358,7 +363,7 @@
       \advance\count@ by\@ne
       %
       \expandafter \let \csname interinstrument\roman@c@\endcsname \interinstrument
-      \expandafter\def\csname interfacteur\roman@c@\endcsname{\interfacteur}  %  RDT 1.24
+      \expandafter\def\csname interfacteur\roman@c@\endcsname{\interfacteur}%  RDT 1.26
       %
       % altitude
       \expandafter \noexpand@newskip  \csname k@i\roman@c@\endcsname
@@ -1810,7 +1815,7 @@
   \edef\nblines{\csname n@l\romannumeral\noinstrum@nt\endcsname}%
   \edef\internote{\csname i@n\romannumeral\noinstrum@nt\endcsname}%
   \edef\int@rf{\csname interfacteur\romannumeral\noinstrum@nt\endcsname}%    RDT 1.24
-  \interportee\int@rf\internote \interportee\tw@\interportee}           %    RDT 1.24
+  \interportee\int@rf\internote \interportee\tw@\interportee}%               RDT 1.26
 
 \def\C@Inter{%  RDT: corrected to work if \nblines > 6   (version 1.23)
   \stem@skip\interportee
@@ -1919,10 +1924,10 @@
 % \let\interinstrumenti\interinstrument
 
 \def\setinterinstrument#1#2{\n@v#1\relax % select instrument
-  \expandafter\def\csname interinstrument\romannumeral\n@v\endcsname{#2}}
+  \expandafter\def\csname interinstrument\romannumeral\n@v\endcsname{#2}}%
 
-\def\setinterstaff#1#2{\n@v#1\relax % select instrument  % RDT 1.24
-  \expandafter\def\csname interfacteur\romannumeral\n@v\endcsname{#2}}
+\def\setinterstaff#1#2{\n@v#1\relax % select instrument   RDT 1.24
+  \expandafter\def\csname interfacteur\romannumeral\n@v\endcsname{#2}}%
 
 %%% portees
 
@@ -2084,7 +2089,7 @@
                   \noexpand\startpiece }%
                 \fi
   \barsinpi@c@\z@ \piece@begina \leavevmode \piece@beginb
-  \piece@beginc \fil@begin \Writ@meters\lastbarpos\lin@pos %%% 1.21: added \lastbarno setting
+  \piece@beginc \fil@begin \Writ@meters\lastbarpos\lin@pos %%% 1.21: added \lastbarpos setting
   \let\volta@set\empty  % tells the kind of volta setting at next bar
   \let\volta@cut\empty  % flag to tell that a volta has been cut at line end
   \let\volta@type\empty % the current volta setting (same defs as \volta@set)
@@ -2102,8 +2107,8 @@
 \def\piece@conta{\catcodesmusic \atnextline \let\atnextline\empty
   \comp@internote \leavevmode \barsinlin@\z@ }
 
-\def\contpiece{\noindent \piece@conta \writ@staffs \piece@beginc
-  \Writ@meters \wbarno@x\lastbarpos\lin@pos\addspace\afterruleskip %%% 1.21: added \lastbarno setting
+\def\contpiece{\noindent \piece@conta \writ@staffs \piece@beginc 
+  \Writ@meters\wbarno@x\lastbarpos\lin@pos\addspace\afterruleskip %%% 1.21: added \lastbarpos setting
 }
 
 % like contpiece but with indentation (parindent) and instrument names
@@ -2111,7 +2116,7 @@
 
 \let\fil@indent\empty
 \def\Contpiece{\piece@conta \piece@beginb \fil@indent \piece@beginc
-  \Writ@meters\lastbarpos\lin@pos}  %%% 1.21: added \lastbarno setting
+  \Writ@meters\lastbarpos\lin@pos}  %%% 1.21: added \lastbarpos setting
 
 
 %%% end score
@@ -2190,7 +2195,7 @@
   \let\fil@termskip\empty \let\fil@signs\empty \let\fil@barno\empty
   \let\leftrepeat\leftrepeat@II \let\leftrightrepeat\leftrightrepeat@II
   \piece@beginc\Writ@meters\lastbarpos\lin@pos\let\pdl@cut\empty\addspace\afterruleskip}
-                            %%% 1.21: added \lastbarno and \pdl@cut settings 
+                            %%% 1.21: added \lastbarpos and \pdl@cut settings 
 
 % enable left and right extracts (e.g. for footnotes)
 
@@ -5003,7 +5008,7 @@
   \count@\z@ \loop
     \advance\count@ by\@ne
     \expandafter \let\csname n@l\roman@c@\endcsname \fiv@
-    \expandafter\def\csname interfacteur\roman@c@\endcsname{\interfacteur}    % RDT 1.24
+%   \expandafter\def\csname interfacteur\roman@c@\endcsname{\interfacteur} % RDT deleted 1.26
   \ifnum\count@<\maxinstruments\repeat
   \resetclefsymbols}
 
