@@ -1,5 +1,5 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2017-12-10  "musixtex version 0.19" ""
+.TH MUSIXTEX 1 2018-07-27  "musixtex version 0.21" ""
 
 .SH NAME
 musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
@@ -14,6 +14,7 @@ is used)
 | 
 .I jobname 
 [ .mtx  | .pmx  | .aspc | .tex | .ltx ] } ...
+.SH DESCRIPTION
 .TP 
 If a jobname argument has a .tex extension, the default effect is to process the file using
 .TP 12
@@ -98,6 +99,11 @@ as the dvi processor; e.g., -D "dvipdfm -m 0.9".
 Use -d
 .I before 
 -D to suppress .ps generation.
+.TP
+.B -P ps2pdf
+use 
+.B ps2pdf
+as the Postscript processor; e.g., -P "ps2pdf -sPAPERSIZE=a4"
 .TP 
 .B -F fmt
 use 

@@ -85,7 +85,8 @@ stem lengths, etc.
 number of instruments to be $n$. If not entered, the default is $1$. This number is used in loops
 that build staves,
 set key signatures, set meters, etc., so if it differs from $1$ it must be explicitly
-defined before any further commands.
+defined before any further commands.  The default maximum number of instruments is $6$
+but this can be increased by using \keyindex{setmaxinstruments}\onen.
 
 \subsection{Number of staves per instrument}
 
@@ -128,7 +129,7 @@ $s=1$ to $4$ mean C-clef, respectively on the first (lowest) through fourth staf
 $1$ is also called \ital{soprano}, $3$ \ital{alto} and $4$ \ital{tenor}.
 $s=5$ to $s=7$ mean F-clef, respectively on the third through fifth staff line. $5$ is
 also called \ital{baritone} and $6$ is the normal \ital{bass}.
- $s=8$ is not used.
+ $s=8$ is used to specify an ``empty'' clef.
 $s=9$ represents a G clef on the first line, also called \ital{French violin} clef.
 
 The three tokens \verb|\treble|, \verb|\alto|, and \verb|\bass| can be used instead

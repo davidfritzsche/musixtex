@@ -25,14 +25,19 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{28}
+\def\mxminorvernumber{29}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2018-05-07}
+\def\mxdate{2018-08-04}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+
+% version 1.29
+
+% defined \tabfnt, \tabcleffnt, \tabstringfnt, \tab etc. to support tablature
 
 % version 1.28
 
@@ -627,6 +632,17 @@
 \def\fontid{cm}        % deprecated but used in pmx.tex
 
 %%
+% Small sans serif fonts       % version 1.29  RDT
+%%
+
+\font\threess=phvr8t at 3pt
+\font\fourss=phvr8t at 4pt
+\font\fivess=phvr8t at 5pt
+\font\fivedc=phvb8t at 5pt
+\font\sixss=phvr8t at 6pt
+\font\sixdc=phvb8t at 6pt
+
+%%
 % Seven point fonts
 %%
 
@@ -635,6 +651,9 @@
 \font\sevenit=cmti7
 \font\sevenbi=cmbxti10 at 7pt   % version 1.22  RDT
 \font\sevensc=cmcsc10 at 7pt
+\font\sevenss=phvr8t at 7pt      % version 1.29  RDT
+\font\sevendc=phvb8t at 7pt
+
 
 %%
 % Eight point fonts
@@ -645,6 +664,8 @@
 \font\eightit=cmti8
 \font\eightbi=cmbxti10 at 8pt    % version 1.22 RDT
 \font\eightsc=cmcsc10 at 8pt
+\font\eightss=phvr8t at 8pt      % version 1.29  RDT
+\font\eightdc=phvb8t at 8pt
 
 %%
 % Nine point fonts
@@ -655,6 +676,7 @@
 \font\nineit=cmti9
 \font\ninebi=cmbxti10 at 9pt     % version 1.22  RDT
 \font\ninesc=cmcsc10 at 9pt
+\font\niness=phvr8t at 9pt       % version 1.29  RDT
 
 %%
 % Ten point fonts
@@ -665,6 +687,8 @@
 \font\tenit=cmti10
 \font\tenbi=cmbxti10        % version 1.22  RDT
 \font\tensc=cmcsc10
+\font\tenss=phvr8t          % version 1.29  RDT
+\font\tendc=phvb8t
 
 %%
 % Eleven point fonts
@@ -674,6 +698,7 @@
 \font\elevenit=cmti9 scaled \magstephalf
 \font\elevenbi=cmbxti10 at 11pt     % version 1.22  RDT
 \font\elevensc=cmcsc10 at 11pt
+\font\elevenss=phvr8t at 11pt % version 1.29  RDT
 
 %%
 % Twelve point fonts
@@ -683,6 +708,8 @@
 \font\twelveit=cmti12
 \font\twelvebi=cmbxti10 scaled \magstep1   % version 1.22 RDT
 \font\twelvesc=cmcsc10 scaled \magstep1
+\font\twelvess=phvr8t scaled \magstep1     % version 1.29  RDT
+\font\twelvedc=phvb8t scaled \magstep1
 
 % 14pt fonts
 \font\frtrm=cmr12 scaled \magstep1
@@ -690,6 +717,8 @@
 \font\frtit=cmti12 scaled \magstep1
 \font\frtsc=cmcsc10 scaled \magstep2
 \font\frtbi=cmbxti10 scaled \magstep2    % version 1.22  RDT
+\font\frtss=phvr8t scaled \magstep2      % version 1.29  RDT
+\font\frtdc=phvb8t scaled \magstep2
 %
 % 17pt
 \font\svtrm=cmr12 scaled \magstep2
@@ -697,6 +726,7 @@
 \font\svtit=cmti12 scaled \magstep2
 \font\svtsc=cmcsc10 scaled \magstep3
 \font\svtbi=cmbxti10 scaled \magstep3
+\font\svtdc=phvb8t scaled \magstep3
 %
 % 20pt
 \font\twtyrm=cmr12 scaled \magstep3
@@ -704,6 +734,7 @@
 \font\twtyit=cmti12 scaled \magstep3
 \font\twtysc=cmcsc10 scaled \magstep4
 \font\twtybi=cmbxti10 scaled \magstep4    % version 1.22  RDT
+\font\twtydc=phvb8t scaled \magstep4
 %
 % 25pt
 \font\twfvrm=cmr12 scaled \magstep4
@@ -1642,6 +1673,28 @@
     \fi
   \fi}
 
+\def\tabcleffnt{% 1.29  RDT
+  \ifdim\internote<.95\Internote \tabsmallcleffnt
+  \else
+    \ifdim\internote<1.19\Internote \tabnorcleffnt
+    \else
+      \ifdim\internote<1.43\Internote \tablargecleffnt
+      \else \tabLargecleffnt
+      \fi
+    \fi
+  \fi}
+
+\def\tabfnt{%     1.29  RDT
+  \ifdim\internote<.95\Internote \tabsmallfnt
+  \else
+    \ifdim\internote<1.19\Internote \tabnorfnt
+    \else
+      \ifdim\internote<1.43\Internote \tablargefnt
+      \else \tabLargefnt
+      \fi
+    \fi
+  \fi}
+
 \newbox\ch@box
 \newcount\musicsize
 \newdimen\qd@skip
@@ -1691,6 +1744,14 @@
     \else\ifdim\internote<1.19\Internote \smalltype\it
     \else\ifdim\internote<1.43\Internote \Smalltype\it
     \else\normtype\it\fi\fi\fi}%
+    \let\tabnorfnt\fivess \let\tablargefnt\sixss 
+    \let\tabLargefnt\eightss \let\tabsmallfnt\fourss
+    \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
+    \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \fourss  %  1.29   RDT
+    \else\ifdim\internote<1.19\Internote \fivess
+    \else\ifdim\internote<1.43\Internote \sevenss
+    \else\eightss\fi\fi\fi}%
   \else\ifnum\musicsize=\@xxiv
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -1715,6 +1776,14 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
+    \let\tabnorfnt\eightss \let\tablargefnt\niness 
+    \let\tabLargefnt\elevenss \let\tabsmallfnt\sixss
+    \let\tabnorcleffnt\twelvedc \let\tablargecleffnt\frtdc
+    \let\tabLargecleffnt\svtdc \let\tabsmallcleffnt\tendc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \sixss  %  1.29  RDT
+    \else\ifdim\internote<1.19\Internote \eightss
+    \else\ifdim\internote<1.43\Internote \niness
+    \else\twelvess\fi\fi\fi}%
   \else\ifnum\musicsize=\@xxix
     \let\musicLargefont\musictwentynine
     \let\musiclargefont\musictwentynine
@@ -1741,6 +1810,14 @@
     \else\ifdim\internote<1.19\Internote \medtype\it
     \else\ifdim\internote<1.43\Internote \bigfont\it
     \else\Bigfont\it\fi\fi\fi}%
+    \let\tabnorfnt\niness \let\tablargefnt\elevenss 
+    \let\tabLargefnt\twelvess \let\tabsmallfnt\eightss
+    \let\tabnorcleffnt\frtdc \let\tablargecleffnt\svtdc
+    \let\tabLargecleffnt\twtydc \let\tabsmallcleffnt\twelvedc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \eightss  %  1.29  RDT
+    \else\ifdim\internote<1.19\Internote \niness
+    \else\ifdim\internote<1.43\Internote \twelvess
+    \else\frtss\fi\fi\fi}%
 \else
     \ifnum\musicsize=\tw@nty
     \else\ifnum\musicsize=\z@
@@ -1771,6 +1848,14 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
+    \let\tabnorfnt\sixss \let\tablargefnt\eightss 
+    \let\tabLargefnt\niness \let\tabsmallfnt\fivess
+    \let\tabnorcleffnt\tendc \let\tablargecleffnt\twelvedc
+    \let\tabLargecleffnt\frtdc \let\tabsmallcleffnt\eightdc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \fivess  %  1.29  RDT
+    \else\ifdim\internote<1.19\Internote \sixss
+    \else\ifdim\internote<1.43\Internote \eightss
+    \else\niness\fi\fi\fi}%
 \fi\fi\fi}%
 
 \def\comput@specifics{\comput@fonts\comput@sizes}
@@ -2620,10 +2705,31 @@
 
 % write colons on all staffs (a part of [left][right]repeat symbols
 
+%\def\writ@colons{\n@loop{\w@coli}\repeat}
+
+
+
 \def\writ@colons{\n@loop{\w@coli}\repeat}
 \def\w@coli{\p@loop
-  \raise\altportee\hbox{\raise4\internote\hbox{\keychar55}}\count@portee\repeat}
+  {\ifnum\nblines=6\tabc@lsix%
+   \else\ifnum\nblines=4\tabc@lfour%
+   \else\raise\altportee\hbox{\raise4\internote\hbox{\keychar55}}\fi\fi}\count@portee\repeat}
 
+%%%%   1.29  RDT
+\def\tabc@lsix{\raise\altportee\hbox{%
+    %\raise7\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}%  uncomment if wanted
+    \raise5\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}%
+    \raise3\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}% comment out if unwanted
+    \raise1\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}%
+    %\raise-1\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}% uncomment if wanted
+}}
+
+%%%%   1.29  RDT
+\def\tabc@lfour{\raise\altportee\hbox{%
+    \raise3\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}%
+    \raise1\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}% comment out if unwanted
+    \raise-1\internote\rlap{\kernm1.2\internote\hbox{\keychar24}}%
+}}
 %%% seperated and full barlines
 
 %\def\rul@full#1{\raise\altplancher\rlap{\vrule\@depth\hlthick
@@ -2847,10 +2953,46 @@
 \def\writ@meterp#1#2#3#4{%
   \ifcase\noport@@\hbox{#1}\or \hbox{#2}\or \hbox{#3}\or \hbox{#4}\fi}
 
-\def\meterfrac#1#2{\setbox\toks@box\vbox{\hbox{\ \meterfont#1}%
-  \hbox{\ \meterfont #2}}\vbox\@to\@ight\internote{\offinterlineskip
-  \vss\hbox\@to\wd\toks@box{\hss\meterfont#1\hss}\vss
-  \vss\hbox\@to\wd\toks@box{\hss\meterfont#2\hss}\vss}}
+\def\meterfrac#1#2{%
+  \ifnum\nblines=6% 
+    \setbox\toks@box\vbox{\hbox{~\meterfont#1}%
+    \hbox{~\meterfont #2}}\raise\internote%
+    \vbox\@to\@ight\internote{\offinterlineskip%
+    \vss\hbox\@to\wd\toks@box{\hss\meterfont#1\hss}\vskip1.5\internote%
+    \vss\hbox\@to\wd\toks@box{\hss\meterfont#2\hss}\vss}%
+  \else\ifnum\nblines=4%
+    \setbox\toks@box\vbox{\hbox{\ \meterfont#1}%
+    \hbox{\ \meterfont #2}}\raise-1\internote\vbox\@to\@ight\internote{\offinterlineskip
+    \vss\hbox\@to\wd\toks@box{\hss\meterfont#1\hss}\vss
+    \vss\hbox\@to\wd\toks@box{\hss\meterfont#2\hss}\vss}
+  \else 
+    \setbox\toks@box\vbox{\hbox{\ \meterfont#1}%
+    \hbox{\ \meterfont #2}}\vbox\@to\@ight\internote{\offinterlineskip
+    \vss\hbox\@to\wd\toks@box{\hss\meterfont#1\hss}\vss
+    \vss\hbox\@to\wd\toks@box{\hss\meterfont#2\hss}\vss}
+  \fi\fi
+}
+\def\allabreve{% -> 2/2
+  \ifnum\nblines=6\raise5\internote\hbox{\keychar82}%
+  \else\ifnum\nblines=4\raise3\internote\hbox{\keychar82}%
+  \else\raise4\internote\hbox{\keychar82}\fi\fi}
+\def\reverseallabreve{%
+  \ifnum\nblines=6\raise5\internote\hbox{\keychar123}%
+  \else\ifnum\nblines=4\raise3\internote\hbox{\keychar123}
+  \else\raise4\internote\hbox{\keychar123}\fi\fi}
+\def\meterC{% -> 4/4
+  \ifnum\nblines=6\raise5\internote\hbox{\musickeyfont\@lxxxiii}%
+  \else\ifnum\nblines=4\raise3\internote\hbox{\musickeyfont\@lxxxiii}%
+  \else\raise4\internote\hbox{\musickeyfont\@lxxxiii}\fi\fi}
+\def\reverseC{% -> 4/2
+  \ifnum\nblines=6\raise5\internote\hbox{\keychar84}%
+  \else\ifnum\nblines=4\raise3\internote\hbox{\keychar84}%
+  \else\raise4\internote\hbox{\keychar84}\fi\fi}
+\def\meterN#1{%
+  \ifnum\nblines=6\raise3\internote\hbox{\meterfont#1}%
+  \else\ifnum\nblines=4\raise1\internote\hbox{\meterfont#1}%
+  \else\raise2\internote\hbox{\meterfont#1}\fi\fi}         
+\def\meterplus{{\keychar57}}
 
 %%% clefs
 
@@ -4210,15 +4352,6 @@
 \def\ldfl#1{\loffset\smallvalue{\dfl{#1}}}
 \def\ldsh#1{\loffset\smallvalue{\dsh{#1}}}
 
-%%% special metersigns
-
-\def\allabreve{\raise4\internote\hbox{\keychar82}}          %-> 2/2
-\def\reverseallabreve{\raise4\internote\hbox{\keychar123}}
-\def\meterC{\raise4\internote\hbox{\musickeyfont\@lxxxiii}} %-> 4/4
-\def\reverseC{\raise4\internote\hbox{\keychar84}}           %-> 4/2
-\def\meterplus{{\keychar57}}
-\def\meterN#1{\raise2\internote\hbox{\meterfont#1}}         % RDT 1.27 
-
 %%% arpeggio
 
 \def\arpeggio#1#2{\zcharnote{#1}{%
@@ -5159,6 +5292,10 @@
 %\resetlayout % no need
 \def\nbinstruments{1}
 \noinstrum@nt1\s@l@ctinstr\internote\Internote
+\def\tabstringfnt{\ifdim\internote<.95\Internote \fivess  %  1.29  RDT
+\else\ifdim\internote<1.19\Internote \sixss
+\else\ifdim\internote<1.43\Internote \eightss
+\else\niness\fi\fi\fi}%
 
 %%%
 %
@@ -5291,6 +5428,104 @@
 %  Added to musixtex.tex version 1.16 by RDT                                   %
 %                                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for tablature. They put numbers on or above the staff lines.%
+% Based on tabdefs.tex by R.J. Gelten                                %
+% version 1.29  RDT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newif\iftabstylespace\tabstylespacefalse
+% \tabbox ensures a white background for the tab number in the ps-file
+% so the stafflines don't overwrite the number. Symbols are centered.
+\def\tabbox#1#2{%
+  \setbox0=\hbox{\tabfnt #2}%
+  \stringraise\nblines
+  \advance\stringraise by -#1
+  \multiply\stringraise by 2
+  \advancefalse\def\q@u{}\loffset{0.45}{\@nq{\the\stringraise}}%
+  \iftabstylespace\else\advance\stringraise-1\fi
+  \special{ps: 1 setgray}%
+  \ccharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
+  \special{ps: 0 setgray}%
+  \ccharnote{\the\stringraise}{\box0}%
+}
+% \ltabbox does the same as \tabbox, except that it produces 
+% left-outlined symbols
+\def\ltabbox#1#2{\setbox0=\hbox{\tabfnt #2}%
+  \stringraise\nblines
+  \advance\stringraise by -#1
+  \multiply\stringraise by 2
+  \advancefalse\def\q@u{}\loffset{0.2}{\@nq{\the\stringraise}}%
+  \iftabstylespace\else\advance\stringraise-1\fi
+  \special{ps: 1 setgray}%
+  \zcharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
+  \special{ps: 0 setgray}%
+  \zcharnote{\the\stringraise}{\box0}%
+}
+% \rtabbox does the same as \tabbox, except that it produces 
+% right-outlined symbols
+\def\rtabbox#1#2{\setbox0=\hbox{\tabfnt #2}%
+  \stringraise\nblines
+  \advance\stringraise by -#1
+  \multiply\stringraise by 2
+  \advancefalse\def\q@u{}\loffset{0.75}{\@nq{\the\stringraise}}%
+  \iftabstylespace\else\advance\stringraise-1\fi
+  \special{ps: 1 setgray}%
+  \lcharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
+  \special{ps: 0 setgray}%
+  \lcharnote{\the\stringraise}{\box0}%
+}
+
+% \tab takes two arguments. 
+% #1 is the string number 
+% #2 is the symbol to be put on the string
+% the symbols are horizontally centered and a \sk is put behind it,
+% to jump to the position of the next symbol
+\newcount\stringraise
+\def\tab#1#2{%
+  \tabbox{#1}{#2}\sk%
+}
+% left spilling \tab
+\def\ltab#1#2{%
+  \ltabbox{#1}{#2}\sk%
+}
+% right spilling  \tab
+\def\rtab#1#2{%
+  \rtabbox{#1}{#2}\sk%
+}
+% \chord-tab symbol. Same as \tab, but no \sk is given, so multiple 
+% symbols can be placed above one another
+\def\ztab#1#2{%
+  \tabbox{#1}{#2}%
+}
+% left spilling \ztab
+\def\zltab#1#2{%
+  \ltabbox{#1}{#2}%
+}
+% right spilling \ztab
+\def\zrtab#1#2{%
+  \rtabbox{#1}{#2}%
+}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% define a new clefsymbol \tabclef for tablature %
+% 1.29  RDT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\tabclef{%
+  \setbox0=\hbox{\tabcleffnt T}
+  \setbox1=\vbox{\baselineskip=0.5\baselineskip
+    \hbox to 2\wd0{{\tabcleffnt T}\hfil}
+    \hbox to 2\wd0{{\tabcleffnt A}\hfil}
+    \hbox to 2\wd0{{\tabcleffnt B}\hfil}
+  }
+  \ifnum\nblines=6\lower1.5\internote\box1
+  \else\ifnum\nblines=4\lower3.5\internote\box1\else\lower2.5\internote\box1\fi\fi}
+
 
 \let\origin@lwrit@staffs\writ@staffs
 \def\writ@staffs{%

@@ -760,7 +760,7 @@ For example,
 \NOtes\lpar c\rpar c\qu c\en
 \NOtes\unbkt C15\qu {FH}|\ovbkt n14\ql{kl}\en
 \NOtes\downtrio C16\qu {FH}|\uptrio o14\ql{lm}\en
-\NOtesp\roffset{1.5}{\slide J33}\qa{JM}|\roffset{1.5}{\slide j33}\qa{jm}\en
+\NOtesp\roffset{1.5}{\slide J33}\ca{JM}|\roffset{1.5}{\slide j33}\ca{jm}\en
 \endextract
 \end{music}
 \noindent is coded as
@@ -774,7 +774,7 @@ For example,
 \NOtes\lpar c\rpar c\qu c\en
 \NOtes\unbkt C15\qu {FH}|\ovbkt n14\ql{kl}\en
 \NOtes\downtrio C16\qu {FH}|\uptrio o14\ql{lm}\en
-\NOtesp\roffset{1.5}{\slide J33}\qa{JM}|\roffset{1.5}{\slide j33}\qa{jm}\en
+\NOtesp\roffset{1.5}{\slide J33}\ca{JM}|\roffset{1.5}{\slide j33}\ca{jm}\en
 \zendextract
 \end{music}
 \end{verbatim}\end{quote}
@@ -821,3 +821,138 @@ The coding is
 \NOTes\ha{HIJK}&\ha{efgh}&\ha{hijk}&\ha{hmlk}\en
 \endextract
 \end{verbatim}\end{quote}
+
+
+\section{Tablature}
+Tablature is a notational system used for fretted stringed instruments such
+as lute, guitar, banjo, mandolin, and so on.  Staff lines represent strings
+and conventional note heads are replaced by numbers (or sometimes letters)
+indicating which fret is to be stopped, with $0$ representing an open string.
+
+A special clef symbol 
+\keyindex{tabclef} may be used with \verb|\setclefsymbol| for a tablature staff; commands \verb|\setlines|, \verb|\setsign|
+and \verb|\setsize| may be used as usual for a tablature staff.  The macros that put numbers (or letters) on staff lines
+are as follows:
+\begin{itemize}
+\item \keyindex{tab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
+puts $p$ on string $n$
+(counting from top to bottom); $p$ is centered, using \verb|\ccharnote|.
+Ledger lines are added for $n$ less than $1$ or greater than the current number of staff lines.
+\item \keyindex{ltab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
+uses \verb|\zcharnote| so $p$
+spills to the right and
+\keyindex{rtab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
+uses \verb|\lcharnote| so $p$
+spills to the left.
+\item \keyindex{ztab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
+is a non-spacing \verb|\tab|, and can be used for building chords. 
+\item \keyindex{zltab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
+is a non-spacing \verb|\ltab| and
+\keyindex{zrtab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
+is a non-spacing \verb|\rtab|.
+\end{itemize}
+A size-dependent font \keyindex{tabfnt} is used for tab characters; Helvetica is the default font family.
+
+The default tablature style is to place the fingering notations \emph{on} the staff line;
+Postscript specials are used to ``blank'' staff lines below
+the tab characters.  
+If it is desired to locate the fingering notations \emph{above} staff lines, use
+the command \keyindex{tabstylespacetrue}.
+A size-dependent font \keyindex{tabstringfnt} is defined to allow string names to be
+listed using \verb|\setname|.
+
+Here is an example of a guitar tablature (6th string lowered to D):
+
+\begin{music}
+\input musixps
+\def\psslurhgt{0.5}
+\instrumentnumber{2}
+\songbottom1\songtop2
+\generalmeter{\meterfrac34}
+\generalsignature{-1}
+\setlines16
+\setclefsymbol1\tabclef\setclefsymbol2\treblelowoct
+\setsize1\largevalue
+\setsign10
+\nobarnumbers
+\interinstrument=4\internote
+\parindent=2ex
+\setname1{\tabstringfnt\baselineskip=1.5\internote%
+          \vbox{\hbox to\parindent{\hss E \hss}%
+                \hbox to\parindent{\hss B \hss}%
+                \hbox to\parindent{\hss G \hss}%
+                \hbox to\parindent{\hss D \hss}%
+                \hbox to\parindent{\hss A \hss}%
+                \hbox to\parindent{\hss D \hss}%
+}}
+\startextract
+\NOtesp\zltab55\zltab43\ltab32&\zh{d}\zhl{f}\qu{.h}\en
+\Notes\ltab32&\cu{h}\en
+\bar%
+\NOtes\zltab55\zltab45\zltab33\ltab10&\zq d\zql g\zq i\qu l\en
+\NOtesp\zltab54\zltab45\zltab32\ltab10&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
+\Notes\ltab10&\cu{l}\en
+\bar%
+\NOtes\zltab40\zltab32\zltab23\ltab11&\zq d\zq h\zq k\qu{m}\en
+\NOtes\zltab51\zltab43\zltab33\ltab23&\zhl b\zh f\zq{.i}\qu{.k}\en
+\Notes\ltab35&\cu j\en
+\bar%
+\NOtes\zltab65\zltab45\ltab33&\zql N\zq g\qu i\en
+\NOtes\zltab50\zltab43\ltab32&\zql a\zq f\qu h\en
+\notes\zltab54\ltab45\ilsluru04\ltab43\ltab42\tlslur04\ltab43%
+&\zql{^c}\ibbu0g{-1}\qb0{g}\slur eed2\qb0{fe}\tqu0f\en
+\bar%
+\notes\zltab60\zltab50\ltab45\ilsluru04\ltab42\ltab43\tlslur04\ltab40%
+&\zq K\zql a\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
+\znotes&\lcn{14}{J.S. Bach}\en
+\zendextract
+\end{music}
+
+\noindent
+The coding is
+\begin{footnotesize}
+\begin{quote}\begin{verbatim}
+\instrumentnumber{2}
+\songbottom1\songtop2
+\setclefsymbol2\treblelowoct
+\generalmeter{\meterfrac34}
+\generalsignature{-1}
+\setlines16\setclefsymbol1\tabclef\setsize1\largevalue\setsign10
+\nobarnumbers
+\interinstrument=4\internote
+\parindent=2ex
+\setname1{\tabstringfnt\baselineskip=1.5\internote%
+          \vbox{\hbox to\parindent{\hss E\hss}%
+                \hbox to\parindent{\hss B\hss}%
+                \hbox to\parindent{\hss G\hss}%
+                \hbox to\parindent{\hss D\hss}%
+                \hbox to\parindent{\hss A\hss}%
+                \hbox to\parindent{\hss D\hss}}}
+\startextract
+\NOtesp\zltab55\zltab43\ltab32&\zh{d}\zhl{f}\qu{.h}\en
+\Notes\ltab32&\cu{h}\en
+\bar%
+\NOtes\zltab55\zltab45\zltab33\ltab10&\zq d\zql g\zq i\qu l\en
+\NOtesp\zltab54\zltab45\zltab32\ltab10&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
+\Notes\ltab10&\cu{l}\en
+\bar%
+\NOtes\zltab40\zltab32\zltab23\ltab11&\zq d\zq h\zq k\qu{m}\en
+\NOtes\zltab51\zltab43\zltab33\ltab23&\zhl b\zh f\zq{.i}\qu{.k}\en
+\Notes\ltab35&\cu j\en
+\bar%
+\NOtes\zltab65\zltab45\ltab33&\zql N\zq g\qu i\en
+\NOtes\zltab50\zltab43\ltab32&\zql a\zq f\qu h\en
+\notes\zltab54\ltab45\ilsluru04\ltab43\ltab42\tlslur04\ltab43%
+&\zql{^c}\ibbu0g{-1}\qb0{g}\slur eed2\qb0{fe}\tqu0f\en
+\bar%
+\notes\zltab60\zltab50\ltab45\ilsluru04\ltab42\ltab43\tlslur04\ltab40%
+&\zq K\zql a\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
+\znotes&\lcn{14}{J.S. Bach}\en
+\zendextract
+\end{verbatim}\end{quote}
+\end{footnotesize}
+Tablature support in \musixtex\ has been adapted
+from \verb|tabdefs.tex| by R.J.~Gelten, which is available 
+\href{http://icking-music-archive.org/software/musixtex/add-ons/tabdefs.tex}
+{\underline{here}}
+at WIMA\index{WIMA}.

@@ -236,26 +236,45 @@ For example,
 
 \begin{music}\nostartrule
 \startextract
-\NOtes\multnoteskip8\isluru0g\ql g\en
-\notes\tslur0g\ql g\en
+\NOtes\multnoteskip8\isluru0i\ql i\en
+\notes\tslur0i\ql i\en
 \zendextract
 \startextract
-\NOtes\multnoteskip8\isluru0g\ql g\en
-\notes\midslur7\tslur0g\ql g\en
+\NOtes\multnoteskip8\isluru0i\ql i\en
+\notes\midslur7\tslur0i\ql i\en
 \zendextract
 \startextract
-\NOtes\multnoteskip8\isluru2g\ql g\en
-\notes\midslur{11}\tslur2g\ql g\en
+\NOtes\multnoteskip8\isluru2i\ql i\en
+\notes\midslur{11}\tslur2i\ql i\en
 \zendextract
 \end{music}
 \noindent was coded as
 \begin{quote}\begin{verbatim}
-\NOtes\multnoteskip8\isluru0g\ql g\en
-\notes\tslur0g\ql g\en
-\NOtes\multnoteskip8\isluru0g\ql g\en
-\notes\midslur7\tslur0g\ql g\en
-\NOtes\multnoteskip8\isluru2g\ql g\en
-\notes\midslur{11}\tslur2g\ql g\en
+\NOtes\multnoteskip8\isluru0i\ql i\en
+\notes\tslur0i\ql i\en
+\NOtes\multnoteskip8\isluru0i\ql i\en
+\notes\midslur7\tslur0i\ql i\en
+\NOtes\multnoteskip8\isluru2i\ql i\en
+\notes\midslur{11}\tslur2i\ql i\en
+\end{verbatim}\end{quote}
+For downward slurs, use negative values; for example,
+
+\begin{music}\nostartrule
+\startextract
+\NOtes\multnoteskip8\islurd0i\qu i\en
+\notes\tslur0i\qu i\en
+\zendextract
+\startextract
+\NOtes\multnoteskip8\islurd0i\qu i\en
+\notes\midslur{-7}\tslur0i\qu i\en
+\zendextract
+\end{music}
+\noindent was coded as
+\begin{quote}\begin{verbatim}
+\NOtes\multnoteskip8\islurd0i\qu i\en
+\notes\tslur0i\qu i\en
+\NOtes\multnoteskip8\islurd0i\qu i\en
+\notes\midslur{-7}\tslur0i\qu i\en
 \end{verbatim}\end{quote}
 
 The macro \keyindex{curve}$hij$ allows more precise control over the shape
@@ -289,12 +308,8 @@ the slur termination. The example below illustrates the use of \verb|\curve|.
 \begin{quote}\begin{verbatim}
 \NOtes\multnoteskip8\itieu0g\ql g\en
 \notes\ttie0\ql g\en
-\zendextract
-\startextract
 \NOtes\multnoteskip8\itieu1g\ql g\en
 \notes\curve 322\ttie1\ql g\en
-\zendextract
-\startextract
 \NOtes\multnoteskip8\itieu2g\ql g\en
 \notes\curve 111\ttie2\ql g\en
 \end{verbatim}\end{quote}

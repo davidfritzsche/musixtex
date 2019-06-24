@@ -1,0 +1,6 @@
+
+Changes from MusiXTeX 128 to 129:
+
+ * introduced support for tablature notation: \tabfnt,
+   \tabcleffnt, \tabstringfnt, \tabstylespace, \tab, \ztab,
+   etc.
