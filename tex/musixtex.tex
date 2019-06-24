@@ -25,14 +25,21 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{27}
+\def\mxminorvernumber{28}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2017-12-26}
+\def\mxdate{2018-05-07}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.28
+
+% defined 
+%  \z[left|right|leftright]repeat, for use *within* a bar
+%  \zz...repeat, to force to the end of a system
+% corrected definition of \C@Inter for \nblines < 4
 
 % version 1.27
 
@@ -1829,8 +1836,9 @@
   \interportee\int@rf\internote \interportee\tw@\interportee}%               RDT 1.26
 
 \def\C@Inter{%  RDT: corrected to work if \nblines > 6   (version 1.23)
+             %  RDT: corrected for \nblines < 4          (version 1.28)
   \stem@skip\interportee
-  \ifnum\nblines=\thr@@
+  \ifnum\nblines<\f@ur
     \advance\stem@skip-\@ight\internote
   \else
     \advance\stem@skip-\nblines\internote
@@ -2417,6 +2425,12 @@
   \kernm\afterruleskip\l@eftrepeat\kern\afterruleskip				%+simick
   \advance\lastbarpos\afterruleskip \b@rrul@}					%+simick
 
+\def\@LeftRpCont{\stoppiec@\l@@ftrepeat\advance\volta@startcor-\afterruleskip	% RDT 1.28
+  \let\z@sw\@ne                  % turn on continuation bar number                               
+  \contpiece\addspace{\h@lf\afterruleskip}%
+  \kernm\afterruleskip\l@eftrepeat\kern\afterruleskip%		
+  \advance\lastbarpos\afterruleskip \b@rrul@}		
+
 \def\T@bil{\advance\barsinlin@\@ne \ifnum\barsinlin@<\maxbarsinlin@}
 
 \def\barre{\T@bil \@bar\else\stoppiec@\contpiece \fi}
@@ -2424,13 +2438,86 @@
 \def\zbar{\T@bil \zn@wbar\else\zstoppiec@\contpiece \fi}
 \def\alaligne{\stoppiece\contpiece}
 \def\zalaligne{\zstoppiece\contpiece}
-\def\leftrepeat@II{\T@bil \setleftrepeat\@bar\else\@LeftRp \fi}
+
+%  ...@II means used in the *second* tex pass
+
+\def\leftrepeat@II{%
+\T@bil 
+  \setleftrepeat\@bar
+\else
+  \@LeftRp %
+\fi}
+
+\def\zleftrepeat@II{%                           % RDT 1.28
+\advance\barno\m@ne%
+\T@bil
+  \setleftrepeat\@bar%
+\else
+  \@LeftRpCont%                                 % RDT 1.28
+\fi}
+
+
 \let\leftrepeat\leftrepeat@II
-\def\leftrightrepeat@II{\T@bil \setleftrightrepeat
-  %\setbox\toks@box\l@eftrightrepeat \global\cut@v=\wd\toks@box
+\let\zleftrepeat\zleftrepeat@II                 % RDT 1.28
+
+\def\zzleftrepeat{%                             % RDT 1.28
+\advance\barno\m@ne%
+\stoppiece%
+\let\z@sw\@ne%
+\contpiece%
+\advance\barno\m@ne%
+\leftrepeat%
+}
+
+\def\leftrightrepeat@II{%
+\T@bil 
+  \setleftrightrepeat\@bar
+\else
+  \setrightrepeat\@LeftRp 
+\fi}
+
+\def\zzrightrepeat{%                            % RDT 1.28
+  \advance\barno\m@ne%
+  \setrightrepeat\stoppiece
+  \let\z@sw\@ne
+  \contpiece
+}
+
+\def\zrightrepeat{%                             % RDT 1.28
+\advance\barno\m@ne
+\setrightrepeat
+\T@bil
   \@bar
-  \else\setrightrepeat\@LeftRp \fi}
+\else
+  \stoppiec@
+  \let\z@sw\@ne
+  \contpiece 
+\fi}
+
+\def\zzleftrightrepeat{%                        % RDT 1.28
+  \advance\barno\m@ne
+  \setrightrepeat
+  \stoppiece
+  \let\z@sw\@ne
+  \contpiece
+  \addspace{\h@lf\afterruleskip}%					
+  \kernm\afterruleskip\l@eftrepeat\kern\afterruleskip			
+  \advance\lastbarpos\afterruleskip \b@rrul@			
+}
+
+\def\zleftrightrepeat@II{%                      % RDT 1.28
+\advance\barno\m@ne
+\T@bil
+  \setleftrightrepeat\@bar
+\else
+  \stoppiec@
+  \let\z@sw\@ne
+  \contpiece 
+\fi}
+
 \let\leftrightrepeat\leftrightrepeat@II
+\let\zleftrightrepeat\zleftrightrepeat@II       % RDT 1.28
+
 \def\alapage{\stoppiece\eject\contpiece}
 \def\zalapage{\zstoppiece\eject\contpiece}
 
@@ -5307,10 +5394,12 @@
 %      indicate musixflx a leftrightrepeat
 %
   \let\leftrightrepeat\leftrightrepeat@I
+  \let\zleftrightrepeat\leftrightrepeat@I               % RDT 1.28
 %
 %   s.a.
 %
   \let\leftrepeat\leftrepeat@I
+  \let\zleftrepeat\leftrepeat@I                         % RDT 1.28
 %
 %   -> \hardspace
 %

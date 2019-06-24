@@ -5,7 +5,7 @@ commands \keyindex{leftrepeat}, \keyindex{rightrepeat} or
 \keyindex{leftrightrepeat} in place of \verb|\bar|. If a \verb|\leftrepeat|
 happens to come at the end of a system, it will automatically be moved to the
 start of the next system. If a \verb|\leftrightrepeat| happens to come at the
-end if a system, \musixtex\ will automatically post a right repeat at the end
+end of a system, \musixtex\ will automatically post a right repeat at the end
 of the system and a left repeat at the beginning of the next.
 
 For example,
@@ -32,19 +32,112 @@ For example,
 \NOTEs\wh j\en
 \end{verbatim}\end{quote}
 
-To insert a right repeat at a forced line break or at the end of a piece, use
+To insert a right-repeat at a forced line break or at the end of a piece, use
 \verb|\setrightrepeat| \textit{before}\ \verb|\alaligne| or \verb|\endpiece|.
-In contrast, to insert a left repeat at a forced line break or at the
-beginning of a piece, simply use \verb|\leftrepeat| immediately \textit{after}
-\verb|\startpiece| or \verb|\alaligne|. To insert a left-right repeat at a
-forced line break, use \verb|\setrightrepeat\alaligne\leftrepeat|.
-
 In fact it is possible to use \keyindex{setleftrepeat},
 \keyindex{setrightrepeat} or \keyindex{setleftrightrepeat} before any
-\keyindex{bar}, \keyindex{stoppiece} or \keyindex{changecontext}. But
-be aware that while \verb|\setleftrepeat| behaves properly if the
-bar is at the end of a system, \verb|\setleftrightrepeat| does not, placing
-the symbol only at the end of the system.
+\keyindex{bar}, \keyindex{stoppiece} or \keyindex{changecontext}; but
+be aware that whereas \verb|\setrightrepeat| behaves properly if the bar is at the
+end of a system, \verb|\setleftrepeat| and \verb|\setleftrightrepeat| do not,
+placing
+the left-repeat symbol at the end of the system rather
+than at the beginning of the next system; see the 
+\verb|\zleftrepeat| \verb|\zzleftrepeat| \verb|\zzleftrightrepeat| 
+and \verb|\zzleftrightrepeat| commands described below.
+
+
+The following commands generate repeat symbols as usual, but
+are assumed to be in the \emph{middle} of a bar; that is,
+the bar counter is not incremented:
+\begin{itemize}
+\item[] \keyindex{zrightrepeat}
+\item[] \keyindex{zleftrepeat}
+\item[] \keyindex{zleftrightrepeat}
+\end{itemize}
+For example, to insert a left-repeat at a forced line break or at the
+beginning of a piece, simply use \verb|\zleftrepeat| immediately \textit{after}
+\verb|\startpiece| or \verb|\alaligne|. To insert a left-right repeat at a
+forced line break, use \verb|\setrightrepeat\alaligne\zleftrepeat|. 
+
+The following commands are similar but force the mid-bar break to the
+end of a system:
+\begin{itemize}
+\item[] \keyindex{zzrightrepeat}
+\item[] \keyindex{zzleftrepeat}
+\item[] \keyindex{zzleftrightrepeat}
+\end{itemize}
+For
+\verb|\zzleftrepeat| and \verb|\zzleftrightrepeat|, the left-repeats occur
+at the beginning of the following system. The bar numbers are
+correctly adjusted, using \keyindex{writezbarno} for the continuation
+if \keyindex{systemnumbers} is in use. 
+
+As an example, here is
+a \emph{bour\'ee} by G.-F.~Handel coded using \verb|\zleftrepeat| at the beginning
+of the \textbf{A} section and \verb|\zzleftrightrepeat| 
+between the \textbf{A} and the \textbf{B} sections:
+
+\begin{music}
+\smallmusicsize
+\generalmeter{\allabreve}
+\generalsignature{1}
+\startbarno=0
+\nobarnumbers
+\nostartrule
+\startpiece\addspace\afterruleskip
+\systemnumbers
+\zleftrepeat%
+\znotes\ccn{10}{\boxit{\bf A}}\en
+\NOtes\qa d\en%
+\bar%1
+\NOtes\qa{g}\qa{i}\qa{h}\qa{g}\en%
+\bar%2
+\NOTes\ha{k}\ha{i}\en%
+\bar%3
+\NOtes\qa{l}\qa{k}\qa{j}\qa{i}\en%
+\bar%4
+\NOtes\qa j\en
+\NOTes\ha i\en%
+\zzleftrightrepeat%
+\znotes\ccn{10}{\boxit{\bf B}}\en
+\NOtes\qa k\en%
+\bar%5
+\NOtes\qa{l}\qa{j}\qa{h}\en
+\Notes\ibl3i2\qb3i\tql3j\en%
+\bar%6
+\NOtes\qa{k}\qa{i}\qa{g}\en
+\Notes\ibu3h2\qb3h\tqu3i\en%
+\bar%7
+\NOtes\qa{j}\qa{i}\qa{h}\qa{g}\en%
+\bar%8
+\Notes\ibu3h1\qb3{h}\qb3{g}\qb3{h}\tqu3i\en
+\NOtes\qa h\en
+\Notes\ibl3i2\qb3i\tql3j\en%
+\bar%9
+\NOtes\qa k\en
+\Notes\ibl3i2\qb3i\tql3j\en
+\NOtes\qa k\en
+\Notes\ibl3j{-2}\qb3j\tql3i\en%
+\bar%10
+\NOtes\qa j\en
+\Notes\ibu3h2\qb3h\tqu3i\en
+\NOtes\qa j\en
+\Notes\ibu3i{-2}\qb3i\tqu3h\en%
+\bar%11
+\NOtes\qa{i}\qa{g}\en
+\NOtesp\tr{11}\qa{.h}\en
+\Notes\ca g\en%
+\bar%12
+\NOTesp\ha{.g}\en%
+\setrightrepeat%
+\endpiece%
+\end{music}
+
+\noindent No explicit adjustment of \verb|\barno| was necessary.  The right-repeat
+at the end of the \textbf{B}~section was produced by
+\verb|\setrightrepeat\endpiece|.
+
+
 
  \section{First and second endings (Voltas)}\index{volta}
 
@@ -61,6 +154,7 @@ mentioned above are all that are required:
 
 \medskip \begin{music}
  \parindent0pt
+ \nostartrule
  \startpiece
  \addspace\afterruleskip
  \NOTEs\wh a\en\bar
@@ -103,7 +197,7 @@ that starts it, and it will automatically terminate at the
 second bar line command:
 
 \medskip \begin{music}
- \parindent0pt \startpiece \addspace\afterruleskip
+ \parindent0pt \nostartrule\startpiece \addspace\afterruleskip
  \NOTEs\wh a\en\bar
  \NOTEs\wh b\en\setvolta{1.-3}\bar \NOTEs\wh c\en\setvolta4\rightrepeat
  \NOTEs\wh d\en\bar

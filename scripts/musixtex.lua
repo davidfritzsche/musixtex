@@ -1,12 +1,12 @@
 #!/usr/bin/env texlua  
 
-VERSION = "0.16c"
+VERSION = "0.19"
 
 --[[
      musixtex.lua: processes MusiXTeX files using prepmx and/or pmxab and/or 
      autosp as pre-processors (and deletes intermediate files)
 
-     (c) Copyright 2011-2016 Bob Tennent rdt@cs.queensu.ca
+     (c) Copyright 2011-2017 Bob Tennent rdt@cs.queensu.ca
                              and Dirk Laurie dirk.laurie@gmail.com
 
      This program is free software; you can redistribute it and/or modify it
@@ -28,6 +28,23 @@ VERSION = "0.16c"
 --[[
 
   ChangeLog:
+
+     version 0.19   2017-12-10 RDT
+       Allow non-standard extensions.
+       Add -M and -A options.
+
+     version 0.18   2017-06-13 RDT
+       Allow autosp to generate .ltx files
+
+     version 0.17a   2017-01-08 RDT
+       Added -D option.
+       Avoid writing or concatenating a nil value.
+
+     version 0.16e  2016-03-02 DL
+       missing version information (caused by batchmode in 0.16c) fixed
+
+     version 0.16d  2016-03-02 RDT
+       filename argument in autosp failure message fixed
 
      version 0.16c  2016-02-24 RDT
        -interaction batchmode for -q
@@ -107,17 +124,21 @@ function usage()
 Usage:  [texlua] musixtex.lua { option | basename[.mtx | .pmx | .aspc | .tex | .ltx] } ...
         When no extension is given, extensions are tried in the above order
         until a source file is found. Preprocessing goes mtx-pmx-tex or 
-        aspc-tex, with the entry point determined by the extension.
+        aspc-etex/ltx, with the entry point determined by the extension.
         The normal route after preprocessing goes tex-dvi-ps-pdf, but shorter 
-        routes are also available, see the options.
+        routes are also available, see the options. The default processing route
+        for .tex files is etex-musixflx-etex.
 Options: -v  version
          -h  help
          -l  latex source
          -p  direct tex-pdf (pdftex etc)
          -F fmt  use fmt as the TeX processor
-         -d  tex-dvi-pdf (dvipdfm)
+         -d  tex-dvi-pdf (using dvipdfm if -D not used)
+         -D dvixx  use dvixx as the dvi processor
          -c  preprocess pmx file using pmxchords
          -m  stop at pmx
+         -M prepmxx use prepmxx as the mtx preprocessor
+         -A autospx use autospx as the aspc preprocessor
          -t  stop at tex/mid
          -s  stop at dvi
          -g  stop at ps
@@ -156,9 +177,9 @@ function exists (filename, nolog)
   end
 end
 
--- The global variables below may be changed by set_options(). System
---   commands for the various programs are mostly set to nil if the step
---   is to be omitted, which can be tested by a simple "if" statement.
+--   System commands for the various programs are mostly
+--   set to nil if the step is to be omitted, which can be
+--   tested by a simple "if" statement.
 -- Exceptions:
 --    'tex' is the command for processing a TeX file, but it is important
 --       to know whether the user has explicitly specified an option that
@@ -176,7 +197,8 @@ local dvips = "dvips -e0"
 function defaults()
   prepmx = "prepmx"
   pmx = "pmxab"
-  tex = "etex"  
+  autosp = "autosp"
+  tex = "etex"
   musixflx = "musixflx"
   dvi = dvips
   ps2pdf = "ps2pdf"
@@ -273,6 +295,9 @@ function process_option(this_arg)
     override = override .. 'p'
   elseif this_arg == "-d" then
     dvi = "dvipdfm"; ps2pdf = nil
+  elseif this_arg == "-D" then
+    narg = narg+1
+    dvi = arg[narg]
   elseif this_arg == "-c" then
     pmx = "pmxchords"
   elseif this_arg == "-F" then
@@ -297,6 +322,12 @@ function process_option(this_arg)
   elseif this_arg == "-m" then
     pmx, tex, dvi, ps2pdf = nil,nil,nil,nil
     protect.pmx = true
+  elseif this_arg == "-M" then
+    narg = narg+1
+    prepmx = arg[narg]
+  elseif this_arg == "-A" then
+    narg = narg+1
+    autosp = arg[narg]
   elseif this_arg == "-q" then
     if not tempname then
       tempname = tempname or os.tmpname()
@@ -311,33 +342,21 @@ end
 
 function find_file(this_arg)
   basename, extension = this_arg:match"(.*)%.(.*)"  
-  if not extension then
-    basename = this_arg 
-    for ext in ("mtx,pmx,aspc,tex,ltx"):gmatch"[^,]+" do
-      if exists (basename .. "." .. ext) then
-        extension = ext
-        break
-     end
+  extensions = {["mtx"] = true, ["pmx"] = true, ["aspc"] = true, ["tex"] = true, ["ltx"] = true}
+  if extensions[extension] then
+    return basename, extension
+  end
+  basename, extension  = this_arg, null
+  for ext in ("mtx,pmx,aspc,tex,ltx"):gmatch"[^,]+" do
+    if exists (basename .. "." .. ext) then
+      extension = ext
+      break
     end
-    if not extension then
-      print("!! No file " .. basename .. "[.mtx|.pmx|.aspc|.tex|.ltx]")
-      exit_code = exit_code+1
-      return
-    end
-  end       
-  if tex then -- tex output enabled, now select engine
-    if tex:match"pdf" then dvi = nil end
-    if not dvi then ps2pdf = nil end
-    -- .ltx extension will be taken into account later, in `process`
-    -- deduce tex/latex from current engine name if -l is not specified
-    if not override:match"l" then latex = tex:match"latex" end 
-    if not force_engine then -- select appropriate default engine
-      if latex then 
-        if dvi==nil then tex = "pdflatex" else tex = "latex" end
-      else 
-        if dvi==nil then tex = "pdfetex" else tex = "etex" end
-      end  
-    end
+  end
+  if extension == null then
+    print("!! No file " .. basename .. ".[mtx|pmx|aspc|tex|ltx]")
+    exit_code = exit_code+1
+    return
   end
   return basename, extension
 end
@@ -382,10 +401,13 @@ function preprocess(basename,extension)
     end
   end
   if extension == "aspc" then
-    if execute ("autosp " .. basename .. ".aspc" ) == 0 then
-      extension = "tex"
+    if execute (autosp .. " " .. basename .. ".aspc" ) == 0 then
+      if exists ( basename .. ".ltx")
+        then extension = "ltx"
+        else extension = "tex"
+      end
     else
-      print ("!! autosp preprocessing of " .. filename .. " fails.")
+      print ("!! autosp preprocessing of " .. basename .. ".aspc fails.")
       exit_code = exit_code+1
       return
     end       
@@ -447,59 +469,80 @@ function tex_process(tex,basename,extension)
   end
 end
 
---    Extracting version and path information from tempname.
--- The targets below rely on the exact output format used by various
--- programs and TeX files.
-targets = {
-mtxtex = "%(([^(]+mtx%.tex)%s*$",
-mtxlatex = "%(([^(]+mtxlatex%.sty)",
-mtxLaTeX = ".*mtxLaTeX.*",
-pmxtex = "%(([^(]+pmx%.tex)",
-musixtex = "%(([^(]+musixtex%.tex)",
-musixltx = "%(([^(]+musixltx%.tex)",
-musixlyr = "%(([^(]+musixlyr%.tex)",
+---- Report version information on musixtex.log
+
+--  File names and message signatures to be looked for in a TeX log file.
+logtargets =  {
+mtxtex = {"mtx%.tex","mtxTeX"},
+mtxlatex = {"mtxlatex%.sty","mtxLaTeX"},
+pmxtex = {"pmx%.tex","PMX"},
+musixtex = {"musixtex%.tex","MusiXTeX"},
+musixltx = {"musixltx%.tex","MusiXLaTeX"},
+musixlyr = {"musixlyr%.tex","MusiXLYR"}
+}
+
+-- Signatures of messages displayed on standard output by programs 
+capturetargets = {
 MTx = "This is (M%-Tx.->)",
 PMX = "This is (PMX[^\n]+)",
 pdftex = "This is (pdfTeX[^\n]+)",
 musixflx = "Musixflx%S+",
 autosp = "This is autosp.*$",
-index = "autosp,MTx,mtxtex,mtxlatex,mtxLaTeX,PMX,pmxtex,"..
-  "musixtex,musixltx,musixlyr,musixflx,pdftex"
+index = "autosp,MTx,PMX,musixflx,pdftex"
 }
 
-extra_line = { mtxtex=true, musixtex=true, musixltx=true, pmxtex=true, 
-  musixlyr=true }
+function report_texfiles(logname)
+  local log = logname and io.open(logname)
+  if not log then return end
+  local lines = 
+    {"---   TeX files actually included according to "..logname.."   ---"}
+  log = log:read"*a"
+-- The following pattern matches filenames input by TeX, even if
+-- interrupted by a line break. It may include the first word of
+-- an \immediate\write10 message emitted by the file.
+  for pos,filename in log:gmatch"%(()(%.?[/]%a[%-/%.%w\n]+)" do
+    local hit
+    repeat  
+      local oldfilename = filename
+      filename = oldfilename:match"[^\n]+"   -- up to next line break
+      hit = io.open(filename)                -- success if the file exists
+      if hit then break end
+      filename = oldfilename:gsub("\n","",1) -- remove line break
+    until filename==oldfilename 
+    if hit then
+      for target,sig in pairs(logtargets) do
+        if filename:match(sig[1]) then
+          local i,j = log:find(sig[2].."[^\n]+",pos)          
+          if j then lines[#lines+1] = filename.."\n  "..log:sub(i,j) end
+        end
+      end
+    end
+  end
+  return table.concat(lines,'\n').."\n"
+end  
 
 function report_versions(tempname)
   if not tempname then return end  -- only available with -q
   local logs = io.open(tempname)
   if not logs then 
-     print ("No version information: could not open "..tempname)
+     musixlog:write ("No version information: could not open "..tempname)
      return
   end
   local versions = {}
-  local extra
-  musixlog:write("---   Packages actually used according to "..
-    tempname.."   ---\n")
+  musixlog:write("---   Programs actually executed according to "..tempname.."   ---\n")
   for line in logs:lines() do
-    if extra then 
-      versions[extra] = versions[extra] .. "\n  " ..line
-      extra = false
-    else for target, pattern in pairs(targets) do 
+    for target in capturetargets.index:gmatch"[^,]+" do
       if not versions[target] then
-        local found = line:match(pattern) 
+        local found = line:match(capturetargets[target]) 
         if found then
-          extra = extra_line[target] and target
           versions[target] = found
+          musixlog:write(found,"\n")
         end 
       end
-    end end
+    end
   end
   logs:close()
-  for target in targets.index:gmatch"[^,]+" do if versions[target] then
-    if target=="mtxLaTeX" then musixlog:write"  " end
-    musixlog:write(versions[target],"\n")
-  end end 
+  return
 end
 
 ------------------------------------------------------------------------
@@ -517,8 +560,25 @@ repeat
   if this_arg:match"^%-" then process_option(this_arg)
   else
     basename, extension = find_file(this_arg)  -- nil,nil if not found
-    extension = preprocess(basename,extension)
+    if tex then -- tex output enabled, now select engine
+      if tex:match"pdf" then dvi = nil end
+      if not dvi then ps2pdf = nil end
+      -- .ltx extension will be taken into account later, in `process`
+      -- deduce tex/latex from current engine name if -l is not specified
+      if not override:match"l" then latex = tex:match"latex" end 
+      if not force_engine then -- select appropriate default engine
+        if latex then 
+          if dvi==nil then tex = "pdflatex" else tex = "latex" end
+        else 
+          if dvi==nil then tex = "pdfetex" else tex = "etex" end
+        end  
+      end
+    end
+    extension = preprocess(basename, extension)
     tex_process(tex,basename,extension)
+    if basename and io.open(basename..".log") then -- to be printed later
+      versions = report_texfiles(basename..".log")
+    end
     if basename and cleanup then
       remove("pmxaerr.dat")
       for ext in ("mx1,mx2,dvi,ps,idx,log,ilg,pml"):gmatch"[^,]+" do
@@ -531,6 +591,7 @@ repeat
   narg = narg+1
 until narg > #arg 
 
+if versions then musixlog:write(versions) end
 report_versions(tempname)
 musixlog:close()
 os.exit( exit_code )

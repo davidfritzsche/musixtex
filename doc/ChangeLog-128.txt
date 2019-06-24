@@ -1,0 +1,7 @@
+
+Changes from MusiXTeX 127 to 128:
+
+ * introduced \z[left|right|leftright]repeat, for use *within* a bar
+   and \zz...repeat, to force to the end of a system
+
+ * corrected definition of \C@Inter for \nblines < 4
