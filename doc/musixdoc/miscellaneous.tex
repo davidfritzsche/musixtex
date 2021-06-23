@@ -81,9 +81,14 @@ small circle above a note head at pitch $p$.
 \end{itemize}
 These marks are horizontally centered relative to solid note heads. 
 To
-compensate for the fact that whole notes are wider, you should use
-\keyindex{wholeshift}\verb|{|\ital{Any nonspacing macro}\verb|}| to center accents
-and other items (e.g.,~\verb|\Fermataup|) above a whole note.
+compensate for the fact that whole notes are wider, you may use
+\begin{quote}
+\keyindex{wholeshift}\verb|{|\ital{Any nonspacing macro}\verb|}| 
+\end{quote}
+to center accents
+(and other items) above or below a whole note.  For example,
+\keyindex{Fermataup}\pitchp~(described in Section~{\ref{ornaments}}) is
+\emph{defined} as \keyindex{wholeshift}\verb|{|\keyindex{fermataup}\pitchp\verb|}|.
 
 There are also variants of the most common accents\footnote{Thanks to Klaus
 {\sc Bechert}'s corrections.} which will be automatically positioned
@@ -139,6 +144,7 @@ The macro
 \verb|\tuplettxt| serves the same role for the last two macros. 
 The font used is defined by
 \verb|\txtfont| and is, by default, \verb|\eightit| (in normal music size) but may be re-defined. 
+\zkeyindex{txtfont}
 
 The first four commands in the table  
 are normally used with beamed xtuplets. As indicated in the
@@ -273,6 +279,7 @@ it is possible to define \verb|\txt| or
 \end{verbatim}\end{quote}
 
  \section{Ornaments}
+\label{ornaments}
 
 
  \subsection{Simple ornaments}\index{ornaments}
@@ -302,7 +309,7 @@ compensate for the fact that whole notes are wider, you may use
 \keyindex{wholeshift}\verb|{|\mbox{\ital{Any nonspacing macro}}\verb|}| 
 \end{quote}
 to center any of these ornaments
-above a whole note.
+above (or below) a whole note.
 
 
 In the following macros for fermatas, the argument $p$ is the pitch of the
@@ -951,6 +958,55 @@ The coding is
 \zendextract
 \end{verbatim}\end{quote}
 \end{footnotesize}
+
+\clearpage
+
+Here is the same example with \verb|\tabstylespacetrue|:
+\begin{music}
+\input musixps
+\def\psslurhgt{0.5}
+\instrumentnumber{2}
+\songbottom1\songtop2
+\generalmeter{\meterfrac34}
+\generalsignature{-1}
+\setlines16
+\setclefsymbol1\tabclef\setclefsymbol2\treblelowoct
+\tabstylespacetrue
+\setsize1\largevalue
+\setsign10
+\nobarnumbers
+\interinstrument=4\internote
+\parindent=2ex
+\setname1{\tabstringfnt\baselineskip=1.5\internote%
+          \vbox{\hbox to\parindent{\hss E \hss}%
+                \hbox to\parindent{\hss B \hss}%
+                \hbox to\parindent{\hss G \hss}%
+                \hbox to\parindent{\hss D \hss}%
+                \hbox to\parindent{\hss A \hss}%
+                \hbox to\parindent{\hss D \hss}%
+}}
+\startextract
+\NOtesp\zltab55\zltab43\ltab32&\zh{d}\zhl{f}\qu{.h}\en
+\Notes\ltab32&\cu{h}\en
+\bar%
+\NOtes\zltab55\zltab45\zltab33\ltab10&\zq d\zql g\zq i\qu l\en
+\NOtesp\zltab54\zltab45\zltab32\ltab10&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
+\Notes\ltab10&\cu{l}\en
+\bar%
+\NOtes\zltab40\zltab32\zltab23\ltab11&\zq d\zq h\zq k\qu{m}\en
+\NOtes\zltab51\zltab43\zltab33\ltab23&\zhl b\zh f\zq{.i}\qu{.k}\en
+\Notes\ltab35&\cu j\en
+\bar%
+\NOtes\zltab65\zltab45\ltab33&\zql N\zq g\qu i\en
+\NOtes\zltab50\zltab43\ltab32&\zql a\zq f\qu h\en
+\notes\zltab54\ltab45\ilsluru05\ltab43\ltab42\tlslur05\ltab43%
+&\zql{^c}\ibbu0g{-1}\qb0{g}\slur eed2\qb0{fe}\tqu0f\en
+\bar%
+\notes\zltab60\zltab50\ltab45\ilsluru05\ltab42\ltab43\tlslur05\ltab40%
+&\zq K\zql a\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
+\znotes&\lcn{14}{J.S. Bach}\en
+\zendextract
+\end{music}
 Tablature support in \musixtex\ has been adapted
 from \verb|tabdefs.tex| by R.J.~Gelten, which is available 
 \href{http://icking-music-archive.org/software/musixtex/add-ons/tabdefs.tex}

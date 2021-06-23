@@ -1,5 +1,5 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2018-07-27  "musixtex version 0.21" ""
+.TH MUSIXTEX 1 2020-03-20  "musixtex version 0.22" ""
 
 .SH NAME
 musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
@@ -67,10 +67,10 @@ or
 in that order, and process it as above.
 .SH OPTIONS
 .TP 10
-.B -v 
+.B -v, -version, --version
 output program name and version number, and quit
 .TP
-.B -h
+.B -h, -help, --help
 output usage summary and quit
 .TP
 .B -l 
@@ -118,11 +118,15 @@ use
 .B mtxx
 as the mtx preprocessor; e.g., -M "prepmx -i".
 .TP
+.B -X pmxx  
+use
+.B pmxx
+as the pmx preprocessor; e.g., -X "./pmxab",
+.TP
 .B -A aspcx
 use
 .B aspcx
 as the aspc preprocessor; e.g., -A "autosp -l".
-.TP
 .TP
 .B -t
 stop processing at the tex/mid files
@@ -152,7 +156,6 @@ restore default processing
 quiet mode (only musixtex's own messages); other messages are diverted to a temporary file.
 If an error occurs at the TeX stage, processing halts immediately and the tail of the log file is sent to stderr.
 Version information is copied from the temporary file to the log file.
-
 
 .TP 0
 Options affect processing of all succeeding MusiXTeX files unless changed by another option.  Option flags cannot be combined; e.g., use \fB -l -x \fP rather than \fB -lx\fP.

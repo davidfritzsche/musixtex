@@ -25,15 +25,19 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{29}
+\def\mxminorvernumber{30}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
-\def\mxversuffix{}% 
+\def\mxversuffix{beta}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2018-08-04}
+\def\mxdate{2018-08-09}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
 
+
+% version 1.30
+% defined \zdoublebar for use within a bar
+% defined \hbp and \hbpp 
 
 % version 1.29
 
@@ -2284,6 +2288,7 @@
 % if you need a line which appears ragged
 \def\raggedstoppiece{\ifx\ragg@d\empty \fil@{r}\fi % version 1.18 RDT (from musixext)
   \check@nopen\n@wbar\hfill\z@suspend\@nds@ction}
+\def\zendpiece{\setemptybar\raggedstoppiece}
 
 \def\Stoppiece{\setdoubleBAR\stoppiece}
 \let\Endpiece\Stoppiece
@@ -2580,14 +2585,13 @@
 \fi}
 
 \def\zzleftrightrepeat{%                        % RDT 1.28
-  \advance\barno\m@ne
-  \setrightrepeat
-  \stoppiece
-  \let\z@sw\@ne
-  \contpiece
-  \addspace{\h@lf\afterruleskip}%					
-  \kernm\afterruleskip\l@eftrepeat\kern\afterruleskip			
-  \advance\lastbarpos\afterruleskip \b@rrul@			
+\advance\barno\m@ne%
+\setrightrepeat%
+\stoppiece%
+\let\z@sw\@ne%
+\contpiece%
+\advance\barno\m@ne%
+\leftrepeat%                                   % RDT revised 1.30
 }
 
 \def\zleftrightrepeat@II{%                      % RDT 1.28
@@ -2602,6 +2606,9 @@
 
 \let\leftrightrepeat\leftrightrepeat@II
 \let\zleftrightrepeat\zleftrightrepeat@II       % RDT 1.28
+
+
+\def\zdoublebar{\advance\barno\m@ne\doublebar}  % RDT 1.30
 
 \def\alapage{\stoppiece\eject\contpiece}
 \def\zalapage{\zstoppiece\eject\contpiece}
@@ -3657,6 +3664,8 @@
 \def\hlpp{\h@symbol\@qlpp}
 
 \def\hb{\h@symbol\@qb}
+\def\hbp{\h@symbol\@qbp}
+\def\hbpp{\h@symbol\@qbpp}
 
 \def\zh{\h@symbol\@zq}
 \def\zhp{\h@symbol\@zqp}
@@ -4155,6 +4164,18 @@
 \def\lpt{\g@pt\m@ne\z@}
 \def\lppt{\g@pt\m@ne\@ne}
 \def\lpppt{\g@pt\m@ne\tw@}
+
+
+%  Shifted, pointed chord notes 
+%
+\def\lhp#1{\loff{\zhp{#1}}}
+\def\rhp#1{\roff{\zhp{#1}}}
+\def\lqp#1{\loff{\zqp{#1}}}
+\def\rqp#1{\roff{\zqp{#1}}}
+\def\rhpp#1{\roff{\zhpp{#1}}}
+\def\lhpp#1{\loff{\zhpp{#1}}}
+\def\rqpp#1{\roff{\zqpp{#1}}}
+\def\lqpp#1{\loff{\zqpp{#1}}}
 
 \def\g@pt#1#2#3{\check@staff
   \inhgetn@i#3\relax \relax % two \relax since the first one

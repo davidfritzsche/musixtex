@@ -1,0 +1,5 @@
+
+Changes from MusiXTeX 129 to 130:
+
+  *  defined \zdoublebar for use within a bar
+  *  defined \hbp and \hbpp 

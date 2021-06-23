@@ -1,5 +1,6 @@
 %% PostScript slurs, ties and crescendos
 %   Coded by Stanislav Kneifl
+%   RDT added \psRslurskip \iRslur \tRslur \psRtieskip \tRtie \psLtieskip \tLtie 2019/06/17
 
 \ifx\undefined\startpiece\errmessage{Input musixtex.tex before musixps.tex}\fi
 \ifx\undefined\liftcresc\else\endinput\fi
@@ -26,6 +27,7 @@
 \def\psbslurraise{2}       % vert. offset for slurs on beams
 
 \def\psLslurskip{-0.2}     % horiz. offset of slurs shifted more to the left
+\def\psRslurskip{4}        % horiz. offset of slurs shifted more to the right
 \def\pslslurskip{0.4}      % horiz. offset of slurs shifted to the left
 \def\psislurskip{1.4}      % horiz. offset of the slur beginnings
 \def\pstslurskip{1.2}      % horiz. offset of the slur endings
@@ -48,6 +50,8 @@
 \def\psttieskip{0.3}       % horiz. offset of the tie endings
 \def\psltieskip{-0.2}      % horiz. offset of ties shifted to the left
 \def\psrtieskip{3}         % horiz. offset of ties shifted to the right
+\def\psLtieskip{-0.4}      % horiz. offset of ties shifted more to the left
+\def\psRtieskip{4}         % horiz. offset of ties shifted more to the right
 
 \def\pstiehgt{0.7}         % height coeficient of the ties
 \def\pstiemaxhgt{30}       % maximal height if the ties
@@ -554,7 +558,9 @@
 \def\ilsluru#1#2{\iSlur{#1}{#2}{\psslurraise}{\pslslurskip}}
 \def\ilslurd#1#2{\iSlur{#1}{#2}{-\psslurraise}{\pslslurskip}}
 \def\iLsluru#1#2{\iSlur{#1}{#2}{\psslurraise}{\psLslurskip}}
-\def\iLslurd#1#2{\iSlur{#1}{#2}{-\psslurraise}{\psLslurskip}}
+\def\iLsluru#1#2{\iSlur{#1}{#2}{\psslurraise}{\psLslurskip}}
+\def\iRslurd#1#2{\iSlur{#1}{#2}{-\psslurraise}{\psRslurskip}}
+\def\iRslurd#1#2{\iSlur{#1}{#2}{-\psslurraise}{\psRslurskip}}
 
 \def\tfslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\pstslurskip}{\psfslurhgt}{\psslurangul}}
 \def\tslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\pstslurskip}{\psslurhgt}{\psslurangul}}
@@ -576,6 +582,7 @@
 
 \def\tLfslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\psLslurskip}{\psfslurhgt}{\psslurangul}}
 \def\tLslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\psLslurskip}{\psslurhgt}{\psslurangul}}
+\def\tRslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\psRslurskip}{\psslurhgt}{\psslurangul}}
 \def\tLhslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\psLslurskip}{\pshslurhgt}{\psslurangul}}
 \def\tLHslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\psLslurskip}{\psHslurhgt}{\psHslurangul}}
 \def\tLHHslur#1#2{\tSlur{#1}{#2}{\psslurraise}{\psLslurskip}{\psHHslurhgt}{\psHHslurangul}}
@@ -599,6 +606,8 @@
 \def\ttie#1{\tTie{#1}{\psttieskip}}
 \def\tltie#1{\tTie{#1}{\psltieskip}}
 \def\trtie#1{\tTie{#1}{\psrtieskip}}
+\def\tLtie#1{\tTie{#1}{\psLtieskip}}
+\def\tRtie#1{\tTie{#1}{\psRtieskip}}
 
 \def\icresc#1{\Icresc{#1}{\d@nh}{0}}
 \def\idecresc#1{\Idecresc{#1}{\d@nh}{0}}

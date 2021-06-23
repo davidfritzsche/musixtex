@@ -138,3 +138,83 @@ to their default values: \keyindex{staffbotmarg} (\verb|3\Interligne|),
  number of lines per staff for all instruments ($5$); and will reset all clef
 symbols to standard clef symbols.
 
+ \section{Split and Shortened Systems}
+It is sometimes desirable to typeset a ``shortened'' system or to split
+a system into left and right segments, as in the following (extracted from a 
+Geminiani \emph{concerto grosso}):
+
+\begin{music}
+\smallmusicsize
+\setclef1\bass
+\setclef5\treble\settrebleclefsymbol5\trebleoct
+\generalsignature{-2}
+\instrumentnumber5
+\songbottom{1}\songtop{5}
+\setinterinstrument4{1\internote}
+\nobarnumbers
+\generalmeter{\meterfrac38}
+\hbox to\hsize\bgroup\vbox\bgroup\hsize=1.7in  
+\startpiece\addspace\afterruleskip
+\Notes\qa G\sk&\ibu1i{-1}\qb1i\qb1{.g}&\ca d\qa g&\ca n\itieu3n\qa n&\ca g\ds\en
+\notes\ds\sk&\sk\tbbu1\tqu1g&\sk\sk&\sk\sk\ttie3&\ds\sk\en
+\znotes&&&&\lcn{q}{\bf D.S. al\kern3ex}\coda p\en
+\setdoublebar\endpiece
+\egroup\hfill\vbox\bgroup\hsize=3.7in         
+\generalmeter{\allabreve}
+\startpiece\addspace\afterruleskip
+\znotes&&&&\coda o\en
+\NOtes\qa{.G}&\qa{.k}&\qa{.d}&\qa n&\qa g\en
+\notes\sk\sk\qs\cca N&\sk\sk\qs\cca i&\sk\sk\qs\cca k&\qs\ibbl3p{-2}\qb3{p}\qb3{o}\tql3n&\qp\sk\sk\sk\en
+\NOtes\qa{.M}&\qa{.h}&\qa{.k}&\qa o&\ha k\en
+\Notes\sk&\sk&\sk&\itieu3r\qa r&\sk\en
+\notes\qs\cca M&\qs\cca h&\qs\cca k&\sk\sk&\sk\sk\en
+\bar
+\NOtes\wh L\sk&\qa{g}\qa{g}&\ha{l}\sk&\ttie3\ha r\sk&\ha{g}\sk\en
+\NOTes\sk&\ha j&\ha{n}&\tr s\ha q&\ha{n}\en
+\bar
+\nspace
+\NOtesp\ha{.K}&\ha{.h}&\ha{.k}&\ha{.r}&\ha{.^m}\en
+\setdoublebar\endpiece
+\egroup\egroup                                  
+\end{music}
+
+This was coded as follows:
+\begin{footnotesize}
+\begin{quote}\begin{verbatim}
+\setclef1\bass\setclef5\treble\settrebleclefsymbol5\trebleoct
+\generalsignature{-2}
+\instrumentnumber5\songbottom{1}\songtop{5}
+\nobarnumbers
+\generalmeter{\meterfrac38}
+\hbox to\hsize\bgroup\vbox\bgroup\hsize=1.7in % specify length of left segment
+\startpiece\addspace\afterruleskip
+\Notes\qa G\sk&\ibu1i{-1}\qb1i\qb1{.g}
+  &\ca d\qa g&\ca n\itieu3n\qa n&\ca g\ds\en
+\notes\ds\sk&\sk\tbbu1\tqu1g
+  &\sk\sk&\sk\sk\ttie3&\ds\sk\en
+\znotes&&&&\lcn{q}{\bf D.S. al\kern3ex}\coda p\en
+\setdoublebar\endpiece
+\egroup\hfill\vbox\bgroup\hsize=3.7in         % specify length of right segment
+\generalmeter{\allabreve}
+\startpiece\addspace\afterruleskip
+\znotes&&&&\coda o\en
+\NOtes\qa{.G}&\qa{.k}&\qa{.d}&\qa n&\qa g\en
+\notes\sk\sk\qs\cca N&\sk\sk\qs\cca i
+  &\sk\sk\qs\cca k
+  &\qs\ibbl3p{-2}\qb3{p}\qb3{o}\tql3n
+  &\qp\sk\sk\sk\en
+\NOtes\qa{.M}&\qa{.h}&\qa{.k}&\qa o&\ha k\en
+\Notes\sk&\sk&\sk&\itieu3r\qa r&\sk\en
+\notes\qs\cca M&\qs\cca h&\qs\cca k
+  &\sk\sk&\sk\sk\en
+\bar
+\NOtes\wh L\sk&\qa{g}\qa{g}&\ha{l}\sk
+  &\ttie3\ha r\sk&\ha{g}\sk\en
+\NOTes\sk&\ha j&\ha{n}&\tr s\ha q&\ha{n}\en
+\bar
+\nspace
+\NOtesp\ha{.K}&\ha{.h}&\ha{.k}&\ha{.r}&\ha{.^m}\en
+\setdoublebar\endpiece
+\egroup\egroup                                % close open \bgroups 
+\end{verbatim}\end{quote}
+\end{footnotesize}

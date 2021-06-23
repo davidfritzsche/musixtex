@@ -44,7 +44,7 @@ macro from the letter.
  \item[\keyindex{breve}{\tt\char123}$p${\tt\char125} :]breve (\hbox to 8pt{\zbreve1\hss}) .
  \item[\keyindex{longa}{\tt\char123}$p${\tt\char125} :]longa (\hbox to8pt{\zlonga1\hss}) .
  \item[\keyindex{longaa}{\tt\char123}$p${\tt\char125} :]longa with automatic stem direction\footnote{Editor's note: Evidently there is no explicit up-stemmed longa} .
- \item[\keyindex{zmaxima}{\tt\char123}$p${\tt\char125} :]maxima(\hbox to16pt{\zmaxima1\hss}) .
+ \item[\keyindex{maxima}{\tt\char123}$p${\tt\char125} :]maxima (\hbox to16pt{\zmaxima1\hss}) .
  \item[\keyindex{wq}{\tt\char123}$p${\tt\char125} :]arbitrary duration note (\hbox to8pt{\zwq1\hss})
 (also used as alternate representation of a \ital{breve}).
  \item[\keyindex{wqq}{\tt\char123}$p${\tt\char125} :]long arbitrary duration note
@@ -214,7 +214,7 @@ Non spacing variants are also provided, namely
 
 By appending one or two \verb|p|'s (for ``pointed'') to the name, many of the
 macros just introduced provide one or two dots after the notehead:
-\keyindex{whp}\pitchp, \keyindex{whpp},
+\keyindex{whp}, \keyindex{whpp},
 \keyindex{zwp}, \keyindex{zwpp},
 \keyindex{hup}, \keyindex{hupp},
 \keyindex{hlp}, \keyindex{hlpp},
@@ -226,12 +226,14 @@ macros just introduced provide one or two dots after the notehead:
 \keyindex{zqp}, \keyindex{zqpp},
 \keyindex{cup}, \keyindex{cupp},
 \keyindex{clp}, \keyindex{clpp},
-\keyindex{qbp} and \keyindex{qbpp}.
-Naturally, the ones that start with ``\verb|z|'' are used in chords.
+\keyindex{qbp}  and \keyindex{qbpp}, all followed by a pitch argument.
+The ones that start with ``\verb|z|'' are used in chords.
 The dot(s) will be raised if the note is on a line.
 
-A more explicit way uses one of the macros \keyindex{pt}{\tt\char123}$p${\tt\char125},
-\keyindex{ppt}, or \keyindex{pppt} right
+A more explicit way uses one of the macros 
+\keyindex{pt}{\tt\char123}$p${\tt\char125},
+\keyindex{ppt}{\tt\char123}$p${\tt\char125}, or 
+\keyindex{pppt}{\tt\char123}$p${\tt\char125} right
 before any note macro to place one to three dots after the normal note
 head at pitch $p$. Again they will be raised if on a line. In fact this is the only
 way to get a triple-dotted note.
@@ -239,6 +241,10 @@ For example a
 quarter note with one dot could be coded \verb|\pt h\qu h|, with two dots
 as \keyindex{ppt}\verb| h\qu h| and with three as
 \keyindex{pppt}\verb| h\qu h|.
+As a matter of style, if two voices share one staff, the dots in
+the lower voice should be \emph{lowered} if the note is on a line. For
+this you can use \keyindex{lpt}, 
+\keyindex{lppt} and \keyindex{lpppt}. 
 
 Yet another method for posting a dot is to insert a \ital{period} before
 the letter representing the pitch. Thus \verb|\qu{.a}| is equivalent to
@@ -248,14 +254,17 @@ section.
 
 Non-spacing dotted notes can be produced using
 \keyindex{zhup}, \keyindex{zhlp}, \keyindex{zqup}, \keyindex{zqlp},
-\keyindex{zcup}, \keyindex{zclp}, \keyindex{zqbp},
+\keyindex{zcup}, \keyindex{zclp}, \keyindex{zqbp}, followed by a pitch,
+and similarly with two \verb|p|'s for
+double-dotted notes.
+The following provide dotted chord notes shifted left or right:
+\keyindex{lhp},
+\keyindex{rhp},
+\keyindex{lqp},
+\keyindex{rqp},
 and similarly with two \verb|p|'s for
 double-dotted notes.
 
-As a matter of style, if two voices share one staff, the dots in
-the lower voice should be lowered if the note is on a line. For
-this you can use \keyindex{lpt}{\tt\char123}$p${\tt\char125} and
-\keyindex{lppt}{\tt\char123}$p${\tt\char125}.
 
 \section{Sequences of equally spaced notes; collective coding}
 \label{CollectiveCoding}
