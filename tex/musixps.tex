@@ -1,11 +1,12 @@
 %% PostScript slurs, ties and crescendos
 %   Coded by Stanislav Kneifl
 %   RDT added \psRslurskip \iRslur \tRslur \psRtieskip \tRtie \psLtieskip \tLtie 2019/06/17
+%   RDT added \iRtieu \iRtied 2020/09/07
 
 \ifx\undefined\startpiece\errmessage{Input musixtex.tex before musixps.tex}\fi
 \ifx\undefined\liftcresc\else\endinput\fi
 
-\immediate\write16{MusiXPS PostScript slurs, ties and crescendos 0.93 (17.2.2015)}%
+\immediate\write16{MusiXPS PostScript slurs, ties and crescendos 0.94 (07.09.2020)}%
 
 \catcode`\@=11
 
@@ -603,6 +604,8 @@
 \def\iltied#1#2{\iTied{#1}{#2}{\pslslurskip}}
 \def\irtieu#1#2{\iTieu{#1}{#2}{\psrslurskip}}
 \def\irtied#1#2{\iTied{#1}{#2}{\psrslurskip}}
+\def\iRtieu#1#2{\iTieu{#1}{#2}{\psRslurskip}}
+\def\iRtied#1#2{\iTied{#1}{#2}{\psRslurskip}}
 \def\ttie#1{\tTie{#1}{\psttieskip}}
 \def\tltie#1{\tTie{#1}{\psltieskip}}
 \def\trtie#1{\tTie{#1}{\psrtieskip}}

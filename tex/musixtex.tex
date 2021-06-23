@@ -25,33 +25,37 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{30}
+\def\mxminorvernumber{31}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
-\def\mxversuffix{beta}% 
+\def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2018-08-09}
+\def\mxdate{2021-01-07}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
 
+% version 1.31
+%
+% defined \zzdoublebar, \zzbar, \zendpiece
 
 % version 1.30
+%
 % defined \zdoublebar for use within a bar
 % defined \hbp and \hbpp 
 
 % version 1.29
-
+%
 % defined \tabfnt, \tabcleffnt, \tabstringfnt, \tab etc. to support tablature
 
 % version 1.28
-
+%
 % defined 
 %  \z[left|right|leftright]repeat, for use *within* a bar
 %  \zz...repeat, to force to the end of a system
 % corrected definition of \C@Inter for \nblines < 4
 
 % version 1.27
-
+%
 % introduced \meterN 
 % eliminated \ds@oup 
 % introduced \nqqb \nqqh \nqqqb \nqqqh abbreviations and
@@ -62,18 +66,18 @@
 % introduced \xxtuplet 
 
 % version 1.26
-
+%
 % deleted spurious definition in \resetlayout and 
 %  spurious space in definition of \interfacteur...
 
 % version 1.25
-
+%
 % included a "dummy" tuplet.tex in the distribution
 % added \ignorespaces in musixltx.tex
 % defined \qap, \qapp, \tqsk
 
 % version 1.24
-
+%
 % preserve changes to \transpose in an hboxed tremolo command
 % test that musixtex.tex has already been loaded in some extensions: 
 %   musixps, musixec, musixhv, musixplt, musixtmr, musixppff 
@@ -83,13 +87,13 @@
 % correct typos \twtybf[g] \svtbf[g] 
 
 % version 1.23
-
+%
 % added \xtr and \ptr ornaments
 % adjusted spacing of \tr
 % corrected definition of \C@Inter for \nblines > 6 
 
 % version 1.22
-
+%
 % bi and sc font definitions added; sl and tt definitions for musixsty moved 
 % explicit font choices for \txtfont replaced by generic commands \smalltype\it etc.
 % \pdlud \halfwidthbigwedge and \raise-height font-dependent
@@ -97,7 +101,7 @@
 
 
 % version 1.21
-
+%
 % RDT adjusted the offsets and/or vertical positions for some tremolos
 % RDT moved \lastbarpos\lin@pos after calls to \Writ@meters 
 %   to correct \centerbar positioning
@@ -108,24 +112,24 @@
 % RDT added support for piano-pedal bracket notation
 
 % version 1.20
-
+%
 % RDT re-defined tremolo commands to allow for numerical pitches; 
 %  use of \raise and \hbox suggested by Jean-Pierre Colon
 
 % version 1.19:
-
+%
 % RDT corrected typos in the definition of \comput@fonts 
 %   affecting ppff fonts for \Largemusicsize
 % RDT introduced definitions for tremolo commands \trml, \trmu, etc. 
 % RDT turned off lyrics for \metron and \metronequiv notes
 
 % version 1.18:
-
+%
 % RDT added definitions of \raggedstoppiece and \slide from musixext.tex
 % RDT increased the length of beam stems (adapted from J.-P. Coulon)
 
 % version 1.17:
-
+%
 % RDT re-defined \txtfont for non-normal staff sizes
 % RDT defined \tinyppff and \ppfftwelve, and re-defined \ppff to be staffsize dependent
 % RDT introduced \tqqb \tqqh \tqqqb \tqqqh abbreviations 
@@ -136,7 +140,7 @@
 % RDT introduced double-dotted rests \qppp, \dspp, \qspp, etc.
 
 % version 1.16:
-
+%
 % RDT corrected the definitions of \nnotes and \nnnotes
 
 % HM corrected the definitions for cautionary small accidentals
@@ -162,7 +166,7 @@
 % added dynamic-mark  macros \sfz \sfzp
 
 % version 1.15:
-
+%
 % moved out:
 % - 1/128th beams        -> musixbm
 % - triple pointed notes -> musixtri
@@ -2288,7 +2292,7 @@
 % if you need a line which appears ragged
 \def\raggedstoppiece{\ifx\ragg@d\empty \fil@{r}\fi % version 1.18 RDT (from musixext)
   \check@nopen\n@wbar\hfill\z@suspend\@nds@ction}
-\def\zendpiece{\setemptybar\raggedstoppiece}
+\def\zendpiece{\setemptybar\raggedstoppiece}       % RDT version 1.31
 
 \def\Stoppiece{\setdoubleBAR\stoppiece}
 \let\Endpiece\Stoppiece
@@ -2303,6 +2307,7 @@
   \let\T@bil\iftrue \let\everyst@ff\everystaff \let\fil@spc\empty
   \let\fil@termskip\empty \let\fil@signs\empty \let\fil@barno\empty
   \let\leftrepeat\leftrepeat@II \let\leftrightrepeat\leftrightrepeat@II
+  \let\doublebar\doublebar@II
   \piece@beginc\Writ@meters\lastbarpos\lin@pos\let\pdl@cut\empty\addspace\afterruleskip}
                             %%% 1.21: added \lastbarpos and \pdl@cut settings 
 
@@ -2550,7 +2555,7 @@
 \let\leftrepeat\leftrepeat@II
 \let\zleftrepeat\zleftrepeat@II                 % RDT 1.28
 
-\def\zzleftrepeat{%                             % RDT 1.28
+\def\zzleftrepeat{%                           % RDT 1.28
 \advance\barno\m@ne%
 \stoppiece%
 \let\z@sw\@ne%
@@ -2609,6 +2614,21 @@
 
 
 \def\zdoublebar{\advance\barno\m@ne\doublebar}  % RDT 1.30
+
+\def\zzdoublebar{%                              % RDT 1.31
+\advance\barno\m@ne%
+\setdoublebar%
+\stoppiece%
+\let\z@sw\@ne%
+\contpiece%
+}
+
+\def\zzbar{%                                    % RDT 1.31
+\advance\barno\m@ne%
+\stoppiece%
+\let\z@sw\@ne%
+\contpiece%
+}
 
 \def\alapage{\stoppiece\eject\contpiece}
 \def\zalapage{\zstoppiece\eject\contpiece}

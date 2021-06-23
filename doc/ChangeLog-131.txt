@@ -1,0 +1,4 @@
+
+Changes from MusiXTeX 130 to 131:
+
+  *  defined \zzdoublebar, \zzbar, \zendpiece

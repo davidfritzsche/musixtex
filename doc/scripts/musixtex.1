@@ -1,9 +1,9 @@
 .\" This manpage is licensed under the GNU Public License
-.TH MUSIXTEX 1 2020-03-20  "musixtex version 0.22" ""
+.TH MUSIXTEX 1 2020-05-21  "musixtex version 0.23" ""
 
 .SH NAME
-musixtex \- processes MusiXTeX files, using pre-processors prepmx, pmxab and autosp as necessary, 
-and then deletes intermediate and log files (unless 
+musixtex \- processes MusiXTeX files, using pre-processors prepmx, xml2pmx, pmxab and autosp 
+as necessary, and then deletes intermediate and log files (unless 
 .B -i 
 is used)
 .SH SYNOPSIS
@@ -13,7 +13,7 @@ is used)
 .I option 
 | 
 .I jobname 
-[ .mtx  | .pmx  | .aspc | .tex | .ltx ] } ...
+[ .xml | .mtx  | .pmx  | .aspc | .tex | .ltx ] } ...
 .SH DESCRIPTION
 .TP 
 If a jobname argument has a .tex extension, the default effect is to process the file using
@@ -39,6 +39,10 @@ If a jobname argument has a .pmx extension, the file is first preprocessed using
 .BR pmxab (1) 
 and the resulting .tex file is processed as above.
 .P
+If a jobname argument has a .xml extension, the file is first preprocessed using
+.BR xml2pmx (1)
+and the resulting .pmx file is processed as above.
+.P
 If a jobname argument has a .mtx extension, the file is first preprocessed using
 .BR prepmx (1)
 and the resulting .pmx file is processed as above.
@@ -55,6 +59,8 @@ If a jobname argument has a .aspc extension, the file is first preprocessed usin
 and the resulting .tex or .ltx file is processed as above.
 .P
 If a jobname argument has none of these extensions, the script will look for a file 
+.IR jobname .xml
+or
 .IR jobname .mtx
 or
 .IR jobname .pmx
@@ -128,6 +134,11 @@ use
 .B aspcx
 as the aspc preprocessor; e.g., -A "autosp -l".
 .TP
+.B -L xmlx
+use 
+.B xmlx
+as the xml preprocessor; e.g., -L "./XML2PMX".
+.TP
 .B -t
 stop processing at the tex/mid files
 .TP
@@ -184,9 +195,10 @@ If the -F option is used, options -l and -p need to be set if the engine name do
 .BR dvipdfm (1),
 .BR dvips (1),
 .BR pmxab (1),
-.BR pmxchords (1)
+.BR pmxchords (1),
 .BR prepmx (1),
-.BR ps2pdf (1)
+.BR ps2pdf (1),
+.BR xml2pmx (1)
 and musixdoc.pdf.
 .SH AUTHOR 
 This manual page was written by Bob Tennent <rdt@cs.queensu.ca>.

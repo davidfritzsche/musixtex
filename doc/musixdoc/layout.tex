@@ -11,7 +11,8 @@ You can force a line or page break by replacing \keyindex{bar} with
 to forbid line-breaking at a particular bar, replace \verb|\bar|
 with \keyindex{xbar}. To force a line or page break where there is
 no bar line, use \keyindex{zalaligne} or \keyindex{zalapage}. To mark any
-mid-bar location as an optional line-breaking point, use \keyindex{zbar}.
+mid-bar location as an optional line-breaking point, use \keyindex{zbar};
+to force the mid-bar bar line to the end of a system, use \keyindex{zzbar}.
 
 The heavy final double bar of a piece is one of the consequences of
 \keyindex{Endpiece} or \keyindex{Stoppiece}. If you just want to terminate
@@ -19,7 +20,7 @@ the text with a simple bar, say \keyindex{stoppiece} or \keyindex{endpiece}.
 To terminate it with no bar line at all, code \keyindex{zstoppiece}.
 If you want to suppress right-justification of the last line of a score,
 use \keyindex{raggedstoppiece}; the bar line can be suppressed by
-using \keyindex{setemptybar}. 
+using \keyindex{zendpiece} (or \keyindex{setemptybar}). 
 
 Once you have stopped the score by any of these means, you may want to restart
 it, and there are several ways to do so. If you don't need to change the key
