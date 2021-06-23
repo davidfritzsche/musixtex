@@ -2178,38 +2178,52 @@ Available are:
 
  \section{musixvbm}\ixtt{musixvbm.tex}
 \label{musixvbm}
-Beams are normally produced by \texttt{musixtex} using special fonts.  Unfortunately, very long beams may have
-unsightly discontinuities (gaps or bumps). This experimental add-on
-(by Hiroaki \textsc{Morimoto}) produces vectorized beams without these
-discontinuities.  Compare
-\begin{description}
-\item{}
-\begin{music}
-\nostartrule
-\setclef1{\bass}
-\startextract
-\nnotes\ibbl0G1\qb0{GJKLMLMLMLMLMLMK}\tqb0L\en
-\endextract
-\end{music}
-\end{description}
-and
-\begin{description}
-\item{}
-\begin{music}
-\input musixvbm
-\nostartrule
-\setclef1{\bass}
-\startextract
-\nnotes\ibbl0G1\qb0{GJKLMLMLMLMLMLMK}\tqb0L\en
-\endextract
-\end{music}
-\end{description}
-especially when magnified.
+By default, \texttt{musixtex} produces beams using special fonts.  Unfortunately, long beams may have
+unsightly discontinuities (gaps or bumps). The \texttt{musixvbm}  add-on
+by Hiroaki \textsc{Morimoto} produces smooth vectorized beams.
+Compare
 
-The only known disadvantage is that some \texttt{dvi} viewers
-including \texttt{xdvi} and \texttt{yap} do not support the \texttt{tpic} specials
-that implement the vectorized beams so that no beams are shown; however, Postscript and PDF
-output generated using \texttt{dvips} and \texttt{ps2pdf} (or \texttt{dvipdfm}) should be satisfactory.  
+\medskip
+\begin{music}
+\let\extractline\hbox
+\vectorizedbeamfalse
+\nostartrule
+\setclef1{\bass}
+\hbox to \hsize{%
+\hss
+\startextract
+\nnotes\ibbl0G1\qb0{GJKLMLMLMLMLMLMK}\tqb0L\en
+\zendextract
+\hss
+\raise20pt\hbox{ and }
+\hss
+\vectorizedbeamtrue
+\startextract
+\nnotes\ibbl0G1\qb0{GJKLMLMLMLMLMLMK}\tqb0L\en
+\zendextract
+\hss}
+\end{music}
+\medskip
+\noindent
+with various magnifications. The output on the left shows a font-based beam; the one
+on the right (like all the other beams in this report) shows the same beam with
+\texttt{musixvbm} activated.  
+
+
+The only known disadvantage with use of \texttt{musixvbm} is that many \texttt{dvi} viewers
+(including \texttt{xdvi} and \texttt{yap}) do not support the ``\texttt{tpic} specials''
+that implement vectorized beams in \texttt{dvi} output, so that no beams are shown\footnote{%
+The \texttt{dviout} program for Windows supports \texttt{tpic} specials;
+it is available from CTAN and in the Win32 distribution of TeXLive.};
+however, Postscript and PDF
+output generated using \texttt{dvips} and \texttt{ps2pdf} (or using
+\texttt{dvipdfm},
+or by processing the score using \texttt{pdfetex}) should be satisfactory.  
+
+If Postscript hairpins
+as described in Section~\ref{PostscriptSlurs} are not being used,
+the \texttt{musixvbm} add-on also vectorizes crescendos and
+decrescendos. 
 
 \section{tuplet}
 
@@ -2218,9 +2232,7 @@ This file does nothing; it is provided for compatibility with
 Since version 1.21, \verb|musixtex.tex| itself contains all the functions 
 of the older \texttt{tuplet.tex}, namely 
 definitions of 
-\begin{itemize}
-\item \keyindex{tuplettxt}
-\item \keyindex{uptuplet}
-\item \keyindex{downtuplet}
-\end{itemize}
+\keyindex{tuplettxt}, 
+\keyindex{uptuplet} and
+\keyindex{downtuplet}.
 See Section~\ref{tuplet}.
