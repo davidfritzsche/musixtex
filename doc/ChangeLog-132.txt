@@ -1,0 +1,6 @@
+
+Changes from MusiXTeX 131 to 132:
+
+  *  commented out spurious \let\doublebar\doublebar@II
+  *  forbid line-breaking at \zdoublebar
+  *  new add-on musixvbm.tex to support vectorized beams

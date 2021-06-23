@@ -1,0 +1,211 @@
+%%
+%% musixvbm.tex - MusiXTeX Extention, Vectorized Beams (& crescendos)
+%%                by tpic specials / pdfTeX raw literal
+%%
+%% Copyright (C) 2000-2007 Hiroaki MORIMOTO (Kuuku)
+%%
+%% This program is free software; you can redistribute it and/or
+%% modify it under the terms of the GNU General Public License
+%% as published by the Free Software Foundation; either version 2
+%% of the License, or any later version.
+%% 
+%% This program is distributed in the hope that it will be useful,
+%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%% GNU General Public License for more details.
+%% 
+%% You should have received a copy of the GNU General Public License
+%% along with this program; if not, write to the Free Software
+%% Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+%% 
+%% \def\domain{nifty.com}
+%% Author: 
+%%   Hiroaki MORIMOTO <CQX\relax05646@\domain>
+%%     Tokyo, Japan
+%%     URL: http://kuuku.no.coocan.jp/pub/musixtex/index-e.html
+%%
+%% based on musixtex.tex T.104, line 3255-3290.
+%% MusiXTeX : (C) Daniel Taupin et al.
+%%
+%% January 1, 2007 version 1.20-beta6
+%% This is a successor of `musixtpb.tex' ver.1.10.
+%%
+\ifx\ifvectorizedbeam\undefined\else\endinput\fi
+\immediate\write16{MusiXTeX Extention, Vectorized Beams and crescendos v1.20-beta6 <2007/01/01>}%
+%
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+%
+% Allocation of registers
+% No register is required except for scratch (\dimen@, \count@)
+%
+% Modes definition (default: true)
+\newif\ifvectorizedbeam \vectorizedbeamtrue
+%
+% Operation mode automatic selection (v1.20)
+%
+\let\@beammodesel\relax%
+\ifx\pdftexversion\undefined\else%
+  \ifnum\pdfoutput>0\relax
+    \immediate\write16{musixvbm: uses pdfTeX raw literal}%
+    \edef\@beammodesel{pdftex}%
+  \fi
+\fi
+\ifx\@beammodesel\relax
+  \immediate\write16{musixvbm: uses tpic specials}%
+  \edef\@beammodesel{tpic}%
+\fi
+%
+% Overriding beam termination code (v1.20)
+%
+\let\@beam@font=\@beam\relax
+\def\@beam{%
+  \ifvectorizedbeam
+    \csname @beam@\@beammodesel\endcsname
+  \else
+    \@beam@font
+  \fi
+}%
+%
+% Main routine for tpic-version beam
+% \y@ii : length, \b@p : slope, \y@i : altitude
+%
+\def\@beam@tpic{%
+  % X of end
+  \@dimentomil{\y@ii}{\@Xend}%
+  % Y of start
+  \y@iii\y@i
+  \advance\y@iii -\b@amthick 
+  \@dimentomil{-\y@iii}{\@Ystart@l}%
+  \advance\y@iii \tw@\b@amthick 
+  \@dimentomil{-\y@iii}{\@Ystart@u}%
+  % Y of end
+  \y@iv\y@i
+  \dimen@=\b@p\y@ii \divide\dimen@ \tw@nty% \tw@nty=20 def'd in musixtex.tex
+  \advance\y@iv \dimen@
+  \advance\y@iv -\b@amthick
+  \@dimentomil{-\y@iv}{\@Yend@l}%
+  \advance\y@iv \tw@\b@amthick
+  \@dimentomil{-\y@iv}{\@Yend@u}%
+%  \special{pn 1}% 
+  \special{sh 1}%
+  \@addbeampath{0}{\@Ystart@l}%
+  \@addbeampath{\@Xend}{\@Yend@l}%
+  \@addbeampath{\@Xend}{\@Yend@u}%
+  \@addbeampath{0}{\@Ystart@u}%
+  \@addbeampath{0}{\@Ystart@l}%
+  \special{ip}%
+  \kern\y@ii
+}%
+%
+%
+% Subroutines for tpic-version beam
+%
+\def\@dimentomil#1#2{{%
+  % 1m-in = 0.07227pt, 1pt = 13.837m-in
+  % \count@=\count255 \dimen@=\dimen0 def'd in plain
+  \dimen@=#1\relax\dimen@=13.837\dimen@\relax
+  \count@\dimen@
+  \ifnum\count@>0
+    \advance\count@ by 32768
+  \else
+    \advance\count@ by -32768
+  \fi
+  \divide\count@ by 65536
+  \xdef#2{\the\count@}}}%
+%
+\def\@addbeampath#1#2{\special{pa #1 #2}}%
+%
+%
+% Main routine for pdfTeX
+%
+\def\@beam@pdftex{%
+  % X of end
+  \edef\@Xend{\strip@pt\y@ii}%
+  % Y of start
+  \y@iii\y@i
+  \advance\y@iii -\b@amthick 
+  \edef\@Ystart@l{\strip@pt\y@iii}%
+  \advance\y@iii \tw@\b@amthick 
+  \edef\@Ystart@u{\strip@pt\y@iii}%
+  % Y of end
+  \y@iv\y@i
+  \dimen@=\b@p\y@ii \divide\dimen@ \tw@nty% \tw@nty=20 def'd in musixtex.tex
+  \advance\y@iv \dimen@
+  \advance\y@iv -\b@amthick
+  \edef\@Yend@l{\strip@pt\y@iv}%
+  \advance\y@iv \tw@\b@amthick
+  \edef\@Yend@u{\strip@pt\y@iv}%
+  \pdfliteral{q 0 g 0 \@Ystart@l\space m \@Xend\space\@Yend@l\space l \@Xend\space\@Yend@u\space l 0 \@Ystart@u\space l 0 \@Ystart@l\space l f Q}%
+  \kern\y@ii
+}%
+%
+% Subroutines for pdfTeX 
+% (taken from latex.ltx 2003/12/01)
+\begingroup
+  \catcode`P=12
+  \catcode`T=12
+  \lowercase{%
+    \def\x{\def\rem@pt##1.##2PT{##1\ifnum##2>\z@.##2\fi}}}%
+  \expandafter\endgroup\x
+\def\strip@pt{\expandafter\rem@pt\the}%
+%
+%
+% vectorized version of crescendo, decrescendo (under construction)
+%
+\let\C@cresc@font=\C@cresc\relax
+%
+% for tpic-version crescendo
+% #1=length (any TeX dimension, no limit))
+\def\C@cresc@tpic#1{%
+  \y@iv#1\relax
+%  \rlap{\vrule width\y@iv height1pt}%
+  \@dimentomil{\y@iv}{\@Xend}%
+  \dimen@=2.5pt \advance\dimen@ by.00125\y@iv\relax% see musixspx.mf
+  \@dimentomil{\dimen@}{\@Yend@l}%
+  \special{pn 6}% 0.4pt=5.5348mil see musixspx.mf
+  \ifnum\n@ii=\@cxv% decrescendo see musixtex.tex T.112 line 3870
+    \@addbeampath{0}{\@Yend@l}%
+    \@addbeampath{\@Xend}{0}%
+    \special{fp}%
+    \@addbeampath{0}{-\@Yend@l}%
+    \@addbeampath{\@Xend}{0}%
+    \special{fp}%
+  \else
+    \@addbeampath{\@Xend}{\@Yend@l}%
+    \@addbeampath{0}{0}%
+    \special{fp}%
+    \@addbeampath{\@Xend}{-\@Yend@l}%
+    \@addbeampath{0}{0}%
+    \special{fp}%
+  \fi
+%  \C@cresc@font#1%
+}%
+%
+% for pdfTeX-version crescendo
+% #1=length (any TeX dimension, no limit))
+\def\C@cresc@pdftex#1{%
+  \y@iv#1\relax
+%  \rlap{\vrule width\y@iv height1pt}%
+  \edef\@Xend{\strip@pt\y@iv}%
+  \dimen@=2.5pt \advance\dimen@ by.00125\y@iv\relax% see musixspx.mf
+  \edef\@Yend@l{\strip@pt\dimen@}%
+  \ifnum\n@ii=\@cxv% decrescendo see musixtex.tex T.112 line 3870
+    \pdfliteral{.4 w q 0 g 0 \@Yend@l\space m \@Xend\space 0 l S Q q 0 g 0 -\@Yend@l\space m \@Xend\space 0 l S Q}%
+  \else
+    \pdfliteral{.4 w q 0 g \@Xend\space \@Yend@l\space m 0 0 l S Q q 0 g \@Xend\space -\@Yend@l\space m 0 0 l S Q}%
+  \fi
+%  \C@cresc@font#1%
+}%
+%
+% Overriding crescendo (v1.20)
+%
+\def\C@cresc#1{%
+  \ifvectorizedbeam
+    \csname C@cresc@\@beammodesel\endcsname#1
+  \else
+    \C@cresc@font#1
+  \fi
+}%
+%
+\catcode`\@=\catcodeat
+\endinput

@@ -25,14 +25,19 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{31}
+\def\mxminorvernumber{32}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2021-01-07}
+\def\mxdate{2021-05-13}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.32 
+
+% commented out spurious \let\doublebar\doublebar@II
+% forbid line-breaking at \zdoublebar
 
 % version 1.31
 %
@@ -2307,7 +2312,7 @@
   \let\T@bil\iftrue \let\everyst@ff\everystaff \let\fil@spc\empty
   \let\fil@termskip\empty \let\fil@signs\empty \let\fil@barno\empty
   \let\leftrepeat\leftrepeat@II \let\leftrightrepeat\leftrightrepeat@II
-  \let\doublebar\doublebar@II
+% \let\doublebar\doublebar@II    % commented out by RDT version 1.32  
   \piece@beginc\Writ@meters\lastbarpos\lin@pos\let\pdl@cut\empty\addspace\afterruleskip}
                             %%% 1.21: added \lastbarpos and \pdl@cut settings 
 
@@ -2613,7 +2618,7 @@
 \let\zleftrightrepeat\zleftrightrepeat@II       % RDT 1.28
 
 
-\def\zdoublebar{\advance\barno\m@ne\doublebar}  % RDT 1.30
+\def\zdoublebar{\advance\barno\m@ne\setdoublebar\xbar}  % RDT revised 1.32
 
 \def\zzdoublebar{%                              % RDT 1.31
 \advance\barno\m@ne%

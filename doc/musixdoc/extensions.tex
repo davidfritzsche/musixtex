@@ -2176,6 +2176,40 @@ Available are:
 \keyindex{qbppp} and
 \keyindex{zqbppp}.
 
+ \section{musixvbm}\ixtt{musixvbm.tex}
+\label{musixvbm}
+Beams are normally produced by \texttt{musixtex} using special fonts.  Unfortunately, very long beams may have
+unsightly discontinuities (gaps or bumps). This experimental add-on
+(by Hiroaki \textsc{Morimoto}) produces vectorized beams without these
+discontinuities.  Compare
+\begin{description}
+\item{}
+\begin{music}
+\nostartrule
+\setclef1{\bass}
+\startextract
+\nnotes\ibbl0G1\qb0{GJKLMLMLMLMLMLMK}\tqb0L\en
+\endextract
+\end{music}
+\end{description}
+and
+\begin{description}
+\item{}
+\begin{music}
+\input musixvbm
+\nostartrule
+\setclef1{\bass}
+\startextract
+\nnotes\ibbl0G1\qb0{GJKLMLMLMLMLMLMK}\tqb0L\en
+\endextract
+\end{music}
+\end{description}
+especially when magnified.
+
+The only known disadvantage is that some \texttt{dvi} viewers
+including \texttt{xdvi} and \texttt{yap} do not support the \texttt{tpic} specials
+that implement the vectorized beams so that no beams are shown; however, Postscript and PDF
+output generated using \texttt{dvips} and \texttt{ps2pdf} (or \texttt{dvipdfm}) should be satisfactory.  
 
 \section{tuplet}
 
