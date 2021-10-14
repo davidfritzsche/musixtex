@@ -25,14 +25,20 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{32}
+\def\mxminorvernumber{33}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2021-05-13}
+\def\mxdate{2021-07-04}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.33
+%
+%  \tabfnt etc. now uses (Helvetica) bold
+%  replace ledger lines by slashes (/) for tablature notes below the staff
+%  new commands \tzqu, \tzcup, etc. for stems without noteheads, for use in tablature
 
 % version 1.32 
 
@@ -645,14 +651,12 @@
 \def\fontid{cm}        % deprecated but used in pmx.tex
 
 %%
-% Small sans serif fonts       % version 1.29  RDT
+% Small bold sans serif fonts       % version 1.33  RDT
 %%
 
-\font\threess=phvr8t at 3pt
-\font\fourss=phvr8t at 4pt
-\font\fivess=phvr8t at 5pt
+\font\threedc=phvb8t at 3pt
+\font\fourdc=phvb8t at 4pt
 \font\fivedc=phvb8t at 5pt
-\font\sixss=phvr8t at 6pt
 \font\sixdc=phvb8t at 6pt
 
 %%
@@ -690,6 +694,7 @@
 \font\ninebi=cmbxti10 at 9pt     % version 1.22  RDT
 \font\ninesc=cmcsc10 at 9pt
 \font\niness=phvr8t at 9pt       % version 1.29  RDT
+\font\ninedc=phvb8t at 9pt
 
 %%
 % Ten point fonts
@@ -712,6 +717,7 @@
 \font\elevenbi=cmbxti10 at 11pt     % version 1.22  RDT
 \font\elevensc=cmcsc10 at 11pt
 \font\elevenss=phvr8t at 11pt % version 1.29  RDT
+\font\elevendc=phvb8t at 11pt
 
 %%
 % Twelve point fonts
@@ -1757,8 +1763,8 @@
     \else\ifdim\internote<1.19\Internote \smalltype\it
     \else\ifdim\internote<1.43\Internote \Smalltype\it
     \else\normtype\it\fi\fi\fi}%
-    \let\tabnorfnt\fivess \let\tablargefnt\sixss 
-    \let\tabLargefnt\eightss \let\tabsmallfnt\fourss
+    \let\tabnorfnt\fivedc \let\tablargefnt\sixdc              %  1.33   RDT
+    \let\tabLargefnt\eightdc \let\tabsmallfnt\fourdc
     \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
     \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \fourss  %  1.29   RDT
@@ -1789,8 +1795,8 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
-    \let\tabnorfnt\eightss \let\tablargefnt\niness 
-    \let\tabLargefnt\elevenss \let\tabsmallfnt\sixss
+    \let\tabnorfnt\eightdc \let\tablargefnt\ninedc           %  1.33 RDT
+    \let\tabLargefnt\elevendc \let\tabsmallfnt\sixdc
     \let\tabnorcleffnt\twelvedc \let\tablargecleffnt\frtdc
     \let\tabLargecleffnt\svtdc \let\tabsmallcleffnt\tendc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \sixss  %  1.29  RDT
@@ -1823,8 +1829,8 @@
     \else\ifdim\internote<1.19\Internote \medtype\it
     \else\ifdim\internote<1.43\Internote \bigfont\it
     \else\Bigfont\it\fi\fi\fi}%
-    \let\tabnorfnt\niness \let\tablargefnt\elevenss 
-    \let\tabLargefnt\twelvess \let\tabsmallfnt\eightss
+    \let\tabnorfnt\ninedc \let\tablargefnt\elevendc   %  1.33 RDT
+    \let\tabLargefnt\twelvedc \let\tabsmallfnt\eightdc
     \let\tabnorcleffnt\frtdc \let\tablargecleffnt\svtdc
     \let\tabLargecleffnt\twtydc \let\tabsmallcleffnt\twelvedc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \eightss  %  1.29  RDT
@@ -1861,8 +1867,8 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
-    \let\tabnorfnt\sixss \let\tablargefnt\eightss 
-    \let\tabLargefnt\niness \let\tabsmallfnt\fivess
+    \let\tabnorfnt\sixdc \let\tablargefnt\eightdc             % 1.33   RDT
+    \let\tabLargefnt\ninedc \let\tabsmallfnt\fivedc
     \let\tabnorcleffnt\tendc \let\tablargecleffnt\twelvedc
     \let\tabLargecleffnt\frtdc \let\tabsmallcleffnt\eightdc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \fivess  %  1.29  RDT
@@ -5477,13 +5483,17 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Macros for tablature. They put numbers on or above the staff lines.%
-% Based on tabdefs.tex by R.J. Gelten                                %
-% version 1.29  RDT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for tablature. They put numbers on or above the staff lines.              %
+% Based on tabdefs.tex by R.J. Gelten                                              %
+%                                                                                  %
+% 1.33 RDT                                                                         %
+% replace ledger lines by slashes (/) for string numbers > number of staff lines   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcount\stringraise
 \newif\iftabstylespace\tabstylespacefalse
+
 % \tabbox ensures a white background for the tab number in the ps-file
 % so the stafflines don't overwrite the number. Symbols are centered.
 \def\tabbox#1#2{%
@@ -5525,36 +5535,75 @@
   \lcharnote{\the\stringraise}{\box0}%
 }
 
+\newcount\stringnum
+\newcount\nslashes
+
 % \tab takes two arguments. 
 % #1 is the string number 
 % #2 is the symbol to be put on the string
 % the symbols are horizontally centered and a \sk is put behind it,
-% to jump to the position of the next symbol
-\newcount\stringraise
+% to jump to the position of the next symbol.
+% if the string number  > \nblines, ledger lines are replaced by slashes (/)
 \def\tab#1#2{%
-  \tabbox{#1}{#2}\sk%
-}
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\or\ccn{-3}{\tabfnt/#2}\or\ccn{-3}{\tabfnt//#2}\or\ccn{-3}{\tabfnt///#2}\or\ccn{-3}{\tabfnt////#2}\ccn{-3}{\tabfnt/////#2}\or\ccn{-3}{\tabfnt//////#2}\or\ccn{-3}{\tabfnt///////#2}\fi%
+\else\tabbox{#1}{#2}\fi\sk}
+
 % left spilling \tab
 \def\ltab#1#2{%
-  \ltabbox{#1}{#2}\sk%
-}
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt////#2}\or\zcn{-3}{\tabfnt/////#2}\or\zcn{-3}{\tabfnt//////#2}\or\zcn{-3}{\tabfnt///////#2}\fi%
+\else\ltabbox{#1}{#2}\fi\sk}
+
 % right spilling  \tab
 \def\rtab#1#2{%
-  \rtabbox{#1}{#2}\sk%
-}
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\or\lcn{-3}{\tabfnt/#2}\or\lcn{-3}{\tabfnt//#2}\or\lcn{-3}{\tabfnt///#2}\or\lcn{-3}{\tabfnt////#2}\or\lcn{-3}{\tabfnt/////#2}\or\lcn{-3}{\tabfnt//////#2}\or\lcn{-3}{\tabfnt///////#2}\fi%
+\else\rtabbox{#1}{#2}\fi\sk}
+
 % \chord-tab symbol. Same as \tab, but no \sk is given, so multiple 
 % symbols can be placed above one another
 \def\ztab#1#2{%
-  \tabbox{#1}{#2}%
-}
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\or\ccn{-3}{\tabfnt/#2}\or\ccn{-3}{\tabfnt//#2}\or\ccn{-3}{\tabfnt///#2}\or\ccn{-3}{\tabfnt////#2}\or\ccn{-3}{\tabfnt/////#2}\or\ccn{-3}{\tabfnt//////#2}\or\ccn{-3}{\tabfnt///////#2}\fi%
+\else\tabbox{#1}{#2}\fi}
+
 % left spilling \ztab
 \def\zltab#1#2{%
-  \ltabbox{#1}{#2}%
-}
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt////#2}\or\zcn{-3}{\tabfnt/////#2}\or\zcn{-3}{\tabfnt//////#2}\or\zcn{-3}{\tabfnt///////#2}\fi%
+\else\ltabbox{#1}{#2}\fi}
+
 % right spilling \ztab
 \def\zrtab#1#2{%
-  \rtabbox{#1}{#2}%
-}
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\or\lcn{-3}{\tabfnt/#2}\or\lcn{-3}{\tabfnt//#2}\or\lcn{-3}{\tabfnt///#2}\or\lcn{-3}{\tabfnt////#2}\or\lcn{-3}{\tabfnt/////#2}\or\lcn{-3}{\tabfnt//////#2}\or\lcn{-3}{\tabfnt///////#2}\fi%
+\else\rtabbox{#1}{#2}\fi}
+
 %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5571,6 +5620,38 @@
   }
   \ifnum\nblines=6\lower1.5\internote\box1
   \else\ifnum\nblines=4\lower3.5\internote\box1\else\lower2.5\internote\box1\fi\fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% stems without noteheads for use above tablature staff %
+% 1.33 RDT                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcount\stem@hgt  % = 2 * \nblines -1
+\def\tzqu{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@qu{\the\stem@hgt}}
+\def\tzqup{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@qup{\the\stem@hgt}}
+\def\tzcu{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@cu{\the\stem@hgt}}
+\def\tzcup{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@cup{\the\stem@hgt}}
+\def\tzccu{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@ccu{\the\stem@hgt}}
+\def\tzccup{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@ccup{\the\stem@hgt}}
+\def\tzcccu{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@cccu{\the\stem@hgt}}
+\def\tzcccup{\advancefalse%
+\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
+\def\q@u{}\@cccup{\the\stem@hgt}}
+
 
 
 \let\origin@lwrit@staffs\writ@staffs

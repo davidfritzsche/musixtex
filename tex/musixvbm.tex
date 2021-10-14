@@ -3,6 +3,7 @@
 %%                by tpic specials / pdfTeX raw literal
 %%
 %% Copyright (C) 2000-2007 Hiroaki MORIMOTO (Kuuku)
+%% 2021-05-17: RDT added comments on the tpic \specials
 %%
 %% This program is free software; you can redistribute it and/or
 %% modify it under the terms of the GNU General Public License
@@ -31,7 +32,7 @@
 %% This is a successor of `musixtpb.tex' ver.1.10.
 %%
 \ifx\ifvectorizedbeam\undefined\else\endinput\fi
-\immediate\write16{MusiXTeX Extension, Vectorized Beams and crescendos v1.20-beta6 <2007/01/01>}%
+\immediate\write16{MusiXTeX Extension, Vectorized Beams and crescendos <2007/01/01>}%
 %
 \edef\catcodeat{\the\catcode`\@}\catcode`\@=11
 %
@@ -87,13 +88,13 @@
   \advance\y@iv \tw@\b@amthick
   \@dimentomil{-\y@iv}{\@Yend@u}%
 %  \special{pn 1}% 
-  \special{sh 1}%                     set beam shading to black
-  \@addbeampath{0}{\@Ystart@l}%       add points to define the beam perimeter
+  \special{sh 1}%                     RDT: set beam shading to black
+  \@addbeampath{0}{\@Ystart@l}%       RDT: add points to define the beam perimeter
   \@addbeampath{\@Xend}{\@Yend@l}%
   \@addbeampath{\@Xend}{\@Yend@u}%
   \@addbeampath{0}{\@Ystart@u}%
-  \@addbeampath{0}{\@Ystart@l}%       close the perimeter
-  \special{ip}%                       draw the beam (without the outline) 
+  \@addbeampath{0}{\@Ystart@l}%       RDT: close the perimeter
+  \special{ip}%                       RDT: draw the beam (without the outline) 
   \kern\y@ii
 }%
 %

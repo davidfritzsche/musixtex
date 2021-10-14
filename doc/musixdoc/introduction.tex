@@ -742,22 +742,21 @@ and \verb|etex| again. This will produce a \verb|.dvi| file. From this point
 forward, this file can be processed like the device-independent output file
 for any \TeX\ document. The most common approach and the only one to 
 be discussed here is to next generate a Postscript file. This is accomplished
-by running \verb|dvips|, which is included in every \TeX\ system. To view the 
+by running \verb|dvips|, which is included in every \TeX\ system; to prevent
+inappropriate adjustments that \verb|dvips| makes by default, it is recommended to
+add the option \verb|-e0|.  To view the 
 Postscript, most users run {\tt GSview} or {\tt gv}, a front-end to {\tt ghostscript}, which must
 be separately downloaded and installed. Finally, you may produce a PDF file 
 using \verb|ps2pdf| or GSview, and view that with any PDF viewer, such as
 the Adobe Reader or {\tt GSview}. 
 
 You also can view the \verb|.dvi| file directly using a DVI viewer such as Yap or \verb|xdvi|, 
-but, if you are using type K Postscript slurs, some DVI viewers will not display them.
+but, if you are using type K Postscript slurs or vectorized beams, some DVI viewers will not display them.
 
 Rather than executing all the foregoing programs separately, most users will 
 find it more convenient to use the \verb|musixtex| script that comes in most
-distributions of \musixtex. For example,
-
-\verb|musixtex jobname|
-
-\noindent will run the three passes described in Section~\ref{threepass},
+distributions of \musixtex. For example, \verb|musixtex jobname| 
+will by default run the three passes described in Section~\ref{threepass},
 convert the result to PDF and delete intermediate files.  
 There are many options available to
 change the behavior; run

@@ -2179,14 +2179,15 @@ Available are:
  \section{musixvbm}\ixtt{musixvbm.tex}
 \label{musixvbm}
 By default, \texttt{musixtex} produces beams using special fonts.  Unfortunately, long beams may have
-unsightly discontinuities (gaps or bumps). The \texttt{musixvbm}  add-on
-by Hiroaki \textsc{Morimoto} produces smooth vectorized beams.
-Compare
+unsightly minor discontinuities (gaps or bumps). The \texttt{musixvbm}  add-on
+by Hiroaki \textsc{Morimoto} produces smooth vectorized beams; simply input
+\texttt{musixvbm} in the preamble of your score (after inputting \texttt{musixtex}).
+For example, compare
 
 \medskip
 \begin{music}
 \let\extractline\hbox
-\vectorizedbeamfalse
+\vectorizedbeamfalse % disable vectorized beams
 \nostartrule
 \setclef1{\bass}
 \hbox to \hsize{%
@@ -2197,7 +2198,7 @@ Compare
 \hss
 \raise20pt\hbox{ and }
 \hss
-\vectorizedbeamtrue
+\vectorizedbeamtrue  % re-enable vectorized beams
 \startextract
 \nnotes\ibbl0G1\qb0{GJKLMLMLMLMLMLMK}\tqb0L\en
 \zendextract
@@ -2206,8 +2207,10 @@ Compare
 \medskip
 \noindent
 with various magnifications. The output on the left shows a font-based beam; the one
-on the right (like all the other beams in this report) shows the same beam with
-\texttt{musixvbm} activated.  
+on the right 
+shows the same beam with
+\texttt{musixvbm} activated.   
+All the other beams in this report are vectorized.  
 
 
 The only known disadvantage with use of \texttt{musixvbm} is that many \texttt{dvi} viewers
@@ -2221,7 +2224,7 @@ output generated using \texttt{dvips} and \texttt{ps2pdf} (or using
 or by processing the score using \texttt{pdfetex}) should be satisfactory.  
 
 If Postscript hairpins
-as described in Section~\ref{PostscriptSlurs} are not being used,
+(as described in Section~\ref{PostscriptSlurs}) are not being used,
 the \texttt{musixvbm} add-on also vectorizes crescendos and
 decrescendos. 
 

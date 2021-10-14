@@ -844,7 +844,7 @@ are as follows:
 \item \keyindex{tab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
 puts $p$ on string $n$
 (counting from top to bottom); $p$ is centered, using \verb|\ccharnote|.
-Ledger lines are added for $n$ less than $1$ or greater than the current number of staff lines.
+Ledger lines are replaced by slashes (/) for $n$ greater than the number of staff lines.
 \item \keyindex{ltab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
 uses \verb|\zcharnote| so $p$
 spills to the right and
@@ -858,7 +858,7 @@ is a non-spacing \verb|\ltab| and
 \keyindex{zrtab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
 is a non-spacing \verb|\rtab|.
 \end{itemize}
-A size-dependent font \keyindex{tabfnt} is used for tab characters; Helvetica is the default font family.
+A size-dependent font \keyindex{tabfnt} is used for tab characters; Helvetica bold is the default font family.
 
 The default tablature style is to place the fingering notations \emph{on} the staff line;
 Postscript specials are used to ``blank'' staff lines below
@@ -868,7 +868,9 @@ the command \keyindex{tabstylespacetrue}.
 A size-dependent font \keyindex{tabstringfnt} is defined to allow string names to be
 listed using \verb|\setname|.
 
-Here is an example of a guitar tablature (6th string lowered to D):
+Here is an example 
+for baroque lute
+(from \emph{Ciaccona} in D~minor by J.S.~Bach): 
 
 \begin{music}
 \input musixps
@@ -876,137 +878,225 @@ Here is an example of a guitar tablature (6th string lowered to D):
 \instrumentnumber{2}
 \songbottom1\songtop2
 \generalmeter{\meterfrac34}
-\generalsignature{-1}
-\setlines16
-\setclefsymbol1\tabclef\setclefsymbol2\treblelowoct
-\setsize1\largevalue
-\setsign10
+\interinstrument=5\internote
 \nobarnumbers
-\interinstrument=4\internote
+\setlines16\setclefsymbol1\tabclef\setsize1{1.2}\setsign10
+\setsign2{-1}\setclefsymbol2\treblelowoct
 \parindent=2ex
-\setname1{\tabstringfnt\baselineskip=1.5\internote%
-          \vbox{\hbox to\parindent{\hss E \hss}%
-                \hbox to\parindent{\hss B \hss}%
-                \hbox to\parindent{\hss G \hss}%
-                \hbox to\parindent{\hss D \hss}%
-                \hbox to\parindent{\hss A \hss}%
-                \hbox to\parindent{\hss D \hss}%
-}}
+\setname1{\tabstringfnt\baselineskip=1.2\internote%
+\vbox{%
+\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}%
+\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}}}
 \startextract
-\NOtesp\zltab55\zltab43\ltab32&\zh{d}\zhl{f}\qu{.h}\en
-\Notes\ltab32&\cu{h}\en
+\scale{0.88}
+\NOtesp\zltab50\zltab40\ltab30&\zhl{d}\zhu{f}\qu{.h}\en
+\Notes\ltab30&\cu{h}\en
 \bar%
-\NOtes\zltab55\zltab45\zltab33\ltab10&\zq d\zql g\zq i\qu l\en
-\NOtesp\zltab54\zltab45\zltab32\ltab10&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
-\Notes\ltab10&\cu{l}\en
+\NOtes\zltab50\zltab42\zltab31\ltab22&\zql d\zqu g\zq i\qu l\en
+\NOtesp\zltab64\zltab55\zltab30\ltab22&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
+\Notes\ltab22&\cu{l}\en
 \bar%
-\NOtes\zltab40\zltab32\zltab23\ltab11&\zq d\zq h\zq k\qu{m}\en
-\NOtes\zltab51\zltab43\zltab33\ltab23&\zhl b\zh f\zq{.i}\qu{.k}\en
-\Notes\ltab35&\cu j\en
+\NOtes\zltab50\zltab40\zltab30\ltab10&\zql d\zq f\zq h\qu{m}\en
+\NOtes\zltab61\zltab40\ltab20&\zhl b\zh f\qu{.k}\en
+\Notes\ltab33&\cu j\en
 \bar%
-\NOtes\zltab65\zltab45\ltab33&\zql N\zq g\qu i\en
-\NOtes\zltab50\zltab43\ltab32&\zql a\zq f\qu h\en
-\notes\zltab54\ltab45\ilsluru04\ltab43\ltab42\tlslur04\ltab43%
-&\zql{^c}\ibbu0g{-1}\qb0{g}\slur eed2\qb0{fe}\tqu0f\en
+\NOtes\zltab70\zltab55\ltab45&\zql N\zq g\qu i\en
+\NOtes\zltab60\zltab53\ltab44&\zql a\zq f\qu h\en
+\notes\zltab64\ltab42\ilsluru03\ltab53\ltab52\tlslur03\ltab53%
+&\zql{^c}\ibbu0g{-1}\qb0g\slur eed2\qb0{fe}\tqu0f\en
 \bar%
-\notes\zltab60\zltab50\ltab45\ilsluru04\ltab42\ltab43\tlslur04\ltab40%
-&\zq K\zql a\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
-\znotes&\lcn{14}{J.S. Bach}\en
+\notes\ztab{10}0\ltab42\ilsluru03\ltab52\ltab53\tlslur03\ltab50%
+&\zql K\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
+\NOtesp\zltab50\zltab40\ltab30&\zhl{d}\zhu{f}\qu{.h}\en
+\Notes\ltab30&\cu{h}\en
+\bar%
 \zendextract
 \end{music}
-
 \noindent
 The coding is
 \begin{footnotesize}
 \begin{quote}\begin{verbatim}
 \instrumentnumber{2}
 \songbottom1\songtop2
-\setclefsymbol2\treblelowoct
 \generalmeter{\meterfrac34}
-\generalsignature{-1}
-\setlines16\setclefsymbol1\tabclef\setsize1\largevalue\setsign10
-\nobarnumbers
 \interinstrument=4\internote
+\nobarnumbers
+\setlines16\setclefsymbol1\tabclef\setsize1{1.2}\setsign10
+\setsign2{-1}\setclefsymbol2\treblelowoct
 \parindent=2ex
-\setname1{\tabstringfnt\baselineskip=1.5\internote%
-          \vbox{\hbox to\parindent{\hss E\hss}%
-                \hbox to\parindent{\hss B\hss}%
-                \hbox to\parindent{\hss G\hss}%
-                \hbox to\parindent{\hss D\hss}%
-                \hbox to\parindent{\hss A\hss}%
-                \hbox to\parindent{\hss D\hss}}}
+\setname1{\tabstringfnt\baselineskip=1.2\internote%
+\vbox{%
+\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}%
+\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}}}
 \startextract
-\NOtesp\zltab55\zltab43\ltab32&\zh{d}\zhl{f}\qu{.h}\en
-\Notes\ltab32&\cu{h}\en
+\NOtesp\zltab50\zltab40\ltab30&\zhl{d}\zhu{f}\qu{.h}\en
+\Notes\ltab30&\cu{h}\en
 \bar%
-\NOtes\zltab55\zltab45\zltab33\ltab10&\zq d\zql g\zq i\qu l\en
-\NOtesp\zltab54\zltab45\zltab32\ltab10&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
-\Notes\ltab10&\cu{l}\en
+\NOtes\zltab50\zltab42\zltab31\ltab22&\zql d\zqu g\zq i\qu l\en
+\NOtesp\zltab64\zltab55\zltab30\ltab22&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
+\Notes\ltab22&\cu{l}\en
 \bar%
-\NOtes\zltab40\zltab32\zltab23\ltab11&\zq d\zq h\zq k\qu{m}\en
-\NOtes\zltab51\zltab43\zltab33\ltab23&\zhl b\zh f\zq{.i}\qu{.k}\en
-\Notes\ltab35&\cu j\en
+\NOtes\zltab50\zltab40\zltab30\ltab10&\zql d\zq f\zq h\qu{m}\en
+\NOtes\zltab61\zltab40\ltab20&\zhl b\zh f\qu{.k}\en
+\Notes\ltab33&\cu j\en
 \bar%
-\NOtes\zltab65\zltab45\ltab33&\zql N\zq g\qu i\en
-\NOtes\zltab50\zltab43\ltab32&\zql a\zq f\qu h\en
-\notes\zltab54\ltab45\ilsluru04\ltab43\ltab42\tlslur04\ltab43%
-&\zql{^c}\ibbu0g{-1}\qb0{g}\slur eed2\qb0{fe}\tqu0f\en
+\NOtes\zltab70\zltab55\ltab45&\zql N\zq g\qu i\en
+\NOtes\zltab60\zltab53\ltab44&\zql a\zq f\qu h\en
+\notes\zltab64\ltab42\ilsluru03\ltab53\ltab52\tlslur03\ltab53%
+&\zql{^c}\ibbu0g{-1}\qb0g\slur eed2\qb0{fe}\tqu0f\en
 \bar%
-\notes\zltab60\zltab50\ltab45\ilsluru04\ltab42\ltab43\tlslur04\ltab40%
-&\zq K\zql a\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
-\znotes&\lcn{14}{J.S. Bach}\en
+\notes\ztab{10}0\ltab42\ilsluru03\ltab52\ltab53\tlslur03\ltab50%
+&\zql K\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
+\NOtesp\zltab50\zltab40\ltab30&\zhl{d}\zhu{f}\qu{.h}\en
+\Notes\ltab30&\cu{h}\en
+\bar%
 \zendextract
 \end{verbatim}\end{quote}
 \end{footnotesize}
 
 \clearpage
 
+\par\noindent
 Here is the same example with \verb|\tabstylespacetrue|:
 \begin{music}
 \input musixps
 \def\psslurhgt{0.5}
+\tabstylespacetrue
 \instrumentnumber{2}
 \songbottom1\songtop2
 \generalmeter{\meterfrac34}
-\generalsignature{-1}
-\setlines16
-\setclefsymbol1\tabclef\setclefsymbol2\treblelowoct
-\tabstylespacetrue
-\setsize1\largevalue
-\setsign10
-\nobarnumbers
 \interinstrument=4\internote
+\nobarnumbers
+\setlines16\setclefsymbol1\tabclef\setsize1{1.2}\setsign10
+\setsign2{-1}\setclefsymbol2\treblelowoct
 \parindent=2ex
-\setname1{\tabstringfnt\baselineskip=1.5\internote%
-          \vbox{\hbox to\parindent{\hss E \hss}%
-                \hbox to\parindent{\hss B \hss}%
-                \hbox to\parindent{\hss G \hss}%
-                \hbox to\parindent{\hss D \hss}%
-                \hbox to\parindent{\hss A \hss}%
-                \hbox to\parindent{\hss D \hss}%
-}}
+\setname1{\tabstringfnt\baselineskip=1.2\internote%
+\vbox{%
+\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}%
+\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}}}
 \startextract
-\NOtesp\zltab55\zltab43\ltab32&\zh{d}\zhl{f}\qu{.h}\en
-\Notes\ltab32&\cu{h}\en
+\scale{0.88}
+\NOtesp\zltab50\zltab40\ltab30&\zhl{d}\zhu{f}\qu{.h}\en
+\Notes\ltab30&\cu{h}\en
 \bar%
-\NOtes\zltab55\zltab45\zltab33\ltab10&\zq d\zql g\zq i\qu l\en
-\NOtesp\zltab54\zltab45\zltab32\ltab10&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
-\Notes\ltab10&\cu{l}\en
+\NOtes\zltab50\zltab42\zltab31\ltab22&\zql d\zqu g\zq i\qu l\en
+\NOtesp\zltab64\zltab55\zltab30\ltab22&\rhl{^c}\rhu{g}\zh{h}\qu{.l}\en
+\Notes\ltab22&\cu{l}\en
 \bar%
-\NOtes\zltab40\zltab32\zltab23\ltab11&\zq d\zq h\zq k\qu{m}\en
-\NOtes\zltab51\zltab43\zltab33\ltab23&\zhl b\zh f\zq{.i}\qu{.k}\en
-\Notes\ltab35&\cu j\en
+\NOtes\zltab50\zltab40\zltab30\ltab10&\zql d\zq f\zq h\qu{m}\en
+\NOtes\zltab61\zltab40\ltab20&\zhl b\zh f\qu{.k}\en
+\Notes\ltab33&\cu j\en
 \bar%
-\NOtes\zltab65\zltab45\ltab33&\zql N\zq g\qu i\en
-\NOtes\zltab50\zltab43\ltab32&\zql a\zq f\qu h\en
-\notes\zltab54\ltab45\ilsluru05\ltab43\ltab42\tlslur05\ltab43%
-&\zql{^c}\ibbu0g{-1}\qb0{g}\slur eed2\qb0{fe}\tqu0f\en
+\NOtes\zltab70\zltab55\ltab45&\zql N\zq g\qu i\en
+\NOtes\zltab60\zltab53\ltab44&\zql a\zq f\qu h\en
+\notes\zltab64\ltab42\ilsluru03\ltab53\ltab52\tlslur03\ltab53%
+&\zql{^c}\ibbu0g{-1}\qb0g\slur eed2\qb0{fe}\tqu0f\en
 \bar%
-\notes\zltab60\zltab50\ltab45\ilsluru05\ltab42\ltab43\tlslur05\ltab40%
-&\zq K\zql a\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
-\znotes&\lcn{14}{J.S. Bach}\en
+\notes\ztab{10}0\ltab42\ilsluru03\ltab52\ltab53\tlslur03\ltab50%
+&\zql K\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
+\NOtesp\zltab50\zltab40\ltab30&\zhl{d}\zhu{f}\qu{.h}\en
+\Notes\ltab30&\cu{h}\en
+\bar%
 \zendextract
 \end{music}
+\medskip
+
+\noindent
+In pure tablature, note durations are typically specified by stems without noteheads immediately
+above the staff, as in:
+\medskip
+
+\begin{music}
+\input musixps
+\def\psslurhgt{0.5}
+\instrumentnumber{1}
+\generalmeter{\meterfrac34}
+\generalsignature{-1}
+\setlines16\setclefsymbol1\tabclef\setsize1{1.2}\setsign10
+\nobarnumbers
+\parindent=2ex
+\setname1{\tabstringfnt\baselineskip=1.2\internote%
+\vbox{\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}%
+\hbox to\parindent{\hss F\hss}%
+\hbox to\parindent{\hss D\hss}%
+\hbox to\parindent{\hss A\hss}}}
+\nostartrule
+\startextract
+\scale{0.88}
+\NOtesp\zltab50\zltab40\tzqup\ltab30\en
+\Notes\tzcu\ltab30\en
+\bar%
+\NOtes\zltab50\zltab42\zltab31\tzqu\ltab22\en
+\NOtesp\zltab64\zltab35\zltab30\tzqup\ltab22\en
+\Notes\tzcu\ltab22\en
+\bar%
+\NOtes\zltab50\zltab30\zltab20\tzqu\ltab10\en
+\NOtes\zltab61\zltab40\tzqup\ltab20\en
+\Notes\tzcu\ltab33\en
+\bar%
+\NOtes\zltab70\zltab55\tzqu\ltab45\en
+\NOtes\zltab60\zltab53\ltab44\en
+\notes\zltab64\tzccu\ltab42\ilsluru03\ltab53\ltab52\tlslur03\ltab53\en
+\bar%
+\notes\ztab{10}0\tzccu\ltab42\ilsluru03\ltab52\ltab53\tlslur03\ltab50\en
+\NOtesp\zltab50\zltab40\tzqup\ltab30\en
+\Notes\tzcu\ltab30\en
+\bar%
+\zendextract
+\end{music}
+\medskip
+\noindent
+Note that this notation does not
+specify the duration of \emph{every} note. 
+
+\smallskip
+
+A stem (without a notehead) is generated immediately above the staff using one of the commands 
+\keyindex{tzqu}, \keyindex{tzqup}, \keyindex{tzcu}, \keyindex{tzcup}, \keyindex{tzccu}, \ldots\  
+\emph{before} a spacing command.  Coding 
+for the notes in the example above is as follows:
+\begin{footnotesize}
+\begin{quote}\begin{verbatim}
+\startextract
+\scale{0.88}
+\NOtesp\zltab50\zltab40\tzqup\ltab30\en
+\Notes\tzcu\ltab30\en
+\bar%
+\NOtes\zltab50\zltab42\zltab31\tzqu\ltab22\en
+\NOtesp\zltab64\zltab35\zltab30\tzqup\ltab22\en
+\Notes\tzcu\ltab22\en
+\bar%
+\NOtes\zltab50\zltab30\zltab20\tzqu\ltab10\en
+\NOtes\zltab61\zltab40\tzqup\ltab20\en
+\Notes\tzcu\ltab33\en
+\bar%
+\NOtes\zltab70\zltab55\tzqu\ltab45\en
+\NOtes\zltab60\zltab53\ltab44\en
+\notes\zltab64\tzccu\ltab42\ilsluru03\ltab53\ltab52\tlslur03\ltab53\en
+\bar%
+\notes\ztab{10}0\tzccu\ltab42\ilsluru03\ltab52\ltab53\tlslur03\ltab50\en
+\NOtesp\zltab50\zltab40\tzqup\ltab30\en
+\Notes\tzcu\ltab30\en
+\bar%
+\zendextract
+\end{verbatim}\end{quote}
+\end{footnotesize}
+
+\medskip
 Tablature support in \musixtex\ has been adapted
 from \verb|tabdefs.tex| by R.J.~Gelten, which is available 
 \href{http://icking-music-archive.org/software/musixtex/add-ons/tabdefs.tex}

@@ -79,14 +79,14 @@ to create staff-jumping doubly beamed notes.
 
 \end{itemize}
 
-\section{Compiling \texttt{musixdoc.tex}}
+\section{Compiling \texttt{musixdoc.ltx}}
 
 This manual is an excellent example of a primarily text document with embedded
 musical excerpts. For this reason, it is a \LaTeX\ document and must be compiled
 with \verb|latex| rather than \verb|etex|. Those wishing to combine text and 
 musical excerpts should carefully study how it is done here.
 
-Before compiling or recompiling \verb|musixdoc.tex|, you should remove all the auxiliary 
+Before compiling or recompiling \verb|musixdoc.ltx|, you should remove all the auxiliary 
 files {\tt musixdoc.[mx1\|\allowbreak mx2\|\allowbreak aux\|\allowbreak toc\|\allowbreak ind\|\allowbreak idx\|\allowbreak ilg\|\allowbreak out]} 
 if they are present. Then the following command sequence will produce \verb|musixdoc.ps|:
 \begin{quote}\begin{verbatim}
@@ -101,16 +101,17 @@ dvips -e0 musixdoc
 The initial three steps \verb|latex|\allowbreak$\to$\allowbreak\verb|musixflx|\allowbreak$\to$\allowbreak\verb|latex| build up the basic appearance of the document including musical examples.
 The \verb|makeindex| step produces the database for the index.  
 After that, \verb|latex| must be run at least twice to complete cross referencing.  
-Finally, \verb|dvips| converts the \verb|.dvi| file into \verb|.ps|.
+Finally, \verb|dvips| converts the \verb|.dvi| file into \verb|.ps|;
+the \texttt{-e0} option prevents \texttt{dvips} from making pixel adjustments
+intended for letters in words.
 To produce \verb|musixdoc.pdf|, use \verb|ps2pdf| or the Distiller component of Adobe Acrobat, or open \verb|musixdoc.ps| in \texttt{GSview}, go to
 {\tt File\|Convert}, select \verb|pdfwrite| at 600 dpi resolution, and click
 \verb|OK|.  
-Or if you have the \verb|musixtex| script, just run 
-\begin{quote}
-\verb|musixtex -l -x musixdoc|
-\end{quote}
-where the \verb|-l| option is to use \verb|latex| as the processing engine
-and \verb|-x| is to create a new index database.
+
+Alternatively, if you have the \verb|musixtex| script, just run 
+\verb|musixtex -x musixdoc|
+(where
+the \verb|-x| option is only needed to create a new index database).
 
 %If you use an older version of \LaTeX\ which doesn't automatically 
 %invoke $\varepsilon$\hbox{-}\nobreak\TeX, you will encounter the 
