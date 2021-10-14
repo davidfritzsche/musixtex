@@ -398,7 +398,7 @@ The example of Section~\ref{tablature} with \texttt{musixftab.tex} is as follows
 \begin{music}
 \input musixftab
 \input musixps
-\tabstylespacetrue
+%\tabstylespacetrue
 \largemusicsize
 \def\psslurhgt{0.5}
 \instrumentnumber{1}
@@ -1432,6 +1432,83 @@ The following bold-oblique fonts for dynamic marks are defined:
 \keyindex{ppfftwentyfour} & 14pt \\
 \keyindex{ppfftwentynine} & 17pt \\
 \end{tabular}\end{quote}
+
+ \section{musixjt}\label{JazzText}\index{musixjt@{\tt musixjt.tex}}
+
+ Jazz scores often use a ``handwriting'' font \texttt{JazzText} originally designed by 
+Richard Sigler and now bundled with Finale.  This font is
+widely available and is said to be ``free for personal use'' but this
+is not sufficiently ``free'' for packaging into TeXLive. A similar
+font \texttt{MuseJazzText} is bundled with MuseScore and because it is OFL-licensed,
+it can be distributed with \musixtex.
+This font will be used for all textual elements of your \musixtex\ score if you input \texttt{musixjt.tex}
+after \texttt{musixtex.tex}. Here is an example:
+ 
+\smallskip 
+\begin{music}
+\input musixjt
+\begin{center}
+\Bigtype Q\,U\,O\,D\,L\,I\,B\,E\,T\\[1ex]
+\medtype Variation 30 of the Goldberg Variations for Clavier
+\end{center}
+\def\pstiehgt{0.5}
+\def\psslurhgt{0.5}
+\smallmusicsize
+\bigaccid
+\parindent=10pt
+\def\raisebarno{7\internote}%
+\nobarnumbers
+\relativeaccid
+\geometricskipscale
+\instrumentnumber4
+\setclef1\bass\setbassclefsymbol1\bassoct
+\setclef4\treble\settrebleclefsymbol4\trebleoct
+\generalsignature{+1}
+\generalmeter\meterC
+\setname1{B}
+\setname2{T}
+\setname3{A}
+\setname4{S}
+\songtop4
+\songbottom1
+\startbarno=0
+\nobarnumbers
+\startextract
+\scale{0.76}
+\znotes&&&\ccn{16}{\rm\kern-1ex Arranged for Recorders}\en
+\Notes\ds&\cu d&\ds&\ds\en
+\bar%1
+\Notes\hl N&\ibu1g2\qb1{ghi}\tqh1j&&\hpause\en
+\Notes\hl M&\ibl1k{-2}\qb1k&&\en
+\notes&\nbbl1\qb1 j\tqb1i&&\qp\en
+\Notes&\ibu1h0\qb1h&&\ds\en
+\notes&\nbbu1\qb1g\tqh1h&&\cu d\en
+\def\atnextbar{\znotes&&\centerpause&\en}%
+\bar%2
+\Notes\hl L&\ibu1i{-2}\qb1i\tqh1h&\ql n&\ibu3g2\qb3{gh}\en
+\Notes&\itied1g\qu g&\ql n&\qb3i\tqh3j\en
+\Notes\ql{.K}&\ttie1\qu g&\ql o&\ibl3k{-2}\qb3k\en
+\notes&&&\nbbl3\qb3j\tqb3i\en
+\Notes&\ibu1f0\shake{n}\qb1f&\cl o&\cu h\en
+\notes\cu J&\nbbu1\qb1e\tqh1f&\ds&\ds\en
+\bar%3
+\Notes\hu I&\qu g&\ibl2n{-1}\qb2{no}&\ql k\en
+\Notes&\ds\cl k&\qb2{n}\tqb2{=m}&\ql k\en
+\Notes\hu J&\ibu1j{-2}\qb1{ji}&\ibl2j{0}\qb2{lk}&\ql l\en
+\Notes&\qb1h\tqh1g&\qb2j\tqb2p&\ql l\en
+\bar%4
+\Notes\hl K&\itied1f\shake{n}\qu f&\ibl2o{-1}\qb2{on}&\ibl3k{-1}\qb3{kl}\en
+\notes&\ttie1\ibbu1e{-2}\qb1f\tbbu1\qb1e&\qb2o&\qb3k\en
+%\vnotes1.5\elemskip&\nbbbu1\qb1e\tbbu1\qb1f&&\en
+\Notes&\itied1d\tqh1d&\tqb2m&\tqb3j\en
+\Notes\qu G&\ttie1\qu d&\ibl2n{-2}\qb2n\tqb2m&\ibu3h{-1}\shake{p}\qb3i\tqh3h\en
+\Notes\ds&\qp&\ibl2n{-5}\qb2n&\qu g\en
+\notes\ibbl0b{-1}\qb0b\tqb0a&&\tqb2k&\en
+\znotes&&&\lcn{16}{\rm J.S. Bach (1685-1750)}\en
+\zendextract 
+\end{music}
+
+\clearpage
 
  \section{musixlit}\label{litu}\label{otherbars}
  Provides a notation style intermediate between gregorian and baroque, for

@@ -30,12 +30,12 @@
 \font\tabfntthirteen=frenchtab at 4pt
 \font\tabfntsixteen=frenchtab at 5pt
 \font\tabfnttwenty=frenchtab at 6pt
-\font\tabfnttwentyfour=frenchtab  at 8pt
-\font\tabfnttwentynine=frenchtab at 12pt
+\font\tabfnttwentyfour=frenchtab at 7pt
+\font\tabfnttwentynine=frenchtab at 9pt
 
 \makeatletter
 
-%  need to raise note boxes 0.2ex for frenchtab.pfb
+%  need to raise note boxes 0.25ex for frenchtab.pfb
 
 \def\tabbox#1#2{%
   \setbox0=\hbox{\tabfnt #2}%
@@ -47,7 +47,7 @@
   \special{ps: 1 setgray}%
   \ccharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
   \special{ps: 0 setgray}%
-  \ccharnote{\the\stringraise}{\raise 0.2ex\box0}%
+  \ccharnote{\the\stringraise}{\raise 0.25ex\box0}%
 }
 % \ltabbox does the same as \tabbox, except that it produces 
 % left-outlined symbols
@@ -60,7 +60,7 @@
   \special{ps: 1 setgray}%
   \zcharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
   \special{ps: 0 setgray}%
-  \zcharnote{\the\stringraise}{\raise 0.2ex\box0}%
+  \zcharnote{\the\stringraise}{\raise 0.25ex\box0}%
 }
 % \rtabbox does the same as \tabbox, except that it produces 
 % right-outlined symbols
@@ -73,7 +73,7 @@
   \special{ps: 1 setgray}%
   \lcharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
   \special{ps: 0 setgray}%
-  \lcharnote{\the\stringraise}{\raise 0.2ex\box0}%
+  \lcharnote{\the\stringraise}{\raise 0.25ex\box0}%
 }
 
 \makeatother

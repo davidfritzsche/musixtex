@@ -1,0 +1,8 @@
+
+Changes from MusiXTeX 134 to 135:
+
+  *  new extension library musixjt.tex to support using the handwriting 
+       font MuseJazzText for all textual elements of a MusiXTeX score. 
+
+  * Aug. 30, 2021: moved frenchtab and MuseJazzText fonts and
+       associated support files to the musixtex-fonts package
