@@ -48,6 +48,10 @@ compliant TeX distribution, including MikTeX, TeXlive and teTeX.
 After unzipping the archive, update the filename database as necessary,
 for example, by executing \verb\texhash ~/texmf\ or 
 clicking the button labelled ``Refresh FNDB" in the MikTeX settings program.
+Update the font map files, for example, by executing
+\begin{list}{}{}\item
+\verb|updmap-user -enable Map frenchtab.map|
+\end{list}
 
 MusiXTeX requires a large set of specialized fonts. If necessary, install the 
 \texttt{musixtex-fonts} package.

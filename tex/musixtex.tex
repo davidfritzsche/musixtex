@@ -25,14 +25,20 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{33}
+\def\mxminorvernumber{34}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
-\def\mxversuffix{a}% 
+\def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2021-07-07}
+\def\mxdate{2021-07-24}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.34
+%
+%  redefine \tabfnt...  commands to allow re-definition in musixftab.tex
+%  decrement the number of slashes if tabstylespace is true
+%
 
 % version 1.33a
 %
@@ -870,6 +876,11 @@
 \def\normdyn{\let\ppff\ppfftwenty}
 \def\meddyn{\let\ppff\ppfftwentyfour}
 
+\font\tabfntthirteen=phvb8t at 4pt  % version 1.34  RDT
+\font\tabfntsixteen=phvb8t at 5pt
+\font\tabfnttwenty=phvb8t at 6pt
+\font\tabfnttwentyfour=phvb8t at 8pt 
+\font\tabfnttwentynine=phvb8t at 10pt
 
 \font\musiceleven=musix11
 \font\musicthirteen=musix13
@@ -1769,8 +1780,8 @@
     \else\ifdim\internote<1.19\Internote \smalltype\it
     \else\ifdim\internote<1.43\Internote \Smalltype\it
     \else\normtype\it\fi\fi\fi}%
-    \let\tabnorfnt\fivedc \let\tablargefnt\sixdc              %  1.33   RDT
-    \let\tabLargefnt\eightdc \let\tabsmallfnt\fourdc
+    \let\tabnorfnt\tabfntsixteen \let\tablargefnt\tabfnttwenty              %  1.34   RDT
+    \let\tabLargefnt\tabfnttwentyfour \let\tabsmallfnt\tabfntthirteen
     \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
     \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \fourss  %  1.29   RDT
@@ -1801,8 +1812,8 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
-    \let\tabnorfnt\eightdc \let\tablargefnt\ninedc           %  1.33 RDT
-    \let\tabLargefnt\elevendc \let\tabsmallfnt\sixdc
+    \let\tabnorfnt\tabfnttwentyfour \let\tablargefnt\tabfnttwentynine           %  1.34 RDT
+    \let\tabLargefnt\tabfnttwentynine \let\tabsmallfnt\tabfnttwenty
     \let\tabnorcleffnt\twelvedc \let\tablargecleffnt\frtdc
     \let\tabLargecleffnt\svtdc \let\tabsmallcleffnt\tendc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \sixss  %  1.29  RDT
@@ -1835,8 +1846,8 @@
     \else\ifdim\internote<1.19\Internote \medtype\it
     \else\ifdim\internote<1.43\Internote \bigfont\it
     \else\Bigfont\it\fi\fi\fi}%
-    \let\tabnorfnt\ninedc \let\tablargefnt\elevendc   %  1.33 RDT
-    \let\tabLargefnt\twelvedc \let\tabsmallfnt\eightdc
+    \let\tabnorfnt\tabfnttwentynine \let\tablargefnt\tabfnttwentynine   %  1.34 RDT
+    \let\tabLargefnt\tabfnttwentynine \let\tabsmallfnt\tabfnttwentyfour
     \let\tabnorcleffnt\frtdc \let\tablargecleffnt\svtdc
     \let\tabLargecleffnt\twtydc \let\tabsmallcleffnt\twelvedc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \eightss  %  1.29  RDT
@@ -1873,8 +1884,8 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
-    \let\tabnorfnt\sixdc \let\tablargefnt\eightdc             % 1.33   RDT
-    \let\tabLargefnt\ninedc \let\tabsmallfnt\fivedc
+    \let\tabnorfnt\tabfnttwenty \let\tablargefnt\tabfnttwentyfour             % 1.34   RDT
+    \let\tabLargefnt\tabfntwentynine \let\tabsmallfnt\tabfntsixteen
     \let\tabnorcleffnt\tendc \let\tablargecleffnt\twelvedc
     \let\tabLargecleffnt\frtdc \let\tabsmallcleffnt\eightdc
     \def\tabstringfnt{\ifdim\internote<.95\Internote \fivess  %  1.29  RDT
@@ -5483,7 +5494,7 @@
 %  This version corrected 07/23/2007 by Rainer Dunker to make it       %
 %  insensitive to changes in \interstaff by PMX                        %
 %                                                                      %
-%  Added to musixtex.tex version 1.16 by RDT                                   %
+%  Added to musixtex.tex version 1.16 by RDT                           %
 %                                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -5496,8 +5507,9 @@
 % 1.33 RDT                                                                         %
 % replace ledger lines by slashes (/) for string numbers > number of staff lines   %
 %                                                                                  %
-% 1.34 RDT                                                                         %
+% 1.33a RDT                                                                        %
 % replace 4-7 slashes by numbers 4-7                                               %
+% decrement number of slashes if tabstylespace is true                             %
 %                                                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -5525,7 +5537,7 @@
   \advance\stringraise by -#1
   \multiply\stringraise by 2
   \advancefalse\def\q@u{}\loffset{0.2}{\@nq{\the\stringraise}}%
-  \iftabstylespace\else\advance\stringraise-1\fi
+  \iftabstylespace\else\advance\stringraise-1\fi  
   \special{ps: 1 setgray}%
   \zcharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
   \special{ps: 0 setgray}%
@@ -5559,8 +5571,9 @@
 \ifnum\stringnum>\nblines
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\ccn{-3}{\tabfnt/#2}\or\ccn{-3}{\tabfnt//#2}\or\ccn{-3}{\tabfnt///#2}\or\ccn{-3}{\tabfnt////#2}\ccn{-3}{\tabfnt/////#2}\or\ccn{-3}{\tabfnt//////#2}\or\ccn{-3}{\tabfnt///////#2}\fi%
+\ifcase\numslashes\tabbox{#1}{#2}\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\tabbox{#1}{#2}\fi\sk}
 
 % left spilling \tab
@@ -5569,8 +5582,9 @@
 \ifnum\stringnum>\nblines
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt////#2}\or\zcn{-3}{\tabfnt/////#2}\or\zcn{-3}{\tabfnt//////#2}\or\zcn{-3}{\tabfnt///////#2}\fi%
+\ifcase\numslashes\ltabbox{#1}{#2}\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\ltabbox{#1}{#2}\fi\sk}
 
 % right spilling  \tab
@@ -5579,8 +5593,9 @@
 \ifnum\stringnum>\nblines
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\lcn{-3}{\tabfnt/#2}\or\lcn{-3}{\tabfnt//#2}\or\lcn{-3}{\tabfnt///#2}\or\lcn{-3}{\tabfnt////#2}\or\lcn{-3}{\tabfnt/////#2}\or\lcn{-3}{\tabfnt//////#2}\or\lcn{-3}{\tabfnt///////#2}\fi%
+\ifcase\numslashes\rtabbox{#1}{#2}\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\rtabbox{#1}{#2}\fi\sk}
 
 % \chord-tab symbol. Same as \tab, but no \sk is given, so multiple 
@@ -5590,8 +5605,9 @@
 \ifnum\stringnum>\nblines
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
+\ifcase\numslashes\tabbox{#1}{#2}\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\tabbox{#1}{#2}\fi}
 
 % left spilling \ztab
@@ -5600,8 +5616,9 @@
 \ifnum\stringnum>\nblines
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
+\ifcase\numslashes\ltabbox{#1}{#2}\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\ltabbox{#1}{#2}\fi}
 
 % right spilling \ztab
@@ -5610,8 +5627,9 @@
 \ifnum\stringnum>\nblines
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
+\ifcase\numslashes\rtabbox{#1}{#2}\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\rtabbox{#1}{#2}\fi}
 
 %
@@ -5633,7 +5651,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % tiny duration notes placed above tablature staff %
-% 1.34 RDT                                         %
+% 1.33a RDT                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcount\tiny@hgt  % = 2 * \nblines + 1

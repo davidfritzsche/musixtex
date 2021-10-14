@@ -1,0 +1,148 @@
+
+% musixftab.tex : french tablature definitions for MusiXTeX
+%
+% usage: 
+%
+%    \input musixtex
+%    \input musixftab
+%    ...
+%
+%   musixftab.tex is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2, or (at your option)
+%   any later version.
+%
+%   musixftab.tex is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with MusiXTeX; see the file COPYING.  If not, write to
+%   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+%   Boston, MA 02111-1307, USA.
+%
+%   Copyright 2021  Bob Tennent rdt@cs.queensu.ca
+%
+\immediate\write16{musixftab\space<2017/02/10>}
+\ifx\undefined\startpiece\errmessage{Input musixtex.tex before musixftab.tex}\fi
+
+\font\tabfntthirteen=frenchtab at 4pt
+\font\tabfntsixteen=frenchtab at 5pt
+\font\tabfnttwenty=frenchtab at 6pt
+\font\tabfnttwentyfour=frenchtab  at 8pt
+\font\tabfnttwentynine=frenchtab at 12pt
+
+\makeatletter
+
+%  need to raise note boxes 0.2ex for frenchtab.pfb
+
+\def\tabbox#1#2{%
+  \setbox0=\hbox{\tabfnt #2}%
+  \stringraise\nblines
+  \advance\stringraise by -#1
+  \multiply\stringraise by 2
+  \advancefalse\def\q@u{}\loffset{0.45}{\@nq{\the\stringraise}}%
+  \iftabstylespace\else\advance\stringraise-1\fi
+  \special{ps: 1 setgray}%
+  \ccharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
+  \special{ps: 0 setgray}%
+  \ccharnote{\the\stringraise}{\raise 0.2ex\box0}%
+}
+% \ltabbox does the same as \tabbox, except that it produces 
+% left-outlined symbols
+\def\ltabbox#1#2{\setbox0=\hbox{\tabfnt #2}%
+  \stringraise\nblines
+  \advance\stringraise by -#1
+  \multiply\stringraise by 2
+  \advancefalse\def\q@u{}\loffset{0.2}{\@nq{\the\stringraise}}%
+  \iftabstylespace\else\advance\stringraise-1\fi
+  \special{ps: 1 setgray}%
+  \zcharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
+  \special{ps: 0 setgray}%
+  \zcharnote{\the\stringraise}{\raise 0.2ex\box0}%
+}
+% \rtabbox does the same as \tabbox, except that it produces 
+% right-outlined symbols
+\def\rtabbox#1#2{\setbox0=\hbox{\tabfnt #2}%
+  \stringraise\nblines
+  \advance\stringraise by -#1
+  \multiply\stringraise by 2
+  \advancefalse\def\q@u{}\loffset{0.75}{\@nq{\the\stringraise}}%
+  \iftabstylespace\else\advance\stringraise-1\fi
+  \special{ps: 1 setgray}%
+  \lcharnote{\the\stringraise}{\vrule height \ht0 width \wd0 depth \dp0}%
+  \special{ps: 0 setgray}%
+  \lcharnote{\the\stringraise}{\raise 0.2ex\box0}%
+}
+
+\makeatother
+
+
+\def\tab#1#2{%
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\tabbox{#1}{#2}\or\zcn{-3}{\tabfnt V0}\or\zcn{-3}{\tabfnt W0}\or\zcn{-3}{\tabfnt X0}\or\zcn{-3}{\tabstringfnt\bf 4}\or\zcn{-3}{\tabstringfnt\bf 5}\or\zcn{-3}{\tabstringfnt\bf 6}\or\zcn{-3}{\tabstringfnt\bf 7}\fi%
+\else\tabbox{#1}{#2}\fi\sk}
+
+% left spilling \tab
+\def\ltab#1#2{%
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\ltabbox{#1}{#2}\or\zcn{-3}{\tabfnt V0}\or\zcn{-3}{\tabfnt W0}\or\zcn{-3}{\tabfnt X0}\or\zcn{-3}{\tabstringfnt\bf 4}\or\zcn{-3}{\tabstringfnt\bf 5}\or\zcn{-3}{\tabstringfnt\bf 6}\or\zcn{-3}{\tabstringfnt\bf 7}\fi%
+\else\ltabbox{#1}{#2}\fi\sk}
+
+% right spilling  \tab
+\def\rtab#1#2{%
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\rtabbox{#1}{#2}\or\zcn{-3}{\tabfnt V0}\or\zcn{-3}{\tabfnt W0}\or\zcn{-3}{\tabfnt X0}\or\zcn{-3}{\tabstringfnt\bf 4}\or\zcn{-3}{\tabstringfnt\bf 5}\or\zcn{-3}{\tabstringfnt\bf 6}\or\zcn{-3}{\tabstringfnt\bf 7}\fi%
+\else\rtabbox{#1}{#2}\fi\sk}
+
+% \chord-tab symbol. Same as \tab, but no \sk is given, so multiple 
+% symbols can be placed above one another
+\def\ztab#1#2{%
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\tabbox{#1}{#2}\or\zcn{-3}{\tabfnt V0}\or\zcn{-3}{\tabfnt W0}\or\zcn{-3}{\tabfnt X0}\or\zcn{-3}{\tabstringfnt\bf 4}\or\zcn{-3}{\tabstringfnt\bf 5}\or\zcn{-3}{\tabstringfnt\bf 6}\or\zcn{-3}{\tabstringfnt\bf 7}\fi%
+\else\tabbox{#1}{#2}\fi}
+
+% left spilling \ztab
+\def\zltab#1#2{%
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\ltabbox{#1}{#2}\or\zcn{-3}{\tabfnt V0}\or\zcn{-3}{\tabfnt W0}\or\zcn{-3}{\tabfnt X0}\or\zcn{-3}{\tabstringfnt\bf 4}\or\zcn{-3}{\tabstringfnt\bf 5}\or\zcn{-3}{\tabstringfnt\bf 6}\or\zcn{-3}{\tabstringfnt\bf 7}\fi%
+\else\ltabbox{#1}{#2}\fi}
+
+% right spilling \ztab
+\def\zrtab#1#2{%
+\stringnum=#1
+\ifnum\stringnum>\nblines
+\nslashes=\stringnum
+\advance\nslashes by -\nblines
+\iftabstylespace\advance\nslashes by -1\fi
+\def\numslashes{\the\nslashes}
+\ifcase\numslashes\rtabbox{#1}{#2}\or\zcn{-3}{\tabfnt V0}\or\zcn{-3}{\tabfnt W0}\or\zcn{-3}{\tabfnt X0}\or\zcn{-3}{\tabstringfnt\bf 4}\or\zcn{-3}{\tabstringfnt\bf 5}\or\zcn{-3}{\tabstringfnt\bf 6}\or\zcn{-3}{\tabstringfnt\bf 7}\fi%
+\else\rtabbox{#1}{#2}\fi}
+
+\endinput

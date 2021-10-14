@@ -1,0 +1,9 @@
+
+Changes from MusiXTeX 133 to 134:
+
+  *  new extension library musixftab.tex to support traditional French
+       tablature using script letters instead of numerals
+
+  *  \tabfnt ... commands re-defined to allow re-definition in 
+       musixftab.tex
+

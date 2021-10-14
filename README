@@ -1,4 +1,4 @@
-This is MusiXTeX, version 1.33a (2021-07-07).
+This is MusiXTeX, version 1.34 (2021-07-24).
 MusiXTeX is a TeX-based system for typesetting music.
 
 The main author was Daniel Taupin, who died in a climbing
@@ -47,6 +47,10 @@ To install (on TDS-compliant TeX systems):
     texmf tree and, if necessary, update the filename database; 
     e.g., texhash texmf.
 
+ +  update the font maps, for example, by executing 
+
+      updmap-user -enable Map frenchtab.map
+
  +  on Windows: move the scripts in Windows to a folder
     on the executable PATH (or add that folder to the PATH)
 
@@ -83,7 +87,15 @@ http://tug.org/mailman/listinfo/tex-music
 MusiXTeX may be freely copied, duplicated and used in
 conformance to the GNU General Public License (Version 2,
 1991, see included file gpl.txt) or (at your option) any
-later version.
+later version.  
+
+The font file frenchtab.pfb is derived from mscoreTab.ttf
+by Maurizio M. Gavioli. It was obtained from
+
+https://github.com/musescore/MuseScore/blob/master/fonts/
+
+and is licensed under the SIL Open Font Licence, 
+Version 1.1; the text may be found in the doc directory.
 
 This distribution is maintained by Bob Tennent
 rdt(at)cs(dot)queensu(dot)ca.

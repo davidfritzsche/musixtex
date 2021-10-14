@@ -385,6 +385,57 @@ requiring ledger lines look better with \keyindex{longledgerlines}.
 \autoledgerlines
 \end{music}
 
+ \section{musixftab}\label{frenchtab}\index{tablature}\index{musixftab@{\tt musixftab.tex}}
+This extension replaces the default (Helvetica) numerals of the tablature commands
+of Section~\ref{tablature} with the traditional script letters of French tablature.
+These glyphs are generated in \keyindex{tabfnt} by arguments \texttt{0}--\texttt{9}
+or by (capital) Latin letters \texttt{A}--\texttt{R} (excluding \texttt{J}).
+\clearpage
+
+The example of Section~\ref{tablature} with \texttt{musixftab.tex} is as follows:
+\medskip
+
+\begin{music}
+\input musixftab
+\input musixps
+\tabstylespacetrue
+\largemusicsize
+\def\psslurhgt{0.5}
+\instrumentnumber{1}
+\generalmeter{\meterfrac34}
+\generalsignature{-1}
+\setlines16\setclefsymbol1\tabclef\setsize1{1.2}\setsign10
+\nobarnumbers
+\parindent=2ex
+\setname1{\tabstringfnt\baselineskip=1.2\internote%
+\vbox{\hbox{F}\hbox{D}\hbox{A}\hbox{F}\hbox{D}\hbox{A}}}
+\nostartrule
+\startextract
+\scale{0.6}
+\NOtes\tzqu\qa{*}\en
+\NOtesp\zltab50\zltab40\tzqup\ltab30\en
+\Notes\tzcu\ltab30\en
+\bar%
+\NOtes\zltab50\zltab42\zltab31\tzqu\ltab22\en
+\NOtesp\zltab64\zltab35\zltab30\tzqup\ltab22\en
+\Notes\tzcu\ltab22\en
+\bar%
+\NOtes\zltab50\zltab30\zltab20\tzqu\ltab10\en
+\NOtes\zltab61\zltab40\tzqup\ltab20\en
+\Notes\tzcu\ltab33\en
+\bar%
+\NOtes\zltab70\zltab55\tzqu\ltab45\en
+\NOtes\zltab60\zltab53\ltab44\en
+\notesp\zltab64\tzccu\ltab42\ilsluru03\ltab53\ltab52\tlslur03\ltab53\en
+\bar%
+\notesp\ztab{10}0\tzccu\ltab42\ilsluru03\ltab52\ltab53\tlslur03\ltab50\en
+\NOtesp\zltab50\zltab40\tzqup\ltab30\en
+\Notes\tzcu\ltab30\en
+\bar%
+\zendextract
+\end{music}
+\medskip
+
  \section{musixgre}\label{gregnotes}\index{gregorian chant}
 
 % \section{Gregorian chant: staffs and clefs}
