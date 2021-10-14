@@ -27,12 +27,18 @@
 \def\mxmajorvernumber{1}
 \def\mxminorvernumber{33}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
-\def\mxversuffix{}% 
+\def\mxversuffix{a}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2021-07-04}
+\def\mxdate{2021-07-07}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.33a
+%
+%  improved implementations of the tablature commands:
+%    + 4-7 slashes are replaced by numbers 4-7
+%    + notehead-less stems are replaced by tiny notes (without ledger lines)
 
 % version 1.33
 %
@@ -5489,6 +5495,10 @@
 %                                                                                  %
 % 1.33 RDT                                                                         %
 % replace ledger lines by slashes (/) for string numbers > number of staff lines   %
+%                                                                                  %
+% 1.34 RDT                                                                         %
+% replace 4-7 slashes by numbers 4-7                                               %
+%                                                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcount\stringraise
@@ -5581,7 +5591,7 @@
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\ccn{-3}{\tabfnt/#2}\or\ccn{-3}{\tabfnt//#2}\or\ccn{-3}{\tabfnt///#2}\or\ccn{-3}{\tabfnt////#2}\or\ccn{-3}{\tabfnt/////#2}\or\ccn{-3}{\tabfnt//////#2}\or\ccn{-3}{\tabfnt///////#2}\fi%
+\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\tabbox{#1}{#2}\fi}
 
 % left spilling \ztab
@@ -5591,7 +5601,7 @@
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt////#2}\or\zcn{-3}{\tabfnt/////#2}\or\zcn{-3}{\tabfnt//////#2}\or\zcn{-3}{\tabfnt///////#2}\fi%
+\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\ltabbox{#1}{#2}\fi}
 
 % right spilling \ztab
@@ -5601,7 +5611,7 @@
 \nslashes=\stringnum
 \advance\nslashes by -\nblines
 \def\numslashes{\the\nslashes}
-\ifcase\numslashes\or\lcn{-3}{\tabfnt/#2}\or\lcn{-3}{\tabfnt//#2}\or\lcn{-3}{\tabfnt///#2}\or\lcn{-3}{\tabfnt////#2}\or\lcn{-3}{\tabfnt/////#2}\or\lcn{-3}{\tabfnt//////#2}\or\lcn{-3}{\tabfnt///////#2}\fi%
+\ifcase\numslashes\or\zcn{-3}{\tabfnt/#2}\or\zcn{-3}{\tabfnt//#2}\or\zcn{-3}{\tabfnt///#2}\or\zcn{-3}{\tabfnt 4}\or\zcn{-3}{\tabfnt 5}\or\zcn{-3}{\tabfnt 6}\or\zcn{-3}{\tabfnt 7}\fi%
 \else\rtabbox{#1}{#2}\fi}
 
 %
@@ -5621,38 +5631,91 @@
   \ifnum\nblines=6\lower1.5\internote\box1
   \else\ifnum\nblines=4\lower3.5\internote\box1\else\lower2.5\internote\box1\fi\fi}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% stems without noteheads for use above tablature staff %
-% 1.33 RDT                                              %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% tiny duration notes placed above tablature staff %
+% 1.34 RDT                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcount\stem@hgt  % = 2 * \nblines -1
-\def\tzqu{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@qu{\the\stem@hgt}}
-\def\tzqup{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@qup{\the\stem@hgt}}
-\def\tzcu{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@cu{\the\stem@hgt}}
-\def\tzcup{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@cup{\the\stem@hgt}}
-\def\tzccu{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@ccu{\the\stem@hgt}}
-\def\tzccup{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@ccup{\the\stem@hgt}}
-\def\tzcccu{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@cccu{\the\stem@hgt}}
-\def\tzcccup{\advancefalse%
-\stem@hgt=\nblines\multiply\stem@hgt by 2\advance\stem@hgt by -1
-\def\q@u{}\@cccup{\the\stem@hgt}}
+\newcount\tiny@hgt  % = 2 * \nblines + 1
+
+% need to suppress ledger lines and prevent raising dots in dotted notes
+
+\def\settiny@hgt{\tiny@hgt=\nblines\multiply\tiny@hgt by 2\advance\tiny@hgt by1}
+
+\def\tzwh{%
+\settiny@hgt
+\tinynotesize\advancefalse\def\w@h{\musixfont\nin@}\y@v\wn@width
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@w \let\n@sym\w@h 
+\pl@base\setst@m\resetst@m\raise\y@i\hbox{\n@sym}\advancetrue\fi}
+
+\def\tzwhp{%
+\settiny@hgt
+\tinynotesize\advancefalse\def\w@h{\musixfont\nin@}\y@v\wn@width
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@w \let\n@sym\w@h 
+\pl@base\setst@m\resetst@m\raise\y@i\hbox{\n@sym\musixchar\z@}\advancetrue\fi}
+
+\def\tzhu{%
+\settiny@hgt
+\tinynotesize\advancefalse
+\check@staff\getn@i{\the\tiny@hgt}\relax\y@v\qn@width
+\pl@base\setst@m\upst@m\raise\y@i\hbox{\musixfont\@ight}\advancetrue\fi}
+
+\def\tzhup{%
+\settiny@hgt
+\tinynotesize\advancefalse
+\check@staff\getn@i{\the\tiny@hgt}\relax\y@v\qn@width
+\pl@base\setst@m\upst@m\raise\y@i\hbox{\musixfont{\@ight}\musixchar\z@}\advancetrue\fi}
+
+\def\tzqu{%
+\settiny@hgt
+\tinynotesize\advancefalse
+\check@staff\getn@i{\the\tiny@hgt}\relax\y@v\qn@width
+\pl@base\setst@m\upst@m\raise\y@i\hbox{\musixfont\s@v@n}\advancetrue\fi} 
+
+\def\tzqup{%
+\settiny@hgt
+\tinynotesize\advancefalse
+\check@staff\getn@i{\the\tiny@hgt}\relax\y@v\qn@width
+\pl@base\setst@m\upst@m\raise\y@i\hbox{\musixfont{\s@v@n}\musixchar\z@}\advancetrue\fi}
+
+\def\tzcu{%
+\settiny@hgt
+\tinynotesize\advancefalse\q@symbol\n@vii\@xl
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@q \let\n@sym\q@u\y@v\qn@width 
+\pl@base\setst@m\up@flag\raise\y@i\hbox{\n@sym}\advancetrue\fi}
+
+\def\tzcup{%
+\settiny@hgt
+\tinynotesize\advancefalse\q@symbol\n@vii\@xl
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@qp \let\n@sym\q@up\y@v\qn@width 
+\pl@base\setst@m\up@flag\raise\y@i\hbox{\n@sym}\advancetrue\fi}
+
+\def\tzccu{%
+\settiny@hgt
+\tinynotesize\advancefalse\q@symbol\n@vii\@xli
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@q \let\n@sym\q@u\y@v\qn@width 
+\pl@base\setst@m\up@flag\raise\y@i\hbox{\n@sym}\advancetrue\fi}
+
+\def\tzccup{%
+\settiny@hgt
+\tinynotesize\advancefalse\q@symbol\n@vii\@xli
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@qp \let\n@sym\q@up\y@v\qn@width 
+\pl@base\setst@m\up@flag\raise\y@i\hbox{\n@sym}\advancetrue\fi}
+
+\def\tzcccu{%
+\settiny@hgt
+\tinynotesize\advancefalse\q@symbol\n@vii42
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@q \let\n@sym\q@u\y@v\qn@width 
+\pl@base\setst@m\up@flag\raise\y@i\hbox{\n@sym}\advancetrue\fi}
+
+\def\tzcccup{%
+\settiny@hgt
+\tinynotesize\advancefalse\q@symbol\n@vii42
+\check@staff\getn@i{\the\tiny@hgt}\relax\let\n@fon\g@qp \let\n@sym\q@up\y@v\qn@width 
+\pl@base\setst@m\up@flag\raise\y@i\hbox{\n@sym}\advancetrue\fi}
 
 
+%%%%%%%% end of tablature support %%%%%%%%%%%%
 
 \let\origin@lwrit@staffs\writ@staffs
 \def\writ@staffs{%

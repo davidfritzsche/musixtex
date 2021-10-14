@@ -844,7 +844,8 @@ are as follows:
 \item \keyindex{tab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
 puts $p$ on string $n$
 (counting from top to bottom); $p$ is centered, using \verb|\ccharnote|.
-Ledger lines are replaced by slashes (/) for $n$ greater than the number of staff lines.
+Ledger lines are replaced by slashes (/) for $n$ greater than the number of staff lines,
+or simply the number of courses below the staff if this is greater than 3. 
 \item \keyindex{ltab}\verb|{|$n$\verb|}|\verb|{|$p$\verb|}| 
 uses \verb|\zcharnote| so $p$
 spills to the right and
@@ -860,7 +861,7 @@ is a non-spacing \verb|\rtab|.
 \end{itemize}
 A size-dependent font \keyindex{tabfnt} is used for tab characters; Helvetica bold is the default font family.
 
-The default tablature style is to place the fingering notations \emph{on} the staff line;
+The default tablature style is to place fingering notations \emph{on} staff lines;
 Postscript specials are used to ``blank'' staff lines below
 the tab characters.  
 If it is desired to locate the fingering notations \emph{above} staff lines, use
@@ -957,8 +958,7 @@ The coding is
 &\zql K\ibbu0g{-1}\qb0g\slur edd2\qb0e\qb0f\tqu0d\en
 \NOtesp\zltab50\zltab40\ltab30&\zhl{d}\zhu{f}\qu{.h}\en
 \Notes\ltab30&\cu{h}\en
-\bar%
-\zendextract
+\bar\zendextract
 \end{verbatim}\end{quote}
 \end{footnotesize}
 
@@ -1014,7 +1014,7 @@ Here is the same example with \verb|\tabstylespacetrue|:
 \medskip
 
 \noindent
-In pure tablature, note durations are typically specified by stems without noteheads immediately
+In pure tablature, note durations can be specified by tiny notes 
 above the staff, as in:
 \medskip
 
@@ -1060,13 +1060,12 @@ above the staff, as in:
 \end{music}
 \medskip
 \noindent
-Note that this notation does not
-specify the duration of \emph{every} note. 
 
 \smallskip
 
-A stem (without a notehead) is generated immediately above the staff using one of the commands 
-\keyindex{tzqu}, \keyindex{tzqup}, \keyindex{tzcu}, \keyindex{tzcup}, \keyindex{tzccu}, \ldots\  
+\noindent
+A tiny note can be generated above the staff using one of the commands 
+\keyindex{tzwh}, \keyindex{tzwhp}, \keyindex{tzhu}, \keyindex{tzhup}, \keyindex{tzqu}, \keyindex{tzqup}, \keyindex{tzcu}, \keyindex{tzcup}, \keyindex{tzccu}, \ldots\  
 \emph{before} a spacing command.  Coding 
 for the notes in the example above is as follows:
 \begin{footnotesize}

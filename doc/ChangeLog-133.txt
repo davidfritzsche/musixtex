@@ -1,8 +1,8 @@
 
-Changes from MusiXTeX 132 to 133:
+Changes from MusiXTeX 132 to 133a:
 
   *  \tabfnt etc. now uses (Helvetica) bold for tablature notes
-  *  replace ledger lines by slashes (/) for tablature notes below the staff
-  *  new commands \tzqu, \tzcup, etc. for stems without noteheads, for use in
+  *  replace ledger lines by slashes (/) or numbers for tablature notes below the staff
+  *  new commands \tzqu, \tzcup, etc. for tiny notes  to indicate duration, for use in
      tablature
 
