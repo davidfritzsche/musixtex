@@ -68,7 +68,7 @@ or \verb|\relax|.
 
  \section{Usual setup commands}\label{whatspecify}
 
-\subsection{Music size}
+\subsection{Music size}\index{music size}
 
  The first decision is what size type to use. \musixtex\ offers four sizes:
 ``small'' \mbox{(\texttt{16pt}-high staves),} ``normal'' (\texttt{20pt}),\index{sizes} ``large''
@@ -79,7 +79,7 @@ enter \keyindex{smallmusicsize}, \keyindex{largemusicsize}, or
 desired staff size but many other related sizes such as note heads, ornaments,
 stem lengths, etc.
 
-\subsection{Number of instruments}
+\subsection{Number of instruments}\index{number of instruments}
 
  The command \keyindex{instrumentnumber}\onen~defines the
 number of instruments to be $n$. If not entered, the default is $1$. This number is used in loops
@@ -88,7 +88,7 @@ set key signatures, set meters, etc., so if it differs from $1$ it must be expli
 defined before any further commands.  The default maximum number of instruments is $6$
 but this can be increased by using \keyindex{setmaxinstruments}\onen.
 
-\subsection{Number of staves per instrument}
+\subsection{Number of staves per instrument}\index{number of staves per instrument}
 
 An instrument may have one or more staves (e.g.,~a piano would normally have 2 staves).
 The differences between one
@@ -111,7 +111,7 @@ number of the instrument. In \musixtex, instruments are numbered
 So for example \verb|setstaffs32|
 assigns two staves to the third instrument from the bottom.
 
-\subsection{Clefs for each staff}
+\subsection{Clefs for each staff}\index{clefs for each staff}
 
  The default clef for every staff is the \ital{treble} clef. To assign
 any other clef, the command is
@@ -141,7 +141,7 @@ could be specified by
 Treble and bass clefs with the digit $8$ above or below are also possible; see 
 Section~\ref{treblelowoct}.
 
-\subsection{Key signatures}
+\subsection{Key signatures}\index{key signatures}
 
 To set a common key signature for all instruments, use
  \keyindex{generalsignature}\verb|{|$s$\verb|}|,
@@ -153,7 +153,7 @@ the common key signature for instrument $n$, use
 \keyindex{setsign}\verb|{|$n$\verb|}{|$s$\verb|}|. Note that differing
 key signatures cannot be assigned to different staves of the same instrument.
 
-\subsection{Meters}
+\subsection{Meters}\index{meters}
 
 A common \itxem{meter} for all staves can be specified by
  \keyindex{generalmeter}\verb|{|$m$\verb|}|,\label{generalmeter}
@@ -219,7 +219,7 @@ sets the meter to 12/8 for the first staff of the third instrument, and
 \ital{alla breve} for the second staff.
 
 
-\subsection{Instrument names}
+\subsection{Instrument names}\index{instrument names}
 
 To set an \itxem{instrument name}, use
 \keyindex{setname}\verb|{|$n$\verb|}{|\ital{name of the instrument}\verb|}|.

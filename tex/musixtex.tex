@@ -25,14 +25,26 @@
 
 \def\mufl@x{0.83}%
 \def\mxmajorvernumber{1}
-\def\mxminorvernumber{34}
+\def\mxminorvernumber{36}
 \def\mxvernumber{\mxmajorvernumber\mxminorvernumber}% make it possible to compare with \ifnum
 \def\mxversuffix{}% 
 \edef\mxversion{\mxmajorvernumber.\mxminorvernumber\mxversuffix}
-\def\mxdate{2021-07-24}
+\def\mxdate{2023-01-11}
 
 \immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}%
 \everyjob{\immediate\write16{MusiXTeX(c) \mxversion\space<\mxdate>}}%
+
+% version 1.36
+%
+%  Support for Turkish classical music accidentalsi; see musixmkm.tex.
+%  Re-define \hlthick to produce thicker ledger lines.
+%  Provide thinner accidentals; see musixthacc.tex.
+%  Thicker Postscript hairpins.
+
+% version 1.35
+%
+%  This release includes a handwriting font from MuseScore and an extension
+%  library musixjt.tex to support it.
 
 % version 1.34
 %
@@ -1643,6 +1655,7 @@
 \newdimen\b@amthick % half beamthickness
 \newdimen\Interligne% de la base d'une ligne a l'autre
 \newdimen\Internote % la moitie de \Interligne
+
 \let\internote\Internote
 \def\musixchar{\musixfont\char}
 \def\keychar{\musickeyfont\char}
@@ -1651,22 +1664,27 @@
 
 \def\set@Largenotesize{\let\musixfont\musicLargefont
   \let\xgregfont\xgregLargefont
+  \let\fetafont\fetaLargefont   % RDT 1.36
   \b@amthick.3456\Interligne \interbeam1.08\Interligne }
 
 \def\set@largenotesize{\let\musixfont\musiclargefont
   \let\xgregfont\xgreglargefont
+  \let\fetafont\fetalargefont   % RDT 1.36
   \b@amthick.288\Interligne \interbeam.9\Interligne }
 
 \def\set@normalnotesize{\let\musixfont\musicnorfont
   \let\xgregfont\xgregnorfont
+  \let\fetafont\fetanorfont   % RDT 1.36
   \b@amthick.24\Interligne \interbeam\p@seven5\Interligne }
 
 \def\set@smallnotesize{\let\musixfont\musicsmallfont
   \let\xgregfont\xgregsmallfont
+  \let\fetafont\fetasmallfont   % RDT 1.36
   \b@amthick\p@ne92\Interligne \interbeam.6\Interligne }
 
 \def\set@tinynotesize{\let\musixfont\musictinyfont
   \let\xgregfont\xgregtinyfont
+  \let\fetafont\fetatinyfont   % RDT 1.36
   \b@amthick\p@ne536\Interligne \interbeam.48\Interligne }
 
 \def\normalnotesize{\set@normalnotesize\comput@specifics
@@ -1742,7 +1760,8 @@
 \newskip\big@spc
 
 \newdimen\lthick \lthick=.4pt
-\def\hlthick{\h@lf\lthick}
+% \def\hlthick{\h@lf\lthick}
+\def\hlthick{0.4pt}                  % 1.36    RDT
 
 %%%
 
@@ -1767,6 +1786,11 @@
     \let\xgregnorfont\xgregsixteen
     \let\xgregsmallfont\xgregthirteen
     \let\xgregtinyfont\xgregeleven
+    \let\fetaLargefont\fetatwentyfour      %   1.36   RDT
+    \let\fetalargefont\fetatwenty
+    \let\fetanorfont\fetasixteen
+    \let\fetasmallfont\fetathirteen
+    \let\fetatinyfont\fetaeleven
     \let\slurd\slurdsixteen \let\sluru\slurusixteen
     \let\hslurd\hslurdsixteen \let\hsluru\hslurusixteen
     \let\meternorfont\tenbf \let\metersmallfont\eightbf  % version 1.16  RDT
@@ -1780,7 +1804,7 @@
     \else\ifdim\internote<1.19\Internote \smalltype\it
     \else\ifdim\internote<1.43\Internote \Smalltype\it
     \else\normtype\it\fi\fi\fi}%
-    \let\tabnorfnt\tabfntsixteen \let\tablargefnt\tabfnttwenty              %  1.34   RDT
+    \let\tabnorfnt\tabfntsixteen \let\tablargefnt\tabfnttwenty     %  1.34   RDT
     \let\tabLargefnt\tabfnttwentyfour \let\tabsmallfnt\tabfntthirteen
     \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
     \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
@@ -1799,6 +1823,11 @@
     \let\xgregnorfont\xgregtwentyfour
     \let\xgregsmallfont\xgregtwenty
     \let\xgregtinyfont\xgregsixteen
+    \let\fetaLargefont\fetatwentynine                 % 1.36   RDT
+    \let\fetalargefont\fetatwentynine
+    \let\fetanorfont\fetatwentyfour
+    \let\fetasmallfont\fetatwenty
+    \let\fetatinyfont\fetasixteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
     \let\meternorfont\frtbf \let\metersmallfont\twelvebf % version 1.18  RDT
@@ -1831,6 +1860,11 @@
     \let\xgregnorfont\xgregtwentynine
     \let\xgregsmallfont\xgregtwentyfour
     \let\xgregtinyfont\xgregtwenty
+    \let\fetaLargefont\fetatwentynine                        % 1.36   RDT
+    \let\fetalargefont\fetatwentynine
+    \let\fetanorfont\fetatwentynine
+    \let\fetasmallfont\fetatwentyfour
+    \let\fetatinyfont\fetatwenty
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
     \let\slurud\slurutwentyd \let\slurdd\slurdtwentyd %    +ickd
@@ -1871,6 +1905,11 @@
     \let\xgregnorfont\xgregtwenty
     \let\xgregsmallfont\xgregsixteen
     \let\xgregtinyfont\xgregthirteen
+    \let\fetalargefont\fetatwentyfour    % 1.36   RDT
+    \let\fetaLargefont\fetatwentynine
+    \let\fetanorfont\fetatwenty
+    \let\fetasmallfont\fetasixteen
+    \let\fetatinyfont\fetathirteen
     \let\sluru\slurutwenty \let\slurd\slurdtwenty
     \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
     \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % version 1.18  RDT

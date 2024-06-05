@@ -219,8 +219,8 @@ slur@Dict begin
 	/y1 ED
 	/x1 ED
 	gsave
-	1 psxAR ceiling setlinewidth         % line thickness: this results
-	1 setlinecap                      % to exactly 2 pixels in 300 dpi
+	2.5 psxAR ceiling setlinewidth    % line thickness: this results
+	1 setlinecap                      % to exactly 2.5 pixels in 300 dpi
 	1 setlinejoin
 	x2 y2 10 psxAR add moveto            % the 10's specify wideness of the
 	x1 y1 lineto                      % open end of the crescendo,
@@ -236,7 +236,7 @@ slur@Dict begin
 	/y1 ED
 	/x1 ED
 	gsave
-	1 psxAR ceiling setlinewidth
+	2.5 psxAR ceiling setlinewidth
 	1 setlinecap
 	1 setlinejoin
 	x2 y2 11 psxAR add moveto

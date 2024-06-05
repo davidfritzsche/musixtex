@@ -1,0 +1,49 @@
+%
+%   This file is part of MusiXTeX
+%
+%   MusiXTeX is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2, or (at your option)
+%   any later version.
+%
+%   MusiXTeX is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with MusiXTeX; see the file COPYING.  If not, write to
+%   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+%   Boston, MA 02111-1307, USA.
+%
+\immediate\write16{MusiXTHinACCidentals v.001\space<2022-12-29>}%
+
+\edef\catcodeat{\the\catcode`\@}\catcode`\@=11
+\catcodesmusic
+
+
+\font\fetaeleven=feta20 scaled \magstephalf
+\font\fetathirteen=feta20 scaled \magstep1
+\font\fetasixteen=feta20 scaled \magstep2
+\font\fetatwenty=feta20 scaled \magstep3
+\font\fetatwentyfour=feta20 scaled \magstep4
+\font\fetatwentynine=feta20 scaled \magstep5
+
+\let\fetanorfont\fetatwenty
+\def\fetachar{\fetafont\char}   
+
+
+\def\writ@ka{\pl@base\raise\y@i\llap{\fetachar\n@v\kern\accshift}}
+\def\set@ka{\let\@Ti=\writ@ka}
+
+\def\thdsh#1{\set@ka \n@v30 \check@staff \inhgetn@i#1\relax\expandafter\@Ti\fi}
+\def\thsh#1{\set@ka \n@v20 \check@staff \inhgetn@i#1\relax\expandafter\@Ti\fi}
+\def\thna#1{\set@ka \n@v32 \check@staff \inhgetn@i#1\relax\expandafter\@Ti\fi}
+\def\thfl#1{\set@ka \n@v37 \check@staff \inhgetn@i#1\relax\expandafter\@Ti\fi}
+\def\thdfl#1{\set@ka \n@v47 \check@staff \inhgetn@i#1\relax\expandafter\@Ti\fi}
+
+\let\fetafont\fetanorfont
+
+\endcatcodesmusic
+\catcode`\@=\catcodeat
+\endinput
